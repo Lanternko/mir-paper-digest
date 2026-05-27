@@ -7,33 +7,95 @@
   <style>
     :root {
       color-scheme: light;
-      --ink: oklch(21% 0.018 78);
-      --muted: oklch(48% 0.020 78);
-      --line: oklch(86% 0.018 78);
-      --paper: oklch(98% 0.012 86);
-      --surface: oklch(95% 0.018 86);
-      --accent: oklch(45% 0.105 166);
-      --coral: oklch(62% 0.155 35);
-      --shadow: 0 18px 40px rgba(65, 53, 31, 0.08);
+      --ink: oklch(22% 0.018 238);
+      --muted: oklch(48% 0.019 238);
+      --quiet: oklch(63% 0.014 238);
+      --line: oklch(86% 0.014 238);
+      --paper: oklch(98% 0.006 238);
+      --surface: oklch(95% 0.009 238);
+      --panel: oklch(97% 0.014 162);
+      --accent: oklch(44% 0.106 166);
+      --accent-soft: oklch(92% 0.043 166);
+      --coral: oklch(61% 0.145 32);
+      --focus: oklch(91% 0.06 78);
+      --shadow: 0 16px 34px rgba(34, 45, 58, 0.07);
     }
     * { box-sizing: border-box; }
+    html { overflow-x: hidden; }
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", "Microsoft JhengHei", system-ui, sans-serif;
-      background: linear-gradient(180deg, var(--paper) 0, var(--surface) 430px, var(--surface) 100%);
       color: var(--ink);
+      background: var(--surface);
       line-height: 1.62;
+      overflow-x: hidden;
+    }
+    a { color: var(--accent); overflow-wrap: anywhere; }
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid var(--line);
+      background: color-mix(in oklch, var(--paper) 94%, transparent);
+      backdrop-filter: blur(12px);
+    }
+    .topbar-inner {
+      width: min(1120px, calc(100% - 28px));
+      min-height: 58px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .brand {
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 850;
+      border-radius: 8px;
+      padding: 6px 8px;
+      margin-left: -8px;
+    }
+    .brand:hover { color: var(--accent); }
+    .brand:focus-visible, .nav-link:focus-visible, .primary-cta:focus-visible, .primary-link:focus-visible, .secondary-link:focus-visible, .issue-link:focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 2px;
+    }
+    .nav {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .nav-link {
+      min-height: 32px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 5px 9px;
+      background: var(--paper);
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 750;
+      text-decoration: none;
     }
     main {
-      width: min(1040px, calc(100% - 28px));
-      margin: 0 auto 52px;
+      width: min(1120px, calc(100% - 28px));
+      margin: 0 auto 56px;
     }
     .hero {
-      padding: 52px 0 28px;
+      padding: 48px 0 28px;
       display: grid;
       grid-template-columns: minmax(0, 1fr) 280px;
       gap: 28px;
       align-items: end;
+    }
+    .hero > *, .archive-layout > *, .paper-row, .summary-panel, .issue-archive {
+      min-width: 0;
     }
     .eyebrow {
       margin: 0 0 10px;
@@ -43,89 +105,375 @@
       letter-spacing: 0.08em;
       text-transform: uppercase;
     }
-    h1 { margin: 0; font-size: 44px; line-height: 1.06; letter-spacing: 0; max-width: 720px; }
-    p { color: var(--muted); margin: 14px 0 0; max-width: 66ch; }
-    .text-link { display: inline-flex; margin-top: 10px; font-weight: 750; }
-    a { color: var(--accent); }
-    .latest {
+    h1 {
+      margin: 0;
+      max-width: 760px;
+      font-size: 44px;
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+    .hero p {
+      max-width: 66ch;
+      margin: 15px 0 0;
+      color: var(--muted);
+      overflow-wrap: anywhere;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .primary-cta, .primary-link, .secondary-link {
+      min-height: 38px;
       display: inline-flex;
-      min-height: 40px;
       align-items: center;
       justify-content: center;
-      padding: 8px 12px;
       border-radius: 8px;
-      background: var(--accent);
-      color: oklch(98% 0.008 180);
+      padding: 7px 11px;
+      font-size: 14px;
+      font-weight: 800;
       text-decoration: none;
-      font-weight: 850;
-      margin-top: 18px;
     }
-    .disabled { background: var(--line); color: var(--muted); }
-    .brief {
+    .primary-cta, .primary-link {
+      border: 1px solid var(--accent);
+      background: var(--accent);
+      color: oklch(98% 0.006 180);
+    }
+    .secondary-link {
+      border: 1px solid var(--line);
+      background: var(--paper);
+      color: var(--ink);
+    }
+    .disabled {
+      border-color: var(--line);
+      background: var(--line);
+      color: var(--muted);
+    }
+    .summary-panel {
       border: 1px solid var(--line);
       border-radius: 8px;
       background: var(--paper);
-      box-shadow: var(--shadow);
       padding: 16px;
+      box-shadow: var(--shadow);
     }
-    .brief h2 { margin: 0 0 10px; font-size: 15px; }
-    .brief p { margin: 0; font-size: 14px; }
-    .reports {
+    .summary-panel h2 {
+      margin: 0 0 10px;
+      font-size: 15px;
+    }
+    .summary-panel dl {
+      margin: 0;
       display: grid;
       gap: 8px;
     }
-    .section-title {
-      margin: 4px 0 12px;
+    .summary-panel div {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 12px;
+      border-top: 1px solid var(--line);
+      padding-top: 8px;
+    }
+    .summary-panel div:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
+    dt { color: var(--muted); font-size: 13px; }
+    dd { margin: 0; font-weight: 850; text-align: right; overflow-wrap: anywhere; }
+    .archive-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 310px;
+      gap: 18px;
+      align-items: start;
+    }
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: end;
+      margin: 8px 0 12px;
+    }
+    .section-head h2 {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.25;
+    }
+    .section-head p {
+      margin: 0;
       color: var(--muted);
       font-size: 13px;
-      font-weight: 850;
-      letter-spacing: 0.08em;
+    }
+    .paper-list {
+      display: grid;
+      gap: 10px;
+    }
+    .paper-row {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--paper);
+      padding: 15px;
+      box-shadow: 0 10px 22px rgba(34, 45, 58, 0.045);
+      max-width: 100%;
+      overflow: hidden;
+    }
+    .paper-row-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      color: var(--quiet);
+      font-size: 12px;
+      font-weight: 800;
       text-transform: uppercase;
     }
-    .report-link {
+    .paper-row h2 {
+      margin: 8px 0 8px;
+      font-size: 18px;
+      line-height: 1.3;
+      letter-spacing: 0;
+      overflow-wrap: anywhere;
+    }
+    .paper-row h2 a {
+      display: block;
+      color: var(--ink);
+      text-decoration: none;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+    .paper-row h2 a:hover { color: var(--accent); }
+    .paper-row-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: oklch(34% 0.09 176);
+      padding: 3px 7px;
+      font-size: 12px;
+      font-weight: 750;
+    }
+    .paper-row-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .issue-archive {
+      position: sticky;
+      top: 76px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--paper);
+      padding: 15px;
+    }
+    .month-block + .month-block { margin-top: 15px; }
+    .month-block h3 {
+      margin: 0 0 8px;
+      color: var(--muted);
+      font-size: 13px;
+      letter-spacing: 0.04em;
+    }
+    .issue-list {
+      display: grid;
+      gap: 7px;
+    }
+    .issue-link {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 12px;
-      padding: 14px 15px;
-      background: var(--paper);
+      gap: 10px;
       border: 1px solid var(--line);
       border-radius: 8px;
+      background: var(--surface);
+      padding: 9px 10px;
+      color: var(--ink);
       text-decoration: none;
-      box-shadow: 0 10px 24px rgba(65, 53, 31, 0.05);
+      font-size: 13px;
     }
-    .report-link span { color: var(--ink); font-weight: 850; }
-    .report-link strong { color: var(--accent); font-size: 13px; }
-    @media (max-width: 760px) {
-      .hero { grid-template-columns: 1fr; padding-top: 34px; }
-      h1 { font-size: 32px; }
+    .issue-link strong {
+      color: var(--accent);
+      font-size: 12px;
+    }
+    .empty {
+      margin: 0;
+      color: var(--muted);
+    }
+    footer {
+      margin-top: 26px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    @media (max-width: 840px) {
+      .hero, .archive-layout { grid-template-columns: 1fr; }
+      .hero { padding-top: 34px; }
+      .issue-archive { position: static; }
+      h1 { font-size: 34px; }
+    }
+    @media (max-width: 560px) {
+      main, .topbar-inner { width: min(100% - 20px, 1120px); }
+      .topbar-inner {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 10px 0;
+      }
+      .nav { justify-content: flex-start; }
+      h1 { font-size: 30px; }
+      .section-head { align-items: flex-start; flex-direction: column; }
+      .summary-panel div { grid-template-columns: 1fr; gap: 2px; }
+      dd { text-align: left; }
+      .paper-row h2, .paper-row h2 a { word-break: break-word; }
     }
   </style>
 </head>
 <body>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="./index.html" aria-label="MIR Paper Digest 主畫面">MIR Paper Digest</a>
+      <nav class="nav" aria-label="主導覽">
+        <a class="nav-link" href="#papers">全部文章</a>
+        <a class="nav-link" href="#issues">Issues</a>
+        <a class="nav-link" href="PRODUCT_STANDARD.md">Product standard</a>
+      </nav>
+    </div>
+  </div>
   <main>
     <section class="hero">
       <div>
         <p class="eyebrow">Research archive</p>
-        <h1>MIR Paper Digest</h1>
-        <p>每天兩篇，先貼近 MeanAudio / text-to-audio generation，再補 karaoke-jp 或重要 MIR 觀點。每期都保留公開網頁，方便手機閱讀與回查。</p>
-        <a class="latest" href="reports/2026-05-27.html">Read latest issue</a>
-        <a class="text-link" href="PRODUCT_STANDARD.md">Product standard</a>
+        <h1>每日 MIR 論文精選</h1>
+        <p>MeanAudio 優先，karaoke-jp 第二。每天保留兩篇可回看的 paper，首頁集中所有歷史文章與 issue，不需要從 Discord 慢慢翻。</p>
+        <div class="hero-actions">
+          <a class="primary-cta" href="reports/2026-05-27.html">閱讀最新 issue</a>
+          <a class="secondary-link" href="#papers">看全部文章</a>
+        </div>
       </div>
-      <aside class="brief">
-        <h2>Selection rule</h2>
-        <p>不是只看新，也不是只看熱門。排序會同時考慮你的主線、論文品質、可落地性和避免重複。</p>
+      <aside class="summary-panel" aria-label="Archive summary">
+        <h2>Archive</h2>
+        <dl>
+          <div><dt>Latest</dt><dd>2026-05-27</dd></div>
+          <div><dt>Issues</dt><dd>5</dd></div>
+          <div><dt>Papers</dt><dd>6</dd></div>
+        </dl>
       </aside>
     </section>
-    <section class="reports" aria-label="歷史報告">
-      <div class="section-title">Issues</div>
-      <a class="report-link" href="reports/2026-05-27.html"><span>2026-05-27</span><strong>Open issue</strong></a>
-<a class="report-link" href="reports/2026-05-26.html"><span>2026-05-26</span><strong>Open issue</strong></a>
-<a class="report-link" href="reports/2026-05-25.html"><span>2026-05-25</span><strong>Open issue</strong></a>
-<a class="report-link" href="reports/2026-05-24.html"><span>2026-05-24</span><strong>Open issue</strong></a>
-<a class="report-link" href="reports/2026-05-23.html"><span>2026-05-23</span><strong>Open issue</strong></a>
+    <section class="archive-layout">
+      <div id="papers">
+        <div class="section-head">
+          <div>
+            <h2>全部文章</h2>
+            <p>最近 6 筆成功發布的 paper，點標題回到當天 issue。</p>
+          </div>
+        </div>
+        <div class="paper-list">
+          
+            <article class="paper-row">
+              <div class="paper-row-meta">
+                <span>2026-05-27 / 01</span>
+                <span>mean_audio</span>
+              </div>
+              <h2><a href="reports/2026-05-27.html">Adversarial Dual On-Policy Distillation from Expressive Flow-based Teacher</a></h2>
+              <div class="paper-row-tags"><span class="tag">text-to-audio/music</span><span class="tag">flow/diffusion</span></div>
+              <div class="paper-row-actions">
+                <a class="primary-link" href="reports/2026-05-27.html">Open issue</a>
+                <a class="secondary-link" href="https://arxiv.org/abs/2605.27095v1">Source</a>
+              </div>
+            </article>
+            
+
+            <article class="paper-row">
+              <div class="paper-row-meta">
+                <span>2026-05-27 / 02</span>
+                <span>mean_audio</span>
+              </div>
+              <h2><a href="reports/2026-05-27.html">JLT: Clean-Latent Prediction in Latent Diffusion Transformers</a></h2>
+              <div class="paper-row-tags"><span class="tag">text-to-audio/music</span><span class="tag">flow/diffusion</span></div>
+              <div class="paper-row-actions">
+                <a class="primary-link" href="reports/2026-05-27.html">Open issue</a>
+                <a class="secondary-link" href="https://arxiv.org/abs/2605.27102v1">Source</a>
+              </div>
+            </article>
+            
+
+            <article class="paper-row">
+              <div class="paper-row-meta">
+                <span>2026-05-23 / 01</span>
+                <span>mean_audio</span>
+              </div>
+              <h2><a href="reports/2026-05-23.html">Live Music Diffusion Models: Efficient Fine-Tuning and Post-Training of Interactive Diffusion Music Generators</a></h2>
+              <div class="paper-row-tags"><span class="tag">text-to-audio/music</span></div>
+              <div class="paper-row-actions">
+                <a class="primary-link" href="reports/2026-05-23.html">Open issue</a>
+                <a class="secondary-link" href="https://arxiv.org/abs/2605.22717v1">Source</a>
+              </div>
+            </article>
+            
+
+            <article class="paper-row">
+              <div class="paper-row-meta">
+                <span>2026-05-23 / 01</span>
+                <span>mean_audio</span>
+              </div>
+              <h2><a href="reports/2026-05-23.html">RobustSpeechFlow: Learning Robust Text-to-Speech Trajectories via Augmentation-based Contrastive Flow Matching</a></h2>
+              <div class="paper-row-tags"><span class="tag">text-to-audio/music</span><span class="tag">flow/diffusion</span></div>
+              <div class="paper-row-actions">
+                <a class="primary-link" href="reports/2026-05-23.html">Open issue</a>
+                <a class="secondary-link" href="https://arxiv.org/abs/2605.22083v1">Source</a>
+              </div>
+            </article>
+            
+
+            <article class="paper-row">
+              <div class="paper-row-meta">
+                <span>2026-05-23 / 02</span>
+                <span>mean_audio</span>
+              </div>
+              <h2><a href="reports/2026-05-23.html">Academic Text-to-Music Grand Challenge: Datasets, Baselines, and Evaluation Methods</a></h2>
+              <div class="paper-row-tags"><span class="tag">text-to-audio/music</span><span class="tag">caption/data</span><span class="tag">evaluation</span></div>
+              <div class="paper-row-actions">
+                <a class="primary-link" href="reports/2026-05-23.html">Open issue</a>
+                <a class="secondary-link" href="https://arxiv.org/abs/2605.21538v1">Source</a>
+              </div>
+            </article>
+            
+
+            <article class="paper-row">
+              <div class="paper-row-meta">
+                <span>2026-05-23 / 02</span>
+                <span>mean_audio</span>
+              </div>
+              <h2><a href="reports/2026-05-23.html">Instrumental Text-to-Music Generation with Auxiliary Conditioning Branches</a></h2>
+              <div class="paper-row-tags"><span class="tag">text-to-audio/music</span></div>
+              <div class="paper-row-actions">
+                <a class="primary-link" href="reports/2026-05-23.html">Open issue</a>
+                <a class="secondary-link" href="https://arxiv.org/abs/2605.21433v1">Source</a>
+              </div>
+            </article>
+            
+        </div>
+      </div>
+      <aside class="issue-archive" id="issues" aria-label="Issue archive">
+        <div class="section-head">
+          <div>
+            <h2>Issue archive</h2>
+            <p>依月份回看每日兩篇。</p>
+          </div>
+        </div>
+        
+            <section class="month-block">
+              <h3>2026-05</h3>
+              <div class="issue-list"><a class="issue-link" href="reports/2026-05-27.html"><span>2026-05-27</span><strong>2 papers</strong></a>
+<a class="issue-link" href="reports/2026-05-26.html"><span>2026-05-26</span><strong>2 papers</strong></a>
+<a class="issue-link" href="reports/2026-05-25.html"><span>2026-05-25</span><strong>2 papers</strong></a>
+<a class="issue-link" href="reports/2026-05-24.html"><span>2026-05-24</span><strong>2 papers</strong></a>
+<a class="issue-link" href="reports/2026-05-23.html"><span>2026-05-23</span><strong>2 papers</strong></a></div>
+            </section>
+            
+      </aside>
     </section>
-    <p style="font-size:13px;">Base URL: https://lanternko.github.io/mir-paper-digest/</p>
+    <footer>Base URL: https://lanternko.github.io/mir-paper-digest/</footer>
   </main>
 </body>
 </html>
