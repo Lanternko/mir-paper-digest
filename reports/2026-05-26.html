@@ -31,89 +31,398 @@
       line-height: 1.62;
     }
     a { color: var(--accent); overflow-wrap: anywhere; }
-    .topbar { position: sticky; top: 0; z-index: 10; border-bottom: 1px solid var(--line); background: rgba(255,253,248,.92); backdrop-filter: blur(12px); }
-    .topbar-inner { width: min(1120px, calc(100% - 28px)); min-height: 58px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 253, 248, 0.92);
+      backdrop-filter: blur(12px);
+    }
+    .topbar-inner {
+      width: min(1120px, calc(100% - 28px));
+      min-height: 58px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
     .brand { font-weight: 850; font-size: 14px; }
-    .issue-pill { display: inline-flex; align-items: center; min-height: 32px; padding: 5px 9px; border: 1px solid var(--line); border-radius: 8px; color: var(--muted); font-size: 13px; background: var(--paper); white-space: nowrap; }
-    main { width: min(1120px, calc(100% - 28px)); margin: 0 auto 52px; }
-    .hero { padding: 42px 0 22px; display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 26px; align-items: end; }
-    .eyebrow { margin: 0 0 10px; color: var(--coral); font-size: 12px; font-weight: 850; letter-spacing: 0.08em; text-transform: uppercase; }
-    h1 { margin: 0; max-width: 780px; font-size: clamp(30px, 5vw, 52px); line-height: 1.08; letter-spacing: 0; }
+    .issue-pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      padding: 5px 9px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--muted);
+      font-size: 13px;
+      background: var(--paper);
+      white-space: nowrap;
+    }
+    main {
+      width: min(1120px, calc(100% - 28px));
+      margin: 0 auto 52px;
+    }
+    .hero {
+      padding: 42px 0 22px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 300px;
+      gap: 26px;
+      align-items: end;
+    }
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--coral);
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 0;
+      max-width: 780px;
+      font-size: clamp(30px, 5vw, 52px);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
     .hero p { margin: 14px 0 0; max-width: 72ch; color: var(--muted); }
-    .brief { border: 1px solid var(--line); border-radius: 8px; background: var(--paper); box-shadow: var(--shadow); padding: 15px; }
+    .brief {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--paper);
+      box-shadow: var(--shadow);
+      padding: 15px;
+    }
     .brief h2 { margin: 0 0 9px; font-size: 15px; }
     .brief p { margin: 0; color: var(--muted); font-size: 14px; }
-    .cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: start; }
-    .paper-card { border: 1px solid var(--line); border-radius: 8px; background: var(--paper); box-shadow: var(--shadow); padding: 18px; min-width: 0; }
-    .card-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
-    .slot { display: inline-flex; align-items: center; min-height: 28px; padding: 4px 9px; border-radius: 8px; background: var(--accent-soft); color: var(--accent); font-size: 12px; font-weight: 850; white-space: nowrap; }
-    .quality { display: inline-flex; min-height: 28px; align-items: center; padding: 4px 9px; border-radius: 8px; background: var(--amber-soft); color: var(--amber); font-size: 12px; font-weight: 850; text-align: right; }
-    h2 { margin: 0 0 8px; font-size: 22px; line-height: 1.18; letter-spacing: 0; overflow-wrap: anywhere; }
-    .authors { margin: 0 0 12px; color: var(--muted); font-size: 14px; overflow-wrap: anywhere; }
-    .tags { display: flex; flex-wrap: wrap; gap: 7px; margin: 12px 0; }
-    .tag { display: inline-flex; align-items: center; min-height: 28px; padding: 4px 8px; border-radius: 8px; background: var(--surface); border: 1px solid var(--line); color: var(--muted); font-size: 12px; font-weight: 750; overflow-wrap: anywhere; }
-    .one-line { margin: 12px 0; font-size: 16px; }
-    .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 14px 0; }
-    .meta { min-width: 0; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); padding: 9px; }
-    .meta span { display: block; color: var(--muted); font-size: 12px; font-weight: 850; }
-    .meta strong { display: block; margin-top: 2px; font-size: 13px; overflow-wrap: anywhere; }
-    .actions { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 14px; }
-    .button { min-height: 42px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--accent); border-radius: 8px; padding: 8px 12px; background: var(--accent); color: #fffaf0; text-decoration: none; font-weight: 850; cursor: pointer; font: inherit; font-size: 14px; }
-    .button.secondary { background: var(--paper); color: var(--accent); }
-    details { margin-top: 14px; border-top: 1px solid var(--line); padding-top: 12px; }
-    summary { min-height: 42px; display: inline-flex; align-items: center; border: 1px solid var(--accent); border-radius: 8px; padding: 8px 12px; color: var(--accent); font-weight: 850; cursor: pointer; user-select: none; }
-    .detail-body { display: grid; gap: 12px; margin-top: 14px; }
-    .detail-section { border-left: 3px solid var(--accent); padding-left: 10px; }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      align-items: start;
+    }
+    .paper-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--paper);
+      box-shadow: var(--shadow);
+      padding: 18px;
+      min-width: 0;
+    }
+    .card-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .slot {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 4px 9px;
+      border-radius: 8px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 850;
+      white-space: nowrap;
+    }
+    .quality {
+      display: inline-flex;
+      min-height: 28px;
+      align-items: center;
+      padding: 4px 9px;
+      border-radius: 8px;
+      background: var(--amber-soft);
+      color: var(--amber);
+      font-size: 12px;
+      font-weight: 850;
+      text-align: right;
+    }
+    h2 {
+      margin: 0 0 8px;
+      font-size: 22px;
+      line-height: 1.18;
+      letter-spacing: 0;
+      overflow-wrap: anywhere;
+    }
+    .authors {
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 14px;
+      overflow-wrap: anywhere;
+    }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin: 12px 0;
+    }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 4px 8px;
+      border-radius: 8px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 750;
+      overflow-wrap: anywhere;
+    }
+    .one-line {
+      margin: 12px 0;
+      font-size: 16px;
+    }
+    .meta-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin: 14px 0;
+    }
+    .meta {
+      min-width: 0;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+      padding: 9px;
+    }
+    .meta span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 850;
+    }
+    .meta strong {
+      display: block;
+      margin-top: 2px;
+      font-size: 13px;
+      overflow-wrap: anywhere;
+    }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 14px;
+    }
+    .button {
+      min-height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--accent);
+      border-radius: 8px;
+      padding: 8px 12px;
+      background: var(--accent);
+      color: #fffaf0;
+      text-decoration: none;
+      font-weight: 850;
+      cursor: pointer;
+      font: inherit;
+      font-size: 14px;
+    }
+    .button.secondary {
+      background: var(--paper);
+      color: var(--accent);
+    }
+    details {
+      margin-top: 14px;
+      border-top: 1px solid var(--line);
+      padding-top: 12px;
+    }
+    summary {
+      min-height: 42px;
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--accent);
+      border-radius: 8px;
+      padding: 8px 12px;
+      color: var(--accent);
+      font-weight: 850;
+      cursor: pointer;
+      user-select: none;
+    }
+    .detail-body {
+      display: grid;
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .detail-section {
+      border-left: 3px solid var(--accent);
+      padding-left: 10px;
+    }
     .detail-section h3 { margin: 0 0 4px; font-size: 14px; }
     .detail-section p, .detail-section ul { margin: 0; color: var(--muted); font-size: 14px; }
     ul { padding-left: 18px; }
     li + li { margin-top: 4px; }
-    footer { margin-top: 22px; color: var(--muted); font-size: 13px; }
-    @media (max-width: 860px) { .hero, .cards { grid-template-columns: 1fr; } .hero { padding-top: 32px; } }
-    @media (max-width: 560px) { .topbar-inner { align-items: flex-start; flex-direction: column; padding: 10px 0; } .issue-pill { white-space: normal; } .paper-card { padding: 15px; } .card-head { flex-direction: column; } .quality { text-align: left; } .meta-grid { grid-template-columns: 1fr; } .button, summary { width: 100%; } h2 { font-size: 20px; } }
+    footer {
+      margin-top: 22px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    @media (max-width: 860px) {
+      .hero, .cards { grid-template-columns: 1fr; }
+      .hero { padding-top: 32px; }
+    }
+    @media (max-width: 560px) {
+      .topbar-inner { align-items: flex-start; flex-direction: column; padding: 10px 0; }
+      .issue-pill { white-space: normal; }
+      .paper-card { padding: 15px; }
+      .card-head { flex-direction: column; }
+      .quality { text-align: left; }
+      .meta-grid { grid-template-columns: 1fr; }
+      .button, summary { width: 100%; }
+      h2 { font-size: 20px; }
+    }
   </style>
 </head>
 <body>
-  <header class="topbar"><div class="topbar-inner"><div class="brand">MIR Paper Digest</div><div class="issue-pill">2026-05-26 · 2 papers · MeanAudio / MIR evaluation</div></div></header>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html" aria-label="MIR Paper Digest home">MIR Paper Digest</a>
+      <div class="topbar-actions">
+        <a class="nav-link" href="../index.html">All papers</a>
+        <div class="issue-pill">2026-05-26 · 2 papers · MeanAudio / MIR evaluation</div>
+      </div>
+    </div>
+  </header>
   <main>
-    <section class="hero"><div><p class="eyebrow">Daily selection</p><h1>今日 MIR / Music Audio AI 論文精選</h1><p>今天優先選入 raw waveform flow matching 的 audio generation 新文，並搭配一篇直接切中音樂 CLAP / audio-text retrieval 語意限制的 ICASSP 2026 論文。兩篇都未命中既有紀錄。</p></div><aside class="brief"><h2>閱讀重點</h2><p>先看 WavFlow 是否能提供 MeanAudio 在 latent codec 之外的設計參照；再看 negation modeling 對 caption filtering、music-only evaluation 與 CLAP 失真診斷的價值。</p></aside></section>
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Daily selection</p>
+        <h1>今日 MIR / Music Audio AI 論文精選</h1>
+        <p>今天優先選入 raw waveform flow matching 的 audio generation 新文，並搭配一篇直接切中音樂 CLAP / audio-text retrieval 語意限制的 ICASSP 2026 論文。兩篇都未命中既有紀錄。</p>
+      </div>
+      <aside class="brief">
+        <h2>閱讀重點</h2>
+        <p>先看 WavFlow 是否能提供 MeanAudio 在 latent codec 之外的設計參照；再看 negation modeling 對 caption filtering、music-only evaluation 與 CLAP 失真診斷的價值。</p>
+      </aside>
+    </section>
+
     <section class="cards" aria-label="論文卡片">
       <article class="paper-card">
-        <div class="card-head"><span class="slot">Priority track: MeanAudio / text-to-audio</span><span class="quality">高品質新文 · code promised</span></div>
+        <div class="card-head">
+          <span class="slot">Priority track: MeanAudio / text-to-audio</span>
+          <span class="quality">高品質新文 · code promised</span>
+        </div>
         <h2>WavFlow: Audio Generation in Waveform Space</h2>
         <p class="authors">Feiyan Zhou, Luyuan Wang, Shoufa Chen, Zhe Wang, Zhiheng Liu, Yuren Cong, Xiaohui Zhang, Fanny Yang, Belinda Zeng</p>
-        <div class="tags"><span class="tag">flow matching</span><span class="tag">raw waveform generation</span><span class="tag">text-to-audio</span><span class="tag">AudioCaps</span><span class="tag">VGGSound</span></div>
+        <div class="tags">
+          <span class="tag">flow matching</span>
+          <span class="tag">raw waveform generation</span>
+          <span class="tag">text-to-audio</span>
+          <span class="tag">AudioCaps</span>
+          <span class="tag">VGGSound</span>
+        </div>
         <p class="one-line">把 latent codec 拿掉，直接在 waveform patch grid 上做 flow matching，挑戰「音訊生成一定要先壓 latent」的慣例。</p>
-        <div class="meta-grid"><div class="meta"><span>更新日期</span><strong>Submitted 2026-05-18</strong></div><div class="meta"><span>新穎性</span><strong>raw waveform + amplitude lifting + direct x-prediction</strong></div></div>
-        <div class="actions"><a class="button" href="https://arxiv.org/abs/2605.18749">arXiv</a><a class="button secondary" href="https://doi.org/10.48550/arXiv.2605.18749">DOI</a></div>
-        <details><summary>展開分析</summary><div class="detail-body">
-          <section class="detail-section"><h3>摘要</h3><p>WavFlow 用 waveform patchify 將高維波形重排為 2D token grid，並用 amplitude lifting 對齊訊號尺度，讓 flow matching 可在原始波形空間穩定訓練。作者用 5M video-text-audio triplets 從頭訓練，並在 VGGSound 與 AudioCaps 上回報接近或超過 latent-based baselines 的結果。</p></section>
-          <section class="detail-section"><h3>可行性</h3><p>工程成本高，因為資料量與 waveform token 序列都重；但方法描述具體，且 arXiv 頁面標示有 code 連結，適合先讀實作細節與訓練穩定化技巧。</p></section>
-          <section class="detail-section"><h3>主要貢獻</h3><ul><li>證明不經 audio VAE / codec latent 也可能做高品質 multimodal audio generation。</li><li>提出 waveform patchify 與 amplitude lifting，處理波形高維與低能量訊號的訓練問題。</li><li>同時評估 video-to-audio 與 text-to-audio，對 semantic alignment 與 temporal synchronization 都有實驗訊號。</li></ul></section>
-          <section class="detail-section"><h3>和 MeanAudio / karaoke-jp 的關係</h3><p>對 MeanAudio 最直接：可作為 latent flow transformer 的反例與上界參照，檢查 codec latent 是否真的限制高頻質感或語意對齊。對 karaoke-jp 則是間接相關，若未來要做 lyrics-conditioned singing/accompaniment generation，可借鑑 waveform-space fidelity 的設計取捨。</p></section>
-          <section class="detail-section"><h3>下一步實驗</h3><p>建議把 paper 的 AudioCaps 指標、推論步數、RTF、token 長度與訓練成本整理成表，和 MeanAudio/latent flow 設定比較；另外抽查音訊樣本，確認 raw waveform 是否改善 transient、bass 與高頻 texture。</p></section>
-          <section class="detail-section"><h3>限制與注意事項</h3><p>不是 music-only paper，AudioCaps/VGGSound 也不等於 MusicCaps。若缺少 subjective music evaluation 或長音樂結構測試，不能直接推論到 text-to-music。5M triplet pipeline 的資料清理品質也需要細看。</p></section>
-        </div></details>
+        <div class="meta-grid">
+          <div class="meta"><span>更新日期</span><strong>Submitted 2026-05-18</strong></div>
+          <div class="meta"><span>新穎性</span><strong>raw waveform + amplitude lifting + direct x-prediction</strong></div>
+        </div>
+        <div class="actions">
+          <a class="button" href="https://arxiv.org/abs/2605.18749">arXiv</a>
+          <a class="button secondary" href="https://doi.org/10.48550/arXiv.2605.18749">DOI</a>
+        </div>
+        <details>
+          <summary>展開分析</summary>
+          <div class="detail-body">
+            <section class="detail-section">
+              <h3>摘要</h3>
+              <p>WavFlow 用 waveform patchify 將高維波形重排為 2D token grid，並用 amplitude lifting 對齊訊號尺度，讓 flow matching 可在原始波形空間穩定訓練。作者用 5M video-text-audio triplets 從頭訓練，並在 VGGSound 與 AudioCaps 上回報接近或超過 latent-based baselines 的結果。</p>
+            </section>
+            <section class="detail-section">
+              <h3>可行性</h3>
+              <p>工程成本高，因為資料量與 waveform token 序列都重；但方法描述具體，且 arXiv 頁面標示有 code 連結，適合先讀實作細節與訓練穩定化技巧。</p>
+            </section>
+            <section class="detail-section">
+              <h3>主要貢獻</h3>
+              <ul>
+                <li>證明不經 audio VAE / codec latent 也可能做高品質 multimodal audio generation。</li>
+                <li>提出 waveform patchify 與 amplitude lifting，處理波形高維與低能量訊號的訓練問題。</li>
+                <li>同時評估 video-to-audio 與 text-to-audio，對 semantic alignment 與 temporal synchronization 都有實驗訊號。</li>
+              </ul>
+            </section>
+            <section class="detail-section">
+              <h3>和 MeanAudio / karaoke-jp 的關係</h3>
+              <p>對 MeanAudio 最直接：可作為 latent flow transformer 的反例與上界參照，檢查 codec latent 是否真的限制高頻質感或語意對齊。對 karaoke-jp 則是間接相關，若未來要做 lyrics-conditioned singing/accompaniment generation，可借鑑 waveform-space fidelity 的設計取捨。</p>
+            </section>
+            <section class="detail-section">
+              <h3>下一步實驗</h3>
+              <p>建議把 paper 的 AudioCaps 指標、推論步數、RTF、token 長度與訓練成本整理成表，和 MeanAudio/latent flow 設定比較；另外抽查音訊樣本，確認 raw waveform 是否改善 transient、bass 與高頻 texture。</p>
+            </section>
+            <section class="detail-section">
+              <h3>限制與注意事項</h3>
+              <p>不是 music-only paper，AudioCaps/VGGSound 也不等於 MusicCaps。若缺少 subjective music evaluation 或長音樂結構測試，不能直接推論到 text-to-music。5M triplet pipeline 的資料清理品質也需要細看。</p>
+            </section>
+          </div>
+        </details>
       </article>
+
       <article class="paper-card">
-        <div class="card-head"><span class="slot">Priority track: MIR evaluation / audio-text</span><span class="quality">ICASSP 2026 · 高相關</span></div>
+        <div class="card-head">
+          <span class="slot">Priority track: MIR evaluation / audio-text</span>
+          <span class="quality">ICASSP 2026 · 高相關</span>
+        </div>
         <h2>Towards Effective Negation Modeling in Joint Audio-Text Models for Music</h2>
         <p class="authors">Yannis Vasilakis, Rachel Bittner, Johan Pauwels</p>
-        <div class="tags"><span class="tag">music CLAP</span><span class="tag">audio-text retrieval</span><span class="tag">LP-MusicCaps-MSD</span><span class="tag">semantic fidelity</span><span class="tag">negation</span></div>
+        <div class="tags">
+          <span class="tag">music CLAP</span>
+          <span class="tag">audio-text retrieval</span>
+          <span class="tag">LP-MusicCaps-MSD</span>
+          <span class="tag">semantic fidelity</span>
+          <span class="tag">negation</span>
+        </div>
         <p class="one-line">專門檢查音樂 audio-text 模型對「有/沒有某元素」的理解，正好對應 CLAP 類 metric 在生成評估中的盲點。</p>
-        <div class="meta-grid"><div class="meta"><span>更新日期</span><strong>Submitted 2026-01-20 · ICASSP 2026</strong></div><div class="meta"><span>新穎性</span><strong>negated captions + dissimilarity contrastive loss</strong></div></div>
-        <div class="actions"><a class="button" href="https://arxiv.org/abs/2601.13931">arXiv</a><a class="button secondary" href="https://doi.org/10.48550/arXiv.2601.13931">DOI</a></div>
-        <details><summary>展開分析</summary><div class="detail-body">
-          <section class="detail-section"><h3>摘要</h3><p>論文指出音樂 joint audio-text models 難以可靠處理否定，例如 with vocals 與 without vocals。作者在 Million Song Dataset 與 LP-MusicCaps-MSD caption 上從頭訓練 CLAP 類模型，加入 negation text augmentation 與 dissimilarity-based contrastive loss，並用 retrieval / binary classification protocol 評估改善。</p></section>
-          <section class="detail-section"><h3>可行性</h3><p>可快速複用其評估想法，不一定要重訓模型。最有價值的是把 negation prompt pair 變成 MeanAudio 生成評估或資料過濾測試集。</p></section>
-          <section class="detail-section"><h3>主要貢獻</h3><ul><li>把音樂語意中的否定視為獨立 failure mode，而不是一般 retrieval noise。</li><li>提出 text augmentation 與 contrastive loss，使原始 caption 與 negated caption 在 embedding space 中分開。</li><li>提供 retrieval 與二元分類兩種評估 protocol，能檢查「缺席元素」是否被模型理解。</li></ul></section>
-          <section class="detail-section"><h3>和 MeanAudio / karaoke-jp 的關係</h3><p>對 MeanAudio 的 caption selection 與 automatic metric 很重要：CLAP 分數可能高估「prompt 裡要求沒有某元素」的樣本。對 karaoke-jp 也有用，因為伴奏/人聲分離、是否有 vocal、是否有特定樂器，都是 karaoke pipeline 的關鍵條件。</p></section>
-          <section class="detail-section"><h3>下一步實驗</h3><p>建立 50-100 組 music negation prompts，例如 without vocals、no drums、no distorted guitar、with backing vocals but no lead vocal，測 MeanAudio outputs 的 CLAP/PE-AV/Audiobox Aesthetics 與人工標註差距。</p></section>
-          <section class="detail-section"><h3>限制與注意事項</h3><p>它改善的是 retrieval representation，不直接等於生成品質提升。negation augmentation 的語句自然度與音樂元素標籤可信度仍要查；若 LP-MusicCaps-MSD caption 本身有偏誤，模型可能只是學到資料集特定語言規則。</p></section>
-        </div></details>
+        <div class="meta-grid">
+          <div class="meta"><span>更新日期</span><strong>Submitted 2026-01-20 · ICASSP 2026</strong></div>
+          <div class="meta"><span>新穎性</span><strong>negated captions + dissimilarity contrastive loss</strong></div>
+        </div>
+        <div class="actions">
+          <a class="button" href="https://arxiv.org/abs/2601.13931">arXiv</a>
+          <a class="button secondary" href="https://doi.org/10.48550/arXiv.2601.13931">DOI</a>
+        </div>
+        <details>
+          <summary>展開分析</summary>
+          <div class="detail-body">
+            <section class="detail-section">
+              <h3>摘要</h3>
+              <p>論文指出音樂 joint audio-text models 難以可靠處理否定，例如 with vocals 與 without vocals。作者在 Million Song Dataset 與 LP-MusicCaps-MSD caption 上從頭訓練 CLAP 類模型，加入 negation text augmentation 與 dissimilarity-based contrastive loss，並用 retrieval / binary classification protocol 評估改善。</p>
+            </section>
+            <section class="detail-section">
+              <h3>可行性</h3>
+              <p>可快速複用其評估想法，不一定要重訓模型。最有價值的是把 negation prompt pair 變成 MeanAudio 生成評估或資料過濾測試集。</p>
+            </section>
+            <section class="detail-section">
+              <h3>主要貢獻</h3>
+              <ul>
+                <li>把音樂語意中的否定視為獨立 failure mode，而不是一般 retrieval noise。</li>
+                <li>提出 text augmentation 與 contrastive loss，使原始 caption 與 negated caption 在 embedding space 中分開。</li>
+                <li>提供 retrieval 與二元分類兩種評估 protocol，能檢查「缺席元素」是否被模型理解。</li>
+              </ul>
+            </section>
+            <section class="detail-section">
+              <h3>和 MeanAudio / karaoke-jp 的關係</h3>
+              <p>對 MeanAudio 的 caption selection 與 automatic metric 很重要：CLAP 分數可能高估「prompt 裡要求沒有某元素」的樣本。對 karaoke-jp 也有用，因為伴奏/人聲分離、是否有 vocal、是否有特定樂器，都是 karaoke pipeline 的關鍵條件。</p>
+            </section>
+            <section class="detail-section">
+              <h3>下一步實驗</h3>
+              <p>建立 50-100 組 music negation prompts，例如 without vocals、no drums、no distorted guitar、with backing vocals but no lead vocal，測 MeanAudio outputs 的 CLAP/PE-AV/Audiobox Aesthetics 與人工標註差距。</p>
+            </section>
+            <section class="detail-section">
+              <h3>限制與注意事項</h3>
+              <p>它改善的是 retrieval representation，不直接等於生成品質提升。negation augmentation 的語句自然度與音樂元素標籤可信度仍要查；若 LP-MusicCaps-MSD caption 本身有偏誤，模型可能只是學到資料集特定語言規則。</p>
+            </section>
+          </div>
+        </details>
       </article>
     </section>
-    <footer>Sources checked: arXiv 2605.18749, arXiv 2601.13931, existing local duplicate log. Public URL: https://lanternko.github.io/mir-paper-digest/reports/2026-05-26.html</footer>
+    <footer>
+      Sources checked: arXiv 2605.18749, arXiv 2601.13931, existing local duplicate log. Public URL: https://lanternko.github.io/mir-paper-digest/reports/2026-05-26.html
+    </footer>
   </main>
 </body>
 </html>
