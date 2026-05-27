@@ -56,6 +56,45 @@
       font-weight: 850;
       font-size: 14px;
       letter-spacing: 0;
+      color: var(--ink);
+      text-decoration: none;
+      border-radius: 8px;
+      padding: 6px 8px;
+      margin-left: -8px;
+    }
+    .brand:hover {
+      color: var(--accent);
+    }
+    .brand:focus-visible {
+      outline: 3px solid var(--amber-soft);
+      outline-offset: 2px;
+    }
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .nav-link {
+      display: inline-flex;
+      min-height: 32px;
+      align-items: center;
+      justify-content: center;
+      padding: 5px 9px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--paper);
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 750;
+      text-decoration: none;
+    }
+    .nav-link:hover {
+      color: var(--accent);
+      border-color: color-mix(in oklch, var(--accent) 34%, var(--line));
+    }
+    .nav-link:focus-visible {
+      outline: 3px solid var(--amber-soft);
+      outline-offset: 2px;
     }
     .issue-pill {
       display: inline-flex;
@@ -448,8 +487,11 @@
 <body>
   <div class="topbar">
     <div class="topbar-inner">
-      <div class="brand">MIR Paper Digest</div>
-      <div class="issue-pill">Issue 2026-05-27 · 2 papers</div>
+      <a class="brand" href="../index.html" aria-label="MIR Paper Digest home">MIR Paper Digest</a>
+      <div class="topbar-actions">
+        <a class="nav-link" href="../index.html">All papers</a>
+        <div class="issue-pill">Issue 2026-05-27 · 2 papers</div>
+      </div>
     </div>
   </div>
   <main>
