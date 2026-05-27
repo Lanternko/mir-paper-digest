@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MIR Paper Digest - 2026-05-25</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: oklch(21% 0.018 78);
+      --muted: oklch(48% 0.020 78);
+      --quiet: oklch(63% 0.018 78);
+      --line: oklch(86% 0.018 78);
+      --paper: oklch(98% 0.012 86);
+      --surface: oklch(95% 0.018 86);
+      --panel: oklch(91% 0.022 86);
+      --accent: oklch(45% 0.105 166);
+      --accent-soft: oklch(91% 0.052 166);
+      --coral: oklch(62% 0.155 35);
+      --coral-soft: oklch(93% 0.046 35);
+      --amber: oklch(63% 0.115 82);
+      --amber-soft: oklch(94% 0.050 82);
+      --shadow: 0 18px 40px rgba(65, 53, 31, 0.08);
+    }
+    * { box-sizing: border-box; }
+    html { overflow-x: hidden; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", "Microsoft JhengHei", system-ui, sans-serif;
+      color: var(--ink);
+      background: linear-gradient(180deg, var(--paper) 0, var(--surface) 420px, var(--surface) 100%);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { color: var(--accent); overflow-wrap: anywhere; }
+    .topbar {
+      border-bottom: 1px solid var(--line);
+      background: color-mix(in oklch, var(--paper) 92%, transparent);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+    .topbar-inner {
+      width: min(1120px, calc(100% - 28px));
+      margin: 0 auto;
+      min-height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .brand { font-weight: 850; font-size: 14px; letter-spacing: 0; }
+    .issue-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 750;
+    }
+    main {
+      width: min(1120px, calc(100% - 28px));
+      margin: 0 auto 56px;
+    }
+    .hero {
+      padding: 44px 0 10px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 320px;
+      gap: 22px;
+      align-items: start;
+    }
+    .eyebrow { margin: 0 0 10px; color: var(--coral); font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; font-size: 12px; }
+    h1 { margin: 0 0 12px; font-size: clamp(30px, 3.8vw, 44px); line-height: 1.1; letter-spacing: -0.02em; }
+    .subtitle { margin: 0; color: var(--muted); max-width: 68ch; }
+    .brief {
+      padding: 18px 18px 16px;
+      border: 1px solid var(--line);
+      background: color-mix(in oklch, var(--paper) 76%, transparent);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+    }
+    .brief h2 { margin: 0 0 10px; font-size: 14px; letter-spacing: 0.01em; }
+    .brief-list { margin: 0; padding-left: 18px; color: var(--muted); }
+    .brief-list li { margin: 9px 0; }
+    .toolbar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      padding: 12px 0 6px;
+    }
+    .toolbar-label { font-size: 12px; font-weight: 850; color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; }
+    .filter-btn {
+      border: 1px solid var(--line);
+      background: color-mix(in oklch, var(--paper) 80%, transparent);
+      color: var(--ink);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-weight: 750;
+      font-size: 12px;
+      cursor: pointer;
+      user-select: none;
+      transition: transform 140ms ease, background 140ms ease, border-color 140ms ease;
+    }
+    .filter-btn[aria-pressed="true"] {
+      background: var(--accent-soft);
+      border-color: color-mix(in oklch, var(--accent) 35%, var(--line));
+      color: var(--accent);
+    }
+    .filter-btn:active { transform: translateY(1px); }
+    .digest-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 320px;
+      gap: 22px;
+      padding-top: 8px;
+    }
+    .cards { display: grid; gap: 16px; }
+    .paper-card {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+      background: color-mix(in oklch, var(--paper) 88%, transparent);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+    .paper-card.is-hidden { display: none; }
+    .paper-head { display: flex; align-items: start; gap: 12px; margin-bottom: 10px; }
+    .paper-number {
+      width: 40px; height: 40px; border-radius: 12px;
+      background: var(--coral-soft);
+      color: var(--coral);
+      font-weight: 900;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+    }
+    .paper-meta { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding-top: 3px; }
+    .paper-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 750;
+      border: 1px solid color-mix(in oklch, var(--line) 70%, transparent);
+      background: color-mix(in oklch, var(--paper) 86%, transparent);
+      color: var(--muted);
+    }
+    .paper-meta .track { background: var(--accent-soft); color: var(--accent); border-color: color-mix(in oklch, var(--accent) 30%, var(--line)); }
+    .paper-meta .quality { background: var(--amber-soft); color: color-mix(in oklch, var(--amber) 80%, var(--ink)); border-color: color-mix(in oklch, var(--amber) 35%, var(--line)); }
+    .paper-meta .freshness { background: color-mix(in oklch, var(--paper) 84%, transparent); }
+    h2 {
+      margin: 0 0 10px;
+      font-size: 18px;
+      letter-spacing: -0.01em;
+      line-height: 1.3;
+    }
+    .one-line { margin: 0 0 12px; color: var(--muted); }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 12px; }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 5px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: color-mix(in oklch, var(--paper) 78%, transparent);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      max-width: 100%;
+      overflow-wrap: anywhere;
+    }
+    .track-hint { font-size: 12px; color: var(--quiet); font-weight: 800; margin-right: 2px; }
+    .quick-read {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .quick-read .label { font-size: 11px; font-weight: 900; color: var(--quiet); letter-spacing: 0.03em; text-transform: uppercase; }
+    .quick-read p { margin: 6px 0 0; color: var(--muted); font-size: 13px; }
+    .card-actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+    .source-link, .details-toggle {
+      border-radius: 12px;
+      padding: 10px 12px;
+      font-weight: 850;
+      font-size: 13px;
+      border: 1px solid var(--line);
+      background: color-mix(in oklch, var(--paper) 82%, transparent);
+      text-decoration: none;
+      color: var(--ink);
+      cursor: pointer;
+    }
+    .source-link { color: var(--accent); border-color: color-mix(in oklch, var(--accent) 30%, var(--line)); }
+    .details-toggle { background: var(--accent-soft); color: var(--accent); border-color: color-mix(in oklch, var(--accent) 30%, var(--line)); }
+    .details-panel {
+      margin-top: 14px;
+      border-top: 1px dashed color-mix(in oklch, var(--line) 80%, transparent);
+      padding-top: 14px;
+      display: none;
+    }
+    .paper-card.is-open .details-panel { display: block; }
+    .detail-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .detail-section {
+      border: 1px solid var(--line);
+      background: color-mix(in oklch, var(--paper) 80%, transparent);
+      border-radius: 16px;
+      padding: 12px 12px 10px;
+    }
+    .detail-section h3 { margin: 0 0 8px; font-size: 13px; letter-spacing: 0.01em; }
+    .detail-section p { margin: 0; color: var(--muted); font-size: 13px; overflow-wrap: anywhere; }
+    .detail-section ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 13px; }
+    .detail-section li { margin: 6px 0; }
+    .meta-list { margin: 0; }
+    .meta-list dt { font-size: 11px; font-weight: 900; color: var(--quiet); letter-spacing: 0.03em; text-transform: uppercase; }
+    .meta-list dd { margin: 4px 0 12px; color: var(--muted); font-size: 13px; }
+    .side-panel {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+      background: color-mix(in oklch, var(--paper) 78%, transparent);
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 78px;
+      height: fit-content;
+    }
+    .side-panel h2 { margin: 0 0 10px; font-size: 14px; }
+    .side-panel p { margin: 10px 0; color: var(--muted); font-size: 13px; }
+    .issue-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin: 14px 0; }
+    .stat { border: 1px solid var(--line); border-radius: 14px; padding: 10px; background: color-mix(in oklch, var(--paper) 84%, transparent); }
+    .stat strong { display: block; font-size: 18px; }
+    .stat span { color: var(--muted); font-size: 12px; font-weight: 750; }
+    footer { margin: 36px 0 0; color: var(--muted); font-size: 12px; }
+    @media (max-width: 980px) {
+      .hero, .digest-layout { grid-template-columns: 1fr; }
+      .side-panel { position: static; top: auto; }
+    }
+    @media (max-width: 640px) {
+      .paper-card { padding: 16px; }
+      .quick-read { grid-template-columns: 1fr; }
+      .detail-grid { grid-template-columns: 1fr; }
+    }
+    @media print {
+      .topbar, .toolbar, .details-toggle { display: none !important; }
+      body { background: white; }
+      .paper-card { break-inside: avoid; box-shadow: none; }
+      .details-panel { display: block !important; }
+      .side-panel { position: static; box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html" aria-label="MIR Paper Digest home">MIR Paper Digest</a>
+      <div class="topbar-actions">
+        <a class="nav-link" href="../index.html">All papers</a>
+        <div class="issue-pill">Issue 2026-05-25 ・ 2 papers</div>
+      </div>
+    </div>
+  </header>
+  <main>
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Daily research brief</p>
+        <h1>每日 MIR 論文精選</h1>
+        <p class="subtitle">優先序：MeanAudio / text-to-audio generation → karaoke-jp → genre/tagging。今天先挑一篇「CLAP / joint audio-text model 的語義陷阱（否定）」對資料與評估有直接影響，再補一篇「唱歌轉寫/對齊/風格標註」對 karaoke pipeline 可落地的工作。</p>
+      </div>
+      <aside class="brief" aria-label="今日閱讀順序">
+        <h2>今日讀法</h2>
+        <ol class="brief-list">
+          <li>先抓「評估/資料」：joint embedding 會怎麼被 prompt 或 caption 帶偏？</li>
+          <li>再抓「可落地」：能不能直接變成下一個小實驗/工具？</li>
+          <li>最後才深讀細節：loss、ablation、以及對你目前 pipeline 的改動成本。</li>
+        </ol>
+      </aside>
+    </section>
+    <nav class="toolbar" aria-label="論文分類">
+      <span class="toolbar-label">Filter</span>
+      <button class="filter-btn" type="button" data-filter="all" aria-pressed="true">全部</button>
+      <button class="filter-btn" type="button" data-filter="mean_audio" aria-pressed="false">MeanAudio</button>
+      <button class="filter-btn" type="button" data-filter="karaoke_jp" aria-pressed="false">karaoke-jp</button>
+      <button class="filter-btn" type="button" data-filter="general_mir" aria-pressed="false">泛 MIR</button>
+    </nav>
+    <section class="digest-layout">
+      <div class="cards" aria-label="論文卡片">
+        <article class="paper-card" data-track="mean_audio">
+          <div class="paper-head">
+            <div class="paper-number" aria-label="Paper 1">01</div>
+            <div class="paper-meta">
+              <span class="track">MeanAudio</span>
+              <span class="quality">高品質（評估/資料直擊）</span>
+              <span class="freshness">更新 2026-01-20 ・ 約 125 天</span>
+            </div>
+          </div>
+          <h2>Towards Effective Negation Modeling in Joint Audio-Text Models for Music</h2>
+          <p class="one-line">讓 CLAP 類 joint embedding 真的「懂否定」：用文字增強 + dissimilarity loss 把「否定後的 caption」從原 caption 拉開，降低檢索/生成被語義陷阱誤導。</p>
+          <div class="tag-row" aria-label="Topic tags">
+            <span class="track-hint">Tags</span>
+            <span class="tag">CLAP / joint audio-text</span>
+            <span class="tag">LP-MusicCaps-MSD</span>
+            <span class="tag">evaluation pitfalls</span>
+            <span class="tag">data augmentation</span>
+          </div>
+          <div class="quick-read">
+            <div>
+              <span class="label">新穎性</span>
+              <p>不是新模型，而是補「否定語義」這個常見盲點；對「用 CLAP 做 data filtering / prompt selection / auto-eval」特別重要。</p>
+            </div>
+            <div>
+              <span class="label">為何入選</span>
+              <p>你的主線常會用到 text-audio similarity（或其衍生）做篩選與評估；否定處理若不可靠，很容易讓資料清理與評估一起偏。</p>
+            </div>
+          </div>
+          <div class="card-actions">
+            <a class="source-link" href="https://arxiv.org/abs/2601.13931">來源</a>
+            <button class="details-toggle" type="button" aria-expanded="false" aria-controls="paper-1-panel">展開細節</button>
+          </div>
+          <div class="details-panel" id="paper-1-panel">
+            <div class="detail-grid">
+              <section class="detail-section">
+                <h3>摘要</h3>
+                <p>作者指出 joint audio-text 模型在否定描述（如「沒有鼓聲」）上容易失效。做法是用文字增強產生「否定版 caption」，再配合 dissimilarity-based 對比式損失，讓否定後的語意在 joint space 明確遠離原 caption，並在音樂資料上驗證。</p>
+              </section>
+              <section class="detail-section">
+                <h3>可行性（你能怎麼做）</h3>
+                <ul>
+                  <li>先用你現有的 CLAP/embedding pipeline 做「否定 prompt 對照測試」（檢索/重排序）。</li>
+                  <li>把否定樣式納入資料過濾：避免把「沒有 X」錯當「有 X」。</li>
+                  <li>若你自訓 CLAP 或 reward model：把 negation augmentation 當成低成本增強。</li>
+                </ul>
+              </section>
+              <section class="detail-section">
+                <h3>主要貢獻（快速抓重點）</h3>
+                <ul>
+                  <li>在音樂資料上系統化呈現「否定語義」的失效案例。</li>
+                  <li>提供可重用的 negation text augmentation + dissimilarity loss 設計。</li>
+                  <li>用 LP-MusicCaps-MSD（Million Song Dataset + pseudo captions）場景連到實務。</li>
+                </ul>
+              </section>
+              <section class="detail-section">
+                <h3>和 MeanAudio 的關係</h3>
+                <p>如果你用 CLAP 類分數做：caption quality filtering、hard negative、LLM 產生 captions 的篩選、或自動化 eval（text alignment），這篇能提醒「否定/反例」會把分數弄歪，並給一個可落地修補方向。</p>
+              </section>
+              <section class="detail-section">
+                <h3>下一步實驗</h3>
+                <ul>
+                  <li>挑 30 個你常用的音樂 prompt，為每個 prompt 造 1 個否定版本，測 CLAP 排名差異與人耳一致性。</li>
+                  <li>把 negation 變成 data filter 的「紅旗」規則：否定 prompt 命中高分 → 需要人工審核。</li>
+                </ul>
+              </section>
+              <section class="detail-section">
+                <h3>限制與注意事項</h3>
+                <p>否定只是語義可靠性的其中一塊；仍要注意 domain shift（speech/music）、以及 pseudo captions 的噪音會不會把「否定增強」學偏。不要只用單一 embedding 指標做最終結論。</p>
+              </section>
+              <section class="detail-section">
+                <h3>Meta</h3>
+                <dl class="meta-list">
+                  <div><dt>Authors</dt><dd>（arXiv）</dd></div>
+                  <div><dt>URL</dt><dd><a href="https://arxiv.org/abs/2601.13931">https://arxiv.org/abs/2601.13931</a></dd></div>
+                  <div><dt>Track</dt><dd>mean_audio</dd></div>
+                </dl>
+              </section>
+            </div>
+          </div>
+        </article>
+
+        <article class="paper-card" data-track="karaoke_jp">
+          <div class="paper-head">
+            <div class="paper-number" aria-label="Paper 2">02</div>
+            <div class="paper-meta">
+              <span class="track">karaoke-jp</span>
+              <span class="quality">高品質（資料/標註管線）</span>
+              <span class="freshness">更新 2025-07-09 ・ 約 321 天</span>
+            </div>
+          </div>
+          <h2>STARS: A Unified Framework for Singing Transcription, Alignment, and Refined Style Annotation</h2>
+          <p class="one-line">把唱歌資料的「轉寫、對齊、技巧/風格標註」做成一條統一 pipeline：更像你真的要做 karaoke / SVS 資料工程時會需要的那種 end-to-end 工具。</p>
+          <div class="tag-row" aria-label="Topic tags">
+            <span class="track-hint">Tags</span>
+            <span class="tag">singing transcription</span>
+            <span class="tag">phoneme/audio alignment</span>
+            <span class="tag">style / technique labels</span>
+            <span class="tag">dataset building</span>
+          </div>
+          <div class="quick-read">
+            <div>
+              <span class="label">新穎性</span>
+              <p>亮點在「把多個分散任務整合」：不只是單點 SOTA，而是讓標註管線變得可規模化。</p>
+            </div>
+            <div>
+              <span class="label">為何入選</span>
+              <p>karaoke-jp 很容易被資料標註卡住（lyrics/phoneme/音高/節拍/時間對齊）；這篇提供一個可參考的整體設計。</p>
+            </div>
+          </div>
+          <div class="card-actions">
+            <a class="source-link" href="https://arxiv.org/abs/2507.06670">來源</a>
+            <button class="details-toggle" type="button" aria-expanded="false" aria-controls="paper-2-panel">展開細節</button>
+          </div>
+          <div class="details-panel" id="paper-2-panel">
+            <div class="detail-grid">
+              <section class="detail-section">
+                <h3>摘要</h3>
+                <p>STARS 同時處理唱歌轉寫、音素/詞級對齊、以及更細的風格/技巧標註。透過階層式的聲學特徵處理與非自回歸的在地編碼器，支援多層級結構（frame/word/phoneme/note/sentence），並展示在多個面向的改進。</p>
+              </section>
+              <section class="detail-section">
+                <h3>可行性（你能怎麼用）</h3>
+                <ul>
+                  <li>拿它當「自動標註器」原型：先做對齊/轉寫，再把結果餵回你的 karaoke 渲染。</li>
+                  <li>把它當成你要蒐集/清理唱歌資料時的參考設計（多層級 supervision）。</li>
+                  <li>若你在意日文：重點是 phoneme 對齊設計能否接到 kana/ruby/mora。</li>
+                </ul>
+              </section>
+              <section class="detail-section">
+                <h3>主要貢獻（快速抓重點）</h3>
+                <ul>
+                  <li>把轉寫 + 對齊 + 風格標註整合成單一框架。</li>
+                  <li>提供更可規模化的自動唱歌標註路線，服務 SVS / karaoke 資料需求。</li>
+                </ul>
+              </section>
+              <section class="detail-section">
+                <h3>和 karaoke-jp 的關係</h3>
+                <p>你可以用這條思路把「lyrics → phoneme → timing」串起來，進一步做 mora-to-note / LRC timecode / 逐字高亮。它也提醒：資料管線比單點模型更可能成為瓶頸。</p>
+              </section>
+              <section class="detail-section">
+                <h3>下一步實驗</h3>
+                <ul>
+                  <li>挑 5 首日文歌：用現成 ASR/lyrics + 強制對齊做 baseline，對比 STARS 類方法在對齊穩定性。</li>
+                  <li>以「karaoke 可讀性」當最終指標：逐字高亮是否對得上、錯誤是否集中在連音/促音/長音。</li>
+                </ul>
+              </section>
+              <section class="detail-section">
+                <h3>限制與注意事項</h3>
+                <p>唱歌對齊容易受到伴奏、混響與歌手咬字影響；如果模型訓練資料偏某些語言/風格，日文歌曲可能需要 domain adaptation。建議把錯誤分佈做可視化（對齊偏移、漏字、重複）。</p>
+              </section>
+              <section class="detail-section">
+                <h3>Meta</h3>
+                <dl class="meta-list">
+                  <div><dt>Authors</dt><dd>Wenxiang Guo, Yu Zhang, Changhao Pan, Zhiyuan Zhu, Ruiqi Li, Zhetao Chen, Wenhao Xu, Fei Wu, Zhou Zhao</dd></div>
+                  <div><dt>URL</dt><dd><a href="https://arxiv.org/abs/2507.06670">https://arxiv.org/abs/2507.06670</a></dd></div>
+                  <div><dt>Track</dt><dd>karaoke_jp</dd></div>
+                </dl>
+              </section>
+            </div>
+          </div>
+        </article>
+      </div>
+      <aside class="side-panel" aria-label="今日總結">
+        <h2>今天的 take-away</h2>
+        <p>1) 對 MeanAudio：你如果靠 CLAP / joint embedding 做資料篩選與評估，務必把「否定/反例」納入 sanity check，否則很容易越篩越偏。</p>
+        <p>2) 對 karaoke-jp：資料管線（轉寫+對齊+標註）要能規模化，才會真的推得動後續渲染與模型訓練。</p>
+        <div class="issue-stats">
+          <div class="stat"><strong>2</strong><span>papers</span></div>
+          <div class="stat"><strong>09:00</strong><span>Taipei</span></div>
+        </div>
+        <p>Generated at 2026-05-25 09:00:00 Asia/Taipei.</p>
+      </aside>
+    </section>
+    <footer>Local backup: D:\Projects\mir_reports\mir_report_2026-05-25.html</footer>
+  </main>
+  <script>
+    const cards = Array.from(document.querySelectorAll('.paper-card'));
+    document.querySelectorAll('.details-toggle').forEach((button) => {
+      button.addEventListener('click', () => {
+        const card = button.closest('.paper-card');
+        const isOpen = card.classList.toggle('is-open');
+        button.setAttribute('aria-expanded', String(isOpen));
+        button.textContent = isOpen ? '收合細節' : '展開細節';
+      });
+    });
+    document.querySelectorAll('.filter-btn').forEach((button) => {
+      button.addEventListener('click', () => {
+        const filter = button.dataset.filter;
+        document.querySelectorAll('.filter-btn').forEach((b) => b.setAttribute('aria-pressed', String(b === button)));
+        cards.forEach((card) => {
+          const show = filter === 'all' || card.dataset.track === filter;
+          card.classList.toggle('is-hidden', !show);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
+
