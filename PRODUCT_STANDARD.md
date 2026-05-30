@@ -19,10 +19,10 @@ Each issue must help the reader answer, within 10 seconds:
 
 ## 2. Content Priority
 
-Always rank topics in this order:
+Current research focus has shifted toward Music Flamingo, lyrics recognition, JPOP / Japanese lyrics, and karaoke-oriented workflows. Rank topics in this order:
 
-1. MeanAudio / text-to-audio / text-to-music generation.
-2. `karaoke-jp`: singing voice, separation, pitch, Japanese lyrics, alignment, MIDI/score, karaoke rendering.
+1. Music Flamingo / music understanding, lyrics recognition or transcription, JPOP / Japanese lyrics, and `karaoke-jp`: singing voice, separation, pitch, kana/ruby, lyrics alignment, mora-to-note timing, MIDI/score, LRC, and karaoke rendering.
+2. MeanAudio / text-to-audio / text-to-music generation, especially when it helps music understanding, lyrics, alignment, captions, codecs, evaluation, or reward/alignment experiments.
 3. General MIR, genre classification, tagging, and representation learning.
 
 Freshness is not enough. Selection must consider quality, relevance, baselines, evaluation reliability, reproducibility signals, and usefulness for the user's experiments.
@@ -150,4 +150,3 @@ Before a redesign is considered done:
 - Confirm the expanded content is useful after expanding.
 - Confirm issue index still points to the latest page.
 - Confirm no secrets appear in HTML, PDF, repo files, Discord messages, or memory files.
-
