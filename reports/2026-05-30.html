@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="zh-Hant" data-standard-version="2026-05-26" data-standard-digest="1d5f843f0d">
+<html lang="zh-Hant" data-standard-version="2026-05-26" data-standard-digest="2187e8b96f">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="mir-digest-product-standard" content="2026-05-26:1d5f843f0d">
+  <meta name="mir-digest-product-standard" content="2026-05-26:2187e8b96f">
   <title>MIR Paper Digest - 2026-05-30</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -681,6 +681,22 @@
     .meta-list dd {
       overflow-wrap: anywhere;
     }
+    .keyterm {
+      color: var(--accent-ink);
+      background: rgba(254, 209, 223, 0.62);
+      border: 1px solid rgba(120, 85, 97, 0.12);
+      border-radius: 6px;
+      padding: 0 0.18em 0.02em;
+      font-weight: 650;
+      box-decoration-break: clone;
+      -webkit-box-decoration-break: clone;
+    }
+    h2 .keyterm {
+      background: transparent;
+      border-color: transparent;
+      color: var(--accent);
+      padding: 0;
+    }
     @media (max-width: 640px) {
       .nav {
         width: 100%;
@@ -740,7 +756,7 @@
       <div>
         <p class="eyebrow">Daily research brief · 2026-05-30</p>
         <h1>每日 MIR 論文<em>精選</em></h1>
-        <p class="subtitle">今天先看最可能推動 MeanAudio 的論文，再補一篇對 karaoke-jp 或 MIR 觀點有啟發的工作。重點是能不能轉成下一個可驗證的小實驗。</p>
+        <p class="subtitle">近期主線往 <mark class="keyterm">Music Flamingo</mark>、<mark class="keyterm">歌詞辨識</mark>、<mark class="keyterm">JPOP</mark> 與<mark class="keyterm">卡拉 OK</mark> 靠攏；今天先看最能轉成下一個小實驗的兩篇。</p>
       </div>
     </section>
 
@@ -772,7 +788,7 @@
             </div>
           </div>
           <div class="paper-card-body">
-          <h2><a href="https://arxiv.org/abs/2605.01790v1" target="_blank" rel="noopener">Khala: Scaling Acoustic Token Language Models Toward High-Fidelity Music Generation</a></h2>
+          <h2><a href="https://arxiv.org/abs/2605.01790v1" target="_blank" rel="noopener">Khala: Scaling <mark class="keyterm">Acoustic Token</mark> Language Models Toward High-Fidelity Music Generation</a></h2>
           <p class="one-line">A common design pattern in high-quality music generation is to handle structure and fidelity in different representation spaces: a...</p>
           <div class="tag-row">
             <span class="track-hint">貼近主線</span>
@@ -781,11 +797,11 @@
           <div class="quick-read">
             <div>
               <span class="label">Insight</span>
-              <p>洞見：它把高保真音樂生成拆成 acoustic token LM 的 scaling 問題，重點在長時結構與音色細節能否同時保住。 方法線索：64-layer RVQ acoustic representation + two-stage coarse-to-fine generation；先產生整首粗 token，再用 super-resolution 補細層 token。</p>
+              <p><mark class="keyterm">洞見</mark>：它把高保真音樂生成拆成 <mark class="keyterm">acoustic token LM</mark> 的 scaling 問題，重點在長時結構與音色細節能否同時保住。 <mark class="keyterm">方法線索</mark>：<mark class="keyterm">64-layer RVQ</mark> acoustic representation + <mark class="keyterm">two-stage coarse-to-fine</mark> generation；先產生整首粗 token，再用 <mark class="keyterm">super-resolution</mark> 補細層 token。</p>
             </div>
             <div>
               <span class="label">Try next</span>
-              <p>可做：固定同一批 prompt 與 codec，對比 token rate / context length / LM scale，看音樂結構與音質是否跟它的 claim 一致。結果焦點：純 acoustic-token LM 也可能長出 text-vocal alignment；不一定要另切 semantic token stage。</p>
+              <p><mark class="keyterm">可做</mark>：固定同一批 prompt 與 <mark class="keyterm">codec</mark>，對比 <mark class="keyterm">token rate</mark> / <mark class="keyterm">context length</mark> / <mark class="keyterm">LM scale</mark>，看音樂結構與音質是否跟它的 claim 一致。<mark class="keyterm">結果焦點</mark>：純 <mark class="keyterm">acoustic-token LM</mark> 也可能長出 <mark class="keyterm">text-vocal alignment</mark>；不一定要另切 semantic token stage。</p>
             </div>
           </div>
           </div>
@@ -817,7 +833,7 @@
               </section>
               <section class="detail-section" data-standard-section="findings">
                 <h3>Findings</h3>
-                <p>To study this, we build a 64-layer residual vector quantization (RVQ) acoustic representation and propose a two-stage coarse-to-fine generation framework.</p>
+                <p>To study this, we build a 64-layer <mark class="keyterm">residual vector quantization</mark> (<mark class="keyterm">RVQ</mark>) acoustic representation and propose a <mark class="keyterm">two-stage coarse-to-fine</mark> generation framework.</p>
               </section>
               <section class="detail-section" data-standard-section="limitations">
                 <h3>Limitations</h3>
@@ -825,7 +841,7 @@
               </section>
               <section class="detail-section" data-standard-section="editor-note">
                 <h3>Editor Note</h3>
-                <p>先看它是否能改善 text-to-audio / text-to-music 的資料、caption、latent flow、codec、評估或 reward alignment。 下一步：抽一個可驗證的 trick，做成小實驗；先看資料與評估是否足以支撐，不要只被 CLAP 或主觀樣本牽著走。</p>
+                <p>先看它是否能改善 text-to-audio / text-to-music，或支援 <mark class="keyterm">Music Flamingo</mark>、<mark class="keyterm">歌詞辨識</mark>、<mark class="keyterm">JPOP</mark> / <mark class="keyterm">卡拉 OK</mark> 的音樂理解方向。 下一步：抽一個可驗證的 trick，做成小實驗；先看資料與評估是否足以支撐，不要只被 <mark class="keyterm">CLAP</mark> 或主觀樣本牽著走。</p>
               </section>
               <section class="detail-section" data-standard-section="metadata">
                 <h3>Metadata</h3>
@@ -851,7 +867,7 @@
           </div>
           <div class="paper-card-body">
           <h2><a href="https://arxiv.org/abs/2605.30349v1" target="_blank" rel="noopener">AdaState: Self-Evolving Anchors for Streaming Video Generation</a></h2>
-          <p class="one-line">Autoregressive video diffusion models generate streaming video by producing frames sequentially, conditioning each chunk on previou...</p>
+          <p class="one-line">Autoregressive video diffusion models generate streaming video by producing frames sequentially, conditioning each <mark class="keyterm">chunk</mark> on previou...</p>
           <div class="tag-row">
             <span class="track-hint">貼近主線</span>
             <span class="tag">text-to-audio/music</span>
@@ -859,11 +875,11 @@
           <div class="quick-read">
             <div>
               <span class="label">Insight</span>
-              <p>洞見：它處理的是自回歸生成跨 chunk 的狀態漂移；雖然題目是 video，但 anchor/state 更新可借鏡到長音訊或分段音樂生成。 方法線索：把固定 first-frame anchor 換成每個 chunk 一起 denoise 的 adaptive state hidden latent，讓 KV cache 承載會演化的場景狀態。</p>
+              <p><mark class="keyterm">洞見</mark>：它處理的是自回歸生成跨 <mark class="keyterm">chunk</mark> 的狀態漂移；雖然題目是 video，但 <mark class="keyterm">anchor/state</mark> 更新可借鏡到長音訊或分段音樂生成。 <mark class="keyterm">方法線索</mark>：把固定 first-frame anchor 換成每個 <mark class="keyterm">chunk</mark> 一起 denoise 的 <mark class="keyterm">adaptive state hidden latent</mark>，讓 <mark class="keyterm">KV cache</mark> 承載會演化的場景狀態。</p>
             </div>
             <div>
               <span class="label">Try next</span>
-              <p>可做：把長音訊切成連續 chunk，測 anchor/state cache 是否降低跨段 drift、重複與風格跳動；先用小模型 smoke test。結果焦點：adaptive state 改善 motion / scene progression；對長音訊可轉成跨段一致性與 drift 測試。</p>
+              <p><mark class="keyterm">可做</mark>：把長音訊切成連續 <mark class="keyterm">chunk</mark>，測 <mark class="keyterm">anchor/state</mark> cache 是否降低跨段 <mark class="keyterm">drift</mark>、重複與風格跳動；先用小模型 smoke test。<mark class="keyterm">結果焦點</mark>：<mark class="keyterm">adaptive state</mark> 改善 motion / scene progression；對長音訊可轉成跨段一致性與 <mark class="keyterm">drift</mark> 測試。</p>
             </div>
           </div>
           </div>
@@ -883,7 +899,7 @@
             <div class="detail-grid">
               <section class="detail-section" data-standard-section="problem">
                 <h3>Problem</h3>
-                <p>Autoregressive video diffusion models generate streaming video by producing frames sequentially, conditioning each chunk on previously generated content.</p>
+                <p>Autoregressive video diffusion models generate streaming video by producing frames sequentially, conditioning each <mark class="keyterm">chunk</mark> on previously generated content.</p>
               </section>
               <section class="detail-section" data-standard-section="method">
                 <h3>Method</h3>
@@ -903,7 +919,7 @@
               </section>
               <section class="detail-section" data-standard-section="editor-note">
                 <h3>Editor Note</h3>
-                <p>先看它是否能改善 text-to-audio / text-to-music 的資料、caption、latent flow、codec、評估或 reward alignment。 下一步：抽一個可驗證的 trick，做成小實驗；先看資料與評估是否足以支撐，不要只被 CLAP 或主觀樣本牽著走。</p>
+                <p>先看它是否能改善 text-to-audio / text-to-music，或支援 <mark class="keyterm">Music Flamingo</mark>、<mark class="keyterm">歌詞辨識</mark>、<mark class="keyterm">JPOP</mark> / <mark class="keyterm">卡拉 OK</mark> 的音樂理解方向。 下一步：抽一個可驗證的 trick，做成小實驗；先看資料與評估是否足以支撐，不要只被 <mark class="keyterm">CLAP</mark> 或主觀樣本牽著走。</p>
               </section>
               <section class="detail-section" data-standard-section="metadata">
                 <h3>Metadata</h3>
@@ -922,14 +938,14 @@
     <details class="footnote">
       <summary>閱讀順序與篩選原則</summary>
       <div class="footnote-body">
-        <span><strong>1.</strong> MeanAudio 優先：生成、flow、caption、codec、評估與 reward alignment。</span>
-        <span><strong>2.</strong> karaoke-jp 第二：分離、pitch、lyrics alignment、score/MIDI 與 rendering。</span>
+        <span><strong>1.</strong> 近期主線：<mark class="keyterm">Music Flamingo</mark>、<mark class="keyterm">歌詞辨識</mark>、<mark class="keyterm">JPOP</mark>、<mark class="keyterm">卡拉 OK</mark> 與 <mark class="keyterm">karaoke-jp</mark>。</span>
+        <span><strong>2.</strong> 生成主線仍保留：text-to-audio/music、flow、caption、<mark class="keyterm">codec</mark>、評估與 <mark class="keyterm">reward</mark> <mark class="keyterm">alignment</mark>。</span>
         <span><strong>3.</strong> 只收高品質：新穎度、重要性、baseline、資料與可落地性一起看。</span>
       </div>
     </details>
   </main>
 
-  <footer>Generated by the local MIR paper automation · Product standard 2026-05-26 · 1d5f843f0d · 2026-05-30 07:46:19 Asia/Taipei</footer>
+  <footer>Generated by the local MIR paper automation · Product standard 2026-05-26 · 2187e8b96f · 2026-05-30 08:12:22 Asia/Taipei</footer>
 
   <script>
     const cards = Array.from(document.querySelectorAll('.paper-card'));
