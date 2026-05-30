@@ -767,11 +767,11 @@
         <ol class="paper-nav-list">
           <li><a href="#paper-1">
             <span class="nav-num">01</span>
-            <span>Khala: Scaling Acoustic Token Language Mo...<span class="nav-track">MeanAudio</span></span>
+            <span>Benchmarking Single-Factor Physical Video...<span class="nav-track">MeanAudio</span></span>
           </a></li>
           <li><a href="#paper-2">
             <span class="nav-num">02</span>
-            <span>AdaState: Self-Evolving Anchors for Strea...<span class="nav-track">MeanAudio</span></span>
+            <span>COMET: Concept Space Dissection of the Mo...<span class="nav-track">MeanAudio</span></span>
           </a></li>
         </ol>
       </aside>
@@ -783,30 +783,32 @@
             <div class="paper-number">01</div>
             <div class="paper-meta">
               <span class="track">MeanAudio</span>
-              <span class="quality">待觀察</span>
-              <span class="freshness">2026-05-03 · 27d</span>
+              <span class="quality">新</span>
+              <span class="freshness">2026-05-28 · 2d</span>
             </div>
           </div>
           <div class="paper-card-body">
-          <h2><a href="https://arxiv.org/abs/2605.01790v1" target="_blank" rel="noopener">Khala: Scaling <mark class="keyterm">Acoustic Token</mark> Language Models Toward High-Fidelity Music Generation</a></h2>
-          <p class="one-line">A common design pattern in high-quality music generation is to handle structure and fidelity in different representation spaces: a...</p>
+          <h2><a href="https://arxiv.org/abs/2605.30339v1" target="_blank" rel="noopener">Benchmarking Single-Factor Physical Video-to-Audio Generation</a></h2>
+          <p class="one-line">Generative video-to-audio (V2A) models produce highly plausible soundtracks, but it remains unclear whether they capture the underl...</p>
           <div class="tag-row">
             <span class="track-hint">貼近主線</span>
             <span class="tag">text-to-audio/music</span>
+            <span class="tag">caption/data</span>
+            <span class="tag">evaluation</span>
           </div>
           <div class="quick-read">
             <div>
               <span class="label">Insight</span>
-              <p><mark class="keyterm">洞見</mark>：它把高保真音樂生成拆成 <mark class="keyterm">acoustic token LM</mark> 的 scaling 問題，重點在長時結構與音色細節能否同時保住。 <mark class="keyterm">方法線索</mark>：<mark class="keyterm">64-layer RVQ</mark> acoustic representation + <mark class="keyterm">two-stage coarse-to-fine</mark> generation；先產生整首粗 token，再用 <mark class="keyterm">super-resolution</mark> 補細層 token。</p>
+              <p><mark class="keyterm">洞見</mark>：它的價值在資料/偏好/評估訊號怎麼進訓練，而不是只看模型架構名稱。 <mark class="keyterm">方法線索</mark>：In this paper, we introduce FlatSounds, a benchmark that audits the physical reasoning of V2A models through: 1) controlled count...</p>
             </div>
             <div>
               <span class="label">Try next</span>
-              <p><mark class="keyterm">可做</mark>：固定同一批 prompt 與 <mark class="keyterm">codec</mark>，對比 <mark class="keyterm">token rate</mark> / <mark class="keyterm">context length</mark> / <mark class="keyterm">LM scale</mark>，看音樂結構與音質是否跟它的 claim 一致。<mark class="keyterm">結果焦點</mark>：純 <mark class="keyterm">acoustic-token LM</mark> 也可能長出 <mark class="keyterm">text-vocal alignment</mark>；不一定要另切 semantic token stage。</p>
+              <p><mark class="keyterm">可做</mark>：抽一個最小變因重跑 ablation，固定資料、模型與 sampling，只檢查它聲稱的關鍵差異。<mark class="keyterm">結果焦點</mark>：Our results highlight the need to move beyond audio quality toward learning physical processes directly from pixels.</p>
             </div>
           </div>
           </div>
           <div class="card-actions">
-            <a class="source-link" href="https://arxiv.org/abs/2605.01790v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
+            <a class="source-link" href="https://arxiv.org/abs/2605.30339v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
             <button class="details-toggle" type="button" aria-expanded="false" aria-controls="paper-1-panel">展開摘要與實驗建議</button>
             <div class="star-rating" data-paper-id="2026-05-30-1" aria-label="Rate this paper">
               <span class="star-label">重要度</span>
@@ -821,11 +823,11 @@
             <div class="detail-grid">
               <section class="detail-section" data-standard-section="problem">
                 <h3>Problem</h3>
-                <p>A common design pattern in high-quality music generation is to handle structure and fidelity in different representation spaces: a generator first models high-level structure, followed by diffusion-based or neural decoding stages that reconstruct fine details.</p>
+                <p>Generative video-to-audio (V2A) models produce highly plausible soundtracks, but it remains unclear whether they capture the underlying physical processes.</p>
               </section>
               <section class="detail-section" data-standard-section="method">
                 <h3>Method</h3>
-                <p>In this work, we explore an alternative view: both may be progressively modeled within a single deep acoustic-token hierarchy.</p>
+                <p>Existing evaluations emphasize perceptual realism and overlook physical correctness under controlled interventions.</p>
               </section>
               <section class="detail-section" data-standard-section="data">
                 <h3>Data</h3>
@@ -833,7 +835,7 @@
               </section>
               <section class="detail-section" data-standard-section="findings">
                 <h3>Findings</h3>
-                <p>To study this, we build a 64-layer <mark class="keyterm">residual vector quantization</mark> (<mark class="keyterm">RVQ</mark>) acoustic representation and propose a <mark class="keyterm">two-stage coarse-to-fine</mark> generation framework.</p>
+                <p>In this paper, we introduce FlatSounds, a benchmark that audits the physical reasoning of V2A models through: 1) controlled counterfactual pairs in which a single physical factor is varied, and 2) single-video pattern tests that probe internal consistency and directional trends.</p>
               </section>
               <section class="detail-section" data-standard-section="limitations">
                 <h3>Limitations</h3>
@@ -846,9 +848,9 @@
               <section class="detail-section" data-standard-section="metadata">
                 <h3>Metadata</h3>
                 <dl class="meta-list">
-                  <div><dt>Authors</dt><dd>Jiafeng Liu, Yuanliang Dong, Hongjia Liu, Yuqing Cheng, Zhancheng Guo 等 11 位</dd></div>
-                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2605.01790v1">arxiv.org/abs/2605.01790v1</a></dd></div>
-                  <div><dt>Relevance</dt><dd>MeanAudio 3 / karaoke 0 · max 3</dd></div>
+                  <div><dt>Authors</dt><dd>Tingle Li, Siddharth Gururani, Kevin J. Shih, Gantavya Bhatt, Sang-gil Lee 等 9 位</dd></div>
+                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2605.30339v1">arxiv.org/abs/2605.30339v1</a></dd></div>
+                  <div><dt>Relevance</dt><dd>MeanAudio 2 / karaoke 0 · max 2</dd></div>
                 </dl>
               </section>
             </div>
@@ -866,25 +868,26 @@
             </div>
           </div>
           <div class="paper-card-body">
-          <h2><a href="https://arxiv.org/abs/2605.30349v1" target="_blank" rel="noopener">AdaState: Self-Evolving Anchors for Streaming Video Generation</a></h2>
-          <p class="one-line">Autoregressive video diffusion models generate streaming video by producing frames sequentially, conditioning each <mark class="keyterm">chunk</mark> on previou...</p>
+          <h2><a href="https://arxiv.org/abs/2605.29628v1" target="_blank" rel="noopener">COMET: Concept Space Dissection of the Modality Gap in Audio-Text Multimodal Contrastive Embeddings</a></h2>
+          <p class="one-line">Contrastive Language-Audio Pretraining (<mark class="keyterm">CLAP</mark>) models are widely used for audio understanding and support modality-agnostic conditio...</p>
           <div class="tag-row">
             <span class="track-hint">貼近主線</span>
             <span class="tag">text-to-audio/music</span>
+            <span class="tag">caption/data</span>
           </div>
           <div class="quick-read">
             <div>
               <span class="label">Insight</span>
-              <p><mark class="keyterm">洞見</mark>：它處理的是自回歸生成跨 <mark class="keyterm">chunk</mark> 的狀態漂移；雖然題目是 video，但 <mark class="keyterm">anchor/state</mark> 更新可借鏡到長音訊或分段音樂生成。 <mark class="keyterm">方法線索</mark>：把固定 first-frame anchor 換成每個 <mark class="keyterm">chunk</mark> 一起 denoise 的 <mark class="keyterm">adaptive state hidden latent</mark>，讓 <mark class="keyterm">KV cache</mark> 承載會演化的場景狀態。</p>
+              <p><mark class="keyterm">洞見</mark>：它的價值在資料/偏好/評估訊號怎麼進訓練，而不是只看模型架構名稱。 <mark class="keyterm">方法線索</mark>：Building on this insight, we propose a simple spectral truncation method that mitigates the modality gap in a training-free manne...</p>
             </div>
             <div>
               <span class="label">Try next</span>
-              <p><mark class="keyterm">可做</mark>：把長音訊切成連續 <mark class="keyterm">chunk</mark>，測 <mark class="keyterm">anchor/state</mark> cache 是否降低跨段 <mark class="keyterm">drift</mark>、重複與風格跳動；先用小模型 smoke test。<mark class="keyterm">結果焦點</mark>：<mark class="keyterm">adaptive state</mark> 改善 motion / scene progression；對長音訊可轉成跨段一致性與 <mark class="keyterm">drift</mark> 測試。</p>
+              <p><mark class="keyterm">可做</mark>：抽一個最小變因重跑 ablation，固定資料、模型與 sampling，只檢查它聲稱的關鍵差異。<mark class="keyterm">結果焦點</mark>：Existing explanations mainly attribute this gap to the cone effect, treating it as a shift between mean embeddings, yet...</p>
             </div>
           </div>
           </div>
           <div class="card-actions">
-            <a class="source-link" href="https://arxiv.org/abs/2605.30349v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
+            <a class="source-link" href="https://arxiv.org/abs/2605.29628v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
             <button class="details-toggle" type="button" aria-expanded="false" aria-controls="paper-2-panel">展開摘要與實驗建議</button>
             <div class="star-rating" data-paper-id="2026-05-30-2" aria-label="Rate this paper">
               <span class="star-label">重要度</span>
@@ -899,11 +902,11 @@
             <div class="detail-grid">
               <section class="detail-section" data-standard-section="problem">
                 <h3>Problem</h3>
-                <p>Autoregressive video diffusion models generate streaming video by producing frames sequentially, conditioning each <mark class="keyterm">chunk</mark> on previously generated content.</p>
+                <p>Contrastive Language-Audio Pretraining (<mark class="keyterm">CLAP</mark>) models are widely used for audio understanding and support modality-agnostic condition swapping in many zero-shot applications.</p>
               </section>
               <section class="detail-section" data-standard-section="method">
                 <h3>Method</h3>
-                <p>These models are structurally anchored to the first frame: its key-value representation occupies a privileged position in the attention cache and serves as the primary scene reference throughout generation.</p>
+                <p>However, their performance is heavily affected by the modality gap between audio and text embeddings.</p>
               </section>
               <section class="detail-section" data-standard-section="data">
                 <h3>Data</h3>
@@ -911,7 +914,7 @@
               </section>
               <section class="detail-section" data-standard-section="findings">
                 <h3>Findings</h3>
-                <p>As the cleanest and most error-free position in the cache, this anchor draws disproportionate attention, suppressing video dynamics, and locking scene composition to the initial viewpoint even as the scene naturally evolves.</p>
+                <p>Existing explanations mainly attribute this gap to the cone effect, treating it as a shift between mean embeddings, yet correcting the mean alone yields only limited improvements.</p>
               </section>
               <section class="detail-section" data-standard-section="limitations">
                 <h3>Limitations</h3>
@@ -924,8 +927,8 @@
               <section class="detail-section" data-standard-section="metadata">
                 <h3>Metadata</h3>
                 <dl class="meta-list">
-                  <div><dt>Authors</dt><dd>Yusuf Dalva, Pinar Yanardag</dd></div>
-                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2605.30349v1">arxiv.org/abs/2605.30349v1</a></dd></div>
+                  <div><dt>Authors</dt><dd>Yonggang Zhu, Liting Gao, Aidong Men, Wenwu Wang</dd></div>
+                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2605.29628v1">arxiv.org/abs/2605.29628v1</a></dd></div>
                   <div><dt>Relevance</dt><dd>MeanAudio 2 / karaoke 0 · max 2</dd></div>
                 </dl>
               </section>
@@ -945,7 +948,7 @@
     </details>
   </main>
 
-  <footer>Generated by the local MIR paper automation · Product standard 2026-05-26 · 2187e8b96f · 2026-05-30 08:12:22 Asia/Taipei</footer>
+  <footer>Generated by the local MIR paper automation · Product standard 2026-05-26 · 2187e8b96f · 2026-05-30 09:01:59 Asia/Taipei</footer>
 
   <script>
     const cards = Array.from(document.querySelectorAll('.paper-card'));
