@@ -767,11 +767,11 @@
         <ol class="paper-nav-list">
           <li><a href="#paper-1">
             <span class="nav-num">01</span>
-            <span>HeartMuLa: A Family of Open Sourced Music...<span class="nav-track">karaoke-jp</span></span>
+            <span>CMI-Bench: A Comprehensive Benchmark for...<span class="nav-track">karaoke-jp</span></span>
           </a></li>
           <li><a href="#paper-2">
             <span class="nav-num">02</span>
-            <span>Exploiting Music Source Separation for Au...<span class="nav-track">karaoke-jp</span></span>
+            <span>Enhancing Lyrics Transcription on Music M...<span class="nav-track">karaoke-jp</span></span>
           </a></li>
         </ol>
       </aside>
@@ -784,32 +784,32 @@
             <div class="paper-meta">
               <span class="track">karaoke-jp</span>
               <span class="quality">重要</span>
-              <span class="freshness">2026-01-26 · 128d</span>
+              <span class="freshness">2025-06-27 · 341d</span>
             </div>
           </div>
           <div class="paper-card-body">
-          <h2><a href="https://arxiv.org/abs/2601.10547v2" target="_blank" rel="noopener">HeartMuLa: A Family of Open Sourced Music Foundation Models</a></h2>
-          <p class="one-line">We present a family of open-source Music Foundation Models designed to advance large-scale music understanding and generation acros...</p>
+          <h2><a href="https://arxiv.org/abs/2506.12285v2" target="_blank" rel="noopener">CMI-Bench: A Comprehensive Benchmark for Evaluating Music Instruction Following</a></h2>
+          <p class="one-line">Recent advances in audio-text large language models (LLMs) have opened new possibilities for music understanding and generation. Ho...</p>
           <div class="tag-row">
             <span class="track-hint">可轉譯</span>
             <span class="tag">lyrics recognition</span>
             <span class="tag">text-to-audio/music</span>
-            <span class="tag">codec/tokenizer</span>
-            <span class="tag">+1</span>
+            <span class="tag">caption/data</span>
+            <span class="tag">+2</span>
           </div>
           <div class="quick-read">
             <div>
               <span class="label">Insight</span>
-              <p><mark class="keyterm">洞見</mark>：它直接打到<mark class="keyterm">歌詞辨識</mark>瓶頸；對 <mark class="keyterm">JPOP</mark> / <mark class="keyterm">卡拉 OK</mark> 來說，錯字、斷句與人聲混音比一般 ASR 更關鍵。 <mark class="keyterm">方法線索</mark>：拆開看 acoustic encoder、language prior 與歌詞 decoding；We present a family of open-source Music Foundation Models designed to advance large-scale music un...</p>
+              <p><mark class="keyterm">洞見</mark>：它直接打到<mark class="keyterm">歌詞辨識</mark>瓶頸；對 <mark class="keyterm">JPOP</mark> / <mark class="keyterm">卡拉 OK</mark> 來說，錯字、斷句與人聲混音比一般 ASR 更關鍵。 <mark class="keyterm">方法線索</mark>：拆開看 acoustic encoder、language prior 與歌詞 decoding；We reinterpret a broad range of traditional MIR annotations as instruction-following formats and in...</p>
             </div>
             <div>
               <span class="label">Try next</span>
-              <p>針對 HeartMuLa / Family / Open / Sourced / Music：<mark class="keyterm">可做</mark>：挑 10-20 首 <mark class="keyterm">JPOP</mark>，固定 <mark class="keyterm">vocal separation</mark> 輸出，測<mark class="keyterm">歌詞辨識</mark>、<mark class="keyterm">kana/ruby</mark> 對齊與副歌重複段。<mark class="keyterm">結果焦點</mark>：優先看<mark class="keyterm">日文歌詞</mark> WER/CER、段落邊界、重複副歌與伴奏干擾，而不是只看乾淨 speech ASR。</p>
+              <p>針對 CMI-Bench / Comprehensive / Benchmark / Evaluating / Music：<mark class="keyterm">可做</mark>：挑 10-20 首 <mark class="keyterm">JPOP</mark>，固定 <mark class="keyterm">vocal separation</mark> 輸出，測<mark class="keyterm">歌詞辨識</mark>、<mark class="keyterm">kana/ruby</mark> 對齊與副歌重複段。<mark class="keyterm">結果焦點</mark>：優先看<mark class="keyterm">日文歌詞</mark> WER/CER、段落邊界、重複副歌與伴奏干擾，而不是只看乾淨 speech ASR。</p>
             </div>
           </div>
           </div>
           <div class="card-actions">
-            <a class="source-link" href="https://arxiv.org/abs/2601.10547v2" target="_blank" rel="noopener">Open Paper &#8599;</a>
+            <a class="source-link" href="https://arxiv.org/abs/2506.12285v2" target="_blank" rel="noopener">Open Paper &#8599;</a>
             <button class="details-toggle" type="button" aria-expanded="false" aria-controls="paper-1-panel">展開摘要與實驗建議</button>
             <div class="star-rating" data-paper-id="2026-06-03-1" aria-label="Rate this paper">
               <span class="star-label">重要度</span>
@@ -824,11 +824,11 @@
             <div class="detail-grid">
               <section class="detail-section" data-standard-section="problem">
                 <h3>Problem</h3>
-                <p>We present a family of open-source Music Foundation Models designed to advance large-scale music understanding and generation across diverse tasks and modalities.</p>
+                <p>Recent advances in audio-text large language models (LLMs) have opened new possibilities for music understanding and generation.</p>
               </section>
               <section class="detail-section" data-standard-section="method">
                 <h3>Method</h3>
-                <p>Our framework consists of four major components: (1) Heart<mark class="keyterm">CLAP</mark>, an audio-text <mark class="keyterm">alignment</mark> model; (2) HeartTranscriptor, a robust <mark class="keyterm">lyric recognition</mark> model optimized for real-world music scenarios; and (3) Heart<mark class="keyterm">Codec</mark>, a low-frame-rate (12.5 Hz) yet high-fidelity music <mark class="keyterm">codec</mark> tokenizer that captures long-range musical structure while preserving fine-grained acoustic details and enabling efficient autoregressive modeling; (4) HeartMuLa, an LLM-based song generation model capable of synthesizing high-fidelity music under rich, user-controllable conditions (e.g., textual style descriptions, lyrics, and reference audio).</p>
+                <p>However, existing benchmarks are limited in scope, often relying on simplified tasks or multi-choice evaluations that fail to reflect the complexity of real-world music analysis.</p>
               </section>
               <section class="detail-section" data-standard-section="data">
                 <h3>Data</h3>
@@ -836,7 +836,7 @@
               </section>
               <section class="detail-section" data-standard-section="findings">
                 <h3>Findings</h3>
-                <p>In addition, it provides two specialized modes: (i) fine-grained musical attribute control, which allows users to specify the style of different song sections (e.g., intro, verse, chorus) using natural language prompts; and (ii) short, engaging music generation, which is suitable as background music for short videos.</p>
+                <p>We reinterpret a broad range of traditional MIR annotations as instruction-following formats and introduce CMI-Bench, a comprehensive music instruction following benchmark designed to evaluate audio-text LLMs on a diverse set of music information retrieval (MIR) tasks.</p>
               </section>
               <section class="detail-section" data-standard-section="limitations">
                 <h3>Limitations</h3>
@@ -849,9 +849,9 @@
               <section class="detail-section" data-standard-section="metadata">
                 <h3>Metadata</h3>
                 <dl class="meta-list">
-                  <div><dt>Authors</dt><dd>Dongchao Yang, Yuxin Xie, Yuguo Yin, Zheyu Wang, Xiaoyu Yi 等 30 位</dd></div>
-                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2601.10547v2">arxiv.org/abs/2601.10547v2</a></dd></div>
-                  <div><dt>Relevance</dt><dd>MeanAudio 4 / karaoke 4 · max 4</dd></div>
+                  <div><dt>Authors</dt><dd>Yinghao Ma, Siyou Li, Juntao Yu, Emmanouil Benetos, Akira Maezawa</dd></div>
+                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2506.12285v2">arxiv.org/abs/2506.12285v2</a></dd></div>
+                  <div><dt>Relevance</dt><dd>MeanAudio 2 / karaoke 5 · max 5</dd></div>
                 </dl>
               </section>
             </div>
@@ -865,12 +865,12 @@
             <div class="paper-meta">
               <span class="track">karaoke-jp</span>
               <span class="quality">重要</span>
-              <span class="freshness">2025-06-18 · 350d</span>
+              <span class="freshness">2025-06-03 · 365d</span>
             </div>
           </div>
           <div class="paper-card-body">
-          <h2><a href="https://arxiv.org/abs/2506.15514v1" target="_blank" rel="noopener">Exploiting Music <mark class="keyterm">Source Separation</mark> for Automatic <mark class="keyterm">Lyrics Transcription</mark> with Whisper</a></h2>
-          <p class="one-line">Automatic <mark class="keyterm">lyrics transcription</mark> (ALT) remains a challenging task in the field of music information retrieval, despite great advances...</p>
+          <h2><a href="https://arxiv.org/abs/2506.02339v1" target="_blank" rel="noopener">Enhancing <mark class="keyterm">Lyrics Transcription</mark> on Music Mixtures with Consistency Loss</a></h2>
+          <p class="one-line">Automatic <mark class="keyterm">Lyrics Transcription</mark> (ALT) aims to recognize lyrics from <mark class="keyterm">singing voice</mark>s, similar to Automatic Speech Recognition (ASR) fo...</p>
           <div class="tag-row">
             <span class="track-hint">可轉譯</span>
             <span class="tag">lyrics recognition</span>
@@ -879,16 +879,16 @@
           <div class="quick-read">
             <div>
               <span class="label">Insight</span>
-              <p><mark class="keyterm">洞見</mark>：它直接打到<mark class="keyterm">歌詞辨識</mark>瓶頸；對 <mark class="keyterm">JPOP</mark> / <mark class="keyterm">卡拉 OK</mark> 來說，錯字、斷句與人聲混音比一般 ASR 更關鍵。 <mark class="keyterm">方法線索</mark>：拆開看 acoustic encoder、language prior 與歌詞 decoding；For long-form, we propose an algorithm using <mark class="keyterm">source separation</mark> as a vocal activity detector to deri...</p>
+              <p><mark class="keyterm">洞見</mark>：它直接打到<mark class="keyterm">歌詞辨識</mark>瓶頸；對 <mark class="keyterm">JPOP</mark> / <mark class="keyterm">卡拉 OK</mark> 來說，錯字、斷句與人聲混音比一般 ASR 更關鍵。 <mark class="keyterm">方法線索</mark>：拆開看 acoustic encoder、language prior 與歌詞 decoding；We propose using a consistency loss to better align vocal and mixture encoder representations, impr...</p>
             </div>
             <div>
               <span class="label">Try next</span>
-              <p>針對 Exploiting / Music / Source / Separation / Automatic：<mark class="keyterm">可做</mark>：挑 10-20 首 <mark class="keyterm">JPOP</mark>，固定 <mark class="keyterm">vocal separation</mark> 輸出，測<mark class="keyterm">歌詞辨識</mark>、<mark class="keyterm">kana/ruby</mark> 對齊與副歌重複段。<mark class="keyterm">結果焦點</mark>：優先看<mark class="keyterm">日文歌詞</mark> WER/CER、段落邊界、重複副歌與伴奏干擾，而不是只看乾淨 speech ASR。</p>
+              <p>針對 Enhancing / Lyrics / Transcription / Music / Mixtures：<mark class="keyterm">可做</mark>：挑 10-20 首 <mark class="keyterm">JPOP</mark>，固定 <mark class="keyterm">vocal separation</mark> 輸出，測<mark class="keyterm">歌詞辨識</mark>、<mark class="keyterm">kana/ruby</mark> 對齊與副歌重複段。<mark class="keyterm">結果焦點</mark>：優先看<mark class="keyterm">日文歌詞</mark> WER/CER、段落邊界、重複副歌與伴奏干擾，而不是只看乾淨 speech ASR。</p>
             </div>
           </div>
           </div>
           <div class="card-actions">
-            <a class="source-link" href="https://arxiv.org/abs/2506.15514v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
+            <a class="source-link" href="https://arxiv.org/abs/2506.02339v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
             <button class="details-toggle" type="button" aria-expanded="false" aria-controls="paper-2-panel">展開摘要與實驗建議</button>
             <div class="star-rating" data-paper-id="2026-06-03-2" aria-label="Rate this paper">
               <span class="star-label">重要度</span>
@@ -903,11 +903,11 @@
             <div class="detail-grid">
               <section class="detail-section" data-standard-section="problem">
                 <h3>Problem</h3>
-                <p>Automatic <mark class="keyterm">lyrics transcription</mark> (ALT) remains a challenging task in the field of music information retrieval, despite great advances in automatic speech recognition (ASR) brought about by transformer-based architectures in recent years.</p>
+                <p>Automatic <mark class="keyterm">Lyrics Transcription</mark> (ALT) aims to recognize lyrics from <mark class="keyterm">singing voice</mark>s, similar to Automatic Speech Recognition (ASR) for spoken language, but faces added complexity due to domain-specific properties of the <mark class="keyterm">singing voice</mark>.</p>
               </section>
               <section class="detail-section" data-standard-section="method">
                 <h3>Method</h3>
-                <p>One of the major challenges in ALT is the high amplitude of interfering audio signals relative to conventional ASR due to musical accompaniment.</p>
+                <p>While foundation ASR models show robustness in various speech tasks, their performance degrades on <mark class="keyterm">singing voice</mark>, especially in the presence of musical accompaniment.</p>
               </section>
               <section class="detail-section" data-standard-section="data">
                 <h3>Data</h3>
@@ -915,7 +915,7 @@
               </section>
               <section class="detail-section" data-standard-section="findings">
                 <h3>Findings</h3>
-                <p>Recent advances in music <mark class="keyterm">source separation</mark> have enabled automatic extraction of high-quality separated vocals, which could potentially improve ALT performance.</p>
+                <p>This work focuses on this performance gap and explores Low-Rank Adaptation (LoRA) for ALT, investigating both single-domain and dual-domain fine-tuning strategies.</p>
               </section>
               <section class="detail-section" data-standard-section="limitations">
                 <h3>Limitations</h3>
@@ -928,9 +928,9 @@
               <section class="detail-section" data-standard-section="metadata">
                 <h3>Metadata</h3>
                 <dl class="meta-list">
-                  <div><dt>Authors</dt><dd>Jaza Syed, Ivan Meresman Higgs, Ondřej Cífka, Mark Sandler</dd></div>
-                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2506.15514v1">arxiv.org/abs/2506.15514v1</a></dd></div>
-                  <div><dt>Relevance</dt><dd>MeanAudio 0 / karaoke 6 · max 6</dd></div>
+                  <div><dt>Authors</dt><dd>Jiawen Huang, Felipe Sousa, Emir Demirel, Emmanouil Benetos, Igor Gadelha</dd></div>
+                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2506.02339v1">arxiv.org/abs/2506.02339v1</a></dd></div>
+                  <div><dt>Relevance</dt><dd>MeanAudio 0 / karaoke 5 · max 5</dd></div>
                 </dl>
               </section>
             </div>
@@ -949,7 +949,7 @@
     </details>
   </main>
 
-  <footer>Generated by the local MIR paper automation · Product standard 2026-05-26 · 2187e8b96f · 2026-06-03 07:03:35 Asia/Taipei</footer>
+  <footer>Generated by the local MIR paper automation · Product standard 2026-05-26 · 2187e8b96f · 2026-06-03 09:00:23 Asia/Taipei</footer>
 
   <script>
     const cards = Array.from(document.querySelectorAll('.paper-card'));
