@@ -767,11 +767,11 @@
         <ol class="paper-nav-list">
           <li><a href="#paper-1">
             <span class="nav-num">01</span>
-            <span>BASS: Benchmarking Audio LMs for Musical...<span class="nav-track">karaoke-jp</span></span>
+            <span>VietLyrics: A Large-Scale Dataset and Mod...<span class="nav-track">karaoke-jp</span></span>
           </a></li>
           <li><a href="#paper-2">
             <span class="nav-num">02</span>
-            <span>SingNet: Towards a Large-Scale, Diverse,...<span class="nav-track">karaoke-jp</span></span>
+            <span>EngravingGNN: A Hybrid Graph Neural Netwo...<span class="nav-track">karaoke-jp</span></span>
           </a></li>
         </ol>
       </aside>
@@ -784,30 +784,31 @@
             <div class="paper-meta">
               <span class="track">karaoke-jp</span>
               <span class="quality">重要</span>
-              <span class="freshness">2026-02-03 · 121d</span>
+              <span class="freshness">2025-12-20 · 166d</span>
             </div>
           </div>
           <div class="paper-card-body">
-          <h2><a href="https://arxiv.org/abs/2602.04085v1" target="_blank" rel="noopener">BASS: Benchmarking Audio LMs for Musical Structure and Semantic Reasoning</a></h2>
-          <p class="one-line">Music understanding is a complex task that often requires reasoning over both structural and semantic elements of audio. We introdu...</p>
+          <h2><a href="https://arxiv.org/abs/2510.22295v2" target="_blank" rel="noopener">VietLyrics: A Large-Scale Dataset and Models for Vietnamese Automatic <mark class="keyterm">Lyrics Transcription</mark></a></h2>
+          <p class="one-line">Automatic <mark class="keyterm">Lyrics Transcription</mark> (ALT) for Vietnamese music presents unique challenges due to its tonal complexity and dialectal vari...</p>
           <div class="tag-row">
             <span class="track-hint">可轉譯</span>
+            <span class="tag">lyrics recognition</span>
             <span class="tag">karaoke-jp</span>
             <span class="tag">evaluation</span>
           </div>
           <div class="quick-read">
             <div>
               <span class="label">Insight</span>
-              <p><mark class="keyterm">洞見</mark>：這篇值得看的點在於它提出的建模假設是否能抽成音訊生成或 MIR pipeline 的單一可測變因。 <mark class="keyterm">方法線索</mark>：We introduce BASS, designed to evaluate music understanding and reasoning in audio language models across four broad categories:...</p>
+              <p><mark class="keyterm">洞見</mark>：它直接打到<mark class="keyterm">歌詞辨識</mark>瓶頸；對 <mark class="keyterm">JPOP</mark> / <mark class="keyterm">卡拉 OK</mark> 來說，錯字、斷句與人聲混音比一般 ASR 更關鍵。 <mark class="keyterm">方法線索</mark>：拆開看 acoustic encoder、language prior 與歌詞 decoding；Therefore, we curated the first large-scale Vietnamese ALT dataset (VietLyrics), comprising 647 hou...</p>
             </div>
             <div>
               <span class="label">Try next</span>
-              <p>針對 BASS / Benchmarking / Audio / LMs / Musical：<mark class="keyterm">可做</mark>：把方法限制在一個 <mark class="keyterm">karaoke</mark> pipeline stage，先測 pitch、lyrics timing 或 separation 的單點改善；不要一次改整條 pipeline。<mark class="keyterm">結果焦點</mark>：BASS provides an evaluation framework with widespread applicati...</p>
+              <p>針對 VietLyrics / Large-Scale / Dataset / Models / Vietnamese：<mark class="keyterm">可做</mark>：挑 10-20 首 <mark class="keyterm">JPOP</mark>，固定 <mark class="keyterm">vocal separation</mark> 輸出，測<mark class="keyterm">歌詞辨識</mark>、<mark class="keyterm">kana/ruby</mark> 對齊與副歌重複段。<mark class="keyterm">結果焦點</mark>：優先看<mark class="keyterm">日文歌詞</mark> WER/CER、段落邊界、重複副歌與伴奏干擾，而不是只看乾淨 speech ASR。</p>
             </div>
           </div>
           </div>
           <div class="card-actions">
-            <a class="source-link" href="https://arxiv.org/abs/2602.04085v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
+            <a class="source-link" href="https://arxiv.org/abs/2510.22295v2" target="_blank" rel="noopener">Open Paper &#8599;</a>
             <button class="details-toggle" type="button" aria-expanded="false" aria-controls="paper-1-panel">展開摘要與實驗建議</button>
             <div class="star-rating" data-paper-id="2026-06-04-1" aria-label="Rate this paper">
               <span class="star-label">重要度</span>
@@ -822,11 +823,11 @@
             <div class="detail-grid">
               <section class="detail-section" data-standard-section="problem">
                 <h3>Problem</h3>
-                <p>Music understanding is a complex task that often requires reasoning over both structural and semantic elements of audio.</p>
+                <p>Automatic <mark class="keyterm">Lyrics Transcription</mark> (ALT) for Vietnamese music presents unique challenges due to its tonal complexity and dialectal variations, but remains largely unexplored due to the lack of a dedicated dataset.</p>
               </section>
               <section class="detail-section" data-standard-section="method">
                 <h3>Method</h3>
-                <p>We introduce BASS, designed to evaluate music understanding and reasoning in audio language models across four broad categories: structural segmentation, <mark class="keyterm">lyric transcription</mark>, musicological analysis, and artist collaboration.</p>
+                <p>Therefore, we curated the first large-scale Vietnamese ALT dataset (VietLyrics), comprising 647 hours of songs with line-level aligned lyrics and metadata to address these issues.</p>
               </section>
               <section class="detail-section" data-standard-section="data">
                 <h3>Data</h3>
@@ -834,7 +835,7 @@
               </section>
               <section class="detail-section" data-standard-section="findings">
                 <h3>Findings</h3>
-                <p>BASS comprises 2658 questions spanning 12 tasks, 1993 unique songs and covering over 138 hours of music from a wide range of genres and tracks, crafted to assess musicological knowledge and reasoning in real-world scenarios.</p>
+                <p>Our evaluation of current ASRbased approaches reveal significant limitations, including frequent transcription errors and hallucinations in non-vocal segments.</p>
               </section>
               <section class="detail-section" data-standard-section="limitations">
                 <h3>Limitations</h3>
@@ -847,9 +848,9 @@
               <section class="detail-section" data-standard-section="metadata">
                 <h3>Metadata</h3>
                 <dl class="meta-list">
-                  <div><dt>Authors</dt><dd>Min Jang, Orevaoghene Ahia, Nazif Tamer, Sachin Kumar, Yulia Tsvetkov 等 6 位</dd></div>
-                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2602.04085v1">arxiv.org/abs/2602.04085v1</a></dd></div>
-                  <div><dt>Relevance</dt><dd>MeanAudio 1 / karaoke 4 · max 4</dd></div>
+                  <div><dt>Authors</dt><dd>Quoc Anh Nguyen, Bernard Cheng, Kelvin Soh</dd></div>
+                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2510.22295v2">arxiv.org/abs/2510.22295v2</a></dd></div>
+                  <div><dt>Relevance</dt><dd>MeanAudio 0 / karaoke 4 · max 4</dd></div>
                 </dl>
               </section>
             </div>
@@ -863,29 +864,31 @@
             <div class="paper-meta">
               <span class="track">karaoke-jp</span>
               <span class="quality">重要</span>
-              <span class="freshness">2025-05-14 · 386d</span>
+              <span class="freshness">2025-09-23 · 254d</span>
             </div>
           </div>
           <div class="paper-card-body">
-          <h2><a href="https://arxiv.org/abs/2505.09325v1" target="_blank" rel="noopener">SingNet: Towards a Large-Scale, Diverse, and In-the-Wild <mark class="keyterm">Singing Voice</mark> Dataset</a></h2>
-          <p class="one-line">The lack of a publicly-available large-scale and diverse dataset has long been a significant bottleneck for <mark class="keyterm">singing voice</mark> applicati...</p>
+          <h2><a href="https://arxiv.org/abs/2509.19412v1" target="_blank" rel="noopener">EngravingGNN: A Hybrid Graph Neural Network for End-to-End Piano Score Engraving</a></h2>
+          <p class="one-line">This paper focuses on automatic music engraving, i.e., the creation of a humanly-readable musical score from musical content. This...</p>
           <div class="tag-row">
             <span class="track-hint">可轉譯</span>
+            <span class="tag">JPOP</span>
             <span class="tag">karaoke-jp</span>
+            <span class="tag">evaluation</span>
           </div>
           <div class="quick-read">
             <div>
               <span class="label">Insight</span>
-              <p><mark class="keyterm">洞見</mark>：這篇值得看的點在於它提出的建模假設是否能抽成音訊生成或 MIR pipeline 的單一可測變因。 <mark class="keyterm">方法線索</mark>：Specifically, we propose a data processing pipeline to extract ready-to-use training data from sample packs and songs on the inte...</p>
+              <p><mark class="keyterm">洞見</mark>：它貼近日文歌曲場景；重點不是泛用 MIR 指標，而是 <mark class="keyterm">JPOP</mark> 的歌詞、發音、段落與伴奏脈絡能否被穩定建模。 <mark class="keyterm">方法線索</mark>：特別檢查日文 <mark class="keyterm">kana/ruby</mark>、長音、促音、英日混寫與段落重複怎麼處理；In this work, we formalize the problem as a collection of interdependent subtasks, and propose...</p>
             </div>
             <div>
               <span class="label">Try next</span>
-              <p>針對 SingNet / Large-Scale / Diverse / In-the-Wild / Singing：<mark class="keyterm">可做</mark>：把方法限制在一個 <mark class="keyterm">karaoke</mark> pipeline stage，先測 pitch、lyrics timing 或 separation 的單點改善；不要一次改整條 pipeline。<mark class="keyterm">結果焦點</mark>：We also conduct benchmark experiments on Automatic...</p>
+              <p>針對 EngravingGNN / Hybrid / Graph / Neural / Network：<mark class="keyterm">可做</mark>：先做一段<mark class="keyterm">卡拉 OK</mark> micro-benchmark：日文<mark class="keyterm">歌詞辨識</mark>、<mark class="keyterm">mora-to-note</mark> timing、pitch 與 LRC 對齊各取一個指標。<mark class="keyterm">結果焦點</mark>：如果沒有 <mark class="keyterm">JPOP</mark> 或<mark class="keyterm">日文歌詞</mark>測試集，就先把它列為方法候選，不要直接信泛音樂結果。</p>
             </div>
           </div>
           </div>
           <div class="card-actions">
-            <a class="source-link" href="https://arxiv.org/abs/2505.09325v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
+            <a class="source-link" href="https://arxiv.org/abs/2509.19412v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
             <button class="details-toggle" type="button" aria-expanded="false" aria-controls="paper-2-panel">展開摘要與實驗建議</button>
             <div class="star-rating" data-paper-id="2026-06-04-2" aria-label="Rate this paper">
               <span class="star-label">重要度</span>
@@ -900,11 +903,11 @@
             <div class="detail-grid">
               <section class="detail-section" data-standard-section="problem">
                 <h3>Problem</h3>
-                <p>The lack of a publicly-available large-scale and diverse dataset has long been a significant bottleneck for <mark class="keyterm">singing voice</mark> applications like <mark class="keyterm">Singing Voice</mark> Synthesis (SVS) and <mark class="keyterm">Singing Voice</mark> Conversion (SVC).</p>
+                <p>This paper focuses on automatic music engraving, i.e., the creation of a humanly-readable musical score from musical content.</p>
               </section>
               <section class="detail-section" data-standard-section="method">
                 <h3>Method</h3>
-                <p>To tackle this problem, we present SingNet, an extensive, diverse, and in-the-wild <mark class="keyterm">singing voice</mark> dataset.</p>
+                <p>This step is fundamental for all applications that include a human player, but it remains a mostly unexplored topic in symbolic music processing.</p>
               </section>
               <section class="detail-section" data-standard-section="data">
                 <h3>Data</h3>
@@ -912,7 +915,7 @@
               </section>
               <section class="detail-section" data-standard-section="findings">
                 <h3>Findings</h3>
-                <p>Specifically, we propose a data processing pipeline to extract ready-to-use training data from sample packs and songs on the internet, forming 3000 hours of <mark class="keyterm">singing voice</mark>s in various languages and styles.</p>
+                <p>In this work, we formalize the problem as a collection of interdependent subtasks, and propose a unified graph neural network (GNN) framework that targets the case of piano music and quantized symbolic input.</p>
               </section>
               <section class="detail-section" data-standard-section="limitations">
                 <h3>Limitations</h3>
@@ -925,9 +928,9 @@
               <section class="detail-section" data-standard-section="metadata">
                 <h3>Metadata</h3>
                 <dl class="meta-list">
-                  <div><dt>Authors</dt><dd>Yicheng Gu, Chaoren Wang, Junan Zhang, Xueyao Zhang, Zihao Fang 等 7 位</dd></div>
-                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2505.09325v1">arxiv.org/abs/2505.09325v1</a></dd></div>
-                  <div><dt>Relevance</dt><dd>MeanAudio 0 / karaoke 5 · max 5</dd></div>
+                  <div><dt>Authors</dt><dd>Emmanouil Karystinaios, Francesco Foscarin, Gerhard Widmer</dd></div>
+                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2509.19412v1">arxiv.org/abs/2509.19412v1</a></dd></div>
+                  <div><dt>Relevance</dt><dd>MeanAudio 0 / karaoke 4 · max 4</dd></div>
                 </dl>
               </section>
             </div>
@@ -946,7 +949,7 @@
     </details>
   </main>
 
-  <footer>Generated by the local MIR paper automation · Product standard 2026-05-26 · 2187e8b96f · 2026-06-04 07:02:16 Asia/Taipei</footer>
+  <footer>Generated by the local MIR paper automation · Product standard 2026-05-26 · 2187e8b96f · 2026-06-04 09:00:34 Asia/Taipei</footer>
 
   <script>
     const cards = Array.from(document.querySelectorAll('.paper-card'));
