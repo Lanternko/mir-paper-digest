@@ -767,11 +767,11 @@
         <ol class="paper-nav-list">
           <li><a href="#paper-1">
             <span class="nav-num">01</span>
-            <span>AudioGen-Omni: A Unified Multimodal Diffu...<span class="nav-track">MeanAudio</span></span>
+            <span>AnyAudio-Judge: A Dynamic Rubric-Based Be...<span class="nav-track">MeanAudio</span></span>
           </a></li>
           <li><a href="#paper-2">
             <span class="nav-num">02</span>
-            <span>ACE-Step: A Step Towards Music Generation...<span class="nav-track">MeanAudio</span></span>
+            <span>UNISON: A Unified Sound Generation and Ed...<span class="nav-track">MeanAudio</span></span>
           </a></li>
         </ol>
       </aside>
@@ -783,30 +783,32 @@
             <div class="paper-number">01</div>
             <div class="paper-meta">
               <span class="track">MeanAudio</span>
-              <span class="quality">重要</span>
-              <span class="freshness">2025-08-07 · 302d</span>
+              <span class="quality">新</span>
+              <span class="freshness">2026-06-02 · 3d</span>
             </div>
           </div>
           <div class="paper-card-body">
-          <h2><a href="https://arxiv.org/abs/2508.00733v4" target="_blank" rel="noopener">AudioGen-Omni: A Unified Multimodal Diffusion Transformer for Video-Synchronized Audio, Speech, and Song Generation</a></h2>
-          <p class="one-line">We present AudioGen-Omni - a unified approach based on multimodal diffusion transformers (MMDit), capable of generating high-fideli...</p>
+          <h2><a href="https://arxiv.org/abs/2606.03116v1" target="_blank" rel="noopener">AnyAudio-Judge: A Dynamic Rubric-Based Benchmark and Evaluator for Audio Instruction Following</a></h2>
+          <p class="one-line">The rapid advancement of instruction-guided audio generation has highlighted the critical need for robust <mark class="keyterm">alignment</mark> evaluation. Cur...</p>
           <div class="tag-row">
             <span class="track-hint">貼近主線</span>
             <span class="tag">text-to-audio/music</span>
+            <span class="tag">caption/data</span>
+            <span class="tag">evaluation</span>
           </div>
           <div class="quick-read">
             <div>
               <span class="label">Insight</span>
-              <p><mark class="keyterm">洞見</mark>：它把 <mark class="keyterm">alignment</mark> signal 放回生成過程本身，而不是只靠後處理 <mark class="keyterm">reward</mark>；可對照音訊文字對齊是否也能這樣做。 <mark class="keyterm">方法線索</mark>：把 <mark class="keyterm">alignment</mark> signal 直接放進 diffusion matching/training，而不是只靠外部 <mark class="keyterm">reward</mark> 做後處理。</p>
+              <p><mark class="keyterm">洞見</mark>：它的價值在資料/偏好/評估訊號怎麼進訓練，而不是只看模型架構名稱。 <mark class="keyterm">方法線索</mark>：To rigorously benchmark this capability, we propose the AnyAudio-Judge Bench, a comprehensive, bilingual benchmark comprising 7,9...</p>
             </div>
             <div>
               <span class="label">Try next</span>
-              <p>針對 AudioGen-Omni / Unified / Multimodal / Diffusion / Transformer：<mark class="keyterm">可做</mark>：把 <mark class="keyterm">alignment</mark> signal 做成單一 loss 或 reranking ablation，先比較文字-音訊相符度與主觀聽感。<mark class="keyterm">結果焦點</mark>：確認 <mark class="keyterm">alignment</mark> 是否真的在生成過程改善，而不是只讓某個 <mark class="keyterm">reward</mark> metric 變好。</p>
+              <p>針對 AnyAudio-Judge / Dynamic / Rubric-Based / Benchmark / Evaluator：<mark class="keyterm">可做</mark>：抽一個最小變因重跑 ablation，固定資料、模型與 sampling，只檢查它聲稱的關鍵差異。<mark class="keyterm">結果焦點</mark>：Extensive experiments demonstrate that AnyAudio-Judge not only significantly enhances...</p>
             </div>
           </div>
           </div>
           <div class="card-actions">
-            <a class="source-link" href="https://arxiv.org/abs/2508.00733v4" target="_blank" rel="noopener">Open Paper &#8599;</a>
+            <a class="source-link" href="https://arxiv.org/abs/2606.03116v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
             <button class="details-toggle" type="button" aria-expanded="false" aria-controls="paper-1-panel">展開摘要與實驗建議</button>
             <div class="star-rating" data-paper-id="2026-06-05-1" aria-label="Rate this paper">
               <span class="star-label">重要度</span>
@@ -821,11 +823,11 @@
             <div class="detail-grid">
               <section class="detail-section" data-standard-section="problem">
                 <h3>Problem</h3>
-                <p>We present AudioGen-Omni - a unified approach based on multimodal diffusion transformers (MMDit), capable of generating high-fidelity audio, speech, and song coherently synchronized with the input video.</p>
+                <p>The rapid advancement of instruction-guided audio generation has highlighted the critical need for robust <mark class="keyterm">alignment</mark> evaluation.</p>
               </section>
               <section class="detail-section" data-standard-section="method">
                 <h3>Method</h3>
-                <p>AudioGen-Omni introduces a novel joint training paradigm that seamlessly integrates large-scale video-text-audio corpora, enabling a model capable of generating semantically rich, acoustically diverse audio conditioned on multimodal inputs and adaptable to a wide range of audio generation tasks.</p>
+                <p>Current automated evaluation methods heavily rely on holistic scoring from general-purpose large language models, which struggle to decouple complex instructions, lack interpretability, and fail to capture fine-grained attribute mismatches.</p>
               </section>
               <section class="detail-section" data-standard-section="data">
                 <h3>Data</h3>
@@ -833,7 +835,7 @@
               </section>
               <section class="detail-section" data-standard-section="findings">
                 <h3>Findings</h3>
-                <p>AudioGen-Omni employs a unified lyrics-transcription encoder that encodes graphemes and phonemes from both song and spoken inputs into dense frame-level representations.</p>
+                <p>To address this, we introduce a novel dynamic rubric-based evaluation paradigm that adaptively decomposes complex audio captions into a variable number of independent, verifiable binary rubric items.</p>
               </section>
               <section class="detail-section" data-standard-section="limitations">
                 <h3>Limitations</h3>
@@ -846,9 +848,9 @@
               <section class="detail-section" data-standard-section="metadata">
                 <h3>Metadata</h3>
                 <dl class="meta-list">
-                  <div><dt>Authors</dt><dd>Le Wang, Jun Wang, Chunyu Qiang, Feng Deng, Chen Zhang 等 7 位</dd></div>
-                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2508.00733v4">arxiv.org/abs/2508.00733v4</a></dd></div>
-                  <div><dt>Relevance</dt><dd>MeanAudio 4 / karaoke 0 · max 4</dd></div>
+                  <div><dt>Authors</dt><dd>Haitao Li, Tian Tan, Yuguang Yang, Shan Yang, Xie Chen</dd></div>
+                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2606.03116v1">arxiv.org/abs/2606.03116v1</a></dd></div>
+                  <div><dt>Relevance</dt><dd>MeanAudio 3 / karaoke 0 · max 3</dd></div>
                 </dl>
               </section>
             </div>
@@ -861,31 +863,30 @@
             <div class="paper-number">02</div>
             <div class="paper-meta">
               <span class="track">MeanAudio</span>
-              <span class="quality">重要</span>
-              <span class="freshness">2025-05-28 · 373d</span>
+              <span class="quality">新</span>
+              <span class="freshness">2026-06-02 · 3d</span>
             </div>
           </div>
           <div class="paper-card-body">
-          <h2><a href="https://arxiv.org/abs/2506.00045v1" target="_blank" rel="noopener">ACE-Step: A Step Towards Music Generation Foundation Model</a></h2>
-          <p class="one-line">We introduce ACE-Step, a novel open-source foundation model for music generation that overcomes key limitations of existing approac...</p>
+          <h2><a href="https://arxiv.org/abs/2605.31530v2" target="_blank" rel="noopener">UNISON: A Unified Sound Generation and Editing Framework via Deep LLM Fusion</a></h2>
+          <p class="one-line">We present UNISON, a latent diffusion framework that unifies speech generation, sound generation, and audio editing within a single...</p>
           <div class="tag-row">
             <span class="track-hint">貼近主線</span>
             <span class="tag">text-to-audio/music</span>
-            <span class="tag">flow/diffusion</span>
           </div>
           <div class="quick-read">
             <div>
               <span class="label">Insight</span>
-              <p><mark class="keyterm">洞見</mark>：它把高保真音樂生成拆成 <mark class="keyterm">acoustic token LM</mark> 的 scaling 問題，重點在長時結構與音色細節能否同時保住。 <mark class="keyterm">方法線索</mark>：把 <mark class="keyterm">alignment</mark> signal 直接放進 diffusion matching/training，而不是只靠外部 <mark class="keyterm">reward</mark> 做後處理。</p>
+              <p><mark class="keyterm">洞見</mark>：它提供一個生成模型訓練或 sampling 的可遷移假設，可以拿來檢查音訊生成 pipeline 的對應位置。 <mark class="keyterm">方法線索</mark>：We present UNISON, a latent diffusion framework that unifies speech generation, sound generation, and audio editing within a sing...</p>
             </div>
             <div>
               <span class="label">Try next</span>
-              <p>針對 ACE-Step / Step / Music / Generation / Foundation：<mark class="keyterm">可做</mark>：固定同一批 prompt 與 <mark class="keyterm">codec</mark>，對比 <mark class="keyterm">token rate</mark> / <mark class="keyterm">context length</mark> / <mark class="keyterm">LM scale</mark>，看音樂結構與音質是否跟它的 claim 一致。<mark class="keyterm">結果焦點</mark>：確認 <mark class="keyterm">alignment</mark> 是否真的在生成過程改善，而不是只讓某個 <mark class="keyterm">reward</mark> metric 變好。</p>
+              <p>針對 UNISON / Unified / Sound / Generation / Editing：<mark class="keyterm">可做</mark>：抽一個最小變因重跑 ablation，固定資料、模型與 sampling，只檢查它聲稱的關鍵差異。<mark class="keyterm">結果焦點</mark>：With 621M--732M trainable parameters, UNISON achieves results competitive with or exceeding task-spec...</p>
             </div>
           </div>
           </div>
           <div class="card-actions">
-            <a class="source-link" href="https://arxiv.org/abs/2506.00045v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
+            <a class="source-link" href="https://arxiv.org/abs/2605.31530v2" target="_blank" rel="noopener">Open Paper &#8599;</a>
             <button class="details-toggle" type="button" aria-expanded="false" aria-controls="paper-2-panel">展開摘要與實驗建議</button>
             <div class="star-rating" data-paper-id="2026-06-05-2" aria-label="Rate this paper">
               <span class="star-label">重要度</span>
@@ -900,11 +901,11 @@
             <div class="detail-grid">
               <section class="detail-section" data-standard-section="problem">
                 <h3>Problem</h3>
-                <p>We introduce ACE-Step, a novel open-source foundation model for music generation that overcomes key limitations of existing approaches and achieves state-of-the-art performance through a holistic architectural design.</p>
+                <p>We present UNISON, a latent diffusion framework that unifies speech generation, sound generation, and audio editing within a single model.</p>
               </section>
               <section class="detail-section" data-standard-section="method">
                 <h3>Method</h3>
-                <p>Current methods face inherent trade-offs between generation speed, musical coherence, and controllability.</p>
+                <p>A single model handles text-to-audio, text-to-speech, zero-shot speaker cloning, mixed speech-and-sound generation, scene-level audio editing, speech-in-scene editing, and timed temporal composition, all of which share a single set of weights.</p>
               </section>
               <section class="detail-section" data-standard-section="data">
                 <h3>Data</h3>
@@ -912,7 +913,7 @@
               </section>
               <section class="detail-section" data-standard-section="findings">
                 <h3>Findings</h3>
-                <p>For example, LLM-based models (e.g.</p>
+                <p>Our architecture features two core designs: (1) Layer-wise deep LLM fusion, which injects hidden states from uniformly sampled layers of a frozen MLLM into corresponding MM-DiT blocks via learned projections, providing depth-matched semantic conditioning that improves instruction following over single-layer baselines; and (2) a unified multi-task architecture where task identity is encoded solely by a channel-wise mask and source audio is provided through VAE-encoded channel concatenation.</p>
               </section>
               <section class="detail-section" data-standard-section="limitations">
                 <h3>Limitations</h3>
@@ -925,9 +926,9 @@
               <section class="detail-section" data-standard-section="metadata">
                 <h3>Metadata</h3>
                 <dl class="meta-list">
-                  <div><dt>Authors</dt><dd>Junmin Gong, Sean Zhao, Sen Wang, Shengyuan Xu, Joe Guo</dd></div>
-                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2506.00045v1">arxiv.org/abs/2506.00045v1</a></dd></div>
-                  <div><dt>Relevance</dt><dd>MeanAudio 4 / karaoke 0 · max 4</dd></div>
+                  <div><dt>Authors</dt><dd>Zhaoqing Li, Haoning Xu, Jingran Su, Yaofang Liu, Zhefan Rao 等 12 位</dd></div>
+                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2605.31530v2">arxiv.org/abs/2605.31530v2</a></dd></div>
+                  <div><dt>Relevance</dt><dd>MeanAudio 3 / karaoke 0 · max 3</dd></div>
                 </dl>
               </section>
             </div>
@@ -946,7 +947,7 @@
     </details>
   </main>
 
-  <footer>Generated by the local MIR paper automation · Product standard 2026-05-26 · 2187e8b96f · 2026-06-05 07:01:41 Asia/Taipei</footer>
+  <footer>Generated by the local MIR paper automation · Product standard 2026-05-26 · 2187e8b96f · 2026-06-05 09:01:02 Asia/Taipei</footer>
 
   <script>
     const cards = Array.from(document.querySelectorAll('.paper-card'));
