@@ -767,11 +767,11 @@
         <ol class="paper-nav-list">
           <li><a href="#paper-1">
             <span class="nav-num">01</span>
-            <span>Making the Most of Limited Data: Score-Aw...<span class="nav-track">MeanAudio</span></span>
+            <span>SURF: Separation via Unsupervised Remixin...<span class="nav-track">MeanAudio</span></span>
           </a></li>
           <li><a href="#paper-2">
             <span class="nav-num">02</span>
-            <span>Diff-VS: Efficient Audio-Aware Diffusion...<span class="nav-track">karaoke-jp</span></span>
+            <span>Drifting Models for Surrogate Flow Modeli...<span class="nav-track">MeanAudio</span></span>
           </a></li>
         </ol>
       </aside>
@@ -783,32 +783,32 @@
             <div class="paper-number">01</div>
             <div class="paper-meta">
               <span class="track">MeanAudio</span>
-              <span class="quality">新且重要</span>
-              <span class="freshness">2026-06-05 · 3d</span>
+              <span class="quality">新</span>
+              <span class="freshness">2026-06-03 · 5d</span>
             </div>
           </div>
           <div class="paper-card-body">
-          <h2><a href="https://arxiv.org/abs/2606.07387v1" target="_blank" rel="noopener">Making the Most of Limited Data: Score-Aware Training for Text-to-Music Generation</a></h2>
-          <p class="one-line">State-of-the-art text-to-music generation systems rely on massive proprietary datasets and industrial-scale compute, making it impo...</p>
+          <h2><a href="https://arxiv.org/abs/2606.04921v1" target="_blank" rel="noopener">SURF: Separation via Unsupervised Remixing Flow</a></h2>
+          <p class="one-line">The goal of single-channel <mark class="keyterm">source separation</mark> is to reconstruct $K$ sources given their mixture. In supervised settings where vast a...</p>
           <div class="tag-row">
             <span class="track-hint">貼近主線</span>
             <span class="tag">text-to-audio/music</span>
-            <span class="tag">caption/data</span>
+            <span class="tag">flow/diffusion</span>
             <span class="tag">evaluation</span>
           </div>
           <div class="quick-read">
             <div>
               <span class="label">Insight</span>
-              <p><mark class="keyterm">洞見</mark>：針對 Making / Most / Limited / Data / Score-Aware：它把高保真音樂生成拆成 <mark class="keyterm">acoustic token LM</mark> 的 scaling 問題，重點在長時結構與音色細節能否同時保住。 <mark class="keyterm">方法線索</mark>：We propose \textit{score-aware training}, which treats audio-caption <mark class="keyterm">alignment</mark> score as a...</p>
+              <p><mark class="keyterm">洞見</mark>：針對 SURF / Separation / Unsupervised / Remixing / Flow：它提供一個生成模型訓練或 sampling 的可遷移假設，可以拿來檢查音訊生成 pipeline 的對應位置。 <mark class="keyterm">方法線索</mark>：To bridge this gap, we present Separation via Unsupervised Remixing Flow (SURF), an unsuper...</p>
             </div>
             <div>
               <span class="label">Try next</span>
-              <p>針對 Making / Most / Limited / Data / Score-Aware：<mark class="keyterm">可做</mark>：固定同一批 prompt 與 <mark class="keyterm">codec</mark>，對比 <mark class="keyterm">token rate</mark> / <mark class="keyterm">context length</mark> / <mark class="keyterm">LM scale</mark>，看音樂結構與音質是否跟它的 claim 一致。<mark class="keyterm">結果焦點</mark>：Our 450M-parameter FluxAudio-based system, submitted to the ICME 20...</p>
+              <p>針對 SURF / Separation / Unsupervised / Remixing / Flow：<mark class="keyterm">可做</mark>：抽一個最小變因重跑 ablation，固定資料、模型與 sampling，只檢查它聲稱的關鍵差異。<mark class="keyterm">結果焦點</mark>：Empirical evaluations on image and audio benchmarks demonstrate that SURF establishes a new state-...</p>
             </div>
           </div>
           </div>
           <div class="card-actions">
-            <a class="source-link" href="https://arxiv.org/abs/2606.07387v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
+            <a class="source-link" href="https://arxiv.org/abs/2606.04921v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
             <button class="details-toggle" type="button" aria-expanded="false" aria-controls="paper-1-panel">展開摘要與實驗建議</button>
             <div class="star-rating" data-paper-id="2026-06-08-1" aria-label="Rate this paper">
               <span class="star-label">重要度</span>
@@ -823,11 +823,11 @@
             <div class="detail-grid">
               <section class="detail-section" data-standard-section="problem">
                 <h3>Problem</h3>
-                <p>State-of-the-art text-to-music generation systems rely on massive proprietary datasets and industrial-scale compute, making it impossible to disentangle architectural contributions from resource advantages.</p>
+                <p>The goal of single-channel <mark class="keyterm">source separation</mark> is to reconstruct $K$ sources given their mixture.</p>
               </section>
               <section class="detail-section" data-standard-section="method">
                 <h3>Method</h3>
-                <p>We propose \textit{score-aware training}, which treats audio-caption <mark class="keyterm">alignment</mark> score as a direct supervision signal throughout the pipeline.</p>
+                <p>In supervised settings where vast amounts of clean source data are available, this challenging, ill-posed problem has been addressed successfully by generative diffusion and flow-based prior models.</p>
               </section>
               <section class="detail-section" data-standard-section="data">
                 <h3>Data</h3>
@@ -835,7 +835,7 @@
               </section>
               <section class="detail-section" data-standard-section="findings">
                 <h3>Findings</h3>
-                <p>Rather than discarding low-scoring segments, we repurpose them via a <mark class="keyterm">CLAP</mark>-conditioned Beta noise timestep schedule that routes them to high-noise training regimes, acting as an effective implicit regularizer.</p>
+                <p>However, access to such clean source samples is often limited, and even when available, supervised models are vulnerable to domain shifts.</p>
               </section>
               <section class="detail-section" data-standard-section="limitations">
                 <h3>Limitations</h3>
@@ -848,9 +848,9 @@
               <section class="detail-section" data-standard-section="metadata">
                 <h3>Metadata</h3>
                 <dl class="meta-list">
-                  <div><dt>Authors</dt><dd>Yun-Chen Cheng, Tzu-Hung Huang, Chih-Pin Tan</dd></div>
-                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2606.07387v1">arxiv.org/abs/2606.07387v1</a></dd></div>
-                  <div><dt>Relevance</dt><dd>MeanAudio 4 / karaoke 0 · max 4</dd></div>
+                  <div><dt>Authors</dt><dd>Henry Li, Robin Scheibler, Efthymios Tzinis, Matt Shannon, Arnaud Doucet 等 6 位</dd></div>
+                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2606.04921v1">arxiv.org/abs/2606.04921v1</a></dd></div>
+                  <div><dt>Relevance</dt><dd>MeanAudio 2 / karaoke 1 · max 2</dd></div>
                 </dl>
               </section>
             </div>
@@ -858,35 +858,36 @@
         </article>
     
 
-        <article class="paper-card" data-track="karaoke_jp" id="paper-2">
+        <article class="paper-card" data-track="mean_audio" id="paper-2">
           <div class="paper-head">
             <div class="paper-number">02</div>
             <div class="paper-meta">
-              <span class="track">karaoke-jp</span>
-              <span class="quality">待觀察</span>
-              <span class="freshness">2026-04-23 · 46d</span>
+              <span class="track">MeanAudio</span>
+              <span class="quality">新</span>
+              <span class="freshness">2026-06-05 · 3d</span>
             </div>
           </div>
           <div class="paper-card-body">
-          <h2><a href="https://arxiv.org/abs/2604.01120v2" target="_blank" rel="noopener">Diff-VS: Efficient Audio-Aware Diffusion U-Net for Vocals Separation</a></h2>
-          <p class="one-line">While diffusion models are best known for their performance in generative tasks, they have also been successfully applied to many o...</p>
+          <h2><a href="https://arxiv.org/abs/2606.07481v1" target="_blank" rel="noopener"><mark class="keyterm">Drift</mark>ing Models for Surrogate Flow Modeling</a></h2>
+          <p class="one-line">While Computational Fluid Dynamics (CFD) provides high-fidelity flow fields for optimizing indoor environments, its computational c...</p>
           <div class="tag-row">
-            <span class="track-hint">可轉譯</span>
-            <span class="tag">karaoke-jp</span>
+            <span class="track-hint">貼近主線</span>
+            <span class="tag">text-to-audio/music</span>
+            <span class="tag">flow/diffusion</span>
           </div>
           <div class="quick-read">
             <div>
               <span class="label">Insight</span>
-              <p><mark class="keyterm">洞見</mark>：針對 Diff-VS / Efficient / Audio-Aware / Diffusion / U-Net：它提供一個生成模型訓練或 sampling 的可遷移假設，可以拿來檢查音訊生成 pipeline 的對應位置。 <mark class="keyterm">方法線索</mark>：In this paper, we address this issue by introducing a novel generative <mark class="keyterm">vocal separation</mark>...</p>
+              <p><mark class="keyterm">洞見</mark>：針對 <mark class="keyterm">Drift</mark>ing / Models / Surrogate / Flow / Modeling：它提供一個生成模型訓練或 sampling 的可遷移假設，可以拿來檢查音訊生成 pipeline 的對應位置。 <mark class="keyterm">方法線索</mark>：Additionally, we propose a spatial-conditioning variant that establishes a promising path towa...</p>
             </div>
             <div>
               <span class="label">Try next</span>
-              <p>針對 Diff-VS / Efficient / Audio-Aware / Diffusion / U-Net：<mark class="keyterm">可做</mark>：把方法限制在一個 <mark class="keyterm">karaoke</mark> pipeline stage，先測 pitch、lyrics timing 或 separation 的單點改善；不要一次改整條 pipeline。<mark class="keyterm">結果焦點</mark>：We hope these results encourage broader exploration o...</p>
+              <p>針對 <mark class="keyterm">Drift</mark>ing / Models / Surrogate / Flow / Modeling：<mark class="keyterm">可做</mark>：抽一個最小變因重跑 ablation，固定資料、模型與 sampling，只檢查它聲稱的關鍵差異。<mark class="keyterm">結果焦點</mark>：Additionally, we propose a spatial-conditioning variant that establishes a promising path towards gen...</p>
             </div>
           </div>
           </div>
           <div class="card-actions">
-            <a class="source-link" href="https://arxiv.org/abs/2604.01120v2" target="_blank" rel="noopener">Open Paper &#8599;</a>
+            <a class="source-link" href="https://arxiv.org/abs/2606.07481v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
             <button class="details-toggle" type="button" aria-expanded="false" aria-controls="paper-2-panel">展開摘要與實驗建議</button>
             <div class="star-rating" data-paper-id="2026-06-08-2" aria-label="Rate this paper">
               <span class="star-label">重要度</span>
@@ -901,11 +902,11 @@
             <div class="detail-grid">
               <section class="detail-section" data-standard-section="problem">
                 <h3>Problem</h3>
-                <p>While diffusion models are best known for their performance in generative tasks, they have also been successfully applied to many other tasks, including audio <mark class="keyterm">source separation</mark>.</p>
+                <p>While Computational Fluid Dynamics (CFD) provides high-fidelity flow fields for optimizing indoor environments, its computational cost limits rapid exploration.</p>
               </section>
               <section class="detail-section" data-standard-section="method">
                 <h3>Method</h3>
-                <p>However, current generative approaches to music <mark class="keyterm">source separation</mark> often underperform on standard objective metrics.</p>
+                <p>To solve this problem generative surrogates offer better distribution modeling than deterministic networks, but iterative sampling is slow.</p>
               </section>
               <section class="detail-section" data-standard-section="data">
                 <h3>Data</h3>
@@ -913,7 +914,7 @@
               </section>
               <section class="detail-section" data-standard-section="findings">
                 <h3>Findings</h3>
-                <p>In this paper, we address this issue by introducing a novel generative <mark class="keyterm">vocal separation</mark> model based on the Elucidated Diffusion Model (EDM) framework.</p>
+                <p>To enable high-quality, single-pass generation, we adapt the novel generative <mark class="keyterm">drift</mark>ing framework to fluid mechanics.</p>
               </section>
               <section class="detail-section" data-standard-section="limitations">
                 <h3>Limitations</h3>
@@ -921,14 +922,14 @@
               </section>
               <section class="detail-section" data-standard-section="editor-note">
                 <h3>Editor Note</h3>
-                <p>看它能否轉進 <mark class="keyterm">Music Flamingo</mark>、<mark class="keyterm">歌詞辨識</mark>、<mark class="keyterm">JPOP</mark> 或 <mark class="keyterm">karaoke-jp</mark> 的 <mark class="keyterm">vocal separation</mark>、<mark class="keyterm">pitch tracking</mark>、lyrics <mark class="keyterm">alignment</mark>、<mark class="keyterm">mora-to-note</mark> timing 或 rendering pipeline。 下一步：先把輸入輸出與可量測指標釘住，再看能不能改善 <mark class="keyterm">lyrics recognition</mark>、pitch、<mark class="keyterm">alignment</mark> 或 timing 的穩定性。</p>
+                <p>先看它是否能改善 text-to-audio / text-to-music，或支援 <mark class="keyterm">Music Flamingo</mark>、<mark class="keyterm">歌詞辨識</mark>、<mark class="keyterm">JPOP</mark> / <mark class="keyterm">卡拉 OK</mark> 的音樂理解方向。 下一步：抽一個可驗證的 trick，做成小實驗；先看資料與評估是否足以支撐，不要只被 <mark class="keyterm">CLAP</mark> 或主觀樣本牽著走。</p>
               </section>
               <section class="detail-section" data-standard-section="metadata">
                 <h3>Metadata</h3>
                 <dl class="meta-list">
-                  <div><dt>Authors</dt><dd>Yun-Ning, Hung, Richard Vogl, Filip Korzeniowski, Igor Pereira</dd></div>
-                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2604.01120v2">arxiv.org/abs/2604.01120v2</a></dd></div>
-                  <div><dt>Relevance</dt><dd>MeanAudio 1 / karaoke 3 · max 3</dd></div>
+                  <div><dt>Authors</dt><dd>Chris R. Jung, Markus Dörr, Natalie Jüngling, Jennifer Niessner, Adam T. Müller 等 6 位</dd></div>
+                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2606.07481v1">arxiv.org/abs/2606.07481v1</a></dd></div>
+                  <div><dt>Relevance</dt><dd>MeanAudio 2 / karaoke 0 · max 2</dd></div>
                 </dl>
               </section>
             </div>
@@ -947,7 +948,7 @@
     </details>
   </main>
 
-  <footer>Generated by the local MIR paper automation · Product standard 2026-05-26 · 2187e8b96f · 2026-06-08 09:00:23 Asia/Taipei</footer>
+  <footer>Generated by the local MIR paper automation · Product standard 2026-05-26 · 2187e8b96f · 2026-06-08 20:40:02 Asia/Taipei</footer>
 
   <script>
     const cards = Array.from(document.querySelectorAll('.paper-card'));
