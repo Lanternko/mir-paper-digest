@@ -767,11 +767,11 @@
         <ol class="paper-nav-list">
           <li><a href="#paper-1">
             <span class="nav-num">01</span>
-            <span>FIGMA: Towards FIne-Grained Music retriev...<span class="nav-track">MeanAudio</span></span>
+            <span>Audio-Oscar: A Multi-Agent System for Com...<span class="nav-track">MeanAudio</span></span>
           </a></li>
           <li><a href="#paper-2">
             <span class="nav-num">02</span>
-            <span>Audio Imitator: Controlling Timbre and Te...<span class="nav-track">MeanAudio</span></span>
+            <span>Consistent-Inversion: Reverse Consistency...<span class="nav-track">MeanAudio</span></span>
           </a></li>
         </ol>
       </aside>
@@ -783,32 +783,30 @@
             <div class="paper-number">01</div>
             <div class="paper-meta">
               <span class="track">MeanAudio</span>
-              <span class="quality">新且重要</span>
-              <span class="freshness">2026-06-04 · 5d</span>
+              <span class="quality">新</span>
+              <span class="freshness">2026-06-05 · 4d</span>
             </div>
           </div>
           <div class="paper-card-body">
-          <h2><a href="https://arxiv.org/abs/2606.06615v1" target="_blank" rel="noopener">FIGMA: Towards FIne-Grained Music retrievAl</a></h2>
-          <p class="one-line">Retrieving music using natural language descriptions has improved with contrastive audio-text models such as <mark class="keyterm">CLAP</mark>, but current syst...</p>
+          <h2><a href="https://arxiv.org/abs/2606.07397v1" target="_blank" rel="noopener">Audio-Oscar: A Multi-Agent System for Complex Audio Scene Generation, Orchestration, and Refinement</a></h2>
+          <p class="one-line">In recent years, audio generation has made significant progress in tasks such as text-to-speech (TTS), text-to-audio (TTA) and text...</p>
           <div class="tag-row">
             <span class="track-hint">貼近主線</span>
             <span class="tag">text-to-audio/music</span>
-            <span class="tag">caption/data</span>
-            <span class="tag">evaluation</span>
           </div>
           <div class="quick-read">
             <div>
               <span class="label">Insight</span>
-              <p><mark class="keyterm">洞見</mark>：針對 FIGMA / FIne-Grained / Music / retrievAl：它的價值在資料/偏好/評估訊號怎麼進訓練，而不是只看模型架構名稱。 <mark class="keyterm">方法線索</mark>：Then, we propose FIGMA (FIne-Grained Music RetrievAl), a multi-view contrastive architecture that addresses this limitation...</p>
+              <p><mark class="keyterm">洞見</mark>：針對 Audio-Oscar / Multi-Agent / System / Complex / Audio：這篇值得看的點在於它提出的建模假設是否能抽成音訊生成或 MIR pipeline 的單一可測變因。 <mark class="keyterm">方法線索</mark>：In this work, we introduce \textbf{Audio-Oscar}, a multi-agent framework for generating audio f...</p>
             </div>
             <div>
               <span class="label">Try next</span>
-              <p>針對 FIGMA / FIne-Grained / Music / retrievAl：<mark class="keyterm">可做</mark>：抽一個最小變因重跑 ablation，固定資料、模型與 sampling，只檢查它聲稱的關鍵差異。<mark class="keyterm">結果焦點</mark>：Extensive experiments demonstrate that FIGMA consistently outperforms existing <mark class="keyterm">CLAP</mark>-based music retrieval mo...</p>
+              <p>針對 Audio-Oscar / Multi-Agent / System / Complex / Audio：<mark class="keyterm">可做</mark>：抽一個最小變因重跑 ablation，固定資料、模型與 sampling，只檢查它聲稱的關鍵差異。<mark class="keyterm">結果焦點</mark>：Experimental results show that Audio-Oscar can effectively generate audio that matches complex s...</p>
             </div>
           </div>
           </div>
           <div class="card-actions">
-            <a class="source-link" href="https://arxiv.org/abs/2606.06615v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
+            <a class="source-link" href="https://arxiv.org/abs/2606.07397v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
             <button class="details-toggle" type="button" aria-expanded="false" aria-controls="paper-1-panel">展開摘要與實驗建議</button>
             <div class="star-rating" data-paper-id="2026-06-09-1" aria-label="Rate this paper">
               <span class="star-label">重要度</span>
@@ -823,11 +821,11 @@
             <div class="detail-grid">
               <section class="detail-section" data-standard-section="problem">
                 <h3>Problem</h3>
-                <p>Retrieving music using natural language descriptions has improved with contrastive audio-text models such as <mark class="keyterm">CLAP</mark>, but current systems remain limited to coarse semantic queries.</p>
+                <p>In recent years, audio generation has made significant progress in tasks such as text-to-speech (TTS), text-to-audio (TTA) and text-to-music (TTM).</p>
               </section>
               <section class="detail-section" data-standard-section="method">
                 <h3>Method</h3>
-                <p>When descriptions specify fine-grained musical attributes such as tempo, key, chord progression, or rhythmic structure, existing models often fail to retrieve the correct audio.</p>
+                <p>However, generating long-form and controllable audio from complex audio scene descriptions remains a significant challenge, as such scenes often require coordinated speech, sound effects, music, songs, temporal structure, and post-production.</p>
               </section>
               <section class="detail-section" data-standard-section="data">
                 <h3>Data</h3>
@@ -835,7 +833,7 @@
               </section>
               <section class="detail-section" data-standard-section="findings">
                 <h3>Findings</h3>
-                <p>We show that this limitation stems from the contrastive learning objective itself: despite being trained on long captions, <mark class="keyterm">CLAP</mark>-based models effectively utilize only the first few tokens, discarding much of the information encoded in detailed prompts.</p>
+                <p>In this work, we introduce \textbf{Audio-Oscar}, a multi-agent framework for generating audio from complex descriptions.</p>
               </section>
               <section class="detail-section" data-standard-section="limitations">
                 <h3>Limitations</h3>
@@ -848,9 +846,9 @@
               <section class="detail-section" data-standard-section="metadata">
                 <h3>Metadata</h3>
                 <dl class="meta-list">
-                  <div><dt>Authors</dt><dd>Nishit Anand, Ashish Seth, Sreyan Ghosh, Dinesh Manocha, Ramani Duraiswami</dd></div>
-                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2606.06615v1">arxiv.org/abs/2606.06615v1</a></dd></div>
-                  <div><dt>Relevance</dt><dd>MeanAudio 4 / karaoke 0 · max 4</dd></div>
+                  <div><dt>Authors</dt><dd>Yifan Duan, Qixiang Xu, Hengtao Wu, Zhanxun Liu, Wenhao Guan 等 9 位</dd></div>
+                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2606.07397v1">arxiv.org/abs/2606.07397v1</a></dd></div>
+                  <div><dt>Relevance</dt><dd>MeanAudio 3 / karaoke 0 · max 3</dd></div>
                 </dl>
               </section>
             </div>
@@ -868,8 +866,8 @@
             </div>
           </div>
           <div class="paper-card-body">
-          <h2><a href="https://arxiv.org/abs/2606.07182v1" target="_blank" rel="noopener">Audio Imitator: Controlling Timbre and Tempo in Video2Audio Synthesis with Audio Reference</a></h2>
-          <p class="one-line">Video-to-audio generation has made significant progress in achieving semantic consistency and temporal <mark class="keyterm">alignment</mark> from silent videos...</p>
+          <h2><a href="https://arxiv.org/abs/2606.07145v1" target="_blank" rel="noopener">Consistent-Inversion: Reverse Consistency Guidance for Structure-Preserving Visual Editing</a></h2>
+          <p class="one-line">Text-guided diffusion models have become effective tools for real-image visual editing, where the edited image must follow a target...</p>
           <div class="tag-row">
             <span class="track-hint">貼近主線</span>
             <span class="tag">text-to-audio/music</span>
@@ -877,16 +875,16 @@
           <div class="quick-read">
             <div>
               <span class="label">Insight</span>
-              <p><mark class="keyterm">洞見</mark>：針對 Audio / Imitator / Controlling / Timbre / Tempo：這篇值得看的點在於它提出的建模假設是否能抽成音訊生成或 MIR pipeline 的單一可測變因。 <mark class="keyterm">方法線索</mark>：We propose AudioIM, an attribute-aware framework that explicitly models timbre and tempo as separate...</p>
+              <p><mark class="keyterm">洞見</mark>：針對 Consistent-Inversion / Reverse / Consistency / Guidance / Structure-Preserving：它把 <mark class="keyterm">alignment</mark> signal 放回生成過程本身，而不是只靠後處理 <mark class="keyterm">reward</mark>；可對照音訊文字對齊是否也能這樣做。 <mark class="keyterm">方法線索</mark>：把 <mark class="keyterm">alignment</mark> signal 直接放進 diffusion matching/training，而不是只...</p>
             </div>
             <div>
               <span class="label">Try next</span>
-              <p>針對 Audio / Imitator / Controlling / Timbre / Tempo：<mark class="keyterm">可做</mark>：抽一個最小變因重跑 ablation，固定資料、模型與 sampling，只檢查它聲稱的關鍵差異。<mark class="keyterm">結果焦點</mark>：Experiments on VGGSound show improved style similarity while preserving semantic <mark class="keyterm">alignment</mark> and synchr...</p>
+              <p>針對 Consistent-Inversion / Reverse / Consistency / Guidance / Structure-Preserving：<mark class="keyterm">可做</mark>：把 <mark class="keyterm">alignment</mark> signal 做成單一 loss 或 reranking ablation，先比較文字-音訊相符度與主觀聽感。<mark class="keyterm">結果焦點</mark>：確認 <mark class="keyterm">alignment</mark> 是否真的在生成過程改善，而不是只讓某個 <mark class="keyterm">reward</mark> metric 變好。</p>
             </div>
           </div>
           </div>
           <div class="card-actions">
-            <a class="source-link" href="https://arxiv.org/abs/2606.07182v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
+            <a class="source-link" href="https://arxiv.org/abs/2606.07145v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
             <button class="details-toggle" type="button" aria-expanded="false" aria-controls="paper-2-panel">展開摘要與實驗建議</button>
             <div class="star-rating" data-paper-id="2026-06-09-2" aria-label="Rate this paper">
               <span class="star-label">重要度</span>
@@ -901,11 +899,11 @@
             <div class="detail-grid">
               <section class="detail-section" data-standard-section="problem">
                 <h3>Problem</h3>
-                <p>Video-to-audio generation has made significant progress in achieving semantic consistency and temporal <mark class="keyterm">alignment</mark> from silent videos.</p>
+                <p>Text-guided diffusion models have become effective tools for real-image visual editing, where the edited image must follow a target instruction while preserving editing-irrelevant structure.</p>
               </section>
               <section class="detail-section" data-standard-section="method">
                 <h3>Method</h3>
-                <p>However, audio contains rich stylistic attributes such as timbre and tempo that are difficult to infer from visual and textual inputs alone.</p>
+                <p>Most training-free editors rely on inversion: a source image is mapped to a noisy latent trajectory and the terminal latent is reused for target-prompt denoising.</p>
               </section>
               <section class="detail-section" data-standard-section="data">
                 <h3>Data</h3>
@@ -913,7 +911,7 @@
               </section>
               <section class="detail-section" data-standard-section="findings">
                 <h3>Findings</h3>
-                <p>While reference audio can serve as additional conditioning, it is typically treated as a holistic signal, limiting fine-grained style control.</p>
+                <p>This reuse is useful for preservation, but it also couples source reconstruction and target editing.</p>
               </section>
               <section class="detail-section" data-standard-section="limitations">
                 <h3>Limitations</h3>
@@ -926,8 +924,8 @@
               <section class="detail-section" data-standard-section="metadata">
                 <h3>Metadata</h3>
                 <dl class="meta-list">
-                  <div><dt>Authors</dt><dd>Jiahui Zhao, Tianrui Wang, Chunyu Qiang, Cheng Gong, Xijuan Zeng 等 7 位</dd></div>
-                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2606.07182v1">arxiv.org/abs/2606.07182v1</a></dd></div>
+                  <div><dt>Authors</dt><dd>Xiaocheng Lu, Jingcai Guo, Song Guo</dd></div>
+                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2606.07145v1">arxiv.org/abs/2606.07145v1</a></dd></div>
                   <div><dt>Relevance</dt><dd>MeanAudio 3 / karaoke 0 · max 3</dd></div>
                 </dl>
               </section>
@@ -947,7 +945,7 @@
     </details>
   </main>
 
-  <footer>Generated by the local MIR paper automation · Product standard 2026-05-26 · 2187e8b96f · 2026-06-09 07:01:52 Asia/Taipei</footer>
+  <footer>Generated by the local MIR paper automation · Product standard 2026-05-26 · 2187e8b96f · 2026-06-09 09:00:02 Asia/Taipei</footer>
 
   <script>
     const cards = Array.from(document.querySelectorAll('.paper-card'));
