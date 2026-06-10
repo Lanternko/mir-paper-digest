@@ -767,11 +767,11 @@
         <ol class="paper-nav-list">
           <li><a href="#paper-1">
             <span class="nav-num">01</span>
-            <span>HoliDubber: Holistic Video Dubbing for Co...<span class="nav-track">MeanAudio</span></span>
+            <span>AHA-WAM:Asynchronous Horizon-Adaptive Wor...<span class="nav-track">MeanAudio</span></span>
           </a></li>
           <li><a href="#paper-2">
             <span class="nav-num">02</span>
-            <span>SMC-ITA: Sequential Monte Carlo Inference...<span class="nav-track">MeanAudio</span></span>
+            <span>CineDance: Towards Next-Generation Multi-...<span class="nav-track">MeanAudio</span></span>
           </a></li>
         </ol>
       </aside>
@@ -788,27 +788,25 @@
             </div>
           </div>
           <div class="paper-card-body">
-          <h2><a href="https://arxiv.org/abs/2606.09098v1" target="_blank" rel="noopener">HoliDubber: Holistic Video Dubbing for Complex Acoustic Scenes via Text-Guided Audio Synthesis</a></h2>
-          <p class="one-line">Video dubbing is a cornerstone of multimedia content creation, aiming to synthesize synchronized acoustic sequences for visual stre...</p>
+          <h2><a href="https://arxiv.org/abs/2606.09811v1" target="_blank" rel="noopener">AHA-WAM:Asynchronous Horizon-Adaptive World-Action Modeling with Observation-Guided Context Routing</a></h2>
+          <p class="one-line">World-action models have emerged as a promising paradigm for robot manipulation, jointly modeling visual scene dynamics and actions...</p>
           <div class="tag-row">
             <span class="track-hint">貼近主線</span>
             <span class="tag">text-to-audio/music</span>
-            <span class="tag">flow/diffusion</span>
-            <span class="tag">evaluation</span>
           </div>
           <div class="quick-read">
             <div>
               <span class="label">Insight</span>
-              <p><mark class="keyterm">洞見</mark>：針對 HoliDubber / Holistic / Video / Dubbing / Complex：它把 <mark class="keyterm">alignment</mark> signal 放回生成過程本身，而不是只靠後處理 <mark class="keyterm">reward</mark>；可對照音訊文字對齊是否也能這樣做。 <mark class="keyterm">方法線索</mark>：把 <mark class="keyterm">alignment</mark> signal 直接放進 diffusion matching/training，而不是只靠外部 <mark class="keyterm">reward</mark> 做後處理。</p>
+              <p><mark class="keyterm">洞見</mark>：針對 AHA-WAM / Asynchronous / Horizon-Adaptive / World-Action / Modeling：它提供一個生成模型訓練或 sampling 的可遷移假設，可以拿來檢查音訊生成 pipeline 的對應位置。 <mark class="keyterm">方法線索</mark>：Therefore, we propose AHA-WAM, an Asynchronous Horizon-Adaptive World-Acti...</p>
             </div>
             <div>
               <span class="label">Try next</span>
-              <p>針對 HoliDubber / Holistic / Video / Dubbing / Complex：<mark class="keyterm">可做</mark>：把 <mark class="keyterm">alignment</mark> signal 做成單一 loss 或 reranking ablation，先比較文字-音訊相符度與主觀聽感。<mark class="keyterm">結果焦點</mark>：確認 <mark class="keyterm">alignment</mark> 是否真的在生成過程改善，而不是只讓某個 <mark class="keyterm">reward</mark> metric 變好。</p>
+              <p>針對 AHA-WAM / Asynchronous / Horizon-Adaptive / World-Action / Modeling：<mark class="keyterm">可做</mark>：抽一個最小變因重跑 ablation，固定資料、模型與 sampling，只檢查它聲稱的關鍵差異。<mark class="keyterm">結果焦點</mark>：Experiments on RoboTwin and real-world manipulation tasks show that AHA-WAM achie...</p>
             </div>
           </div>
           </div>
           <div class="card-actions">
-            <a class="source-link" href="https://arxiv.org/abs/2606.09098v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
+            <a class="source-link" href="https://arxiv.org/abs/2606.09811v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
             <button class="details-toggle" type="button" aria-expanded="false" aria-controls="paper-1-panel">展開摘要與實驗建議</button>
             <div class="star-rating" data-paper-id="2026-06-10-1" aria-label="Rate this paper">
               <span class="star-label">重要度</span>
@@ -823,11 +821,11 @@
             <div class="detail-grid">
               <section class="detail-section" data-standard-section="problem">
                 <h3>Problem</h3>
-                <p>Video dubbing is a cornerstone of multimedia content creation, aiming to synthesize synchronized acoustic sequences for visual streams.</p>
+                <p>World-action models have emerged as a promising paradigm for robot manipulation, jointly modeling visual scene dynamics and actions to inject physical priors into policy learning.</p>
               </section>
               <section class="detail-section" data-standard-section="method">
                 <h3>Method</h3>
-                <p>While Text-to-Speech (TTS) and Text-to-Audio (TTA) generation have each achieved remarkable progress, existing dubbing systems remain confined to isolated speech synthesis without incorporating sound effects and ambient audio, forcing practitioners to rely on fragmented workflows and laborious manual post-mixing.</p>
+                <p>However, existing world-action models couple world prediction and action execution at the same temporal resolution, forcing the world branch to model near-term frame variations that are redundant and weakly informative.</p>
               </section>
               <section class="detail-section" data-standard-section="data">
                 <h3>Data</h3>
@@ -835,7 +833,7 @@
               </section>
               <section class="detail-section" data-standard-section="findings">
                 <h3>Findings</h3>
-                <p>To address this limitation, we present HoliDubber, a holistic video dubbing framework that moves beyond speech-only generation by enabling the joint synthesis of speech and sound effects from a single text prompt.</p>
+                <p>We posit that strictly binding world prediction and action execution to the same temporal rhythm may underutilize the potential of the video branch for embodied control.</p>
               </section>
               <section class="detail-section" data-standard-section="limitations">
                 <h3>Limitations</h3>
@@ -848,9 +846,9 @@
               <section class="detail-section" data-standard-section="metadata">
                 <h3>Metadata</h3>
                 <dl class="meta-list">
-                  <div><dt>Authors</dt><dd>Wenhao Guan, Yifan Duan, Junxi Liu, Yu Gu, Feng Dang 等 9 位</dd></div>
-                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2606.09098v1">arxiv.org/abs/2606.09098v1</a></dd></div>
-                  <div><dt>Relevance</dt><dd>MeanAudio 3 / karaoke 0 · max 3</dd></div>
+                  <div><dt>Authors</dt><dd>Jisong Cai, Long Ling, Shiwei Chu, Zhongshan Liu, Jiayue Kang 等 13 位</dd></div>
+                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2606.09811v1">arxiv.org/abs/2606.09811v1</a></dd></div>
+                  <div><dt>Relevance</dt><dd>MeanAudio 2 / karaoke 0 · max 2</dd></div>
                 </dl>
               </section>
             </div>
@@ -864,30 +862,31 @@
             <div class="paper-meta">
               <span class="track">MeanAudio</span>
               <span class="quality">新</span>
-              <span class="freshness">2026-06-07 · 3d</span>
+              <span class="freshness">2026-06-08 · 2d</span>
             </div>
           </div>
           <div class="paper-card-body">
-          <h2><a href="https://arxiv.org/abs/2606.08393v1" target="_blank" rel="noopener">SMC-ITA: Sequential Monte Carlo Inference-Time <mark class="keyterm">Alignment</mark> for Video-to-Audio Generation</a></h2>
-          <p class="one-line">Video-to-audio (V2A) generation must jointly satisfy audiovisual <mark class="keyterm">alignment</mark>, semantic consistency, temporal synchronization, and per...</p>
+          <h2><a href="https://arxiv.org/abs/2606.09639v1" target="_blank" rel="noopener">CineDance: Towards Next-Generation Multi-Shot Long-Form Cinematic Audio-Video Generation</a></h2>
+          <p class="one-line">The fidelity and structural diversity of training datasets fundamentally determine the capabilities of video generation models. Whi...</p>
           <div class="tag-row">
             <span class="track-hint">貼近主線</span>
             <span class="tag">text-to-audio/music</span>
-            <span class="tag">flow/diffusion</span>
+            <span class="tag">caption/data</span>
+            <span class="tag">evaluation</span>
           </div>
           <div class="quick-read">
             <div>
               <span class="label">Insight</span>
-              <p><mark class="keyterm">洞見</mark>：針對 SMC-ITA / Sequential / Monte / Carlo / Inference-Time：它的價值在資料/偏好/評估訊號怎麼進訓練，而不是只看模型架構名稱。 <mark class="keyterm">方法線索</mark>：We propose Sequential Monte Carlo Inference-Time <mark class="keyterm">Alignment</mark> (SMC-ITA), which combines lookahead-based <mark class="keyterm">reward</mark> es...</p>
+              <p><mark class="keyterm">洞見</mark>：針對 CineDance / Next-Generation / Multi-Shot / Long-Form / Cinematic：它的價值在資料/偏好/評估訊號怎麼進訓練，而不是只看模型架構名稱。 <mark class="keyterm">方法線索</mark>：For a comprehensive assessment, we propose CineBench, featuring a diverse prompt suite and a six-di...</p>
             </div>
             <div>
               <span class="label">Try next</span>
-              <p>針對 SMC-ITA / Sequential / Monte / Carlo / Inference-Time：<mark class="keyterm">可做</mark>：抽一個最小變因重跑 ablation，固定資料、模型與 sampling，只檢查它聲稱的關鍵差異。<mark class="keyterm">結果焦點</mark>：Under matched NFE budgets, it also achieves the best overall trade-off among the compared searc...</p>
+              <p>針對 CineDance / Next-Generation / Multi-Shot / Long-Form / Cinematic：<mark class="keyterm">可做</mark>：抽一個最小變因重跑 ablation，固定資料、模型與 sampling，只檢查它聲稱的關鍵差異。<mark class="keyterm">結果焦點</mark>：Furthermore, we adapt LTX-2.3 into CineDance, which demonstrates exceptional single-...</p>
             </div>
           </div>
           </div>
           <div class="card-actions">
-            <a class="source-link" href="https://arxiv.org/abs/2606.08393v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
+            <a class="source-link" href="https://arxiv.org/abs/2606.09639v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
             <button class="details-toggle" type="button" aria-expanded="false" aria-controls="paper-2-panel">展開摘要與實驗建議</button>
             <div class="star-rating" data-paper-id="2026-06-10-2" aria-label="Rate this paper">
               <span class="star-label">重要度</span>
@@ -902,11 +901,11 @@
             <div class="detail-grid">
               <section class="detail-section" data-standard-section="problem">
                 <h3>Problem</h3>
-                <p>Video-to-audio (V2A) generation must jointly satisfy audiovisual <mark class="keyterm">alignment</mark>, semantic consistency, temporal synchronization, and perceptual quality.</p>
+                <p>The fidelity and structural diversity of training datasets fundamentally determine the capabilities of video generation models.</p>
               </section>
               <section class="detail-section" data-standard-section="method">
                 <h3>Method</h3>
-                <p>While prior work has mainly focused on model architecture, multimodal conditioning, and training objectives, inference-time <mark class="keyterm">alignment</mark> for V2A remains underexplored.</p>
+                <p>While commercial systems showremarkableabilitytogeneratecinematicnarratives, the progress of open-source models remains limited by the scarcity of high-quality training data.</p>
               </section>
               <section class="detail-section" data-standard-section="data">
                 <h3>Data</h3>
@@ -914,7 +913,7 @@
               </section>
               <section class="detail-section" data-standard-section="findings">
                 <h3>Findings</h3>
-                <p>In this paper, we study inference-time <mark class="keyterm">alignment</mark> for flow-matching-based V2A generation and formulate it as a search problem.</p>
+                <p>To bridge this gap, we introduce CineDance-1M, a large-scale, open research Text-to-Audio-Video (T2AV) dataset designed specifically for multi-shot, long-form joint audio-video generation.</p>
               </section>
               <section class="detail-section" data-standard-section="limitations">
                 <h3>Limitations</h3>
@@ -927,9 +926,9 @@
               <section class="detail-section" data-standard-section="metadata">
                 <h3>Metadata</h3>
                 <dl class="meta-list">
-                  <div><dt>Authors</dt><dd>Haoyu Zhang, Yuta Oshima, Xingjian Du, Chunfeng Wang, Irene Li 等 7 位</dd></div>
-                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2606.08393v1">arxiv.org/abs/2606.08393v1</a></dd></div>
-                  <div><dt>Relevance</dt><dd>MeanAudio 3 / karaoke 0 · max 3</dd></div>
+                  <div><dt>Authors</dt><dd>Yuheng Chen, Teng Hu, Yuji Wang, Qingdong He, Zhucun Xue 等 10 位</dd></div>
+                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2606.09639v1">arxiv.org/abs/2606.09639v1</a></dd></div>
+                  <div><dt>Relevance</dt><dd>MeanAudio 2 / karaoke 0 · max 2</dd></div>
                 </dl>
               </section>
             </div>
@@ -948,7 +947,7 @@
     </details>
   </main>
 
-  <footer>Generated by the local MIR paper automation · Product standard 2026-05-26 · 2187e8b96f · 2026-06-10 07:00:44 Asia/Taipei</footer>
+  <footer>Generated by the local MIR paper automation · Product standard 2026-05-26 · 2187e8b96f · 2026-06-10 09:00:02 Asia/Taipei</footer>
 
   <script>
     const cards = Array.from(document.querySelectorAll('.paper-card'));
