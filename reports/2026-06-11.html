@@ -767,11 +767,11 @@
         <ol class="paper-nav-list">
           <li><a href="#paper-1">
             <span class="nav-num">01</span>
-            <span>Mean Flow Distillation: Robust and Stable...<span class="nav-track">MeanAudio</span></span>
+            <span>Flow-DPPO: Divergence Proximal Policy Opt...<span class="nav-track">MeanAudio</span></span>
           </a></li>
           <li><a href="#paper-2">
             <span class="nav-num">02</span>
-            <span>DeRA-MOS: Optimizing Text-to-Music Evalua...<span class="nav-track">MeanAudio</span></span>
+            <span>Lip Forcing: Few-Step Autoregressive Diff...<span class="nav-track">MeanAudio</span></span>
           </a></li>
         </ol>
       </aside>
@@ -783,13 +783,13 @@
             <div class="paper-number">01</div>
             <div class="paper-meta">
               <span class="track">MeanAudio</span>
-              <span class="quality">新且重要</span>
+              <span class="quality">新</span>
               <span class="freshness">2026-06-09 · 2d</span>
             </div>
           </div>
           <div class="paper-card-body">
-          <h2><a href="https://arxiv.org/abs/2606.11155v1" target="_blank" rel="noopener">Mean Flow Distillation: Robust and Stable Distillation for Flow Matching Models</a></h2>
-          <p class="one-line">Flow Matching models have demonstrated strong performance across a wide range of generative tasks. However, their reliance on ODE-b...</p>
+          <h2><a href="https://arxiv.org/abs/2606.11025v1" target="_blank" rel="noopener">Flow-DPPO: Divergence Proximal Policy Optimization for Flow Matching Models</a></h2>
+          <p class="one-line">Recent work has demonstrated that online reinforcement learning (RL) can substantially improve the quality and <mark class="keyterm">alignment</mark> of flow ma...</p>
           <div class="tag-row">
             <span class="track-hint">貼近主線</span>
             <span class="tag">text-to-audio/music</span>
@@ -798,16 +798,16 @@
           <div class="quick-read">
             <div>
               <span class="label">Insight</span>
-              <p><mark class="keyterm">洞見</mark>：針對 Mean / Flow / Distillation / Robust / Stable：它把 <mark class="keyterm">alignment</mark> signal 放回生成過程本身，而不是只靠後處理 <mark class="keyterm">reward</mark>；可對照音訊文字對齊是否也能這樣做。 <mark class="keyterm">方法線索</mark>：把 <mark class="keyterm">alignment</mark> signal 直接放進 diffusion matching/training，而不是只靠外部 <mark class="keyterm">reward</mark> 做後處理。</p>
+              <p><mark class="keyterm">洞見</mark>：針對 Flow-DPPO / Divergence / Proximal / Policy / Optimization：它的價值在資料/偏好/評估訊號怎麼進訓練，而不是只看模型架構名稱。 <mark class="keyterm">方法線索</mark>：We propose Flow-DPPO (Flow Divergence Proximal Policy Optimization), which replaces ratio clipping with a...</p>
             </div>
             <div>
               <span class="label">Try next</span>
-              <p>針對 Mean / Flow / Distillation / Robust / Stable：<mark class="keyterm">可做</mark>：把 <mark class="keyterm">alignment</mark> signal 做成單一 loss 或 reranking ablation，先比較文字-音訊相符度與主觀聽感。<mark class="keyterm">結果焦點</mark>：確認 <mark class="keyterm">alignment</mark> 是否真的在生成過程改善，而不是只讓某個 <mark class="keyterm">reward</mark> metric 變好。</p>
+              <p>針對 Flow-DPPO / Divergence / Proximal / Policy / Optimization：<mark class="keyterm">可做</mark>：抽一個最小變因重跑 ablation，固定資料、模型與 sampling，只檢查它聲稱的關鍵差異。<mark class="keyterm">結果焦點</mark>：Experiments show that Flow-DPPO achieves higher <mark class="keyterm">reward</mark>s with better KL-proximal efficiency,...</p>
             </div>
           </div>
           </div>
           <div class="card-actions">
-            <a class="source-link" href="https://arxiv.org/abs/2606.11155v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
+            <a class="source-link" href="https://arxiv.org/abs/2606.11025v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
             <button class="details-toggle" type="button" aria-expanded="false" aria-controls="paper-1-panel">展開摘要與實驗建議</button>
             <div class="star-rating" data-paper-id="2026-06-11-1" aria-label="Rate this paper">
               <span class="star-label">重要度</span>
@@ -822,11 +822,11 @@
             <div class="detail-grid">
               <section class="detail-section" data-standard-section="problem">
                 <h3>Problem</h3>
-                <p>Flow Matching models have demonstrated strong performance across a wide range of generative tasks.</p>
+                <p>Recent work has demonstrated that online reinforcement learning (RL) can substantially improve the quality and <mark class="keyterm">alignment</mark> of flow matching models for image and video generation.</p>
               </section>
               <section class="detail-section" data-standard-section="method">
                 <h3>Method</h3>
-                <p>However, their reliance on ODE-based iterative sampling incurs substantial computational overhead in inference, which limits their applicability in real-time scenes.</p>
+                <p>Methods such as Flow-GRPO and CPS cast the denoising process as a Markov Decision Process and apply PPO-style ratio clipping to enforce a trust region.</p>
               </section>
               <section class="detail-section" data-standard-section="data">
                 <h3>Data</h3>
@@ -834,7 +834,7 @@
               </section>
               <section class="detail-section" data-standard-section="findings">
                 <h3>Findings</h3>
-                <p>While distillation is a promising solution, existing approaches largely borrow from diffusion-based score matching, often failing to exploit the intrinsic geometric structure of flows and suffering from training instability, high variance, and degraded generation quality.</p>
+                <p>However, we argue that ratio clipping is structurally ill-suited for flow models: the probability ratio between new and old policies is a noisy, single-sample estimate of the true policy divergence, leading to over-constraining in some regions of the trajectory and under-constraining in others.</p>
               </section>
               <section class="detail-section" data-standard-section="limitations">
                 <h3>Limitations</h3>
@@ -847,9 +847,9 @@
               <section class="detail-section" data-standard-section="metadata">
                 <h3>Metadata</h3>
                 <dl class="meta-list">
-                  <div><dt>Authors</dt><dd>An Zhao, Shengyuan Zhang, Zhongjian Sun, Yixiang Zhou, Zejian Li 等 8 位</dd></div>
-                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2606.11155v1">arxiv.org/abs/2606.11155v1</a></dd></div>
-                  <div><dt>Relevance</dt><dd>MeanAudio 4 / karaoke 0 · max 4</dd></div>
+                  <div><dt>Authors</dt><dd>Bowen Ping, Xiangxin Zhou, Penghui Qi, Minnan Luo, Liefeng Bo 等 6 位</dd></div>
+                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2606.11025v1">arxiv.org/abs/2606.11025v1</a></dd></div>
+                  <div><dt>Relevance</dt><dd>MeanAudio 3 / karaoke 0 · max 3</dd></div>
                 </dl>
               </section>
             </div>
@@ -862,31 +862,30 @@
             <div class="paper-number">02</div>
             <div class="paper-meta">
               <span class="track">MeanAudio</span>
-              <span class="quality">新且重要</span>
-              <span class="freshness">2026-06-08 · 3d</span>
+              <span class="quality">新</span>
+              <span class="freshness">2026-06-09 · 2d</span>
             </div>
           </div>
           <div class="paper-card-body">
-          <h2><a href="https://arxiv.org/abs/2606.10010v1" target="_blank" rel="noopener">DeRA-MOS: Optimizing Text-to-Music Evaluation via Decoupled Listwise Ranking and Modality <mark class="keyterm">Alignment</mark></a></h2>
-          <p class="one-line">Evaluating text-to-music (TTM) systems remains expensive because music impression (MI) and text <mark class="keyterm">alignment</mark> (TA) scores rely on human...</p>
+          <h2><a href="https://arxiv.org/abs/2606.11180v1" target="_blank" rel="noopener">Lip Forcing: Few-Step Autoregressive Diffusion for Real-time Lip Synchronization</a></h2>
+          <p class="one-line">Diffusion-based lip synchronization models achieve strong visual quality and audio-visual <mark class="keyterm">alignment</mark>, but full-sequence bidirectiona...</p>
           <div class="tag-row">
             <span class="track-hint">貼近主線</span>
             <span class="tag">text-to-audio/music</span>
-            <span class="tag">evaluation</span>
           </div>
           <div class="quick-read">
             <div>
               <span class="label">Insight</span>
-              <p><mark class="keyterm">洞見</mark>：針對 DeRA-MOS / Optimizing / Text-to-Music / Evaluation / Decoupled：這篇值得看的點在於它提出的建模假設是否能抽成音訊生成或 MIR pipeline 的單一可測變因。 <mark class="keyterm">方法線索</mark>：To address these gaps, we propose DeRA-MOS, a decoupled optimization framework for TT...</p>
+              <p><mark class="keyterm">洞見</mark>：針對 Lip / Forcing / Few-Step / Autoregressive / Diffusion：它把 <mark class="keyterm">alignment</mark> signal 放回生成過程本身，而不是只靠後處理 <mark class="keyterm">reward</mark>；可對照音訊文字對齊是否也能這樣做。 <mark class="keyterm">方法線索</mark>：把 <mark class="keyterm">alignment</mark> signal 直接放進 diffusion matching/training，而不是只靠外部 <mark class="keyterm">reward</mark> 做後處理。</p>
             </div>
             <div>
               <span class="label">Try next</span>
-              <p>針對 DeRA-MOS / Optimizing / Text-to-Music / Evaluation / Decoupled：<mark class="keyterm">可做</mark>：抽一個最小變因重跑 ablation，固定資料、模型與 sampling，只檢查它聲稱的關鍵差異。<mark class="keyterm">結果焦點</mark>：By effectively mitigating the point-wise training mismatch and modality <mark class="keyterm">drift</mark>, experim...</p>
+              <p>針對 Lip / Forcing / Few-Step / Autoregressive / Diffusion：<mark class="keyterm">可做</mark>：把 <mark class="keyterm">alignment</mark> signal 做成單一 loss 或 reranking ablation，先比較文字-音訊相符度與主觀聽感。<mark class="keyterm">結果焦點</mark>：確認 <mark class="keyterm">alignment</mark> 是否真的在生成過程改善，而不是只讓某個 <mark class="keyterm">reward</mark> metric 變好。</p>
             </div>
           </div>
           </div>
           <div class="card-actions">
-            <a class="source-link" href="https://arxiv.org/abs/2606.10010v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
+            <a class="source-link" href="https://arxiv.org/abs/2606.11180v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
             <button class="details-toggle" type="button" aria-expanded="false" aria-controls="paper-2-panel">展開摘要與實驗建議</button>
             <div class="star-rating" data-paper-id="2026-06-11-2" aria-label="Rate this paper">
               <span class="star-label">重要度</span>
@@ -901,11 +900,11 @@
             <div class="detail-grid">
               <section class="detail-section" data-standard-section="problem">
                 <h3>Problem</h3>
-                <p>Evaluating text-to-music (TTM) systems remains expensive because music impression (MI) and text <mark class="keyterm">alignment</mark> (TA) scores rely on human mean opinion scores (MOS).</p>
+                <p>Diffusion-based lip synchronization models achieve strong visual quality and audio-visual <mark class="keyterm">alignment</mark>, but full-sequence bidirectional attention and many denoising steps make them impractical for real-time inference.</p>
               </section>
               <section class="detail-section" data-standard-section="method">
                 <h3>Method</h3>
-                <p>Most automatic MOS estimators are trained with point-wise regression or distributional classification.</p>
+                <p>We present Lip Forcing, to our knowledge the first autoregressive diffusion method for video-to-video (V2V) lip synchronization, which distills a 14B audio-conditioned bidirectional video diffusion teacher into causal students.</p>
               </section>
               <section class="detail-section" data-standard-section="data">
                 <h3>Data</h3>
@@ -913,7 +912,7 @@
               </section>
               <section class="detail-section" data-standard-section="findings">
                 <h3>Findings</h3>
-                <p>These objectives do not directly optimize rank-based metrics and provide weak geometric constraints for cross-modal coherence.</p>
+                <p>At inference, the students generate each <mark class="keyterm">chunk</mark> in only two denoising steps without inference-time CFG, enabling real-time lip synchronization.</p>
               </section>
               <section class="detail-section" data-standard-section="limitations">
                 <h3>Limitations</h3>
@@ -926,9 +925,9 @@
               <section class="detail-section" data-standard-section="metadata">
                 <h3>Metadata</h3>
                 <dl class="meta-list">
-                  <div><dt>Authors</dt><dd>Chien-Chun Wang, Hung-Shin Lee, Hsin-Min Wang, Berlin Chen</dd></div>
-                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2606.10010v1">arxiv.org/abs/2606.10010v1</a></dd></div>
-                  <div><dt>Relevance</dt><dd>MeanAudio 4 / karaoke 0 · max 4</dd></div>
+                  <div><dt>Authors</dt><dd>Paul Hyunbin Cho, Jinhyuk Jang, SeokYoung Lee, Joungbin Lee, Siyoon Jin 等 10 位</dd></div>
+                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2606.11180v1">arxiv.org/abs/2606.11180v1</a></dd></div>
+                  <div><dt>Relevance</dt><dd>MeanAudio 3 / karaoke 0 · max 3</dd></div>
                 </dl>
               </section>
             </div>
@@ -947,7 +946,7 @@
     </details>
   </main>
 
-  <footer>Generated by the local MIR paper automation · Product standard 2026-05-26 · 2187e8b96f · 2026-06-11 07:02:36 Asia/Taipei</footer>
+  <footer>Generated by the local MIR paper automation · Product standard 2026-05-26 · 2187e8b96f · 2026-06-11 09:00:03 Asia/Taipei</footer>
 
   <script>
     const cards = Array.from(document.querySelectorAll('.paper-card'));
