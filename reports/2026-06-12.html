@@ -767,11 +767,11 @@
         <ol class="paper-nav-list">
           <li><a href="#paper-1">
             <span class="nav-num">01</span>
-            <span>DiffCold: A Diffusion-based Generative Mo...<span class="nav-track">MeanAudio</span></span>
+            <span>Making Foresight Actionable: Repurposing...<span class="nav-track">MeanAudio</span></span>
           </a></li>
           <li><a href="#paper-2">
             <span class="nav-num">02</span>
-            <span>Flow Matching with In-Context Priors for...<span class="nav-track">MeanAudio</span></span>
+            <span>PianoKontext: Expressive Performance Rend...<span class="nav-track">MeanAudio</span></span>
           </a></li>
         </ol>
       </aside>
@@ -788,8 +788,8 @@
             </div>
           </div>
           <div class="paper-card-body">
-          <h2><a href="https://arxiv.org/abs/2606.12245v1" target="_blank" rel="noopener">DiffCold: A Diffusion-based Generative Model for Cold-Start Item Recommendation</a></h2>
-          <p class="one-line">Cold-start item recommendation remains a persistent challenge in real-world systems due to the absence of interaction histories. Wh...</p>
+          <h2><a href="https://arxiv.org/abs/2606.12217v1" target="_blank" rel="noopener">Making Foresight Actionable: Repurposing Representation <mark class="keyterm">Alignment</mark> in World Action Models</a></h2>
+          <p class="one-line">World Action Models (WAMs) offer a promising route for robot manipulation by using video generation models to model future scene ev...</p>
           <div class="tag-row">
             <span class="track-hint">貼近主線</span>
             <span class="tag">text-to-audio/music</span>
@@ -797,16 +797,16 @@
           <div class="quick-read">
             <div>
               <span class="label">Insight</span>
-              <p><mark class="keyterm">洞見</mark>：針對 DiffCold / Diffusion-based / Generative / Model / Cold-Start：它把 <mark class="keyterm">alignment</mark> signal 放回生成過程本身，而不是只靠後處理 <mark class="keyterm">reward</mark>；可對照音訊文字對齊是否也能這樣做。 <mark class="keyterm">方法線索</mark>：把 <mark class="keyterm">alignment</mark> signal 直接放進 diffusion matching/training，而不是只靠外部 <mark class="keyterm">reward</mark> 做後處理。</p>
+              <p><mark class="keyterm">洞見</mark>：針對 Making / Foresight / Actionable / Repurposing / Representation：它把 <mark class="keyterm">alignment</mark> signal 放回生成過程本身，而不是只靠後處理 <mark class="keyterm">reward</mark>；可對照音訊文字對齊是否也能這樣做。 <mark class="keyterm">方法線索</mark>：把 <mark class="keyterm">alignment</mark> signal 直接放進 diffusion matching/training，而不是只靠外部 <mark class="keyterm">reward</mark> 做後處理。</p>
             </div>
             <div>
               <span class="label">Try next</span>
-              <p>針對 DiffCold / Diffusion-based / Generative / Model / Cold-Start：<mark class="keyterm">可做</mark>：把 <mark class="keyterm">alignment</mark> signal 做成單一 loss 或 reranking ablation，先比較文字-音訊相符度與主觀聽感。<mark class="keyterm">結果焦點</mark>：確認 <mark class="keyterm">alignment</mark> 是否真的在生成過程改善，而不是只讓某個 <mark class="keyterm">reward</mark> metric 變好。</p>
+              <p>針對 Making / Foresight / Actionable / Repurposing / Representation：<mark class="keyterm">可做</mark>：把 <mark class="keyterm">alignment</mark> signal 做成單一 loss 或 reranking ablation，先比較文字-音訊相符度與主觀聽感。<mark class="keyterm">結果焦點</mark>：確認 <mark class="keyterm">alignment</mark> 是否真的在生成過程改善，而不是只讓某個 <mark class="keyterm">reward</mark> metric 變好。</p>
             </div>
           </div>
           </div>
           <div class="card-actions">
-            <a class="source-link" href="https://arxiv.org/abs/2606.12245v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
+            <a class="source-link" href="https://arxiv.org/abs/2606.12217v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
             <button class="details-toggle" type="button" aria-expanded="false" aria-controls="paper-1-panel">展開摘要與實驗建議</button>
             <div class="star-rating" data-paper-id="2026-06-12-1" aria-label="Rate this paper">
               <span class="star-label">重要度</span>
@@ -821,11 +821,11 @@
             <div class="detail-grid">
               <section class="detail-section" data-standard-section="problem">
                 <h3>Problem</h3>
-                <p>Cold-start item recommendation remains a persistent challenge in real-world systems due to the absence of interaction histories.</p>
+                <p>World Action Models (WAMs) offer a promising route for robot manipulation by using video generation models to model future scene evolution before producing control actions.</p>
               </section>
               <section class="detail-section" data-standard-section="method">
                 <h3>Method</h3>
-                <p>While prior models attempt to bridge this gap using item content features, they universally suffer from the \textbf{seesaw dilemma}: enhancing performance for cold items inevitably degrades performance for warm items, and vice versa.</p>
+                <p>However, our empirical observations reveal a phenomenon: generating plausible visual futures does not always guarantee the extraction of accurate actions.</p>
               </section>
               <section class="detail-section" data-standard-section="data">
                 <h3>Data</h3>
@@ -833,7 +833,7 @@
               </section>
               <section class="detail-section" data-standard-section="findings">
                 <h3>Findings</h3>
-                <p>We identify that this dilemma stems from a fundamental \textbf{distributional disparity}: warm item embeddings occupy a complex ``behavioral manifold&quot; shaped by rich interaction signals, whereas cold item embeddings are constrained to a ``semantic manifold&quot; derived solely from auxiliary content.</p>
+                <p>To diagnose this failure, we conduct action-head attention analysis and causal interventions.</p>
               </section>
               <section class="detail-section" data-standard-section="limitations">
                 <h3>Limitations</h3>
@@ -846,8 +846,8 @@
               <section class="detail-section" data-standard-section="metadata">
                 <h3>Metadata</h3>
                 <dl class="meta-list">
-                  <div><dt>Authors</dt><dd>Kangning Zhang, Yingjie Qin, Weinan Zhang, Yong Yu, Jianghao Lin</dd></div>
-                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2606.12245v1">arxiv.org/abs/2606.12245v1</a></dd></div>
+                  <div><dt>Authors</dt><dd>Lu Qiu, Yizhuo Li, Yi Chen, Yuying Ge, Yixiao Ge 等 6 位</dd></div>
+                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2606.12217v1">arxiv.org/abs/2606.12217v1</a></dd></div>
                   <div><dt>Relevance</dt><dd>MeanAudio 2 / karaoke 0 · max 2</dd></div>
                 </dl>
               </section>
@@ -866,27 +866,26 @@
             </div>
           </div>
           <div class="paper-card-body">
-          <h2><a href="https://arxiv.org/abs/2606.11833v1" target="_blank" rel="noopener">Flow Matching with In-Context Priors for Out-of-Distribution Brain Dynamics</a></h2>
-          <p class="one-line">Flow matching and diffusion models enable conditional generation across domains ranging from images to proteins, with recent extens...</p>
+          <h2><a href="https://arxiv.org/abs/2606.12282v1" target="_blank" rel="noopener">PianoKontext: Expressive Performance Rendering from Deadpan Context</a></h2>
+          <p class="one-line">Expressive performance rendering (EPR) aims to generate realistic performances constrained on sequences of notes. However, flow mat...</p>
           <div class="tag-row">
             <span class="track-hint">貼近主線</span>
             <span class="tag">text-to-audio/music</span>
             <span class="tag">flow/diffusion</span>
-            <span class="tag">evaluation</span>
           </div>
           <div class="quick-read">
             <div>
               <span class="label">Insight</span>
-              <p><mark class="keyterm">洞見</mark>：針對 Flow / Matching / In-Context / Priors / Out-of-Distribution：它提供一個生成模型訓練或 sampling 的可遷移假設，可以拿來檢查音訊生成 pipeline 的對應位置。 <mark class="keyterm">方法線索</mark>：In this work, we propose a per-timestep conditioned diffusion transformer for gene...</p>
+              <p><mark class="keyterm">洞見</mark>：針對 PianoKontext / Expressive / Performance / Rendering / Deadpan：它提供一個生成模型訓練或 sampling 的可遷移假設，可以拿來檢查音訊生成 pipeline 的對應位置。 <mark class="keyterm">方法線索</mark>：We introduce PianoKontext, a flow matching rendering model for classical piano m...</p>
             </div>
             <div>
               <span class="label">Try next</span>
-              <p>針對 Flow / Matching / In-Context / Priors / Out-of-Distribution：<mark class="keyterm">可做</mark>：抽一個最小變因重跑 ablation，固定資料、模型與 sampling，只檢查它聲稱的關鍵差異。<mark class="keyterm">結果焦點</mark>：Such zero-shot generation could enable counterfactual neuroscience by supporting in-silic...</p>
+              <p>針對 PianoKontext / Expressive / Performance / Rendering / Deadpan：<mark class="keyterm">可做</mark>：抽一個最小變因重跑 ablation，固定資料、模型與 sampling，只檢查它聲稱的關鍵差異。<mark class="keyterm">結果焦點</mark>：We introduce PianoKontext, a flow matching rendering model for classical piano music th...</p>
             </div>
           </div>
           </div>
           <div class="card-actions">
-            <a class="source-link" href="https://arxiv.org/abs/2606.11833v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
+            <a class="source-link" href="https://arxiv.org/abs/2606.12282v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
             <button class="details-toggle" type="button" aria-expanded="false" aria-controls="paper-2-panel">展開摘要與實驗建議</button>
             <div class="star-rating" data-paper-id="2026-06-12-2" aria-label="Rate this paper">
               <span class="star-label">重要度</span>
@@ -901,11 +900,11 @@
             <div class="detail-grid">
               <section class="detail-section" data-standard-section="problem">
                 <h3>Problem</h3>
-                <p>Flow matching and diffusion models enable conditional generation across domains ranging from images to proteins, with recent extensions to out-of-distribution contexts.</p>
+                <p>Expressive performance rendering (EPR) aims to generate realistic performances constrained on sequences of notes.</p>
               </section>
               <section class="detail-section" data-standard-section="method">
                 <h3>Method</h3>
-                <p>Yet generative models of neural time series have largely remained restricted to categorical conditioning, precluding compositional and zero-shot generalization.</p>
+                <p>However, flow matching audio editing models manipulate only synchronized music samples of the same duration, limiting their understanding of expressive timing.</p>
               </section>
               <section class="detail-section" data-standard-section="data">
                 <h3>Data</h3>
@@ -913,7 +912,7 @@
               </section>
               <section class="detail-section" data-standard-section="findings">
                 <h3>Findings</h3>
-                <p>In this work, we propose a per-timestep conditioned diffusion transformer for generating realistic fMRI brain dynamics during unseen cognitive tasks by injecting both compositional language and optional spatial priors in-context.</p>
+                <p>We introduce PianoKontext, a flow matching rendering model for classical piano music that generates variable-length performances in the latent space of a pretrained Music2Latent model.</p>
               </section>
               <section class="detail-section" data-standard-section="limitations">
                 <h3>Limitations</h3>
@@ -926,8 +925,8 @@
               <section class="detail-section" data-standard-section="metadata">
                 <h3>Metadata</h3>
                 <dl class="meta-list">
-                  <div><dt>Authors</dt><dd>Sam Gijsen, Michał Łukomski, Marc-André Schulz, Kerstin Ritter</dd></div>
-                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2606.11833v1">arxiv.org/abs/2606.11833v1</a></dd></div>
+                  <div><dt>Authors</dt><dd>Dmitrii Gavrilev</dd></div>
+                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2606.12282v1">arxiv.org/abs/2606.12282v1</a></dd></div>
                   <div><dt>Relevance</dt><dd>MeanAudio 2 / karaoke 0 · max 2</dd></div>
                 </dl>
               </section>
@@ -947,7 +946,7 @@
     </details>
   </main>
 
-  <footer>Generated by the local MIR paper automation · Product standard 2026-05-26 · 2187e8b96f · 2026-06-12 07:01:49 Asia/Taipei</footer>
+  <footer>Generated by the local MIR paper automation · Product standard 2026-05-26 · 2187e8b96f · 2026-06-12 09:00:02 Asia/Taipei</footer>
 
   <script>
     const cards = Array.from(document.querySelectorAll('.paper-card'));
