@@ -767,11 +767,11 @@
         <ol class="paper-nav-list">
           <li><a href="#paper-1">
             <span class="nav-num">01</span>
-            <span>AudioX-Turbo: A Unified Framework for Eff...<span class="nav-track">MeanAudio</span></span>
+            <span>A2D2: Fine-Tuning Any-Length Discrete Dif...<span class="nav-track">MeanAudio</span></span>
           </a></li>
           <li><a href="#paper-2">
             <span class="nav-num">02</span>
-            <span>$\texttt{WEAVER}$, Better, Faster, Longer...<span class="nav-track">MeanAudio</span></span>
+            <span>Budget-Constrained Step-Level Diffusion C...<span class="nav-track">MeanAudio</span></span>
           </a></li>
         </ol>
       </aside>
@@ -783,32 +783,30 @@
             <div class="paper-number">01</div>
             <div class="paper-meta">
               <span class="track">MeanAudio</span>
-              <span class="quality">新且重要</span>
-              <span class="freshness">2026-06-10 · 3d</span>
+              <span class="quality">新</span>
+              <span class="freshness">2026-06-11 · 2d</span>
             </div>
           </div>
           <div class="paper-card-body">
-          <h2><a href="https://arxiv.org/abs/2606.12555v1" target="_blank" rel="noopener">AudioX-Turbo: A Unified Framework for Efficient Anything-to-Audio Generation</a></h2>
-          <p class="one-line">Audio and music generation based on flexible multimodal control signals is a widely applicable topic, with the following key challe...</p>
+          <h2><a href="https://arxiv.org/abs/2606.13565v1" target="_blank" rel="noopener">A2D2: Fine-Tuning Any-Length Discrete Diffusion for Adaptive Decoding</a></h2>
+          <p class="one-line">Discrete diffusion models offer a simple and stable likelihood-based framework for sequence generation, recently extended to any-le...</p>
           <div class="tag-row">
             <span class="track-hint">貼近主線</span>
             <span class="tag">text-to-audio/music</span>
-            <span class="tag">flow/diffusion</span>
-            <span class="tag">evaluation</span>
           </div>
           <div class="quick-read">
             <div>
               <span class="label">Insight</span>
-              <p><mark class="keyterm">洞見</mark>：針對 AudioX-Turbo / Unified / Framework / Efficient / Anything-to-Audio：它把高保真音樂生成拆成 <mark class="keyterm">acoustic token LM</mark> 的 scaling 問題，重點在長時結構與音色細節能否同時保住。 <mark class="keyterm">方法線索</mark>：As such, we propose AudioX-Turbo, a unified and efficient framework...</p>
+              <p><mark class="keyterm">洞見</mark>：針對 A2D2 / Fine-Tuning / Any-Length / Discrete / Diffusion：它的價值在資料/偏好/評估訊號怎麼進訓練，而不是只看模型架構名稱。 <mark class="keyterm">方法線索</mark>：We introduce Fine-Tuning Any-Length Discrete Diffusion for Adaptive Decoding (A2D2), a unified framework for...</p>
             </div>
             <div>
               <span class="label">Try next</span>
-              <p>針對 AudioX-Turbo / Unified / Framework / Efficient / Anything-to-Audio：<mark class="keyterm">可做</mark>：固定同一批 prompt 與 <mark class="keyterm">codec</mark>，對比 <mark class="keyterm">token rate</mark> / <mark class="keyterm">context length</mark> / <mark class="keyterm">LM scale</mark>，看音樂結構與音質是否跟它的 claim 一致。<mark class="keyterm">結果焦點</mark>：These results demonstrate that our method is...</p>
+              <p>針對 A2D2 / Fine-Tuning / Any-Length / Discrete / Diffusion：<mark class="keyterm">可做</mark>：抽一個最小變因重跑 ablation，固定資料、模型與 sampling，只檢查它聲稱的關鍵差異。<mark class="keyterm">結果焦點</mark>：Empirically, A2D2 improves <mark class="keyterm">reward</mark> optimization while enhancing generation flexibility and accu...</p>
             </div>
           </div>
           </div>
           <div class="card-actions">
-            <a class="source-link" href="https://arxiv.org/abs/2606.12555v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
+            <a class="source-link" href="https://arxiv.org/abs/2606.13565v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
             <button class="details-toggle" type="button" aria-expanded="false" aria-controls="paper-1-panel">展開摘要與實驗建議</button>
             <div class="star-rating" data-paper-id="2026-06-13-1" aria-label="Rate this paper">
               <span class="star-label">重要度</span>
@@ -823,11 +821,11 @@
             <div class="detail-grid">
               <section class="detail-section" data-standard-section="problem">
                 <h3>Problem</h3>
-                <p>Audio and music generation based on flexible multimodal control signals is a widely applicable topic, with the following key challenges: 1) a unified multimodal modeling framework, 2) large-scale, high-quality training data, and 3) the prohibitive inference cost of multi-step diffusion sampling.</p>
+                <p>Discrete diffusion models offer a simple and stable likelihood-based framework for sequence generation, recently extended to any-length settings via token insertion.</p>
               </section>
               <section class="detail-section" data-standard-section="method">
                 <h3>Method</h3>
-                <p>As such, we propose AudioX-Turbo, a unified and efficient framework for anything-to-audio generation that integrates varied multimodal conditions (i.e., text, video, and audio signals) in this work.</p>
+                <p>Principled <mark class="keyterm">reward</mark>-guided fine-tuning for any-length discrete diffusion, however, remains largely unexplored.</p>
               </section>
               <section class="detail-section" data-standard-section="data">
                 <h3>Data</h3>
@@ -835,7 +833,7 @@
               </section>
               <section class="detail-section" data-standard-section="findings">
                 <h3>Findings</h3>
-                <p>AudioX-Turbo follows a teacher-student paradigm.</p>
+                <p>We introduce Fine-Tuning Any-Length Discrete Diffusion for Adaptive Decoding (A2D2), a unified framework for <mark class="keyterm">reward</mark>-guided fine-tuning of any-length discrete diffusion models via joint optimization of the insertion and unmasking policies together with a quality-based inference schedule.</p>
               </section>
               <section class="detail-section" data-standard-section="limitations">
                 <h3>Limitations</h3>
@@ -848,9 +846,9 @@
               <section class="detail-section" data-standard-section="metadata">
                 <h3>Metadata</h3>
                 <dl class="meta-list">
-                  <div><dt>Authors</dt><dd>Zeyue Tian, Lei Ke, Zhaoyang Liu, Ruibin Yuan, Liumeng Xue 等 11 位</dd></div>
-                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2606.12555v1">arxiv.org/abs/2606.12555v1</a></dd></div>
-                  <div><dt>Relevance</dt><dd>MeanAudio 6 / karaoke 0 · max 6</dd></div>
+                  <div><dt>Authors</dt><dd>Sophia Tang, Yuchen Zhu, Molei Tao, Pranam Chatterjee</dd></div>
+                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2606.13565v1">arxiv.org/abs/2606.13565v1</a></dd></div>
+                  <div><dt>Relevance</dt><dd>MeanAudio 2 / karaoke 0 · max 2</dd></div>
                 </dl>
               </section>
             </div>
@@ -868,27 +866,25 @@
             </div>
           </div>
           <div class="paper-card-body">
-          <h2><a href="https://arxiv.org/abs/2606.13672v1" target="_blank" rel="noopener">$\texttt{WEAVER}$, Better, Faster, Longer: An Effective World Model for Robotic Manipulation</a></h2>
-          <p class="one-line">The potential impacts of world models (WMs, i.e., learned simulators) on robotics are far-reaching -- policy evaluation, policy imp...</p>
+          <h2><a href="https://arxiv.org/abs/2606.13496v1" target="_blank" rel="noopener">Budget-Constrained Step-Level Diffusion Caching</a></h2>
+          <p class="one-line">Step-level caching accelerates diffusion models by exploiting temporal redundancy across denoising steps. Existing methods make per...</p>
           <div class="tag-row">
             <span class="track-hint">貼近主線</span>
             <span class="tag">text-to-audio/music</span>
-            <span class="tag">flow/diffusion</span>
-            <span class="tag">evaluation</span>
           </div>
           <div class="quick-read">
             <div>
               <span class="label">Insight</span>
-              <p><mark class="keyterm">洞見</mark>：針對 texttt / WEAVER / Better / Faster / Longer：它的價值在資料/偏好/評估訊號怎麼進訓練，而不是只看模型架構名稱。 <mark class="keyterm">方法線索</mark>：We propose $\texttt{WEAVER}$ (World Estimation Across Views for Embodied Reasoning): a WM architecture that simultaneousl...</p>
+              <p><mark class="keyterm">洞見</mark>：針對 Budget-Constrained / Step-Level / Diffusion / Caching：它把 <mark class="keyterm">alignment</mark> signal 放回生成過程本身，而不是只靠後處理 <mark class="keyterm">reward</mark>；可對照音訊文字對齊是否也能這樣做。 <mark class="keyterm">方法線索</mark>：把 <mark class="keyterm">alignment</mark> signal 直接放進 diffusion matching/training，而不是只靠外部 <mark class="keyterm">reward</mark> 做後處理。</p>
             </div>
             <div>
               <span class="label">Try next</span>
-              <p>針對 texttt / WEAVER / Better / Faster / Longer：<mark class="keyterm">可做</mark>：抽一個最小變因重跑 ablation，固定資料、模型與 sampling，只檢查它聲稱的關鍵差異。<mark class="keyterm">結果焦點</mark>：We propose $\texttt{WEAVER}$ (World Estimation Across Views for Embodied Reasoning): a WM architecture tha...</p>
+              <p>針對 Budget-Constrained / Step-Level / Diffusion / Caching：<mark class="keyterm">可做</mark>：把 <mark class="keyterm">alignment</mark> signal 做成單一 loss 或 reranking ablation，先比較文字-音訊相符度與主觀聽感。<mark class="keyterm">結果焦點</mark>：確認 <mark class="keyterm">alignment</mark> 是否真的在生成過程改善，而不是只讓某個 <mark class="keyterm">reward</mark> metric 變好。</p>
             </div>
           </div>
           </div>
           <div class="card-actions">
-            <a class="source-link" href="https://arxiv.org/abs/2606.13672v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
+            <a class="source-link" href="https://arxiv.org/abs/2606.13496v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
             <button class="details-toggle" type="button" aria-expanded="false" aria-controls="paper-2-panel">展開摘要與實驗建議</button>
             <div class="star-rating" data-paper-id="2026-06-13-2" aria-label="Rate this paper">
               <span class="star-label">重要度</span>
@@ -903,11 +899,11 @@
             <div class="detail-grid">
               <section class="detail-section" data-standard-section="problem">
                 <h3>Problem</h3>
-                <p>The potential impacts of world models (WMs, i.e., learned simulators) on robotics are far-reaching -- policy evaluation, policy improvement, and test-time planning -- all with limited real-world interaction.</p>
+                <p>Step-level caching accelerates diffusion models by exploiting temporal redundancy across denoising steps.</p>
               </section>
               <section class="detail-section" data-standard-section="method">
                 <h3>Method</h3>
-                <p>To unlock these downstream capabilities, a WM needs to jointly satisfy three desiderata: $\textit{(i)}$ fidelity (i.e., producing simulated trajectories that correlate with reality), $\textit{(ii)}$ consistency (i.e., producing simulated trajectories that are coherent over long horizons), and $\textit{(iii)}$ efficiency (i.e., producing simulated trajectories quickly).</p>
+                <p>Existing methods make per-step cache decisions using threshold-based heuristics, without directly optimizing for final output quality.</p>
               </section>
               <section class="detail-section" data-standard-section="data">
                 <h3>Data</h3>
@@ -915,7 +911,7 @@
               </section>
               <section class="detail-section" data-standard-section="findings">
                 <h3>Findings</h3>
-                <p>We propose $\texttt{WEAVER}$ (World Estimation Across Views for Embodied Reasoning): a WM architecture that simultaneously achieves all three desiderata, providing state-of-the-art results on robotic manipulation tasks.</p>
+                <p>As a result, their inference latency varies across inputs and is difficult to control at deployment.</p>
               </section>
               <section class="detail-section" data-standard-section="limitations">
                 <h3>Limitations</h3>
@@ -928,8 +924,8 @@
               <section class="detail-section" data-standard-section="metadata">
                 <h3>Metadata</h3>
                 <dl class="meta-list">
-                  <div><dt>Authors</dt><dd>Arnav Kumar Jain, Yilin Wu, Jesse Farebrother, Gokul Swamy, Andrea Bajcsy</dd></div>
-                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2606.13672v1">arxiv.org/abs/2606.13672v1</a></dd></div>
+                  <div><dt>Authors</dt><dd>Mingkun Lei, Tong Zhao, Liangyu Yuan, Chi Zhang</dd></div>
+                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2606.13496v1">arxiv.org/abs/2606.13496v1</a></dd></div>
                   <div><dt>Relevance</dt><dd>MeanAudio 2 / karaoke 0 · max 2</dd></div>
                 </dl>
               </section>
@@ -949,7 +945,7 @@
     </details>
   </main>
 
-  <footer>Generated by the local MIR paper automation · Product standard 2026-05-26 · 2187e8b96f · 2026-06-13 07:01:47 Asia/Taipei</footer>
+  <footer>Generated by the local MIR paper automation · Product standard 2026-05-26 · 2187e8b96f · 2026-06-13 09:00:02 Asia/Taipei</footer>
 
   <script>
     const cards = Array.from(document.querySelectorAll('.paper-card'));
