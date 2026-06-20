@@ -767,11 +767,11 @@
         <ol class="paper-nav-list">
           <li><a href="#paper-1">
             <span class="nav-num">01</span>
-            <span>Hybrid Diffusion Transformer for Instruct...<span class="nav-track">MeanAudio</span></span>
+            <span>JanusMesh: Fast and Zero-Shot 3D Visual I...<span class="nav-track">MeanAudio</span></span>
           </a></li>
           <li><a href="#paper-2">
             <span class="nav-num">02</span>
-            <span>How Transparent is DiffusionGemma?<span class="nav-track">MeanAudio</span></span>
+            <span>Site-Specific MIMO Channel Generation via...<span class="nav-track">MeanAudio</span></span>
           </a></li>
         </ol>
       </aside>
@@ -783,31 +783,30 @@
             <div class="paper-number">01</div>
             <div class="paper-meta">
               <span class="track">MeanAudio</span>
-              <span class="quality">新且重要</span>
+              <span class="quality">新</span>
               <span class="freshness">2026-06-18 · 2d</span>
             </div>
           </div>
           <div class="paper-card-body">
-          <h2><a href="https://arxiv.org/abs/2606.20101v1" target="_blank" rel="noopener">Hybrid Diffusion Transformer for Instruction-Guided Audio Editing via Rectified Flow</a></h2>
-          <p class="one-line">Audio editing aims to modify specific content in an existing audio clip according to a natural language instruction while preservin...</p>
+          <h2><a href="https://arxiv.org/abs/2606.20563v1" target="_blank" rel="noopener">JanusMesh: Fast and Zero-Shot 3D Visual Illusion Generation via Cross-Space Denoising</a></h2>
+          <p class="one-line">Creating 3D visual illusions, a single 3D mesh that reveals entirely different semantics from various viewing angles, is a fascinat...</p>
           <div class="tag-row">
             <span class="track-hint">貼近主線</span>
             <span class="tag">text-to-audio/music</span>
-            <span class="tag">flow/diffusion</span>
           </div>
           <div class="quick-read">
             <div>
               <span class="label">Insight</span>
-              <p><mark class="keyterm">洞見</mark>：針對 Hybrid / Diffusion / Transformer / Instruction-Guided / Audio：它把 <mark class="keyterm">alignment</mark> signal 放回生成過程本身，而不是只靠後處理 <mark class="keyterm">reward</mark>；可對照音訊文字對齊是否也能這樣做。 <mark class="keyterm">方法線索</mark>：把 <mark class="keyterm">alignment</mark> signal 直接放進 diffusion matching/training，而不是只靠外部 <mark class="keyterm">reward</mark> 做後處理。</p>
+              <p><mark class="keyterm">洞見</mark>：針對 JanusMesh / Fast / Zero-Shot / Visual / Illusion：它把 <mark class="keyterm">alignment</mark> signal 放回生成過程本身，而不是只靠後處理 <mark class="keyterm">reward</mark>；可對照音訊文字對齊是否也能這樣做。 <mark class="keyterm">方法線索</mark>：把 <mark class="keyterm">alignment</mark> signal 直接放進 diffusion matching/training，而不是只靠外部 <mark class="keyterm">reward</mark> 做後處理。</p>
             </div>
             <div>
               <span class="label">Try next</span>
-              <p>針對 Hybrid / Diffusion / Transformer / Instruction-Guided / Audio：<mark class="keyterm">可做</mark>：把 <mark class="keyterm">alignment</mark> signal 做成單一 loss 或 reranking ablation，先比較文字-音訊相符度與主觀聽感。<mark class="keyterm">結果焦點</mark>：確認 <mark class="keyterm">alignment</mark> 是否真的在生成過程改善，而不是只讓某個 <mark class="keyterm">reward</mark> metric 變好。</p>
+              <p>針對 JanusMesh / Fast / Zero-Shot / Visual / Illusion：<mark class="keyterm">可做</mark>：把 <mark class="keyterm">alignment</mark> signal 做成單一 loss 或 reranking ablation，先比較文字-音訊相符度與主觀聽感。<mark class="keyterm">結果焦點</mark>：確認 <mark class="keyterm">alignment</mark> 是否真的在生成過程改善，而不是只讓某個 <mark class="keyterm">reward</mark> metric 變好。</p>
             </div>
           </div>
           </div>
           <div class="card-actions">
-            <a class="source-link" href="https://arxiv.org/abs/2606.20101v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
+            <a class="source-link" href="https://arxiv.org/abs/2606.20563v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
             <button class="details-toggle" type="button" aria-expanded="false" aria-controls="paper-1-panel">展開摘要與實驗建議</button>
             <div class="star-rating" data-paper-id="2026-06-20-1" aria-label="Rate this paper">
               <span class="star-label">重要度</span>
@@ -822,11 +821,11 @@
             <div class="detail-grid">
               <section class="detail-section" data-standard-section="problem">
                 <h3>Problem</h3>
-                <p>Audio editing aims to modify specific content in an existing audio clip according to a natural language instruction while preserving the remaining acoustic content.</p>
+                <p>Creating 3D visual illusions, a single 3D mesh that reveals entirely different semantics from various viewing angles, is a fascinating but tough challenge.</p>
               </section>
               <section class="detail-section" data-standard-section="method">
                 <h3>Method</h3>
-                <p>Despite the remarkable progress of diffusion models, existing training-based editing methods mainly rely on the local inductive biases and cross-attention interaction in convolutional U-Net backbones, which often hinder long-range semantic <mark class="keyterm">alignment</mark> and precise understanding and localization of instructions.</p>
+                <p>Existing optimization-based methods are slow and can produce oversaturated colors.</p>
               </section>
               <section class="detail-section" data-standard-section="data">
                 <h3>Data</h3>
@@ -834,7 +833,7 @@
               </section>
               <section class="detail-section" data-standard-section="findings">
                 <h3>Findings</h3>
-                <p>In contrast, diffusion transformers provide stronger global modeling and multimodal fusion, but existing editing architectures usually adopt a simple stack of MMDiT and DiT blocks.</p>
+                <p>In contrast, naive stitching approaches fail to produce geometrically coherent objects.</p>
               </section>
               <section class="detail-section" data-standard-section="limitations">
                 <h3>Limitations</h3>
@@ -847,9 +846,9 @@
               <section class="detail-section" data-standard-section="metadata">
                 <h3>Metadata</h3>
                 <dl class="meta-list">
-                  <div><dt>Authors</dt><dd>Liting Gao, Yonggang Zhu, Yaru Chen, Dongyu Wang, Shubin Zhang 等 8 位</dd></div>
-                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2606.20101v1">arxiv.org/abs/2606.20101v1</a></dd></div>
-                  <div><dt>Relevance</dt><dd>MeanAudio 4 / karaoke 0 · max 4</dd></div>
+                  <div><dt>Authors</dt><dd>Siang-Ling Zhang, Huai-Hsun Cheng, Tsung-Ju Yang, Yu-Lun Liu</dd></div>
+                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2606.20563v1">arxiv.org/abs/2606.20563v1</a></dd></div>
+                  <div><dt>Relevance</dt><dd>MeanAudio 3 / karaoke 0 · max 3</dd></div>
                 </dl>
               </section>
             </div>
@@ -867,8 +866,8 @@
             </div>
           </div>
           <div class="paper-card-body">
-          <h2><a href="https://arxiv.org/abs/2606.20560v1" target="_blank" rel="noopener">How Transparent is DiffusionGemma?</a></h2>
-          <p class="one-line">LLM reasoning transparency is a critical affordance for understanding model decisions, mitigating misuse and mis<mark class="keyterm">alignment</mark>, and debu...</p>
+          <h2><a href="https://arxiv.org/abs/2606.20098v1" target="_blank" rel="noopener">Site-Specific MIMO Channel Generation via Diffusion and Flow Matching: Fidelity, Efficiency, and Downstream Utility</a></h2>
+          <p class="one-line">This paper explores the use of generative models to synthesize high-quality, site-specific multiple-input multiple-output (MIMO) ch...</p>
           <div class="tag-row">
             <span class="track-hint">貼近主線</span>
             <span class="tag">text-to-audio/music</span>
@@ -877,16 +876,16 @@
           <div class="quick-read">
             <div>
               <span class="label">Insight</span>
-              <p><mark class="keyterm">洞見</mark>：針對 How / Transparent / DiffusionGemma：它把 <mark class="keyterm">alignment</mark> signal 放回生成過程本身，而不是只靠後處理 <mark class="keyterm">reward</mark>；可對照音訊文字對齊是否也能這樣做。 <mark class="keyterm">方法線索</mark>：把 <mark class="keyterm">alignment</mark> signal 直接放進 diffusion matching/training，而不是只靠外部 <mark class="keyterm">reward</mark> 做後處理。</p>
+              <p><mark class="keyterm">洞見</mark>：針對 Site-Specific / MIMO / Channel / Generation / Diffusion：它把 <mark class="keyterm">alignment</mark> signal 放回生成過程本身，而不是只靠後處理 <mark class="keyterm">reward</mark>；可對照音訊文字對齊是否也能這樣做。 <mark class="keyterm">方法線索</mark>：把 <mark class="keyterm">alignment</mark> signal 直接放進 diffusion matching/training，而不是只靠外部 <mark class="keyterm">reward</mark> 做後處理。</p>
             </div>
             <div>
               <span class="label">Try next</span>
-              <p>針對 How / Transparent / DiffusionGemma：<mark class="keyterm">可做</mark>：把 <mark class="keyterm">alignment</mark> signal 做成單一 loss 或 reranking ablation，先比較文字-音訊相符度與主觀聽感。<mark class="keyterm">結果焦點</mark>：確認 <mark class="keyterm">alignment</mark> 是否真的在生成過程改善，而不是只讓某個 <mark class="keyterm">reward</mark> metric 變好。</p>
+              <p>針對 Site-Specific / MIMO / Channel / Generation / Diffusion：<mark class="keyterm">可做</mark>：把 <mark class="keyterm">alignment</mark> signal 做成單一 loss 或 reranking ablation，先比較文字-音訊相符度與主觀聽感。<mark class="keyterm">結果焦點</mark>：確認 <mark class="keyterm">alignment</mark> 是否真的在生成過程改善，而不是只讓某個 <mark class="keyterm">reward</mark> metric 變好。</p>
             </div>
           </div>
           </div>
           <div class="card-actions">
-            <a class="source-link" href="https://arxiv.org/abs/2606.20560v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
+            <a class="source-link" href="https://arxiv.org/abs/2606.20098v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
             <button class="details-toggle" type="button" aria-expanded="false" aria-controls="paper-2-panel">展開摘要與實驗建議</button>
             <div class="star-rating" data-paper-id="2026-06-20-2" aria-label="Rate this paper">
               <span class="star-label">重要度</span>
@@ -901,11 +900,11 @@
             <div class="detail-grid">
               <section class="detail-section" data-standard-section="problem">
                 <h3>Problem</h3>
-                <p>LLM reasoning transparency is a critical affordance for understanding model decisions, mitigating misuse and mis<mark class="keyterm">alignment</mark>, and debugging surprising model behaviors.</p>
+                <p>This paper explores the use of generative models to synthesize high-quality, site-specific multiple-input multiple-output (MIMO) channel data, addressing the high cost of the extensive measurement campaigns required to acquire real-world data for AI-native wireless networks.</p>
               </section>
               <section class="detail-section" data-standard-section="method">
                 <h3>Method</h3>
-                <p>However, DiffusionGemma performs a larger fraction of its computation in a continuous latent space; does this make its reasoning less transparent?</p>
+                <p>Two location-conditioned generative paradigms are compared: a conditional denoising diffusion implicit model (cDDIM), and a conditional flow matching model (cFMM).</p>
               </section>
               <section class="detail-section" data-standard-section="data">
                 <h3>Data</h3>
@@ -913,7 +912,7 @@
               </section>
               <section class="detail-section" data-standard-section="findings">
                 <h3>Findings</h3>
-                <p>We study this question by decomposing transparency into two components: variable transparency, whether we understand intermediate snapshots of a model&#x27;s computational state; and algorithmic transparency, whether we can use these snapshots to reconstruct the process by which the model arrived at its outputs.</p>
+                <p>Both these models generate MIMO channel matrices conditioned on user coordinates, to preserve the spatial structure of the deployment site.</p>
               </section>
               <section class="detail-section" data-standard-section="limitations">
                 <h3>Limitations</h3>
@@ -926,8 +925,8 @@
               <section class="detail-section" data-standard-section="metadata">
                 <h3>Metadata</h3>
                 <dl class="meta-list">
-                  <div><dt>Authors</dt><dd>Joshua Engels, Callum McDougall, Bilal Chughtai, Janos Kramar, Senthoran Rajamanoharan 等 14 位</dd></div>
-                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2606.20560v1">arxiv.org/abs/2606.20560v1</a></dd></div>
+                  <div><dt>Authors</dt><dd>Sina Beyraghi, Masoud Sadeghian, Firdous Bin Ismail, Angel Lozano, Paul Almasan 等 6 位</dd></div>
+                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2606.20098v1">arxiv.org/abs/2606.20098v1</a></dd></div>
                   <div><dt>Relevance</dt><dd>MeanAudio 3 / karaoke 0 · max 3</dd></div>
                 </dl>
               </section>
@@ -947,7 +946,7 @@
     </details>
   </main>
 
-  <footer>Generated by the local MIR paper automation · Product standard 2026-05-26 · 2187e8b96f · 2026-06-20 09:00:28 Asia/Taipei</footer>
+  <footer>Generated by the local MIR paper automation · Product standard 2026-05-26 · 2187e8b96f · 2026-06-20 17:27:17 Asia/Taipei</footer>
 
   <script>
     const cards = Array.from(document.querySelectorAll('.paper-card'));
