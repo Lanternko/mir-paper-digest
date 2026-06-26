@@ -767,11 +767,11 @@
         <ol class="paper-nav-list">
           <li><a href="#paper-1">
             <span class="nav-num">01</span>
-            <span>Real-Time Interactive Music Generation vi...<span class="nav-track">MeanAudio</span></span>
+            <span>Learning Action Priors for Cross-embodime...<span class="nav-track">MeanAudio</span></span>
           </a></li>
           <li><a href="#paper-2">
             <span class="nav-num">02</span>
-            <span>Action ControlNet: A Lightweight Delay-Aw...<span class="nav-track">MeanAudio</span></span>
+            <span>MVTrack4Gen: Multi-View Point Tracking as...<span class="nav-track">MeanAudio</span></span>
           </a></li>
         </ol>
       </aside>
@@ -784,12 +784,12 @@
             <div class="paper-meta">
               <span class="track">MeanAudio</span>
               <span class="quality">新</span>
-              <span class="freshness">2026-06-23 · 3d</span>
+              <span class="freshness">2026-06-24 · 2d</span>
             </div>
           </div>
           <div class="paper-card-body">
-          <h2><a href="https://arxiv.org/abs/2606.24307v1" target="_blank" rel="noopener">Real-Time Interactive Music Generation via Data-Free Streaming Consistency Distillation</a></h2>
-          <p class="one-line">Interactive music and live performance relies on real-time human expression, but modern generative music AI remains largely absent...</p>
+          <h2><a href="https://arxiv.org/abs/2606.26095v1" target="_blank" rel="noopener">Learning Action Priors for Cross-embodiment Robot Manipulation</a></h2>
+          <p class="one-line">Most Vision-Language-Action (VLA) models build on a Vision-Language Model (VLM) backbone by attaching an action module and optimizi...</p>
           <div class="tag-row">
             <span class="track-hint">貼近主線</span>
             <span class="tag">text-to-audio/music</span>
@@ -798,16 +798,16 @@
           <div class="quick-read">
             <div>
               <span class="label">Insight</span>
-              <p><mark class="keyterm">洞見</mark>：針對 Real-Time / Interactive / Music / Generation / Data-Free：它把高保真音樂生成拆成 <mark class="keyterm">acoustic token LM</mark> 的 scaling 問題，重點在長時結構與音色細節能否同時保住。 <mark class="keyterm">方法線索</mark>：In this paper, we propose a framework that bridges this gap.</p>
+              <p><mark class="keyterm">洞見</mark>：針對 Learning / Action / Priors / Cross-embodiment / Robot：它提供一個生成模型訓練或 sampling 的可遷移假設，可以拿來檢查音訊生成 pipeline 的對應位置。 <mark class="keyterm">方法線索</mark>：In this work, we propose to pretrain the action module with motion priors before cross-m...</p>
             </div>
             <div>
               <span class="label">Try next</span>
-              <p>針對 Real-Time / Interactive / Music / Generation / Data-Free：<mark class="keyterm">可做</mark>：固定同一批 prompt 與 <mark class="keyterm">codec</mark>，對比 <mark class="keyterm">token rate</mark> / <mark class="keyterm">context length</mark> / <mark class="keyterm">LM scale</mark>，看音樂結構與音質是否跟它的 claim 一致。<mark class="keyterm">結果焦點</mark>：To achieve the low latency required for live interactio...</p>
+              <p>針對 Learning / Action / Priors / Cross-embodiment / Robot：<mark class="keyterm">可做</mark>：抽一個最小變因重跑 ablation，固定資料、模型與 sampling，只檢查它聲稱的關鍵差異。<mark class="keyterm">結果焦點</mark>：Extensive experiments across 13 diverse cross-embodiment tasks on both simulated and real-world...</p>
             </div>
           </div>
           </div>
           <div class="card-actions">
-            <a class="source-link" href="https://arxiv.org/abs/2606.24307v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
+            <a class="source-link" href="https://arxiv.org/abs/2606.26095v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
             <button class="details-toggle" type="button" aria-expanded="false" aria-controls="paper-1-panel">展開摘要與實驗建議</button>
             <div class="star-rating" data-paper-id="2026-06-26-1" aria-label="Rate this paper">
               <span class="star-label">重要度</span>
@@ -822,11 +822,11 @@
             <div class="detail-grid">
               <section class="detail-section" data-standard-section="problem">
                 <h3>Problem</h3>
-                <p>Interactive music and live performance relies on real-time human expression, but modern generative music AI remains largely absent from this domain due to its prohibitive inference latency and offline rendering paradigm.</p>
+                <p>Most Vision-Language-Action (VLA) models build on a Vision-Language Model (VLM) backbone by attaching an action module and optimizing the full policy jointly.</p>
               </section>
               <section class="detail-section" data-standard-section="method">
                 <h3>Method</h3>
-                <p>To provide pioneer musicians with a novel medium for interactive composition, we should fundamentally change these static models into dynamic, playable instruments.</p>
+                <p>This design inherits strong visual and linguistic priors from the VLM, but leaves the action module to learn physical motion almost from scratch.</p>
               </section>
               <section class="detail-section" data-standard-section="data">
                 <h3>Data</h3>
@@ -834,7 +834,7 @@
               </section>
               <section class="detail-section" data-standard-section="findings">
                 <h3>Findings</h3>
-                <p>In this paper, we propose a framework that bridges this gap.</p>
+                <p>As a result, the policy lacks an explicit motion prior, forcing early optimization to simultaneously discover temporal action dynamics and cross-modal <mark class="keyterm">alignment</mark>, a challenge further amplified in cross-embodiment settings.</p>
               </section>
               <section class="detail-section" data-standard-section="limitations">
                 <h3>Limitations</h3>
@@ -847,9 +847,9 @@
               <section class="detail-section" data-standard-section="metadata">
                 <h3>Metadata</h3>
                 <dl class="meta-list">
-                  <div><dt>Authors</dt><dd>Baisen Wang, Chenxi Bao, Qisong Han</dd></div>
-                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2606.24307v1">arxiv.org/abs/2606.24307v1</a></dd></div>
-                  <div><dt>Relevance</dt><dd>MeanAudio 3 / karaoke 0 · max 3</dd></div>
+                  <div><dt>Authors</dt><dd>Dong Jing, Tianqi Zhang, Jiaqi Liu, Jinman Zhao, Zelong Sun 等 8 位</dd></div>
+                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2606.26095v1">arxiv.org/abs/2606.26095v1</a></dd></div>
+                  <div><dt>Relevance</dt><dd>MeanAudio 2 / karaoke 0 · max 2</dd></div>
                 </dl>
               </section>
             </div>
@@ -867,26 +867,25 @@
             </div>
           </div>
           <div class="paper-card-body">
-          <h2><a href="https://arxiv.org/abs/2606.25985v1" target="_blank" rel="noopener">Action ControlNet: A Lightweight Delay-Aware Adapter for Smooth Asynchronous Control in Vision-Language-Action Models</a></h2>
-          <p class="one-line">Vision-language-action (VLA) models have shown strong potential for general-purpose robot manipulation, but their inference latency...</p>
+          <h2><a href="https://arxiv.org/abs/2606.26087v1" target="_blank" rel="noopener">MVTrack4Gen: Multi-View Point Tracking as Geometric Supervision for 4D Video Generation</a></h2>
+          <p class="one-line">Synthesizing a novel-view video from a monocular reference video along a target camera trajectory requires both geometric consisten...</p>
           <div class="tag-row">
             <span class="track-hint">貼近主線</span>
             <span class="tag">text-to-audio/music</span>
-            <span class="tag">flow/diffusion</span>
           </div>
           <div class="quick-read">
             <div>
               <span class="label">Insight</span>
-              <p><mark class="keyterm">洞見</mark>：針對 Action / ControlNet / Lightweight / Delay-Aware / Adapter：它提供一個生成模型訓練或 sampling 的可遷移假設，可以拿來檢查音訊生成 pipeline 的對應位置。 <mark class="keyterm">方法線索</mark>：This work proposes Action ControlNet (ACNet), a lightweight delay-aware adapter that...</p>
+              <p><mark class="keyterm">洞見</mark>：針對 MVTrack4Gen / Multi-View / Point / Tracking / Geometric：它把 <mark class="keyterm">alignment</mark> signal 放回生成過程本身，而不是只靠後處理 <mark class="keyterm">reward</mark>；可對照音訊文字對齊是否也能這樣做。 <mark class="keyterm">方法線索</mark>：把 <mark class="keyterm">alignment</mark> signal 直接放進 diffusion matching/training，而不是只靠外部 <mark class="keyterm">reward</mark> 做後處理。</p>
             </div>
             <div>
               <span class="label">Try next</span>
-              <p>針對 Action / ControlNet / Lightweight / Delay-Aware / Adapter：<mark class="keyterm">可做</mark>：抽一個最小變因重跑 ablation，固定資料、模型與 sampling，只檢查它聲稱的關鍵差異。<mark class="keyterm">結果焦點</mark>：On Kinetix, Meta-World MT50, and a real-world SO-ARM101 platform, ACNet improves robustness...</p>
+              <p>針對 MVTrack4Gen / Multi-View / Point / Tracking / Geometric：<mark class="keyterm">可做</mark>：把 <mark class="keyterm">alignment</mark> signal 做成單一 loss 或 reranking ablation，先比較文字-音訊相符度與主觀聽感。<mark class="keyterm">結果焦點</mark>：確認 <mark class="keyterm">alignment</mark> 是否真的在生成過程改善，而不是只讓某個 <mark class="keyterm">reward</mark> metric 變好。</p>
             </div>
           </div>
           </div>
           <div class="card-actions">
-            <a class="source-link" href="https://arxiv.org/abs/2606.25985v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
+            <a class="source-link" href="https://arxiv.org/abs/2606.26087v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
             <button class="details-toggle" type="button" aria-expanded="false" aria-controls="paper-2-panel">展開摘要與實驗建議</button>
             <div class="star-rating" data-paper-id="2026-06-26-2" aria-label="Rate this paper">
               <span class="star-label">重要度</span>
@@ -901,11 +900,11 @@
             <div class="detail-grid">
               <section class="detail-section" data-standard-section="problem">
                 <h3>Problem</h3>
-                <p>Vision-language-action (VLA) models have shown strong potential for general-purpose robot manipulation, but their inference latency remains a major obstacle to stable high-frequency control.</p>
+                <p>Synthesizing a novel-view video from a monocular reference video along a target camera trajectory requires both geometric consistency and motion fidelity with respect to the reference video.</p>
               </section>
               <section class="detail-section" data-standard-section="method">
                 <h3>Method</h3>
-                <p>Asynchronous execution mitigates this bottleneck by overlapping policy inference with action execution, yet the next action <mark class="keyterm">chunk</mark> is still predicted from stale observations while the robot continues to move.</p>
+                <p>Existing methods based on explicit 3D representations are limited by the accuracy of off-the-shelf reconstruction modules, which often produce inaccurate geometry for dynamic objects in monocular videos.</p>
               </section>
               <section class="detail-section" data-standard-section="data">
                 <h3>Data</h3>
@@ -913,7 +912,7 @@
               </section>
               <section class="detail-section" data-standard-section="findings">
                 <h3>Findings</h3>
-                <p>Direct <mark class="keyterm">chunk</mark> stitching therefore introduces handoff discontinuities, action jitter, and failures in contact-rich manipulation.</p>
+                <p>In contrast, camera-conditioning-only methods can achieve high visual quality but often struggle to preserve geometric and motion consistency.</p>
               </section>
               <section class="detail-section" data-standard-section="limitations">
                 <h3>Limitations</h3>
@@ -926,8 +925,8 @@
               <section class="detail-section" data-standard-section="metadata">
                 <h3>Metadata</h3>
                 <dl class="meta-list">
-                  <div><dt>Authors</dt><dd>Tiecheng Guo, Meng Guo</dd></div>
-                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2606.25985v1">arxiv.org/abs/2606.25985v1</a></dd></div>
+                  <div><dt>Authors</dt><dd>JoungBin Lee, Jaewoo Jung, Jongmin Lee, Tongmin Kim, Hyunsung Kim 等 11 位</dd></div>
+                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2606.26087v1">arxiv.org/abs/2606.26087v1</a></dd></div>
                   <div><dt>Relevance</dt><dd>MeanAudio 2 / karaoke 0 · max 2</dd></div>
                 </dl>
               </section>
@@ -947,7 +946,7 @@
     </details>
   </main>
 
-  <footer>Generated by the local MIR paper automation · Product standard 2026-05-26 · 2187e8b96f · 2026-06-26 07:00:56 Asia/Taipei</footer>
+  <footer>Generated by the local MIR paper automation · Product standard 2026-05-26 · 2187e8b96f · 2026-06-26 09:00:02 Asia/Taipei</footer>
 
   <script>
     const cards = Array.from(document.querySelectorAll('.paper-card'));
