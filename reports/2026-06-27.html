@@ -767,47 +767,47 @@
         <ol class="paper-nav-list">
           <li><a href="#paper-1">
             <span class="nav-num">01</span>
-            <span>Listening Like a Judge: A Music-Aware Fra...<span class="nav-track">karaoke-jp</span></span>
+            <span>LISA: Likelihood Score Alignment for Visu...<span class="nav-track">MeanAudio</span></span>
           </a></li>
           <li><a href="#paper-2">
             <span class="nav-num">02</span>
-            <span>Don&#x27;t Settle at the Mode! Mitigating Dive...<span class="nav-track">MeanAudio</span></span>
+            <span>Ask, Solve, Generate: Self-Evolving Unifi...<span class="nav-track">MeanAudio</span></span>
           </a></li>
         </ol>
       </aside>
 
       <div class="cards" aria-label="論文卡片">
 
-        <article class="paper-card" data-track="karaoke_jp" id="paper-1">
+        <article class="paper-card" data-track="mean_audio" id="paper-1">
           <div class="paper-head">
             <div class="paper-number">01</div>
             <div class="paper-meta">
-              <span class="track">karaoke-jp</span>
-              <span class="quality">新且重要</span>
-              <span class="freshness">2026-06-24 · 3d</span>
+              <span class="track">MeanAudio</span>
+              <span class="quality">新</span>
+              <span class="freshness">2026-06-25 · 2d</span>
             </div>
           </div>
           <div class="paper-card-body">
-          <h2><a href="https://arxiv.org/abs/2606.26451v1" target="_blank" rel="noopener">Listening Like a Judge: A Music-Aware Framework for Automatic Singing Performance Evaluation</a></h2>
-          <p class="one-line">Automatic singing quality assessment (SQA) requires evaluating lyrical correctness and musical fidelity while handling expressive v...</p>
+          <h2><a href="https://arxiv.org/abs/2606.27192v1" target="_blank" rel="noopener">LISA: Likelihood Score <mark class="keyterm">Alignment</mark> for Visual-condition Controllable Generation</a></h2>
+          <p class="one-line">The prevalent dual-branch paradigm, i.e., training a side network to encode visual conditions and fusing its intermediate-layer fea...</p>
           <div class="tag-row">
-            <span class="track-hint">可轉譯</span>
-            <span class="tag">karaoke-jp</span>
-            <span class="tag">evaluation</span>
+            <span class="track-hint">貼近主線</span>
+            <span class="tag">text-to-audio/music</span>
+            <span class="tag">flow/diffusion</span>
           </div>
           <div class="quick-read">
             <div>
               <span class="label">Insight</span>
-              <p><mark class="keyterm">洞見</mark>：針對 Listening / Like / Judge / Music-Aware / Framework：這篇值得看的點在於它提出的建模假設是否能抽成音訊生成或 MIR pipeline 的單一可測變因。 <mark class="keyterm">方法線索</mark>：To this end, we propose MusicJudge, a modality-guided framework for automated SQA that performs b...</p>
+              <p><mark class="keyterm">洞見</mark>：針對 LISA / Likelihood / Score / <mark class="keyterm">Alignment</mark> / Visual-condition：它把 <mark class="keyterm">alignment</mark> signal 放回生成過程本身，而不是只靠後處理 <mark class="keyterm">reward</mark>；可對照音訊文字對齊是否也能這樣做。 <mark class="keyterm">方法線索</mark>：把 <mark class="keyterm">alignment</mark> signal 直接放進 diffusion matching/training，而不是只靠外部 <mark class="keyterm">reward</mark> 做後處理。</p>
             </div>
             <div>
               <span class="label">Try next</span>
-              <p>針對 Listening / Like / Judge / Music-Aware / Framework：<mark class="keyterm">可做</mark>：把方法限制在一個 <mark class="keyterm">karaoke</mark> pipeline stage，先測 pitch、lyrics timing 或 separation 的單點改善；不要一次改整條 pipeline。<mark class="keyterm">結果焦點</mark>：Experiments across datasets demonstrate strong agreement...</p>
+              <p>針對 LISA / Likelihood / Score / <mark class="keyterm">Alignment</mark> / Visual-condition：<mark class="keyterm">可做</mark>：把 <mark class="keyterm">alignment</mark> signal 做成單一 loss 或 reranking ablation，先比較文字-音訊相符度與主觀聽感。<mark class="keyterm">結果焦點</mark>：確認 <mark class="keyterm">alignment</mark> 是否真的在生成過程改善，而不是只讓某個 <mark class="keyterm">reward</mark> metric 變好。</p>
             </div>
           </div>
           </div>
           <div class="card-actions">
-            <a class="source-link" href="https://arxiv.org/abs/2606.26451v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
+            <a class="source-link" href="https://arxiv.org/abs/2606.27192v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
             <button class="details-toggle" type="button" aria-expanded="false" aria-controls="paper-1-panel">展開摘要與實驗建議</button>
             <div class="star-rating" data-paper-id="2026-06-27-1" aria-label="Rate this paper">
               <span class="star-label">重要度</span>
@@ -822,11 +822,11 @@
             <div class="detail-grid">
               <section class="detail-section" data-standard-section="problem">
                 <h3>Problem</h3>
-                <p>Automatic singing quality assessment (SQA) requires evaluating lyrical correctness and musical fidelity while handling expressive variations.</p>
+                <p>The prevalent dual-branch paradigm, i.e., training a side network to encode visual conditions and fusing its intermediate-layer features to a frozen pretrained main network, has shown remarkable success in visual-condition controllable generation.</p>
               </section>
               <section class="detail-section" data-standard-section="method">
                 <h3>Method</h3>
-                <p>However, existing systems largely rely on either acoustic cues or <mark class="keyterm">lyric transcription</mark>s exclusively, limiting holistic performance evaluation.</p>
+                <p>Despite its widespread adoption, the role of the side branch and its training efficiency remain underexplored.</p>
               </section>
               <section class="detail-section" data-standard-section="data">
                 <h3>Data</h3>
@@ -834,7 +834,7 @@
               </section>
               <section class="detail-section" data-standard-section="findings">
                 <h3>Findings</h3>
-                <p>Furthermore, their integration is non-trivial due to challenges in robust <mark class="keyterm">singing transcription</mark> amid melisma, vibrato, and tempo elasticity.</p>
+                <p>In this paper, we first revisit this mainstream paradigm through the lens of score-based generative modeling: 1) The main network preserves visual perceptual quality by providing a prior unconditional score.</p>
               </section>
               <section class="detail-section" data-standard-section="limitations">
                 <h3>Limitations</h3>
@@ -842,14 +842,14 @@
               </section>
               <section class="detail-section" data-standard-section="editor-note">
                 <h3>Editor Note</h3>
-                <p>看它能否轉進 <mark class="keyterm">Music Flamingo</mark>、<mark class="keyterm">歌詞辨識</mark>、<mark class="keyterm">JPOP</mark> 或 <mark class="keyterm">karaoke-jp</mark> 的 <mark class="keyterm">vocal separation</mark>、<mark class="keyterm">pitch tracking</mark>、lyrics <mark class="keyterm">alignment</mark>、<mark class="keyterm">mora-to-note</mark> timing 或 rendering pipeline。 下一步：先把輸入輸出與可量測指標釘住，再看能不能改善 <mark class="keyterm">lyrics recognition</mark>、pitch、<mark class="keyterm">alignment</mark> 或 timing 的穩定性。</p>
+                <p>先看它是否能改善 text-to-audio / text-to-music，或支援 <mark class="keyterm">Music Flamingo</mark>、<mark class="keyterm">歌詞辨識</mark>、<mark class="keyterm">JPOP</mark> / <mark class="keyterm">卡拉 OK</mark> 的音樂理解方向。 下一步：抽一個可驗證的 trick，做成小實驗；先看資料與評估是否足以支撐，不要只被 <mark class="keyterm">CLAP</mark> 或主觀樣本牽著走。</p>
               </section>
               <section class="detail-section" data-standard-section="metadata">
                 <h3>Metadata</h3>
                 <dl class="meta-list">
-                  <div><dt>Authors</dt><dd>Neelam Saini, Sourav Ghosh</dd></div>
-                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2606.26451v1">arxiv.org/abs/2606.26451v1</a></dd></div>
-                  <div><dt>Relevance</dt><dd>MeanAudio 1 / karaoke 7 · max 7</dd></div>
+                  <div><dt>Authors</dt><dd>Yanghao Wang, Hongxu Chen, Jiazhen Liu, Zhenqi He, Rui Liu 等 7 位</dd></div>
+                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2606.27192v1">arxiv.org/abs/2606.27192v1</a></dd></div>
+                  <div><dt>Relevance</dt><dd>MeanAudio 3 / karaoke 0 · max 3</dd></div>
                 </dl>
               </section>
             </div>
@@ -867,26 +867,28 @@
             </div>
           </div>
           <div class="paper-card-body">
-          <h2><a href="https://arxiv.org/abs/2606.27371v1" target="_blank" rel="noopener">Don&#x27;t Settle at the Mode! Mitigating Diversity Collapse in Pretrained Flow Models via Feature Self-Guidance</a></h2>
-          <p class="one-line">State-of-the-art flow models generate stunning images from text or image prompts. However, they suffer from diversity collapse when...</p>
+          <h2><a href="https://arxiv.org/abs/2606.27376v1" target="_blank" rel="noopener">Ask, Solve, Generate: Self-Evolving Unified Multimodal Understanding and Generation via Self-Consistency <mark class="keyterm">Reward</mark>s</a></h2>
+          <p class="one-line">Most unified large multimodal models (LMMs) that support both visual understanding and image generation still rely on curated post-...</p>
           <div class="tag-row">
             <span class="track-hint">貼近主線</span>
             <span class="tag">text-to-audio/music</span>
             <span class="tag">flow/diffusion</span>
+            <span class="tag">caption/data</span>
+            <span class="tag">+1</span>
           </div>
           <div class="quick-read">
             <div>
               <span class="label">Insight</span>
-              <p><mark class="keyterm">洞見</mark>：針對 Don / Settle / Mode / Mitigating / Diversity：它的價值在資料/偏好/評估訊號怎麼進訓練，而不是只看模型架構名稱。 <mark class="keyterm">方法線索</mark>：In this work, we introduce an efficient, training-free self-guidance mechanism to mitigate diversity collapse without r...</p>
+              <p><mark class="keyterm">洞見</mark>：針對 Ask / Solve / Generate / Self-Evolving / Unified：它的價值在資料/偏好/評估訊號怎麼進訓練，而不是只看模型架構名稱。 <mark class="keyterm">方法線索</mark>：We propose a self-evolving training framework with three internal roles: a Proposer that generates visual questions...</p>
             </div>
             <div>
               <span class="label">Try next</span>
-              <p>針對 Don / Settle / Mode / Mitigating / Diversity：<mark class="keyterm">可做</mark>：抽一個最小變因重跑 ablation，固定資料、模型與 sampling，只檢查它聲稱的關鍵差異。<mark class="keyterm">結果焦點</mark>：Experiments demonstrate significant improvements in diversity while preserving fidelity across several c...</p>
+              <p>針對 Ask / Solve / Generate / Self-Evolving / Unified：<mark class="keyterm">可做</mark>：抽一個最小變因重跑 ablation，固定資料、模型與 sampling，只檢查它聲稱的關鍵差異。<mark class="keyterm">結果焦點</mark>：We ask whether a unified LMM can improve both abilities autonomously using only unlabeled images.</p>
             </div>
           </div>
           </div>
           <div class="card-actions">
-            <a class="source-link" href="https://arxiv.org/abs/2606.27371v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
+            <a class="source-link" href="https://arxiv.org/abs/2606.27376v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
             <button class="details-toggle" type="button" aria-expanded="false" aria-controls="paper-2-panel">展開摘要與實驗建議</button>
             <div class="star-rating" data-paper-id="2026-06-27-2" aria-label="Rate this paper">
               <span class="star-label">重要度</span>
@@ -901,11 +903,11 @@
             <div class="detail-grid">
               <section class="detail-section" data-standard-section="problem">
                 <h3>Problem</h3>
-                <p>State-of-the-art flow models generate stunning images from text or image prompts.</p>
+                <p>Most unified large multimodal models (LMMs) that support both visual understanding and image generation still rely on curated post-training supervision, such as human annotations, preference labels, or external <mark class="keyterm">reward</mark> models.</p>
               </section>
               <section class="detail-section" data-standard-section="method">
                 <h3>Method</h3>
-                <p>However, they suffer from diversity collapse when generating multiple samples under the same conditioning.</p>
+                <p>We ask whether a unified LMM can improve both abilities autonomously using only unlabeled images.</p>
               </section>
               <section class="detail-section" data-standard-section="data">
                 <h3>Data</h3>
@@ -913,7 +915,7 @@
               </section>
               <section class="detail-section" data-standard-section="findings">
                 <h3>Findings</h3>
-                <p>Existing methods address this issue via either latent guidance, which has limited effectiveness, or sample selection, which relies on external <mark class="keyterm">reward</mark> models that incur significant inference-time overhead.</p>
+                <p>We propose a self-evolving training framework with three internal roles: a Proposer that generates visual questions, a Solver that answers and evaluates them, and a Generator that synthesizes images.</p>
               </section>
               <section class="detail-section" data-standard-section="limitations">
                 <h3>Limitations</h3>
@@ -926,9 +928,9 @@
               <section class="detail-section" data-standard-section="metadata">
                 <h3>Metadata</h3>
                 <dl class="meta-list">
-                  <div><dt>Authors</dt><dd>Pradhaan S Bhat, Rishubh Parihar, Abhijnya Bhat, R. Venkatesh Babu</dd></div>
-                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2606.27371v1">arxiv.org/abs/2606.27371v1</a></dd></div>
-                  <div><dt>Relevance</dt><dd>MeanAudio 3 / karaoke 0 · max 3</dd></div>
+                  <div><dt>Authors</dt><dd>Ritesh Thawkar, Shravan Venkatraman, Omkar Thawakar, Abdelrahman Shaker, Fahad Khan 等 8 位</dd></div>
+                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2606.27376v1">arxiv.org/abs/2606.27376v1</a></dd></div>
+                  <div><dt>Relevance</dt><dd>MeanAudio 2 / karaoke 0 · max 2</dd></div>
                 </dl>
               </section>
             </div>
@@ -947,7 +949,7 @@
     </details>
   </main>
 
-  <footer>Generated by the local MIR paper automation · Product standard 2026-05-26 · 2187e8b96f · 2026-06-27 07:01:26 Asia/Taipei</footer>
+  <footer>Generated by the local MIR paper automation · Product standard 2026-05-26 · 2187e8b96f · 2026-06-27 09:00:04 Asia/Taipei</footer>
 
   <script>
     const cards = Array.from(document.querySelectorAll('.paper-card'));
