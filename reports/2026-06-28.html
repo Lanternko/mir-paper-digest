@@ -767,11 +767,11 @@
         <ol class="paper-nav-list">
           <li><a href="#paper-1">
             <span class="nav-num">01</span>
-            <span>PhysiFormer: Learning to Simulate Mechani...<span class="nav-track">MeanAudio</span></span>
+            <span>Safe Autoregressive Image Generation with...<span class="nav-track">MeanAudio</span></span>
           </a></li>
           <li><a href="#paper-2">
             <span class="nav-num">02</span>
-            <span>Proposal-Conditioned Latent Diffusion for...<span class="nav-track">MeanAudio</span></span>
+            <span>Aligning MusicLLM with Emotion using Inst...<span class="nav-track">MeanAudio</span></span>
           </a></li>
         </ol>
       </aside>
@@ -788,8 +788,8 @@
             </div>
           </div>
           <div class="paper-card-body">
-          <h2><a href="https://arxiv.org/abs/2606.27364v1" target="_blank" rel="noopener">PhysiFormer: Learning to Simulate Mechanics in World Space</a></h2>
-          <p class="one-line">We present PhysiFormer, a diffusion transformer for physically-plausible 3D object motion. Unlike video world models that operate i...</p>
+          <h2><a href="https://arxiv.org/abs/2606.27147v1" target="_blank" rel="noopener">Safe Autoregressive Image Generation with Iterative Self-Improving Codebooks</a></h2>
+          <p class="one-line">Unlike diffusion-based models that operate in continuous latent spaces, autoregressive unified multimodal models produce images by...</p>
           <div class="tag-row">
             <span class="track-hint">貼近主線</span>
             <span class="tag">text-to-audio/music</span>
@@ -797,16 +797,16 @@
           <div class="quick-read">
             <div>
               <span class="label">Insight</span>
-              <p><mark class="keyterm">洞見</mark>：針對 PhysiFormer / Learning / Simulate / Mechanics / World：它提供一個生成模型訓練或 sampling 的可遷移假設，可以拿來檢查音訊生成 pipeline 的對應位置。 <mark class="keyterm">方法線索</mark>：We present PhysiFormer, a diffusion transformer for physically-plausible 3D object motio...</p>
+              <p><mark class="keyterm">洞見</mark>：針對 Safe / Autoregressive / Image / Generation / Iterative：它提供一個生成模型訓練或 sampling 的可遷移假設，可以拿來檢查音訊生成 pipeline 的對應位置。 <mark class="keyterm">方法線索</mark>：In this work, we propose iterative self-improving codebooks for safe autoregressive gen...</p>
             </div>
             <div>
               <span class="label">Try next</span>
-              <p>針對 PhysiFormer / Learning / Simulate / Mechanics / World：<mark class="keyterm">可做</mark>：抽一個最小變因重跑 ablation，固定資料、模型與 sampling，只檢查它聲稱的關鍵差異。<mark class="keyterm">結果焦點</mark>：While related neural physics approaches build on ad-hoc latent spaces or explicitly enforce rig...</p>
+              <p>針對 Safe / Autoregressive / Image / Generation / Iterative：<mark class="keyterm">可做</mark>：抽一個最小變因重跑 ablation，固定資料、模型與 sampling，只檢查它聲稱的關鍵差異。<mark class="keyterm">結果焦點</mark>：These two steps are repeated until no further improvement is observed, producing a safety-enha...</p>
             </div>
           </div>
           </div>
           <div class="card-actions">
-            <a class="source-link" href="https://arxiv.org/abs/2606.27364v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
+            <a class="source-link" href="https://arxiv.org/abs/2606.27147v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
             <button class="details-toggle" type="button" aria-expanded="false" aria-controls="paper-1-panel">展開摘要與實驗建議</button>
             <div class="star-rating" data-paper-id="2026-06-28-1" aria-label="Rate this paper">
               <span class="star-label">重要度</span>
@@ -821,11 +821,11 @@
             <div class="detail-grid">
               <section class="detail-section" data-standard-section="problem">
                 <h3>Problem</h3>
-                <p>We present PhysiFormer, a diffusion transformer for physically-plausible 3D object motion.</p>
+                <p>Unlike diffusion-based models that operate in continuous latent spaces, autoregressive unified multimodal models produce images by sequentially predicting discretized visual tokens.</p>
               </section>
               <section class="detail-section" data-standard-section="method">
                 <h3>Method</h3>
-                <p>Unlike video world models that operate in view-dependent pixel space, PhysiFormer represents objects as 3D meshes expressed in world coordinates.</p>
+                <p>These tokens are derived from a codebook that maps embeddings to quantized visual patterns.</p>
               </section>
               <section class="detail-section" data-standard-section="data">
                 <h3>Data</h3>
@@ -833,7 +833,7 @@
               </section>
               <section class="detail-section" data-standard-section="findings">
                 <h3>Findings</h3>
-                <p>Given the initial vertex positions and velocities, as well as object material type, rigid or elastic, the model samples future vertex trajectories.</p>
+                <p>The language-like architecture enables unified multimodal models to effectively capture text conditional information for generation, making them promising for text-to-image tasks.</p>
               </section>
               <section class="detail-section" data-standard-section="limitations">
                 <h3>Limitations</h3>
@@ -846,8 +846,8 @@
               <section class="detail-section" data-standard-section="metadata">
                 <h3>Metadata</h3>
                 <dl class="meta-list">
-                  <div><dt>Authors</dt><dd>Yiming Chen, Yushi Lan, Andrea Vedaldi</dd></div>
-                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2606.27364v1">arxiv.org/abs/2606.27364v1</a></dd></div>
+                  <div><dt>Authors</dt><dd>Yunqi Xue, Zhijiang Li, Philip Torr, Jindong Gu</dd></div>
+                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2606.27147v1">arxiv.org/abs/2606.27147v1</a></dd></div>
                   <div><dt>Relevance</dt><dd>MeanAudio 2 / karaoke 0 · max 2</dd></div>
                 </dl>
               </section>
@@ -862,12 +862,12 @@
             <div class="paper-meta">
               <span class="track">MeanAudio</span>
               <span class="quality">新</span>
-              <span class="freshness">2026-06-25 · 3d</span>
+              <span class="freshness">2026-06-23 · 5d</span>
             </div>
           </div>
           <div class="paper-card-body">
-          <h2><a href="https://arxiv.org/abs/2606.27123v1" target="_blank" rel="noopener">Proposal-Conditioned Latent Diffusion for Closed-Loop Traffic Scenario Generation</a></h2>
-          <p class="one-line">Closed-loop traffic simulation remains challenging because it must generate interactive multi-agent behaviors that are scene-consis...</p>
+          <h2><a href="https://arxiv.org/abs/2606.24123v1" target="_blank" rel="noopener">Aligning MusicLLM with Emotion using Instruction Tuning and Feedback-Driven <mark class="keyterm">Alignment</mark></a></h2>
+          <p class="one-line">This paper investigates whether music large language models (MusicLLMs) can be aligned for emotion regression. While MusicLLMs have...</p>
           <div class="tag-row">
             <span class="track-hint">貼近主線</span>
             <span class="tag">text-to-audio/music</span>
@@ -875,16 +875,16 @@
           <div class="quick-read">
             <div>
               <span class="label">Insight</span>
-              <p><mark class="keyterm">洞見</mark>：針對 Proposal-Conditioned / Latent / Diffusion / Closed-Loop / Traffic：它提供一個生成模型訓練或 sampling 的可遷移假設，可以拿來檢查音訊生成 pipeline 的對應位置。 <mark class="keyterm">方法線索</mark>：We present a diffusion-based scenario generation framework conditioned on in...</p>
+              <p><mark class="keyterm">洞見</mark>：針對 Aligning / MusicLLM / Emotion / Instruction / Tuning：它的價值在資料/偏好/評估訊號怎麼進訓練，而不是只看模型架構名稱。 <mark class="keyterm">方法線索</mark>：While MusicLLMs have shown strong performance in music information retrieval tasks, their ability to predict ar...</p>
             </div>
             <div>
               <span class="label">Try next</span>
-              <p>針對 Proposal-Conditioned / Latent / Diffusion / Closed-Loop / Traffic：<mark class="keyterm">可做</mark>：抽一個最小變因重跑 ablation，固定資料、模型與 sampling，只檢查它聲稱的關鍵差異。<mark class="keyterm">結果焦點</mark>：Experiments on the Waymo Open Motion Dataset demonstrate a favorable balance among...</p>
+              <p>針對 Aligning / MusicLLM / Emotion / Instruction / Tuning：<mark class="keyterm">可做</mark>：抽一個最小變因重跑 ablation，固定資料、模型與 sampling，只檢查它聲稱的關鍵差異。<mark class="keyterm">結果焦點</mark>：Applying feedback-driven <mark class="keyterm">alignment</mark> with a verifiable numerical <mark class="keyterm">reward</mark> substantially improves per...</p>
             </div>
           </div>
           </div>
           <div class="card-actions">
-            <a class="source-link" href="https://arxiv.org/abs/2606.27123v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
+            <a class="source-link" href="https://arxiv.org/abs/2606.24123v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
             <button class="details-toggle" type="button" aria-expanded="false" aria-controls="paper-2-panel">展開摘要與實驗建議</button>
             <div class="star-rating" data-paper-id="2026-06-28-2" aria-label="Rate this paper">
               <span class="star-label">重要度</span>
@@ -899,11 +899,11 @@
             <div class="detail-grid">
               <section class="detail-section" data-standard-section="problem">
                 <h3>Problem</h3>
-                <p>Closed-loop traffic simulation remains challenging because it must generate interactive multi-agent behaviors that are scene-consistent and controllable throughout rollout.</p>
+                <p>This paper investigates whether music large language models (MusicLLMs) can be aligned for emotion regression.</p>
               </section>
               <section class="detail-section" data-standard-section="method">
                 <h3>Method</h3>
-                <p>Prior diffusion-based approaches achieve strong realism, but their computational cost can hinder deployment in time-constrained replanning loops for autonomous vehicle planning and simulation.</p>
+                <p>While MusicLLMs have shown strong performance in music information retrieval tasks, their ability to predict arousal and valence scores remains limited, since emotion regression has not been an explicit training objective.</p>
               </section>
               <section class="detail-section" data-standard-section="data">
                 <h3>Data</h3>
@@ -911,7 +911,7 @@
               </section>
               <section class="detail-section" data-standard-section="findings">
                 <h3>Findings</h3>
-                <p>We present a diffusion-based scenario generation framework conditioned on instance-centric scene context and multimodal proposal priors, with optional test-time guidance for shaping safety-critical behaviors.</p>
+                <p>To examine whether MusicLLMs can be aligned with emotion, we train MusicLLMs on emotion regression and compare two strategies: instruction tuning and feedback-driven <mark class="keyterm">alignment</mark>.</p>
               </section>
               <section class="detail-section" data-standard-section="limitations">
                 <h3>Limitations</h3>
@@ -924,8 +924,8 @@
               <section class="detail-section" data-standard-section="metadata">
                 <h3>Metadata</h3>
                 <dl class="meta-list">
-                  <div><dt>Authors</dt><dd>Shubham Vaijanath Phoolari, Aleyna Kara, Christoph Lauer, Steven Peters</dd></div>
-                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2606.27123v1">arxiv.org/abs/2606.27123v1</a></dd></div>
+                  <div><dt>Authors</dt><dd>Takuya Hasumi, Welly Naptali</dd></div>
+                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2606.24123v1">arxiv.org/abs/2606.24123v1</a></dd></div>
                   <div><dt>Relevance</dt><dd>MeanAudio 2 / karaoke 0 · max 2</dd></div>
                 </dl>
               </section>
@@ -945,7 +945,7 @@
     </details>
   </main>
 
-  <footer>Generated by the local MIR paper automation · Product standard 2026-05-26 · 2187e8b96f · 2026-06-28 07:01:07 Asia/Taipei</footer>
+  <footer>Generated by the local MIR paper automation · Product standard 2026-05-26 · 2187e8b96f · 2026-06-28 09:00:02 Asia/Taipei</footer>
 
   <script>
     const cards = Array.from(document.querySelectorAll('.paper-card'));
