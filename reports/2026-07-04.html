@@ -767,11 +767,11 @@
         <ol class="paper-nav-list">
           <li><a href="#paper-1">
             <span class="nav-num">01</span>
-            <span>UT-AISTimprt submission for ICME 2026 Gra...<span class="nav-track">MeanAudio</span></span>
+            <span>Alignment Is All You Need For X-to-4D Gen...<span class="nav-track">MeanAudio</span></span>
           </a></li>
           <li><a href="#paper-2">
             <span class="nav-num">02</span>
-            <span>A Multi-Branch Hierarchy-Aware Framework...<span class="nav-track">MeanAudio</span></span>
+            <span>Controllable Sim Agents with Behavior Lat...<span class="nav-track">MeanAudio</span></span>
           </a></li>
         </ol>
       </aside>
@@ -788,26 +788,25 @@
             </div>
           </div>
           <div class="paper-card-body">
-          <h2><a href="https://arxiv.org/abs/2607.01669v1" target="_blank" rel="noopener">UT-AISTimprt submission for ICME 2026 Grand Challenge on Academic Text-to-Music Generation</a></h2>
-          <p class="one-line">This work investigates the effect of batch sampling strategies during training for text-to-audio music generation under low-data an...</p>
+          <h2><a href="https://arxiv.org/abs/2607.02516v1" target="_blank" rel="noopener"><mark class="keyterm">Alignment</mark> Is All You Need For X-to-4D Generation</a></h2>
+          <p class="one-line">Generative diffusion models excel at synthesizing high-quality images, videos, and 3D content under multimodal control. However, ar...</p>
           <div class="tag-row">
             <span class="track-hint">貼近主線</span>
             <span class="tag">text-to-audio/music</span>
-            <span class="tag">evaluation</span>
           </div>
           <div class="quick-read">
             <div>
               <span class="label">Insight</span>
-              <p><mark class="keyterm">洞見</mark>：針對 UT-AISTimprt / submission / ICME / 2026 / Grand：它把高保真音樂生成拆成 <mark class="keyterm">acoustic token LM</mark> 的 scaling 問題，重點在長時結構與音色細節能否同時保住。 <mark class="keyterm">方法線索</mark>：This paper describes our approach and findings for the ICME 2026 Grand Challenge on Aca...</p>
+              <p><mark class="keyterm">洞見</mark>：針對 <mark class="keyterm">Alignment</mark> / All / You / Need / X-to-4D：它把 <mark class="keyterm">alignment</mark> signal 放回生成過程本身，而不是只靠後處理 <mark class="keyterm">reward</mark>；可對照音訊文字對齊是否也能這樣做。 <mark class="keyterm">方法線索</mark>：把 <mark class="keyterm">alignment</mark> signal 直接放進 diffusion matching/training，而不是只靠外部 <mark class="keyterm">reward</mark> 做後處理。</p>
             </div>
             <div>
               <span class="label">Try next</span>
-              <p>針對 UT-AISTimprt / submission / ICME / 2026 / Grand：<mark class="keyterm">可做</mark>：固定同一批 prompt 與 <mark class="keyterm">codec</mark>，對比 <mark class="keyterm">token rate</mark> / <mark class="keyterm">context length</mark> / <mark class="keyterm">LM scale</mark>，看音樂結構與音質是否跟它的 claim 一致。<mark class="keyterm">結果焦點</mark>：Results show that clustering based on text embeddings achieves b...</p>
+              <p>針對 <mark class="keyterm">Alignment</mark> / All / You / Need / X-to-4D：<mark class="keyterm">可做</mark>：把 <mark class="keyterm">alignment</mark> signal 做成單一 loss 或 reranking ablation，先比較文字-音訊相符度與主觀聽感。<mark class="keyterm">結果焦點</mark>：確認 <mark class="keyterm">alignment</mark> 是否真的在生成過程改善，而不是只讓某個 <mark class="keyterm">reward</mark> metric 變好。</p>
             </div>
           </div>
           </div>
           <div class="card-actions">
-            <a class="source-link" href="https://arxiv.org/abs/2607.01669v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
+            <a class="source-link" href="https://arxiv.org/abs/2607.02516v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
             <button class="details-toggle" type="button" aria-expanded="false" aria-controls="paper-1-panel">展開摘要與實驗建議</button>
             <div class="star-rating" data-paper-id="2026-07-04-1" aria-label="Rate this paper">
               <span class="star-label">重要度</span>
@@ -822,11 +821,11 @@
             <div class="detail-grid">
               <section class="detail-section" data-standard-section="problem">
                 <h3>Problem</h3>
-                <p>This work investigates the effect of batch sampling strategies during training for text-to-audio music generation under low-data and small-scale model settings.</p>
+                <p>Generative diffusion models excel at synthesizing high-quality images, videos, and 3D content under multimodal control.</p>
               </section>
               <section class="detail-section" data-standard-section="method">
                 <h3>Method</h3>
-                <p>This paper describes our approach and findings for the ICME 2026 Grand Challenge on Academic Text-to-Music Generation.</p>
+                <p>However, arbitrary user-defined modality-to-4D (X-to-4D) generation remains challenging due to the high cost of constructing diverse datasets and the limited scalability of existing methods.</p>
               </section>
               <section class="detail-section" data-standard-section="data">
                 <h3>Data</h3>
@@ -834,7 +833,7 @@
               </section>
               <section class="detail-section" data-standard-section="findings">
                 <h3>Findings</h3>
-                <p>Training data are clustered using either text embeddings or audio embeddings, and samples with similar characteristics are grouped within the same mini-batch to mitigate gradient interference.</p>
+                <p>This paper presents Align4D, a flexible framework that translates any-modal input into coherent video-3D pairs, using video to guide 4D motion and 3D data to shape 4D geometry.</p>
               </section>
               <section class="detail-section" data-standard-section="limitations">
                 <h3>Limitations</h3>
@@ -847,9 +846,9 @@
               <section class="detail-section" data-standard-section="metadata">
                 <h3>Metadata</h3>
                 <dl class="meta-list">
-                  <div><dt>Authors</dt><dd>Shunsuke Yoshida, Yu-Hua Chen, Satoru Fukayama</dd></div>
-                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2607.01669v1">arxiv.org/abs/2607.01669v1</a></dd></div>
-                  <div><dt>Relevance</dt><dd>MeanAudio 3 / karaoke 0 · max 3</dd></div>
+                  <div><dt>Authors</dt><dd>Qiaowei Miao, Kehan Li, Yawei Luo, Yi Yang</dd></div>
+                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2607.02516v1">arxiv.org/abs/2607.02516v1</a></dd></div>
+                  <div><dt>Relevance</dt><dd>MeanAudio 2 / karaoke 0 · max 2</dd></div>
                 </dl>
               </section>
             </div>
@@ -867,26 +866,26 @@
             </div>
           </div>
           <div class="paper-card-body">
-          <h2><a href="https://arxiv.org/abs/2607.01974v1" target="_blank" rel="noopener">A Multi-Branch Hierarchy-Aware Framework for Heterogeneous Audio Classification</a></h2>
-          <p class="one-line">This technical report describes our system for Task 1 of the DCASE 2026 Challenge, which aims to classify heterogeneous audio recor...</p>
+          <h2><a href="https://arxiv.org/abs/2607.02496v1" target="_blank" rel="noopener">Controllable Sim Agents with Behavior Latents</a></h2>
+          <p class="one-line">Realistic traffic simulation requires agents that imitate logged behavior and can also be steered along interpretable axes. Such co...</p>
           <div class="tag-row">
             <span class="track-hint">貼近主線</span>
             <span class="tag">text-to-audio/music</span>
-            <span class="tag">evaluation</span>
+            <span class="tag">flow/diffusion</span>
           </div>
           <div class="quick-read">
             <div>
               <span class="label">Insight</span>
-              <p><mark class="keyterm">洞見</mark>：針對 Multi-Branch / Hierarchy-Aware / Framework / Heterogeneous / Audio：這篇值得看的點在於它提出的建模假設是否能抽成音訊生成或 MIR pipeline 的單一可測變因。 <mark class="keyterm">方法線索</mark>：Our system is built on <mark class="keyterm">CLAP</mark>-based audio-text representations and is improved alon...</p>
+              <p><mark class="keyterm">洞見</mark>：針對 Controllable / Sim / Agents / Behavior / Latents：它的價值在資料/偏好/評估訊號怎麼進訓練，而不是只看模型架構名稱。 <mark class="keyterm">方法線索</mark>：To tackle scarcity in <mark class="keyterm">reward</mark> signals, we propose soft eligibility gates that replace hard binary thresholds with sm...</p>
             </div>
             <div>
               <span class="label">Try next</span>
-              <p>針對 Multi-Branch / Hierarchy-Aware / Framework / Heterogeneous / Audio：<mark class="keyterm">可做</mark>：抽一個最小變因重跑 ablation，固定資料、模型與 sampling，只檢查它聲稱的關鍵差異。<mark class="keyterm">結果焦點</mark>：Our system is built on <mark class="keyterm">CLAP</mark>-based audio-text representations and is improved along...</p>
+              <p>針對 Controllable / Sim / Agents / Behavior / Latents：<mark class="keyterm">可做</mark>：抽一個最小變因重跑 ablation，固定資料、模型與 sampling，只檢查它聲稱的關鍵差異。<mark class="keyterm">結果焦點</mark>：Furthermore, our experiment demonstrates that steering metrics must be read alongside physical-plaus...</p>
             </div>
           </div>
           </div>
           <div class="card-actions">
-            <a class="source-link" href="https://arxiv.org/abs/2607.01974v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
+            <a class="source-link" href="https://arxiv.org/abs/2607.02496v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
             <button class="details-toggle" type="button" aria-expanded="false" aria-controls="paper-2-panel">展開摘要與實驗建議</button>
             <div class="star-rating" data-paper-id="2026-07-04-2" aria-label="Rate this paper">
               <span class="star-label">重要度</span>
@@ -901,11 +900,11 @@
             <div class="detail-grid">
               <section class="detail-section" data-standard-section="problem">
                 <h3>Problem</h3>
-                <p>This technical report describes our system for Task 1 of the DCASE 2026 Challenge, which aims to classify heterogeneous audio recordings according to the Broad Sound Taxonomy (BST).</p>
+                <p>Realistic traffic simulation requires agents that imitate logged behavior and can also be steered along interpretable axes.</p>
               </section>
               <section class="detail-section" data-standard-section="method">
                 <h3>Method</h3>
-                <p>The task requires both accurate second-level prediction and consistency with the top-level taxonomy.</p>
+                <p>Such controllability enables engineers to isolate variables, reproduce specific edge cases, and test autonomous systems without real-world risk.</p>
               </section>
               <section class="detail-section" data-standard-section="data">
                 <h3>Data</h3>
@@ -913,7 +912,7 @@
               </section>
               <section class="detail-section" data-standard-section="findings">
                 <h3>Findings</h3>
-                <p>Our system is built on <mark class="keyterm">CLAP</mark>-based audio-text representations and is improved along three strategies: expanding the training set with a filtered subset of BSD35k, enhancing acoustic modeling with feature-specific branches, and refining predictions using hierarchy-aware classifiers and KNN-based post-processing.</p>
+                <p>We introduce Controllable Neural Variational Agents (CNeVA), a controllable simulated-agent framework that learns to infer a per-agent Gaussian behavior latent from per-channel discounted returns via a closed-form conjugate variational update, conditioning a rectified-flow trajectory generator trained on a mixed channel-mask curriculum for classifier-free guidance.</p>
               </section>
               <section class="detail-section" data-standard-section="limitations">
                 <h3>Limitations</h3>
@@ -926,8 +925,8 @@
               <section class="detail-section" data-standard-section="metadata">
                 <h3>Metadata</h3>
                 <dl class="meta-list">
-                  <div><dt>Authors</dt><dd>Beile Ning, Jiayi Yu, Zitong Wang, Yufei Hu, Wenjun Xu 等 8 位</dd></div>
-                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2607.01974v1">arxiv.org/abs/2607.01974v1</a></dd></div>
+                  <div><dt>Authors</dt><dd>Juanwu Lu, Junyu Zhu, Ziran Wang</dd></div>
+                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2607.02496v1">arxiv.org/abs/2607.02496v1</a></dd></div>
                   <div><dt>Relevance</dt><dd>MeanAudio 2 / karaoke 0 · max 2</dd></div>
                 </dl>
               </section>
@@ -947,7 +946,7 @@
     </details>
   </main>
 
-  <footer>Generated by the local MIR paper automation · Product standard 2026-05-26 · 2187e8b96f · 2026-07-04 09:00:15 Asia/Taipei</footer>
+  <footer>Generated by the local MIR paper automation · Product standard 2026-05-26 · 2187e8b96f · 2026-07-04 12:01:56 Asia/Taipei</footer>
 
   <script>
     const cards = Array.from(document.querySelectorAll('.paper-card'));
