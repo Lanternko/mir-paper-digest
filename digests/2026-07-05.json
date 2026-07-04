@@ -1,0 +1,65 @@
+{
+  "date": "2026-07-05",
+  "papers": [
+    {
+      "slot": 1,
+      "track": "mean_audio",
+      "title": "Neural Audio Codec with Adjustable Token Temporal Resolution Using Sampling-Frequency-Independent Convolutional Layers",
+      "authors": ["Tomohiko Nakamura", "Wataru Nakata", "Kanami Imamura", "Yuki Saito"],
+      "published": "2026-07-02",
+      "updated": "2026-07-02",
+      "source_url": "https://arxiv.org/abs/2607.01865",
+      "arxiv_id": "2607.01865",
+      "doi": "",
+      "tags": ["codec/tokenizer", "text-to-audio/music", "token rate"],
+      "quality": "新且重要",
+      "tldr": "用取樣頻率無關卷積讓單一 neural codec 支援多種 token 時間解析度(TTR),把 token rate 與音質細節的取捨變成可調參數,不必為每種解析度分開訓練 codec。",
+      "insight": "洞見:把 TTR 視為 token 序列的取樣週期,從共享參數動態生成各解析度的卷積 kernel,一個模型覆蓋多種 token rate。這直接對應 MeanAudio 在 codec 端「序列長度 vs 快速聲學事件」的老問題。",
+      "try_next": "可做:在 DAC 語義保真度實驗線上對照——固定生成模型,只換 TTR 設定,量測音樂重建品質與語義保留(CLAP 檢索),看多解析度 codec 是否比單一 TTR 的 DAC 更適合當 MeanAudio 的表示層。",
+      "problem": "Neural codec 的 token 時間解析度(TTR)控制「表現快速聲學事件」與「縮短 token 序列」的取捨,但多數 codec 只能在單一 TTR 訓練,每換一種解析度就要重訓一次。",
+      "method": "提出取樣頻率無關(SFI)卷積機制:把 TTR 當作 token 序列的取樣週期,從共享參數集生成 TTR 相依的卷積 kernel,並隨 TTR 調整 kernel size 與 stride;直接嵌進 Descript Audio Codec(DAC),quantizer 不動。",
+      "data": "在環境音重建上實驗;基於 DAC 架構。注意:論文用的是環境音,不是音樂——音樂與歌聲上的表現需要自行驗證。",
+      "findings": "單一模型在多種 TTR 下的重建品質,優於「每種 TTR 換一組專屬層」的 single-model baseline;代表共享參數生成 kernel 的做法確實可行。",
+      "limitations": "只在環境音重建驗證,未測音樂、歌聲或下游生成任務;quantizer 未動,TTR 改變對 RVQ codebook 使用率與語義保留的影響未知;也還沒接到 token LM 上驗證生成品質。",
+      "editor_note": "與 MeanAudio 的 codec/token rate 問題直接相關,也呼應 DAC 語義保真度研究線。下一步:拿它的 SFI 機制對 DAC 做單變因替換,先在音樂資料上跑重建+語義檢索 smoke test。",
+      "relevance": {"mean_audio": 5, "karaoke_jp": 1}
+    },
+    {
+      "slot": 2,
+      "track": "general_mir",
+      "title": "Decomposer: Learning to Decompile Symbolic Music to Programs",
+      "authors": ["Yewon Kim", "Apurva Gandhi", "David Chung", "Graham Neubig", "Chris Donahue"],
+      "published": "2026-07-02",
+      "updated": "2026-07-02",
+      "source_url": "https://arxiv.org/abs/2607.01849",
+      "arxiv_id": "2607.01849",
+      "doi": "",
+      "tags": ["MIDI/score", "symbolic music", "RL reward"],
+      "quality": "新",
+      "tldr": "把 MIDI 反編譯成可執行、可編輯的 Strudel 音樂程式:先用合成配對資料做 SFT,再用 RL 同時獎勵重建忠實度與程式可讀性,避免退化成逐音符轉寫。",
+      "insight": "洞見:低資源配對資料的解法是「合成資料 SFT + 無配對資料 RL」兩段式;reward 同時管忠實度與可讀性,防止模型走捷徑。這個 recipe 可遷移到歌詞對齊或 mora-to-note 這類配對資料稀缺的任務。",
+      "try_next": "可做:借它的兩段式訓練思路——karaoke-jp 的日文歌詞對齊也缺配對資料,可以先合成(TTS 唱聲+已知時間軸)做 SFT,再用無標註歌曲以對齊一致性 reward 做 RL,驗證是否比純監督穩。",
+      "problem": "從演奏(symbolic MIDI)反推高階音樂指令是逆問題:Strudel 是低資源語言,幾乎沒有 MIDI-程式配對資料;只優化 MIDI 重建又會塌縮成不可讀的逐音符轉寫。",
+      "method": "兩階段後訓練:(1)建 Strudel-Synth 合成語料(配對的 Strudel 程式與渲染 MIDI)做監督微調;(2)在無配對 MIDI 上做強化學習,reward 同時計 MIDI 重建忠實度與程式碼可讀性。",
+      "data": "Strudel-Synth 合成語料+合成與真實世界 MIDI benchmark;專案頁有展示(yewon-kim.com/decomposer)。",
+      "findings": "MIDI 重建忠實度大幅超過閉源 LLM 直接生成,程式可讀性與多樣性優於啟發式轉換器;證明小模型後訓練在這種結構化逆問題上能贏過通用大模型。",
+      "limitations": "任務限定在 symbolic(MIDI)層,不含音訊轉錄;Strudel 表達力有限,對複雜表演性演奏(rubato、微時值)的處理未知;可讀性 reward 的設計細節需要看正文驗證。",
+      "editor_note": "CMU Donahue/Neubig 組。對主線的價值在訓練 recipe 而非任務本身:合成配對+RL 雙 reward 的路子,值得記進 karaoke-jp 的歌詞對齊實驗選項。",
+      "relevance": {"mean_audio": 1, "karaoke_jp": 2}
+    }
+  ],
+  "repo": {
+    "full_name": "nomadkaraoke/karaoke-gen",
+    "url": "https://github.com/nomadkaraoke/karaoke-gen",
+    "description_zh": "端到端卡拉 OK 影片生成:下載音訊與歌詞、人聲/伴奏分離、用轉錄模型同步歌詞時間軸、渲染 CDG 字幕並上傳 YouTube/Dropbox。MIT 授權,147★,2026-07-03 仍在活躍更新。",
+    "stars": 147,
+    "updated": "2026-07-03",
+    "why": "與 karaoke-jp 幾乎同構的完整 pipeline(分離→轉錄→對齊→渲染)。值得對照它的歌詞同步與渲染模組設計,特別是轉錄模型怎麼接時間軸;也可當 baseline 比較日文歌詞場景的失敗模式。",
+    "tags": ["karaoke", "lyrics sync", "source separation"]
+  },
+  "discord_messages": [
+    "# 每日 MIR 論文精選 - 2026-07-05\n網站版:https://lanternko.github.io/mir-paper-digest/reports/2026-07-05.html\n\n## 1. Neural Audio Codec with Adjustable Token Temporal Resolution Using SFI Convolutional Layers\n- 作者:Nakamura, Nakata, Imamura, Saito(東大系,IWAENC 2026)\n- 連結:https://arxiv.org/abs/2607.01865\n- 主線:MeanAudio(codec / token rate)· 品質:新且重要(7/2 發表)\n\n**TLDR**:用取樣頻率無關卷積讓單一 neural codec 支援多種 token 時間解析度(TTR),把 token rate 與音質細節的取捨變成可調參數,不必每種解析度重訓 codec。\n\n**為什麼選它**:TTR 直接控制「快速聲學事件 vs token 序列長度」——這就是 MeanAudio 在 codec 端一直碰到的取捨。它把 TTR 當 token 取樣週期,從共享參數動態生成各解析度 kernel,嵌進 DAC 而 quantizer 不動,和你的 DAC 語義保真度研究線完全對得上。\n\n**注意**:實驗只做了環境音重建,音樂/歌聲未驗證;也還沒接 token LM 測生成。\n\n**下一步**:固定生成模型,只換 TTR 設定,在音樂資料上跑重建品質+CLAP 語義檢索的單變因對照。",
+    "## 2. Decomposer: Learning to Decompile Symbolic Music to Programs\n- 作者:Kim, Gandhi, Chung, Neubig, Donahue(CMU)\n- 連結:https://arxiv.org/abs/2607.01849\n- 主線:泛 MIR(MIDI/score)· 品質:新(7/2 發表)\n\n**TLDR**:把 MIDI 反編譯成可執行、可編輯的 Strudel 音樂程式:先用合成配對語料 SFT,再用 RL 同時獎勵重建忠實度與程式可讀性,避免塌縮成逐音符轉寫。\n\n**為什麼選它**:價值在訓練 recipe 而非任務本身——「合成配對資料 SFT + 無配對資料 RL 雙 reward」正是配對資料稀缺任務的通用解法。結果上,MIDI 重建忠實度大幅超過閉源 LLM,可讀性優於啟發式轉換器。\n\n**對 karaoke-jp 的啟發**:日文歌詞對齊同樣缺配對資料,可以仿照:先合成(TTS 唱聲+已知時間軸)做 SFT,再用無標註歌曲以對齊一致性 reward 做 RL。\n\n**注意**:限 symbolic 層、不含音訊轉錄;對 rubato/微時值的處理未知。",
+    "## GitHub pick:nomadkaraoke/karaoke-gen\nhttps://github.com/nomadkaraoke/karaoke-gen(MIT,147★,7/3 仍在更新)\n\n端到端卡拉 OK 影片生成:下載音訊與歌詞 → 人聲/伴奏分離 → 轉錄模型同步歌詞時間軸 → 渲染 CDG 字幕 → 上傳。與 karaoke-jp 幾乎同構,值得對照它的歌詞同步與渲染模組,或當日文場景的 baseline 找失敗模式。\n\n## 今天的 take-away\n- 兩篇都指向「表示層可調化」:codec 的 TTR 可調、MIDI 的抽象層可反編譯。深讀前先問:能不能變成你 pipeline 裡的一個單變因實驗?\n- Decomposer 的兩段式訓練 recipe 建議記進 karaoke-jp 的實驗選項清單。"
+  ]
+}

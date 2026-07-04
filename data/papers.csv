@@ -109,3 +109,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-07-04,2,paper,mean_audio,A Multi-Branch Hierarchy-Aware Framework for Heterogeneous Audio Classification,https://arxiv.org/abs/2607.01974v1,2607.01974v1,text-to-audio/music|evaluation,新
 2026-07-04,1,paper,mean_audio,Alignment Is All You Need For X-to-4D Generation,https://arxiv.org/abs/2607.02516v1,2607.02516v1,text-to-audio/music,新
 2026-07-04,2,paper,mean_audio,Controllable Sim Agents with Behavior Latents,https://arxiv.org/abs/2607.02496v1,2607.02496v1,text-to-audio/music|flow/diffusion,新
+2026-07-05,1,paper,mean_audio,Neural Audio Codec with Adjustable Token Temporal Resolution Using Sampling-Frequency-Independent Convolutional Layers,https://arxiv.org/abs/2607.01865,2607.01865,codec/tokenizer|text-to-audio/music|token rate,新且重要
+2026-07-05,2,paper,general_mir,Decomposer: Learning to Decompile Symbolic Music to Programs,https://arxiv.org/abs/2607.01849,2607.01849,MIDI/score|symbolic music|RL reward,新
+2026-07-05,0,repo,github,nomadkaraoke/karaoke-gen,https://github.com/nomadkaraoke/karaoke-gen,,karaoke|lyrics sync|source separation,
