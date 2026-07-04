@@ -21,6 +21,17 @@ MAX_LEN = 1990
 USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) mir-digest-ci/2.0"
 
 
+def sanitize_webhook(raw: str) -> str:
+    """Strip BOM / zero-width chars / quotes / whitespace.
+
+    Secrets set from PowerShell pipelines can carry a UTF-8 BOM, which makes
+    urllib fail with "unknown url type: \\ufeffhttps".
+    """
+    for ch in ("\ufeff", "\u200b", "\u200e", "\u200f", '"', "'"):
+        raw = raw.replace(ch, "")
+    return "".join(raw.split())
+
+
 def post(webhook: str, content: str) -> tuple[int, str]:
     body = json.dumps({"content": content}, ensure_ascii=False).encode("utf-8")
     req = urllib.request.Request(
@@ -44,14 +55,14 @@ def post(webhook: str, content: str) -> tuple[int, str]:
 
 def clamp(s: str) -> str:
     s = (s or "").strip()
-    return s if len(s) <= MAX_LEN else s[: MAX_LEN - 1].rstrip() + "…"
+    return s if len(s) <= MAX_LEN else s[: MAX_LEN - 1].rstrip() + "\u2026"
 
 
 def main() -> int:
     if len(sys.argv) != 2:
         print("usage: notify_discord.py <digest.json>", file=sys.stderr)
         return 2
-    webhook = (os.environ.get("MIR_DISCORD_WEBHOOK") or "").strip()
+    webhook = sanitize_webhook(os.environ.get("MIR_DISCORD_WEBHOOK") or "")
     if not webhook:
         print("ERROR: MIR_DISCORD_WEBHOOK is not set (repo secret missing?)", file=sys.stderr)
         return 2

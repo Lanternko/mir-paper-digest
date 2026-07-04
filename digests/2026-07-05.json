@@ -63,3 +63,4 @@
     "## GitHub pick:nomadkaraoke/karaoke-gen\nhttps://github.com/nomadkaraoke/karaoke-gen(MIT,147★,7/3 仍在更新)\n\n端到端卡拉 OK 影片生成:下載音訊與歌詞 → 人聲/伴奏分離 → 轉錄模型同步歌詞時間軸 → 渲染 CDG 字幕 → 上傳。與 karaoke-jp 幾乎同構,值得對照它的歌詞同步與渲染模組,或當日文場景的 baseline 找失敗模式。\n\n## 今天的 take-away\n- 兩篇都指向「表示層可調化」:codec 的 TTR 可調、MIDI 的抽象層可反編譯。深讀前先問:能不能變成你 pipeline 裡的一個單變因實驗?\n- Decomposer 的兩段式訓練 recipe 建議記進 karaoke-jp 的實驗選項清單。"
   ]
 }
+
