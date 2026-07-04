@@ -1,0 +1,37 @@
+name: Daily digest Discord notify
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "digests/**"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: discord-notify
+  cancel-in-progress: false
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Find changed digest file
+        id: changed
+        run: |
+          FILE=$(git diff --name-only HEAD^ HEAD -- 'digests/*.json' | head -1)
+          if [ -z "$FILE" ]; then
+            FILE=$(ls digests/*.json | sort | tail -1)
+          fi
+          echo "file=$FILE" >> "$GITHUB_OUTPUT"
+          echo "Digest file: $FILE"
+
+      - name: Send Discord messages
+        env:
+          MIR_DISCORD_WEBHOOK: ${{ secrets.MIR_DISCORD_WEBHOOK }}
+        run: python3 scripts/notify_discord.py "${{ steps.changed.outputs.file }}"

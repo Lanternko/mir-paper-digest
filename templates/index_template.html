@@ -1,0 +1,733 @@
+<!doctype html>
+<html lang="zh-Hant" data-standard-version="__STANDARD_VERSION__" data-standard-digest="__STANDARD_DIGEST__">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="mir-digest-product-standard" content="__STANDARD_VERSION__:__STANDARD_DIGEST__">
+  <title>MIR Paper Digest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&family=Inter+Tight:wght@400;500;600&family=Noto+Serif+TC:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --bg-base: #faf9fc;
+      --bg-surface: #ffffff;
+      --bg-sunken: #f3f3f7;
+      --bg-hover: #ede8f0;
+      --accent: #785561;
+      --accent-ink: #563742;
+      --accent-soft: #fed1df;
+      --accent-tint: rgba(254, 209, 223, 0.50);
+      --accent-wash: #fdf1f5;
+      --teal: #3a7a6a;
+      --teal-soft: #d4efe8;
+      --teal-wash: #eef8f5;
+      --text-primary: #2f3337;
+      --text-secondary: #5c5f64;
+      --text-tertiary: #8a8a92;
+      --text-on-accent: #fff7f7;
+      --border: rgba(176, 178, 184, 0.32);
+      --border-strong: rgba(120, 85, 97, 0.30);
+      --radius: 14px;
+      --radius-sm: 10px;
+      --radius-lg: 20px;
+      --shadow-card: 0 1px 0 rgba(120, 85, 97, 0.04), 0 8px 24px rgba(60, 50, 55, 0.04);
+      --shadow-elev: 0 1px 0 rgba(120, 85, 97, 0.06), 0 18px 48px rgba(60, 50, 55, 0.08);
+      --font-serif: "Source Serif 4", "Source Serif Pro", ui-serif, Georgia, serif;
+      --font-sans: "Inter Tight", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+      --font-zh: "Noto Serif TC", var(--font-serif);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg-base);
+      color: var(--text-primary);
+      font-family: var(--font-zh), var(--font-sans);
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .topbar {
+      position: sticky; top: 0; z-index: 30;
+      background: rgba(250, 249, 252, 0.82);
+      backdrop-filter: saturate(1.4) blur(18px);
+      -webkit-backdrop-filter: saturate(1.4) blur(18px);
+      border-bottom: 1px solid var(--border);
+    }
+    .topbar-inner {
+      max-width: 1180px; margin: 0 auto;
+      padding: 12px 28px;
+      display: flex; align-items: center; gap: 16px;
+    }
+    .brand {
+      display: flex; align-items: baseline; gap: 10px;
+      font-family: var(--font-zh), var(--font-serif);
+      font-size: 19px; font-weight: 600; letter-spacing: -0.015em;
+      color: var(--accent-ink);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .brand:hover { color: var(--accent); text-decoration: none; }
+    .brand-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent-soft);
+      border: 1px solid var(--accent);
+      display: inline-block;
+      transform: translateY(-1px);
+    }
+    .brand .sub {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-tertiary);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding-left: 12px;
+      border-left: 1px solid var(--border);
+    }
+    .nav {
+      display: flex; align-items: center; gap: 4px;
+      margin-left: auto;
+      font-family: var(--font-sans);
+      font-size: 13px;
+    }
+    .nav a {
+      padding: 6px 14px; border-radius: 9999px;
+      color: var(--text-secondary);
+      font-weight: 500;
+      text-decoration: none;
+      transition: background .18s, color .18s;
+      white-space: nowrap;
+    }
+    .nav a:hover { background: var(--bg-hover); color: var(--text-primary); text-decoration: none; }
+    .nav a.active { background: var(--accent-tint); color: var(--accent-ink); }
+    .canvas {
+      max-width: 1180px; width: 100%;
+      margin: 0 auto;
+      padding: 42px 28px 78px;
+      min-width: 0;
+    }
+    .hero {
+      padding-bottom: 30px;
+      margin-bottom: 26px;
+      border-bottom: 1px solid var(--border);
+    }
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      color: var(--text-tertiary);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    h1 {
+      font-family: var(--font-zh), var(--font-serif);
+      font-weight: 500;
+      font-size: 40px;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      color: var(--text-primary);
+      margin-bottom: 14px;
+    }
+    h1 em { font-style: italic; color: var(--accent); font-weight: 400; }
+    .subtitle {
+      font-family: var(--font-sans);
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      max-width: 620px;
+      overflow-wrap: anywhere;
+    }
+    .home-actions {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      margin-top: 22px;
+    }
+    .primary-cta,
+    .primary-link,
+    .secondary-link,
+    .filter-tab {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      min-height: 36px;
+      padding: 8px 16px;
+      border-radius: 9999px;
+      border: 1px solid var(--border);
+      background: var(--bg-surface);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 500;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background .18s, border-color .18s, color .18s, transform .08s;
+    }
+    .primary-cta,
+    .primary-link {
+      background: var(--teal-wash);
+      border-color: var(--teal);
+      color: var(--teal);
+    }
+    .primary-cta:hover,
+    .primary-link:hover { background: var(--teal-soft); text-decoration: none; }
+    .secondary-link:hover,
+    .filter-tab:hover { background: var(--bg-hover); text-decoration: none; }
+    .disabled {
+      background: var(--bg-sunken);
+      border-color: var(--border);
+      color: var(--text-tertiary);
+      pointer-events: none;
+    }
+    .archive-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 304px;
+      gap: 28px;
+      align-items: start;
+    }
+    .archive-layout > *,
+    .archive-rail > * {
+      min-width: 0;
+    }
+    .section-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 14px;
+    }
+    .section-copy h2,
+    .rail-panel h2 {
+      margin: 0;
+      font-family: var(--font-zh), var(--font-serif);
+      font-size: 21px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
+    .section-copy p,
+    .rail-panel p {
+      margin-top: 4px;
+      color: var(--text-secondary);
+      font-family: var(--font-sans);
+      font-size: 13px;
+    }
+    .filter-tabs {
+      display: inline-flex;
+      gap: 4px;
+      padding: 3px;
+      border-radius: 9999px;
+      background: var(--bg-sunken);
+      flex-shrink: 0;
+    }
+    .filter-tab {
+      min-height: 30px;
+      padding: 5px 13px;
+      border-color: transparent;
+      background: transparent;
+      color: var(--text-secondary);
+      font-size: 12px;
+    }
+    .filter-tab[aria-pressed="true"] {
+      background: var(--bg-surface);
+      color: var(--accent-ink);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+    .filter-tab.important[aria-pressed="true"] {
+      background: var(--accent);
+      color: var(--text-on-accent);
+    }
+    .paper-list {
+      display: grid;
+      gap: 12px;
+    }
+    .paper-row {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+      min-width: 0;
+      transition: background .15s, border-color .15s, box-shadow .15s;
+    }
+    .paper-row:hover {
+      border-color: var(--border-strong);
+      box-shadow: var(--shadow-elev);
+    }
+    .paper-row.is-important {
+      background: var(--accent-wash);
+      border-color: var(--border-strong);
+    }
+    .paper-row-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-tertiary);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .rating-chip {
+      margin-left: auto;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: var(--bg-sunken);
+      color: var(--text-tertiary);
+      letter-spacing: 0;
+      text-transform: none;
+      font-family: var(--font-sans);
+      font-size: 11px;
+    }
+    .rating-chip.is-rated {
+      background: var(--accent-tint);
+      color: var(--accent-ink);
+    }
+    .paper-row h2 {
+      margin: 8px 0 10px;
+      font-family: var(--font-zh), var(--font-serif);
+      font-size: 22px;
+      font-weight: 500;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+    }
+    .paper-row h2 a {
+      color: var(--text-primary);
+      text-decoration: none;
+      overflow-wrap: anywhere;
+    }
+    .paper-row h2 a:hover { color: var(--accent); text-decoration: none; }
+    .paper-row-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 4px 10px;
+      background: var(--bg-sunken);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+    .paper-row-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .archive-rail {
+      display: grid;
+      gap: 14px;
+      position: sticky;
+      top: 78px;
+    }
+    .rail-panel {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-card);
+      padding: 16px;
+      width: 100%;
+      overflow: hidden;
+    }
+    .calendar-panel {
+      padding-bottom: 14px;
+    }
+    .calendar-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin: 12px 0 10px;
+    }
+    .calendar-title {
+      font-family: var(--font-zh), var(--font-serif);
+      font-size: 17px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }
+    .calendar-title span {
+      color: var(--text-tertiary);
+      font-weight: 400;
+    }
+    .calendar-nav {
+      display: flex;
+      gap: 4px;
+    }
+    .calendar-nav button {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--bg-surface);
+      color: var(--text-secondary);
+      cursor: pointer;
+      font-size: 15px;
+      line-height: 1;
+    }
+    .calendar-nav button:hover { background: var(--bg-hover); color: var(--text-primary); }
+    .weekdays,
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 28px);
+      gap: 3px;
+      justify-content: center;
+    }
+    .weekdays {
+      margin-bottom: 5px;
+      color: var(--text-tertiary);
+      font-family: var(--font-mono);
+      font-size: 8.5px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .weekdays span {
+      width: 28px;
+      text-align: center;
+    }
+    .calendar-cell {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      border: 0;
+      background: transparent;
+      color: var(--text-tertiary);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 500;
+      position: relative;
+      text-decoration: none;
+    }
+    .calendar-cell.other-month { opacity: 0.28; }
+    .calendar-cell.has-report {
+      color: var(--text-primary);
+      cursor: pointer;
+    }
+    .calendar-cell.has-report::after {
+      content: "";
+      position: absolute;
+      bottom: 3px;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+    .calendar-cell.has-report:hover {
+      background: var(--accent-tint);
+      color: var(--accent-ink);
+      text-decoration: none;
+    }
+    .calendar-cell.today {
+      background: var(--bg-sunken);
+      color: var(--accent-ink);
+      font-weight: 700;
+    }
+    .calendar-cell.is-important::after {
+      box-shadow: 0 0 0 2px var(--accent-soft);
+    }
+    .month-block + .month-block { margin-top: 14px; }
+    .month-block h3 {
+      margin: 0 0 8px;
+      color: var(--text-tertiary);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+    }
+    .issue-list {
+      display: grid;
+      gap: 7px;
+    }
+    .issue-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--bg-sunken);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-size: 13px;
+      text-decoration: none;
+    }
+    .issue-link:hover { background: var(--bg-hover); text-decoration: none; }
+    .issue-link strong {
+      color: var(--teal);
+      font-size: 12px;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+    .issue-link span {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .empty {
+      color: var(--text-secondary);
+      font-family: var(--font-sans);
+      font-size: 13px;
+      padding: 14px 2px;
+    }
+    .is-hidden { display: none; }
+    footer {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 28px 38px;
+      color: var(--text-tertiary);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.06em;
+    }
+    @media (max-width: 880px) {
+      .archive-layout { grid-template-columns: 1fr; }
+      .archive-rail { position: static; order: -1; }
+      .section-head { align-items: flex-start; flex-direction: column; }
+    }
+    @media (max-width: 640px) {
+      .canvas { padding: 28px 16px 60px; }
+      .topbar-inner { padding: 10px 16px; flex-wrap: wrap; gap: 8px; }
+      .brand .sub { display: none; }
+      .nav { width: 100%; overflow-x: auto; margin-left: 0; }
+      .nav a { padding: 5px 11px; font-size: 12px; }
+      h1 { font-size: 30px; }
+      .hero,
+      .archive-layout {
+        max-width: 342px;
+        margin-left: 0;
+        margin-right: auto;
+      }
+      .subtitle { word-break: break-all; }
+      .weekdays,
+      .calendar-grid {
+        grid-template-columns: repeat(7, 25px);
+        gap: 3px;
+      }
+      .weekdays span,
+      .calendar-cell {
+        width: 25px;
+      }
+      .calendar-cell {
+        height: 25px;
+        font-size: 11px;
+      }
+      .calendar-nav {
+        margin-right: 8px;
+      }
+      .rail-panel {
+        padding-right: 20px;
+      }
+      .issue-link {
+        justify-content: flex-start;
+        padding-right: 18px;
+      }
+      .issue-link strong {
+        margin-left: 8px;
+        margin-right: 0;
+        font-size: 0;
+      }
+      .issue-link strong::before {
+        content: "2 篇";
+        font-size: 12px;
+      }
+      .paper-row { padding: 16px; }
+      .paper-row h2 { font-size: 19px; }
+      .rating-chip { margin-left: 0; }
+      footer { padding: 0 16px 32px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="./index.html" aria-label="MIR Paper Digest home">
+        <span class="brand-dot"></span>
+        MIR Paper Digest
+        <span class="sub">Research Archive</span>
+      </a>
+      <nav class="nav" aria-label="Site navigation">
+        <a class="active" href="#papers">全部文章</a>
+        <a href="#calendar">月曆</a>
+        <a href="#issues">Issues</a>
+        <a href="PRODUCT_STANDARD.md">Product standard</a>
+      </nav>
+    </div>
+  </div>
+  <main class="canvas">
+    <section class="hero">
+      <p class="eyebrow">Research archive · __LATEST_DATE__</p>
+      <h1>每日 MIR 論文<em>精選</em></h1>
+      <p class="subtitle">近期主線往 Music Flamingo、歌詞辨識、JPOP 與卡拉 OK 靠攏;生成、評估與 alignment 仍保留,但文章篩選會優先看能落到音樂理解與 karaoke pipeline 的工作。</p>
+      <div class="home-actions">
+        __LATEST_CTA__
+        <a class="secondary-link" href="#papers">查看全部文章</a>
+      </div>
+    </section>
+    <section class="archive-layout">
+      <section class="paper-section" id="papers">
+        <div class="section-head">
+          <div class="section-copy">
+            <h2>全部文章</h2>
+            <p>依發布日期排序。重要篩選只看你在報告頁打到 ★3 以上的文章。</p>
+          </div>
+          <div class="filter-tabs" aria-label="文章篩選">
+            <button class="filter-tab" type="button" data-paper-filter="all" aria-pressed="true">全部</button>
+            <button class="filter-tab important" type="button" data-paper-filter="important" aria-pressed="false">★ 重要</button>
+          </div>
+        </div>
+        <div class="paper-list">
+__PAPER_ROWS__
+        </div>
+      </section>
+      <aside class="archive-rail">
+        <section class="rail-panel calendar-panel" id="calendar" aria-label="Issue calendar">
+          <h2>月曆</h2>
+          <p>有圓點的日期可直接打開當天 issue。</p>
+          <div class="calendar-head">
+            <div class="calendar-title" id="calendar-title"></div>
+            <div class="calendar-nav">
+              <button type="button" id="calendar-prev" aria-label="Previous month">‹</button>
+              <button type="button" id="calendar-next" aria-label="Next month">›</button>
+            </div>
+          </div>
+          <div class="weekdays" aria-hidden="true">
+            <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+          </div>
+          <div class="calendar-grid" id="calendar-grid"></div>
+        </section>
+        <section class="rail-panel" id="issues" aria-label="Issue archive">
+          <h2>Issues</h2>
+__ISSUE_LINKS__
+        </section>
+      </aside>
+    </section>
+  </main>
+  <footer>MIR Paper Digest · Automated daily · Product standard __STANDARD_VERSION__ · __STANDARD_DIGEST__</footer>
+  <script>
+    const REPORTS = __REPORTS_JSON__;
+    const RATINGS_KEY = 'mir-ratings';
+    const MONTH_NAMES_ZH = ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'];
+    const todayStr = '__TODAY__';
+    let currentYear = __CALENDAR_YEAR__;
+    let currentMonth = __CALENDAR_MONTH__;
+    let currentFilter = 'all';
+    function pad(n) { return String(n).padStart(2, '0'); }
+    function dateStr(y, m, d) { return `${y}-${pad(m + 1)}-${pad(d)}`; }
+    function loadRatings() {
+      try { return JSON.parse(localStorage.getItem(RATINGS_KEY)) || {}; } catch { return {}; }
+    }
+    function issueMaxRating(report, ratings) {
+      return (report.paperIds || []).reduce((max, id) => Math.max(max, ratings[id] || 0), 0);
+    }
+    function stars(value) {
+      if (!value) return '未評分';
+      return '★'.repeat(value) + '☆'.repeat(5 - value);
+    }
+    function updateRatings() {
+      const ratings = loadRatings();
+      document.querySelectorAll('.paper-row').forEach(row => {
+        const rating = ratings[row.dataset.paperId] || 0;
+        row.classList.toggle('is-important', rating >= 3);
+        const chip = row.querySelector('.rating-chip');
+        if (chip) {
+          chip.textContent = stars(rating);
+          chip.classList.toggle('is-rated', rating > 0);
+        }
+      });
+    }
+    function applyPaperFilter() {
+      const ratings = loadRatings();
+      let shown = 0;
+      document.querySelectorAll('.paper-row').forEach(row => {
+        const rating = ratings[row.dataset.paperId] || 0;
+        const show = currentFilter === 'all' || rating >= 3;
+        row.classList.toggle('is-hidden', !show);
+        if (show) shown++;
+      });
+      const empty = document.getElementById('paper-empty');
+      if (empty) empty.classList.toggle('is-hidden', shown > 0);
+    }
+    function renderCalendar() {
+      const title = document.getElementById('calendar-title');
+      const grid = document.getElementById('calendar-grid');
+      const ratings = loadRatings();
+      title.innerHTML = `${MONTH_NAMES_ZH[currentMonth]} <span>${currentYear}</span>`;
+      grid.innerHTML = '';
+      const reportsByDate = new Map(REPORTS.map(r => [r.date, r]));
+      const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+      const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+      const prevMonthDays = new Date(currentYear, currentMonth, 0).getDate();
+      for (let i = firstDay - 1; i >= 0; i--) {
+        const cell = document.createElement('span');
+        cell.className = 'calendar-cell other-month';
+        cell.textContent = prevMonthDays - i;
+        grid.appendChild(cell);
+      }
+      for (let d = 1; d <= daysInMonth; d++) {
+        const ds = dateStr(currentYear, currentMonth, d);
+        const report = reportsByDate.get(ds);
+        const cell = document.createElement(report ? 'a' : 'span');
+        cell.className = 'calendar-cell';
+        cell.textContent = d;
+        if (ds === todayStr) cell.classList.add('today');
+        if (report) {
+          cell.href = report.href;
+          cell.classList.add('has-report');
+          const maxRating = issueMaxRating(report, ratings);
+          if (maxRating >= 3) cell.classList.add('is-important');
+          if (maxRating) cell.title = `重要度 ${maxRating}/5`;
+        }
+        grid.appendChild(cell);
+      }
+      const remaining = (7 - (grid.children.length % 7)) % 7;
+      for (let d = 1; d <= remaining; d++) {
+        const cell = document.createElement('span');
+        cell.className = 'calendar-cell other-month';
+        cell.textContent = d;
+        grid.appendChild(cell);
+      }
+    }
+    document.querySelectorAll('[data-paper-filter]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        currentFilter = btn.dataset.paperFilter;
+        document.querySelectorAll('[data-paper-filter]').forEach(b => b.setAttribute('aria-pressed', String(b === btn)));
+        applyPaperFilter();
+      });
+    });
+    document.getElementById('calendar-prev').addEventListener('click', () => {
+      currentMonth--;
+      if (currentMonth < 0) { currentMonth = 11; currentYear--; }
+      renderCalendar();
+    });
+    document.getElementById('calendar-next').addEventListener('click', () => {
+      currentMonth++;
+      if (currentMonth > 11) { currentMonth = 0; currentYear++; }
+      renderCalendar();
+    });
+    updateRatings();
+    applyPaperFilter();
+    renderCalendar();
+    window.addEventListener('storage', () => {
+      updateRatings();
+      applyPaperFilter();
+      renderCalendar();
+    });
+  </script>
+</body>
+</html>

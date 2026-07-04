@@ -1,0 +1,111 @@
+date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_label
+2026-05-23,1,paper,mean_audio,Live Music Diffusion Models: Efficient Fine-Tuning and Post-Training of Interactive Diffusion Music Generators,https://arxiv.org/abs/2605.22717v1,2605.22717v1,text-to-audio/music,新且重要
+2026-05-23,2,paper,mean_audio,"Academic Text-to-Music Grand Challenge: Datasets, Baselines, and Evaluation Methods",https://arxiv.org/abs/2605.21538v1,2605.21538v1,text-to-audio/music|caption/data|evaluation,新且重要
+2026-05-23,1,paper,mean_audio,RobustSpeechFlow: Learning Robust Text-to-Speech Trajectories via Augmentation-based Contrastive Flow Matching,https://arxiv.org/abs/2605.22083v1,2605.22083v1,text-to-audio/music|flow/diffusion,新
+2026-05-23,2,paper,mean_audio,Instrumental Text-to-Music Generation with Auxiliary Conditioning Branches,https://arxiv.org/abs/2605.21433v1,2605.21433v1,text-to-audio/music,新
+2026-05-27,1,paper,mean_audio,Adversarial Dual On-Policy Distillation from Expressive Flow-based Teacher,https://arxiv.org/abs/2605.27095v1,2605.27095v1,text-to-audio/music|flow/diffusion,新
+2026-05-27,2,paper,mean_audio,JLT: Clean-Latent Prediction in Latent Diffusion Transformers,https://arxiv.org/abs/2605.27102v1,2605.27102v1,text-to-audio/music|flow/diffusion,新
+2026-05-29,1,paper,mean_audio,Alignment-Guided Score Matching for Text-to-Image Alignment in Diffusion Models,https://arxiv.org/abs/2605.30038v1,2605.30038v1,text-to-audio/music,新
+2026-05-29,2,paper,mean_audio,LoSATok: Low-dimensional Semantic-Acoustic Tokenizer for Cross-Domain Audio Understanding and Generation,https://arxiv.org/abs/2605.27840v1,2605.27840v1,text-to-audio/music,新
+2026-05-30,1,paper,mean_audio,Khala: Scaling Acoustic Token Language Models Toward High-Fidelity Music Generation,https://arxiv.org/abs/2605.01790v1,2605.01790v1,text-to-audio/music,待觀察
+2026-05-30,2,paper,mean_audio,AdaState: Self-Evolving Anchors for Streaming Video Generation,https://arxiv.org/abs/2605.30349v1,2605.30349v1,text-to-audio/music,新
+2026-05-30,1,paper,mean_audio,Benchmarking Single-Factor Physical Video-to-Audio Generation,https://arxiv.org/abs/2605.30339v1,2605.30339v1,text-to-audio/music|caption/data|evaluation,新
+2026-05-30,2,paper,mean_audio,COMET: Concept Space Dissection of the Modality Gap in Audio-Text Multimodal Contrastive Embeddings,https://arxiv.org/abs/2605.29628v1,2605.29628v1,text-to-audio/music|caption/data,新
+2026-05-31,1,paper,karaoke_jp,SongPrep: A Preprocessing Framework and End-to-end Model for Full-song Structure Parsing and Lyrics Transcription,https://arxiv.org/abs/2509.17404v1,2509.17404v1,lyrics recognition|karaoke-jp,重要
+2026-05-31,2,paper,karaoke_jp,IdolSongsJp Corpus: A Multi-Singer Song Corpus in the Style of Japanese Idol Groups,https://arxiv.org/abs/2507.01349v1,2507.01349v1,JPOP|karaoke-jp,重要
+2026-06-02,1,paper,mean_audio,Music Flamingo: Scaling Music Understanding in Audio Language Models,https://arxiv.org/abs/2511.10289v1,2511.10289v1,Music Flamingo|text-to-audio/music|caption/data|karaoke-jp,重要
+2026-06-02,2,paper,mean_audio,Assessing Factual Music Comprehension in Large Audio Language Models,https://arxiv.org/abs/2511.05550v2,2511.05550v2,Music Flamingo|text-to-audio/music|karaoke-jp|evaluation,新且重要
+2026-06-03,1,paper,karaoke_jp,HeartMuLa: A Family of Open Sourced Music Foundation Models,https://arxiv.org/abs/2601.10547v2,2601.10547v2,lyrics recognition|text-to-audio/music|codec/tokenizer|karaoke-jp,重要
+2026-06-03,2,paper,karaoke_jp,Exploiting Music Source Separation for Automatic Lyrics Transcription with Whisper,https://arxiv.org/abs/2506.15514v1,2506.15514v1,lyrics recognition|karaoke-jp,重要
+2026-06-03,1,paper,karaoke_jp,CMI-Bench: A Comprehensive Benchmark for Evaluating Music Instruction Following,https://arxiv.org/abs/2506.12285v2,2506.12285v2,lyrics recognition|text-to-audio/music|caption/data|karaoke-jp|evaluation,重要
+2026-06-03,2,paper,karaoke_jp,Enhancing Lyrics Transcription on Music Mixtures with Consistency Loss,https://arxiv.org/abs/2506.02339v1,2506.02339v1,lyrics recognition|karaoke-jp,重要
+2026-06-04,1,paper,karaoke_jp,BASS: Benchmarking Audio LMs for Musical Structure and Semantic Reasoning,https://arxiv.org/abs/2602.04085v1,2602.04085v1,karaoke-jp|evaluation,重要
+2026-06-04,2,paper,karaoke_jp,"SingNet: Towards a Large-Scale, Diverse, and In-the-Wild Singing Voice Dataset",https://arxiv.org/abs/2505.09325v1,2505.09325v1,karaoke-jp,重要
+2026-06-04,1,paper,karaoke_jp,VietLyrics: A Large-Scale Dataset and Models for Vietnamese Automatic Lyrics Transcription,https://arxiv.org/abs/2510.22295v2,2510.22295v2,lyrics recognition|karaoke-jp|evaluation,重要
+2026-06-04,2,paper,karaoke_jp,EngravingGNN: A Hybrid Graph Neural Network for End-to-End Piano Score Engraving,https://arxiv.org/abs/2509.19412v1,2509.19412v1,JPOP|karaoke-jp|evaluation,重要
+2026-06-05,1,paper,mean_audio,"AudioGen-Omni: A Unified Multimodal Diffusion Transformer for Video-Synchronized Audio, Speech, and Song Generation",https://arxiv.org/abs/2508.00733v4,2508.00733v4,text-to-audio/music,重要
+2026-06-05,2,paper,mean_audio,ACE-Step: A Step Towards Music Generation Foundation Model,https://arxiv.org/abs/2506.00045v1,2506.00045v1,text-to-audio/music|flow/diffusion,重要
+2026-06-05,1,paper,mean_audio,AnyAudio-Judge: A Dynamic Rubric-Based Benchmark and Evaluator for Audio Instruction Following,https://arxiv.org/abs/2606.03116v1,2606.03116v1,text-to-audio/music|caption/data|evaluation,新
+2026-06-05,2,paper,mean_audio,UNISON: A Unified Sound Generation and Editing Framework via Deep LLM Fusion,https://arxiv.org/abs/2605.31530v2,2605.31530v2,text-to-audio/music,新
+2026-06-06,1,paper,mean_audio,FORTE: FOL-guided Optimal Refinement for Text-audio rEtrieval,https://arxiv.org/abs/2606.05812v1,2606.05812v1,text-to-audio/music,新且重要
+2026-06-06,2,paper,mean_audio,"UAT: Unified Audio-Text Diffusion for Audio Generation, Editing, and Captioning",https://arxiv.org/abs/2606.04939v1,2606.04939v1,text-to-audio/music|caption/data,新且重要
+2026-06-07,1,paper,mean_audio,UniVoice: A Unified Model for Speech and Singing Voice Generation,https://arxiv.org/abs/2606.05852v1,2606.05852v1,text-to-audio/music|flow/diffusion,新
+2026-06-07,2,paper,mean_audio,Where Should Knowledge Enter? A Layered Framework for Knowledge Infusion in Multimodal Iterative Generative Mo,https://arxiv.org/abs/2606.06356v1,2606.06356v1,text-to-audio/music,新
+2026-06-08,1,paper,mean_audio,Making the Most of Limited Data: Score-Aware Training for Text-to-Music Generation,https://arxiv.org/abs/2606.07387v1,2606.07387v1,text-to-audio/music|caption/data|evaluation,新且重要
+2026-06-08,2,paper,karaoke_jp,Diff-VS: Efficient Audio-Aware Diffusion U-Net for Vocals Separation,https://arxiv.org/abs/2604.01120v2,2604.01120v2,karaoke-jp,待觀察
+2026-06-08,1,paper,mean_audio,SURF: Separation via Unsupervised Remixing Flow,https://arxiv.org/abs/2606.04921v1,2606.04921v1,text-to-audio/music|flow/diffusion|evaluation,新
+2026-06-08,2,paper,mean_audio,Drifting Models for Surrogate Flow Modeling,https://arxiv.org/abs/2606.07481v1,2606.07481v1,text-to-audio/music|flow/diffusion,新
+2026-06-09,1,paper,mean_audio,FIGMA: Towards FIne-Grained Music retrievAl,https://arxiv.org/abs/2606.06615v1,2606.06615v1,text-to-audio/music|caption/data|evaluation,新且重要
+2026-06-09,2,paper,mean_audio,Audio Imitator: Controlling Timbre and Tempo in Video2Audio Synthesis with Audio Reference,https://arxiv.org/abs/2606.07182v1,2606.07182v1,text-to-audio/music,新
+2026-06-09,1,paper,mean_audio,"Audio-Oscar: A Multi-Agent System for Complex Audio Scene Generation, Orchestration, and Refinement",https://arxiv.org/abs/2606.07397v1,2606.07397v1,text-to-audio/music,新
+2026-06-09,2,paper,mean_audio,Consistent-Inversion: Reverse Consistency Guidance for Structure-Preserving Visual Editing,https://arxiv.org/abs/2606.07145v1,2606.07145v1,text-to-audio/music,新
+2026-06-10,1,paper,mean_audio,HoliDubber: Holistic Video Dubbing for Complex Acoustic Scenes via Text-Guided Audio Synthesis,https://arxiv.org/abs/2606.09098v1,2606.09098v1,text-to-audio/music|flow/diffusion|evaluation,新
+2026-06-10,2,paper,mean_audio,SMC-ITA: Sequential Monte Carlo Inference-Time Alignment for Video-to-Audio Generation,https://arxiv.org/abs/2606.08393v1,2606.08393v1,text-to-audio/music|flow/diffusion,新
+2026-06-10,1,paper,mean_audio,AHA-WAM:Asynchronous Horizon-Adaptive World-Action Modeling with Observation-Guided Context Routing,https://arxiv.org/abs/2606.09811v1,2606.09811v1,text-to-audio/music,新
+2026-06-10,2,paper,mean_audio,CineDance: Towards Next-Generation Multi-Shot Long-Form Cinematic Audio-Video Generation,https://arxiv.org/abs/2606.09639v1,2606.09639v1,text-to-audio/music|caption/data|evaluation,新
+2026-06-11,1,paper,mean_audio,Mean Flow Distillation: Robust and Stable Distillation for Flow Matching Models,https://arxiv.org/abs/2606.11155v1,2606.11155v1,text-to-audio/music|flow/diffusion,新且重要
+2026-06-11,2,paper,mean_audio,DeRA-MOS: Optimizing Text-to-Music Evaluation via Decoupled Listwise Ranking and Modality Alignment,https://arxiv.org/abs/2606.10010v1,2606.10010v1,text-to-audio/music|evaluation,新且重要
+2026-06-11,1,paper,mean_audio,Flow-DPPO: Divergence Proximal Policy Optimization for Flow Matching Models,https://arxiv.org/abs/2606.11025v1,2606.11025v1,text-to-audio/music|flow/diffusion,新
+2026-06-11,2,paper,mean_audio,Lip Forcing: Few-Step Autoregressive Diffusion for Real-time Lip Synchronization,https://arxiv.org/abs/2606.11180v1,2606.11180v1,text-to-audio/music,新
+2026-06-12,1,paper,mean_audio,DiffCold: A Diffusion-based Generative Model for Cold-Start Item Recommendation,https://arxiv.org/abs/2606.12245v1,2606.12245v1,text-to-audio/music,新
+2026-06-12,2,paper,mean_audio,Flow Matching with In-Context Priors for Out-of-Distribution Brain Dynamics,https://arxiv.org/abs/2606.11833v1,2606.11833v1,text-to-audio/music|flow/diffusion|evaluation,新
+2026-06-12,1,paper,mean_audio,Making Foresight Actionable: Repurposing Representation Alignment in World Action Models,https://arxiv.org/abs/2606.12217v1,2606.12217v1,text-to-audio/music,新
+2026-06-12,2,paper,mean_audio,PianoKontext: Expressive Performance Rendering from Deadpan Context,https://arxiv.org/abs/2606.12282v1,2606.12282v1,text-to-audio/music|flow/diffusion,新
+2026-06-13,1,paper,mean_audio,AudioX-Turbo: A Unified Framework for Efficient Anything-to-Audio Generation,https://arxiv.org/abs/2606.12555v1,2606.12555v1,text-to-audio/music|flow/diffusion|evaluation,新且重要
+2026-06-13,2,paper,mean_audio,"$\texttt{WEAVER}$, Better, Faster, Longer: An Effective World Model for Robotic Manipulation",https://arxiv.org/abs/2606.13672v1,2606.13672v1,text-to-audio/music|flow/diffusion|evaluation,新
+2026-06-13,1,paper,mean_audio,A2D2: Fine-Tuning Any-Length Discrete Diffusion for Adaptive Decoding,https://arxiv.org/abs/2606.13565v1,2606.13565v1,text-to-audio/music,新
+2026-06-13,2,paper,mean_audio,Budget-Constrained Step-Level Diffusion Caching,https://arxiv.org/abs/2606.13496v1,2606.13496v1,text-to-audio/music,新
+2026-06-14,1,paper,mean_audio,"Generative Modeling of Bach-Style Symbolic Music: A Comparative Study of Autoregressive, Latent-Variable, and Adversarial Approaches",https://arxiv.org/abs/2606.13626v1,2606.13626v1,text-to-audio/music,新
+2026-06-14,2,paper,mean_audio,Improving Robotic Generalist Policies via Flow Reversal Steering,https://arxiv.org/abs/2606.13675v1,2606.13675v1,text-to-audio/music|flow/diffusion,新
+2026-06-15,1,paper,mean_audio,PepALD: Macrocyclic Peptide Generation via Autoregressive Latent Diffusion,https://arxiv.org/abs/2606.14510v1,2606.14510v1,text-to-audio/music,新
+2026-06-15,2,paper,mean_audio,NavWAM: A Navigation World Action Model for Goal-Conditioned Visual Navigation,https://arxiv.org/abs/2606.13494v1,2606.13494v1,text-to-audio/music|evaluation,新
+2026-06-16,1,paper,mean_audio,"FoleyGenEx: Unified Video-to-Audio Generation with Multi-Modal Control, Temporal Alignment, and Semantic Precision",https://arxiv.org/abs/2606.14049v1,2606.14049v1,text-to-audio/music,新
+2026-06-16,2,paper,mean_audio,A Surface-based Multimodal Framework for Multitask Analysis in Alzheimer's Disease,https://arxiv.org/abs/2606.15692v1,2606.15692v1,text-to-audio/music,新
+2026-06-17,1,paper,mean_audio,TuneJury: An Open Metric for Improving Music Generation Preference Alignment,https://arxiv.org/abs/2606.17006v1,2606.17006v1,text-to-audio/music,新且重要
+2026-06-17,2,paper,mean_audio,STAR: SpatioTemporal Adaptive Reward Allocation for Text-to-Image RL Post-Training,https://arxiv.org/abs/2606.17979v1,2606.17979v1,text-to-audio/music|flow/diffusion,新且重要
+2026-06-18,1,paper,mean_audio,ELSA: Acoustic Event-Level Semantic Alignment for Fine-Grained Reference-Free Text-to-Audio Evaluation,https://arxiv.org/abs/2606.17404v1,2606.17404v1,text-to-audio/music|evaluation,新
+2026-06-18,2,paper,mean_audio,NoiseTilt: Noise-Tilted Reverse Kernels for Diffusion Reward Alignment,https://arxiv.org/abs/2606.18066v1,2606.18066v1,text-to-audio/music,新
+2026-06-19,1,paper,mean_audio,Moebius: 0.2B Lightweight Image Inpainting Framework with 10B-Level Performance,https://arxiv.org/abs/2606.19195v1,2606.19195v1,text-to-audio/music,新
+2026-06-19,2,paper,mean_audio,The Reward Was in Your Data All Along: Correcting Flow Matching with Discriminator-Guided RL,https://arxiv.org/abs/2606.19162v1,2606.19162v1,text-to-audio/music|flow/diffusion,新
+2026-06-20,1,paper,mean_audio,Hybrid Diffusion Transformer for Instruction-Guided Audio Editing via Rectified Flow,https://arxiv.org/abs/2606.20101v1,2606.20101v1,text-to-audio/music|flow/diffusion,新且重要
+2026-06-20,2,paper,mean_audio,How Transparent is DiffusionGemma?,https://arxiv.org/abs/2606.20560v1,2606.20560v1,text-to-audio/music|flow/diffusion,新
+2026-06-20,1,paper,mean_audio,JanusMesh: Fast and Zero-Shot 3D Visual Illusion Generation via Cross-Space Denoising,https://arxiv.org/abs/2606.20563v1,2606.20563v1,text-to-audio/music,新
+2026-06-20,2,paper,mean_audio,"Site-Specific MIMO Channel Generation via Diffusion and Flow Matching: Fidelity, Efficiency, and Downstream Utility",https://arxiv.org/abs/2606.20098v1,2606.20098v1,text-to-audio/music|flow/diffusion,新
+2026-06-21,1,paper,mean_audio,Through the PRISM: Preference Representation in Intermediate States of Video Diffusion Models,https://arxiv.org/abs/2606.20310v1,2606.20310v1,text-to-audio/music|evaluation,新
+2026-06-21,2,paper,mean_audio,BAFIS: Dataset + Framework to assess occupational Bias and Human Preference in modern Text-to-image Models,https://arxiv.org/abs/2606.20241v1,2606.20241v1,text-to-audio/music|evaluation,新
+2026-06-22,1,paper,mean_audio,CMDS-AD: Cross-Modal Dual-Stream Decoupling for Few-Shot Anomaly Detection,https://arxiv.org/abs/2606.20300v1,2606.20300v1,text-to-audio/music,新
+2026-06-22,2,paper,mean_audio,FlowBender: Feedback-Aware Training for Self-Correcting Conditional Flows,https://arxiv.org/abs/2606.20404v1,2606.20404v1,text-to-audio/music|flow/diffusion,新
+2026-06-23,1,paper,mean_audio,2D Versus 3D Diffusion for In Silico Training of Interventional X-ray AI Models,https://arxiv.org/abs/2606.21414v1,2606.21414v1,text-to-audio/music,新
+2026-06-23,2,paper,mean_audio,FlowMaps: Modeling Long-Term Multimodal Object Dynamics with Flow Matching,https://arxiv.org/abs/2606.20209v1,2606.20209v1,text-to-audio/music|flow/diffusion,新
+2026-06-24,1,paper,mean_audio,Improving Text-to-Music Generation with Human Preference Rewards,https://arxiv.org/abs/2606.21670v1,2606.21670v1,text-to-audio/music,新且重要
+2026-06-24,2,paper,mean_audio,STAR-VAE: Structured Topology-Aware Regularization for Audio Reconstruction and Generation,https://arxiv.org/abs/2606.23064v1,2606.23064v1,text-to-audio/music|flow/diffusion,新且重要
+2026-06-25,1,paper,mean_audio,Beyond U-Net: A Latent-Representation-Aligned Skip-Free Backbone for Flow-Matching Speech Enhancement,https://arxiv.org/abs/2606.24745v1,2606.24745v1,text-to-audio/music|flow/diffusion|codec/tokenizer|evaluation,新且重要
+2026-06-25,2,paper,mean_audio,AudioCALM: Continuous Autoregressive Language Modeling for Universal Audio Generation,https://arxiv.org/abs/2606.23080v1,2606.23080v1,text-to-audio/music|flow/diffusion|caption/data,新且重要
+2026-06-26,1,paper,mean_audio,Real-Time Interactive Music Generation via Data-Free Streaming Consistency Distillation,https://arxiv.org/abs/2606.24307v1,2606.24307v1,text-to-audio/music|flow/diffusion,新
+2026-06-26,2,paper,mean_audio,Action ControlNet: A Lightweight Delay-Aware Adapter for Smooth Asynchronous Control in Vision-Language-Action Models,https://arxiv.org/abs/2606.25985v1,2606.25985v1,text-to-audio/music|flow/diffusion,新
+2026-06-26,1,paper,mean_audio,Learning Action Priors for Cross-embodiment Robot Manipulation,https://arxiv.org/abs/2606.26095v1,2606.26095v1,text-to-audio/music|flow/diffusion,新
+2026-06-26,2,paper,mean_audio,MVTrack4Gen: Multi-View Point Tracking as Geometric Supervision for 4D Video Generation,https://arxiv.org/abs/2606.26087v1,2606.26087v1,text-to-audio/music,新
+2026-06-27,1,paper,karaoke_jp,Listening Like a Judge: A Music-Aware Framework for Automatic Singing Performance Evaluation,https://arxiv.org/abs/2606.26451v1,2606.26451v1,karaoke-jp|evaluation,新且重要
+2026-06-27,2,paper,mean_audio,Don't Settle at the Mode! Mitigating Diversity Collapse in Pretrained Flow Models via Feature Self-Guidance,https://arxiv.org/abs/2606.27371v1,2606.27371v1,text-to-audio/music|flow/diffusion,新
+2026-06-27,1,paper,mean_audio,LISA: Likelihood Score Alignment for Visual-condition Controllable Generation,https://arxiv.org/abs/2606.27192v1,2606.27192v1,text-to-audio/music|flow/diffusion,新
+2026-06-27,2,paper,mean_audio,"Ask, Solve, Generate: Self-Evolving Unified Multimodal Understanding and Generation via Self-Consistency Rewards",https://arxiv.org/abs/2606.27376v1,2606.27376v1,text-to-audio/music|flow/diffusion|caption/data|evaluation,新
+2026-06-28,1,paper,mean_audio,PhysiFormer: Learning to Simulate Mechanics in World Space,https://arxiv.org/abs/2606.27364v1,2606.27364v1,text-to-audio/music,新
+2026-06-28,2,paper,mean_audio,Proposal-Conditioned Latent Diffusion for Closed-Loop Traffic Scenario Generation,https://arxiv.org/abs/2606.27123v1,2606.27123v1,text-to-audio/music,新
+2026-06-28,1,paper,mean_audio,Safe Autoregressive Image Generation with Iterative Self-Improving Codebooks,https://arxiv.org/abs/2606.27147v1,2606.27147v1,text-to-audio/music,新
+2026-06-28,2,paper,mean_audio,Aligning MusicLLM with Emotion using Instruction Tuning and Feedback-Driven Alignment,https://arxiv.org/abs/2606.24123v1,2606.24123v1,text-to-audio/music,新
+2026-06-29,1,paper,mean_audio,Disentangling Continuous-Time Latent Dynamics: Identifiability of Latent SDEs via Diffusion Shifts,https://arxiv.org/abs/2606.28228v1,2606.28228v1,text-to-audio/music,新
+2026-06-29,2,paper,karaoke_jp,STRUM: A Spectral Transcription and Rhythm Understanding Model for End-to-End Generation of Playable Rhythm-Game Charts,https://arxiv.org/abs/2605.12135v1,2605.12135v1,karaoke-jp,待觀察
+2026-07-01,1,paper,mean_audio,EvalSafetyGap: A Hybrid Survey and Conceptual Framework for LLM Evaluation-Safety Failures,https://arxiv.org/abs/2606.30219v1,2606.30219v1,text-to-audio/music|evaluation,新
+2026-07-01,2,paper,mean_audio,Your Data Manifold is Secretly a Reward Model: Shell-LCC for Text-to-Video Generation,https://arxiv.org/abs/2606.30248v1,2606.30248v1,text-to-audio/music,新
+2026-07-01,1,paper,mean_audio,$μ$Flow: Leveraging Average Images for Improving Generalisation of Deepfake Faces Detectors,https://arxiv.org/abs/2606.30528v1,2606.30528v1,text-to-audio/music|flow/diffusion,新
+2026-07-01,2,paper,mean_audio,3D Scene-Adaptive Trajectory-Controllable Human Image Animation with Camera Movement,https://arxiv.org/abs/2606.30514v1,2606.30514v1,text-to-audio/music|flow/diffusion,新
+2026-07-01,1,paper,mean_audio,"Continuous-Time Information Design for Hurricane Evacuation: Disclosure, Congestion, and Optimal Phasing under Model Uncertainty",https://arxiv.org/abs/2606.30320v1,2606.30320v1,text-to-audio/music,新
+2026-07-01,2,paper,mean_audio,Diffusion Fine-tuning with Rewarded Moment Matching Distillation,https://arxiv.org/abs/2606.30414v1,2606.30414v1,text-to-audio/music,新
+2026-07-02,1,paper,mean_audio,SwiftAudio: Data-Efficient Caption-Only Distillation for One-Step Text-to-Audio Diffusion-based Generation,https://arxiv.org/abs/2606.31259v1,2606.31259v1,text-to-audio/music|caption/data,新且重要
+2026-07-02,2,paper,mean_audio,Attacking UTMOS: Probing the Robustness of a Speech Quality Assessment Model,https://arxiv.org/abs/2606.31105v1,2606.31105v1,text-to-audio/music|codec/tokenizer,新
+2026-07-03,1,paper,mean_audio,A Text-Steerable Instrument for Sketching Procedural Soundscapes via Language Models,https://arxiv.org/abs/2607.00309v1,10.5281/zenodo.20784374,text-to-audio/music,新且重要
+2026-07-03,2,paper,mean_audio,DetailAnywhere: Fashion Detail Generation via Cross-Modal Feature Alignment Distillation,https://arxiv.org/abs/2607.02220v1,2607.02220v1,text-to-audio/music|evaluation,新
+2026-07-04,1,paper,mean_audio,UT-AISTimprt submission for ICME 2026 Grand Challenge on Academic Text-to-Music Generation,https://arxiv.org/abs/2607.01669v1,2607.01669v1,text-to-audio/music|evaluation,新
+2026-07-04,2,paper,mean_audio,A Multi-Branch Hierarchy-Aware Framework for Heterogeneous Audio Classification,https://arxiv.org/abs/2607.01974v1,2607.01974v1,text-to-audio/music|evaluation,新
+2026-07-04,1,paper,mean_audio,Alignment Is All You Need For X-to-4D Generation,https://arxiv.org/abs/2607.02516v1,2607.02516v1,text-to-audio/music,新
+2026-07-04,2,paper,mean_audio,Controllable Sim Agents with Behavior Latents,https://arxiv.org/abs/2607.02496v1,2607.02496v1,text-to-audio/music|flow/diffusion,新
