@@ -633,6 +633,7 @@
       .paper-nav-list { flex-direction: column; }
       footer { padding: 0 16px 32px; }
     }
+
     .source-link,
     .details-toggle {
       display: inline-flex; align-items: center; justify-content: center; gap: 8px;
@@ -652,57 +653,88 @@
       border-color: var(--teal);
       color: var(--teal);
     }
-    .source-link:hover { background: var(--teal-soft); text-decoration: none; }
+    .source-link:hover {
+      background: var(--teal-soft);
+      text-decoration: none;
+    }
     .details-toggle:hover { background: var(--bg-hover); }
     .details-toggle:active,
     .source-link:active { transform: translateY(1px); }
     body { overflow-x: hidden; }
-    .canvas, .topbar-inner, footer, .digest-layout > *, .paper-card,
-    .paper-card-body, .quick-read > *, .detail-section { min-width: 0; }
-    .paper-card { overflow: hidden; }
-    .paper-card h2, .one-line, .quick-read p, .detail-section p,
-    .meta-list dd { overflow-wrap: anywhere; }
-    .repo-pick {
-      margin-top: 18px;
-      background: var(--bg-surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow-card);
-      padding: 18px;
+    .canvas,
+    .topbar-inner,
+    footer,
+    .digest-layout > *,
+    .paper-card,
+    .paper-card-body,
+    .quick-read > *,
+    .detail-section {
+      min-width: 0;
+    }
+    .paper-card {
       overflow: hidden;
     }
-    .repo-pick .repo-eyebrow {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text-tertiary);
-      margin-bottom: 6px;
+    .paper-card h2,
+    .one-line,
+    .quick-read p,
+    .detail-section p,
+    .meta-list dd {
+      overflow-wrap: anywhere;
     }
-    .repo-pick h2 {
-      margin: 0 0 8px;
-      font-family: var(--font-zh), var(--font-serif);
-      font-size: 21px;
-      font-weight: 500;
-      line-height: 1.25;
+    .keyterm {
+      color: var(--accent-ink);
+      background: rgba(254, 209, 223, 0.62);
+      border: 1px solid rgba(120, 85, 97, 0.12);
+      border-radius: 6px;
+      padding: 0 0.18em 0.02em;
+      font-weight: 650;
+      box-decoration-break: clone;
+      -webkit-box-decoration-break: clone;
     }
-    .repo-pick h2 a { color: var(--text-primary); text-decoration: none; overflow-wrap: anywhere; }
-    .repo-pick h2 a:hover { color: var(--accent); }
-    .repo-pick p { margin: 0 0 8px; color: var(--text-secondary); font-family: var(--font-sans); font-size: 14px; overflow-wrap: anywhere; }
-    .repo-pick .repo-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+    h2 .keyterm {
+      background: transparent;
+      border-color: transparent;
+      color: var(--accent);
+      padding: 0;
+    }
     @media (max-width: 640px) {
-      .nav { width: 100%; margin-left: 0; overflow-x: auto; justify-content: flex-start; }
-      .nav a, .nav-pill { flex-shrink: 0; }
-      .hero, .digest-layout { max-width: 342px; margin-left: 0; margin-right: auto; }
-      .paper-card { width: 100%; }
-      .card-actions { align-items: flex-start; }
-      .star-rating { width: 100%; margin-left: 0; justify-content: flex-end; }
-      .star-rating button { width: 26px; height: 28px; }
+      .nav {
+        width: 100%;
+        margin-left: 0;
+        overflow-x: auto;
+        justify-content: flex-start;
+      }
+      .nav a,
+      .nav-pill {
+        flex-shrink: 0;
+      }
+      .hero,
+      .digest-layout {
+        max-width: 342px;
+        margin-left: 0;
+        margin-right: auto;
+      }
+      .paper-card {
+        width: 100%;
+      }
+      .card-actions {
+        align-items: flex-start;
+      }
+      .star-rating {
+        width: 100%;
+        margin-left: 0;
+        justify-content: flex-end;
+      }
+      .star-rating button {
+        width: 26px;
+        height: 28px;
+      }
     }
 
   </style>
 </head>
 <body>
+
   <div class="topbar">
     <div class="topbar-inner">
       <a class="brand" href="../index.html" aria-label="MIR Paper Digest home">
@@ -717,28 +749,33 @@
       </nav>
     </div>
   </div>
+
   <main class="canvas">
+
     <section class="hero">
       <div>
         <p class="eyebrow">Daily research brief · 2026-07-05</p>
         <h1>每日 MIR 論文<em>精選</em></h1>
-        <p class="subtitle">近期主線往 Music Flamingo、歌詞辨識、JPOP 與卡拉 OK 靠攏;今天先看最能轉成下一個小實驗的兩篇。</p>
+        <p class="subtitle">近期主線往 <mark class="keyterm">Music Flamingo</mark>、<mark class="keyterm">歌詞辨識</mark>、<mark class="keyterm">JPOP</mark> 與<mark class="keyterm">卡拉 OK</mark> 靠攏；今天先看最能轉成下一個小實驗的兩篇。</p>
       </div>
     </section>
+
     <section class="digest-layout">
+
       <aside class="paper-nav" aria-label="Paper navigation">
         <div class="paper-nav-title">Papers</div>
         <ol class="paper-nav-list">
           <li><a href="#paper-1">
             <span class="nav-num">01</span>
-            <span>Neural Audio Codec with Adjustable Token...<span class="nav-track">MeanAudio</span></span>
+            <span>From SRA to Self-Flow: Data Augmentation...<span class="nav-track">MeanAudio</span></span>
           </a></li>
           <li><a href="#paper-2">
             <span class="nav-num">02</span>
-            <span>Decomposer: Learning to Decompile Symboli...<span class="nav-track">MIR</span></span>
+            <span>Hierarchical Anti-Aesthetics: Protecting...<span class="nav-track">MeanAudio</span></span>
           </a></li>
         </ol>
       </aside>
+
       <div class="cards" aria-label="論文卡片">
 
         <article class="paper-card" data-track="mean_audio" id="paper-1">
@@ -746,32 +783,31 @@
             <div class="paper-number">01</div>
             <div class="paper-meta">
               <span class="track">MeanAudio</span>
-              <span class="quality">新且重要</span>
+              <span class="quality">新</span>
               <span class="freshness">2026-07-02 · 3d</span>
             </div>
           </div>
           <div class="paper-card-body">
-          <h2><a href="https://arxiv.org/abs/2607.01865" target="_blank" rel="noopener">Neural Audio Codec with Adjustable Token Temporal Resolution Using Sampling-Frequency-Independent Convolutional Layers</a></h2>
-          <p class="one-line">用取樣頻率無關卷積讓單一 neural codec 支援多種 token 時間解析度(TTR),把 token rate 與音質細節的取捨變成可調參數,不必為每種解析度分開訓練 codec。</p>
+          <h2><a href="https://arxiv.org/abs/2607.02508v1" target="_blank" rel="noopener">From SRA to Self-Flow: Data Augmentation or Self-Supervision?</a></h2>
+          <p class="one-line">Representation <mark class="keyterm">alignment</mark> has become an effective way to accelerate diffusion transformer training and improve generation quality. R...</p>
           <div class="tag-row">
             <span class="track-hint">貼近主線</span>
-            <span class="tag">codec/tokenizer</span>
             <span class="tag">text-to-audio/music</span>
-            <span class="tag">token rate</span>
+            <span class="tag">flow/diffusion</span>
           </div>
           <div class="quick-read">
             <div>
               <span class="label">Insight</span>
-              <p>洞見:把 TTR 視為 token 序列的取樣週期,從共享參數動態生成各解析度的卷積 kernel,一個模型覆蓋多種 token rate。這直接對應 MeanAudio 在 codec 端「序列長度 vs 快速聲學事件」的老問題。</p>
+              <p><mark class="keyterm">洞見</mark>：針對 SRA / Self-Flow / Data / Augmentation / Self-Supervision：它把 <mark class="keyterm">alignment</mark> signal 放回生成過程本身，而不是只靠後處理 <mark class="keyterm">reward</mark>；可對照音訊文字對齊是否也能這樣做。 <mark class="keyterm">方法線索</mark>：把 <mark class="keyterm">alignment</mark> signal 直接放進 diffusion matching/training，而不是只靠外部 <mark class="keyterm">reward</mark> 做後處理。</p>
             </div>
             <div>
               <span class="label">Try next</span>
-              <p>可做:在 DAC 語義保真度實驗線上對照——固定生成模型,只換 TTR 設定,量測音樂重建品質與語義保留(CLAP 檢索),看多解析度 codec 是否比單一 TTR 的 DAC 更適合當 MeanAudio 的表示層。</p>
+              <p>針對 SRA / Self-Flow / Data / Augmentation / Self-Supervision：<mark class="keyterm">可做</mark>：把 <mark class="keyterm">alignment</mark> signal 做成單一 loss 或 reranking ablation，先比較文字-音訊相符度與主觀聽感。<mark class="keyterm">結果焦點</mark>：確認 <mark class="keyterm">alignment</mark> 是否真的在生成過程改善，而不是只讓某個 <mark class="keyterm">reward</mark> metric 變好。</p>
             </div>
           </div>
           </div>
           <div class="card-actions">
-            <a class="source-link" href="https://arxiv.org/abs/2607.01865" target="_blank" rel="noopener">Open Paper &#8599;</a>
+            <a class="source-link" href="https://arxiv.org/abs/2607.02508v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
             <button class="details-toggle" type="button" aria-expanded="false" aria-controls="paper-1-panel">展開摘要與實驗建議</button>
             <div class="star-rating" data-paper-id="2026-07-05-1" aria-label="Rate this paper">
               <span class="star-label">重要度</span>
@@ -786,34 +822,34 @@
             <div class="detail-grid">
               <section class="detail-section" data-standard-section="problem">
                 <h3>Problem</h3>
-                <p>Neural codec 的 token 時間解析度(TTR)控制「表現快速聲學事件」與「縮短 token 序列」的取捨,但多數 codec 只能在單一 TTR 訓練,每換一種解析度就要重訓一次。</p>
+                <p>Representation <mark class="keyterm">alignment</mark> has become an effective way to accelerate diffusion transformer training and improve generation quality.</p>
               </section>
               <section class="detail-section" data-standard-section="method">
                 <h3>Method</h3>
-                <p>提出取樣頻率無關(SFI)卷積機制:把 TTR 當作 token 序列的取樣週期,從共享參數集生成 TTR 相依的卷積 kernel,並隨 TTR 調整 kernel size 與 stride;直接嵌進 Descript Audio Codec(DAC),quantizer 不動。</p>
+                <p>Recent self-<mark class="keyterm">alignment</mark> methods, such as SRA and Self-Flow, further remove the dependency on external pretrained encoders by constructing <mark class="keyterm">alignment</mark> within the diffusion model itself.</p>
               </section>
               <section class="detail-section" data-standard-section="data">
                 <h3>Data</h3>
-                <p>在環境音重建上實驗;基於 DAC 架構。注意:論文用的是環境音,不是音樂——音樂與歌聲上的表現需要自行驗證。</p>
+                <p>看資料來源、benchmark、baseline 與評估指標是否公開或可重建；若不足，先做小型替代測試。</p>
               </section>
               <section class="detail-section" data-standard-section="findings">
                 <h3>Findings</h3>
-                <p>單一模型在多種 TTR 下的重建品質,優於「每種 TTR 換一組專屬層」的 single-model baseline;代表共享參數生成 kernel 的做法確實可行。</p>
+                <p>However, the mechanism behind the improvement from SRA to Self-Flow, dual-time scheduling, remains under-examined: Self-Flow attributes its gain to interactions between tokens at different noise levels, where cleaner tokens help infer noisier ones.</p>
               </section>
               <section class="detail-section" data-standard-section="limitations">
                 <h3>Limitations</h3>
-                <p>只在環境音重建驗證,未測音樂、歌聲或下游生成任務;quantizer 未動,TTR 改變對 RVQ codebook 使用率與語義保留的影響未知;也還沒接到 token LM 上驗證生成品質。</p>
+                <p>注意是否只在單一資料集、單一模型或特定 sampling 設定下成立，也要避免把 speech/TTS 結論直接套到 music/audio generation。</p>
               </section>
               <section class="detail-section" data-standard-section="editor-note">
                 <h3>Editor Note</h3>
-                <p>與 MeanAudio 的 codec/token rate 問題直接相關,也呼應 DAC 語義保真度研究線。下一步:拿它的 SFI 機制對 DAC 做單變因替換,先在音樂資料上跑重建+語義檢索 smoke test。</p>
+                <p>先看它是否能改善 text-to-audio / text-to-music，或支援 <mark class="keyterm">Music Flamingo</mark>、<mark class="keyterm">歌詞辨識</mark>、<mark class="keyterm">JPOP</mark> / <mark class="keyterm">卡拉 OK</mark> 的音樂理解方向。 下一步：抽一個可驗證的 trick，做成小實驗；先看資料與評估是否足以支撐，不要只被 <mark class="keyterm">CLAP</mark> 或主觀樣本牽著走。</p>
               </section>
               <section class="detail-section" data-standard-section="metadata">
                 <h3>Metadata</h3>
                 <dl class="meta-list">
-                  <div><dt>Authors</dt><dd>Tomohiko Nakamura, Wataru Nakata, Kanami Imamura, Yuki Saito</dd></div>
-                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2607.01865">arxiv.org/abs/2607.01865</a></dd></div>
-                  <div><dt>Relevance</dt><dd>MeanAudio 5 / karaoke 1 · max 5</dd></div>
+                  <div><dt>Authors</dt><dd>Dengyang Jiang, Mengmeng Wang, Harry Yang, Jingdong Wang</dd></div>
+                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2607.02508v1">arxiv.org/abs/2607.02508v1</a></dd></div>
+                  <div><dt>Relevance</dt><dd>MeanAudio 2 / karaoke 0 · max 2</dd></div>
                 </dl>
               </section>
             </div>
@@ -821,37 +857,35 @@
         </article>
     
 
-        <article class="paper-card" data-track="general_mir" id="paper-2">
+        <article class="paper-card" data-track="mean_audio" id="paper-2">
           <div class="paper-head">
             <div class="paper-number">02</div>
             <div class="paper-meta">
-              <span class="track">MIR</span>
+              <span class="track">MeanAudio</span>
               <span class="quality">新</span>
               <span class="freshness">2026-07-02 · 3d</span>
             </div>
           </div>
           <div class="paper-card-body">
-          <h2><a href="https://arxiv.org/abs/2607.01849" target="_blank" rel="noopener">Decomposer: Learning to Decompile Symbolic Music to Programs</a></h2>
-          <p class="one-line">把 MIDI 反編譯成可執行、可編輯的 Strudel 音樂程式:先用合成配對資料做 SFT,再用 RL 同時獎勵重建忠實度與程式可讀性,避免退化成逐音符轉寫。</p>
+          <h2><a href="https://arxiv.org/abs/2607.02038v1" target="_blank" rel="noopener">Hierarchical Anti-Aesthetics: Protecting Facial Privacy against Customized Diffusion Models</a></h2>
+          <p class="one-line">The rise of customized diffusion models has fueled a boom in personalized visual content creation, but it also introduces serious r...</p>
           <div class="tag-row">
-            <span class="track-hint">MIR 觀點</span>
-            <span class="tag">MIDI/score</span>
-            <span class="tag">symbolic music</span>
-            <span class="tag">RL reward</span>
+            <span class="track-hint">貼近主線</span>
+            <span class="tag">text-to-audio/music</span>
           </div>
           <div class="quick-read">
             <div>
               <span class="label">Insight</span>
-              <p>洞見:低資源配對資料的解法是「合成資料 SFT + 無配對資料 RL」兩段式;reward 同時管忠實度與可讀性,防止模型走捷徑。這個 recipe 可遷移到歌詞對齊或 mora-to-note 這類配對資料稀缺的任務。</p>
+              <p><mark class="keyterm">洞見</mark>：針對 Hierarchical / Anti-Aesthetics / Protecting / Facial / Privacy：它的價值在資料/偏好/評估訊號怎麼進訓練，而不是只看模型架構名稱。 <mark class="keyterm">方法線索</mark>：Specifically, we propose a Hierarchical Anti-Aesthetics (HAA) framework that exploits aesthetic cues...</p>
             </div>
             <div>
               <span class="label">Try next</span>
-              <p>可做:借它的兩段式訓練思路——karaoke-jp 的日文歌詞對齊也缺配對資料,可以先合成(TTS 唱聲+已知時間軸)做 SFT,再用無標註歌曲以對齊一致性 reward 做 RL,驗證是否比純監督穩。</p>
+              <p>針對 Hierarchical / Anti-Aesthetics / Protecting / Facial / Privacy：<mark class="keyterm">可做</mark>：抽一個最小變因重跑 ablation，固定資料、模型與 sampling，只檢查它聲稱的關鍵差異。<mark class="keyterm">結果焦點</mark>：Extensive experiments show that HAA outperforms existing methods in identity removal,...</p>
             </div>
           </div>
           </div>
           <div class="card-actions">
-            <a class="source-link" href="https://arxiv.org/abs/2607.01849" target="_blank" rel="noopener">Open Paper &#8599;</a>
+            <a class="source-link" href="https://arxiv.org/abs/2607.02038v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
             <button class="details-toggle" type="button" aria-expanded="false" aria-controls="paper-2-panel">展開摘要與實驗建議</button>
             <div class="star-rating" data-paper-id="2026-07-05-2" aria-label="Rate this paper">
               <span class="star-label">重要度</span>
@@ -866,34 +900,34 @@
             <div class="detail-grid">
               <section class="detail-section" data-standard-section="problem">
                 <h3>Problem</h3>
-                <p>從演奏(symbolic MIDI)反推高階音樂指令是逆問題:Strudel 是低資源語言,幾乎沒有 MIDI-程式配對資料;只優化 MIDI 重建又會塌縮成不可讀的逐音符轉寫。</p>
+                <p>The rise of customized diffusion models has fueled a boom in personalized visual content creation, but it also introduces serious risks of malicious misuse, thereby posing threats to personal privacy.</p>
               </section>
               <section class="detail-section" data-standard-section="method">
                 <h3>Method</h3>
-                <p>兩階段後訓練:(1)建 Strudel-Synth 合成語料(配對的 Strudel 程式與渲染 MIDI)做監督微調;(2)在無配對 MIDI 上做強化學習,reward 同時計 MIDI 重建忠實度與程式碼可讀性。</p>
+                <p>Image aesthetics are strongly correlated with human perception of image quality.</p>
               </section>
               <section class="detail-section" data-standard-section="data">
                 <h3>Data</h3>
-                <p>Strudel-Synth 合成語料+合成與真實世界 MIDI benchmark;專案頁有展示(yewon-kim.com/decomposer)。</p>
+                <p>看資料來源、benchmark、baseline 與評估指標是否公開或可重建；若不足，先做小型替代測試。</p>
               </section>
               <section class="detail-section" data-standard-section="findings">
                 <h3>Findings</h3>
-                <p>MIDI 重建忠實度大幅超過閉源 LLM 直接生成,程式可讀性與多樣性優於啟發式轉換器;證明小模型後訓練在這種結構化逆問題上能贏過通用大模型。</p>
+                <p>Motivated by this observation, we address facial privacy protection from a novel aesthetic perspective by degrading the generation quality of maliciously customized models, thus reducing facial identity leakage.</p>
               </section>
               <section class="detail-section" data-standard-section="limitations">
                 <h3>Limitations</h3>
-                <p>任務限定在 symbolic(MIDI)層,不含音訊轉錄;Strudel 表達力有限,對複雜表演性演奏(rubato、微時值)的處理未知;可讀性 reward 的設計細節需要看正文驗證。</p>
+                <p>注意是否只在單一資料集、單一模型或特定 sampling 設定下成立，也要避免把 speech/TTS 結論直接套到 music/audio generation。</p>
               </section>
               <section class="detail-section" data-standard-section="editor-note">
                 <h3>Editor Note</h3>
-                <p>CMU Donahue/Neubig 組。對主線的價值在訓練 recipe 而非任務本身:合成配對+RL 雙 reward 的路子,值得記進 karaoke-jp 的歌詞對齊實驗選項。</p>
+                <p>先看它是否能改善 text-to-audio / text-to-music，或支援 <mark class="keyterm">Music Flamingo</mark>、<mark class="keyterm">歌詞辨識</mark>、<mark class="keyterm">JPOP</mark> / <mark class="keyterm">卡拉 OK</mark> 的音樂理解方向。 下一步：抽一個可驗證的 trick，做成小實驗；先看資料與評估是否足以支撐，不要只被 <mark class="keyterm">CLAP</mark> 或主觀樣本牽著走。</p>
               </section>
               <section class="detail-section" data-standard-section="metadata">
                 <h3>Metadata</h3>
                 <dl class="meta-list">
-                  <div><dt>Authors</dt><dd>Yewon Kim, Apurva Gandhi, David Chung, Graham Neubig, Chris Donahue</dd></div>
-                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2607.01849">arxiv.org/abs/2607.01849</a></dd></div>
-                  <div><dt>Relevance</dt><dd>MeanAudio 1 / karaoke 2 · max 2</dd></div>
+                  <div><dt>Authors</dt><dd>Songping Wang, Yueming Lyu, Shiqi Liu, Chen Zhao, Ziyuan Chen 等 8 位</dd></div>
+                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2607.02038v1">arxiv.org/abs/2607.02038v1</a></dd></div>
+                  <div><dt>Relevance</dt><dd>MeanAudio 2 / karaoke 0 · max 2</dd></div>
                 </dl>
               </section>
             </div>
@@ -902,32 +936,22 @@
     
       </div>
     </section>
-
-    <section class="repo-pick" aria-label="GitHub pick">
-      <div class="repo-eyebrow">GitHub pick of the day</div>
-      <h2><a href="https://github.com/nomadkaraoke/karaoke-gen" target="_blank" rel="noopener">nomadkaraoke/karaoke-gen</a></h2>
-      <div class="repo-meta"><span class="tag">★ 147</span><span class="tag">更新 2026-07-03</span><span class="tag">karaoke</span><span class="tag">lyrics sync</span><span class="tag">source separation</span></div>
-      <p>端到端卡拉 OK 影片生成:下載音訊與歌詞、人聲/伴奏分離、用轉錄模型同步歌詞時間軸、渲染 CDG 字幕並上傳 YouTube/Dropbox。MIT 授權,147★,2026-07-03 仍在活躍更新。</p>
-      <p><strong>為什麼相關:</strong>與 karaoke-jp 幾乎同構的完整 pipeline(分離→轉錄→對齊→渲染)。值得對照它的歌詞同步與渲染模組設計,特別是轉錄模型怎麼接時間軸;也可當 baseline 比較日文歌詞場景的失敗模式。</p>
-      <div class="card-actions">
-        <a class="source-link" href="https://github.com/nomadkaraoke/karaoke-gen" target="_blank" rel="noopener">Open Repo &#8599;</a>
-      </div>
-    </section>
-    
     <details class="footnote">
       <summary>閱讀順序與篩選原則</summary>
       <div class="footnote-body">
-        <span><strong>1.</strong> 近期主線:Music Flamingo、歌詞辨識、JPOP、卡拉 OK 與 karaoke-jp。</span>
-        <span><strong>2.</strong> 生成主線仍保留:text-to-audio/music、flow、caption、codec、評估與 reward alignment。</span>
-        <span><strong>3.</strong> 只收高品質:新穎度、重要性、baseline、資料與可落地性一起看。</span>
+        <span><strong>1.</strong> 近期主線：<mark class="keyterm">Music Flamingo</mark>、<mark class="keyterm">歌詞辨識</mark>、<mark class="keyterm">JPOP</mark>、<mark class="keyterm">卡拉 OK</mark> 與 <mark class="keyterm">karaoke-jp</mark>。</span>
+        <span><strong>2.</strong> 生成主線仍保留：text-to-audio/music、flow、caption、<mark class="keyterm">codec</mark>、評估與 <mark class="keyterm">reward</mark> <mark class="keyterm">alignment</mark>。</span>
+        <span><strong>3.</strong> 只收高品質：新穎度、重要性、baseline、資料與可落地性一起看。</span>
       </div>
     </details>
   </main>
-  <footer>Generated by the MIR digest automation · Product standard 2026-05-26 · 2187e8b96f · 2026-07-05 01:49:38 Asia/Taipei</footer>
-  <script>
 
+  <footer>Generated by the local MIR paper automation · Product standard 2026-05-26 · 2187e8b96f · 2026-07-05 09:00:12 Asia/Taipei</footer>
+
+  <script>
     const cards = Array.from(document.querySelectorAll('.paper-card'));
     const RATINGS_KEY = 'mir-ratings';
+
     function loadRatings() {
       try { return JSON.parse(localStorage.getItem(RATINGS_KEY)) || {}; } catch { return {}; }
     }
@@ -973,6 +997,7 @@
       });
     }
     document.querySelectorAll('.star-rating').forEach(initStarWidget);
+
     function toggleCard(card) {
       const isOpen = card.classList.toggle('is-open');
       const btn = card.querySelector('.details-toggle');
@@ -986,6 +1011,33 @@
       body.addEventListener('click', event => {
         if (event.target.closest('a, button, input, .card-actions, .star-rating')) return;
         toggleCard(body.closest('.paper-card'));
+      });
+    });
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.dataset.filter;
+        document.querySelectorAll('.filter-btn').forEach(b => b.setAttribute('aria-pressed', String(b === btn)));
+        const ratings = loadRatings();
+        cards.forEach(card => {
+          let show = filter === 'all' || card.dataset.track === filter;
+          if (filter === 'important') {
+            const paperId = card.id ? `2026-07-05-${card.id.replace('paper-', '')}` : null;
+            show = paperId && (ratings[paperId] || 0) >= 3;
+          }
+          card.classList.toggle('is-hidden', !show);
+        });
+        document.querySelectorAll('.paper-nav-list li').forEach(li => {
+          const link = li.querySelector('a');
+          if (!link) return;
+          const target = document.querySelector(link.getAttribute('href'));
+          if (!target) return;
+          let show = filter === 'all' || target.dataset.track === filter;
+          if (filter === 'important') {
+            const paperId = target.id ? `2026-07-05-${target.id.replace('paper-', '')}` : null;
+            show = paperId && (ratings[paperId] || 0) >= 3;
+          }
+          li.style.display = show ? '' : 'none';
+        });
       });
     });
     document.querySelectorAll('.paper-nav-list a').forEach(link => {
@@ -1003,7 +1055,7 @@
         }
       });
     });
-
   </script>
+
 </body>
 </html>
