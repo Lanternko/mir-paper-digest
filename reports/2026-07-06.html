@@ -633,7 +633,6 @@
       .paper-nav-list { flex-direction: column; }
       footer { padding: 0 16px 32px; }
     }
-
     .source-link,
     .details-toggle {
       display: inline-flex; align-items: center; justify-content: center; gap: 8px;
@@ -653,88 +652,57 @@
       border-color: var(--teal);
       color: var(--teal);
     }
-    .source-link:hover {
-      background: var(--teal-soft);
-      text-decoration: none;
-    }
+    .source-link:hover { background: var(--teal-soft); text-decoration: none; }
     .details-toggle:hover { background: var(--bg-hover); }
     .details-toggle:active,
     .source-link:active { transform: translateY(1px); }
     body { overflow-x: hidden; }
-    .canvas,
-    .topbar-inner,
-    footer,
-    .digest-layout > *,
-    .paper-card,
-    .paper-card-body,
-    .quick-read > *,
-    .detail-section {
-      min-width: 0;
-    }
-    .paper-card {
+    .canvas, .topbar-inner, footer, .digest-layout > *, .paper-card,
+    .paper-card-body, .quick-read > *, .detail-section { min-width: 0; }
+    .paper-card { overflow: hidden; }
+    .paper-card h2, .one-line, .quick-read p, .detail-section p,
+    .meta-list dd { overflow-wrap: anywhere; }
+    .repo-pick {
+      margin-top: 18px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-card);
+      padding: 18px;
       overflow: hidden;
     }
-    .paper-card h2,
-    .one-line,
-    .quick-read p,
-    .detail-section p,
-    .meta-list dd {
-      overflow-wrap: anywhere;
+    .repo-pick .repo-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 6px;
     }
-    .keyterm {
-      color: var(--accent-ink);
-      background: rgba(254, 209, 223, 0.62);
-      border: 1px solid rgba(120, 85, 97, 0.12);
-      border-radius: 6px;
-      padding: 0 0.18em 0.02em;
-      font-weight: 650;
-      box-decoration-break: clone;
-      -webkit-box-decoration-break: clone;
+    .repo-pick h2 {
+      margin: 0 0 8px;
+      font-family: var(--font-zh), var(--font-serif);
+      font-size: 21px;
+      font-weight: 500;
+      line-height: 1.25;
     }
-    h2 .keyterm {
-      background: transparent;
-      border-color: transparent;
-      color: var(--accent);
-      padding: 0;
-    }
+    .repo-pick h2 a { color: var(--text-primary); text-decoration: none; overflow-wrap: anywhere; }
+    .repo-pick h2 a:hover { color: var(--accent); }
+    .repo-pick p { margin: 0 0 8px; color: var(--text-secondary); font-family: var(--font-sans); font-size: 14px; overflow-wrap: anywhere; }
+    .repo-pick .repo-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
     @media (max-width: 640px) {
-      .nav {
-        width: 100%;
-        margin-left: 0;
-        overflow-x: auto;
-        justify-content: flex-start;
-      }
-      .nav a,
-      .nav-pill {
-        flex-shrink: 0;
-      }
-      .hero,
-      .digest-layout {
-        max-width: 342px;
-        margin-left: 0;
-        margin-right: auto;
-      }
-      .paper-card {
-        width: 100%;
-      }
-      .card-actions {
-        align-items: flex-start;
-      }
-      .star-rating {
-        width: 100%;
-        margin-left: 0;
-        justify-content: flex-end;
-      }
-      .star-rating button {
-        width: 26px;
-        height: 28px;
-      }
+      .nav { width: 100%; margin-left: 0; overflow-x: auto; justify-content: flex-start; }
+      .nav a, .nav-pill { flex-shrink: 0; }
+      .hero, .digest-layout { max-width: 342px; margin-left: 0; margin-right: auto; }
+      .paper-card { width: 100%; }
+      .card-actions { align-items: flex-start; }
+      .star-rating { width: 100%; margin-left: 0; justify-content: flex-end; }
+      .star-rating button { width: 26px; height: 28px; }
     }
 
   </style>
 </head>
 <body>
-
   <div class="topbar">
     <div class="topbar-inner">
       <a class="brand" href="../index.html" aria-label="MIR Paper Digest home">
@@ -749,65 +717,61 @@
       </nav>
     </div>
   </div>
-
   <main class="canvas">
-
     <section class="hero">
       <div>
         <p class="eyebrow">Daily research brief · 2026-07-06</p>
         <h1>每日 MIR 論文<em>精選</em></h1>
-        <p class="subtitle">近期主線往 <mark class="keyterm">Music Flamingo</mark>、<mark class="keyterm">歌詞辨識</mark>、<mark class="keyterm">JPOP</mark> 與<mark class="keyterm">卡拉 OK</mark> 靠攏；今天先看最能轉成下一個小實驗的兩篇。</p>
+        <p class="subtitle">近期主線往 Music Flamingo、歌詞辨識、JPOP 與卡拉 OK 靠攏;今天先看最能轉成下一個小實驗的兩篇。</p>
       </div>
     </section>
-
     <section class="digest-layout">
-
       <aside class="paper-nav" aria-label="Paper navigation">
         <div class="paper-nav-title">Papers</div>
         <ol class="paper-nav-list">
           <li><a href="#paper-1">
             <span class="nav-num">01</span>
-            <span>Neural Audio Codec with Adjustable Token...<span class="nav-track">MeanAudio</span></span>
+            <span>VocalParse: Towards Unified and Scalable...<span class="nav-track">karaoke-jp</span></span>
           </a></li>
           <li><a href="#paper-2">
             <span class="nav-num">02</span>
-            <span>Open-Weather Robust 3D Detection via Dual...<span class="nav-track">MeanAudio</span></span>
+            <span>MR-FlowDPO: Multi-Reward Direct Preferenc...<span class="nav-track">MeanAudio</span></span>
           </a></li>
         </ol>
       </aside>
-
       <div class="cards" aria-label="論文卡片">
 
-        <article class="paper-card" data-track="mean_audio" id="paper-1">
+        <article class="paper-card" data-track="karaoke_jp" id="paper-1">
           <div class="paper-head">
             <div class="paper-number">01</div>
             <div class="paper-meta">
-              <span class="track">MeanAudio</span>
-              <span class="quality">新</span>
-              <span class="freshness">2026-07-02 · 4d</span>
+              <span class="track">karaoke-jp</span>
+              <span class="quality">新且重要</span>
+              <span class="freshness">2026-05-06 · 61d</span>
             </div>
           </div>
           <div class="paper-card-body">
-          <h2><a href="https://arxiv.org/abs/2607.01865v1" target="_blank" rel="noopener">Neural Audio <mark class="keyterm">Codec</mark> with Adjustable Token Temporal Resolution Using Sampling-Frequency-Independent Convolutional Layers</a></h2>
-          <p class="one-line">Discrete tokens obtained from neural audio <mark class="keyterm">codec</mark>s (NACs) have been used as compact representations in audio generation and understa...</p>
+          <h2><a href="https://arxiv.org/abs/2605.04613" target="_blank" rel="noopener">VocalParse: Towards Unified and Scalable Singing Voice Transcription with Large Audio Language Models</a></h2>
+          <p class="one-line">以 Qwen3-ASR 為底把唱聲轉譜變成單一自迴歸生成:交錯 token 同時輸出歌詞、音高、音值並保留字-音符對應,搭配先解歌詞的 CoT 式 prompting,多個歌唱資料集達 SOTA。</p>
           <div class="tag-row">
-            <span class="track-hint">貼近主線</span>
-            <span class="tag">text-to-audio/music</span>
-            <span class="tag">codec/tokenizer</span>
+            <span class="track-hint">可轉譯</span>
+            <span class="tag">唱聲轉譜</span>
+            <span class="tag">LALM</span>
+            <span class="tag">歌詞對齊</span>
           </div>
           <div class="quick-read">
             <div>
               <span class="label">Insight</span>
-              <p><mark class="keyterm">洞見</mark>：針對 Neural / Audio / <mark class="keyterm">Codec</mark> / Adjustable / Token：這篇值得看的點在於它提出的建模假設是否能抽成音訊生成或 MIR pipeline 的單一可測變因。 <mark class="keyterm">方法線索</mark>：This paper proposes a mechanism that enables a single NAC to operate at multiple TTRs using sampling-fre...</p>
+              <p>洞見:交錯序列本身就是對齊——字-音符對應直接編碼在解碼流裡,不需事後強制對齊;但交錯會打斷 ASR 預訓練依賴的連續文本語境,所以先產出純歌詞當語義鷹架、再輸出交錯譜,兩者兼得。</p>
             </div>
             <div>
               <span class="label">Try next</span>
-              <p>針對 Neural / Audio / <mark class="keyterm">Codec</mark> / Adjustable / Token：<mark class="keyterm">可做</mark>：抽一個最小變因重跑 ablation，固定資料、模型與 sampling，只檢查它聲稱的關鍵差異。<mark class="keyterm">結果焦點</mark>：Experiments on environmental sound reconstruction show that the proposed model outperforms a single-model...</p>
+              <p>可做:抓 VocalParse-1.7B checkpoint,對 10 段人聲分離後的日文歌曲跑 transcribe_one,量 kana CER 與字-音符對應正確率,評估能否取代 karaoke-jp 現在的 ASR+對齊+音高三段 pipeline。</p>
             </div>
           </div>
           </div>
           <div class="card-actions">
-            <a class="source-link" href="https://arxiv.org/abs/2607.01865v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
+            <a class="source-link" href="https://arxiv.org/abs/2605.04613" target="_blank" rel="noopener">Open Paper &#8599;</a>
             <button class="details-toggle" type="button" aria-expanded="false" aria-controls="paper-1-panel">展開摘要與實驗建議</button>
             <div class="star-rating" data-paper-id="2026-07-06-1" aria-label="Rate this paper">
               <span class="star-label">重要度</span>
@@ -822,34 +786,34 @@
             <div class="detail-grid">
               <section class="detail-section" data-standard-section="problem">
                 <h3>Problem</h3>
-                <p>Discrete tokens obtained from neural audio <mark class="keyterm">codec</mark>s (NACs) have been used as compact representations in audio generation and understanding models.</p>
+                <p>SVS 與卡拉 OK 應用需要大量帶字-音符對應的唱聲標註,人工標註昂貴;現行 SVT pipeline 多段串接易累積錯誤、詞-音符對應要靠額外對齊重建,且對大音域、拖長音等 OOD 唱聲泛化差。</p>
               </section>
               <section class="detail-section" data-standard-section="method">
                 <h3>Method</h3>
-                <p>In such token-based systems, token temporal resolution (TTR), defined as the time interval between adjacent token frames, is important because it controls the trade-off between representing rapid acoustic events and reducing token-sequence length.</p>
+                <p>基於 Qwen3-ASR-1.7B(12.5 Hz audio token),擴充約 400 個譜面 token(128 個 MIDI pitch、12 個音值、BPM);訓練目標分兩段:先純歌詞序列、再詞-音符交錯序列(CoT 式);另建 SingCrawl 管線自動爬取網路唱聲並偽標註(人聲分離、強制對齊、音符抽取、tempo 量化)。</p>
               </section>
               <section class="detail-section" data-standard-section="data">
                 <h3>Data</h3>
-                <p>看資料來源、benchmark、baseline 與評估指標是否公開或可重建；若不足，先做小型替代測試。</p>
+                <p>訓練用 SingCrawl 大規模偽標註資料+公開語料(GTSinger、M4Singer 訓練,Opencpop 驗證);評測 AMT 在 Opencpop/ACE-KiSing,ALT 在 Opencpop/OpenSinger/PopCS——以中文歌唱語料為主,日文未驗證。</p>
               </section>
               <section class="detail-section" data-standard-section="findings">
                 <h3>Findings</h3>
-                <p>However, most NACs are trained at a single TTR and require separate training for each TTR.</p>
+                <p>在歌詞 WER、對齊、音高、音符各指標達 SOTA;同一模型同時支援 audio-only 與歌詞條件式兩種推論;能把噪聲偽標蒸餾平滑,下游評測甚至優於 teacher pipeline。</p>
               </section>
               <section class="detail-section" data-standard-section="limitations">
                 <h3>Limitations</h3>
-                <p>注意是否只在單一資料集、單一模型或特定 sampling 設定下成立，也要避免把 speech/TTS 結論直接套到 music/audio generation。</p>
+                <p>整段只估單一全域 BPM,rubato 或漸慢會有偏差;CoT 歌詞前綴與後段交錯輸出偶有不一致;效能上限仍受偽標 teacher 品質限制;評測集中於中文語料,日文歌唱表現未知。</p>
               </section>
               <section class="detail-section" data-standard-section="editor-note">
                 <h3>Editor Note</h3>
-                <p>先看它是否能改善 text-to-audio / text-to-music，或支援 <mark class="keyterm">Music Flamingo</mark>、<mark class="keyterm">歌詞辨識</mark>、<mark class="keyterm">JPOP</mark> / <mark class="keyterm">卡拉 OK</mark> 的音樂理解方向。 下一步：抽一個可驗證的 trick，做成小實驗；先看資料與評估是否足以支撐，不要只被 <mark class="keyterm">CLAP</mark> 或主觀樣本牽著走。</p>
+                <p>對 karaoke-jp 是「一個模型換掉三段 pipeline」的直接候選,而且官方程式碼與 checkpoint 都放出來了(見今日 GitHub pick)。先做日文小樣本評測,若 kana 錯誤率可接受,mora-to-note timing 可直接從交錯輸出導出。</p>
               </section>
               <section class="detail-section" data-standard-section="metadata">
                 <h3>Metadata</h3>
                 <dl class="meta-list">
-                  <div><dt>Authors</dt><dd>Tomohiko Nakamura, Wataru Nakata, Kanami Imamura, Yuki Saito</dd></div>
-                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2607.01865v1">arxiv.org/abs/2607.01865v1</a></dd></div>
-                  <div><dt>Relevance</dt><dd>MeanAudio 2 / karaoke 0 · max 2</dd></div>
+                  <div><dt>Authors</dt><dd>Yukun Chen, Tianrui Wang, Zhaoxi Mu, Xinyu Yang, EngSiong Chng</dd></div>
+                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2605.04613">arxiv.org/abs/2605.04613</a></dd></div>
+                  <div><dt>Relevance</dt><dd>MeanAudio 2 / karaoke 5 · max 5</dd></div>
                 </dl>
               </section>
             </div>
@@ -862,30 +826,32 @@
             <div class="paper-number">02</div>
             <div class="paper-meta">
               <span class="track">MeanAudio</span>
-              <span class="quality">新</span>
-              <span class="freshness">2026-07-02 · 4d</span>
+              <span class="quality">重要</span>
+              <span class="freshness">2025-12-12 · 206d</span>
             </div>
           </div>
           <div class="paper-card-body">
-          <h2><a href="https://arxiv.org/abs/2607.01983v1" target="_blank" rel="noopener">Open-Weather Robust 3D Detection via Dual-Critic Diffusion <mark class="keyterm">Alignment</mark></a></h2>
-          <p class="one-line">Robust 3D object detection under adverse weather remains a critical hurdle for autonomous driving. Despite progress with LiDAR-4D r...</p>
+          <h2><a href="https://arxiv.org/abs/2512.10264" target="_blank" rel="noopener">MR-FlowDPO: Multi-Reward Direct Preference Optimization for Flow-Matching Text-to-Music Generation</a></h2>
+          <p class="one-line">用 CLAP、Audiobox Aesthetics、HuBERT 語義一致性三種自動 reward 構造偏好對,對 flow matching 文字轉音樂模型做 DPO;人評全面勝過 MelodyFlow-1B。</p>
           <div class="tag-row">
             <span class="track-hint">貼近主線</span>
-            <span class="tag">text-to-audio/music</span>
+            <span class="tag">reward alignment</span>
+            <span class="tag">DPO</span>
+            <span class="tag">text-to-music</span>
           </div>
           <div class="quick-read">
             <div>
               <span class="label">Insight</span>
-              <p><mark class="keyterm">洞見</mark>：針對 Open-Weather / Robust / Detection / Dual-Critic / Diffusion：它把 <mark class="keyterm">alignment</mark> signal 放回生成過程本身，而不是只靠後處理 <mark class="keyterm">reward</mark>；可對照音訊文字對齊是否也能這樣做。 <mark class="keyterm">方法線索</mark>：把 <mark class="keyterm">alignment</mark> signal 直接放進 diffusion matching/training，而不是只靠外部 <mark class="keyterm">reward</mark> 做後處理。</p>
+              <p>洞見:單一 reward 會偏科——只用文字對齊 reward 做 DPO,CLAP 上升但節奏穩定性反而變差(BPM-std 7.77→8.40);用 HuBERT likelihood 當語義一致性代理並與其他 reward 平衡,才能同時顧 CLAP 與節奏。reward 組合設計比對齊演算法本身更關鍵。</p>
             </div>
             <div>
               <span class="label">Try next</span>
-              <p>針對 Open-Weather / Robust / Detection / Dual-Critic / Diffusion：<mark class="keyterm">可做</mark>：把 <mark class="keyterm">alignment</mark> signal 做成單一 loss 或 reranking ablation，先比較文字-音訊相符度與主觀聽感。<mark class="keyterm">結果焦點</mark>：確認 <mark class="keyterm">alignment</mark> 是否真的在生成過程改善，而不是只讓某個 <mark class="keyterm">reward</mark> metric 變好。</p>
+              <p>可做:在 MeanAudio 的 reward alignment 線上加一個語義一致性 reward:用 HuBERT 或 MERT likelihood 對生成音訊打分,先離線驗證它與節奏穩定度(BPM-std)的相關性,再決定是否納入偏好資料構造。</p>
             </div>
           </div>
           </div>
           <div class="card-actions">
-            <a class="source-link" href="https://arxiv.org/abs/2607.01983v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
+            <a class="source-link" href="https://arxiv.org/abs/2512.10264" target="_blank" rel="noopener">Open Paper &#8599;</a>
             <button class="details-toggle" type="button" aria-expanded="false" aria-controls="paper-2-panel">展開摘要與實驗建議</button>
             <div class="star-rating" data-paper-id="2026-07-06-2" aria-label="Rate this paper">
               <span class="star-label">重要度</span>
@@ -900,34 +866,34 @@
             <div class="detail-grid">
               <section class="detail-section" data-standard-section="problem">
                 <h3>Problem</h3>
-                <p>Robust 3D object detection under adverse weather remains a critical hurdle for autonomous driving.</p>
+                <p>音樂生成模型的訓練目標不含人類偏好;既有對齊方法要嘛依賴難規模化的人工偏好標註(如 MusicRL),要嘛只優化文字對齊單一軸(Tango2、TangoFlux),音質與音樂性顧不到。</p>
               </section>
               <section class="detail-section" data-standard-section="method">
                 <h3>Method</h3>
-                <p>Despite progress with LiDAR-4D radar fusion, most methods are constrained by a closed-world assumption, implicitly requiring training and test weather to align in both type and severity.</p>
+                <p>把 DPO-diffusion loss 改寫到 flow matching 向量場上;以 CLAP、Meta Audiobox Aesthetics、HuBERT 語義一致性三種 reward 用 MRSD 配對法構造 90K 偏好三元組(20K prompts、每題 k=16 樣本);推論時另把 reward 分數作為文字 prompt 條件;應用於 Flow-400M 與 MelodyFlow-1B 兩個參考模型。</p>
               </section>
               <section class="detail-section" data-standard-section="data">
                 <h3>Data</h3>
-                <p>看資料來源、benchmark、baseline 與評估指標是否公開或可重建；若不足，先做小型替代測試。</p>
+                <p>偏好資料由模型自生成音訊+自動 reward 打分構成,無人工標註;評測在 MusicCaps(Aesthetics、CLAP、BPM-std、FAD)加人評 net win rate(bootstrap 95% CI)。</p>
               </section>
               <section class="detail-section" data-standard-section="findings">
                 <h3>Findings</h3>
-                <p>This premise fails in practice: the open-ended nature of weather, and even variations within a single type like rain, cause dramatically different LiDAR degradation patterns, leading to significant performance drops in unseen conditions.</p>
+                <p>兩個參考模型套用後所有客觀指標一致提升;人評對 MelodyFlow-1B 在整體、音質、音樂性顯著勝出(文字對齊持平,因基線已強);消融顯示三 reward 全開才能兼顧 CLAP 與節奏穩定,任何單一 reward 都有明顯短板。</p>
               </section>
               <section class="detail-section" data-standard-section="limitations">
                 <h3>Limitations</h3>
-                <p>注意是否只在單一資料集、單一模型或特定 sampling 設定下成立，也要避免把 speech/TTS 結論直接套到 music/audio generation。</p>
+                <p>reward 全是代理模型,上限受 reward 模型品質限制;在器樂 text-to-music 上驗證,含人聲歌曲未測;內部 Flow-400M 不公開,重現只能走 MelodyFlow;文字對齊在強基線上無增益。</p>
               </section>
               <section class="detail-section" data-standard-section="editor-note">
                 <h3>Editor Note</h3>
-                <p>先看它是否能改善 text-to-audio / text-to-music，或支援 <mark class="keyterm">Music Flamingo</mark>、<mark class="keyterm">歌詞辨識</mark>、<mark class="keyterm">JPOP</mark> / <mark class="keyterm">卡拉 OK</mark> 的音樂理解方向。 下一步：抽一個可驗證的 trick，做成小實驗；先看資料與評估是否足以支撐，不要只被 <mark class="keyterm">CLAP</mark> 或主觀樣本牽著走。</p>
+                <p>與 MeanAudio 的 CRPO/reward 主線直接同題,是「多 reward 平衡」目前最完整的實證之一。semantic self-supervised reward 是可直接借的組件,建議先試 MERT likelihood 版本再考慮全套 MRSD。</p>
               </section>
               <section class="detail-section" data-standard-section="metadata">
                 <h3>Metadata</h3>
                 <dl class="meta-list">
-                  <div><dt>Authors</dt><dd>Shuyao Li, Chuanxing Geng, Heyang Sun, Qiang Zhou, Jingjing Gu</dd></div>
-                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2607.01983v1">arxiv.org/abs/2607.01983v1</a></dd></div>
-                  <div><dt>Relevance</dt><dd>MeanAudio 2 / karaoke 0 · max 2</dd></div>
+                  <div><dt>Authors</dt><dd>Alon Ziv, Sanyuan Chen, Andros Tjandra, Yossi Adi, Wei-Ning Hsu 等 6 位</dd></div>
+                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2512.10264">arxiv.org/abs/2512.10264</a></dd></div>
+                  <div><dt>Relevance</dt><dd>MeanAudio 5 / karaoke 1 · max 5</dd></div>
                 </dl>
               </section>
             </div>
@@ -936,22 +902,32 @@
     
       </div>
     </section>
+
+    <section class="repo-pick" aria-label="GitHub pick">
+      <div class="repo-eyebrow">GitHub pick of the day</div>
+      <h2><a href="https://github.com/pymaster17/VocalParse" target="_blank" rel="noopener">pymaster17/VocalParse</a></h2>
+      <div class="repo-meta"><span class="tag">★ 6</span><span class="tag">更新 2026-06-16</span><span class="tag">singing-voice-transcription</span><span class="tag">LALM</span><span class="tag">karaoke</span></div>
+      <p>VocalParse 官方實作:基於 Qwen3-ASR-1.7B 的統一唱聲轉譜,單一 decoder 輸出歌詞+音高+音值+BPM 的交錯序列;附 HuggingFace checkpoint、單樣本 demo、多 GPU batch API 與完整訓練管線。Apache 2.0,6★,2026-06-16 仍在更新。</p>
+      <p><strong>為什麼相關:</strong>今天論文 1 的官方程式碼:transcribe_one 一行即可在日文音檔上 smoke test;api.py 的 batch 推論(torchrun 多 GPU、動態 batch)可直接嵌進 karaoke-jp 的標註管線,省去自建三段式 pipeline。</p>
+      <div class="card-actions">
+        <a class="source-link" href="https://github.com/pymaster17/VocalParse" target="_blank" rel="noopener">Open Repo &#8599;</a>
+      </div>
+    </section>
+    
     <details class="footnote">
       <summary>閱讀順序與篩選原則</summary>
       <div class="footnote-body">
-        <span><strong>1.</strong> 近期主線：<mark class="keyterm">Music Flamingo</mark>、<mark class="keyterm">歌詞辨識</mark>、<mark class="keyterm">JPOP</mark>、<mark class="keyterm">卡拉 OK</mark> 與 <mark class="keyterm">karaoke-jp</mark>。</span>
-        <span><strong>2.</strong> 生成主線仍保留：text-to-audio/music、flow、caption、<mark class="keyterm">codec</mark>、評估與 <mark class="keyterm">reward</mark> <mark class="keyterm">alignment</mark>。</span>
-        <span><strong>3.</strong> 只收高品質：新穎度、重要性、baseline、資料與可落地性一起看。</span>
+        <span><strong>1.</strong> 近期主線:Music Flamingo、歌詞辨識、JPOP、卡拉 OK 與 karaoke-jp。</span>
+        <span><strong>2.</strong> 生成主線仍保留:text-to-audio/music、flow、caption、codec、評估與 reward alignment。</span>
+        <span><strong>3.</strong> 只收高品質:新穎度、重要性、baseline、資料與可落地性一起看。</span>
       </div>
     </details>
   </main>
-
-  <footer>Generated by the local MIR paper automation · Product standard 2026-05-26 · 2187e8b96f · 2026-07-06 09:00:14 Asia/Taipei</footer>
-
+  <footer>Generated by the MIR digest automation · Product standard 2026-05-26 · 2187e8b96f · 2026-07-06 09:18:27 Asia/Taipei</footer>
   <script>
+
     const cards = Array.from(document.querySelectorAll('.paper-card'));
     const RATINGS_KEY = 'mir-ratings';
-
     function loadRatings() {
       try { return JSON.parse(localStorage.getItem(RATINGS_KEY)) || {}; } catch { return {}; }
     }
@@ -997,7 +973,6 @@
       });
     }
     document.querySelectorAll('.star-rating').forEach(initStarWidget);
-
     function toggleCard(card) {
       const isOpen = card.classList.toggle('is-open');
       const btn = card.querySelector('.details-toggle');
@@ -1011,33 +986,6 @@
       body.addEventListener('click', event => {
         if (event.target.closest('a, button, input, .card-actions, .star-rating')) return;
         toggleCard(body.closest('.paper-card'));
-      });
-    });
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const filter = btn.dataset.filter;
-        document.querySelectorAll('.filter-btn').forEach(b => b.setAttribute('aria-pressed', String(b === btn)));
-        const ratings = loadRatings();
-        cards.forEach(card => {
-          let show = filter === 'all' || card.dataset.track === filter;
-          if (filter === 'important') {
-            const paperId = card.id ? `2026-07-06-${card.id.replace('paper-', '')}` : null;
-            show = paperId && (ratings[paperId] || 0) >= 3;
-          }
-          card.classList.toggle('is-hidden', !show);
-        });
-        document.querySelectorAll('.paper-nav-list li').forEach(li => {
-          const link = li.querySelector('a');
-          if (!link) return;
-          const target = document.querySelector(link.getAttribute('href'));
-          if (!target) return;
-          let show = filter === 'all' || target.dataset.track === filter;
-          if (filter === 'important') {
-            const paperId = target.id ? `2026-07-06-${target.id.replace('paper-', '')}` : null;
-            show = paperId && (ratings[paperId] || 0) >= 3;
-          }
-          li.style.display = show ? '' : 'none';
-        });
       });
     });
     document.querySelectorAll('.paper-nav-list a').forEach(link => {
@@ -1055,7 +1003,7 @@
         }
       });
     });
-  </script>
 
+  </script>
 </body>
 </html>

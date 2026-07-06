@@ -1,0 +1,96 @@
+{
+ "date": "2026-07-06",
+ "papers": [
+  {
+   "slot": 1,
+   "track": "karaoke_jp",
+   "title": "VocalParse: Towards Unified and Scalable Singing Voice Transcription with Large Audio Language Models",
+   "authors": [
+    "Yukun Chen",
+    "Tianrui Wang",
+    "Zhaoxi Mu",
+    "Xinyu Yang",
+    "EngSiong Chng"
+   ],
+   "published": "2026-05-06",
+   "updated": "2026-05-06",
+   "source_url": "https://arxiv.org/abs/2605.04613",
+   "arxiv_id": "2605.04613",
+   "doi": "",
+   "tags": [
+    "唱聲轉譜",
+    "LALM",
+    "歌詞對齊"
+   ],
+   "quality": "新且重要",
+   "tldr": "以 Qwen3-ASR 為底把唱聲轉譜變成單一自迴歸生成:交錯 token 同時輸出歌詞、音高、音值並保留字-音符對應,搭配先解歌詞的 CoT 式 prompting,多個歌唱資料集達 SOTA。",
+   "insight": "洞見:交錯序列本身就是對齊——字-音符對應直接編碼在解碼流裡,不需事後強制對齊;但交錯會打斷 ASR 預訓練依賴的連續文本語境,所以先產出純歌詞當語義鷹架、再輸出交錯譜,兩者兼得。",
+   "try_next": "可做:抓 VocalParse-1.7B checkpoint,對 10 段人聲分離後的日文歌曲跑 transcribe_one,量 kana CER 與字-音符對應正確率,評估能否取代 karaoke-jp 現在的 ASR+對齊+音高三段 pipeline。",
+   "problem": "SVS 與卡拉 OK 應用需要大量帶字-音符對應的唱聲標註,人工標註昂貴;現行 SVT pipeline 多段串接易累積錯誤、詞-音符對應要靠額外對齊重建,且對大音域、拖長音等 OOD 唱聲泛化差。",
+   "method": "基於 Qwen3-ASR-1.7B(12.5 Hz audio token),擴充約 400 個譜面 token(128 個 MIDI pitch、12 個音值、BPM);訓練目標分兩段:先純歌詞序列、再詞-音符交錯序列(CoT 式);另建 SingCrawl 管線自動爬取網路唱聲並偽標註(人聲分離、強制對齊、音符抽取、tempo 量化)。",
+   "data": "訓練用 SingCrawl 大規模偽標註資料+公開語料(GTSinger、M4Singer 訓練,Opencpop 驗證);評測 AMT 在 Opencpop/ACE-KiSing,ALT 在 Opencpop/OpenSinger/PopCS——以中文歌唱語料為主,日文未驗證。",
+   "findings": "在歌詞 WER、對齊、音高、音符各指標達 SOTA;同一模型同時支援 audio-only 與歌詞條件式兩種推論;能把噪聲偽標蒸餾平滑,下游評測甚至優於 teacher pipeline。",
+   "limitations": "整段只估單一全域 BPM,rubato 或漸慢會有偏差;CoT 歌詞前綴與後段交錯輸出偶有不一致;效能上限仍受偽標 teacher 品質限制;評測集中於中文語料,日文歌唱表現未知。",
+   "editor_note": "對 karaoke-jp 是「一個模型換掉三段 pipeline」的直接候選,而且官方程式碼與 checkpoint 都放出來了(見今日 GitHub pick)。先做日文小樣本評測,若 kana 錯誤率可接受,mora-to-note timing 可直接從交錯輸出導出。",
+   "relevance": {
+    "mean_audio": 2,
+    "karaoke_jp": 5
+   }
+  },
+  {
+   "slot": 2,
+   "track": "mean_audio",
+   "title": "MR-FlowDPO: Multi-Reward Direct Preference Optimization for Flow-Matching Text-to-Music Generation",
+   "authors": [
+    "Alon Ziv",
+    "Sanyuan Chen",
+    "Andros Tjandra",
+    "Yossi Adi",
+    "Wei-Ning Hsu",
+    "Bowen Shi"
+   ],
+   "published": "2025-12-11",
+   "updated": "2025-12-12",
+   "source_url": "https://arxiv.org/abs/2512.10264",
+   "arxiv_id": "2512.10264",
+   "doi": "",
+   "tags": [
+    "reward alignment",
+    "DPO",
+    "text-to-music"
+   ],
+   "quality": "重要",
+   "tldr": "用 CLAP、Audiobox Aesthetics、HuBERT 語義一致性三種自動 reward 構造偏好對,對 flow matching 文字轉音樂模型做 DPO;人評全面勝過 MelodyFlow-1B。",
+   "insight": "洞見:單一 reward 會偏科——只用文字對齊 reward 做 DPO,CLAP 上升但節奏穩定性反而變差(BPM-std 7.77→8.40);用 HuBERT likelihood 當語義一致性代理並與其他 reward 平衡,才能同時顧 CLAP 與節奏。reward 組合設計比對齊演算法本身更關鍵。",
+   "try_next": "可做:在 MeanAudio 的 reward alignment 線上加一個語義一致性 reward:用 HuBERT 或 MERT likelihood 對生成音訊打分,先離線驗證它與節奏穩定度(BPM-std)的相關性,再決定是否納入偏好資料構造。",
+   "problem": "音樂生成模型的訓練目標不含人類偏好;既有對齊方法要嘛依賴難規模化的人工偏好標註(如 MusicRL),要嘛只優化文字對齊單一軸(Tango2、TangoFlux),音質與音樂性顧不到。",
+   "method": "把 DPO-diffusion loss 改寫到 flow matching 向量場上;以 CLAP、Meta Audiobox Aesthetics、HuBERT 語義一致性三種 reward 用 MRSD 配對法構造 90K 偏好三元組(20K prompts、每題 k=16 樣本);推論時另把 reward 分數作為文字 prompt 條件;應用於 Flow-400M 與 MelodyFlow-1B 兩個參考模型。",
+   "data": "偏好資料由模型自生成音訊+自動 reward 打分構成,無人工標註;評測在 MusicCaps(Aesthetics、CLAP、BPM-std、FAD)加人評 net win rate(bootstrap 95% CI)。",
+   "findings": "兩個參考模型套用後所有客觀指標一致提升;人評對 MelodyFlow-1B 在整體、音質、音樂性顯著勝出(文字對齊持平,因基線已強);消融顯示三 reward 全開才能兼顧 CLAP 與節奏穩定,任何單一 reward 都有明顯短板。",
+   "limitations": "reward 全是代理模型,上限受 reward 模型品質限制;在器樂 text-to-music 上驗證,含人聲歌曲未測;內部 Flow-400M 不公開,重現只能走 MelodyFlow;文字對齊在強基線上無增益。",
+   "editor_note": "與 MeanAudio 的 CRPO/reward 主線直接同題,是「多 reward 平衡」目前最完整的實證之一。semantic self-supervised reward 是可直接借的組件,建議先試 MERT likelihood 版本再考慮全套 MRSD。",
+   "relevance": {
+    "mean_audio": 5,
+    "karaoke_jp": 1
+   }
+  }
+ ],
+ "repo": {
+  "full_name": "pymaster17/VocalParse",
+  "url": "https://github.com/pymaster17/VocalParse",
+  "description_zh": "VocalParse 官方實作:基於 Qwen3-ASR-1.7B 的統一唱聲轉譜,單一 decoder 輸出歌詞+音高+音值+BPM 的交錯序列;附 HuggingFace checkpoint、單樣本 demo、多 GPU batch API 與完整訓練管線。Apache 2.0,6★,2026-06-16 仍在更新。",
+  "stars": 6,
+  "updated": "2026-06-16",
+  "why": "今天論文 1 的官方程式碼:transcribe_one 一行即可在日文音檔上 smoke test;api.py 的 batch 推論(torchrun 多 GPU、動態 batch)可直接嵌進 karaoke-jp 的標註管線,省去自建三段式 pipeline。",
+  "tags": [
+   "singing-voice-transcription",
+   "LALM",
+   "karaoke"
+  ]
+ },
+ "discord_messages": [
+  "# 每日 MIR 論文精選 - 2026-07-06\n網站版:https://lanternko.github.io/mir-paper-digest/reports/2026-07-06.html\n\n## 1. VocalParse: Unified and Scalable Singing Voice Transcription with LALMs\n- 作者:Chen, Wang, Mu, Yang, Chng(西安交大+NTU)\n- 連結:https://arxiv.org/abs/2605.04613\n- 主線:karaoke-jp(唱聲轉譜 / 歌詞對齊)· 品質:新且重要(5/6 發表)\n\n**TLDR**:以 Qwen3-ASR 為底,把唱聲轉譜變成單一自迴歸生成——交錯 token 同時輸出歌詞、音高、音值並保留字-音符對應,搭配先解歌詞的 CoT 式 prompting 與 SingCrawl 偽標註管線,多資料集 SOTA。\n\n**為什麼選它**:字-音符對應直接編碼在解碼流裡,不用事後強制對齊——這正是 karaoke-jp 的 mora-to-note timing 問題。一個 1.7B 模型有機會換掉 ASR+對齊+音高三段 pipeline,且官方 code 與 checkpoint 都已釋出(見今日 GitHub pick)。\n\n**注意**:評測以中文歌唱語料為主(Opencpop/OpenSinger/PopCS 等),日文未驗證;整段只估單一 BPM,rubato 會偏差。\n\n**下一步**:對 10 段人聲分離後的日文歌曲跑 transcribe_one,量 kana CER 與字-音符對應正確率。",
+  "## 2. MR-FlowDPO: Multi-Reward DPO for Flow-Matching Text-to-Music\n- 作者:Ziv, Chen, Tjandra, Adi, Hsu, Shi(Meta FAIR+希伯來大學)\n- 連結:https://arxiv.org/abs/2512.10264\n- 主線:MeanAudio(reward alignment / flow matching)· 品質:重要(2025/12,稍舊但主線核心)\n\n**TLDR**:用三種自動 reward(CLAP 文字對齊、Audiobox Aesthetics 製作品質、HuBERT 語義一致性)構造 90K 偏好對,對 flow matching 音樂模型做 DPO 並把 reward 分數寫進 prompt;人評全面勝過 MelodyFlow-1B。\n\n**為什麼選它**:給 MeanAudio reward 線最重要的一課——單一 reward 會偏科:只用文字對齊 reward,CLAP 上升但節奏穩定性反而變差(BPM-std 7.77→8.40)。多 reward 平衡+HuBERT likelihood 當 musicality 代理,比換對齊演算法更關鍵。\n\n**注意**:reward 全是代理模型;只在器樂 text-to-music 驗證,含人聲歌曲未測;內部 Flow-400M 不公開。\n\n**下一步**:離線驗證 HuBERT/MERT likelihood 與 BPM-std 的相關性,再決定是否納入 MeanAudio 的偏好資料構造。",
+  "## GitHub pick:pymaster17/VocalParse\nhttps://github.com/pymaster17/VocalParse(Apache 2.0,6★,6/16 仍在更新)\n\n論文 1 的官方實作:transcribe_one 一行跑單檔 demo,api.py 提供 torchrun 多 GPU batch 推論與動態 batching,HuggingFace 有 VocalParse-1.7B checkpoint,訓練/前處理管線齊全。星數還少但工程完成度高,適合直接嵌進 karaoke-jp 的標註管線做小樣本評測。\n\n## 今天的 take-away\n- 兩篇合起來是「用 token 序列設計取代 pipeline 工程」:VocalParse 把對齊編進交錯序列,MR-FlowDPO 把偏好編進 reward 組合。先問:你 pipeline 裡哪段能改成序列/資料設計問題?\n- MR-FlowDPO 的教訓要記住:加 reward 前先量它跟你在乎的指標(節奏穩定度)相關不相關。\n- VocalParse 日文表現未知——這是 karaoke-jp 本週最值得做的 smoke test。"
+ ]
+}

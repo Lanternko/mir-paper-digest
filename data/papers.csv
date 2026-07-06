@@ -112,3 +112,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-07-05,1,paper,mean_audio,Neural Audio Codec with Adjustable Token Temporal Resolution Using Sampling-Frequency-Independent Convolutional Layers,https://arxiv.org/abs/2607.01865,2607.01865,codec/tokenizer|text-to-audio/music|token rate,新且重要
 2026-07-05,2,paper,general_mir,Decomposer: Learning to Decompile Symbolic Music to Programs,https://arxiv.org/abs/2607.01849,2607.01849,MIDI/score|symbolic music|RL reward,新
 2026-07-05,0,repo,github,nomadkaraoke/karaoke-gen,https://github.com/nomadkaraoke/karaoke-gen,,karaoke|lyrics sync|source separation,
+2026-07-06,1,paper,karaoke_jp,VocalParse: Towards Unified and Scalable Singing Voice Transcription with Large Audio Language Models,https://arxiv.org/abs/2605.04613,2605.04613,唱聲轉譜|LALM|歌詞對齊,新且重要
+2026-07-06,2,paper,mean_audio,MR-FlowDPO: Multi-Reward Direct Preference Optimization for Flow-Matching Text-to-Music Generation,https://arxiv.org/abs/2512.10264,2512.10264,reward alignment|DPO|text-to-music,重要
+2026-07-06,0,repo,github,pymaster17/VocalParse,https://github.com/pymaster17/VocalParse,,singing-voice-transcription|LALM|karaoke,
