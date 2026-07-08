@@ -115,3 +115,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-07-06,1,paper,karaoke_jp,VocalParse: Towards Unified and Scalable Singing Voice Transcription with Large Audio Language Models,https://arxiv.org/abs/2605.04613,2605.04613,唱聲轉譜|LALM|歌詞對齊,新且重要
 2026-07-06,2,paper,mean_audio,MR-FlowDPO: Multi-Reward Direct Preference Optimization for Flow-Matching Text-to-Music Generation,https://arxiv.org/abs/2512.10264,2512.10264,reward alignment|DPO|text-to-music,重要
 2026-07-06,0,repo,github,pymaster17/VocalParse,https://github.com/pymaster17/VocalParse,,singing-voice-transcription|LALM|karaoke,
+2026-07-08,1,paper,mean_audio,Resonate: Reinforcing Text-to-Audio Generation via Online Feedback from Large Audio Language Models,https://arxiv.org/abs/2603.11661,2603.11661,reward alignment|GRPO|text-to-audio,重要
+2026-07-08,2,paper,karaoke_jp,"STARS: A Unified Framework for Singing Transcription, Alignment, and Refined Style Annotation",https://arxiv.org/abs/2507.06670,2507.06670,歌詞對齊|唱聲轉譜|風格標註,重要
+2026-07-08,0,repo,github,rzru/nightingale,https://github.com/rzru/nightingale,,karaoke|pitch scoring|singing,

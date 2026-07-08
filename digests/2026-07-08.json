@@ -1,0 +1,65 @@
+{
+  "date": "2026-07-08",
+  "papers": [
+    {
+      "slot": 1,
+      "track": "mean_audio",
+      "title": "Resonate: Reinforcing Text-to-Audio Generation via Online Feedback from Large Audio Language Models",
+      "authors": ["Xiquan Li", "Junxi Liu", "Wenxi Chen", "Haina Zhu", "Ziyang Ma", "Xie Chen"],
+      "published": "2026-03-12",
+      "updated": "2026-03-12",
+      "source_url": "https://arxiv.org/abs/2603.11661",
+      "arxiv_id": "2603.11661",
+      "doi": "",
+      "tags": ["reward alignment", "GRPO", "text-to-audio"],
+      "quality": "重要",
+      "tldr": "把線上 GRPO 引入 flow matching 文字轉音訊模型,並改用 LALM(Qwen2.5-Omni)的 AQA yes/no 機率當細粒度 reward;470M 模型在 TTA-Bench 的音質與語義對齊都達 SOTA,勝過 MeanAudio 與 TangoFlux。",
+      "insight": "洞見:reward 模型比演算法更關鍵——CLAP 有 bag-of-words 效應、給的獎勵太粗;把獎勵改成 LALM 回答「音訊是否包含文字描述的聲音事件」的 yes 機率(AQAScore),一個 token 就能算、又貼近人耳判斷。且線上 GRPO 明顯勝過離線 DPO(AQAScore 0.737 vs 0.676),避免偏好資料與策略脫節的分布偏移。",
+      "try_next": "可做:在 MeanAudio 上先做離線驗證——用 Qwen2.5-Omni 對一批生成音訊算 AQAScore,與 CLAP、人工偏好比相關性;若可行,再把 Flow-GRPO(group size 24、KL β=0.04)接到 MeanAudio 的 post-training,論文架構本就沿用 MeanAudio 的 Flux-style flow Transformer,遷移成本低。",
+      "problem": "TTA 的 RL 對齊多用離線 DPO(Tango2、TangoFlux 的 CRPO),偏好資料與訓練脫節導致分布偏移、探索受限;且 reward 幾乎都靠 CLAP,其 bag-of-words 效應讓時序與組合推理很弱,獎勵訊號粗糙、與人類偏好對不上。",
+      "method": "架構直接沿用 MeanAudio 的 Flux-style flow Transformer(16 MMDiT + 36 DiT,470M),先以 CFM 預訓練;再把 GRPO 適配到 flow matching 向量場上做線上 RL(Flow-GRPO,1000 步、G=24、噪聲 0.7、KL β=0.04);reward 採 AQAScore:問 LALM「音訊是否含 prompt 描述的聲音事件」,取 yes/no 的 softmax 機率。",
+      "data": "預訓練用約 370 萬對音訊-文字(1 萬小時:AudioCaps、AudioSet、Clotho、VGGSound、WavCaps、AudioStock);GRPO 只用 AudioCaps 訓練集的 prompt;評測用 TTA-Bench Accuracy 子集 1500 條多事件/時序複雜 prompt。reward 用 Qwen2.5-Omni、評測改用 Qwen3-Omni 以降低 reward hacking 風險。",
+      "findings": "TTA-Bench 上 AQAScore 0.737(MeanAudio 0.729、TangoFlux 0.677)、CLAP 0.476 皆最高,PQ 6.064 同步提升;消融顯示線上 GRPO 全面勝過 DPO 與 SFT(SFT 反而拉低音質),LALM reward 也優於 CLAP reward;人評 OVL/REL 均第一,而且只有 470M 參數、25 NFE。",
+      "limitations": "只在環境音/音效(AudioCaps 系)驗證,音樂與歌唱未測,AQA 式 reward 對音樂性(旋律、和聲)是否有效未知;reward 仍是代理模型,上限受 LALM 品質限制;GRPO rollout 需線上生成+打分,訓練成本比離線 DPO 高。",
+      "editor_note": "這篇幾乎是為 MeanAudio 的 reward alignment 路線量身打造:同架構、同預訓練目標,直接示範了「換掉 CLAP、上線上 RL」的完整配方,程式碼開源(xiquan-li/Resonate,含 pre-training/SFT/DPO/GRPO 全 pipeline)。優先讀消融兩張表。",
+      "relevance": {"mean_audio": 5, "karaoke_jp": 1}
+    },
+    {
+      "slot": 2,
+      "track": "karaoke_jp",
+      "title": "STARS: A Unified Framework for Singing Transcription, Alignment, and Refined Style Annotation",
+      "authors": ["Wenxiang Guo", "Yu Zhang", "Changhao Pan", "Zhiyuan Zhu", "Ruiqi Li", "Zhetao Chen", "Wenhao Xu", "Fei Wu", "Zhou Zhao"],
+      "published": "2025-07-09",
+      "updated": "2025-07-09",
+      "source_url": "https://arxiv.org/abs/2507.06670",
+      "arxiv_id": "2507.06670",
+      "doi": "",
+      "tags": ["歌詞對齊", "唱聲轉譜", "風格標註"],
+      "quality": "重要",
+      "tldr": "首個統一框架一次完成歌唱標註四件事:音素級對齊、音符轉譜與定位、逐音素唱法技巧辨識、整體情緒/速度標註;取代 WhisperX+MFA+VOCANO 式的拼裝 pipeline,標註資料還能提升 SVS 自然度。",
+      "insight": "洞見:歌唱標註的錯誤主要來自「拼裝工具鏈的級聯誤差」——ASR、強制對齊、音高追蹤各管一段,邊界不一致會層層放大。STARS 用 frame/word/phoneme/note/sentence 五層階層式聲學特徵一次建模,讓對齊、音符、技巧、風格共享同一套邊界,非自迴歸局部聲學編碼器則保證各層表徵結構一致。",
+      "try_next": "可做:抓 gwx314/STARS 開源模型,對 5-10 首人聲分離後的日文歌跑推論,重點量測音素邊界誤差與音符 onset/offset(對 mora-to-note timing 最關鍵),確認中英訓練的模型在日文上退化多少,評估是否值得用少量日文 TextGrid 微調。",
+      "problem": "SVS 與卡拉 OK 需要音素邊界、MIDI 音符、唱法技巧、整體風格四個層級的精細標註;人工標註極貴,現行自動標註各自為政(WhisperX/Qwen-Audio 轉錄、MFA 對齊、VOCANO/MusicYOLO 音高),級聯誤差大且標註粒度不一。",
+      "method": "階層式聲學特徵處理,依 frame→word→phoneme→note→sentence 五層逐級聚合;各層用非自迴歸局部聲學編碼器(U-Net + Conformer + FreqMOE)學結構化表徵;先做音素對齊與音符定位,再用逐音素特徵預測六類唱法技巧,最後聚合全部層級預測情緒、速度等全域屬性。",
+      "data": "用 GTSinger 的中文與英文子集訓練與評測(TextGrid 含詞/音素邊界、六種技巧逐音素標註、全域風格);評測指標含邊界誤差、音符 COn/COnOff、RPA、技巧 F1 與風格準確率。",
+      "findings": "在對齊、音符轉譜、技巧辨識、風格偵測各維度都優於 MFA、WhisperX、VOCANO 等既有工具組合;更重要的是用 STARS 自動標註的資料訓 SVS,人評自然度與風格控制精準度顯著提升,證明標註品質足以回饋生成。",
+      "limitations": "作者自承只在中文與英文驗證,日文等其他語言的泛化未測;依賴 GTSinger 規模的乾淨獨唱資料,對真實混音、合唱或人聲分離殘留的魯棒性未知;六類技巧分類未必涵蓋 JPOP 常見唱法。",
+      "editor_note": "karaoke-jp 的資料標註瓶頸(音素對齊+音符 timing 一次搞定)正是這篇的目標場景,ACL 2025 Findings、程式碼與 demo 都開源。日文未驗證是最大風險,但 kana 音素集比英文單純,遷移值得一試;可與上月的 VocalParse 做同題對比(NAR 階層式 vs LALM 自迴歸)。",
+      "relevance": {"mean_audio": 2, "karaoke_jp": 5}
+    }
+  ],
+  "repo": {
+    "full_name": "rzru/nightingale",
+    "url": "https://github.com/rzru/nightingale",
+    "description_zh": "機器學習驅動的開源卡拉 OK 應用,主打即時演唱評分:偵測唱者音高並與歌曲對照計分,近期持續活躍開發。",
+    "stars": 1226,
+    "updated": "2026-07-06",
+    "why": "karaoke-jp 若要做「唱得準不準」的回饋,pitch 偵測+對照評分是核心迴路;這個專案是少數活躍、star 數高的開源實作,計分邏輯與 UI 呈現都可直接參考,也適合當日文歌 pitch 評分的整合測試床。",
+    "tags": ["karaoke", "pitch scoring", "singing"]
+  },
+  "discord_messages": [
+    "# 每日 MIR 論文精選 - 2026-07-08\n網站:https://lanternko.github.io/mir-paper-digest/reports/2026-07-08.html\n\n## 論文 1|Resonate: Reinforcing Text-to-Audio Generation via Online Feedback from Large Audio Language Models\nhttps://arxiv.org/abs/2603.11661\n主線:MeanAudio(reward alignment)|品質:重要\n\n**TLDR**:把線上 GRPO 引入 flow matching TTA 模型,reward 改用 LALM 的 AQA yes/no 機率(AQAScore);470M 模型在 TTA-Bench 音質與語義對齊都達 SOTA,勝過 MeanAudio 與 TangoFlux。\n\n**為什麼選它**:架構直接沿用 MeanAudio 的 Flux-style flow Transformer,等於官方示範了 MeanAudio 的 RL post-training 配方——線上 GRPO 全面勝過離線 DPO(AQAScore 0.737 vs 0.676),LALM reward 也勝過 CLAP reward。程式碼開源(xiquan-li/Resonate),含 pre-training/SFT/DPO/GRPO 全 pipeline。\n\n**注意**:只在環境音/音效驗證,音樂與歌唱未測;reward 仍是代理模型;線上 rollout 訓練成本較高。\n\n**下一步**:先離線驗證——用 Qwen2.5-Omni 對 MeanAudio 生成結果算 AQAScore,和 CLAP、人工偏好比相關性,再決定是否接 Flow-GRPO。",
+    "## 論文 2|STARS: A Unified Framework for Singing Transcription, Alignment, and Refined Style Annotation\nhttps://arxiv.org/abs/2507.06670\n主線:karaoke-jp(歌詞對齊/唱聲轉譜)|品質:重要\n\n**TLDR**:首個統一框架一次完成歌唱標註四件事:音素級對齊、音符轉譜與定位、逐音素唱法技巧、整體情緒/速度;取代 WhisperX+MFA+VOCANO 的拼裝 pipeline,標註資料還能回頭提升 SVS 自然度。\n\n**為什麼選它**:karaoke-jp 最痛的就是音素對齊+音符 timing 要靠多段工具串接、級聯誤差大。STARS 用 frame/word/phoneme/note/sentence 五層階層特徵一次建模,讓所有標註共享同一套邊界;ACL 2025 Findings,程式碼與 demo 開源(gwx314/STARS)。\n\n**注意**:只在 GTSinger 中/英文子集驗證,日文泛化未測;乾淨獨唱資料訓練,對人聲分離殘留的魯棒性未知。\n\n**下一步**:對 5-10 首人聲分離後的日文歌跑推論,量音素邊界與音符 onset/offset 誤差,評估用少量日文 TextGrid 微調的價值;可與 VocalParse(07-06)做 NAR vs LALM 的同題對比。",
+    "## GitHub Pick|rzru/nightingale ⭐1226\nhttps://github.com/rzru/nightingale\n機器學習驅動的開源卡拉 OK 應用,主打即時演唱評分:偵測唱者音高並與歌曲對照計分,近期持續活躍開發(最近推送 2026-07-06)。karaoke-jp 若要做「唱得準不準」的回饋,pitch 偵測+對照評分是核心迴路,這是少數活躍且 star 數高的參考實作。\n\n## 今天的 take-away\n1. **Reward 模型比對齊演算法更關鍵**:Resonate 顯示換掉 CLAP、改用 LALM 的 AQA 機率當 reward,加上線上 GRPO,比任何離線 DPO 配方都有效——MeanAudio 的 reward alignment 線可以直接照抄這份消融。\n2. **歌唱標註走向一體化**:STARS(NAR 階層式)與 VocalParse(LALM 自迴歸)代表兩條路線,共同點是把「對齊+轉譜+風格」收進單一模型,拼裝 pipeline 的級聯誤差時代正在結束;對 karaoke-jp,先測哪條路線在日文上退化更小。\n3. **評分閉環可以先借現成的**:nightingale 提供 pitch 評分的完整工程參考,先接上再優化演算法。"
+  ]
+}
