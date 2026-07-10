@@ -633,7 +633,6 @@
       .paper-nav-list { flex-direction: column; }
       footer { padding: 0 16px 32px; }
     }
-
     .source-link,
     .details-toggle {
       display: inline-flex; align-items: center; justify-content: center; gap: 8px;
@@ -653,88 +652,57 @@
       border-color: var(--teal);
       color: var(--teal);
     }
-    .source-link:hover {
-      background: var(--teal-soft);
-      text-decoration: none;
-    }
+    .source-link:hover { background: var(--teal-soft); text-decoration: none; }
     .details-toggle:hover { background: var(--bg-hover); }
     .details-toggle:active,
     .source-link:active { transform: translateY(1px); }
     body { overflow-x: hidden; }
-    .canvas,
-    .topbar-inner,
-    footer,
-    .digest-layout > *,
-    .paper-card,
-    .paper-card-body,
-    .quick-read > *,
-    .detail-section {
-      min-width: 0;
-    }
-    .paper-card {
+    .canvas, .topbar-inner, footer, .digest-layout > *, .paper-card,
+    .paper-card-body, .quick-read > *, .detail-section { min-width: 0; }
+    .paper-card { overflow: hidden; }
+    .paper-card h2, .one-line, .quick-read p, .detail-section p,
+    .meta-list dd { overflow-wrap: anywhere; }
+    .repo-pick {
+      margin-top: 18px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-card);
+      padding: 18px;
       overflow: hidden;
     }
-    .paper-card h2,
-    .one-line,
-    .quick-read p,
-    .detail-section p,
-    .meta-list dd {
-      overflow-wrap: anywhere;
+    .repo-pick .repo-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 6px;
     }
-    .keyterm {
-      color: var(--accent-ink);
-      background: rgba(254, 209, 223, 0.62);
-      border: 1px solid rgba(120, 85, 97, 0.12);
-      border-radius: 6px;
-      padding: 0 0.18em 0.02em;
-      font-weight: 650;
-      box-decoration-break: clone;
-      -webkit-box-decoration-break: clone;
+    .repo-pick h2 {
+      margin: 0 0 8px;
+      font-family: var(--font-zh), var(--font-serif);
+      font-size: 21px;
+      font-weight: 500;
+      line-height: 1.25;
     }
-    h2 .keyterm {
-      background: transparent;
-      border-color: transparent;
-      color: var(--accent);
-      padding: 0;
-    }
+    .repo-pick h2 a { color: var(--text-primary); text-decoration: none; overflow-wrap: anywhere; }
+    .repo-pick h2 a:hover { color: var(--accent); }
+    .repo-pick p { margin: 0 0 8px; color: var(--text-secondary); font-family: var(--font-sans); font-size: 14px; overflow-wrap: anywhere; }
+    .repo-pick .repo-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
     @media (max-width: 640px) {
-      .nav {
-        width: 100%;
-        margin-left: 0;
-        overflow-x: auto;
-        justify-content: flex-start;
-      }
-      .nav a,
-      .nav-pill {
-        flex-shrink: 0;
-      }
-      .hero,
-      .digest-layout {
-        max-width: 342px;
-        margin-left: 0;
-        margin-right: auto;
-      }
-      .paper-card {
-        width: 100%;
-      }
-      .card-actions {
-        align-items: flex-start;
-      }
-      .star-rating {
-        width: 100%;
-        margin-left: 0;
-        justify-content: flex-end;
-      }
-      .star-rating button {
-        width: 26px;
-        height: 28px;
-      }
+      .nav { width: 100%; margin-left: 0; overflow-x: auto; justify-content: flex-start; }
+      .nav a, .nav-pill { flex-shrink: 0; }
+      .hero, .digest-layout { max-width: 342px; margin-left: 0; margin-right: auto; }
+      .paper-card { width: 100%; }
+      .card-actions { align-items: flex-start; }
+      .star-rating { width: 100%; margin-left: 0; justify-content: flex-end; }
+      .star-rating button { width: 26px; height: 28px; }
     }
 
   </style>
 </head>
 <body>
-
   <div class="topbar">
     <div class="topbar-inner">
       <a class="brand" href="../index.html" aria-label="MIR Paper Digest home">
@@ -749,64 +717,61 @@
       </nav>
     </div>
   </div>
-
   <main class="canvas">
-
     <section class="hero">
       <div>
         <p class="eyebrow">Daily research brief · 2026-07-10</p>
         <h1>每日 MIR 論文<em>精選</em></h1>
-        <p class="subtitle">近期主線往 <mark class="keyterm">Music Flamingo</mark>、<mark class="keyterm">歌詞辨識</mark>、<mark class="keyterm">JPOP</mark> 與<mark class="keyterm">卡拉 OK</mark> 靠攏；今天先看最能轉成下一個小實驗的兩篇。</p>
+        <p class="subtitle">近期主線往 Music Flamingo、歌詞辨識、JPOP 與卡拉 OK 靠攏;今天先看最能轉成下一個小實驗的兩篇。</p>
       </div>
     </section>
-
     <section class="digest-layout">
-
       <aside class="paper-nav" aria-label="Paper navigation">
         <div class="paper-nav-title">Papers</div>
         <ol class="paper-nav-list">
           <li><a href="#paper-1">
             <span class="nav-num">01</span>
-            <span>Unified Audio Intelligence Without Regres...<span class="nav-track">MeanAudio</span></span>
+            <span>SongTrans: An unified song transcription...<span class="nav-track">karaoke-jp</span></span>
           </a></li>
           <li><a href="#paper-2">
             <span class="nav-num">02</span>
-            <span>Agon: Competitive Cross-Model RL with Imp...<span class="nav-track">MeanAudio</span></span>
+            <span>Optimal Transport Audio Distance with Lea...<span class="nav-track">MeanAudio</span></span>
           </a></li>
         </ol>
       </aside>
-
       <div class="cards" aria-label="論文卡片">
 
-        <article class="paper-card" data-track="mean_audio" id="paper-1">
+        <article class="paper-card" data-track="karaoke_jp" id="paper-1">
           <div class="paper-head">
             <div class="paper-number">01</div>
             <div class="paper-meta">
-              <span class="track">MeanAudio</span>
-              <span class="quality">新</span>
-              <span class="freshness">2026-07-07 · 3d</span>
+              <span class="track">karaoke-jp</span>
+              <span class="quality">重要</span>
+              <span class="freshness">2024-10-10 · 638d</span>
             </div>
           </div>
           <div class="paper-card-body">
-          <h2><a href="https://arxiv.org/abs/2607.05196v2" target="_blank" rel="noopener">Unified Audio Intelligence Without Regressing on Text Intelligence</a></h2>
-          <p class="one-line">Audio intelligence involves understanding, reasoning about, and generating both audio and speech. In this work, we introduce Nemotr...</p>
+          <h2><a href="https://arxiv.org/abs/2409.14619" target="_blank" rel="noopener">SongTrans: An unified song transcription and alignment method for lyrics and notes</a></h2>
+          <p class="one-line">統一模型一次完成歌詞轉錄、音符轉譜與兩者對齊:雙 Whisper 自迴歸模組輸出歌詞、逐詞時長與每詞音符數,非自迴歸模組預測音符音高與時長;免 MFA 免人聲分離,M4Singer 歌詞 WER 10.81%,遠優於 Whisper 的 32.56%。</p>
           <div class="tag-row">
-            <span class="track-hint">貼近主線</span>
-            <span class="tag">text-to-audio/music</span>
+            <span class="track-hint">可轉譯</span>
+            <span class="tag">歌詞對齊</span>
+            <span class="tag">唱聲轉譜</span>
+            <span class="tag">mora-to-note</span>
           </div>
           <div class="quick-read">
             <div>
               <span class="label">Insight</span>
-              <p><mark class="keyterm">洞見</mark>：針對 Unified / Audio / Intelligence / Without / Regressing：這篇值得看的點在於它提出的建模假設是否能抽成音訊生成或 MIR pipeline 的單一可測變因。 <mark class="keyterm">方法線索</mark>：In this work, we introduce Nemotron-Labs-Audex-30B-A3B (Audex), a unified audio-text LLM built...</p>
+              <p>洞見:「一個字對多個音符」是歌聲與語音的本質差異,SongTrans 把它顯式建模成 note number 預測——自迴歸模組先決定每個詞攜帶幾個音符 k,非自迴歸模組再在該詞時長內挑 top-(k-1) 個邊界機率最高的 frame 當音符邊界。這正是 mora-to-note timing 需要的中間表徵。另一個實用發現:MFA 會把轉音(melisma)誤判成靜音,是拼裝 pipeline 的主要級聯誤差源,作者靠靜音重切+重新轉錄修掉它。</p>
             </div>
             <div>
               <span class="label">Try next</span>
-              <p>針對 Unified / Audio / Intelligence / Without / Regressing：<mark class="keyterm">可做</mark>：抽一個最小變因重跑 ablation，固定資料、模型與 sampling，只檢查它聲稱的關鍵差異。<mark class="keyterm">結果焦點</mark>：In this work, we introduce Nemotron-Labs-Audex-30B-A3B (Audex), a unified audio-text LLM built...</p>
+              <p>可做:在 karaoke-jp 上驗證「note number+邊界機率」路線——取 10 首日文歌人聲,用現有對齊產生 mora 時長,微調一個 Whisper-encoder 邊界預測頭,對比目前 mora-to-note 的規則切分;同時量測自家 MFA 在長轉音段的靜音誤判率,確認是否需要同款靜音重切修正。</p>
             </div>
           </div>
           </div>
           <div class="card-actions">
-            <a class="source-link" href="https://arxiv.org/abs/2607.05196v2" target="_blank" rel="noopener">Open Paper &#8599;</a>
+            <a class="source-link" href="https://arxiv.org/abs/2409.14619" target="_blank" rel="noopener">Open Paper &#8599;</a>
             <button class="details-toggle" type="button" aria-expanded="false" aria-controls="paper-1-panel">展開摘要與實驗建議</button>
             <div class="star-rating" data-paper-id="2026-07-10-1" aria-label="Rate this paper">
               <span class="star-label">重要度</span>
@@ -821,34 +786,34 @@
             <div class="detail-grid">
               <section class="detail-section" data-standard-section="problem">
                 <h3>Problem</h3>
-                <p>Audio intelligence involves understanding, reasoning about, and generating both audio and speech.</p>
+                <p>歌聲資料標註靠拼裝 pipeline(UVR 分離→Whisper 轉錄→MFA 對齊→ROSVOT 音符),費時且 MFA 常把轉音誤判為靜音;更沒有任何工具能直接做「詞↔音符」對齊,即判定每個詞對應哪幾個音符——這卻是歌聲合成與卡拉 OK timing 的關鍵標註。</p>
               </section>
               <section class="detail-section" data-standard-section="method">
                 <h3>Method</h3>
-                <p>In this work, we introduce Nemotron-Labs-Audex-30B-A3B (Audex), a unified audio-text LLM built on Nemotron-Cascade-2-30B-A3B, a strong text-only MoE LLM.</p>
+                <p>先建標註 pipeline:詞級 WER&lt;0.3 或音素級 WER&lt;0.4 雙層過濾爬蟲歌詞、UVR 分離人聲、按靜音重切後重新轉錄再跑 MFA,修掉轉音誤判。再以標註資料訓 SongTrans:自迴歸模組微調兩個 Whisper,分別輸出「歌詞+逐詞時長」與「歌詞+每詞音符數」;非自迴歸模組用 Whisper encoder 逐 frame 預測音符邊界機率與音高,推論時在詞時長內取 top-(k-1) 邊界。</p>
               </section>
               <section class="detail-section" data-standard-section="data">
                 <h3>Data</h3>
-                <p>看資料來源、benchmark、baseline 與評估指標是否公開或可重建；若不足，先做小型替代測試。</p>
+                <p>網路收集 58,144 首歌(80.8 萬句歌詞-歌曲對),過濾後 20.2 萬句、重切後 27.3 萬句用於訓練;評測用 M4Singer(中文)3% 測試集;backbone 為 Whisper-v3-1.5B;另在 50 首帶伴奏歌曲上驗證免分離直接標註。</p>
               </section>
               <section class="detail-section" data-standard-section="findings">
                 <h3>Findings</h3>
-                <p>Audex adopts a simple unified design with a single Transformer decoder: audio inputs are encoded and projected into the text embedding space, while text tokens and quantized audio output tokens are treated uniformly during generation.</p>
+                <p>歌詞 WER 10.81%、音素 9.14%(Whisper 為 32.56%/23.98%);音高 WER 22.45% 與 ROSVOT 持平、音符時長 MAE 16.17 優於 VOCANO 的 21.26;首個能對齊詞與音符的模型(每詞音符數 MAE 0.144);帶伴奏輸入的預測與分離後的偽標準答案接近,顯示可跳過分離步驟。</p>
               </section>
               <section class="detail-section" data-standard-section="limitations">
                 <h3>Limitations</h3>
-                <p>注意是否只在單一資料集、單一模型或特定 sampling 設定下成立，也要避免把 speech/TTS 結論直接套到 music/audio generation。</p>
+                <p>只在中文(M4Singer)驗證,日文與其他語言未測;訓練資料靠爬蟲+自動過濾,標註品質上限受 pipeline 制約;以句級片段為主,整曲含長靜音時要靠 data merge 補強;2024-09 的工作,未與其後的 LALM 路線(如 VocalParse)正面比較。</p>
               </section>
               <section class="detail-section" data-standard-section="editor-note">
                 <h3>Editor Note</h3>
-                <p>先看它是否能改善 text-to-audio / text-to-music，或支援 <mark class="keyterm">Music Flamingo</mark>、<mark class="keyterm">歌詞辨識</mark>、<mark class="keyterm">JPOP</mark> / <mark class="keyterm">卡拉 OK</mark> 的音樂理解方向。 下一步：抽一個可驗證的 trick，做成小實驗；先看資料與評估是否足以支撐，不要只被 <mark class="keyterm">CLAP</mark> 或主觀樣本牽著走。</p>
+                <p>稍舊(2024-09)但補上本 digest 沒介紹過的關鍵一塊:詞↔音符對齊的顯式建模。與 07-06 的 VocalParse(LALM 自迴歸)、07-08 的 STARS(NAR 階層式)對照,SongTrans 是「雙 Whisper AR+NAR 邊界」路線,結構最簡單、最容易在自家資料上復刻。</p>
               </section>
               <section class="detail-section" data-standard-section="metadata">
                 <h3>Metadata</h3>
                 <dl class="meta-list">
-                  <div><dt>Authors</dt><dd>Zhifeng Kong, Sang-gil Lee, Jaehyeon Kim, Boxin Wang, Zihan Liu 等 20 位</dd></div>
-                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2607.05196v2">arxiv.org/abs/2607.05196v2</a></dd></div>
-                  <div><dt>Relevance</dt><dd>MeanAudio 3 / karaoke 0 · max 3</dd></div>
+                  <div><dt>Authors</dt><dd>Siwei Wu, Jinzheng He, Ruibin Yuan, Haojie Wei, Xipin Wei 等 8 位</dd></div>
+                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2409.14619">arxiv.org/abs/2409.14619</a></dd></div>
+                  <div><dt>Relevance</dt><dd>MeanAudio 1 / karaoke 5 · max 5</dd></div>
                 </dl>
               </section>
             </div>
@@ -861,30 +826,32 @@
             <div class="paper-number">02</div>
             <div class="paper-meta">
               <span class="track">MeanAudio</span>
-              <span class="quality">新</span>
-              <span class="freshness">2026-07-08 · 2d</span>
+              <span class="quality">新且重要</span>
+              <span class="freshness">2026-05-08 · 63d</span>
             </div>
           </div>
           <div class="paper-card-body">
-          <h2><a href="https://arxiv.org/abs/2607.07690v1" target="_blank" rel="noopener">Agon: Competitive Cross-Model RL with Implicit Rival Grading of Reasoning</a></h2>
-          <p class="one-line">Reinforcement learning from verifiable <mark class="keyterm">reward</mark>s (e.g. GRPO) is the engine behind today&#x27;s reasoning models, yet it grades only the fi...</p>
+          <h2><a href="https://arxiv.org/abs/2605.05554" target="_blank" rel="noopener">Optimal Transport Audio Distance with Learned Riemannian Ground Metrics</a></h2>
+          <p class="one-line">把 FAD 的兩個原件各修一刀:凍結 embedding 的 cost 換成可學的殘差黎曼 ground metric,高斯耦合換成 Sinkhorn 離散最優傳輸;對 rank-1 污染的敏感度是 FAD 的 1.9–3.6 倍,與 DCASE 音質 MOS 的相關性也更高。</p>
           <div class="tag-row">
             <span class="track-hint">貼近主線</span>
-            <span class="tag">text-to-audio/music</span>
+            <span class="tag">FAD 替代</span>
+            <span class="tag">optimal transport</span>
+            <span class="tag">evaluation</span>
           </div>
           <div class="quick-read">
             <div>
               <span class="label">Insight</span>
-              <p><mark class="keyterm">洞見</mark>：針對 Agon / Competitive / Cross-Model / Implicit / Rival：它的價值在資料/偏好/評估訊號怎麼進訓練，而不是只看模型架構名稱。 <mark class="keyterm">方法線索</mark>：We introduce Agon, which makes two competing models each other&#x27;s graders.</p>
+              <p>洞見:FAD 對明顯 artifact 無感是結構性的——高斯擬合把「少數樣本嚴重劣化」平均稀釋掉,凍結 embedding 的 pullback 距離又對某些失真方向天生不變(藏進不變集)。OTAD 把兩個病因拆開、各配一個機制修正,而且離散 transport plan 附送 per-sample 診斷(AUROC ≥0.86),能點名是哪幾條音訊在拉低分數——這是 FAD/KAD 等 scalar 或 kernel 聚合指標結構上給不了的除錯能力。</p>
             </div>
             <div>
               <span class="label">Try next</span>
-              <p>針對 Agon / Competitive / Cross-Model / Implicit / Rival：<mark class="keyterm">可做</mark>：抽一個最小變因重跑 ablation，固定資料、模型與 sampling，只檢查它聲稱的關鍵差異。<mark class="keyterm">結果焦點</mark>：We introduce Agon, which makes two competing models each other&#x27;s graders.</p>
+              <p>可做:安裝 otadtk(github.com/wonwoo-jeong/otadtk),在 MeanAudio 評測腳本裡與 FAD、CLAP 並排跑 2-3 個 checkpoint;重點分析 OTAD 與 FAD 排序衝突的樣本,用 per-sample 診斷歸類 FAD 漏抓的失真型態,再決定是否納入日常評測面板。</p>
             </div>
           </div>
           </div>
           <div class="card-actions">
-            <a class="source-link" href="https://arxiv.org/abs/2607.07690v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
+            <a class="source-link" href="https://arxiv.org/abs/2605.05554" target="_blank" rel="noopener">Open Paper &#8599;</a>
             <button class="details-toggle" type="button" aria-expanded="false" aria-controls="paper-2-panel">展開摘要與實驗建議</button>
             <div class="star-rating" data-paper-id="2026-07-10-2" aria-label="Rate this paper">
               <span class="star-label">重要度</span>
@@ -899,34 +866,34 @@
             <div class="detail-grid">
               <section class="detail-section" data-standard-section="problem">
                 <h3>Problem</h3>
-                <p>Reinforcement learning from verifiable <mark class="keyterm">reward</mark>s (e.g.</p>
+                <p>FAD 是帶結構限制的 2-Wasserstein 距離,兩個原件都被綁死:cost 是凍結 embedding 的 pullback、其不變集會隱藏嚴重 artifact;耦合是高斯擬合、會稀釋 rank-1 污染的影響。結果是指標與人耳感受脫節,音訊生成模型的迭代訊號失真。</p>
               </section>
               <section class="detail-section" data-standard-section="method">
                 <h3>Method</h3>
-                <p>GRPO) is the engine behind today&#x27;s reasoning models, yet it grades only the final answer.</p>
+                <p>OTAD 對每個原件配一個修正機制:cost 端用殘差式黎曼 ground-metric adapter(在凍結 embedding 上學一層度量修正);耦合端改用熵正則 Sinkhorn 離散最優傳輸(ε=0.05)。在八個音訊 encoder 上以四軸協定系統性評測,並用 transport plan 做逐樣本異常診斷。</p>
               </section>
               <section class="detail-section" data-standard-section="data">
                 <h3>Data</h3>
-                <p>看資料來源、benchmark、baseline 與評估指標是否公開或可重建；若不足，先做小型替代測試。</p>
+                <p>八個音訊 encoder 的 embedding;rank-1 污染敏感度對照實驗;DCASE 2023 Task 7(音效生成)音質 MOS 相關性評測;toolkit 以 otadtk 開源。</p>
               </section>
               <section class="detail-section" data-standard-section="findings">
                 <h3>Findings</h3>
-                <p>On hard problems this trains models to write more rather than to think better, since the trace itself is never graded and no label for good thinking exists.</p>
+                <p>coupling-only 對照下,Sinkhorn 對 rank-1 污染的敏感度超過 FAD 1.9–3.6 倍;與 DCASE 2023 Task 7 MOS 的平均 Spearman 相關高於 baseline 指標;per-sample 診斷 AUROC ≥0.86,可直接定位壞樣本。</p>
               </section>
               <section class="detail-section" data-standard-section="limitations">
                 <h3>Limitations</h3>
-                <p>注意是否只在單一資料集、單一模型或特定 sampling 設定下成立，也要避免把 speech/TTS 結論直接套到 music/audio generation。</p>
+                <p>MOS 相關性只在音效/環境音(DCASE)上驗證,音樂與歌唱未測;Sinkhorn 需選熵正則 ε、ground metric 需額外訓練,比 FAD 重;單一作者的新工作,尚無第三方復現。</p>
               </section>
               <section class="detail-section" data-standard-section="editor-note">
                 <h3>Editor Note</h3>
-                <p>先看它是否能改善 text-to-audio / text-to-music，或支援 <mark class="keyterm">Music Flamingo</mark>、<mark class="keyterm">歌詞辨識</mark>、<mark class="keyterm">JPOP</mark> / <mark class="keyterm">卡拉 OK</mark> 的音樂理解方向。 下一步：抽一個可驗證的 trick，做成小實驗；先看資料與評估是否足以支撐，不要只被 <mark class="keyterm">CLAP</mark> 或主觀樣本牽著走。</p>
+                <p>MeanAudio 評測線一直抱怨 FAD 與聽感脫節,這篇把病因拆成兩個可各自驗證的機制並附 toolkit,是「後 FAD」浪潮(KAD、ELSA)中少數給 per-sample 診斷的。先拿排序衝突樣本做小規模人耳抽查最划算。</p>
               </section>
               <section class="detail-section" data-standard-section="metadata">
                 <h3>Metadata</h3>
                 <dl class="meta-list">
-                  <div><dt>Authors</dt><dd>Vladislav Beliaev</dd></div>
-                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2607.07690v1">arxiv.org/abs/2607.07690v1</a></dd></div>
-                  <div><dt>Relevance</dt><dd>MeanAudio 2 / karaoke 0 · max 2</dd></div>
+                  <div><dt>Authors</dt><dd>Wonwoo Jeong</dd></div>
+                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2605.05554">arxiv.org/abs/2605.05554</a></dd></div>
+                  <div><dt>Relevance</dt><dd>MeanAudio 5 / karaoke 1 · max 5</dd></div>
                 </dl>
               </section>
             </div>
@@ -935,22 +902,32 @@
     
       </div>
     </section>
+
+    <section class="repo-pick" aria-label="GitHub pick">
+      <div class="repo-eyebrow">GitHub pick of the day</div>
+      <h2><a href="https://github.com/ZFTurbo/Music-Source-Separation-Training" target="_blank" rel="noopener">ZFTurbo/Music-Source-Separation-Training</a></h2>
+      <div class="repo-meta"><span class="tag">★ 1400</span><span class="tag">更新 2026-07-07</span><span class="tag">source separation</span><span class="tag">BS-RoFormer</span><span class="tag">LoRA</span></div>
+      <p>通用音樂音源分離訓練框架(MVSep 出品):同一套訓練/推論碼支援 BS-RoFormer、Mel-Band RoFormer、SCNet、Demucs4HT 等 15+ 架構,含 LoRA 微調、ensemble 工具與大量預訓練權重(最新 release 含 53-stem 模型)。</p>
+      <p><strong>為什麼相關:</strong>karaoke-jp pipeline 第一步就是人聲分離;想在 J-POP 上微調 SOTA 分離模型(BS-RoFormer 系),這是最完整的開源訓練碼——2026-07-07 還在 commit(剛加 log-mel 域的 FullnessPenaltyLoss),自備資料集格式與 LoRA 文件齊全,MIT 授權。</p>
+      <div class="card-actions">
+        <a class="source-link" href="https://github.com/ZFTurbo/Music-Source-Separation-Training" target="_blank" rel="noopener">Open Repo &#8599;</a>
+      </div>
+    </section>
+    
     <details class="footnote">
       <summary>閱讀順序與篩選原則</summary>
       <div class="footnote-body">
-        <span><strong>1.</strong> 近期主線：<mark class="keyterm">Music Flamingo</mark>、<mark class="keyterm">歌詞辨識</mark>、<mark class="keyterm">JPOP</mark>、<mark class="keyterm">卡拉 OK</mark> 與 <mark class="keyterm">karaoke-jp</mark>。</span>
-        <span><strong>2.</strong> 生成主線仍保留：text-to-audio/music、flow、caption、<mark class="keyterm">codec</mark>、評估與 <mark class="keyterm">reward</mark> <mark class="keyterm">alignment</mark>。</span>
-        <span><strong>3.</strong> 只收高品質：新穎度、重要性、baseline、資料與可落地性一起看。</span>
+        <span><strong>1.</strong> 近期主線:Music Flamingo、歌詞辨識、JPOP、卡拉 OK 與 karaoke-jp。</span>
+        <span><strong>2.</strong> 生成主線仍保留:text-to-audio/music、flow、caption、codec、評估與 reward alignment。</span>
+        <span><strong>3.</strong> 只收高品質:新穎度、重要性、baseline、資料與可落地性一起看。</span>
       </div>
     </details>
   </main>
-
-  <footer>Generated by the local MIR paper automation · Product standard 2026-05-26 · 2187e8b96f · 2026-07-10 09:00:15 Asia/Taipei</footer>
-
+  <footer>Generated by the MIR digest automation · Product standard 2026-05-26 · 2187e8b96f · 2026-07-10 09:16:48 Asia/Taipei</footer>
   <script>
+
     const cards = Array.from(document.querySelectorAll('.paper-card'));
     const RATINGS_KEY = 'mir-ratings';
-
     function loadRatings() {
       try { return JSON.parse(localStorage.getItem(RATINGS_KEY)) || {}; } catch { return {}; }
     }
@@ -996,7 +973,6 @@
       });
     }
     document.querySelectorAll('.star-rating').forEach(initStarWidget);
-
     function toggleCard(card) {
       const isOpen = card.classList.toggle('is-open');
       const btn = card.querySelector('.details-toggle');
@@ -1010,33 +986,6 @@
       body.addEventListener('click', event => {
         if (event.target.closest('a, button, input, .card-actions, .star-rating')) return;
         toggleCard(body.closest('.paper-card'));
-      });
-    });
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const filter = btn.dataset.filter;
-        document.querySelectorAll('.filter-btn').forEach(b => b.setAttribute('aria-pressed', String(b === btn)));
-        const ratings = loadRatings();
-        cards.forEach(card => {
-          let show = filter === 'all' || card.dataset.track === filter;
-          if (filter === 'important') {
-            const paperId = card.id ? `2026-07-10-${card.id.replace('paper-', '')}` : null;
-            show = paperId && (ratings[paperId] || 0) >= 3;
-          }
-          card.classList.toggle('is-hidden', !show);
-        });
-        document.querySelectorAll('.paper-nav-list li').forEach(li => {
-          const link = li.querySelector('a');
-          if (!link) return;
-          const target = document.querySelector(link.getAttribute('href'));
-          if (!target) return;
-          let show = filter === 'all' || target.dataset.track === filter;
-          if (filter === 'important') {
-            const paperId = target.id ? `2026-07-10-${target.id.replace('paper-', '')}` : null;
-            show = paperId && (ratings[paperId] || 0) >= 3;
-          }
-          li.style.display = show ? '' : 'none';
-        });
       });
     });
     document.querySelectorAll('.paper-nav-list a').forEach(link => {
@@ -1054,7 +1003,7 @@
         }
       });
     });
-  </script>
 
+  </script>
 </body>
 </html>

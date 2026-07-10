@@ -118,3 +118,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-07-08,1,paper,mean_audio,Resonate: Reinforcing Text-to-Audio Generation via Online Feedback from Large Audio Language Models,https://arxiv.org/abs/2603.11661,2603.11661,reward alignment|GRPO|text-to-audio,重要
 2026-07-08,2,paper,karaoke_jp,"STARS: A Unified Framework for Singing Transcription, Alignment, and Refined Style Annotation",https://arxiv.org/abs/2507.06670,2507.06670,歌詞對齊|唱聲轉譜|風格標註,重要
 2026-07-08,0,repo,github,rzru/nightingale,https://github.com/rzru/nightingale,,karaoke|pitch scoring|singing,
+2026-07-10,1,paper,karaoke_jp,SongTrans: An unified song transcription and alignment method for lyrics and notes,https://arxiv.org/abs/2409.14619,2409.14619,歌詞對齊|唱聲轉譜|mora-to-note,重要
+2026-07-10,2,paper,mean_audio,Optimal Transport Audio Distance with Learned Riemannian Ground Metrics,https://arxiv.org/abs/2605.05554,2605.05554,FAD 替代|optimal transport|evaluation,新且重要
+2026-07-10,0,repo,github,ZFTurbo/Music-Source-Separation-Training,https://github.com/ZFTurbo/Music-Source-Separation-Training,,source separation|BS-RoFormer|LoRA,
