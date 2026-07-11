@@ -1,0 +1,93 @@
+{
+ "date": "2026-07-11",
+ "papers": [
+  {
+   "slot": 1,
+   "track": "karaoke_jp",
+   "title": "Note-Level Singing Melody Transcription for Time-Aligned Musical Score Generation",
+   "authors": [
+    "Leekyung Kim",
+    "Sungwook Jeon",
+    "Wan Heo",
+    "Jonghun Park"
+   ],
+   "published": "2025-02-18",
+   "updated": "2025-02-18",
+   "source_url": "https://arxiv.org/abs/2502.12438",
+   "arxiv_id": "2502.12438",
+   "doi": "",
+   "tags": [
+    "唱聲轉譜",
+    "MIDI/score",
+    "mora-to-note"
+   ],
+   "quality": "重要",
+   "tldr": "T3MS 端到端把歌聲音訊直接轉成帶音值的時間對齊樂譜:以 beat tracking 網格量化 ST500 標註產生音值偽標籤,tokenized seq2seq 一次輸出音高、起迄時間與音值,note-level F1 0.610 超越既有方法。",
+   "insight": "洞見:音值與 onset/offset 聯合學習會互相增強——T3MS 不靠 DALI 額外資料就在傳統 onset+offset+pitch 指標上贏過 note-level Transformer,說明「拍值」是有效的輔助監督;而音值偽標籤只需 madmom 的 beat 網格量化即可生成,不需人工標註,推論時也完全不用 beat tracker。對 karaoke-jp 來說,時間對齊樂譜正是 LRC 渲染與 mora-to-note timing 的上游表徵:字幕節奏本質上是 score-time 到 real-time 的映射。",
+   "try_next": "可做:取 karaoke-jp 已有的日文歌人聲與 LRC 時間戳,用 madmom 抓 beat 後照論文做網格量化產生音值偽標籤,抽查與人工 MIDI 的一致率;若可靠,讓 mora-to-note timing 改吃「音值+onset」雙約束,量測 note 邊界誤差的變化。",
+   "problem": "現有工具要嘛只出 piano-roll(有時間、缺音值),要嘛只出樂譜(有音值、缺時間),要拿到時間對齊樂譜得多階段串接(轉譜→beat tracking→量化),誤差層層累積;且幾乎沒有同時帶 onset/offset/音高/音值標註的歌聲資料集。",
+   "method": "提出「擴充 note-level 轉譜」任務與 T3MS 模型:12 層 encoder+8 層 decoder 的 seq2seq,token 序列同時編碼 onset、offset、音高與音值(以十六分音符為單位);用 madmom beat tracking 對 ST500 的 onset/offset 做網格量化,自動生成音值偽標籤參與訓練,推論時直接從音訊輸出完整時間對齊樂譜。",
+   "data": "ST500(474 首帶伴奏流行歌)做訓練與 note-level 評測;HSD 55 首(人工校正音值,另經 F0 比對修正八度與時間偏移)僅作音值評測;對照組含 note-level Transformer、MusicYOLO、AE-SVT、Grid Quantization、MuseScore、AnthemScore。",
+   "findings": "ST500 note-level(onset+offset+pitch)F1 0.610 為全場最高且 P/R 均衡;HSD 音值辨識全面優於「先轉譜再量化」路線(CN2 accuracy 0.546 vs 0.517,MSE 0.796 vs 0.856)與 MuseScore/AnthemScore;證明音值直出可避免多階段級聯誤差,還反過來提升傳統轉譜精度。",
+   "limitations": "只支援 4/4 拍、無法辨識三連音;強伴奏、多聲部、氣音唱腔仍易失誤;音值評測僅 55 首歌且以中韓流行歌為主,日文歌未驗證;2025-02 的工作(TASLP),非本月新作。",
+   "editor_note": "digest 講過歌詞對齊(SongTrans、STARS)但一直沒碰「音值」這塊:T3MS 把 note value 當一級公民直出時間對齊樂譜,正好補上卡拉 OK 字幕節奏建模缺的中間層。期刊版工程細節完整,偽標籤做法可直接搬用。",
+   "relevance": {
+    "mean_audio": 1,
+    "karaoke_jp": 5
+   }
+  },
+  {
+   "slot": 2,
+   "track": "mean_audio",
+   "title": "Investigating Group Relative Policy Optimization for Diffusion Transformer based Text-to-Audio Generation",
+   "authors": [
+    "Yi Gu",
+    "Yanqing Liu",
+    "Chen Yang",
+    "Sheng Zhao"
+   ],
+   "published": "2026-03-02",
+   "updated": "2026-03-02",
+   "source_url": "https://arxiv.org/abs/2603.01565",
+   "arxiv_id": "2603.01565",
+   "doi": "",
+   "tags": [
+    "reward alignment",
+    "GRPO",
+    "text-to-audio"
+   ],
+   "quality": "重要",
+   "tldr": "微軟團隊在 TangoFlux 上系統性實驗 GRPO:先用 LLM 把稀疏 caption 擴寫成細節描述(CLAP 0.326→0.546),再以 CLAP/FAD/KL 加權獎勵做 RL 微調(→0.567),把資料增強與 RL 的貢獻拆開量化。",
+   "insight": "洞見:這篇最有價值的是消融的誠實——單一獎勵 GRPO 只拉高自己對應的指標,CLAP-only 甚至讓 FD 惡化 10 點(161.9→171.8),加權三獎勵才全面持平或更好;且 LLM caption 增強的增益遠大於 RL 本身。對 MeanAudio 的直接啟示:caption 品質先做滿,RL 是最後一哩的細調,而且獎勵必須多目標,單指標 reward 就是 reward hacking 的入口。",
+   "try_next": "可做:用 MeanAudio 現有的 CLAP/FAD 評測腳本複製其消融——取一個 MeanFlow checkpoint 生成小批樣本,分別以 CLAP-only 與 CLAP+FAD+KL 加權做 reward 排序,算兩種排序的相關性差異,估算單獎勵 reward hacking 的風險再決定 RL 配方。",
+   "problem": "T2A 模型對複雜 prompt 常有事件遺漏、順序錯亂與語意對齊不準;RLHF 式後訓練在 T2A 缺乏大規模偏好資料,獎勵函數該怎麼設計也沒有系統性答案。",
+   "method": "以 TangoFlux(DiT+MMDiT、rectified flow、44.1kHz)為基底,分兩階段:(1) 設計 prompt 規則集讓 GPT-4/DeepSeek-V2/Qwen-2.5 擴寫音訊描述,人工評分挑最佳配置後全量增強,與原 caption 按可調比例混採訓練;(2) 用 GRPO 微調 flow-matching 模型,獎勵為 CLAP(語意對齊)、FAD(分佈保真)、KL(樣本級語意一致)及其加權和,群組內相對優勢估計、凍結參考模型。",
+   "data": "內部音訊資料集(規模未公開);評測指標 FD_Openl3、KL_PaSST、CLAP score;A100 訓練,AdamW+cosine(1e-4→5e-6)。",
+   "findings": "caption 增強:FD 181.5→161.9、KL 2.142→1.028、CLAP 0.326→0.546;加權 GRPO 再推到 158.8/1.012/0.567。單獎勵 GRPO 只改善對應指標且會犧牲其他維度,加權組合在三指標上同時最穩,證實多目標 reward 設計的必要性。",
+   "limitations": "訓練資料為內部集、無法直接復現;只有客觀指標、無 MOS 或人耳評測;RL 增益相對資料增強偏小;僅在 TangoFlux 單一基底、通用音效場景驗證,音樂生成未測。",
+   "editor_note": "與 7/8 的 Resonate(線上 LALM 回饋)同屬 GRPO-for-T2A,但這篇的貢獻是把「資料 vs RL」「單獎勵 vs 多獎勵」拆乾淨,結論直白好用:caption 先行、獎勵加權。給 MeanAudio 排 RL 路線圖時可以直接當基準表。",
+   "relevance": {
+    "mean_audio": 5,
+    "karaoke_jp": 1
+   }
+  }
+ ],
+ "repo": {
+  "full_name": "HeartMuLa/heartlib",
+  "url": "https://github.com/HeartMuLa/heartlib",
+  "description_zh": "HeartMuLa 官方庫:開源音樂基礎模型全家桶——歌詞+tags 條件的音樂語言模型(3B,主打歌詞可控性)、12.5Hz 高保真 HeartCodec、Whisper 系歌詞轉錄 HeartTranscriptor、音樂版 HeartCLAP;附 HuggingFace/ModelScope 權重、benchmark 與 ComfyUI 節點,Apache 2.0。",
+  "stars": 4100,
+  "updated": "2026-04-10",
+  "why": "6/3 digest 介紹過 HeartMuLa 論文,這是可直接跑的官方實作:HeartTranscriptor 可當 karaoke-jp 歌詞轉錄的現成對照組,HeartCodec 的 12.5Hz token 率正對 MeanAudio 的 codec 主線;2026 年持續迭代(1/23 RL 版、2/13 happy-new-year 權重、4/10 上線 HF demo),4.1k 星。",
+  "tags": [
+   "music generation",
+   "codec/tokenizer",
+   "lyrics transcription"
+  ]
+ },
+ "discord_messages": [
+  "# 每日 MIR 論文精選 - 2026-07-11\n網站:https://lanternko.github.io/mir-paper-digest/reports/2026-07-11.html\n\n## 論文 1|Note-Level Singing Melody Transcription for Time-Aligned Musical Score Generation(T3MS)\nhttps://arxiv.org/abs/2502.12438\n主線:karaoke-jp(唱聲轉譜/MIDI/score)|品質:重要\n\n**TLDR**:端到端從歌聲音訊直出「帶音值的時間對齊樂譜」:用 madmom beat 網格量化 ST500 標註自動生成音值偽標籤,seq2seq 一次輸出音高、起迄時間與音值,note-level F1 0.610 為全場最高。\n\n**為什麼選它**:digest 講過歌詞對齊,但一直沒碰「音值」——卡拉 OK 字幕節奏本質是 score-time 到 real-time 的映射,T3MS 正好補上這個中間層。而且它證明音值與 onset/offset 聯合學習會互相增強:不加額外資料就贏過 note-level Transformer,偽標籤也不需人工音值標註。\n\n**注意**:只支援 4/4 拍、不能辨三連音;音值評測僅 55 首 HSD、以中韓流行歌為主,日文未驗證;2025-02 的 TASLP 工作,重要但稍舊。\n\n**下一步**:用自家日文歌人聲+LRC 時間戳照論文做 beat 網格量化偽標籤,抽查與人工 MIDI 一致率;可靠的話讓 mora-to-note timing 改吃「音值+onset」雙約束。",
+  "## 論文 2|Investigating Group Relative Policy Optimization for Diffusion Transformer based Text-to-Audio Generation\nhttps://arxiv.org/abs/2603.01565\n主線:MeanAudio(reward alignment/GRPO)|品質:重要\n\n**TLDR**:微軟團隊在 TangoFlux 上把「資料 vs RL」拆開量化:LLM 擴寫 caption 讓 CLAP 0.326→0.546、KL 2.14→1.03;GRPO 加權獎勵(CLAP+FAD+KL)再推到 0.567/1.012,FD 也從 161.9 降到 158.8。\n\n**為什麼選它**:消融誠實——單一獎勵 GRPO 只拉高自己對應的指標,CLAP-only 甚至讓 FD 惡化 10 點;加權三獎勵才全面最穩。結論直白:caption 品質先做滿(增益最大),RL 是最後一哩,而且獎勵必須多目標,單指標 reward 就是 reward hacking 的入口。\n\n**注意**:內部資料集、無法復現;只有客觀指標無 MOS;RL 增益相對資料增強偏小;僅 TangoFlux 單基底、通用音效場景,音樂生成未測。\n\n**下一步**:用 MeanAudio 現有 CLAP/FAD 腳本複製其消融——同一批生成樣本分別以 CLAP-only 與加權獎勵排序,算排序相關性差異,估單獎勵 hacking 風險再定 RL 配方。",
+  "## GitHub Pick|HeartMuLa/heartlib ⭐4.1k\nhttps://github.com/HeartMuLa/heartlib\n開源音樂基礎模型全家桶:歌詞+tags 條件音樂生成(3B)、12.5Hz HeartCodec、Whisper 系歌詞轉錄 HeartTranscriptor、音樂版 HeartCLAP;Apache 2.0,權重/benchmark/ComfyUI 節點齊全,2026 年持續迭代(1/23 RL 版→2/13 新權重→4/10 HF demo)。6/3 介紹過論文,現在可以直接跑:HeartTranscriptor 當歌詞轉錄對照組、HeartCodec 對 MeanAudio 的 codec 主線都現成。\n\n## 今天的 take-away\n1. **音值是卡拉 OK timing 缺的中間層**:T3MS 證明 note value 可以用 beat 網格量化偽標籤學出來,還反過來提升轉譜精度——mora-to-note 可以試「音值+onset」雙約束。\n2. **caption 先行、獎勵加權**:GRPO 論文把帳算清楚了——資料增強的增益遠大於 RL,單指標 reward 必然顧此失彼;MeanAudio 排 RL 路線前先把這張基準表放在手邊。\n3. **HeartMuLa 全家桶落地**:論文讀過了,權重和轉錄器都能直接跑,先拿 HeartTranscriptor 對照自家日文歌詞轉錄的錯誤型態。"
+ ]
+}

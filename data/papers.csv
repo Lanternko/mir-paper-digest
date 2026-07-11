@@ -121,3 +121,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-07-10,1,paper,karaoke_jp,SongTrans: An unified song transcription and alignment method for lyrics and notes,https://arxiv.org/abs/2409.14619,2409.14619,歌詞對齊|唱聲轉譜|mora-to-note,重要
 2026-07-10,2,paper,mean_audio,Optimal Transport Audio Distance with Learned Riemannian Ground Metrics,https://arxiv.org/abs/2605.05554,2605.05554,FAD 替代|optimal transport|evaluation,新且重要
 2026-07-10,0,repo,github,ZFTurbo/Music-Source-Separation-Training,https://github.com/ZFTurbo/Music-Source-Separation-Training,,source separation|BS-RoFormer|LoRA,
+2026-07-11,1,paper,karaoke_jp,Note-Level Singing Melody Transcription for Time-Aligned Musical Score Generation,https://arxiv.org/abs/2502.12438,2502.12438,唱聲轉譜|MIDI/score|mora-to-note,重要
+2026-07-11,2,paper,mean_audio,Investigating Group Relative Policy Optimization for Diffusion Transformer based Text-to-Audio Generation,https://arxiv.org/abs/2603.01565,2603.01565,reward alignment|GRPO|text-to-audio,重要
+2026-07-11,0,repo,github,HeartMuLa/heartlib,https://github.com/HeartMuLa/heartlib,,music generation|codec/tokenizer|lyrics transcription,
