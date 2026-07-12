@@ -124,3 +124,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-07-11,1,paper,karaoke_jp,Note-Level Singing Melody Transcription for Time-Aligned Musical Score Generation,https://arxiv.org/abs/2502.12438,2502.12438,唱聲轉譜|MIDI/score|mora-to-note,重要
 2026-07-11,2,paper,mean_audio,Investigating Group Relative Policy Optimization for Diffusion Transformer based Text-to-Audio Generation,https://arxiv.org/abs/2603.01565,2603.01565,reward alignment|GRPO|text-to-audio,重要
 2026-07-11,0,repo,github,HeartMuLa/heartlib,https://github.com/HeartMuLa/heartlib,,music generation|codec/tokenizer|lyrics transcription,
+2026-07-12,1,paper,karaoke_jp,Poly-SVC: Polyphony-Aware Singing Voice Conversion with Harmonic Modeling,https://arxiv.org/abs/2605.12310,2605.12310,唱聲 pitch|人聲分離|flow/diffusion,新且重要
+2026-07-12,2,paper,mean_audio,PairAlign: A Framework for Sequence Tokenization via Self-Alignment with Applications to Audio Tokenization,https://arxiv.org/abs/2605.06582,2605.06582,codec/tokenizer|sequence tokenization|audio representation,新
+2026-07-12,0,repo,github,mason369/music-to-midi,https://github.com/mason369/music-to-midi,,audio-to-midi|source separation|music transcription,

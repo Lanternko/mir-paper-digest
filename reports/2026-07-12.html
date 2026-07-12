@@ -633,7 +633,6 @@
       .paper-nav-list { flex-direction: column; }
       footer { padding: 0 16px 32px; }
     }
-
     .source-link,
     .details-toggle {
       display: inline-flex; align-items: center; justify-content: center; gap: 8px;
@@ -653,88 +652,57 @@
       border-color: var(--teal);
       color: var(--teal);
     }
-    .source-link:hover {
-      background: var(--teal-soft);
-      text-decoration: none;
-    }
+    .source-link:hover { background: var(--teal-soft); text-decoration: none; }
     .details-toggle:hover { background: var(--bg-hover); }
     .details-toggle:active,
     .source-link:active { transform: translateY(1px); }
     body { overflow-x: hidden; }
-    .canvas,
-    .topbar-inner,
-    footer,
-    .digest-layout > *,
-    .paper-card,
-    .paper-card-body,
-    .quick-read > *,
-    .detail-section {
-      min-width: 0;
-    }
-    .paper-card {
+    .canvas, .topbar-inner, footer, .digest-layout > *, .paper-card,
+    .paper-card-body, .quick-read > *, .detail-section { min-width: 0; }
+    .paper-card { overflow: hidden; }
+    .paper-card h2, .one-line, .quick-read p, .detail-section p,
+    .meta-list dd { overflow-wrap: anywhere; }
+    .repo-pick {
+      margin-top: 18px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-card);
+      padding: 18px;
       overflow: hidden;
     }
-    .paper-card h2,
-    .one-line,
-    .quick-read p,
-    .detail-section p,
-    .meta-list dd {
-      overflow-wrap: anywhere;
+    .repo-pick .repo-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 6px;
     }
-    .keyterm {
-      color: var(--accent-ink);
-      background: rgba(254, 209, 223, 0.62);
-      border: 1px solid rgba(120, 85, 97, 0.12);
-      border-radius: 6px;
-      padding: 0 0.18em 0.02em;
-      font-weight: 650;
-      box-decoration-break: clone;
-      -webkit-box-decoration-break: clone;
+    .repo-pick h2 {
+      margin: 0 0 8px;
+      font-family: var(--font-zh), var(--font-serif);
+      font-size: 21px;
+      font-weight: 500;
+      line-height: 1.25;
     }
-    h2 .keyterm {
-      background: transparent;
-      border-color: transparent;
-      color: var(--accent);
-      padding: 0;
-    }
+    .repo-pick h2 a { color: var(--text-primary); text-decoration: none; overflow-wrap: anywhere; }
+    .repo-pick h2 a:hover { color: var(--accent); }
+    .repo-pick p { margin: 0 0 8px; color: var(--text-secondary); font-family: var(--font-sans); font-size: 14px; overflow-wrap: anywhere; }
+    .repo-pick .repo-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
     @media (max-width: 640px) {
-      .nav {
-        width: 100%;
-        margin-left: 0;
-        overflow-x: auto;
-        justify-content: flex-start;
-      }
-      .nav a,
-      .nav-pill {
-        flex-shrink: 0;
-      }
-      .hero,
-      .digest-layout {
-        max-width: 342px;
-        margin-left: 0;
-        margin-right: auto;
-      }
-      .paper-card {
-        width: 100%;
-      }
-      .card-actions {
-        align-items: flex-start;
-      }
-      .star-rating {
-        width: 100%;
-        margin-left: 0;
-        justify-content: flex-end;
-      }
-      .star-rating button {
-        width: 26px;
-        height: 28px;
-      }
+      .nav { width: 100%; margin-left: 0; overflow-x: auto; justify-content: flex-start; }
+      .nav a, .nav-pill { flex-shrink: 0; }
+      .hero, .digest-layout { max-width: 342px; margin-left: 0; margin-right: auto; }
+      .paper-card { width: 100%; }
+      .card-actions { align-items: flex-start; }
+      .star-rating { width: 100%; margin-left: 0; justify-content: flex-end; }
+      .star-rating button { width: 26px; height: 28px; }
     }
 
   </style>
 </head>
 <body>
-
   <div class="topbar">
     <div class="topbar-inner">
       <a class="brand" href="../index.html" aria-label="MIR Paper Digest home">
@@ -749,64 +717,61 @@
       </nav>
     </div>
   </div>
-
   <main class="canvas">
-
     <section class="hero">
       <div>
         <p class="eyebrow">Daily research brief · 2026-07-12</p>
         <h1>每日 MIR 論文<em>精選</em></h1>
-        <p class="subtitle">近期主線往 <mark class="keyterm">Music Flamingo</mark>、<mark class="keyterm">歌詞辨識</mark>、<mark class="keyterm">JPOP</mark> 與<mark class="keyterm">卡拉 OK</mark> 靠攏；今天先看最能轉成下一個小實驗的兩篇。</p>
+        <p class="subtitle">近期主線往 Music Flamingo、歌詞辨識、JPOP 與卡拉 OK 靠攏;今天先看最能轉成下一個小實驗的兩篇。</p>
       </div>
     </section>
-
     <section class="digest-layout">
-
       <aside class="paper-nav" aria-label="Paper navigation">
         <div class="paper-nav-title">Papers</div>
         <ol class="paper-nav-list">
           <li><a href="#paper-1">
             <span class="nav-num">01</span>
-            <span>AutoAnchor: Stable Diffusion Unlearning U...<span class="nav-track">MeanAudio</span></span>
+            <span>Poly-SVC: Polyphony-Aware Singing Voice C...<span class="nav-track">karaoke-jp</span></span>
           </a></li>
           <li><a href="#paper-2">
             <span class="nav-num">02</span>
-            <span>FSD-VLN: Fast-Slow Dual-System Modeling f...<span class="nav-track">MeanAudio</span></span>
+            <span>PairAlign: A Framework for Sequence Token...<span class="nav-track">MeanAudio</span></span>
           </a></li>
         </ol>
       </aside>
-
       <div class="cards" aria-label="論文卡片">
 
-        <article class="paper-card" data-track="mean_audio" id="paper-1">
+        <article class="paper-card" data-track="karaoke_jp" id="paper-1">
           <div class="paper-head">
             <div class="paper-number">01</div>
             <div class="paper-meta">
-              <span class="track">MeanAudio</span>
-              <span class="quality">新</span>
-              <span class="freshness">2026-07-09 · 3d</span>
+              <span class="track">karaoke-jp</span>
+              <span class="quality">新且重要</span>
+              <span class="freshness">2026-05-12 · 61d</span>
             </div>
           </div>
           <div class="paper-card-body">
-          <h2><a href="https://arxiv.org/abs/2607.08337v1" target="_blank" rel="noopener">AutoAnchor: Stable Diffusion Unlearning Using Cross-Attention as a Manifold Surrogate</a></h2>
-          <p class="one-line">Diffusion unlearning is essential for mitigating the generation of harmful or copyrighted content in text-to-image models. Current...</p>
+          <h2><a href="https://arxiv.org/abs/2605.12310" target="_blank" rel="noopener">Poly-SVC: Polyphony-Aware Singing Voice Conversion with Harmonic Modeling</a></h2>
+          <p class="one-line">騰訊 Lyra Lab 的零樣本跨語言唱聲轉換:不假設分離後人聲乾淨,用 CQT 整包保留主旋律與殘留和聲,配 MIDI 監督與 CFM 擴散解碼器,和聲場景 MOS 3.75 勝 SeedVC 的 3.35。</p>
           <div class="tag-row">
-            <span class="track-hint">貼近主線</span>
-            <span class="tag">text-to-audio/music</span>
+            <span class="track-hint">可轉譯</span>
+            <span class="tag">唱聲 pitch</span>
+            <span class="tag">人聲分離</span>
+            <span class="tag">flow/diffusion</span>
           </div>
           <div class="quick-read">
             <div>
               <span class="label">Insight</span>
-              <p><mark class="keyterm">洞見</mark>：針對 AutoAnchor / Stable / Diffusion / Unlearning / Cross-Attention：它提供一個生成模型訓練或 sampling 的可遷移假設，可以拿來檢查音訊生成 pipeline 的對應位置。 <mark class="keyterm">方法線索</mark>：To achieve stable unlearning, we propose \mysysn, a two-stage framework that au...</p>
+              <p>洞見:真實歌曲經 UVR/Demucs 分離永遠留殘留和聲,與其硬擠出單一 F0,不如在表徵層改用 CQT 把「多條旋律線」整包交給生成器——CQT 的對數頻率軸還附送平移即轉調。這個思路對 karaoke-jp 的唱聲 pitch 抽取同樣成立:合唱與和聲段落的 F0 追蹤錯誤,可能該從表徵層解,而非事後修補;且論文顯示只需少量 MIDI 對齊資料做 L1 監督,就能教會 CQT encoder 壓掉音色等音高無關成分。</p>
             </div>
             <div>
               <span class="label">Try next</span>
-              <p>針對 AutoAnchor / Stable / Diffusion / Unlearning / Cross-Attention：<mark class="keyterm">可做</mark>：抽一個最小變因重跑 ablation，固定資料、模型與 sampling，只檢查它聲稱的關鍵差異。<mark class="keyterm">結果焦點</mark>：Experimental results demonstrate that \mysys effectively achieves robust and unbiased...</p>
+              <p>可做:在 karaoke-jp 的 pitch 模組加一條 CQT 路徑(12 bins/octave、共 84 bins、hop 441),對比 RMVPE 在和聲豐富的 J-POP 副歌片段的 pitch 曲線穩定度;若 CQT 更穩,再用手上的 MIDI 標註複製論文的 CQT-MIDI encoder L1 對齊監督。</p>
             </div>
           </div>
           </div>
           <div class="card-actions">
-            <a class="source-link" href="https://arxiv.org/abs/2607.08337v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
+            <a class="source-link" href="https://arxiv.org/abs/2605.12310" target="_blank" rel="noopener">Open Paper &#8599;</a>
             <button class="details-toggle" type="button" aria-expanded="false" aria-controls="paper-1-panel">展開摘要與實驗建議</button>
             <div class="star-rating" data-paper-id="2026-07-12-1" aria-label="Rate this paper">
               <span class="star-label">重要度</span>
@@ -821,34 +786,34 @@
             <div class="detail-grid">
               <section class="detail-section" data-standard-section="problem">
                 <h3>Problem</h3>
-                <p>Diffusion unlearning is essential for mitigating the generation of harmful or copyrighted content in text-to-image models.</p>
+                <p>SVC 系統依賴 F0 抽取器,但真實歌曲的人聲分離總留下殘留和聲,單一 F0 在多音高場景大量出錯,造成走音與頻譜失真;同時訓練用乾淨人聲、推論吃帶殘留和聲的分離結果,分佈不匹配。</p>
               </section>
               <section class="detail-section" data-standard-section="method">
                 <h3>Method</h3>
-                <p>Current diffusion unlearning techniques determine the model update direction by either using alternatives of the target concept as an anchor or using empty prompts.</p>
+                <p>三個組件:(1) CQT-based pitch extractor,裁剪到 32Hz-1kHz 人聲域,保留主旋律與殘留和聲;(2) Random Sampler 用少量 MIDI 平行資料以 L1 損失讓 CQT encoder 貼近 MIDI encoder,抑制音高無關資訊;(3) 內容(Whisper-small)、音色(CampPlus)、音高三特徵經 length regulator 對齊後,條件到 U-DiT 的 Conditional Flow Matching 擴散解碼器,Firefly-GAN vocoder 出聲;另用 OpenVoice Timbre Shifter 防止內容特徵洩漏音色。</p>
               </section>
               <section class="detail-section" data-standard-section="data">
                 <h3>Data</h3>
-                <p>看資料來源、benchmark、baseline 與評估指標是否公開或可重建；若不足，先做小型替代測試。</p>
+                <p>語音用 Emilia 子集;唱聲用 m4singer、OpenSinger、OpenCpop、PopBuTFy、VocalSet(m4singer 帶 MIDI 標註);另以 UVR 從 70 小時中/英/粵/日混音歌抽人聲並去殘響,模擬帶殘留和聲的真實場景;評測 20 條 5-15 秒樣本。</p>
               </section>
               <section class="detail-section" data-standard-section="findings">
                 <h3>Findings</h3>
-                <p>The anchor-based method relies on manually and semantically-chosen anchors that risk biased unlearning, while the anchor-free method inherently suffers from unrobust unlearning due to unconstrained latent updates.</p>
+                <p>12 人主觀評測:和聲場景 MOS 3.75、SIM-MOS 3.42,優於 SeedVC(3.35/3.40)、DDSP-SVC(2.98/2.82)、so-vits-svc(1.64/2.08);單旋律場景 MOS 3.98 亦全場最高。消融:移除 Timbre Shifter 使 SIM-MOS 明顯下降,移除 Random Sampler 則 MOS 與 SIM-MOS 同步變差;頻譜圖顯示能同時重建主旋律與和聲結構,SeedVC 只抓到主旋律且有明顯音高錯誤。</p>
               </section>
               <section class="detail-section" data-standard-section="limitations">
                 <h3>Limitations</h3>
-                <p>注意是否只在單一資料集、單一模型或特定 sampling 設定下成立，也要避免把 speech/TTS 結論直接套到 music/audio generation。</p>
+                <p>評測全靠主觀 MOS(12 位中文受試者、20 條樣本),無任何客觀指標;和聲訓練資料是 UVR 分離的偽 ground truth;多人唱不同歌詞的內容重疊問題明言未解;訓練含日文但日文表現未單獨報告。</p>
               </section>
               <section class="detail-section" data-standard-section="editor-note">
                 <h3>Editor Note</h3>
-                <p>先看它是否能改善 text-to-audio / text-to-music，或支援 <mark class="keyterm">Music Flamingo</mark>、<mark class="keyterm">歌詞辨識</mark>、<mark class="keyterm">JPOP</mark> / <mark class="keyterm">卡拉 OK</mark> 的音樂理解方向。 下一步：抽一個可驗證的 trick，做成小實驗；先看資料與評估是否足以支撐，不要只被 <mark class="keyterm">CLAP</mark> 或主觀樣本牽著走。</p>
+                <p>digest 之前談分離(Diff-VS、MSST)與唱聲轉譜(SongTrans、T3MS),這篇補上中間的縫:分離不完美時下游怎麼活。它的答案「殘留和聲不是雜訊、是該保留的資訊」對 karaoke-jp 的 pitch 抽取是可直接檢驗的假設,ICASSP 2026 已接收。</p>
               </section>
               <section class="detail-section" data-standard-section="metadata">
                 <h3>Metadata</h3>
                 <dl class="meta-list">
-                  <div><dt>Authors</dt><dd>Siyuan Wen, Jiahao Zeng, Ningning Ding</dd></div>
-                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2607.08337v1">arxiv.org/abs/2607.08337v1</a></dd></div>
-                  <div><dt>Relevance</dt><dd>MeanAudio 2 / karaoke 0 · max 2</dd></div>
+                  <div><dt>Authors</dt><dd>Chen Geng, Meng Chen, Ruohua Zhou, Ruolan Liu, Weifeng Zhao</dd></div>
+                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2605.12310">arxiv.org/abs/2605.12310</a></dd></div>
+                  <div><dt>Relevance</dt><dd>MeanAudio 2 / karaoke 4 · max 4</dd></div>
                 </dl>
               </section>
             </div>
@@ -862,29 +827,31 @@
             <div class="paper-meta">
               <span class="track">MeanAudio</span>
               <span class="quality">新</span>
-              <span class="freshness">2026-07-09 · 3d</span>
+              <span class="freshness">2026-05-08 · 65d</span>
             </div>
           </div>
           <div class="paper-card-body">
-          <h2><a href="https://arxiv.org/abs/2607.08359v1" target="_blank" rel="noopener">FSD-VLN: Fast-Slow Dual-System Modeling for Aerial Long-Horizon Vision-Language Navigation</a></h2>
-          <p class="one-line">Vision-Language Navigation (VLN) enables UAV autonomous navigation in unknown environments by mapping language instructions to real...</p>
+          <h2><a href="https://arxiv.org/abs/2605.06582" target="_blank" rel="noopener">PairAlign: A Framework for Sequence Tokenization via Self-Alignment with Applications to Audio Tokenization</a></h2>
+          <p class="one-line">把 tokenization 重新定義為條件序列生成:AR decoder 自行決定 token 身分、順序、長度與 EOS,雙視角自對齊保留編輯距離結構;TIMIT 檢索 token 數省 55%。</p>
           <div class="tag-row">
             <span class="track-hint">貼近主線</span>
-            <span class="tag">text-to-audio/music</span>
+            <span class="tag">codec/tokenizer</span>
+            <span class="tag">sequence tokenization</span>
+            <span class="tag">audio representation</span>
           </div>
           <div class="quick-read">
             <div>
               <span class="label">Insight</span>
-              <p><mark class="keyterm">洞見</mark>：針對 FSD-VLN / Fast-Slow / Dual-System / Modeling / Aerial：它把 <mark class="keyterm">alignment</mark> signal 放回生成過程本身，而不是只靠後處理 <mark class="keyterm">reward</mark>；可對照音訊文字對齊是否也能這樣做。 <mark class="keyterm">方法線索</mark>：把 <mark class="keyterm">alignment</mark> signal 直接放進 diffusion matching/training，而不是只靠外部 <mark class="keyterm">reward</mark> 做後處理。</p>
+              <p>洞見:現行 codec/VQ tokenizer 都是逐幀局部指派,序列層級的性質——緊湊度、長度控制、可終止、編輯相似度——從來不是訓練目標,只是副產品。PairAlign 把「同內容兩個視角應產生彼此高似然的序列」當成可規模化的編輯距離代理目標,順帶用競爭序列防 many-to-one 塌縮。對 MeanAudio 的意義:token 序列長度主宰生成模型算力,能學出「內容不變則序列不變」的可變長 tokenizer,比調 codebook 大小更根本;不過它目前只在 3 秒語音上驗證。</p>
             </div>
             <div>
               <span class="label">Try next</span>
-              <p>針對 FSD-VLN / Fast-Slow / Dual-System / Modeling / Aerial：<mark class="keyterm">可做</mark>：把 <mark class="keyterm">alignment</mark> signal 做成單一 loss 或 reranking ablation，先比較文字-音訊相符度與主觀聽感。<mark class="keyterm">結果焦點</mark>：確認 <mark class="keyterm">alignment</mark> 是否真的在生成過程改善，而不是只讓某個 <mark class="keyterm">reward</mark> metric 變好。</p>
+              <p>可做:給 MeanAudio 的評測管線加一個序列一致性檢查——對同一段音訊做 time-shift、增益等內容保持擾動,量現有 codec(如 DAC/EnCodec)token 序列的編輯距離分佈,先建立「現況有多不穩」的基線,再判斷自對齊式目標值不值得引入訓練。</p>
             </div>
           </div>
           </div>
           <div class="card-actions">
-            <a class="source-link" href="https://arxiv.org/abs/2607.08359v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
+            <a class="source-link" href="https://arxiv.org/abs/2605.06582" target="_blank" rel="noopener">Open Paper &#8599;</a>
             <button class="details-toggle" type="button" aria-expanded="false" aria-controls="paper-2-panel">展開摘要與實驗建議</button>
             <div class="star-rating" data-paper-id="2026-07-12-2" aria-label="Rate this paper">
               <span class="star-label">重要度</span>
@@ -899,34 +866,34 @@
             <div class="detail-grid">
               <section class="detail-section" data-standard-section="problem">
                 <h3>Problem</h3>
-                <p>Vision-Language Navigation (VLN) enables UAV autonomous navigation in unknown environments by mapping language instructions to real-time visual inputs.</p>
+                <p>比較、記憶、檢索、推理等操作天然定義在離散符號序列上;語言有現成 token,音訊的 token 得用學的。現有 audio tokenizer 靠量化、聚類或 codec 重建,token 逐幀指派,序列一致性、緊湊性、長度控制、終止與編輯相似度幾乎沒有被直接優化。</p>
               </section>
               <section class="detail-section" data-standard-section="method">
                 <h3>Method</h3>
-                <p>Compared with GPS-dependent or pre-programmed navigation, VLN supports intuitive human-machine interaction and stronger environmental adaptability, requiring tight integration of high-level semantic reasoning and low-latency flight control.Existing methods suffer from structural mis<mark class="keyterm">alignment</mark> between global multimodal understanding and sequential action generation, causing jittery trajectories and severe decision latency for long-horizon aerial navigation.</p>
+                <p>把 tokenization 當條件序列生成:encoder 把音訊映成連續條件,AR decoder 從 BOS 生成 token 序列,學 token 身分、順序、長度與 EOS 位置。訓練用內容保持的雙視角:每個視角的序列要在對方的表徵下高似然,無關樣本提供競爭序列;從 VQ 式 tokenization 起步,再以 EMA-teacher 目標、跨視角 teacher forcing、prefix 汙損、似然對比與長度控制逐步精煉。</p>
               </section>
               <section class="detail-section" data-standard-section="data">
                 <h3>Data</h3>
-                <p>看資料來源、benchmark、baseline 與評估指標是否公開或可重建；若不足，先做小型替代測試。</p>
+                <p>3 秒語音片段訓練與分析;TIMIT 做編輯距離檢索評測;另設 continuous-sweep probe 檢查 100ms 位移下的局部重疊、長度控制與編輯軌跡;與稠密幾何式 tokenizer 對照。</p>
               </section>
               <section class="detail-section" data-standard-section="findings">
                 <h3>Findings</h3>
-                <p>To solve this issue, we propose FSD-VLN, a fast-slow dual-system architecture disentangling semantic reasoning and low-latency flight command generation.The framework has two asynchronous branches: a slow stream extracting stable semantic priors from pre-trained vision-language models, and a Diffusion Transformer (DiT) fast stream modeling cross-temporal action distributions to produce consistent flight outputs.</p>
+                <p>學出緊湊、不退化、詞彙使用廣的序列,跨視角一致性強;TIMIT 檢索保留編輯距離搜尋能力,同時檔案庫 token 總數減少 55%;probe 顯示局部重疊低於稠密幾何 tokenizer,但長度控制更強、100ms 位移下編輯軌跡有界。</p>
               </section>
               <section class="detail-section" data-standard-section="limitations">
                 <h3>Limitations</h3>
-                <p>注意是否只在單一資料集、單一模型或特定 sampling 設定下成立，也要避免把 speech/TTS 結論直接套到 music/audio generation。</p>
+                <p>只在 3 秒語音驗證,音樂與歌聲完全未測;評測以檢索與 probe 為主,沒接任何下游生成模型驗證 token 可用性;101 頁 preprint、under review,結果未經同儕審查;與主流 codec(EnCodec/DAC)的直接對比未見。</p>
               </section>
               <section class="detail-section" data-standard-section="editor-note">
                 <h3>Editor Note</h3>
-                <p>先看它是否能改善 text-to-audio / text-to-music，或支援 <mark class="keyterm">Music Flamingo</mark>、<mark class="keyterm">歌詞辨識</mark>、<mark class="keyterm">JPOP</mark> / <mark class="keyterm">卡拉 OK</mark> 的音樂理解方向。 下一步：抽一個可驗證的 trick，做成小實驗；先看資料與評估是否足以支撐，不要只被 <mark class="keyterm">CLAP</mark> 或主觀樣本牽著走。</p>
+                <p>7/5 的可調 token rate codec 是在「幀率」維度鬆綁,這篇更激進:連 token 序列本身都改成生成式、可變長、以序列性質為目標。方向對 MeanAudio 的 codec 選型有啟發,但目前證據只到語音檢索,先當概念股觀察。</p>
               </section>
               <section class="detail-section" data-standard-section="metadata">
                 <h3>Metadata</h3>
                 <dl class="meta-list">
-                  <div><dt>Authors</dt><dd>Xueke Zhu, Qingyan Meng, Liutao Yu, Wei Zhang, Zhengyu Ma 等 7 位</dd></div>
-                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2607.08359v1">arxiv.org/abs/2607.08359v1</a></dd></div>
-                  <div><dt>Relevance</dt><dd>MeanAudio 2 / karaoke 0 · max 2</dd></div>
+                  <div><dt>Authors</dt><dd>Adhiraj Banerjee, Vipul Arora</dd></div>
+                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2605.06582">arxiv.org/abs/2605.06582</a></dd></div>
+                  <div><dt>Relevance</dt><dd>MeanAudio 4 / karaoke 1 · max 4</dd></div>
                 </dl>
               </section>
             </div>
@@ -935,22 +902,32 @@
     
       </div>
     </section>
+
+    <section class="repo-pick" aria-label="GitHub pick">
+      <div class="repo-eyebrow">GitHub pick of the day</div>
+      <h2><a href="https://github.com/mason369/music-to-midi" target="_blank" rel="noopener">mason369/music-to-midi</a></h2>
+      <div class="repo-meta"><span class="tag">★ 19</span><span class="tag">更新 2026-06-26</span><span class="tag">audio-to-midi</span><span class="tag">source separation</span><span class="tag">music transcription</span></div>
+      <p>AI 音訊轉多軌 MIDI 工具箱:BS-RoFormer 人聲/六聲部分離 + YourMT3+ 多樂器轉譜 + Transkun/Aria-AMT/ByteDance Pedal 三條鋼琴後端,支援歌詞嵌入與量化/去重/力度平滑等 MIDI 後處理,提供 PyQt6 桌面版、Gradio Web 與 Colab 入口。</p>
+      <p><strong>為什麼相關:</strong>與 karaoke-jp 的「分離→轉譜→MIDI」骨架幾乎同構:VOCAL_SPLIT 工作流(分離後人聲/伴奏分別轉譜、人聲 MIDI 收斂到旋律軌)可直接對照;README 把各後端 benchmark 口徑分開標註不混排行榜,工程紀律也值得抄。</p>
+      <div class="card-actions">
+        <a class="source-link" href="https://github.com/mason369/music-to-midi" target="_blank" rel="noopener">Open Repo &#8599;</a>
+      </div>
+    </section>
+    
     <details class="footnote">
       <summary>閱讀順序與篩選原則</summary>
       <div class="footnote-body">
-        <span><strong>1.</strong> 近期主線：<mark class="keyterm">Music Flamingo</mark>、<mark class="keyterm">歌詞辨識</mark>、<mark class="keyterm">JPOP</mark>、<mark class="keyterm">卡拉 OK</mark> 與 <mark class="keyterm">karaoke-jp</mark>。</span>
-        <span><strong>2.</strong> 生成主線仍保留：text-to-audio/music、flow、caption、<mark class="keyterm">codec</mark>、評估與 <mark class="keyterm">reward</mark> <mark class="keyterm">alignment</mark>。</span>
-        <span><strong>3.</strong> 只收高品質：新穎度、重要性、baseline、資料與可落地性一起看。</span>
+        <span><strong>1.</strong> 近期主線:Music Flamingo、歌詞辨識、JPOP、卡拉 OK 與 karaoke-jp。</span>
+        <span><strong>2.</strong> 生成主線仍保留:text-to-audio/music、flow、caption、codec、評估與 reward alignment。</span>
+        <span><strong>3.</strong> 只收高品質:新穎度、重要性、baseline、資料與可落地性一起看。</span>
       </div>
     </details>
   </main>
-
-  <footer>Generated by the local MIR paper automation · Product standard 2026-05-26 · 2187e8b96f · 2026-07-12 09:00:17 Asia/Taipei</footer>
-
+  <footer>Generated by the MIR digest automation · Product standard 2026-05-26 · 2187e8b96f · 2026-07-12 09:15:46 Asia/Taipei</footer>
   <script>
+
     const cards = Array.from(document.querySelectorAll('.paper-card'));
     const RATINGS_KEY = 'mir-ratings';
-
     function loadRatings() {
       try { return JSON.parse(localStorage.getItem(RATINGS_KEY)) || {}; } catch { return {}; }
     }
@@ -996,7 +973,6 @@
       });
     }
     document.querySelectorAll('.star-rating').forEach(initStarWidget);
-
     function toggleCard(card) {
       const isOpen = card.classList.toggle('is-open');
       const btn = card.querySelector('.details-toggle');
@@ -1010,33 +986,6 @@
       body.addEventListener('click', event => {
         if (event.target.closest('a, button, input, .card-actions, .star-rating')) return;
         toggleCard(body.closest('.paper-card'));
-      });
-    });
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const filter = btn.dataset.filter;
-        document.querySelectorAll('.filter-btn').forEach(b => b.setAttribute('aria-pressed', String(b === btn)));
-        const ratings = loadRatings();
-        cards.forEach(card => {
-          let show = filter === 'all' || card.dataset.track === filter;
-          if (filter === 'important') {
-            const paperId = card.id ? `2026-07-12-${card.id.replace('paper-', '')}` : null;
-            show = paperId && (ratings[paperId] || 0) >= 3;
-          }
-          card.classList.toggle('is-hidden', !show);
-        });
-        document.querySelectorAll('.paper-nav-list li').forEach(li => {
-          const link = li.querySelector('a');
-          if (!link) return;
-          const target = document.querySelector(link.getAttribute('href'));
-          if (!target) return;
-          let show = filter === 'all' || target.dataset.track === filter;
-          if (filter === 'important') {
-            const paperId = target.id ? `2026-07-12-${target.id.replace('paper-', '')}` : null;
-            show = paperId && (ratings[paperId] || 0) >= 3;
-          }
-          li.style.display = show ? '' : 'none';
-        });
       });
     });
     document.querySelectorAll('.paper-nav-list a').forEach(link => {
@@ -1054,7 +1003,7 @@
         }
       });
     });
-  </script>
 
+  </script>
 </body>
 </html>

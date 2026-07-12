@@ -1,0 +1,92 @@
+{
+  "date": "2026-07-12",
+  "papers": [
+    {
+      "slot": 1,
+      "track": "karaoke_jp",
+      "title": "Poly-SVC: Polyphony-Aware Singing Voice Conversion with Harmonic Modeling",
+      "authors": [
+        "Chen Geng",
+        "Meng Chen",
+        "Ruohua Zhou",
+        "Ruolan Liu",
+        "Weifeng Zhao"
+      ],
+      "published": "2026-05-12",
+      "updated": "2026-05-12",
+      "source_url": "https://arxiv.org/abs/2605.12310",
+      "arxiv_id": "2605.12310",
+      "doi": "",
+      "tags": [
+        "唱聲 pitch",
+        "人聲分離",
+        "flow/diffusion"
+      ],
+      "quality": "新且重要",
+      "tldr": "騰訊 Lyra Lab 的零樣本跨語言唱聲轉換:不假設分離後人聲乾淨,用 CQT 整包保留主旋律與殘留和聲,配 MIDI 監督與 CFM 擴散解碼器,和聲場景 MOS 3.75 勝 SeedVC 的 3.35。",
+      "insight": "洞見:真實歌曲經 UVR/Demucs 分離永遠留殘留和聲,與其硬擠出單一 F0,不如在表徵層改用 CQT 把「多條旋律線」整包交給生成器——CQT 的對數頻率軸還附送平移即轉調。這個思路對 karaoke-jp 的唱聲 pitch 抽取同樣成立:合唱與和聲段落的 F0 追蹤錯誤,可能該從表徵層解,而非事後修補;且論文顯示只需少量 MIDI 對齊資料做 L1 監督,就能教會 CQT encoder 壓掉音色等音高無關成分。",
+      "try_next": "可做:在 karaoke-jp 的 pitch 模組加一條 CQT 路徑(12 bins/octave、共 84 bins、hop 441),對比 RMVPE 在和聲豐富的 J-POP 副歌片段的 pitch 曲線穩定度;若 CQT 更穩,再用手上的 MIDI 標註複製論文的 CQT-MIDI encoder L1 對齊監督。",
+      "problem": "SVC 系統依賴 F0 抽取器,但真實歌曲的人聲分離總留下殘留和聲,單一 F0 在多音高場景大量出錯,造成走音與頻譜失真;同時訓練用乾淨人聲、推論吃帶殘留和聲的分離結果,分佈不匹配。",
+      "method": "三個組件:(1) CQT-based pitch extractor,裁剪到 32Hz-1kHz 人聲域,保留主旋律與殘留和聲;(2) Random Sampler 用少量 MIDI 平行資料以 L1 損失讓 CQT encoder 貼近 MIDI encoder,抑制音高無關資訊;(3) 內容(Whisper-small)、音色(CampPlus)、音高三特徵經 length regulator 對齊後,條件到 U-DiT 的 Conditional Flow Matching 擴散解碼器,Firefly-GAN vocoder 出聲;另用 OpenVoice Timbre Shifter 防止內容特徵洩漏音色。",
+      "data": "語音用 Emilia 子集;唱聲用 m4singer、OpenSinger、OpenCpop、PopBuTFy、VocalSet(m4singer 帶 MIDI 標註);另以 UVR 從 70 小時中/英/粵/日混音歌抽人聲並去殘響,模擬帶殘留和聲的真實場景;評測 20 條 5-15 秒樣本。",
+      "findings": "12 人主觀評測:和聲場景 MOS 3.75、SIM-MOS 3.42,優於 SeedVC(3.35/3.40)、DDSP-SVC(2.98/2.82)、so-vits-svc(1.64/2.08);單旋律場景 MOS 3.98 亦全場最高。消融:移除 Timbre Shifter 使 SIM-MOS 明顯下降,移除 Random Sampler 則 MOS 與 SIM-MOS 同步變差;頻譜圖顯示能同時重建主旋律與和聲結構,SeedVC 只抓到主旋律且有明顯音高錯誤。",
+      "limitations": "評測全靠主觀 MOS(12 位中文受試者、20 條樣本),無任何客觀指標;和聲訓練資料是 UVR 分離的偽 ground truth;多人唱不同歌詞的內容重疊問題明言未解;訓練含日文但日文表現未單獨報告。",
+      "editor_note": "digest 之前談分離(Diff-VS、MSST)與唱聲轉譜(SongTrans、T3MS),這篇補上中間的縫:分離不完美時下游怎麼活。它的答案「殘留和聲不是雜訊、是該保留的資訊」對 karaoke-jp 的 pitch 抽取是可直接檢驗的假設,ICASSP 2026 已接收。",
+      "relevance": {
+        "mean_audio": 2,
+        "karaoke_jp": 4
+      }
+    },
+    {
+      "slot": 2,
+      "track": "mean_audio",
+      "title": "PairAlign: A Framework for Sequence Tokenization via Self-Alignment with Applications to Audio Tokenization",
+      "authors": [
+        "Adhiraj Banerjee",
+        "Vipul Arora"
+      ],
+      "published": "2026-05-08",
+      "updated": "2026-05-08",
+      "source_url": "https://arxiv.org/abs/2605.06582",
+      "arxiv_id": "2605.06582",
+      "doi": "",
+      "tags": [
+        "codec/tokenizer",
+        "sequence tokenization",
+        "audio representation"
+      ],
+      "quality": "新",
+      "tldr": "把 tokenization 重新定義為條件序列生成:AR decoder 自行決定 token 身分、順序、長度與 EOS,雙視角自對齊保留編輯距離結構;TIMIT 檢索 token 數省 55%。",
+      "insight": "洞見:現行 codec/VQ tokenizer 都是逐幀局部指派,序列層級的性質——緊湊度、長度控制、可終止、編輯相似度——從來不是訓練目標,只是副產品。PairAlign 把「同內容兩個視角應產生彼此高似然的序列」當成可規模化的編輯距離代理目標,順帶用競爭序列防 many-to-one 塌縮。對 MeanAudio 的意義:token 序列長度主宰生成模型算力,能學出「內容不變則序列不變」的可變長 tokenizer,比調 codebook 大小更根本;不過它目前只在 3 秒語音上驗證。",
+      "try_next": "可做:給 MeanAudio 的評測管線加一個序列一致性檢查——對同一段音訊做 time-shift、增益等內容保持擾動,量現有 codec(如 DAC/EnCodec)token 序列的編輯距離分佈,先建立「現況有多不穩」的基線,再判斷自對齊式目標值不值得引入訓練。",
+      "problem": "比較、記憶、檢索、推理等操作天然定義在離散符號序列上;語言有現成 token,音訊的 token 得用學的。現有 audio tokenizer 靠量化、聚類或 codec 重建,token 逐幀指派,序列一致性、緊湊性、長度控制、終止與編輯相似度幾乎沒有被直接優化。",
+      "method": "把 tokenization 當條件序列生成:encoder 把音訊映成連續條件,AR decoder 從 BOS 生成 token 序列,學 token 身分、順序、長度與 EOS 位置。訓練用內容保持的雙視角:每個視角的序列要在對方的表徵下高似然,無關樣本提供競爭序列;從 VQ 式 tokenization 起步,再以 EMA-teacher 目標、跨視角 teacher forcing、prefix 汙損、似然對比與長度控制逐步精煉。",
+      "data": "3 秒語音片段訓練與分析;TIMIT 做編輯距離檢索評測;另設 continuous-sweep probe 檢查 100ms 位移下的局部重疊、長度控制與編輯軌跡;與稠密幾何式 tokenizer 對照。",
+      "findings": "學出緊湊、不退化、詞彙使用廣的序列,跨視角一致性強;TIMIT 檢索保留編輯距離搜尋能力,同時檔案庫 token 總數減少 55%;probe 顯示局部重疊低於稠密幾何 tokenizer,但長度控制更強、100ms 位移下編輯軌跡有界。",
+      "limitations": "只在 3 秒語音驗證,音樂與歌聲完全未測;評測以檢索與 probe 為主,沒接任何下游生成模型驗證 token 可用性;101 頁 preprint、under review,結果未經同儕審查;與主流 codec(EnCodec/DAC)的直接對比未見。",
+      "editor_note": "7/5 的可調 token rate codec 是在「幀率」維度鬆綁,這篇更激進:連 token 序列本身都改成生成式、可變長、以序列性質為目標。方向對 MeanAudio 的 codec 選型有啟發,但目前證據只到語音檢索,先當概念股觀察。",
+      "relevance": {
+        "mean_audio": 4,
+        "karaoke_jp": 1
+      }
+    }
+  ],
+  "repo": {
+    "full_name": "mason369/music-to-midi",
+    "url": "https://github.com/mason369/music-to-midi",
+    "description_zh": "AI 音訊轉多軌 MIDI 工具箱:BS-RoFormer 人聲/六聲部分離 + YourMT3+ 多樂器轉譜 + Transkun/Aria-AMT/ByteDance Pedal 三條鋼琴後端,支援歌詞嵌入與量化/去重/力度平滑等 MIDI 後處理,提供 PyQt6 桌面版、Gradio Web 與 Colab 入口。",
+    "stars": 19,
+    "updated": "2026-06-26",
+    "why": "與 karaoke-jp 的「分離→轉譜→MIDI」骨架幾乎同構:VOCAL_SPLIT 工作流(分離後人聲/伴奏分別轉譜、人聲 MIDI 收斂到旋律軌)可直接對照;README 把各後端 benchmark 口徑分開標註不混排行榜,工程紀律也值得抄。",
+    "tags": [
+      "audio-to-midi",
+      "source separation",
+      "music transcription"
+    ]
+  },
+  "discord_messages": [
+    "# 每日 MIR 論文精選 - 2026-07-12\n🌐 完整報告:https://lanternko.github.io/mir-paper-digest/reports/2026-07-12.html\n\n**論文 1|Poly-SVC: Polyphony-Aware Singing Voice Conversion with Harmonic Modeling**\n🔗 https://arxiv.org/abs/2605.12310\n🎯 主線:karaoke-jp(唱聲 pitch/人聲分離)|ICASSP 2026,騰訊 Lyra Lab\n\n**TLDR**:零樣本跨語言唱聲轉換,不假設分離後人聲乾淨——改用 CQT 特徵整包保留主旋律與殘留和聲,配 MIDI 監督的 Random Sampler 與 CFM 擴散解碼器;和聲場景 MOS 3.75 勝 SeedVC 的 3.35,單旋律場景也全場最高。\n\n**為什麼選它**:它直面 karaoke pipeline 最痛的一段——UVR/Demucs 分離永遠留殘留和聲,單一 F0 抽取在這裡大量走音。論文的答案是「殘留和聲不是雜訊、是該保留的資訊」:CQT 對數頻率軸天然適合多旋律線,平移即轉調;少量 MIDI 對齊資料做 L1 監督就能壓掉音色干擾。這對 karaoke-jp 的唱聲 pitch 模組是可直接檢驗的假設。\n\n**注意**:評測全靠 12 人主觀 MOS、20 條樣本,無客觀指標;和聲 ground truth 是 UVR 分離的偽標籤;訓練含日文但日文表現未單獨報告。\n\n**下一步**:在 pitch 模組加一條 CQT 路徑(12 bins/octave、84 bins、hop 441),對比 RMVPE 在和聲豐富 J-POP 副歌的曲線穩定度。",
+    "**論文 2|PairAlign: A Framework for Sequence Tokenization via Self-Alignment with Applications to Audio Tokenization**\n🔗 https://arxiv.org/abs/2605.06582\n🎯 主線:MeanAudio(codec/tokenizer)|IIT Kanpur,101 頁 preprint\n\n**TLDR**:把 tokenization 重新定義為條件序列生成——AR decoder 自己決定 token 身分、順序、長度與 EOS,雙視角自對齊訓練保留編輯距離結構;TIMIT 檢索 token 總數省 55%,檢索能力不掉。\n\n**為什麼選它**:現行 codec/VQ tokenizer 都是逐幀局部指派,「序列」層級的性質(緊湊、可終止、編輯相似度)從來不是訓練目標。PairAlign 把「同內容兩視角應互為高似然序列」當成可規模化的編輯距離代理,還用競爭序列防塌縮。token 序列長度主宰生成模型算力——能學出「內容不變則序列不變」的可變長 tokenizer,比調 codebook 大小更根本。\n\n**注意**:只在 3 秒語音驗證,音樂/歌聲完全未測;沒接下游生成模型;under review,未經同儕審查;缺與 EnCodec/DAC 的直接對比。\n\n**下一步**:先量「現況有多不穩」——對同一段音訊做 time-shift/增益等內容保持擾動,統計現有 codec token 序列的編輯距離分佈,再決定要不要引入自對齊目標。",
+    "**GitHub Pick|mason369/music-to-midi** ⭐19|最近更新 2026-06-26\n🔗 https://github.com/mason369/music-to-midi\n\nAI 音訊轉多軌 MIDI 工具箱:BS-RoFormer 人聲/六聲部分離 + YourMT3+ 多樂器轉譜 + Transkun/Aria-AMT/ByteDance Pedal 三條鋼琴後端,支援歌詞嵌入與量化/去重/力度平滑等 MIDI 後處理,PyQt6 桌面版、Gradio Web、Colab 三入口。\n\n**為什麼選它**:與 karaoke-jp 的「分離→轉譜→MIDI」骨架幾乎同構——VOCAL_SPLIT 工作流把分離後的人聲 MIDI 收斂到旋律軌、減少伴奏幻覺,可直接對照;README 把分離、多樂器轉譜、鋼琴專精三類後端的 benchmark 口徑分開標註、拒絕混排行榜,工程紀律值得抄。\n\n## 今天的 take-away\n- 殘留和聲不是雜訊是資訊:表徵層用 CQT 整包保留多旋律線,比硬擠單一 F0 更貼近真實歌曲(Poly-SVC)。\n- tokenizer 的下一戰場在序列層級:長度、終止、編輯相似度都可以直接當訓練目標,不必只是副產品(PairAlign)。\n- 分離→轉譜→MIDI 的工程骨架已有活躍開源對照組,先對照流程與後處理,再談換演算法(music-to-midi)。"
+  ]
+}
