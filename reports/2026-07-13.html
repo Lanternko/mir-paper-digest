@@ -633,7 +633,6 @@
       .paper-nav-list { flex-direction: column; }
       footer { padding: 0 16px 32px; }
     }
-
     .source-link,
     .details-toggle {
       display: inline-flex; align-items: center; justify-content: center; gap: 8px;
@@ -653,88 +652,57 @@
       border-color: var(--teal);
       color: var(--teal);
     }
-    .source-link:hover {
-      background: var(--teal-soft);
-      text-decoration: none;
-    }
+    .source-link:hover { background: var(--teal-soft); text-decoration: none; }
     .details-toggle:hover { background: var(--bg-hover); }
     .details-toggle:active,
     .source-link:active { transform: translateY(1px); }
     body { overflow-x: hidden; }
-    .canvas,
-    .topbar-inner,
-    footer,
-    .digest-layout > *,
-    .paper-card,
-    .paper-card-body,
-    .quick-read > *,
-    .detail-section {
-      min-width: 0;
-    }
-    .paper-card {
+    .canvas, .topbar-inner, footer, .digest-layout > *, .paper-card,
+    .paper-card-body, .quick-read > *, .detail-section { min-width: 0; }
+    .paper-card { overflow: hidden; }
+    .paper-card h2, .one-line, .quick-read p, .detail-section p,
+    .meta-list dd { overflow-wrap: anywhere; }
+    .repo-pick {
+      margin-top: 18px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-card);
+      padding: 18px;
       overflow: hidden;
     }
-    .paper-card h2,
-    .one-line,
-    .quick-read p,
-    .detail-section p,
-    .meta-list dd {
-      overflow-wrap: anywhere;
+    .repo-pick .repo-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 6px;
     }
-    .keyterm {
-      color: var(--accent-ink);
-      background: rgba(254, 209, 223, 0.62);
-      border: 1px solid rgba(120, 85, 97, 0.12);
-      border-radius: 6px;
-      padding: 0 0.18em 0.02em;
-      font-weight: 650;
-      box-decoration-break: clone;
-      -webkit-box-decoration-break: clone;
+    .repo-pick h2 {
+      margin: 0 0 8px;
+      font-family: var(--font-zh), var(--font-serif);
+      font-size: 21px;
+      font-weight: 500;
+      line-height: 1.25;
     }
-    h2 .keyterm {
-      background: transparent;
-      border-color: transparent;
-      color: var(--accent);
-      padding: 0;
-    }
+    .repo-pick h2 a { color: var(--text-primary); text-decoration: none; overflow-wrap: anywhere; }
+    .repo-pick h2 a:hover { color: var(--accent); }
+    .repo-pick p { margin: 0 0 8px; color: var(--text-secondary); font-family: var(--font-sans); font-size: 14px; overflow-wrap: anywhere; }
+    .repo-pick .repo-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
     @media (max-width: 640px) {
-      .nav {
-        width: 100%;
-        margin-left: 0;
-        overflow-x: auto;
-        justify-content: flex-start;
-      }
-      .nav a,
-      .nav-pill {
-        flex-shrink: 0;
-      }
-      .hero,
-      .digest-layout {
-        max-width: 342px;
-        margin-left: 0;
-        margin-right: auto;
-      }
-      .paper-card {
-        width: 100%;
-      }
-      .card-actions {
-        align-items: flex-start;
-      }
-      .star-rating {
-        width: 100%;
-        margin-left: 0;
-        justify-content: flex-end;
-      }
-      .star-rating button {
-        width: 26px;
-        height: 28px;
-      }
+      .nav { width: 100%; margin-left: 0; overflow-x: auto; justify-content: flex-start; }
+      .nav a, .nav-pill { flex-shrink: 0; }
+      .hero, .digest-layout { max-width: 342px; margin-left: 0; margin-right: auto; }
+      .paper-card { width: 100%; }
+      .card-actions { align-items: flex-start; }
+      .star-rating { width: 100%; margin-left: 0; justify-content: flex-end; }
+      .star-rating button { width: 26px; height: 28px; }
     }
 
   </style>
 </head>
 <body>
-
   <div class="topbar">
     <div class="topbar-inner">
       <a class="brand" href="../index.html" aria-label="MIR Paper Digest home">
@@ -749,33 +717,28 @@
       </nav>
     </div>
   </div>
-
   <main class="canvas">
-
     <section class="hero">
       <div>
         <p class="eyebrow">Daily research brief · 2026-07-13</p>
         <h1>每日 MIR 論文<em>精選</em></h1>
-        <p class="subtitle">近期主線往 <mark class="keyterm">Music Flamingo</mark>、<mark class="keyterm">歌詞辨識</mark>、<mark class="keyterm">JPOP</mark> 與<mark class="keyterm">卡拉 OK</mark> 靠攏；今天先看最能轉成下一個小實驗的兩篇。</p>
+        <p class="subtitle">近期主線往 Music Flamingo、歌詞辨識、JPOP 與卡拉 OK 靠攏;今天先看最能轉成下一個小實驗的兩篇。</p>
       </div>
     </section>
-
     <section class="digest-layout">
-
       <aside class="paper-nav" aria-label="Paper navigation">
         <div class="paper-nav-title">Papers</div>
         <ol class="paper-nav-list">
           <li><a href="#paper-1">
             <span class="nav-num">01</span>
-            <span>HumanForge: A Human-Centric Deepfake Vide...<span class="nav-track">MeanAudio</span></span>
+            <span>SegTune: Structured and Fine-Grained Cont...<span class="nav-track">MeanAudio</span></span>
           </a></li>
           <li><a href="#paper-2">
             <span class="nav-num">02</span>
-            <span>LongE2V: Long-Horizon Event-based Video R...<span class="nav-track">MeanAudio</span></span>
+            <span>EntangleCodec: A Unified Discrete Audio T...<span class="nav-track">MeanAudio</span></span>
           </a></li>
         </ol>
       </aside>
-
       <div class="cards" aria-label="論文卡片">
 
         <article class="paper-card" data-track="mean_audio" id="paper-1">
@@ -783,30 +746,32 @@
             <div class="paper-number">01</div>
             <div class="paper-meta">
               <span class="track">MeanAudio</span>
-              <span class="quality">新</span>
-              <span class="freshness">2026-07-09 · 4d</span>
+              <span class="quality">新且重要</span>
+              <span class="freshness">2026-05-31 · 43d</span>
             </div>
           </div>
           <div class="paper-card-body">
-          <h2><a href="https://arxiv.org/abs/2607.08705v1" target="_blank" rel="noopener">HumanForge: A Human-Centric Deepfake Video Benchmark with Multi-Agent Forgery Rationales</a></h2>
-          <p class="one-line">Rapid advancements in video diffusion models and temporal editing tools have enabled the generation of highly realistic human-centr...</p>
+          <h2><a href="https://arxiv.org/abs/2606.02638" target="_blank" rel="noopener">SegTune: Structured and Fine-Grained Control for Song Generation</a></h2>
+          <p class="one-line">快手 Kling 團隊的 DiT+流匹配歌曲生成:全局 prompt 管風格、段落 prompt 管局部情緒與配器,再用微調 Qwen3-4B 直接生成 LRC 句級時間戳;PER 14.5% 全場最低,ACL 2026 口頭報告並獲最佳論文提名。</p>
           <div class="tag-row">
             <span class="track-hint">貼近主線</span>
-            <span class="tag">text-to-audio/music</span>
+            <span class="tag">text-to-music</span>
+            <span class="tag">flow/diffusion</span>
+            <span class="tag">歌詞對齊</span>
           </div>
           <div class="quick-read">
             <div>
               <span class="label">Insight</span>
-              <p><mark class="keyterm">洞見</mark>：針對 HumanForge / Human-Centric / Deepfake / Video / Benchmark：它把 <mark class="keyterm">alignment</mark> signal 放回生成過程本身，而不是只靠後處理 <mark class="keyterm">reward</mark>；可對照音訊文字對齊是否也能這樣做。 <mark class="keyterm">方法線索</mark>：把 <mark class="keyterm">alignment</mark> signal 直接放進 diffusion matching/training，而不是只靠外部 <mark class="keyterm">reward</mark> 做後處理。</p>
+              <p>洞見:歌曲生成的可控性瓶頸其實在時間軸——SegTune 把 LRC 時間戳當成 LLM 的生成目標(微調 Qwen3-4B,句級 MAE 0.99 秒;GPT-4o zero-shot 是 3.24 秒),證明句級 timing 可以從歌詞+風格描述被直接預測出來。對 karaoke-jp 來說,LRC 之上多了一條「先驗生成」路線,可當 forced alignment 失敗時的 fallback 或 QA 異常偵測。另一個硬結論:prompt encoder 用 Qwen3-Embedding 性別控制 92.2%、MuQ-MuLan 只有 47.6%——MuLan 系 embedding 對人聲屬性近乎全盲,因為訓練 caption 根本沒標歌手屬性。</p>
             </div>
             <div>
               <span class="label">Try next</span>
-              <p>針對 HumanForge / Human-Centric / Deepfake / Video / Benchmark：<mark class="keyterm">可做</mark>：把 <mark class="keyterm">alignment</mark> signal 做成單一 loss 或 reranking ablation，先比較文字-音訊相符度與主觀聽感。<mark class="keyterm">結果焦點</mark>：確認 <mark class="keyterm">alignment</mark> 是否真的在生成過程改善，而不是只讓某個 <mark class="keyterm">reward</mark> metric 變好。</p>
+              <p>可做:用 karaoke-jp 手上的日文 LRC 資料微調小型 LLM(照論文配方:Qwen3-4B-Base + LoRA rank 32、8 epochs)做「歌詞+曲風→句級時間戳」預測,對比 forced alignment 輸出量 MAE;若 &lt;1.5 秒,即可上線當對齊結果的 sanity check。</p>
             </div>
           </div>
           </div>
           <div class="card-actions">
-            <a class="source-link" href="https://arxiv.org/abs/2607.08705v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
+            <a class="source-link" href="https://arxiv.org/abs/2606.02638" target="_blank" rel="noopener">Open Paper &#8599;</a>
             <button class="details-toggle" type="button" aria-expanded="false" aria-controls="paper-1-panel">展開摘要與實驗建議</button>
             <div class="star-rating" data-paper-id="2026-07-13-1" aria-label="Rate this paper">
               <span class="star-label">重要度</span>
@@ -821,34 +786,34 @@
             <div class="detail-grid">
               <section class="detail-section" data-standard-section="problem">
                 <h3>Problem</h3>
-                <p>Rapid advancements in video diffusion models and temporal editing tools have enabled the generation of highly realistic human-centric videos, posing unprecedented challenges to digital content forensics.</p>
+                <p>現有歌曲生成(AR 的 YuE/LeVo、NAR 的 DiffRhythm+/ACE-Step)只吃全局 prompt,無法控制段落級的情緒、配器、節奏演變;NAR 模型還依賴人工標註或 zero-shot LLM 的歌詞時間戳,錯誤多且阻礙互動使用。</p>
               </section>
               <section class="detail-section" data-standard-section="method">
                 <h3>Method</h3>
-                <p>Existing benchmarks primarily focus on either face-swapping or global text-to-video synthesis, overlooking the crucial dimensions of human-object or human-human interactions and multi-modal <mark class="keyterm">alignment</mark>.</p>
+                <p>DiT(1.1B、16 層 LLaMA-style blocks)+ 條件流匹配,44kHz 音訊由 1D VAE 壓到 21.5Hz latent。三路條件:全局 prompt 廣播全曲、段落 prompt 只廣播到對應時間窗(皆用 Qwen3-Embedding-0.6B 編碼後 channel 拼接)、歌詞經 G2P 轉音素後按時間戳寫入 placeholder 序列。時間窗與歌詞 timing 來自微調 Qwen3-4B 的 duration predictor,直接輸出 LRC 格式句級時間戳。訓練三階段:預訓練→SFT→兩輪迭代 DPO。</p>
               </section>
               <section class="detail-section" data-standard-section="data">
                 <h3>Data</h3>
-                <p>看資料來源、benchmark、baseline 與評估指標是否公開或可重建；若不足，先做小型替代測試。</p>
+                <p>內部策展語料,&gt;90% 為華語流行歌;資料 pipeline:Audiobox-Aesthetics/SongEval 過濾品質、Demucs v4 分離人聲、FireRedASR(中)/Whisper-large-v3(其他語言)轉錄、all-in-one 模型抽段落結構、Audio Flamingo 3 生成全局與段落 caption;duration predictor 用超過 10 萬條 LRC 歌詞微調。</p>
               </section>
               <section class="detail-section" data-standard-section="findings">
                 <h3>Findings</h3>
-                <p>To address these limitations, we introduce HumanForge, a unified, large-scale, and multi-paradigm human-centric video forgery dataset.</p>
+                <p>PER 14.5% 全場最低(YuE 48.5%、ACE-Step 35.6%、DiffRhythm+ 27.4%);性別控制 96.7% 最高;DPO 後主觀音樂性 MOS 4.57±0.52 全場第一(Wilcoxon p&lt;.001)。消融:段落 prompt 拼接明顯優於 global-only 與加權混合;duration predictor MAE 0.99 秒遠優於 GPT-4o 的 3.24 秒,且下游音樂性對 timing 誤差相當穩健。</p>
               </section>
               <section class="detail-section" data-standard-section="limitations">
                 <h3>Limitations</h3>
-                <p>注意是否只在單一資料集、單一模型或特定 sampling 設定下成立，也要避免把 speech/TTS 結論直接套到 music/audio generation。</p>
+                <p>訓練與評測幾乎全在華語流行歌,測試集僅 15 首 ChatGPT 生成歌詞,語言泛化未驗證;段落結構模糊時 duration predictor 退化並拖累全曲;DPO 後性別/年齡控制下降(偏好資料偏向年輕女聲);段內漸強、裝飾音等 intra-segment 動態仍不可控;訓練語料未開源。</p>
               </section>
               <section class="detail-section" data-standard-section="editor-note">
                 <h3>Editor Note</h3>
-                <p>先看它是否能改善 text-to-audio / text-to-music，或支援 <mark class="keyterm">Music Flamingo</mark>、<mark class="keyterm">歌詞辨識</mark>、<mark class="keyterm">JPOP</mark> / <mark class="keyterm">卡拉 OK</mark> 的音樂理解方向。 下一步：抽一個可驗證的 trick，做成小實驗；先看資料與評估是否足以支撐，不要只被 <mark class="keyterm">CLAP</mark> 或主觀樣本牽著走。</p>
+                <p>digest 追過 DiffRhythm 系與 ACE-Step,SegTune 是這條 NAR 歌曲生成線上第一個把「段落級文字控制 + LLM 時間戳預測」做成完整系統的;主觀評測僅 5 位聽者、樣本偏小,但客觀指標與消融夠紮實。程式碼在 KlingAIResearch/SegTune。</p>
               </section>
               <section class="detail-section" data-standard-section="metadata">
                 <h3>Metadata</h3>
                 <dl class="meta-list">
-                  <div><dt>Authors</dt><dd>Wenbo Xu, Zhimin Chen, Xiaojie Liang, Hengrui Liu, Wei Lu</dd></div>
-                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2607.08705v1">arxiv.org/abs/2607.08705v1</a></dd></div>
-                  <div><dt>Relevance</dt><dd>MeanAudio 2 / karaoke 0 · max 2</dd></div>
+                  <div><dt>Authors</dt><dd>Yuejiao Wang, Zihao Ji, Pengfei Cai, Xu Li, Haorui Zheng 等 9 位</dd></div>
+                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2606.02638">arxiv.org/abs/2606.02638</a></dd></div>
+                  <div><dt>Relevance</dt><dd>MeanAudio 5 / karaoke 3 · max 5</dd></div>
                 </dl>
               </section>
             </div>
@@ -861,30 +826,32 @@
             <div class="paper-number">02</div>
             <div class="paper-meta">
               <span class="track">MeanAudio</span>
-              <span class="quality">新</span>
-              <span class="freshness">2026-07-09 · 4d</span>
+              <span class="quality">新且重要</span>
+              <span class="freshness">2026-06-01 · 42d</span>
             </div>
           </div>
           <div class="paper-card-body">
-          <h2><a href="https://arxiv.org/abs/2607.08770v1" target="_blank" rel="noopener">LongE2V: Long-Horizon Event-based Video Reconstruction, Prediction, and Frame Interpolation with Video Diffusion Models</a></h2>
-          <p class="one-line">Recovering high-quality video from sparse event streams is a challenging task. Regression methods often blur textures, while existi...</p>
+          <h2><a href="https://arxiv.org/abs/2606.02739" target="_blank" rel="noopener">EntangleCodec: A Unified Discrete Audio Tokenizer via Semantic-Acoustic Entanglement</a></h2>
+          <p class="one-line">復旦的統一離散 audio tokenizer:量化前就把語義與聲學縫進同一表徵,用 LLM 生成的 rich caption 做對比對齊取代 ASR 轉錄;單 codebook 50 TPS,理解任務 MMAR 比最佳 codec 基線高 7.4%,重建 UTMOS 3.96。</p>
           <div class="tag-row">
             <span class="track-hint">貼近主線</span>
-            <span class="tag">text-to-audio/music</span>
+            <span class="tag">codec/tokenizer</span>
+            <span class="tag">caption/data</span>
+            <span class="tag">evaluation</span>
           </div>
           <div class="quick-read">
             <div>
               <span class="label">Insight</span>
-              <p><mark class="keyterm">洞見</mark>：針對 LongE2V / Long-Horizon / Event-based / Video / Reconstruction：它把 <mark class="keyterm">alignment</mark> signal 放回生成過程本身，而不是只靠後處理 <mark class="keyterm">reward</mark>；可對照音訊文字對齊是否也能這樣做。 <mark class="keyterm">方法線索</mark>：把 <mark class="keyterm">alignment</mark> signal 直接放進 diffusion matching/training，而不是只靠外部 <mark class="keyterm">reward</mark> 做後處理。</p>
+              <p>洞見:語義流與聲學流分開再融合不是必然——把對齊監督從 ASR 轉錄升級成涵蓋歌手、情緒、韻律、場景的 rich caption,單一 token 流就能同時餵理解與生成。消融最有說服力:拿掉對比損失,UTMOS 從 3.96 崩到 3.04,語義對齊反而救了重建品質。另一個訊號:0.6B LM 配好 tokenizer 打贏 13B+ 連續表徵模型,表徵品質比堆參數划算——對資源有限的 MeanAudio 是好消息。</p>
             </div>
             <div>
               <span class="label">Try next</span>
-              <p>針對 LongE2V / Long-Horizon / Event-based / Video / Reconstruction：<mark class="keyterm">可做</mark>：把 <mark class="keyterm">alignment</mark> signal 做成單一 loss 或 reranking ablation，先比較文字-音訊相符度與主觀聽感。<mark class="keyterm">結果焦點</mark>：確認 <mark class="keyterm">alignment</mark> 是否真的在生成過程改善，而不是只讓某個 <mark class="keyterm">reward</mark> metric 變好。</p>
+              <p>可做:載 EntangleCodec 開源權重(GitHub: luckyerr/EntangleCodec),對 MeanAudio 評測集抽 token 重建後量 FAD 與 CLAP score,對比現用 codec;特別驗音樂域——論文音樂 AudioBoxScore 5.42 次於 XCodec,音樂生成效益要自己確認。</p>
             </div>
           </div>
           </div>
           <div class="card-actions">
-            <a class="source-link" href="https://arxiv.org/abs/2607.08770v1" target="_blank" rel="noopener">Open Paper &#8599;</a>
+            <a class="source-link" href="https://arxiv.org/abs/2606.02739" target="_blank" rel="noopener">Open Paper &#8599;</a>
             <button class="details-toggle" type="button" aria-expanded="false" aria-controls="paper-2-panel">展開摘要與實驗建議</button>
             <div class="star-rating" data-paper-id="2026-07-13-2" aria-label="Rate this paper">
               <span class="star-label">重要度</span>
@@ -899,34 +866,34 @@
             <div class="detail-grid">
               <section class="detail-section" data-standard-section="problem">
                 <h3>Problem</h3>
-                <p>Recovering high-quality video from sparse event streams is a challenging task.</p>
+                <p>重建導向 codec(EnCodec/DAC)缺語義、下游推理弱;語義導向 tokenizer(SpeechTokenizer/XCodec 系)靠雙流融合,帶來冗餘與錯位;且語義監督多半只有 ASR 轉錄,丟失歌手、情緒、韻律、聲學場景等非文字訊息。</p>
               </section>
               <section class="detail-section" data-standard-section="method">
                 <h3>Method</h3>
-                <p>Regression methods often blur textures, while existing generative models struggle with long-term stability.</p>
+                <p>單一 Transformer encoder 從 Mel 圖直接學統一表徵,[CLS] 全局向量與 LLM 自動生成的 rich caption 做 CLIP 式對比學習;經 MLP 投影 + L2 正規化後餵單 codebook VQ(50 tokens/s);解碼用 Rectified Flow 的 Llama-style diffusion decoder 重建 Mel。兩階段訓練:先聯合訓 encoder+quantizer+decoder,再凍結前端只精修 decoder。下游凍結 tokenizer,接 Qwen3 系列 LM 做 audio QA/TTS/TTA。</p>
               </section>
               <section class="detail-section" data-standard-section="data">
                 <h3>Data</h3>
-                <p>看資料來源、benchmark、baseline 與評估指標是否公開或可重建；若不足，先做小型替代測試。</p>
+                <p>訓練:LibriSpeech、MusicBench、AudioSet、AudioCaps、WavCaps;理解評測 MMAR、MMAU、MMAU-mini;TTS 用 SEED-TTS 測試集(Whisper-large-v3 量 WER),TTA 用 CLAP score;codec 對照全部統一 Qwen3-0.6B backbone 隔離 tokenizer 效果。</p>
               </section>
               <section class="detail-section" data-standard-section="findings">
                 <h3>Findings</h3>
-                <p>We propose LongE2V, a novel approach that leverages pre-trained video diffusion priors to jointly handle event-based video reconstruction, prediction, and frame interpolation.</p>
+                <p>理解:同 backbone 對照平均 34.5 全場最高,MMAR 34.3 比次佳高 7.4 點;生成:TTS WER 9.8%、UTMOS 3.89 均為 codec 基線第一;重建:UTMOS 3.96 僅次 XCodec2 的 4.02,是唯一在語音/音效/音樂三域都名列前茅的 tokenizer;scaling:0.6B 贏 13B+ 連續表徵 LLM,8B 在 MMAR 42.6% 創新高。</p>
               </section>
               <section class="detail-section" data-standard-section="limitations">
                 <h3>Limitations</h3>
-                <p>注意是否只在單一資料集、單一模型或特定 sampling 設定下成立，也要避免把 speech/TTS 結論直接套到 music/audio generation。</p>
+                <p>語義粒度受 caption 品質上限,細微情緒變化、複雜和聲未必捕捉得到;音樂重建仍輸無語義對齊的 XCodec;text-to-music 未直接評測(TTA 以一般音效為主);scaling 只驗到 8B,重建與理解對容量的需求分配未探索。</p>
               </section>
               <section class="detail-section" data-standard-section="editor-note">
                 <h3>Editor Note</h3>
-                <p>先看它是否能改善 text-to-audio / text-to-music，或支援 <mark class="keyterm">Music Flamingo</mark>、<mark class="keyterm">歌詞辨識</mark>、<mark class="keyterm">JPOP</mark> / <mark class="keyterm">卡拉 OK</mark> 的音樂理解方向。 下一步：抽一個可驗證的 trick，做成小實驗；先看資料與評估是否足以支撐，不要只被 <mark class="keyterm">CLAP</mark> 或主觀樣本牽著走。</p>
+                <p>digest 已追過 LoSATok、PairAlign 與 Token-Space Manipulation 這條 tokenizer 線,EntangleCodec 的差異點是把 rich caption 對比對齊放進量化前表徵,且程式碼與權重已開源,適合直接當 MeanAudio codec 選型的對照組。</p>
               </section>
               <section class="detail-section" data-standard-section="metadata">
                 <h3>Metadata</h3>
                 <dl class="meta-list">
-                  <div><dt>Authors</dt><dd>Cheng-De Fan, Chun-Wei Tuan Mu, Chen-Wei Chang, Chin-Yang Lin, Kun-Ru Wu 等 7 位</dd></div>
-                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2607.08770v1">arxiv.org/abs/2607.08770v1</a></dd></div>
-                  <div><dt>Relevance</dt><dd>MeanAudio 2 / karaoke 0 · max 2</dd></div>
+                  <div><dt>Authors</dt><dd>Hui Li, Yangfan Gao, Junlin Shang, Changhao Jiang, Tao Gui 等 7 位</dd></div>
+                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2606.02739">arxiv.org/abs/2606.02739</a></dd></div>
+                  <div><dt>Relevance</dt><dd>MeanAudio 4 / karaoke 1 · max 4</dd></div>
                 </dl>
               </section>
             </div>
@@ -935,22 +902,32 @@
     
       </div>
     </section>
+
+    <section class="repo-pick" aria-label="GitHub pick">
+      <div class="repo-eyebrow">GitHub pick of the day</div>
+      <h2><a href="https://github.com/MahmoudAshraf97/ctc-forced-aligner" target="_blank" rel="noopener">MahmoudAshraf97/ctc-forced-aligner</a></h2>
+      <div class="repo-meta"><span class="tag">★ 522</span><span class="tag">更新 2026-07-12</span><span class="tag">forced alignment</span><span class="tag">lyrics sync</span><span class="tag">karaoke</span></div>
+      <p>CTC forced alignment 工具:預設用 MMS 多語 wav2vec2 模型,把任意文字與音訊對齊出 word/segment 級時間戳,非拉丁語系(含日文)走 uroman 羅馬化路徑;比 TorchAudio 官方流程省記憶體、比自架 MFA 輕量,提供 Python API 與 CLI。</p>
+      <p><strong>為什麼相關:</strong>karaoke-jp 歌詞對齊主線可直接接:分離後人聲 + 已知日文歌詞 → uroman 羅馬化 → CTC 對齊拿 word-level 時間戳,當 WhisperX 對齊之外的第二意見交叉驗證;522 星、7/12 剛更新,活躍且依賴極少。</p>
+      <div class="card-actions">
+        <a class="source-link" href="https://github.com/MahmoudAshraf97/ctc-forced-aligner" target="_blank" rel="noopener">Open Repo &#8599;</a>
+      </div>
+    </section>
+    
     <details class="footnote">
       <summary>閱讀順序與篩選原則</summary>
       <div class="footnote-body">
-        <span><strong>1.</strong> 近期主線：<mark class="keyterm">Music Flamingo</mark>、<mark class="keyterm">歌詞辨識</mark>、<mark class="keyterm">JPOP</mark>、<mark class="keyterm">卡拉 OK</mark> 與 <mark class="keyterm">karaoke-jp</mark>。</span>
-        <span><strong>2.</strong> 生成主線仍保留：text-to-audio/music、flow、caption、<mark class="keyterm">codec</mark>、評估與 <mark class="keyterm">reward</mark> <mark class="keyterm">alignment</mark>。</span>
-        <span><strong>3.</strong> 只收高品質：新穎度、重要性、baseline、資料與可落地性一起看。</span>
+        <span><strong>1.</strong> 近期主線:Music Flamingo、歌詞辨識、JPOP、卡拉 OK 與 karaoke-jp。</span>
+        <span><strong>2.</strong> 生成主線仍保留:text-to-audio/music、flow、caption、codec、評估與 reward alignment。</span>
+        <span><strong>3.</strong> 只收高品質:新穎度、重要性、baseline、資料與可落地性一起看。</span>
       </div>
     </details>
   </main>
-
-  <footer>Generated by the local MIR paper automation · Product standard 2026-05-26 · 2187e8b96f · 2026-07-13 09:00:13 Asia/Taipei</footer>
-
+  <footer>Generated by the MIR digest automation · Product standard 2026-05-26 · 2187e8b96f · 2026-07-13 09:17:33 Asia/Taipei</footer>
   <script>
+
     const cards = Array.from(document.querySelectorAll('.paper-card'));
     const RATINGS_KEY = 'mir-ratings';
-
     function loadRatings() {
       try { return JSON.parse(localStorage.getItem(RATINGS_KEY)) || {}; } catch { return {}; }
     }
@@ -996,7 +973,6 @@
       });
     }
     document.querySelectorAll('.star-rating').forEach(initStarWidget);
-
     function toggleCard(card) {
       const isOpen = card.classList.toggle('is-open');
       const btn = card.querySelector('.details-toggle');
@@ -1010,33 +986,6 @@
       body.addEventListener('click', event => {
         if (event.target.closest('a, button, input, .card-actions, .star-rating')) return;
         toggleCard(body.closest('.paper-card'));
-      });
-    });
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const filter = btn.dataset.filter;
-        document.querySelectorAll('.filter-btn').forEach(b => b.setAttribute('aria-pressed', String(b === btn)));
-        const ratings = loadRatings();
-        cards.forEach(card => {
-          let show = filter === 'all' || card.dataset.track === filter;
-          if (filter === 'important') {
-            const paperId = card.id ? `2026-07-13-${card.id.replace('paper-', '')}` : null;
-            show = paperId && (ratings[paperId] || 0) >= 3;
-          }
-          card.classList.toggle('is-hidden', !show);
-        });
-        document.querySelectorAll('.paper-nav-list li').forEach(li => {
-          const link = li.querySelector('a');
-          if (!link) return;
-          const target = document.querySelector(link.getAttribute('href'));
-          if (!target) return;
-          let show = filter === 'all' || target.dataset.track === filter;
-          if (filter === 'important') {
-            const paperId = target.id ? `2026-07-13-${target.id.replace('paper-', '')}` : null;
-            show = paperId && (ratings[paperId] || 0) >= 3;
-          }
-          li.style.display = show ? '' : 'none';
-        });
       });
     });
     document.querySelectorAll('.paper-nav-list a').forEach(link => {
@@ -1054,7 +1003,7 @@
         }
       });
     });
-  </script>
 
+  </script>
 </body>
 </html>

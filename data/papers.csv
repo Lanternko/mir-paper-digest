@@ -127,3 +127,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-07-12,1,paper,karaoke_jp,Poly-SVC: Polyphony-Aware Singing Voice Conversion with Harmonic Modeling,https://arxiv.org/abs/2605.12310,2605.12310,唱聲 pitch|人聲分離|flow/diffusion,新且重要
 2026-07-12,2,paper,mean_audio,PairAlign: A Framework for Sequence Tokenization via Self-Alignment with Applications to Audio Tokenization,https://arxiv.org/abs/2605.06582,2605.06582,codec/tokenizer|sequence tokenization|audio representation,新
 2026-07-12,0,repo,github,mason369/music-to-midi,https://github.com/mason369/music-to-midi,,audio-to-midi|source separation|music transcription,
+2026-07-13,1,paper,mean_audio,SegTune: Structured and Fine-Grained Control for Song Generation,https://arxiv.org/abs/2606.02638,2606.02638,text-to-music|flow/diffusion|歌詞對齊,新且重要
+2026-07-13,2,paper,mean_audio,EntangleCodec: A Unified Discrete Audio Tokenizer via Semantic-Acoustic Entanglement,https://arxiv.org/abs/2606.02739,2606.02739,codec/tokenizer|caption/data|evaluation,新且重要
+2026-07-13,0,repo,github,MahmoudAshraf97/ctc-forced-aligner,https://github.com/MahmoudAshraf97/ctc-forced-aligner,,forced alignment|lyrics sync|karaoke,

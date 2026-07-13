@@ -1,0 +1,101 @@
+{
+  "date": "2026-07-13",
+  "papers": [
+    {
+      "slot": 1,
+      "track": "mean_audio",
+      "title": "SegTune: Structured and Fine-Grained Control for Song Generation",
+      "authors": [
+        "Yuejiao Wang",
+        "Zihao Ji",
+        "Pengfei Cai",
+        "Xu Li",
+        "Haorui Zheng",
+        "Zewen Song",
+        "Zhongliang Liu",
+        "Chen Zhang",
+        "Pengfei Wan"
+      ],
+      "published": "2026-05-31",
+      "updated": "2026-05-31",
+      "source_url": "https://arxiv.org/abs/2606.02638",
+      "arxiv_id": "2606.02638",
+      "doi": "",
+      "tags": [
+        "text-to-music",
+        "flow/diffusion",
+        "歌詞對齊"
+      ],
+      "quality": "新且重要",
+      "tldr": "快手 Kling 團隊的 DiT+流匹配歌曲生成:全局 prompt 管風格、段落 prompt 管局部情緒與配器,再用微調 Qwen3-4B 直接生成 LRC 句級時間戳;PER 14.5% 全場最低,ACL 2026 口頭報告並獲最佳論文提名。",
+      "insight": "洞見:歌曲生成的可控性瓶頸其實在時間軸——SegTune 把 LRC 時間戳當成 LLM 的生成目標(微調 Qwen3-4B,句級 MAE 0.99 秒;GPT-4o zero-shot 是 3.24 秒),證明句級 timing 可以從歌詞+風格描述被直接預測出來。對 karaoke-jp 來說,LRC 之上多了一條「先驗生成」路線,可當 forced alignment 失敗時的 fallback 或 QA 異常偵測。另一個硬結論:prompt encoder 用 Qwen3-Embedding 性別控制 92.2%、MuQ-MuLan 只有 47.6%——MuLan 系 embedding 對人聲屬性近乎全盲,因為訓練 caption 根本沒標歌手屬性。",
+      "try_next": "可做:用 karaoke-jp 手上的日文 LRC 資料微調小型 LLM(照論文配方:Qwen3-4B-Base + LoRA rank 32、8 epochs)做「歌詞+曲風→句級時間戳」預測,對比 forced alignment 輸出量 MAE;若 <1.5 秒,即可上線當對齊結果的 sanity check。",
+      "problem": "現有歌曲生成(AR 的 YuE/LeVo、NAR 的 DiffRhythm+/ACE-Step)只吃全局 prompt,無法控制段落級的情緒、配器、節奏演變;NAR 模型還依賴人工標註或 zero-shot LLM 的歌詞時間戳,錯誤多且阻礙互動使用。",
+      "method": "DiT(1.1B、16 層 LLaMA-style blocks)+ 條件流匹配,44kHz 音訊由 1D VAE 壓到 21.5Hz latent。三路條件:全局 prompt 廣播全曲、段落 prompt 只廣播到對應時間窗(皆用 Qwen3-Embedding-0.6B 編碼後 channel 拼接)、歌詞經 G2P 轉音素後按時間戳寫入 placeholder 序列。時間窗與歌詞 timing 來自微調 Qwen3-4B 的 duration predictor,直接輸出 LRC 格式句級時間戳。訓練三階段:預訓練→SFT→兩輪迭代 DPO。",
+      "data": "內部策展語料,>90% 為華語流行歌;資料 pipeline:Audiobox-Aesthetics/SongEval 過濾品質、Demucs v4 分離人聲、FireRedASR(中)/Whisper-large-v3(其他語言)轉錄、all-in-one 模型抽段落結構、Audio Flamingo 3 生成全局與段落 caption;duration predictor 用超過 10 萬條 LRC 歌詞微調。",
+      "findings": "PER 14.5% 全場最低(YuE 48.5%、ACE-Step 35.6%、DiffRhythm+ 27.4%);性別控制 96.7% 最高;DPO 後主觀音樂性 MOS 4.57±0.52 全場第一(Wilcoxon p<.001)。消融:段落 prompt 拼接明顯優於 global-only 與加權混合;duration predictor MAE 0.99 秒遠優於 GPT-4o 的 3.24 秒,且下游音樂性對 timing 誤差相當穩健。",
+      "limitations": "訓練與評測幾乎全在華語流行歌,測試集僅 15 首 ChatGPT 生成歌詞,語言泛化未驗證;段落結構模糊時 duration predictor 退化並拖累全曲;DPO 後性別/年齡控制下降(偏好資料偏向年輕女聲);段內漸強、裝飾音等 intra-segment 動態仍不可控;訓練語料未開源。",
+      "editor_note": "digest 追過 DiffRhythm 系與 ACE-Step,SegTune 是這條 NAR 歌曲生成線上第一個把「段落級文字控制 + LLM 時間戳預測」做成完整系統的;主觀評測僅 5 位聽者、樣本偏小,但客觀指標與消融夠紮實。程式碼在 KlingAIResearch/SegTune。",
+      "relevance": {
+        "mean_audio": 5,
+        "karaoke_jp": 3
+      }
+    },
+    {
+      "slot": 2,
+      "track": "mean_audio",
+      "title": "EntangleCodec: A Unified Discrete Audio Tokenizer via Semantic-Acoustic Entanglement",
+      "authors": [
+        "Hui Li",
+        "Yangfan Gao",
+        "Junlin Shang",
+        "Changhao Jiang",
+        "Tao Gui",
+        "Qi Zhang",
+        "Xuanjing Huang"
+      ],
+      "published": "2026-06-01",
+      "updated": "2026-06-01",
+      "source_url": "https://arxiv.org/abs/2606.02739",
+      "arxiv_id": "2606.02739",
+      "doi": "",
+      "tags": [
+        "codec/tokenizer",
+        "caption/data",
+        "evaluation"
+      ],
+      "quality": "新且重要",
+      "tldr": "復旦的統一離散 audio tokenizer:量化前就把語義與聲學縫進同一表徵,用 LLM 生成的 rich caption 做對比對齊取代 ASR 轉錄;單 codebook 50 TPS,理解任務 MMAR 比最佳 codec 基線高 7.4%,重建 UTMOS 3.96。",
+      "insight": "洞見:語義流與聲學流分開再融合不是必然——把對齊監督從 ASR 轉錄升級成涵蓋歌手、情緒、韻律、場景的 rich caption,單一 token 流就能同時餵理解與生成。消融最有說服力:拿掉對比損失,UTMOS 從 3.96 崩到 3.04,語義對齊反而救了重建品質。另一個訊號:0.6B LM 配好 tokenizer 打贏 13B+ 連續表徵模型,表徵品質比堆參數划算——對資源有限的 MeanAudio 是好消息。",
+      "try_next": "可做:載 EntangleCodec 開源權重(GitHub: luckyerr/EntangleCodec),對 MeanAudio 評測集抽 token 重建後量 FAD 與 CLAP score,對比現用 codec;特別驗音樂域——論文音樂 AudioBoxScore 5.42 次於 XCodec,音樂生成效益要自己確認。",
+      "problem": "重建導向 codec(EnCodec/DAC)缺語義、下游推理弱;語義導向 tokenizer(SpeechTokenizer/XCodec 系)靠雙流融合,帶來冗餘與錯位;且語義監督多半只有 ASR 轉錄,丟失歌手、情緒、韻律、聲學場景等非文字訊息。",
+      "method": "單一 Transformer encoder 從 Mel 圖直接學統一表徵,[CLS] 全局向量與 LLM 自動生成的 rich caption 做 CLIP 式對比學習;經 MLP 投影 + L2 正規化後餵單 codebook VQ(50 tokens/s);解碼用 Rectified Flow 的 Llama-style diffusion decoder 重建 Mel。兩階段訓練:先聯合訓 encoder+quantizer+decoder,再凍結前端只精修 decoder。下游凍結 tokenizer,接 Qwen3 系列 LM 做 audio QA/TTS/TTA。",
+      "data": "訓練:LibriSpeech、MusicBench、AudioSet、AudioCaps、WavCaps;理解評測 MMAR、MMAU、MMAU-mini;TTS 用 SEED-TTS 測試集(Whisper-large-v3 量 WER),TTA 用 CLAP score;codec 對照全部統一 Qwen3-0.6B backbone 隔離 tokenizer 效果。",
+      "findings": "理解:同 backbone 對照平均 34.5 全場最高,MMAR 34.3 比次佳高 7.4 點;生成:TTS WER 9.8%、UTMOS 3.89 均為 codec 基線第一;重建:UTMOS 3.96 僅次 XCodec2 的 4.02,是唯一在語音/音效/音樂三域都名列前茅的 tokenizer;scaling:0.6B 贏 13B+ 連續表徵 LLM,8B 在 MMAR 42.6% 創新高。",
+      "limitations": "語義粒度受 caption 品質上限,細微情緒變化、複雜和聲未必捕捉得到;音樂重建仍輸無語義對齊的 XCodec;text-to-music 未直接評測(TTA 以一般音效為主);scaling 只驗到 8B,重建與理解對容量的需求分配未探索。",
+      "editor_note": "digest 已追過 LoSATok、PairAlign 與 Token-Space Manipulation 這條 tokenizer 線,EntangleCodec 的差異點是把 rich caption 對比對齊放進量化前表徵,且程式碼與權重已開源,適合直接當 MeanAudio codec 選型的對照組。",
+      "relevance": {
+        "mean_audio": 4,
+        "karaoke_jp": 1
+      }
+    }
+  ],
+  "repo": {
+    "full_name": "MahmoudAshraf97/ctc-forced-aligner",
+    "url": "https://github.com/MahmoudAshraf97/ctc-forced-aligner",
+    "description_zh": "CTC forced alignment 工具:預設用 MMS 多語 wav2vec2 模型,把任意文字與音訊對齊出 word/segment 級時間戳,非拉丁語系(含日文)走 uroman 羅馬化路徑;比 TorchAudio 官方流程省記憶體、比自架 MFA 輕量,提供 Python API 與 CLI。",
+    "stars": 522,
+    "updated": "2026-07-12",
+    "why": "karaoke-jp 歌詞對齊主線可直接接:分離後人聲 + 已知日文歌詞 → uroman 羅馬化 → CTC 對齊拿 word-level 時間戳,當 WhisperX 對齊之外的第二意見交叉驗證;522 星、7/12 剛更新,活躍且依賴極少。",
+    "tags": [
+      "forced alignment",
+      "lyrics sync",
+      "karaoke"
+    ]
+  },
+  "discord_messages": [
+    "# 每日 MIR 論文精選 - 2026-07-13\n🌐 完整報告:https://lanternko.github.io/mir-paper-digest/reports/2026-07-13.html\n\n**論文 1|SegTune: Structured and Fine-Grained Control for Song Generation**\n🔗 https://arxiv.org/abs/2606.02638\n🎯 主線:MeanAudio(text-to-music/flow)+ karaoke-jp(LRC 時間戳)|ACL 2026 口頭報告、最佳論文提名,快手 Kling 團隊\n\n**TLDR**:DiT+條件流匹配的歌曲生成:全局 prompt 管風格、段落 prompt 廣播到對應時間窗管局部情緒/配器,歌詞時間戳由微調 Qwen3-4B 直接生成 LRC;PER 14.5% 全場最低,DPO 後音樂性 MOS 4.57 全場第一。\n\n**為什麼選它**:兩條主線同時吃到。生成側,它證明段落級文字控制在 NAR 流匹配框架可行,消融還揭露 MuLan 系 embedding 對歌手屬性近乎全盲(性別控制 47.6% vs Qwen3-Embedding 的 92.2%)。karaoke 側,它的 duration predictor 把「歌詞+風格→LRC 句級時間戳」變成 LLM 生成任務,MAE 0.99 秒,比 GPT-4o zero-shot 的 3.24 秒好 3 倍——LRC timing 從此多了一條不靠音訊的先驗生成路線。\n\n**注意**:訓練評測幾乎全是華語流行歌(測試僅 15 首 ChatGPT 歌詞);DPO 後性別/年齡控制下降;主觀評測僅 5 位聽者;段內漸強等細部動態仍不可控。\n\n**下一步**:用日文 LRC 資料照配方微調 Qwen3-4B(LoRA rank 32)做句級時間戳預測,量 MAE 對比 forced alignment,合格就當對齊 QA 的異常偵測器。",
+    "**論文 2|EntangleCodec: A Unified Discrete Audio Tokenizer via Semantic-Acoustic Entanglement**\n🔗 https://arxiv.org/abs/2606.02739\n🎯 主線:MeanAudio(codec/tokenizer)|復旦大學,程式碼與權重已開源\n\n**TLDR**:統一離散 tokenizer:量化前就把語義與聲學縫進同一表徵,用 LLM 生成的 rich caption(含歌手、情緒、韻律、場景)做 CLIP 式對比對齊,取代 ASR 轉錄監督;單 codebook 50 TPS,MMAR 比最佳 codec 基線高 7.4 點,重建 UTMOS 3.96。\n\n**為什麼選它**:它挑戰「語義流+聲學流分開再融合」的主流設計,而且消融給出反直覺的硬證據——拿掉對比損失,重建 UTMOS 從 3.96 崩到 3.04:語義對齊不是重建的代價,是助力。另外 0.6B LM 配好 tokenizer 就打贏 13B+ 連續表徵模型、8B 在 MMAR 42.6% 創新高,說明表徵品質比堆參數划算。\n\n**注意**:音樂重建仍輸無語義對齊的 XCodec;text-to-music 未直接評測(TTA 以一般音效為主),音樂生成效益要自己驗;caption 品質是語義粒度的天花板。\n\n**下一步**:載開源權重對 MeanAudio 評測集抽 token 重建,量 FAD 與 CLAP score 對比現用 codec,先驗音樂域再談選型。",
+    "**GitHub Pick|MahmoudAshraf97/ctc-forced-aligner** ⭐522|最近更新 2026-07-12\n🔗 https://github.com/MahmoudAshraf97/ctc-forced-aligner\n\nCTC forced alignment 工具:預設 MMS 多語 wav2vec2,把任意文字與音訊對齊出 word/segment 級時間戳,非拉丁語系(含日文)走 uroman 羅馬化;比 TorchAudio 官方流程省記憶體、比自架 MFA 輕量,Python API 與 CLI 都有。\n\n**為什麼選它**:karaoke-jp 歌詞對齊主線可直接接——分離後人聲 + 已知日文歌詞 → 羅馬化 → CTC 對齊,當 WhisperX 之外的第二意見交叉驗證;活躍維護、依賴極少,接進 pipeline 成本一個下午。\n\n## 今天的 take-away\n- 時間軸即控制權:句級 LRC 時間戳可由微調 LLM 從歌詞+風格直接預測(MAE 0.99 秒),生成與對齊兩條路開始互相借力(SegTune)。\n- tokenizer 的語義監督別停在 ASR 轉錄:rich caption 對比對齊讓單一 token 流同時服務理解與生成,還反過來救了重建品質(EntangleCodec)。\n- 歌詞對齊的工程基線已現成:CTC forced aligner 輕量活躍,先接進 pipeline 交叉驗證,再談自研(ctc-forced-aligner)。"
+  ]
+}
