@@ -1,0 +1,101 @@
+{
+  "date": "2026-07-14",
+  "papers": [
+    {
+      "slot": 1,
+      "track": "karaoke_jp",
+      "title": "MuScriptor: An Open Model for Multi-Instrument Music Transcription",
+      "authors": [
+        "Simon Rouard",
+        "Michael Krause",
+        "Axel Roebel",
+        "Carl-Johann Simon-Gabriel",
+        "Alexandre Défossez"
+      ],
+      "published": "2026-07-09",
+      "updated": "2026-07-09",
+      "source_url": "https://arxiv.org/abs/2607.08168",
+      "arxiv_id": "2607.08168",
+      "doi": "",
+      "tags": [
+        "music transcription",
+        "MIDI/score",
+        "reward alignment"
+      ],
+      "quality": "新且重要",
+      "tldr": "Kyutai/Mirelo 開源多樂器 AMT：合成資料預訓練 + 17 萬首真實曲 fine-tune + GRPO 對齊，1.3B 在真實混音上 Onset F1 60.4、Frame F1 73.3，並支援樂器條件化轉錄。",
+      "insight": "洞見:多樂器轉譜的瓶頸不是架構花樣，而是「合成→真實」的領域落差——純合成訓練的 onset F1 只有約 26–34，接上 11k 小時真實對齊資料後跳到 52–54，再以 300 首高品質曲做 GRPO 才到 60.4。對 karaoke-jp 的啟示：mora-to-note / MIDI 管線可先用開源權重當 baseline，再用日文曲做小規模 RL 精修；樂器條件化（可只抽人聲或吉他）正好對應分離後再轉譜的工作流。",
+      "try_next": "可做:用 `uvx muscriptor serve` 載 medium/1.3B 權重，對 karaoke-jp 日文流行曲分離人聲與全曲分別跑轉譜，量 onset F1（±50ms）與 frame F1；若全曲 multi F1 仍低，改走「先分離→單軌轉譜→合併」並用樂器條件化固定 track 標籤。",
+      "problem": "多樂器自動音樂轉譜（AMT）長期卡在資料：MT3 系大量依賴合成 MIDI，真實混音上錯誤過多幾乎不可用；公開真實多樂器對齊資料又少，無法覆蓋從古典到重金屬的音色與效果。",
+      "method": "解碼器-only Transformer（60M–1.3B），輸入 5 秒 mel（16kHz、100Hz 幀率）+ 可選樂器 presence 條件，輸出 MT3_FULL_PLUS 風格 MIDI 事件（36 樂器子類）。三階段：1.45M MIDI 即時合成預訓練（音源/調音/速度增強）→ 17 萬首真實曲（約 11k 小時，chroma+onset DTW 對齊）fine-tune → 300 首人工核對高品質子集做 GRPO-like RL（獎勵=onset+frame+offset F1，G=8）。推論可用 CFG（α=2）與樂器條件化穩定跨段樂器分配。",
+      "data": "𝒟Synth：約 1.45M MIDI（含 Lakh 等）+ 250+ soundfont 即時合成；𝒟Real：內部 170k 真實曲對齊；𝒟RL：300 首高品質；𝒟Test：372 首自 𝒟Real 抽出。公開基準對照 YourMT3+（如 Dagstuhl ChoirSet 等未進訓練集的資料）。權重與推論碼開源於 GitHub/HuggingFace（CC BY-NC）。",
+      "findings": "真實資料 fine-tune 相對純合成約提升 20 個百分點；RL 後 1.3B：Onset F1 60.4、Frame F1 73.3、Offset F1 49.0。合成預訓練在真實資料很少時特別有用（例如只用 1% 真實資料時 offset F1 從 9.9→33.4）。跨資料集相對 YourMT3+ 大幅領先（如 ChoirSet frame F1 51.0→80.7）。樂器條件化再抬高數分；mel 輸入優於 CQT / EnCodec / MERT。",
+      "limitations": "訓練與測試對齊多來自內部同步，非完全開源可復現；tokenization 不允許同樂器同音高重疊，拿掉重疊後分數會掉（onset 60.4→51.8）；onset/offset 在合唱等風格仍偏低；段落長度固定 5 秒；商業權重為非商用授權。",
+      "editor_note": "作者含 Défossez（Demucs/MusicGen 線），Kyutai+Mirelo 聯名開源，是近年多樂器 AMT 最值得立刻試的權重。digest 已追過 Note-Level Singing Melody、SongTrans、STARS；MuScriptor 補上「全曲多軌 MIDI」這塊，可直接餵 karaoke-jp 的 score/MIDI 下游。",
+      "relevance": {
+        "mean_audio": 2,
+        "karaoke_jp": 5
+      }
+    },
+    {
+      "slot": 2,
+      "track": "mean_audio",
+      "title": "MADB: A Large-Scale Music Aesthetics Dataset with Professional and Multi-Dimensional Annotations",
+      "authors": [
+        "Sirui Zhang",
+        "Tianle Wang",
+        "Xinyi Tong",
+        "Peiyang Yu",
+        "Jishang Chen",
+        "Liangke Zhao",
+        "Haoxin Zhang",
+        "Duo Xu",
+        "Xin Jin",
+        "Feng Yu",
+        "Songchun Zhu"
+      ],
+      "published": "2026-07-08",
+      "updated": "2026-07-08",
+      "source_url": "https://arxiv.org/abs/2607.06929",
+      "arxiv_id": "2607.06929",
+      "doi": "",
+      "tags": [
+        "evaluation",
+        "caption/data",
+        "reward alignment"
+      ],
+      "quality": "新且重要",
+      "tldr": "中央音樂學院等的 9999 首專業美學標註集：10 感知維度+總分、約 10 人/曲、文字評論；MuQ 預測遠勝 CLAP，證明通用音訊–文字對齊遠不夠做人向美學 reward。",
+      "insight": "洞見:MeanAudio 若用 CLAP score 當 reward，可能量錯了東西——在 MADB 上 MuQ overall LCC 0.718、CLAP 只有 0.436；結構/編曲等維度落差更大。更狠的是 Qwen2-Audio 純聽音訊幾乎隨機（overall LCC≈0），但餵人類文字評論後 LCC 跳到 0.73，說明「可訓練的人類審美語言」比再堆一個 encoder 更值錢。",
+      "try_next": "可做:下載公開子集（HF: sirui1/MADB-Dataset，約 7030 可發布音訊+全量標註），用 MeanAudio 生成樣本跑 MuQ/MERT 回歸頭，對比 CLAP 排序與 overall 人類分的 SRCC；若 CLAP 明顯塌，把 reward 換到 MuQ 美學頭或 comment-conditioned 判分。",
+      "problem": "生成音樂爆炸後急需對齊人類美學的自動評估，但現有資料（MusicEval、SongEval 等）規模小、標註人少、多半只有單一總分，缺多維感知結構與文字解釋，難以支撐細粒度 reward 或 RLHF。",
+      "method": "定義 10 維美學（旋律感知/情緒、節奏、結構、編曲感知/情緒、演唱與演奏情緒、咬字唱功、演奏技巧、音效）+ 獨立 overall（非維度加總）。30 名受過專業訓練標註者，每曲約 9–11 人；三階段品管（抽查 20% + 再驗證 10%）。基準：凍結 MuQ/MERT/CLAP encoder + Transformer 回歸頭（MSE±相關損失）；另做 CLAP 的 comment/tag 語義適配預訓練，以及 Qwen2-Audio-7B 零樣本多模態判分。",
+      "data": "9999 曲：2799 人工蒐集真實曲、Suno 1000、Levo 1800、Muchin 4400；含 AI 與真人創作以測跨範式。公開標註 + 7030 可發布音訊（含 2630 AI 生成）。標註 ICC 約 0.8；分數多集中在 2.5–4.5，動態範圍窄、回歸難。",
+      "findings": "MuQ 全面最佳（overall MSE 0.081、LCC 0.718、SRCC 0.714、KRCC 0.528），MERT 次之，CLAP 明顯落後（overall LCC 0.436）。CLAP 加 comment/tag 適配可小幅拉高相關。Qwen2-Audio 純音訊失敗，Comment&Tag 或 Audio+Comment&Tag 則 LCC≈0.73——文字反饋本身已是強美學信號。整體距離飽和仍遠，多維美學預測未解。",
+      "limitations": "大量版權曲不能釋出音訊；AI 生成子集（Suno/Levo）美學分佈可能與真人作品不同；標註以中文為主再機翻英文；分數區間窄，模型容易「中庸預測」；未直接測 text-to-music RL 閉環。",
+      "editor_note": "digest 追過 TuneJury、DeRA-MOS、SongEval 系；MADB 的差異是專業多維 + 文字評論 + 對 CLAP/MuQ 的硬對照，正好回擊「CLAP 萬能」的懶評估。可與昨日 EntangleCodec 的 rich caption 監督思路互相印證。",
+      "relevance": {
+        "mean_audio": 5,
+        "karaoke_jp": 1
+      }
+    }
+  ],
+  "repo": {
+    "full_name": "muscriptor/muscriptor",
+    "url": "https://github.com/muscriptor/muscriptor",
+    "description_zh": "Kyutai + Mirelo 開源的多樂器音樂轉譜：Python 套件與 Web UI，`uvx muscriptor serve/transcribe` 即可本地跑；權重在 HuggingFace（需同意 CC BY-NC），提供多種參數量級。",
+    "stars": 468,
+    "updated": "2026-07-13",
+    "why": "對應今日論文 1 的可跑產物：karaoke-jp 需要全曲→MIDI/score 的 baseline，這裡已有 demo、CLI 與開源權重，7/13 仍在更新；比自訓 MT3 省掉資料與工程前置。",
+    "tags": [
+      "music transcription",
+      "MIDI",
+      "karaoke"
+    ]
+  },
+  "discord_messages": [
+    "# 每日 MIR 論文精選 - 2026-07-14\n🌐 完整報告:https://lanternko.github.io/mir-paper-digest/reports/2026-07-14.html\n\n**論文 1｜MuScriptor: An Open Model for Multi-Instrument Music Transcription**\n🔗 https://arxiv.org/abs/2607.08168\n🎯 主線:karaoke-jp（MIDI/score 轉譜）｜Kyutai + Mirelo，Défossez 參與，權重開源\n\n**TLDR**:多樂器 AMT 開源模型：1.45M 合成 MIDI 預訓練 → 17 萬首真實曲 fine-tune → 300 首高品質 GRPO；1.3B 在真實混音 Onset F1 60.4、Frame F1 73.3，可選樂器條件化。\n\n**為什麼選它**:MT3 系長期「合成練、真實炸」。論文用消融把故事講死——純合成 onset 只有二十多分，真實資料一上就跳約 20 點，RL 再推到 60+；ChoirSet frame F1 從 YourMT3+ 的 51 拉到 81。對 karaoke-jp 來說，這是目前最該先裝來跑的全曲→多軌 MIDI baseline，樂器條件化還能只抽人聲/吉他軌。\n\n**注意**:內部對齊資料不可完全復現；同 pitch 重疊 note 的 tokenization 限制會壓低分數；權重非商用。\n\n**下一步**:`uvx muscriptor serve` 對日文流行曲全曲與分離人聲各跑一輪，量 onset/frame F1，決定要不要接「先分離再轉譜」。",
+    "**論文 2｜MADB: A Large-Scale Music Aesthetics Dataset with Professional and Multi-Dimensional Annotations**\n🔗 https://arxiv.org/abs/2607.06929\n🎯 主線:MeanAudio（評估 / reward alignment）｜中央音樂學院等，9999 首專業標註\n\n**TLDR**:10 感知維度+總分、約 10 標註者/曲、含文字評論；統一基準下 MuQ overall LCC 0.718 遠勝 CLAP 的 0.436，Qwen2-Audio 純聽音訊幾乎隨機。\n\n**為什麼選它**:生成模型的 reward 若還停在 CLAP score，MADB 直接打臉——音樂理解 encoder（MuQ/MERT）才比較貼人類美學，CLAP 在結構/編曲維度更弱。另一個硬訊號：把人類評論餵給 LLM 比再換一個音訊 backbone 更有效（LCC 從 ≈0 到 0.73）。這對 MeanAudio 的 preference / RL 路線是可操作的選型依據。\n\n**注意**:大量版權音訊未釋出；分數集中 2.5–4.5 動態窄；含 Suno/Levo AI 曲，分佈未必等同真人作品。\n\n**下一步**:載公開子集，用生成樣本對比 CLAP vs MuQ 美學頭與人類 overall 的排序相關；必要時把 reward 從 CLAP 換成 MuQ 回歸。",
+    "**GitHub Pick｜muscriptor/muscriptor** ⭐468｜最近更新 2026-07-13\n🔗 https://github.com/muscriptor/muscriptor\n\nKyutai/Mirelo 多樂器轉譜套件：`uvx muscriptor serve` 起 Web UI，或 CLI `transcribe`；權重在 HF（CC BY-NC，需登入同意授權）。\n\n**為什麼選它**:今天論文 1 的可執行入口，468 星且昨日仍推送；karaoke-jp 要 MIDI/score 不必再從 MT3 從頭訓。\n\n## 今天的 take-away\n- 多樂器轉譜終於有「真實混音可用」的開源權重：資料階段（合成→真實→RL）比改架構更關鍵（MuScriptor）。\n- CLAP 不是萬用美學尺：在專業多維標註上 MuQ 明顯更貼人，文字評論本身就是強 reward 信號（MADB）。\n- 工程路徑清楚：先 `uvx muscriptor` 建 MIDI baseline，再決定分離/樂器條件化與日文域精修。"
+  ]
+}

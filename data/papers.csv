@@ -130,3 +130,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-07-13,1,paper,mean_audio,SegTune: Structured and Fine-Grained Control for Song Generation,https://arxiv.org/abs/2606.02638,2606.02638,text-to-music|flow/diffusion|歌詞對齊,新且重要
 2026-07-13,2,paper,mean_audio,EntangleCodec: A Unified Discrete Audio Tokenizer via Semantic-Acoustic Entanglement,https://arxiv.org/abs/2606.02739,2606.02739,codec/tokenizer|caption/data|evaluation,新且重要
 2026-07-13,0,repo,github,MahmoudAshraf97/ctc-forced-aligner,https://github.com/MahmoudAshraf97/ctc-forced-aligner,,forced alignment|lyrics sync|karaoke,
+2026-07-14,1,paper,karaoke_jp,MuScriptor: An Open Model for Multi-Instrument Music Transcription,https://arxiv.org/abs/2607.08168,2607.08168,music transcription|MIDI/score|reward alignment,新且重要
+2026-07-14,2,paper,mean_audio,MADB: A Large-Scale Music Aesthetics Dataset with Professional and Multi-Dimensional Annotations,https://arxiv.org/abs/2607.06929,2607.06929,evaluation|caption/data|reward alignment,新且重要
+2026-07-14,0,repo,github,muscriptor/muscriptor,https://github.com/muscriptor/muscriptor,,music transcription|MIDI|karaoke,
