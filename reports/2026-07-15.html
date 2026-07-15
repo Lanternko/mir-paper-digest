@@ -1,0 +1,1009 @@
+<!doctype html>
+<html lang="zh-Hant" data-standard-version="2026-05-26" data-standard-digest="2187e8b96f">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="mir-digest-product-standard" content="2026-05-26:2187e8b96f">
+  <title>MIR Paper Digest - 2026-07-15</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&family=Inter+Tight:wght@400;500;600&family=Noto+Serif+TC:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+:root {
+      --bg-base: #faf9fc;
+      --bg-surface: #ffffff;
+      --bg-sunken: #f3f3f7;
+      --bg-hover: #ede8f0;
+
+      --accent: #785561;
+      --accent-ink: #563742;
+      --accent-soft: #fed1df;
+      --accent-tint: rgba(254, 209, 223, 0.50);
+      --accent-wash: #fdf1f5;
+
+      --teal: #3a7a6a;
+      --teal-soft: #d4efe8;
+      --teal-wash: #eef8f5;
+
+      --amber: #b77d2a;
+      --amber-soft: rgba(183, 125, 42, 0.10);
+
+      --text-primary: #2f3337;
+      --text-secondary: #5c5f64;
+      --text-tertiary: #8a8a92;
+      --text-on-accent: #fff7f7;
+
+      --border: rgba(176, 178, 184, 0.32);
+      --border-strong: rgba(120, 85, 97, 0.30);
+
+      --radius: 14px;
+      --radius-sm: 10px;
+      --radius-lg: 20px;
+      --shadow-card: 0 1px 0 rgba(120, 85, 97, 0.04), 0 8px 24px rgba(60, 50, 55, 0.04);
+      --shadow-elev: 0 1px 0 rgba(120, 85, 97, 0.06), 0 18px 48px rgba(60, 50, 55, 0.08);
+
+      --font-serif: "Source Serif 4", "Source Serif Pro", ui-serif, Georgia, serif;
+      --font-sans: "Inter Tight", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+      --font-zh: "Noto Serif TC", var(--font-serif);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg-base);
+      color: var(--text-primary);
+      font-family: var(--font-zh), var(--font-sans);
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      line-height: 1.6;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── Topbar ──────────────────────────── */
+    .topbar {
+      position: sticky; top: 0; z-index: 30;
+      background: rgba(250, 249, 252, 0.82);
+      backdrop-filter: saturate(1.4) blur(18px);
+      -webkit-backdrop-filter: saturate(1.4) blur(18px);
+      border-bottom: 1px solid var(--border);
+    }
+    .topbar-inner {
+      max-width: 1200px; margin: 0 auto;
+      padding: 12px 32px;
+      display: flex; align-items: center; gap: 16px;
+    }
+    .brand {
+      display: flex; align-items: baseline; gap: 10px;
+      font-family: var(--font-zh), var(--font-serif);
+      font-size: 19px; font-weight: 600; letter-spacing: -0.015em;
+      color: var(--accent-ink);
+      text-decoration: none;
+    }
+    .brand:hover { text-decoration: none; color: var(--accent); }
+    .brand-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent-soft);
+      border: 1px solid var(--accent);
+      display: inline-block;
+      transform: translateY(-1px);
+    }
+    .brand .sub {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-tertiary);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding-left: 12px;
+      border-left: 1px solid var(--border);
+    }
+    .nav {
+      display: flex; align-items: center; gap: 4px;
+      margin-left: auto;
+      font-family: var(--font-sans); font-size: 13px;
+    }
+    .nav a, .nav-pill {
+      background: transparent; border: none; cursor: pointer;
+      padding: 6px 14px; border-radius: 9999px;
+      color: var(--text-secondary);
+      font: inherit; font-size: 13px; font-weight: 500;
+      transition: background .18s, color .18s;
+      text-decoration: none;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .nav a:hover, .nav-pill:hover { background: var(--bg-hover); color: var(--text-primary); text-decoration: none; }
+    .nav-pill.active {
+      background: var(--accent-tint);
+      color: var(--accent-ink);
+    }
+    .issue-badge {
+      font-family: var(--font-mono);
+      font-size: 10px; font-weight: 500;
+      padding: 3px 9px; border-radius: 999px;
+      background: var(--bg-sunken);
+      color: var(--text-tertiary);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── Canvas ──────────────────────────── */
+    .canvas {
+      max-width: 1200px; width: 100%;
+      margin: 0 auto;
+      padding: 40px 32px 80px;
+    }
+
+    /* ── Hero ────────────────────────────── */
+    .hero {
+      padding-bottom: 32px;
+      margin-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+    }
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      color: var(--text-tertiary);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    h1 {
+      font-family: var(--font-zh), var(--font-serif);
+      font-weight: 500;
+      font-size: 40px;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+    }
+    h1 em {
+      font-style: italic;
+      color: var(--accent);
+      font-weight: 400;
+    }
+    .subtitle {
+      font-family: var(--font-sans);
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      max-width: 560px;
+    }
+
+    /* ── Footnote ────────────────────────── */
+    .footnote {
+      margin-top: 40px;
+      padding: 14px 18px;
+      background: var(--bg-sunken);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+    }
+    .footnote summary {
+      font-family: var(--font-mono);
+      font-size: 11px; font-weight: 500;
+      color: var(--text-tertiary);
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      list-style: none;
+    }
+    .footnote summary::-webkit-details-marker { display: none; }
+    .footnote summary::before { content: "▸ "; }
+    .footnote[open] summary::before { content: "▾ "; }
+    .footnote-body {
+      margin-top: 10px;
+      font-family: var(--font-sans);
+      font-size: 12.5px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    .footnote-body span { display: block; margin-top: 4px; }
+
+    /* ── Toolbar / Filters ──────────────── */
+    .toolbar {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+    .toolbar-label {
+      font-family: var(--font-mono);
+      font-size: 10px; font-weight: 500;
+      color: var(--text-tertiary);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding-right: 8px;
+    }
+    .filter-btn {
+      border: 1px solid var(--border);
+      border-radius: 9999px;
+      background: var(--bg-surface);
+      color: var(--text-secondary);
+      font-family: var(--font-sans);
+      font-size: 13px; font-weight: 500;
+      padding: 7px 16px;
+      cursor: pointer;
+      transition: background .18s, border-color .18s, color .18s;
+    }
+    .filter-btn:hover { background: var(--bg-hover); border-color: var(--border-strong); color: var(--text-primary); }
+    .filter-btn[aria-pressed="true"] {
+      background: var(--accent-tint);
+      border-color: var(--accent);
+      color: var(--accent-ink);
+      font-weight: 600;
+    }
+    .filter-btn-important {
+      margin-left: auto;
+      color: var(--accent);
+      border-color: var(--border-strong);
+    }
+    .filter-btn-important[aria-pressed="true"] {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--text-on-accent);
+    }
+
+    /* ── Main layout ────────────────────── */
+    .digest-layout {
+      display: grid;
+      grid-template-columns: 220px minmax(0, 1fr);
+      gap: 28px;
+      align-items: start;
+    }
+
+    /* ── Paper nav (left sidebar) ───────── */
+    .paper-nav {
+      position: sticky; top: 76px;
+    }
+    .paper-nav-title {
+      font-family: var(--font-mono);
+      font-size: 10px; font-weight: 500;
+      color: var(--text-tertiary);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      padding: 0 4px;
+    }
+    .paper-nav-list {
+      list-style: none; display: grid; gap: 4px;
+    }
+    .paper-nav-list a {
+      display: flex; align-items: center; gap: 10px;
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-sans);
+      font-size: 12.5px; font-weight: 500;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: background .15s, color .15s;
+      line-height: 1.35;
+    }
+    .paper-nav-list a:hover { background: var(--bg-hover); color: var(--text-primary); }
+    .paper-nav-list a .nav-num {
+      width: 26px; height: 22px;
+      display: inline-flex; align-items: center; justify-content: center;
+      border-radius: 7px;
+      background: var(--bg-sunken);
+      color: var(--accent);
+      font-family: var(--font-mono);
+      font-size: 10px; font-weight: 600;
+      flex-shrink: 0;
+    }
+    .paper-nav-list a .nav-track {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--text-tertiary);
+      letter-spacing: 0.06em;
+      display: block;
+      margin-top: 1px;
+    }
+
+    .nav-stats {
+      margin-top: 20px;
+      padding: 16px;
+      background: var(--accent-wash);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-sm);
+    }
+    .nav-stats-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+    }
+    .nav-stat strong {
+      display: block;
+      font-family: var(--font-zh), var(--font-serif);
+      font-size: 22px; font-weight: 500;
+      color: var(--accent-ink);
+      letter-spacing: -0.02em;
+    }
+    .nav-stat span {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--text-tertiary);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .nav-note {
+      margin-top: 14px;
+      font-family: var(--font-sans);
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+
+    /* ── Cards ───────────────────────────── */
+    .cards { display: grid; gap: 20px; }
+
+    .paper-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow-card);
+      transition: border-color .2s, box-shadow .2s;
+      scroll-margin-top: 80px;
+    }
+    .paper-card:hover {
+      border-color: var(--border-strong);
+    }
+
+    .paper-head {
+      display: flex; gap: 14px;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+    .paper-number {
+      width: 44px; height: 38px;
+      display: inline-flex; align-items: center; justify-content: center;
+      border-radius: 10px;
+      background: var(--accent);
+      color: var(--text-on-accent);
+      font-family: var(--font-mono);
+      font-size: 13px; font-weight: 600;
+      flex-shrink: 0;
+    }
+    .paper-meta {
+      display: flex; flex-wrap: wrap;
+      justify-content: flex-end; gap: 6px;
+    }
+    .track, .quality, .freshness, .tag, .track-hint {
+      display: inline-flex; align-items: center;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-family: var(--font-sans);
+      font-size: 11px; font-weight: 600;
+      line-height: 1.2;
+    }
+    .track {
+      background: var(--accent-soft);
+      color: var(--accent-ink);
+    }
+    .track-hint {
+      background: var(--teal-soft);
+      color: var(--teal);
+    }
+    .quality {
+      background: var(--amber-soft);
+      color: var(--amber);
+    }
+    .freshness {
+      background: var(--bg-sunken);
+      color: var(--text-tertiary);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.02em;
+    }
+
+    h2 {
+      font-family: var(--font-zh), var(--font-serif);
+      font-weight: 500;
+      font-size: 22px;
+      letter-spacing: -0.015em;
+      line-height: 1.25;
+      margin: 14px 0 8px;
+      max-width: 600px;
+    }
+    h2 a {
+      color: inherit;
+      text-decoration: none;
+    }
+    h2 a:hover {
+      color: var(--accent);
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+    .paper-card-body {
+      cursor: pointer;
+    }
+    .one-line {
+      font-family: var(--font-sans);
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      max-width: 600px;
+      margin-bottom: 16px;
+    }
+
+    .tag-row {
+      display: flex; flex-wrap: wrap; gap: 6px;
+      margin-bottom: 16px;
+    }
+    .tag {
+      background: var(--bg-sunken);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      font-size: 11px;
+    }
+
+    /* ── Quick read grid ────────────────── */
+    .quick-read {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .quick-read div {
+      padding: 14px 16px;
+      background: var(--bg-sunken);
+      border-radius: var(--radius-sm);
+    }
+    .label {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 10px; font-weight: 500;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .quick-read p {
+      font-family: var(--font-sans);
+      font-size: 13px;
+      color: var(--text-primary);
+      line-height: 1.55;
+    }
+
+    /* ── Card actions ───────────────────── */
+    .card-actions {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin-top: 8px;
+    }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      font-family: var(--font-sans);
+      font-size: 13px; font-weight: 500;
+      padding: 9px 18px;
+      border-radius: 9999px;
+      border: 1px solid var(--border);
+      background: var(--bg-surface);
+      color: var(--text-primary);
+      cursor: pointer;
+      transition: background .18s, border-color .18s, color .18s, transform .08s;
+      text-decoration: none;
+    }
+    .btn:hover { background: var(--bg-hover); text-decoration: none; }
+    .btn:active { transform: translateY(1px); }
+    .btn-primary {
+      background: var(--accent);
+      color: var(--text-on-accent);
+      border-color: var(--accent);
+    }
+    .btn-primary:hover { background: var(--accent-ink); border-color: var(--accent-ink); }
+    .btn-teal {
+      background: var(--teal-wash);
+      border-color: var(--teal);
+      color: var(--teal);
+    }
+    .btn-teal:hover { background: var(--teal-soft); }
+
+    /* ── Star rating ────────────────────── */
+    .star-rating {
+      display: inline-flex; align-items: center; gap: 2px;
+      margin-left: auto;
+    }
+    .star-rating button {
+      width: 30px; height: 30px;
+      background: none; border: none;
+      cursor: pointer;
+      font-size: 18px;
+      color: var(--border);
+      line-height: 1;
+      padding: 0;
+      transition: color .12s, transform .08s;
+      display: inline-flex; align-items: center; justify-content: center;
+    }
+    .star-rating button:hover { transform: scale(1.2); }
+    .star-rating button.filled { color: var(--accent); }
+    .star-rating button.preview { color: var(--accent-soft); }
+    .star-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-tertiary);
+      letter-spacing: 0.06em;
+      margin-right: 4px;
+      white-space: nowrap;
+    }
+    .paper-card.is-rated { border-left: 3px solid var(--accent); }
+    .paper-card.is-important { border-left: 3px solid var(--accent); background: var(--accent-wash); }
+
+    /* ── Details panel ──────────────────── */
+    .details-panel {
+      display: none;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+    .paper-card.is-open .details-panel { display: block; }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    .detail-section {
+      padding: 16px;
+      background: var(--bg-sunken);
+      border-radius: var(--radius-sm);
+    }
+    .detail-section h3 {
+      font-family: var(--font-mono);
+      font-size: 10px; font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .detail-section p, .detail-section ul {
+      font-family: var(--font-sans);
+      font-size: 13px;
+      color: var(--text-primary);
+      line-height: 1.6;
+      max-width: 60ch;
+    }
+    .detail-section ul { padding-left: 18px; }
+    .detail-section li + li { margin-top: 6px; }
+
+    .meta-list { display: grid; gap: 10px; }
+    .meta-list div {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 10px;
+    }
+    dt {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--text-tertiary);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding-top: 2px;
+    }
+    dd { font-family: var(--font-sans); font-size: 13px; }
+
+    /* ── Footer ──────────────────────────── */
+    footer {
+      max-width: 1200px; margin: 0 auto;
+      padding: 0 32px 40px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-tertiary);
+      letter-spacing: 0.06em;
+    }
+
+    .is-hidden { display: none; }
+
+    /* ── Scrollbar ───────────────────────── */
+    ::-webkit-scrollbar { width: 10px; height: 10px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 999px; border: 2px solid var(--bg-base); }
+    ::-webkit-scrollbar-thumb:hover { background: var(--border-strong); }
+
+    /* ── Print ───────────────────────────── */
+    @media print {
+      .topbar { position: static; }
+      .toolbar, .card-actions, .paper-nav { display: none; }
+      .hero, .digest-layout { grid-template-columns: 1fr; }
+      .details-panel { display: block; }
+      .paper-card { break-inside: avoid; box-shadow: none; }
+    }
+
+    /* ── Responsive ──────────────────────── */
+    @media (max-width: 960px) {
+      .digest-layout { grid-template-columns: 1fr; }
+      .paper-nav { position: static; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+      .paper-nav-title { grid-column: 1 / -1; }
+      .paper-nav-list { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 6px; }
+      .paper-nav-list a { padding: 6px 10px; }
+      .nav-stats { grid-column: 1 / -1; }
+    }
+    @media (max-width: 820px) {
+      h1 { font-size: 32px; }
+    }
+    @media (max-width: 640px) {
+      .canvas { padding: 24px 16px 60px; }
+      .topbar-inner { padding: 10px 16px; flex-wrap: wrap; gap: 8px; }
+      .brand .sub { display: none; }
+      .issue-badge { display: none; }
+      h1 { font-size: 28px; }
+      h2 { font-size: 19px; }
+      .paper-card { padding: 20px; }
+      .paper-head { display: grid; grid-template-columns: 44px 1fr; }
+      .paper-meta { justify-content: flex-start; }
+      .quick-read, .detail-grid { grid-template-columns: 1fr; }
+      .meta-list div { grid-template-columns: 1fr; gap: 2px; }
+      .paper-nav-list { flex-direction: column; }
+      footer { padding: 0 16px 32px; }
+    }
+    .source-link,
+    .details-toggle {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      font-family: var(--font-sans);
+      font-size: 13px; font-weight: 500;
+      padding: 9px 18px;
+      border-radius: 9999px;
+      border: 1px solid var(--border);
+      background: var(--bg-surface);
+      color: var(--text-primary);
+      cursor: pointer;
+      transition: background .18s, border-color .18s, color .18s, transform .08s;
+      text-decoration: none;
+    }
+    .source-link {
+      background: var(--teal-wash);
+      border-color: var(--teal);
+      color: var(--teal);
+    }
+    .source-link:hover { background: var(--teal-soft); text-decoration: none; }
+    .details-toggle:hover { background: var(--bg-hover); }
+    .details-toggle:active,
+    .source-link:active { transform: translateY(1px); }
+    body { overflow-x: hidden; }
+    .canvas, .topbar-inner, footer, .digest-layout > *, .paper-card,
+    .paper-card-body, .quick-read > *, .detail-section { min-width: 0; }
+    .paper-card { overflow: hidden; }
+    .paper-card h2, .one-line, .quick-read p, .detail-section p,
+    .meta-list dd { overflow-wrap: anywhere; }
+    .repo-pick {
+      margin-top: 18px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-card);
+      padding: 18px;
+      overflow: hidden;
+    }
+    .repo-pick .repo-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 6px;
+    }
+    .repo-pick h2 {
+      margin: 0 0 8px;
+      font-family: var(--font-zh), var(--font-serif);
+      font-size: 21px;
+      font-weight: 500;
+      line-height: 1.25;
+    }
+    .repo-pick h2 a { color: var(--text-primary); text-decoration: none; overflow-wrap: anywhere; }
+    .repo-pick h2 a:hover { color: var(--accent); }
+    .repo-pick p { margin: 0 0 8px; color: var(--text-secondary); font-family: var(--font-sans); font-size: 14px; overflow-wrap: anywhere; }
+    .repo-pick .repo-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+    @media (max-width: 640px) {
+      .nav { width: 100%; margin-left: 0; overflow-x: auto; justify-content: flex-start; }
+      .nav a, .nav-pill { flex-shrink: 0; }
+      .hero, .digest-layout { max-width: 342px; margin-left: 0; margin-right: auto; }
+      .paper-card { width: 100%; }
+      .card-actions { align-items: flex-start; }
+      .star-rating { width: 100%; margin-left: 0; justify-content: flex-end; }
+      .star-rating button { width: 26px; height: 28px; }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html" aria-label="MIR Paper Digest home">
+        <span class="brand-dot"></span>
+        MIR Paper Digest
+        <span class="sub">Daily Brief</span>
+      </a>
+      <nav class="nav" aria-label="Site navigation">
+        <a class="nav-pill active" href="#">2026-07-15</a>
+        <a class="nav-pill" href="../index.html">All Issues</a>
+        <span class="issue-badge">2 papers</span>
+      </nav>
+    </div>
+  </div>
+  <main class="canvas">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Daily research brief · 2026-07-15</p>
+        <h1>每日 MIR 論文<em>精選</em></h1>
+        <p class="subtitle">近期主線往 Music Flamingo、歌詞辨識、JPOP 與卡拉 OK 靠攏;今天先看最能轉成下一個小實驗的兩篇。</p>
+      </div>
+    </section>
+    <section class="digest-layout">
+      <aside class="paper-nav" aria-label="Paper navigation">
+        <div class="paper-nav-title">Papers</div>
+        <ol class="paper-nav-list">
+          <li><a href="#paper-1">
+            <span class="nav-num">01</span>
+            <span>MulTTiPop: A Multitrack Transcription Dat...<span class="nav-track">karaoke-jp</span></span>
+          </a></li>
+          <li><a href="#paper-2">
+            <span class="nav-num">02</span>
+            <span>Qwen-Music Technical Report<span class="nav-track">MeanAudio</span></span>
+          </a></li>
+        </ol>
+      </aside>
+      <div class="cards" aria-label="論文卡片">
+
+        <article class="paper-card" data-track="karaoke_jp" id="paper-1">
+          <div class="paper-head">
+            <div class="paper-number">01</div>
+            <div class="paper-meta">
+              <span class="track">karaoke-jp</span>
+              <span class="quality">新且重要</span>
+              <span class="freshness">2026-07-09 · 6d</span>
+            </div>
+          </div>
+          <div class="paper-card-body">
+          <h2><a href="https://arxiv.org/abs/2607.08756" target="_blank" rel="noopener">MulTTiPop: A Multitrack Transcription Dataset for Pop Music</a></h2>
+          <p class="one-line">CMU 開源流行曲多軌轉譜評測集：572 段、3.5 小時商業音訊對齊多軌 MIDI；MT3/YourMT3+ 在真實流行混音上 Onset F1 仍只有約 30–38%，暴露合成訓練的領域落差。</p>
+          <div class="tag-row">
+            <span class="track-hint">可轉譯</span>
+            <span class="tag">music transcription</span>
+            <span class="tag">MIDI/score</span>
+            <span class="tag">evaluation</span>
+          </div>
+          <div class="quick-read">
+            <div>
+              <span class="label">Insight</span>
+              <p>洞見:昨天 MuScriptor 證明「真實混音轉譜」需要資料與 RL；今天 MulTTiPop 把評測尺子釘在商業流行曲上——只靠 Slakh 合成訓練的 MT3 系在真實 YouTube pop 上幾乎半殘（Onset F1 約三成）。對 karaoke-jp 的啟示：mora-to-note / 全曲 MIDI baseline 不該再只報 MusicNet/Slakh；至少用 MulTTiPop 的 dev/test 測一輪，並區分 exact 樂器標籤與 harmonic-percussive 粗粒度。</p>
+            </div>
+            <div>
+              <span class="label">Try next</span>
+              <p>可做:下載 HF gclef-cmu/multtipop 的 MIDI+metadata，對日文流行曲先不做訓練只做評測；把 MuScriptor medium 與 YourMT3+ 的 onset F1（±50ms）並排，若 exact 樂器分很低，改報 harmonic-percussive 或先人聲分離再轉譜。</p>
+            </div>
+          </div>
+          </div>
+          <div class="card-actions">
+            <a class="source-link" href="https://arxiv.org/abs/2607.08756" target="_blank" rel="noopener">Open Paper &#8599;</a>
+            <button class="details-toggle" type="button" aria-expanded="false" aria-controls="paper-1-panel">展開摘要與實驗建議</button>
+            <div class="star-rating" data-paper-id="2026-07-15-1" aria-label="Rate this paper">
+              <span class="star-label">重要度</span>
+              <button type="button" data-value="1" aria-label="1 star">&#9733;</button>
+              <button type="button" data-value="2" aria-label="2 stars">&#9733;</button>
+              <button type="button" data-value="3" aria-label="3 stars">&#9733;</button>
+              <button type="button" data-value="4" aria-label="4 stars">&#9733;</button>
+              <button type="button" data-value="5" aria-label="5 stars">&#9733;</button>
+            </div>
+          </div>
+          <div class="details-panel" id="paper-1-panel">
+            <div class="detail-grid">
+              <section class="detail-section" data-standard-section="problem">
+                <h3>Problem</h3>
+                <p>多樂器 AMT 已從鋼琴走向流行混音，但缺乏「商業流行曲音訊 + 時間對齊多軌 MIDI」的公開評測集：Slakh 是合成、TheoryTab 只有弱對齊旋律/和弦、RWC-Pop 規模與多樣性有限，導致模型在真實 pop 上的失敗難以系統量化。</p>
+              </section>
+              <section class="detail-section" data-standard-section="method">
+                <h3>Method</h3>
+                <p>TheoryTab 段（YouTube 時間戳）與 Lakh LMD-matched 多軌 MIDI 做 metadata 近似比對 → madmom 拍點追蹤 + 錨定拍（anchor beat）時間扭曲對齊 → chroma/onset 與 melody/YouTube 時間等候選 → 6 名人工聽寫選正確錨點。僅釋出對齊 MIDI 與 YouTube ID/時間戳，建議只取片段、只用評測。</p>
+              </section>
+              <section class="detail-section" data-standard-section="data">
+                <h3>Data</h3>
+                <p>572 段（約 3.5 小時）、374 首、263 藝人；平均段長約 22 秒、約 583 個 MIDI note。dev/test 約 7:3 且藝人不相交（dev 169 段 / test 403 段）。年代跨 1930s–2000s（LMD 限制無 2010 後）。HF: gclef-cmu/multtipop（CC-BY 4.0）；預覽站 gclef-cmu.org/multtipop 含 MT3/YourMT3+/MuScriptor 對照。</p>
+              </section>
+              <section class="detail-section" data-standard-section="findings">
+                <h3>Findings</h3>
+                <p>SOTA 開源多軌模型在 MulTTiPop 上遠未飽和：論文報告最佳 Onset F1 約 38%；MT3 與 YourMT3+ 在 exact / harmonic-percussive 設定下大致三成出頭，彼此差距遠小於在合成/古典基準上的落差。質性：能抓調性與和弦走向，但密織編曲常支離、樂器 program 不一致、人聲線偶可追但和聲層缺失。旋律匹配候選相對純 chroma 大幅提高錨點成功率（約 2%→32%）。</p>
+              </section>
+              <section class="detail-section" data-standard-section="limitations">
+                <h3>Limitations</h3>
+                <p>規模小且作者明確禁止當訓練集（版權商業音訊）；西方/HookTheory 用戶偏差；無 2010 後曲目；對齊失敗率高（約半數候選被拒）；僅兩家開源 AMT 數字報告；日文 JPOP 覆蓋未知。</p>
+              </section>
+              <section class="detail-section" data-standard-section="editor-note">
+                <h3>Editor Note</h3>
+                <p>與昨日 MuScriptor 成對：一邊是可跑權重，一邊是真實 pop 評測尺。preview 已掛 MuScriptor 轉譜對照，digest 讀者可直接聽差距。karaoke-jp 若要做 mora-to-note / score，MulTTiPop 是目前最該先接上的 commercial multitrack 測試集。</p>
+              </section>
+              <section class="detail-section" data-standard-section="metadata">
+                <h3>Metadata</h3>
+                <dl class="meta-list">
+                  <div><dt>Authors</dt><dd>Nathan Pruyne, Benjamin Stoler, William Chen, Chien-yu Huang, Shinji Watanabe 等 6 位</dd></div>
+                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2607.08756">arxiv.org/abs/2607.08756</a></dd></div>
+                  <div><dt>Relevance</dt><dd>MeanAudio 1 / karaoke 5 · max 5</dd></div>
+                </dl>
+              </section>
+            </div>
+          </div>
+        </article>
+    
+
+        <article class="paper-card" data-track="mean_audio" id="paper-2">
+          <div class="paper-head">
+            <div class="paper-number">02</div>
+            <div class="paper-meta">
+              <span class="track">MeanAudio</span>
+              <span class="quality">新且重要</span>
+              <span class="freshness">2026-07-13 · 2d</span>
+            </div>
+          </div>
+          <div class="paper-card-body">
+          <h2><a href="https://arxiv.org/abs/2607.11699" target="_blank" rel="noopener">Qwen-Music Technical Report</a></h2>
+          <p class="one-line">Qwen 隊完整歌曲生成系統：25Hz 單碼本語義 token + Melody-CoT + DiT 立體聲 render；&gt;500 萬小時多語料、SFT→DPO→GSPO；在 16 項客觀指標中 13 項 SOTA，盲測可壓過多家專有系統。</p>
+          <div class="tag-row">
+            <span class="track-hint">貼近主線</span>
+            <span class="tag">text-to-music</span>
+            <span class="tag">codec/tokenizer</span>
+            <span class="tag">reward alignment</span>
+          </div>
+          <div class="quick-read">
+            <div>
+              <span class="label">Insight</span>
+              <p>洞見:MeanAudio 路線又被「語義壓縮 + 旋律先規劃 + 生成式 render + 分階段 preference」重寫一遍——重點不是再堆一個 flow，而是 (1) 25Hz 單流語義 token 讓 33B LLM 可做全曲結構；(2) Melody-CoT 把旋律當 intermediate，統一 text-to-song 與 cover；(3) post-training 用內部 musicality MOS + 指令跟隨 reward 跑 offline DPO 再 online GSPO。對齊 MADB/SongEval 那條：reward 模型本身就是系統的一部分。</p>
+            </div>
+            <div>
+              <span class="label">Try next</span>
+              <p>可做:對照 HeartMuLa/LeVo 的 token rate 與 post-training 階段，在 MeanAudio 實驗裡把「旋律骨架 token」當額外條件試 cover/clone；評估時除 CLAP 外接 SongEval/SongBench 多維與 PER（歌詞可懂度），避免只看單一 embedding 相似度。</p>
+            </div>
+          </div>
+          </div>
+          <div class="card-actions">
+            <a class="source-link" href="https://arxiv.org/abs/2607.11699" target="_blank" rel="noopener">Open Paper &#8599;</a>
+            <button class="details-toggle" type="button" aria-expanded="false" aria-controls="paper-2-panel">展開摘要與實驗建議</button>
+            <div class="star-rating" data-paper-id="2026-07-15-2" aria-label="Rate this paper">
+              <span class="star-label">重要度</span>
+              <button type="button" data-value="1" aria-label="1 star">&#9733;</button>
+              <button type="button" data-value="2" aria-label="2 stars">&#9733;</button>
+              <button type="button" data-value="3" aria-label="3 stars">&#9733;</button>
+              <button type="button" data-value="4" aria-label="4 stars">&#9733;</button>
+              <button type="button" data-value="5" aria-label="5 stars">&#9733;</button>
+            </div>
+          </div>
+          <div class="details-panel" id="paper-2-panel">
+            <div class="detail-grid">
+              <section class="detail-section" data-standard-section="problem">
+                <h3>Problem</h3>
+                <p>完整帶人聲歌曲生成要同時處理歌詞、旋律、結構、演唱與伴奏，且在語意規劃與波形保真之間落差巨大：離散 token LM 可做長程結構但失真，直接波形模型又難控歌詞/風格；cover 還要求保留參考旋律同時改編曲與音色。</p>
+              </section>
+              <section class="detail-section" data-standard-section="method">
+                <h3>Method</h3>
+                <p>三件套：Tokenizer（0.6B Conformer，BestRQ→causal→CTC/Mel/chroma SFT→VQ，25Hz、32k codebook、約 375 bit/s）→ LLM（33B Qwen3.5-Omni 系 AR，Melody-CoT：RMVPE→6.25Hz 相對 MIDI 旋律 token 先規劃再生成全曲語義 token）→ Render（語義條件 DiT flow matching 出 latent + Spec-VAE + Band-Mode Refiner→48kHz stereo）。訓練：品質分桶課程（Q1–Q6）pretrain + SFT cold start + 迭代 offline DPO + online GSPO。</p>
+              </section>
+              <section class="detail-section" data-standard-section="data">
+                <h3>Data</h3>
+                <p>逾 500 萬小時多語音樂；按類型內 percentile 分七品質桶、去掉最差 Q7；含約 20% 器樂以強化伴奏。Render 另用 acoustic quality pipeline 過濾假 lossless/假立體聲/高頻截斷。評估：600 中英 prompt；SongBench/SongEval/AudioBox-Aesthetic；歌詞 PER；tag following；cover 的 Melody MAE；專業聽者盲測 vs Suno/MiniMax/Mureka。</p>
+              </section>
+              <section class="detail-section" data-standard-section="findings">
+                <h3>Findings</h3>
+                <p>Text-to-music 在 16 項客觀指標中 13 項最佳；專業 A/B 勝率：vs MiniMax 2.5+ 59.1%、2.6 66.7%、Mureka V8 58.3%、Suno V5 55.4%，與 Suno V5.5 約 50.3% 互有勝負。Cover：AI 參考集上旋律保留優於 Suno V5.5/V5 與 MiniMax Cover；真實流行參考集多數指標勝過 MiniMax Cover。外部 Artificial Analysis 人聲音樂榜以 JazzCat 名次進入前列。</p>
+              </section>
+              <section class="detail-section" data-standard-section="limitations">
+                <h3>Limitations</h3>
+                <p>技術報告，權重/推論碼是否完整開源未在摘要層保證；資料與內部 MOS reward 不可完全復現；與專有系統比較依賴當下 API 版本；日文/JPOP 細分表現未單獨拆開；Melody-CoT 與 render 的消融細節需讀全文。</p>
+              </section>
+              <section class="detail-section" data-standard-section="editor-note">
+                <h3>Editor Note</h3>
+                <p>繼 HeartMuLa、SegTune 後又一「全曲+人聲」工業級報告；Melody-CoT 與 GSPO 兩點對 MeanAudio 的 reward alignment 最可遷移。digest 讀者若只關心 karaoke-jp，可當「生成端對手盤」：你的轉譜/對齊要能吃這種模型吐出的歌。</p>
+              </section>
+              <section class="detail-section" data-standard-section="metadata">
+                <h3>Metadata</h3>
+                <dl class="meta-list">
+                  <div><dt>Authors</dt><dd>Jin Xu, Kangdi Wang, Ruibin Yuan, Shun Lei, Xiong Wang 等 27 位</dd></div>
+                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2607.11699">arxiv.org/abs/2607.11699</a></dd></div>
+                  <div><dt>Relevance</dt><dd>MeanAudio 5 / karaoke 2 · max 5</dd></div>
+                </dl>
+              </section>
+            </div>
+          </div>
+        </article>
+    
+      </div>
+    </section>
+
+    <section class="repo-pick" aria-label="GitHub pick">
+      <div class="repo-eyebrow">GitHub pick of the day</div>
+      <h2><a href="https://github.com/ptnghia-j/ChordMiniApp" target="_blank" rel="noopener">ptnghia-j/ChordMiniApp</a></h2>
+      <div class="repo-meta"><span class="tag">★ 345</span><span class="tag">更新 2026-07-14</span><span class="tag">chord recognition</span><span class="tag">lyrics transcription</span><span class="tag">beat tracking</span></div>
+      <p>開源音樂分析 Web：上傳音訊或 YouTube，做和弦辨識、拍點追蹤、吉他/鋼琴可視化與歌詞轉錄，並可接 context-aware LLM 做分析；TypeScript 全端。</p>
+      <p><strong>為什麼相關:</strong>karaoke-jp 需要「和弦+拍+歌詞時間」的整合前端；ChordMiniApp 345 星且 7/14 仍在更新，可當 pipeline 的 UI/分析參考，補今天論文 1（MIDI 評測）之外的和弦與歌詞層。</p>
+      <div class="card-actions">
+        <a class="source-link" href="https://github.com/ptnghia-j/ChordMiniApp" target="_blank" rel="noopener">Open Repo &#8599;</a>
+      </div>
+    </section>
+    
+    <details class="footnote">
+      <summary>閱讀順序與篩選原則</summary>
+      <div class="footnote-body">
+        <span><strong>1.</strong> 近期主線:Music Flamingo、歌詞辨識、JPOP、卡拉 OK 與 karaoke-jp。</span>
+        <span><strong>2.</strong> 生成主線仍保留:text-to-audio/music、flow、caption、codec、評估與 reward alignment。</span>
+        <span><strong>3.</strong> 只收高品質:新穎度、重要性、baseline、資料與可落地性一起看。</span>
+      </div>
+    </details>
+  </main>
+  <footer>Generated by the MIR digest automation · Product standard 2026-05-26 · 2187e8b96f · 2026-07-15 09:01:54 Asia/Taipei</footer>
+  <script>
+
+    const cards = Array.from(document.querySelectorAll('.paper-card'));
+    const RATINGS_KEY = 'mir-ratings';
+    function loadRatings() {
+      try { return JSON.parse(localStorage.getItem(RATINGS_KEY)) || {}; } catch { return {}; }
+    }
+    function saveRating(paperId, value) {
+      const ratings = loadRatings();
+      if (value === 0) delete ratings[paperId];
+      else ratings[paperId] = value;
+      localStorage.setItem(RATINGS_KEY, JSON.stringify(ratings));
+    }
+    function applyStars(widget, filled) {
+      widget.querySelectorAll('button[data-value]').forEach(btn => {
+        const value = parseInt(btn.dataset.value);
+        btn.classList.toggle('filled', value <= filled);
+        btn.classList.remove('preview');
+      });
+      const card = widget.closest('.paper-card');
+      card.classList.toggle('is-rated', filled > 0);
+      card.classList.toggle('is-important', filled >= 3);
+    }
+    function initStarWidget(widget) {
+      const paperId = widget.dataset.paperId;
+      applyStars(widget, loadRatings()[paperId] || 0);
+      const buttons = widget.querySelectorAll('button[data-value]');
+      buttons.forEach(btn => {
+        btn.addEventListener('mouseenter', () => {
+          const value = parseInt(btn.dataset.value);
+          buttons.forEach(b => {
+            const other = parseInt(b.dataset.value);
+            b.classList.remove('filled');
+            b.classList.toggle('preview', other <= value);
+          });
+        });
+        btn.addEventListener('click', () => {
+          const value = parseInt(btn.dataset.value);
+          const previous = loadRatings()[paperId] || 0;
+          const next = previous === value ? 0 : value;
+          saveRating(paperId, next);
+          applyStars(widget, next);
+        });
+      });
+      widget.addEventListener('mouseleave', () => {
+        applyStars(widget, loadRatings()[paperId] || 0);
+      });
+    }
+    document.querySelectorAll('.star-rating').forEach(initStarWidget);
+    function toggleCard(card) {
+      const isOpen = card.classList.toggle('is-open');
+      const btn = card.querySelector('.details-toggle');
+      btn.setAttribute('aria-expanded', String(isOpen));
+      btn.textContent = isOpen ? '收合' : '展開摘要與實驗建議';
+    }
+    document.querySelectorAll('.details-toggle').forEach(btn => {
+      btn.addEventListener('click', () => toggleCard(btn.closest('.paper-card')));
+    });
+    document.querySelectorAll('.paper-card-body').forEach(body => {
+      body.addEventListener('click', event => {
+        if (event.target.closest('a, button, input, .card-actions, .star-rating')) return;
+        toggleCard(body.closest('.paper-card'));
+      });
+    });
+    document.querySelectorAll('.paper-nav-list a').forEach(link => {
+      link.addEventListener('click', event => {
+        event.preventDefault();
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          target.style.borderColor = 'var(--accent)';
+          target.style.boxShadow = '0 0 0 4px var(--accent-tint)';
+          setTimeout(() => {
+            target.style.borderColor = '';
+            target.style.boxShadow = '';
+          }, 1500);
+        }
+      });
+    });
+
+  </script>
+</body>
+</html>

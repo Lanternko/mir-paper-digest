@@ -1,0 +1,118 @@
+{
+  "date": "2026-07-15",
+  "papers": [
+    {
+      "slot": 1,
+      "track": "karaoke_jp",
+      "title": "MulTTiPop: A Multitrack Transcription Dataset for Pop Music",
+      "authors": [
+        "Nathan Pruyne",
+        "Benjamin Stoler",
+        "William Chen",
+        "Chien-yu Huang",
+        "Shinji Watanabe",
+        "Chris Donahue"
+      ],
+      "published": "2026-07-09",
+      "updated": "2026-07-09",
+      "source_url": "https://arxiv.org/abs/2607.08756",
+      "arxiv_id": "2607.08756",
+      "doi": "",
+      "tags": [
+        "music transcription",
+        "MIDI/score",
+        "evaluation"
+      ],
+      "quality": "新且重要",
+      "tldr": "CMU 開源流行曲多軌轉譜評測集：572 段、3.5 小時商業音訊對齊多軌 MIDI；MT3/YourMT3+ 在真實流行混音上 Onset F1 仍只有約 30–38%，暴露合成訓練的領域落差。",
+      "insight": "洞見:昨天 MuScriptor 證明「真實混音轉譜」需要資料與 RL；今天 MulTTiPop 把評測尺子釘在商業流行曲上——只靠 Slakh 合成訓練的 MT3 系在真實 YouTube pop 上幾乎半殘（Onset F1 約三成）。對 karaoke-jp 的啟示：mora-to-note / 全曲 MIDI baseline 不該再只報 MusicNet/Slakh；至少用 MulTTiPop 的 dev/test 測一輪，並區分 exact 樂器標籤與 harmonic-percussive 粗粒度。",
+      "try_next": "可做:下載 HF gclef-cmu/multtipop 的 MIDI+metadata，對日文流行曲先不做訓練只做評測；把 MuScriptor medium 與 YourMT3+ 的 onset F1（±50ms）並排，若 exact 樂器分很低，改報 harmonic-percussive 或先人聲分離再轉譜。",
+      "problem": "多樂器 AMT 已從鋼琴走向流行混音，但缺乏「商業流行曲音訊 + 時間對齊多軌 MIDI」的公開評測集：Slakh 是合成、TheoryTab 只有弱對齊旋律/和弦、RWC-Pop 規模與多樣性有限，導致模型在真實 pop 上的失敗難以系統量化。",
+      "method": "TheoryTab 段（YouTube 時間戳）與 Lakh LMD-matched 多軌 MIDI 做 metadata 近似比對 → madmom 拍點追蹤 + 錨定拍（anchor beat）時間扭曲對齊 → chroma/onset 與 melody/YouTube 時間等候選 → 6 名人工聽寫選正確錨點。僅釋出對齊 MIDI 與 YouTube ID/時間戳，建議只取片段、只用評測。",
+      "data": "572 段（約 3.5 小時）、374 首、263 藝人；平均段長約 22 秒、約 583 個 MIDI note。dev/test 約 7:3 且藝人不相交（dev 169 段 / test 403 段）。年代跨 1930s–2000s（LMD 限制無 2010 後）。HF: gclef-cmu/multtipop（CC-BY 4.0）；預覽站 gclef-cmu.org/multtipop 含 MT3/YourMT3+/MuScriptor 對照。",
+      "findings": "SOTA 開源多軌模型在 MulTTiPop 上遠未飽和：論文報告最佳 Onset F1 約 38%；MT3 與 YourMT3+ 在 exact / harmonic-percussive 設定下大致三成出頭，彼此差距遠小於在合成/古典基準上的落差。質性：能抓調性與和弦走向，但密織編曲常支離、樂器 program 不一致、人聲線偶可追但和聲層缺失。旋律匹配候選相對純 chroma 大幅提高錨點成功率（約 2%→32%）。",
+      "limitations": "規模小且作者明確禁止當訓練集（版權商業音訊）；西方/HookTheory 用戶偏差；無 2010 後曲目；對齊失敗率高（約半數候選被拒）；僅兩家開源 AMT 數字報告；日文 JPOP 覆蓋未知。",
+      "editor_note": "與昨日 MuScriptor 成對：一邊是可跑權重，一邊是真實 pop 評測尺。preview 已掛 MuScriptor 轉譜對照，digest 讀者可直接聽差距。karaoke-jp 若要做 mora-to-note / score，MulTTiPop 是目前最該先接上的 commercial multitrack 測試集。",
+      "relevance": {
+        "mean_audio": 1,
+        "karaoke_jp": 5
+      }
+    },
+    {
+      "slot": 2,
+      "track": "mean_audio",
+      "title": "Qwen-Music Technical Report",
+      "authors": [
+        "Jin Xu",
+        "Kangdi Wang",
+        "Ruibin Yuan",
+        "Shun Lei",
+        "Xiong Wang",
+        "Xize Cheng",
+        "Xueyao Zhang",
+        "Yang Zhang",
+        "Yiheng Chen",
+        "Yongqi Wang",
+        "Yue Wang",
+        "Zhifang Guo",
+        "Zihan Liu",
+        "Zijian Lin",
+        "Dake Guo",
+        "Hangrui Hu",
+        "Lei Xie",
+        "Linhan Ma",
+        "Wei Xue",
+        "Wenxiang Guo",
+        "Xinfa Zhu",
+        "Xipin Wei",
+        "Yangze Li",
+        "Yuanjun Lv",
+        "Yuxuan Wang",
+        "Yunfei Chu",
+        "Zhiyong Wu"
+      ],
+      "published": "2026-07-13",
+      "updated": "2026-07-13",
+      "source_url": "https://arxiv.org/abs/2607.11699",
+      "arxiv_id": "2607.11699",
+      "doi": "",
+      "tags": [
+        "text-to-music",
+        "codec/tokenizer",
+        "reward alignment"
+      ],
+      "quality": "新且重要",
+      "tldr": "Qwen 隊完整歌曲生成系統：25Hz 單碼本語義 token + Melody-CoT + DiT 立體聲 render；>500 萬小時多語料、SFT→DPO→GSPO；在 16 項客觀指標中 13 項 SOTA，盲測可壓過多家專有系統。",
+      "insight": "洞見:MeanAudio 路線又被「語義壓縮 + 旋律先規劃 + 生成式 render + 分階段 preference」重寫一遍——重點不是再堆一個 flow，而是 (1) 25Hz 單流語義 token 讓 33B LLM 可做全曲結構；(2) Melody-CoT 把旋律當 intermediate，統一 text-to-song 與 cover；(3) post-training 用內部 musicality MOS + 指令跟隨 reward 跑 offline DPO 再 online GSPO。對齊 MADB/SongEval 那條：reward 模型本身就是系統的一部分。",
+      "try_next": "可做:對照 HeartMuLa/LeVo 的 token rate 與 post-training 階段，在 MeanAudio 實驗裡把「旋律骨架 token」當額外條件試 cover/clone；評估時除 CLAP 外接 SongEval/SongBench 多維與 PER（歌詞可懂度），避免只看單一 embedding 相似度。",
+      "problem": "完整帶人聲歌曲生成要同時處理歌詞、旋律、結構、演唱與伴奏，且在語意規劃與波形保真之間落差巨大：離散 token LM 可做長程結構但失真，直接波形模型又難控歌詞/風格；cover 還要求保留參考旋律同時改編曲與音色。",
+      "method": "三件套：Tokenizer（0.6B Conformer，BestRQ→causal→CTC/Mel/chroma SFT→VQ，25Hz、32k codebook、約 375 bit/s）→ LLM（33B Qwen3.5-Omni 系 AR，Melody-CoT：RMVPE→6.25Hz 相對 MIDI 旋律 token 先規劃再生成全曲語義 token）→ Render（語義條件 DiT flow matching 出 latent + Spec-VAE + Band-Mode Refiner→48kHz stereo）。訓練：品質分桶課程（Q1–Q6）pretrain + SFT cold start + 迭代 offline DPO + online GSPO。",
+      "data": "逾 500 萬小時多語音樂；按類型內 percentile 分七品質桶、去掉最差 Q7；含約 20% 器樂以強化伴奏。Render 另用 acoustic quality pipeline 過濾假 lossless/假立體聲/高頻截斷。評估：600 中英 prompt；SongBench/SongEval/AudioBox-Aesthetic；歌詞 PER；tag following；cover 的 Melody MAE；專業聽者盲測 vs Suno/MiniMax/Mureka。",
+      "findings": "Text-to-music 在 16 項客觀指標中 13 項最佳；專業 A/B 勝率：vs MiniMax 2.5+ 59.1%、2.6 66.7%、Mureka V8 58.3%、Suno V5 55.4%，與 Suno V5.5 約 50.3% 互有勝負。Cover：AI 參考集上旋律保留優於 Suno V5.5/V5 與 MiniMax Cover；真實流行參考集多數指標勝過 MiniMax Cover。外部 Artificial Analysis 人聲音樂榜以 JazzCat 名次進入前列。",
+      "limitations": "技術報告，權重/推論碼是否完整開源未在摘要層保證；資料與內部 MOS reward 不可完全復現；與專有系統比較依賴當下 API 版本；日文/JPOP 細分表現未單獨拆開；Melody-CoT 與 render 的消融細節需讀全文。",
+      "editor_note": "繼 HeartMuLa、SegTune 後又一「全曲+人聲」工業級報告；Melody-CoT 與 GSPO 兩點對 MeanAudio 的 reward alignment 最可遷移。digest 讀者若只關心 karaoke-jp，可當「生成端對手盤」：你的轉譜/對齊要能吃這種模型吐出的歌。",
+      "relevance": {
+        "mean_audio": 5,
+        "karaoke_jp": 2
+      }
+    }
+  ],
+  "repo": {
+    "full_name": "ptnghia-j/ChordMiniApp",
+    "url": "https://github.com/ptnghia-j/ChordMiniApp",
+    "description_zh": "開源音樂分析 Web：上傳音訊或 YouTube，做和弦辨識、拍點追蹤、吉他/鋼琴可視化與歌詞轉錄，並可接 context-aware LLM 做分析；TypeScript 全端。",
+    "stars": 345,
+    "updated": "2026-07-14",
+    "why": "karaoke-jp 需要「和弦+拍+歌詞時間」的整合前端；ChordMiniApp 345 星且 7/14 仍在更新，可當 pipeline 的 UI/分析參考，補今天論文 1（MIDI 評測）之外的和弦與歌詞層。",
+    "tags": [
+      "chord recognition",
+      "lyrics transcription",
+      "beat tracking"
+    ]
+  },
+  "discord_messages": [
+    "# 每日 MIR 論文精選 - 2026-07-15\n🌐 完整報告:https://lanternko.github.io/mir-paper-digest/reports/2026-07-15.html\n\n**論文 1｜MulTTiPop: A Multitrack Transcription Dataset for Pop Music**\n🔗 https://arxiv.org/abs/2607.08756\n🎯 主線:karaoke-jp（多軌 MIDI 評測）｜CMU，Donahue / Watanabe\n\n**TLDR**:572 段商業流行曲（3.5h）對齊多軌 MIDI 的公開評測集；MT3/YourMT3+ 在真實 pop 上 Onset F1 仍只有約 30–38%，遠低於合成/古典基準。\n\n**為什麼選它**:昨天 MuScriptor 給了可跑權重，今天 MulTTiPop 給了該用的尺子——訓練若只在 Slakh 合成上好看，商業 YouTube pop 一上就崩。TheoryTab×Lakh 對齊 + 人工選錨定拍，只釋 MIDI/metadata、明確禁止當訓練集。對 karaoke-jp：mora-to-note / 全曲轉譜至少要在這個 test 上報數。\n\n**注意**:規模小、西方偏差、無 2010 後曲；日文 JPOP 覆蓋未知。\n\n**下一步**:HF `gclef-cmu/multtipop` 下載，MuScriptor vs YourMT3+ 並排 onset F1；必要時先分離再轉譜。",
+    "**論文 2｜Qwen-Music Technical Report**\n🔗 https://arxiv.org/abs/2607.11699\n🎯 主線:MeanAudio（text-to-music + codec + reward）｜Qwen Team，7/13 上架\n\n**TLDR**:25Hz 單碼本語義 token + Melody-CoT 旋律先規劃 + DiT 立體聲 render；>500 萬小時；SFT→offline DPO→online GSPO；16 項指標 13 項 SOTA，盲測可壓 MiniMax/Mureka/Suno V5。\n\n**為什麼選它**:完整「帶人聲全曲」工業報告：壓縮表示、旋律 intermediate、生成式 render、分階段 preference 一次講完。Melody-CoT 統一 text-to-song 與 cover；post-training 的 musicality MOS + 指令 reward 直接接上 MADB/SongEval 那條評估主線。\n\n**注意**:技術報告，開源範圍需自行核對；內部 reward/資料不可完全復現。\n\n**下一步**:MeanAudio 實驗可試「旋律骨架 token」當 cover 條件；評估加 SongEval 多維與歌詞 PER，別只盯 CLAP。",
+    "**GitHub Pick｜ptnghia-j/ChordMiniApp** ⭐345｜最近更新 2026-07-14\n🔗 https://github.com/ptnghia-j/ChordMiniApp\n\n音樂分析應用：和弦、拍點、吉他/鋼琴可視化、歌詞轉錄，支援上傳與 YouTube，可接 LLM 分析。\n\n**為什麼選它**:karaoke-jp 的和弦/拍/歌詞層整合前端參考；與今日多軌 MIDI 評測互補。\n\n## 今天的 take-away\n- 真實流行多軌轉譜仍未解：公開 SOTA 在 MulTTiPop 上 Onset F1 約三成，評測必須離開純合成集（MulTTiPop）。\n- 全曲生成的可遷移配方：語義 token + 旋律 CoT + DiT render + DPO/GSPO（Qwen-Music）。\n- 工程上可並行：MuScriptor/MulTTiPop 測轉譜，ChordMiniApp 管和弦與歌詞時間軸。"
+  ]
+}

@@ -133,3 +133,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-07-14,1,paper,karaoke_jp,MuScriptor: An Open Model for Multi-Instrument Music Transcription,https://arxiv.org/abs/2607.08168,2607.08168,music transcription|MIDI/score|reward alignment,新且重要
 2026-07-14,2,paper,mean_audio,MADB: A Large-Scale Music Aesthetics Dataset with Professional and Multi-Dimensional Annotations,https://arxiv.org/abs/2607.06929,2607.06929,evaluation|caption/data|reward alignment,新且重要
 2026-07-14,0,repo,github,muscriptor/muscriptor,https://github.com/muscriptor/muscriptor,,music transcription|MIDI|karaoke,
+2026-07-15,1,paper,karaoke_jp,MulTTiPop: A Multitrack Transcription Dataset for Pop Music,https://arxiv.org/abs/2607.08756,2607.08756,music transcription|MIDI/score|evaluation,新且重要
+2026-07-15,2,paper,mean_audio,Qwen-Music Technical Report,https://arxiv.org/abs/2607.11699,2607.11699,text-to-music|codec/tokenizer|reward alignment,新且重要
+2026-07-15,0,repo,github,ptnghia-j/ChordMiniApp,https://github.com/ptnghia-j/ChordMiniApp,,chord recognition|lyrics transcription|beat tracking,
