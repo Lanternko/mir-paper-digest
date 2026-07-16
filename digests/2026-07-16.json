@@ -1,0 +1,94 @@
+{
+  "date": "2026-07-16",
+  "papers": [
+    {
+      "slot": 1,
+      "track": "karaoke_jp",
+      "title": "Teaching Speech Enhancement Models to Sing: Domain Adaptation from Speech Enhancement to Singing Voice Separation",
+      "authors": [
+        "Paul A. Bereuter",
+        "Mark D. Plumbley",
+        "Alois Sontacchi"
+      ],
+      "published": "2026-07-13",
+      "updated": "2026-07-13",
+      "source_url": "https://arxiv.org/abs/2607.11630",
+      "arxiv_id": "2607.11630",
+      "doi": "",
+      "tags": [
+        "source separation",
+        "singing voice",
+        "domain adaptation"
+      ],
+      "quality": "新且重要",
+      "tldr": "把唱聲分離當「語音增強→唱聲」的領域適應：在判別式與生成式 SE 上做 full FT 與 LoRA；比同架構從頭訓高 0.29–1.8 dB SDR，LoRA 以 6–12% 參數保住原 SE 能力。",
+      "insight": "洞見:karaoke-jp 的人聲分離長期卡在「唱聲標註少、語音資料多」——這篇直接把 SOTA speech enhancement 當預訓練，再適配到 singing voice separation。Full FT 分離最好但會 catastrophic forgetting；LoRA 幾乎持平且保留語音能力，對要同時處理對話/朗讀與 JPOP 人聲的 pipeline 更務實。生成式模型在未見測試集泛化更好，暗示資料稀缺時先借語音先驗再適配。",
+      "try_next": "可做:用現成 SE 權重（判別/生成各一）+ LoRA 在公開唱聲分離集（如 MUSDB 人聲軌或日文人聲子集）上適配，與 Demucs/htdemucs 基線並排 SDR/SI-SDR；若 JPOP 混響與和聲重，優先試生成式 backbone 的跨域泛化。",
+      "problem": "唱聲分離標註遠少於語音增強：直接在小規模歌唱資料上從頭訓練易欠擬合；語音與歌唱在音高、和聲、混響與音色上又有領域落差，無法直接當同一任務。",
+      "method": "將 singing voice separation 形式化為 speech enhancement 的 domain adaptation。對判別式與生成式兩類 SE 模型比較：(1) full fine-tuning；(2) LoRA 參數高效適配（約 6–12% 額外參數）。以 SDR 評估分離，並檢查適配後是否破壞原語音增強能力（catastrophic forgetting）。",
+      "data": "論文以語音增強預訓練資源為起點，再於唱聲分離資料上 fine-tune；並報告未見測試集泛化。摘要層未給完整語料清單，細節需讀 IWAENC 全文與補充材料。",
+      "findings": "兩種適配策略都勝過同架構從頭訓練，SDR 提升 0.29–1.8 dB。Full fine-tuning 唱聲分離最高，但語音增強明顯退化；LoRA 唱聲分離接近 full FT，且幾乎保留原 SE 性能。生成式模型對未見測試集泛化較好。結論：資料稀缺時，適配預訓練 SE 是有效路徑。",
+      "limitations": "IWAENC 短文，摘要未列完整資料集名稱、基線與超參；日文/JPOP 人聲是否涵蓋未知；與 Demucs 等音樂專用分離器的直接對照需讀全文；生成式 vs 判別式的工程延遲未在摘要層報告。",
+      "editor_note": "對 karaoke-jp 是「分離前端」可直接試的方法論：不必等更大唱聲集，先借語音 SE 再 LoRA。與今日 GitHub pick（Demucs 分離 + 對齊）可串：LoRA-SE 當替代 stem 後端，對齊與 pitch 管線不變。",
+      "relevance": {
+        "mean_audio": 1,
+        "karaoke_jp": 5
+      }
+    },
+    {
+      "slot": 2,
+      "track": "mean_audio",
+      "title": "Genre Bias or Aesthetic Perception? Identifying and Mitigating Shortcut Learning in Music Evaluation",
+      "authors": [
+        "Yizhou Zhang",
+        "Wangjin Zhou",
+        "Yi Zhao",
+        "Wei Tan",
+        "Keisuke Imoto",
+        "Zhi Gong"
+      ],
+      "published": "2026-07-15",
+      "updated": "2026-07-15",
+      "source_url": "https://arxiv.org/abs/2607.13903",
+      "arxiv_id": "2607.13903",
+      "doi": "",
+      "tags": [
+        "reward alignment",
+        "music evaluation",
+        "aesthetics"
+      ],
+      "quality": "新且重要",
+      "tldr": "揭 SongEval 系美學模型的曲風捷徑：訓練偏差讓 pop 被系統高估、其他曲風高品質樣本被低估；提出 hard-sample 重權 + group 正則，改善跨曲風與曲風內人耳偏好對齊。",
+      "insight": "洞見:繼 MADB、Qwen-Music 把 musicality reward 推到生成系統中心後，這篇問更狠的問題——你的美學分數是在聽「好不好聽」還是在認「像不像 pop」？SongEval 分析顯示 genre 特徵與分數高度相關，模型用曲風當 aesthetics 代理，導致偏好與人類不一致。對 MeanAudio 的 reward alignment：DPO/GSPO 若 reward 本身有 genre shortcut，會把生成器鎖在 pop-like 模式；必須測 cross-genre 與 within-genre 對齊，不能只報整體相關。",
+      "try_next": "可做:在 MeanAudio 評估管線對 SongEval/內部 MOS reward 做 genre-stratified 診斷；若 pop 系統高估，試 paper 的 hard reweight + group-level regularizer 再訓練 reward，或至少在 preference 資料做 genre-balanced 採樣後重跑 DPO。",
+      "problem": "音樂美學評分用於資料篩選、生成評估與 reward model，但深度模型可能學到虛假相關而非感知上有意義的 musicality。曲風誘導的 shortcut learning 此前被低估。",
+      "method": "系統分析 SongEval：量化 genre 相關特徵與預測分數的相關，展示 pop 被高估、其他曲風被低估。提出聯合目標：對 hard samples 重權重，並以 group-level performance 正則，促使學習 genre-invariant 的 musicality 表徵。以跨曲風與曲風內偏好對齊評估。",
+      "data": "以 SongEval 及相關人耳美學標註為分析與實驗基礎（ISMIR 2026）。摘要強調訓練資料偏差導致 genre 與分數耦合；完整分割與基線見全文。",
+      "findings": "確認 genre-induced shortcut：模型把曲風當美學代理，系統高估 pop、低估其他曲風高品質樣本，預測與人類偏好不一致。提出的 reweight + group regularizer 降低曲風依賴偏誤，並在 cross-genre 與 within-genre preference alignment 上改善。",
+      "limitations": "分析主軸在 SongEval 生態；其他美學模型/MADB 是否同樣 shortcut 需外推驗證；日文/JPOP 曲風分桶未單獨報告；方法是否可直接 plug-in 到工業級 GSPO reward 尚未在摘要層證明。",
+      "editor_note": "昨天 Qwen-Music 用內部 MOS + 指令 reward 做 DPO/GSPO；今天這篇是 reward 側的紅隊報告。MeanAudio 若只追「整體 SongEval 更高」可能在放大 pop bias——digest 讀者應把 genre-stratified 對齊當 reward 必做項。",
+      "relevance": {
+        "mean_audio": 5,
+        "karaoke_jp": 1
+      }
+    }
+  ],
+  "repo": {
+    "full_name": "walterfr/UltraStarKaraokeMaker",
+    "url": "https://github.com/walterfr/UltraStarKaraokeMaker",
+    "description_zh": "本機 UltraStar 卡拉 OK 包生成器：你提供已知歌詞，用 WhisperX+Demucs 做 forced alignment、pitch/BPM 與元數據，輸出可玩套件；Tauri+Rust+Python，Windows，PT/EN。",
+    "stars": 8,
+    "updated": "2026-07-16",
+    "why": "karaoke-jp 的核心是「已知歌詞→時間軸」而非從頭 ASR：USKMaker 明確走 forced alignment（Whisper 錨點 + fuzzy 對齊 + wav2vec2 窗口再對齊 + 音節插值），並串 Demucs 分離與 pitch/BPM，是可對照的端到端參考。7 月初建、今日仍更新，與論文 1 的分離適配可並讀。",
+    "tags": [
+      "forced alignment",
+      "karaoke",
+      "source separation"
+    ]
+  },
+  "discord_messages": [
+    "# 每日 MIR 論文精選 - 2026-07-16\n🌐 完整報告:https://lanternko.github.io/mir-paper-digest/reports/2026-07-16.html\n\n**論文 1｜Teaching Speech Enhancement Models to Sing**\n🔗 https://arxiv.org/abs/2607.11630\n🎯 主線:karaoke-jp（人聲分離／領域適應）｜Bereuter / Plumbley / Sontacchi，IWAENC 2026\n\n**TLDR**:唱聲分離資料少→把語音增強當預訓練再適配。Full FT 與 LoRA 都勝過從頭訓（+0.29–1.8 dB SDR）；LoRA 僅 6–12% 參數且保住原 SE 能力，生成式模型泛化更好。\n\n**為什麼選它**:karaoke-jp 人聲分離不必等更大唱聲集——借語音 SE 先驗再 domain adapt 是務實捷徑。Full FT 最高分但會忘語音；LoRA 更適合「語音+歌唱」共用管線。\n\n**注意**:短文，日文/JPOP 覆蓋與 vs Demucs 細節需讀全文。\n\n**下一步**:SE 權重 + LoRA 在唱聲集上適配，對 Demucs 基線報 SI-SDR。",
+    "**論文 2｜Genre Bias or Aesthetic Perception?**\n🔗 https://arxiv.org/abs/2607.13903\n🎯 主線:MeanAudio（reward / 美學評估）｜ISMIR 2026，7/15 上架\n\n**TLDR**:SongEval 系美學模型會把曲風當捷徑——系統高估 pop、低估其他曲風高品質樣本。作者用 hard-sample 重權 + group 正則推 genre-invariant musicality，改善跨曲風與曲風內人耳對齊。\n\n**為什麼選它**:昨天 Qwen-Music 把 DPO/GSPO 建在 musicality reward 上；今天這篇是 reward 紅隊——若分數其實在認「像不像 pop」，preference 訓練會鎖死生成風格。MeanAudio 評估必須加 genre-stratified 診斷。\n\n**注意**:主分析在 SongEval；是否遷移到 MADB/工業 reward 需驗證。\n\n**下一步**:對現有 reward 做曲風分層；必要時 reweight 或平衡 preference 資料後重跑 DPO。",
+    "**GitHub Pick｜walterfr/UltraStarKaraokeMaker** ⭐8｜最近更新 2026-07-16\n🔗 https://github.com/walterfr/UltraStarKaraokeMaker\n\n本機 UltraStar 卡拉 OK 生成：已知歌詞 + WhisperX forced alignment + Demucs 分離 + pitch/BPM，輸出可玩套件（Tauri/Windows）。\n\n**為什麼選它**:問題定義正確——對齊已知歌詞而非盲轉寫；pipeline 與 karaoke-jp 的分離/對齊/pitch 直接對照。\n\n## 今天的 take-away\n- 人聲分離可借語音 SE 預訓練再 LoRA，不必只靠音樂專用小資料從頭訓（2607.11630）。\n- 美學/reward 模型要防 genre shortcut，否則 DPO 會把生成鎖在 pop-like（2607.13903）。\n- 工程參考：已知歌詞 forced alignment 卡拉 OK 管線（UltraStarKaraokeMaker）。"
+  ]
+}
