@@ -139,3 +139,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-07-16,1,paper,karaoke_jp,Teaching Speech Enhancement Models to Sing: Domain Adaptation from Speech Enhancement to Singing Voice Separation,https://arxiv.org/abs/2607.11630,2607.11630,source separation|singing voice|domain adaptation,新且重要
 2026-07-16,2,paper,mean_audio,Genre Bias or Aesthetic Perception? Identifying and Mitigating Shortcut Learning in Music Evaluation,https://arxiv.org/abs/2607.13903,2607.13903,reward alignment|music evaluation|aesthetics,新且重要
 2026-07-16,0,repo,github,walterfr/UltraStarKaraokeMaker,https://github.com/walterfr/UltraStarKaraokeMaker,,forced alignment|karaoke|source separation,
+2026-07-17,1,paper,karaoke_jp,Adapting Diffusion-Based Music Synthesis to Speech and Singing Voice Conversion,https://arxiv.org/abs/2607.13278,2607.13278,singing voice|voice conversion|pitch control,新且重要
+2026-07-17,2,paper,mean_audio,FdAudio: MeanFlow-Anchored Fréchet-Distance Post-Training for One-Step Text-to-Audio Generation,https://arxiv.org/abs/2607.10421,2607.10421,text-to-audio|flow matching|FAD,新且重要
+2026-07-17,0,repo,github,Kdroidwin/CTCLRC,https://github.com/Kdroidwin/CTCLRC,,forced alignment|LRC|karaoke,

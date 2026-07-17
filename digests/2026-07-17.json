@@ -1,0 +1,96 @@
+{
+  "date": "2026-07-17",
+  "papers": [
+    {
+      "slot": 1,
+      "track": "karaoke_jp",
+      "title": "Adapting Diffusion-Based Music Synthesis to Speech and Singing Voice Conversion",
+      "authors": [
+        "Ben Maman",
+        "Frank Zalkow",
+        "Hans-Ulrich Berendes",
+        "Paolo Sani",
+        "Christian Dittmar",
+        "Meinard Müller"
+      ],
+      "published": "2026-07-14",
+      "updated": "2026-07-16",
+      "source_url": "https://arxiv.org/abs/2607.13278",
+      "arxiv_id": "2607.13278",
+      "doi": "",
+      "tags": [
+        "singing voice",
+        "voice conversion",
+        "pitch control"
+      ],
+      "quality": "新且重要",
+      "tldr": "把多樂器音樂 diffusion 模型改造成統一語音／唱聲轉換：以 PPG + pitch 取代音符條件、用 FiLM 當 singer identity；自然度與相似度追上專用 VC，且 pitch 可控，但音素保真與混訓樂器會傷唱聲品質。",
+      "insight": "洞見:karaoke-jp 長期在「唱聲 pitch 可控 + 身份保留 + 不必從零訓音樂生成器」之間拉扯——這篇直接把音樂合成 diffusion 的 note/timbre 條件改成 PPG/pitch/FiLM singer，證明跨域轉移可行。重點不在又一個 VC，而在：現成 off-the-shelf 特徵就能自監督大規模訓練，且 pitch 在語音與唱聲都準。限制也誠實：音素保真不足、加入樂器資料會拉垮人聲，對 JPOP 卡拉 OK 後端「只換音色、歌詞要咬字清楚」仍需額外對齊或 ASR 約束。",
+      "try_next": "可做:用公開 PPG + f0 特徵適配現有音樂 diffusion 權重，在日文唱聲小集上測 singer similarity / pitch RMSE / intelligibility（WER 或假名對齊）；對照「純唱聲微調」vs「混入樂器」是否如文所述劣化，決定 karaoke-jp 是否該隔離音樂軌道訓練。",
+      "problem": "擴散式生成在語音、唱聲、器樂各自表現強，但模型通常領域特化，難以處理混合或中間型音訊；語音與唱聲轉換需要兼顧身份、音素與 pitch，卻又希望借用音樂合成的生成先驗。",
+      "method": "將多樂器音樂 diffusion 適配到統一語音／唱聲轉換：音符條件擴充為 phonetic posteriorgrams（PPG）與 pitch contour；音色條件改以 feature-wise linear modulation（FiLM）編碼 speaker/singer identity。比較與專用 VC 的自然度、表演者相似度與 pitch 控制，並檢驗現成特徵抽取器是否足以支撐大規模自監督訓練。",
+      "data": "實驗涵蓋語音與唱聲轉換設定；以現成 PPG/pitch 等特徵做條件，避免大量手標。完整語料、基線與指標細節見 DAFx 2026 全文與專案頁 demo。",
+      "findings": "適配後模型在自然度與 performer similarity 上可匹配或超越專用 VC，並在語音與唱聲維持準確 pitch 控制。現成特徵抽取器可作為有效條件訊號，支援無手標的自監督訓練。但音素保真仍有限；混入器樂訓練資料會使唱聲品質下降。",
+      "limitations": "音素層保真不足會影響歌詞可懂度（卡拉 OK 關鍵）；器樂混訓的負遷移需工程上隔離；日文／JPOP 覆蓋與對現成 karaoke 管線的延遲未在摘要層報告；仍依賴上游 PPG/f0 品質。",
+      "editor_note": "對 karaoke-jp：把「音樂生成 backbone → 唱聲 VC」當可複製配方，優先驗證 pitch 可控與日文咬字；與昨日人聲分離適配可串成 分離→PPG/f0→VC 的換聲試驗。與 MeanAudio 也有弱連結：同一 diffusion 先驗跨語音／唱聲／音樂。",
+      "relevance": {
+        "mean_audio": 2,
+        "karaoke_jp": 5
+      }
+    },
+    {
+      "slot": 2,
+      "track": "mean_audio",
+      "title": "FdAudio: MeanFlow-Anchored Fréchet-Distance Post-Training for One-Step Text-to-Audio Generation",
+      "authors": [
+        "Kuan-Po Huang",
+        "Bo-Ru Lu",
+        "Ho-Lam Chung",
+        "Shih-Hsin Wang",
+        "Hung-yi Lee"
+      ],
+      "published": "2026-07-11",
+      "updated": "2026-07-11",
+      "source_url": "https://arxiv.org/abs/2607.10421",
+      "arxiv_id": "2607.10421",
+      "doi": "",
+      "tags": [
+        "text-to-audio",
+        "flow matching",
+        "FAD"
+      ],
+      "quality": "新且重要",
+      "tldr": "針對 MeanAudio 一階取樣品質落後多步：用多表徵 Fréchet distance 直接優化一階分佈，並以 MeanFlow consistency 當錨避免多步崩壞；相對 MeanAudio 基線 FD −11.4%、FAD −28.8%。",
+      "insight": "洞見:這是直接打在 MeanAudio 產品痛點上的 post-training 論文——few-step/one-step 很快，但一階品質明顯輸多步。作者不改架構，改用多 embedding 空間的 FD loss 對齊最終一階分佈，再用 MeanFlow consistency 當結構錨，解決「naive FD post-train 會毀掉多步路徑」的經典坑。對 MeanAudio：可把 FdAudio 當一階部署的必讀後訓練配方；評估也再次確認 FAD/FD 可當可微調目標，但昨天 genre shortcut 警告仍在——分佈距離下降≠跨曲風美學對齊。",
+      "try_next": "可做:在 MeanAudio 一階 checkpoint 上重現 multi-rep FD + MeanFlow anchor 後訓練，報 one-step 與 25-step 的 FAD/FD/CLAP；並做 genre-stratified 抽樣，確認改善不是只堆在高頻 pop-like 樣本。",
+      "problem": "MeanAudio 等以平均速度場建模的 few-step text-to-audio 大幅加速生成，但嚴格一階取樣品質仍明顯落後多步模型；僅靠速度場回歸難以拉近最終音訊分佈。",
+      "method": "提出 FdAudio post-training：在預訓練 embedding 空間以多表徵 Fréchet-distance（FD）loss 直接優化一階生成分佈；並引入 MeanFlow consistency objective 作為結構錨，防止 naive FD 後訓練破壞多步取樣路徑。與 MeanAudio 基線比較 FD、FAD 等指標。",
+      "data": "以 MeanAudio 框架為基線做 text-to-audio 實驗；報告相對基線的 FD/FAD 相對改善，以及 25-step 路徑與強多步模型的比較。完整資料集與超參見全文與專案站 https://fdoneaudio.github.io/。",
+      "findings": "FdAudio 在 few-step 系統中達到 SOTA 一階 T2A 品質：相對 MeanAudio 基線 FD 降 11.4%、FAD 改善 28.8%。MeanFlow anchor 解決 naive FD 後訓練的多步劣化，使 25-step 路徑仍能維持高保真，並以遠低延遲匹配或超越強多步模型。",
+      "limitations": "摘要聚焦 FD/FAD 分佈指標，指令遵循與語意細節未強調；是否遷移到 text-to-music／唱聲、以及 CLAP 語意對齊需外推；後訓練算力與可再現細節以全文為準。",
+      "editor_note": "MeanAudio 主線今日首選：名字就寫 MeanAudio。可與 7/16 genre-bias 論文並讀——FD/FAD 優化後仍應做跨曲風診斷；若要指令遵循再對照 2607.13408 的 ALLM fine-grained DPO。",
+      "relevance": {
+        "mean_audio": 5,
+        "karaoke_jp": 1
+      }
+    }
+  ],
+  "repo": {
+    "full_name": "Kdroidwin/CTCLRC",
+    "url": "https://github.com/Kdroidwin/CTCLRC",
+    "description_zh": "Windows GUI：給音訊 + 正確歌詞，用 CTC forced alignment 產出同步 LRC；面向本機卡拉 OK 字幕管線。",
+    "stars": 8,
+    "updated": "2026-07-06",
+    "why": "karaoke-jp 需要「已知歌詞→時間軸」而非盲 ASR：CTCLRC 把 CTC forced alignment 做成 Windows 可點即用的 LRC 工具，與昨日 UltraStarKaraokeMaker 同題但更輕、專攻字幕輸出。7 月初仍有 push，可當本機對齊基線。",
+    "tags": [
+      "forced alignment",
+      "LRC",
+      "karaoke"
+    ]
+  },
+  "discord_messages": [
+    "# 每日 MIR 論文精選 - 2026-07-17\n🌐 完整報告:https://lanternko.github.io/mir-paper-digest/reports/2026-07-17.html\n\n**論文 1｜Adapting Diffusion-Based Music Synthesis to Speech and Singing Voice Conversion**\n🔗 https://arxiv.org/abs/2607.13278\n🎯 主線:karaoke-jp（唱聲轉換／pitch）｜Müller 團隊，DAFx 2026；7/16 更新\n\n**TLDR**:把多樂器音樂 diffusion 改造成統一語音／唱聲 VC：PPG+pitch 當條件、FiLM 當 singer identity。自然度與相似度追上專用 VC，pitch 可控；但音素保真有限，混訓樂器會傷唱聲。\n\n**為什麼選它**:karaoke-jp 要 pitch 可控的換聲，不必從零訓生成器——這篇證明音樂合成 backbone 可跨域轉移，且 off-the-shelf 特徵就能自監督訓練。\n\n**注意**:歌詞可懂度與日文覆蓋需自測；器樂混訓有負遷移。\n\n**下一步**:日文唱聲小集上測 similarity / pitch RMSE / WER，對照是否隔離音樂軌道。",
+    "**論文 2｜FdAudio: MeanFlow-Anchored Fréchet-Distance Post-Training**\n🔗 https://arxiv.org/abs/2607.10421\n🎯 主線:MeanAudio（一階 T2A／FAD）｜Hung-yi Lee 團隊，7/11 上架\n\n**TLDR**:MeanAudio 一階品質落後多步→用多表徵 FD loss 直接優化一階分佈，並以 MeanFlow consistency 當錨避免多步崩壞。相對 MeanAudio：FD −11.4%、FAD −28.8%；25-step 仍高保真。\n\n**為什麼選它**:直接打在 MeanAudio 產品痛點——要速度又要品質。不改架構的 post-training 配方，且公開點名 MeanAudio 基線，可立即對照實驗。\n\n**注意**:FD/FAD 降不等於跨曲風美學或指令遵循都好（接昨天 genre bias）。\n\n**下一步**:在一階 checkpoint 重現 FD+MeanFlow anchor，並做 genre-stratified 報告。",
+    "**GitHub Pick｜Kdroidwin/CTCLRC** ⭐8｜最近更新 2026-07-06\n🔗 https://github.com/Kdroidwin/CTCLRC\n\nWindows GUI：音訊 + 正確歌詞 → CTC forced alignment → 同步 LRC，本機卡拉 OK 字幕工具。\n\n**為什麼選它**:問題定義正確（對齊已知歌詞而非盲轉寫）；與 karaoke-jp 的 LRC 渲染節點直接對接，比大型套件更輕。\n\n## 今天的 take-away\n- 音樂 diffusion 可改造成 pitch 可控的語音／唱聲 VC，但音素保真與器樂混訓是坑（2607.13278）。\n- MeanAudio 一階部署可用 multi-rep FD + MeanFlow anchor 後訓練拉品質，且保住多步路徑（2607.10421）。\n- 工程：Windows 上 CTC→LRC 的輕量對齊工具（CTCLRC）可當字幕基線。"
+  ]
+}
