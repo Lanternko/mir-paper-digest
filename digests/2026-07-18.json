@@ -1,0 +1,92 @@
+{
+  "date": "2026-07-18",
+  "papers": [
+    {
+      "slot": 1,
+      "track": "karaoke_jp",
+      "title": "MMGenre: Benchmarking Singing Voice Synthesis across Multiple Musical Genres",
+      "authors": [
+        "Wenhao Feng",
+        "Yuxun Tang",
+        "Jiatong Shi",
+        "Qin Jin"
+      ],
+      "published": "2026-07-08",
+      "updated": "2026-07-08",
+      "source_url": "https://arxiv.org/abs/2607.06986",
+      "arxiv_id": "2607.06986",
+      "doi": "10.48550/arXiv.2607.06986",
+      "tags": [
+        "singing voice synthesis",
+        "genre",
+        "benchmark"
+      ],
+      "quality": "新且重要",
+      "tldr": "提出 MMGenre 多曲風唱聲合成基準：10 大類、26 子類，附自動樂譜對齊建庫管線。現有 SVS 跨曲風辨識力弱、音色過度同質；zero-shot 改編有限，輕量曲風專用續訓才明顯提升。",
+      "insight": "洞見:karaoke-jp 若只在 pop/JPOP 切片上驗證唱聲合成或換聲，會誤以為「模型已夠泛」——MMGenre 用系統診斷證明：合成人聲跨曲風高度同質、可分性差。這與 7/16 genre-bias 論文形成雙鏡：一邊是評分捷徑，一邊是生成不分曲風。工程含義是把「genre tag 當條件」或「曲風專用 adapter」納入 karaoke 後端，而不是只調一個通用 singer embedding。",
+      "try_next": "可做:在日文 JPOP／アニソン／演歌等子類抽樣，用公開 SVS 或昨日 diffusion-VC 產樣，量測跨曲風 embedding 可分性與聽感辨識；試 genre-conditioned 輕量續訓 vs zero-shot 標籤，對照 MMGenre 結論是否在日文語料重現。",
+      "problem": "唱聲合成（SVS）進展快，但跨音樂曲風的泛化能力缺乏系統評估；既有基準嚴重偏向流行音樂，難以暴露曲風依賴的失敗模式。",
+      "method": "提出 MMGenre 多曲風 SVS 診斷基準，搭配可自動建構曲風對齊樂譜的管線；涵蓋 10 大曲風與 26 子類。對代表性 SVS 模型做廣泛評估，並比較 zero-shot 曲風適配與輕量曲風專用續訓。",
+      "data": "MMGenre 以自動管線生成曲風對齊 music scores，跨 10 major genres / 26 subgenres。Demo：https://fengjin1117.github.io/mmgenre-demo/。完整指標與模型清單見 Interspeech 2026 camera-ready。",
+      "findings": "代表 SVS 模型的跨曲風辨識能力有限：不同曲風合成人聲的聲學特徵高度相似、可分性弱。zero-shot 曲風適配僅邊際改善；輕量 genre-specific continued training 則帶來明顯增益。基準提供可複現的多曲風 SVS 評估框架。",
+      "limitations": "摘要未詳列日文／JPOP 覆蓋與開源權重；「輕量續訓」的資料量與標註成本需全文確認；基準側重 SVS 而非完整卡拉 OK 管線（對齊、LRC、pitch）。自動建庫管線品質會影響診斷可信度。",
+      "editor_note": "karaoke-jp 今日首選：把「曲風」從評分捷徑（7/16）推進到生成診斷。可與昨日唱聲 VC 串讀——換聲後是否仍塌成 pop-like 音色。MeanAudio 弱連結：曲風條件與 caption 粒度可互相借鏡。",
+      "relevance": {
+        "mean_audio": 2,
+        "karaoke_jp": 5
+      }
+    },
+    {
+      "slot": 2,
+      "track": "mean_audio",
+      "title": "Probing Low-Level Acoustic Attribute Encoding in CLAP Audio Embeddings",
+      "authors": [
+        "Héctor Martel",
+        "Joe Hennessy-Priest",
+        "Taemin Cho"
+      ],
+      "published": "2026-07-04",
+      "updated": "2026-07-04",
+      "source_url": "https://arxiv.org/abs/2607.03806",
+      "arxiv_id": "2607.03806",
+      "doi": "10.48550/arXiv.2607.03806",
+      "tags": [
+        "CLAP",
+        "evaluation",
+        "audio embeddings"
+      ],
+      "quality": "新且重要",
+      "tldr": "用 probing 拆解 CLAP 音訊嵌入：混響 RT60、響度 LUFS、頻譜質心與相對音高皆可恢復；前兩者近乎線性，頻譜需非線性探針。結論可推至多個 foundation 模型，並展示文字描述與 RT60 方向幾何對齊。",
+      "insight": "洞見:MeanAudio 天天用 CLAP/FAD 當語意與分佈指標，卻很少問 embedding 裡藏了什麼「低階聲學」。這篇證明 RT60、LUFS、相對 pitch 在 CLAP 空間可恢復，且部分近線性——代表 CLAP 相似度可能被混響／響度捷徑帶偏，而不只是「有沒有對上 caption」。接昨天 FdAudio 的 FD 後訓練與 7/16 genre bias：優化分佈距離前，應先知道評估軸上混進哪些物理屬性。",
+      "try_next": "可做:對 MeanAudio 生成樣本做 CLAP 空間沿 RT60/LUFS 方向的投影診斷；在 reward/DPO 前用 LUFS 正規化或混響匹配，測 CLAP score 變化是否來自語意而非響度。並對照振幅不變架構是否如文所述丟棄 loudness。",
+      "problem": "音訊 foundation model 被廣泛當通用特徵抽取器，但其表徵內部結構與低階知覺屬性如何編碼仍不清楚，影響評估與可控生成的可信度。",
+      "method": "以 probing 框架分析 CLAP 音訊嵌入，預測混響（RT60）、響度（LUFS）、頻譜質心（SC）與相對音高（RP）。在 freeze embedding 上訓練遞增複雜度的探針，涵蓋噪聲、語音、單音與音樂混音等五類資料，並推廣到另外八個 audio foundation 模型；另做跨模態文字描述與特徵方向的幾何一致性展示。",
+      "data": "五個涵蓋 noise / speech / monophonic notes / music mixtures 的資料集做屬性回歸；並在八個額外 audio foundation 模型上驗證編碼體制。Accepted to DAFx 2026。",
+      "findings": "RT60、LUFS、SC、RP 皆可從 CLAP embedding 可靠恢復。RT60、LUFS、RP 近似線性編碼，SC 需非線性探針。體制可推廣到其他 foundation 模型，但振幅不變架構會完全丟棄 loudness。RT60 與 LUFS 的線性方向跨資料集幾何一致，RP 則高度領域依賴。文字端聲學描述可與 RT60 特徵方向對齊。",
+      "limitations": "屬性集合仍偏低階，未直接涵蓋樂句結構或歌詞語意；音樂混音場景的 pitch 方向領域依賴強，對 text-to-music 解讀需謹慎；未提出新訓練目標，主要是診斷工具。",
+      "editor_note": "MeanAudio 評估主線今日首選：CLAP 不是黑盒語意分數。可接 FdAudio／genre-bias 做成「評估衛生清單」：正規化響度、報告混響匹配、避免把 LUFS 捷徑當品質。karaoke-jp 弱連結：相對 pitch 可探表示 CLAP 或可用於粗 pitch 診斷，但 RP 領域依賴。",
+      "relevance": {
+        "mean_audio": 5,
+        "karaoke_jp": 2
+      }
+    }
+  ],
+  "repo": {
+    "full_name": "Japan7/yohane",
+    "url": "https://github.com/Japan7/yohane",
+    "description_zh": "給歌曲與歌詞，可選人聲分離、日文音節切分與 forced alignment，輸出 Aegisub .ass 卡拉 OK 字幕；提供 Colab／HF Space／本機 CLI。",
+    "stars": 26,
+    "updated": "2026-07-17",
+    "why": "karaoke-jp 核心節點是「已知歌詞→時間軸」且日文音節／假名友好。yohane 明確針對日文歌詞優化音節切分，並有 karaoke-ja forced aligner 微調模型；昨天 CTCLRC 偏 Windows LRC，今天補上 ASS 路線與日文特化，7/17 仍有 push。",
+    "tags": [
+      "forced alignment",
+      "karaoke",
+      "Japanese"
+    ]
+  },
+  "discord_messages": [
+    "# 每日 MIR 論文精選 - 2026-07-18\n🌐 完整報告:https://lanternko.github.io/mir-paper-digest/reports/2026-07-18.html\n\n**論文 1｜MMGenre: Benchmarking Singing Voice Synthesis across Multiple Musical Genres**\n🔗 https://arxiv.org/abs/2607.06986\n🎯 主線:karaoke-jp（多曲風 SVS）｜Interspeech 2026；7/8 上架\n\n**TLDR**:MMGenre 用 10 大類／26 子類診斷唱聲合成：現有模型跨曲風幾乎「長一樣」，zero-shot 曲風適配弱，輕量曲風專用續訓才明顯拉開。\n\n**為什麼選它**:karaoke-jp 若只測 JPOP 切片會高估泛化——這篇把曲風當一等公民基準，直接打中「通用 singer 模型」幻覺。\n\n**注意**:日文覆蓋與開源細節以全文／demo 為準；基準是 SVS 不是完整卡拉 OK 管線。\n\n**下一步**:日文多曲風抽樣測可分性；試 genre adapter 續訓。",
+    "**論文 2｜Probing Low-Level Acoustic Attribute Encoding in CLAP Audio Embeddings**\n🔗 https://arxiv.org/abs/2607.03806\n🎯 主線:MeanAudio（CLAP 評估）｜DAFx 2026；7/4 上架\n\n**TLDR**:CLAP 嵌入可恢復 RT60、LUFS、頻譜質心與相對 pitch；前兩者近乎線性。代表 CLAP 分數可能被混響／響度捷徑影響，而不只是語意對齊。\n\n**為什麼選它**:MeanAudio 重度依賴 CLAP/FAD——昨天剛用 FD 優化一階，今天補「embedding 裡藏了什麼」，避免把物理屬性當品質。\n\n**注意**:低階屬性≠樂句／歌詞語意；pitch 方向領域依賴強。\n\n**下一步**:生成樣本沿 RT60/LUFS 投影；reward 前做 LUFS 正規化 ablative。",
+    "**GitHub Pick｜Japan7/yohane** ⭐26｜最近更新 2026-07-17\n🔗 https://github.com/Japan7/yohane\n\n歌曲+歌詞→（可選人聲分離）→日文音節切分→forced alignment→Aegisub .ass 卡拉 OK 字幕；Colab／HF Space／本機 CLI。\n\n**為什麼選它**:日文歌詞音節優化、有 karaoke-ja 對齊微調模型；補昨天 CTCLRC 的 ASS／日文路線，直接對 karaoke-jp 對齊節點。\n\n## 今天的 take-away\n- 多曲風 SVS 基準顯示「通用唱聲」跨曲風同質化嚴重，genre 專用輕量續訓比 zero-shot 有效（2607.06986）。\n- CLAP 不是純語意：混響／響度等低階屬性可線性讀出，評估與 reward 需防捷徑（2607.03806）。\n- 工程：日文特化 forced alignment→ASS（yohane）可當 karaoke-jp 字幕基線之一。"
+  ]
+}

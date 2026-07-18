@@ -142,3 +142,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-07-17,1,paper,karaoke_jp,Adapting Diffusion-Based Music Synthesis to Speech and Singing Voice Conversion,https://arxiv.org/abs/2607.13278,2607.13278,singing voice|voice conversion|pitch control,新且重要
 2026-07-17,2,paper,mean_audio,FdAudio: MeanFlow-Anchored Fréchet-Distance Post-Training for One-Step Text-to-Audio Generation,https://arxiv.org/abs/2607.10421,2607.10421,text-to-audio|flow matching|FAD,新且重要
 2026-07-17,0,repo,github,Kdroidwin/CTCLRC,https://github.com/Kdroidwin/CTCLRC,,forced alignment|LRC|karaoke,
+2026-07-18,1,paper,karaoke_jp,MMGenre: Benchmarking Singing Voice Synthesis across Multiple Musical Genres,https://arxiv.org/abs/2607.06986,10.48550/arXiv.2607.06986,singing voice synthesis|genre|benchmark,新且重要
+2026-07-18,2,paper,mean_audio,Probing Low-Level Acoustic Attribute Encoding in CLAP Audio Embeddings,https://arxiv.org/abs/2607.03806,10.48550/arXiv.2607.03806,CLAP|evaluation|audio embeddings,新且重要
+2026-07-18,0,repo,github,Japan7/yohane,https://github.com/Japan7/yohane,,forced alignment|karaoke|Japanese,
