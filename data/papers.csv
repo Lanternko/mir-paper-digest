@@ -145,3 +145,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-07-18,1,paper,karaoke_jp,MMGenre: Benchmarking Singing Voice Synthesis across Multiple Musical Genres,https://arxiv.org/abs/2607.06986,10.48550/arXiv.2607.06986,singing voice synthesis|genre|benchmark,新且重要
 2026-07-18,2,paper,mean_audio,Probing Low-Level Acoustic Attribute Encoding in CLAP Audio Embeddings,https://arxiv.org/abs/2607.03806,10.48550/arXiv.2607.03806,CLAP|evaluation|audio embeddings,新且重要
 2026-07-18,0,repo,github,Japan7/yohane,https://github.com/Japan7/yohane,,forced alignment|karaoke|Japanese,
+2026-07-19,1,paper,karaoke_jp,Local Multimodal Music Alignment from Global Supervision,https://arxiv.org/abs/2607.10023,10.48550/arXiv.2607.10023,multimodal alignment|score-audio|contrastive learning,新且重要
+2026-07-19,2,paper,mean_audio,WanSong v1.0 Technical Report,https://arxiv.org/abs/2607.14749,10.48550/arXiv.2607.14749,song generation|diffusion|dual stems,新且重要
+2026-07-19,0,repo,github,wangjiqing/xingyu-lyrics-aligner,https://github.com/wangjiqing/xingyu-lyrics-aligner,,forced alignment|LRC|karaoke,

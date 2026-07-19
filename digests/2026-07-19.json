@@ -1,0 +1,94 @@
+{
+  "date": "2026-07-19",
+  "papers": [
+    {
+      "slot": 1,
+      "track": "karaoke_jp",
+      "title": "Local Multimodal Music Alignment from Global Supervision",
+      "authors": [
+        "Irmak Bukey",
+        "Zachary Novack",
+        "Jongmin Jung",
+        "Dasaem Jeong",
+        "Chris Donahue"
+      ],
+      "published": "2026-07-10",
+      "updated": "2026-07-10",
+      "source_url": "https://arxiv.org/abs/2607.10023",
+      "arxiv_id": "2607.10023",
+      "doi": "10.48550/arXiv.2607.10023",
+      "tags": [
+        "multimodal alignment",
+        "score-audio",
+        "contrastive learning"
+      ],
+      "quality": "新且重要",
+      "tldr": "提出 FuSiLi：用 Sinkhorn 軟對齊在影像 patch 與音訊 frame 上算局部相似度，只需「整段配對」全域監督就能學出 frame 級樂譜–音訊對齊；微調 CLIP/CLAP 後局部對齊勝出、檢索仍具競爭力。",
+      "insight": "洞見:karaoke-jp 的痛點之一是「沒有字級／拍級時間戳也能對齊」。FuSiLi 證明：只要有 audio↔score 段落配對，就能用 OT/Sinkhorn 把全局對比學習壓到局部 frame–patch，而不必手標 DTW 金標。這對日文歌詞／樂譜／LRC 管線意味著——缺密集標註時，可先用弱監督把「時間軸對應」學進多模態空間，再接 forced aligner 精修。",
+      "try_next": "可做:把 FuSiLi 的局部相似度換成「歌詞行 embedding × 人聲 frame」或「假名 mora × pitch 軌」試弱監督對齊；用 JPOP 有 LRC 的粗行時間當 global pair，量 frame accuracy 是否優於純 CLAP 全域相似度。",
+      "problem": "理解音樂需要跨模態的局部對應（例如演奏音訊時間點對應樂譜影像位置），但密集局部對齊標註極難取得；實務上往往只有較粗的全域配對（整段音訊與整頁／整段樂譜）。",
+      "method": "提出 FuSiLi（Fused Sinkhorn-Localized Similarity）：在局部 image patch 與 audio frame 特徵上以 Sinkhorn 軟對齊計算相似度，用於多模態對比學習。再以 hybrid 目標（FuSiLi + 傳統全域相似度）微調預訓練 CLIP 與 CLAP 編碼器，對 raw sheet music 影像與音訊配對。",
+      "data": "以樂譜影像–音訊配對微調 CLIP/CLAP；在跨模態檢索與 frame-level alignment 任務上對比多組全域／局部 baseline。ISMIR 2026。",
+      "findings": "FuSiLi 能在僅有全域監督下學到有效局部關係；局部對齊任務優於多組 baseline，同時在檢索上仍與傳統全域對比學習競爭。顯示「局部可學、全域不崩」可並存。",
+      "limitations": "主實驗是 sheet music 影像而非日文歌詞文字／kana；遷移到 LRC 或 mora-to-note 需另驗。Sinkhorn 對齊成本與超參敏感度摘要未詳；真實 JPOP 混音與版權樂譜場景未覆蓋。",
+      "editor_note": "karaoke-jp 今日首選：對齊主線從「要金標時間戳」退到「只要段落配對」。可與 CTCLRC／yohane 串成「弱監督粗對齊 → forced align 精修」。MeanAudio 弱連結：CLAP 微調與跨模態局部相似度可反哺 caption–audio 對齊診斷。",
+      "relevance": {
+        "mean_audio": 3,
+        "karaoke_jp": 5
+      }
+    },
+    {
+      "slot": 2,
+      "track": "mean_audio",
+      "title": "WanSong v1.0 Technical Report",
+      "authors": [
+        "Binghui Chen",
+        "Pandeng Li",
+        "Yu Liu",
+        "Jingren Zhou"
+      ],
+      "published": "2026-07-16",
+      "updated": "2026-07-16",
+      "source_url": "https://arxiv.org/abs/2607.14749",
+      "arxiv_id": "2607.14749",
+      "doi": "10.48550/arXiv.2607.14749",
+      "tags": [
+        "song generation",
+        "diffusion",
+        "dual stems"
+      ],
+      "quality": "新且重要",
+      "tldr": "WanSong 以純 diffusion（非 AR、非 AR+diffusion 串級）一次生成最長約 5 分鐘多語歌曲，並同時輸出人聲與伴奏雙 stem；支援 step-distillation 加速與微調客製化編輯路徑。",
+      "insight": "洞見:MeanAudio 長期在「codec token AR」與「latent diffusion」之間擺盪；WanSong 把「長篇歌曲 + 雙 stem 一次出」壓進單一 diffusion 框架，直接打中 karaoke 後端的「要乾淨伴奏＋可選人聲」需求。相對 Qwen-Music（7/15）的 tokenizer–LLM–render 三件套，這是另一條 pure diffusion 路線——工程上可比較：可控性、長序列穩定度、與 reward／DPO 後訓練的介面。",
+      "try_next": "可做:若有 demo／權重，測雙 stem 分離度（人聲殘響進伴奏？）與 3–5 分鐘結構塌陷；對 MeanAudio 管線試「只取 BGM stem 當 karaoke 伴奏」再疊 yohane／CTCLRC 對齊歌詞。",
+      "problem": "音樂生成 foundation model 要同時兼顧高效生成、高保真長時音訊與可控性仍困難；AR 或 AR+diffusion 串級管線在長篇歌曲與編輯性上各有瓶頸。",
+      "method": "提出 WanSong：純 diffusion 一次直接生成高保真、多語、最長約 5 分鐘的歌曲，並在單次前向輸出雙 stem（vocals + background music）。擴散框架支援 step-distillation 加速推論，並提供微調／客製化路徑以支援下游編輯。",
+      "data": "技術報告（Wan Team）；摘要未列公開訓練集規模與基準分數細節。arXiv:2607.14749，2026-07-16。",
+      "findings": "報告定位為 commercial-grade 長篇歌曲生成：相對 AR 與多階段串級，純 diffusion 可一次出長篇高保真與雙 stem，並以 distillation 與 fine-tune 路徑兼顧速度與客製。",
+      "limitations": "技術報告摘要缺少客觀指標表、與 SOTA 的定量對照與開源承諾；「commercial-grade」需聽感與授權側另驗。雙 stem 是否達可用 karaoke 級分離未在 abs 證明。",
+      "editor_note": "MeanAudio 今日首選：長篇 + 雙 stem 是 karaoke 伴奏生成的最短路徑之一。可與 7/15 Qwen-Music、7/17 FdAudio 並列成「歌曲生成三路線」：LLM-token、pure diffusion、FD 後訓練。karaoke-jp 強連結在 BGM stem。",
+      "relevance": {
+        "mean_audio": 5,
+        "karaoke_jp": 4
+      }
+    }
+  ],
+  "repo": {
+    "full_name": "wangjiqing/xingyu-lyrics-aligner",
+    "url": "https://github.com/wangjiqing/xingyu-lyrics-aligner",
+    "description_zh": "本機優先的歌詞 forced alignment 工具：輸入音訊與歌詞，產出行級／字級時間戳，可輸出 LRC；tags 含 karaoke、forced-alignment、lrc。",
+    "stars": 0,
+    "updated": "2026-07-15",
+    "why": "karaoke-jp 本週已有 CTCLRC（Win LRC）與 yohane（日文 ASS）；xingyu 補「local-first、行／字級對齊」路線，7/15 仍有 push，與今日 FuSiLi「弱監督局部對齊」論點可對照實作。星數雖低但任務對口、近期活躍。",
+    "tags": [
+      "forced alignment",
+      "LRC",
+      "karaoke"
+    ]
+  },
+  "discord_messages": [
+    "# 每日 MIR 論文精選 - 2026-07-19\n🌐 完整報告:https://lanternko.github.io/mir-paper-digest/reports/2026-07-19.html\n\n**論文 1｜Local Multimodal Music Alignment from Global Supervision**\n🔗 https://arxiv.org/abs/2607.10023\n🎯 主線:karaoke-jp（弱監督局部對齊）｜ISMIR 2026；7/10 上架\n\n**TLDR**:FuSiLi 用 Sinkhorn 在 patch–frame 上算局部相似度，只需整段 audio–score 配對就能學 frame 級對齊；微調 CLIP/CLAP 後局部對齊勝 baseline、檢索仍夠用。\n\n**為什麼選它**:karaoke-jp 常缺字級金標——這篇把「對齊」從 DTW 金標需求降到段落級弱監督，可直接啟發歌詞／樂譜時間軸管線。\n\n**注意**:實驗主軸是樂譜影像不是日文 LRC；遷移需另測。\n\n**下一步**:JPOP 粗行時間當 global pair，試歌詞–人聲 frame 版 FuSiLi。",
+    "**論文 2｜WanSong v1.0 Technical Report**\n🔗 https://arxiv.org/abs/2607.14749\n🎯 主線:MeanAudio（長篇歌曲／雙 stem）｜7/16 上架\n\n**TLDR**:純 diffusion（非 AR 串級）一次生成最長約 5 分鐘多語歌曲，並同時輸出人聲＋伴奏雙 stem；支援 step-distillation 與微調編輯路徑。\n\n**為什麼選它**:MeanAudio 要長篇可控歌曲；雙 stem 直接對 karaoke「抽 BGM」場景。可與 7/15 Qwen-Music 三件套對讀。\n\n**注意**:技術報告 abs 缺完整指標表與開源細節；commercial-grade 需另驗。\n\n**下一步**:量雙 stem 分離度與長時結構；BGM stem + 對齊器串 karaoke demo。",
+    "**GitHub Pick｜wangjiqing/xingyu-lyrics-aligner** ⭐0｜最近更新 2026-07-15\n🔗 https://github.com/wangjiqing/xingyu-lyrics-aligner\n\n本機優先歌詞 forced alignment：行級／字級時間戳，LRC／karaoke 向；補本週 CTCLRC、yohane 之外的 local-first 路線。\n\n**為什麼選它**:任務對口 karaoke-jp，且與今日 FuSiLi「弱監督→精修對齊」敘事可並讀；7/15 活躍。\n\n## 今天的 take-away\n- 局部樂譜–音訊對齊可不靠密集金標：FuSiLi + 全域配對即可（2607.10023）。\n- 純 diffusion 長篇歌曲 + 雙 stem 是 karaoke 伴奏生成的另一條主幹（2607.14749）。\n- 工程：local-first 字級對齊工具（xingyu-lyrics-aligner）可當 LRC 精修節點之一。"
+  ]
+}
