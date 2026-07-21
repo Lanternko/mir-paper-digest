@@ -1,0 +1,98 @@
+{
+  "date": "2026-07-21",
+  "papers": [
+    {
+      "slot": 1,
+      "track": "karaoke_jp",
+      "title": "Estimating the Reliability of Dynamic Time Warping Alignments Using Circumstantial Evidence",
+      "authors": [
+        "Aanya Pratapneni",
+        "Alice Yuan",
+        "TJ Tsai"
+      ],
+      "published": "2026-07-16",
+      "updated": "2026-07-16",
+      "source_url": "https://arxiv.org/abs/2607.15443",
+      "arxiv_id": "2607.15443",
+      "doi": "10.48550/arXiv.2607.15443",
+      "tags": [
+        "DTW alignment",
+        "alignment reliability",
+        "audio-audio"
+      ],
+      "quality": "新且重要",
+      "tldr": "提出以「旁證」估 DTW 對齊可靠度：對路徑局部重跑 FlexDTW（放寬邊界），比對原路徑與 FlexDTW 一致性，作為無監督的片段級可靠度分數；在含匹配／不匹配區的音訊對齊上 AUROC 達 0.97。",
+      "insight": "洞見:karaoke-jp 的 forced align／LRC 痛點不只是「對齊對不對」，而是「模型有沒有勇氣說這段不確定」。這篇把 Soft-DTW 那條「把不確定性塞進可微路徑」的路，改成後驗診斷：同一段路徑若在放寬邊界後仍被選中，才算硬路徑。對日文歌詞行／字級時間戳，可直接當「可交付／需人工修」閘門，比只看 global cost 更可操作。",
+      "try_next": "可做:把 CTC forced align 或 DTW 歌詞–人聲路徑切成局部窗，套同一套 FlexDTW 重估，輸出 per-line confidence；低分段落丟給 arkhe-lyric-lock 式瀏覽器修齊，或標紅進 LRC 編輯器。",
+      "problem": "DTW 對齊路徑在匹配區與不匹配／漂移區品質差異很大，但實務上常只有一條「看起來完整」的路徑，缺乏無監督、片段級的可靠度指標；Soft-DTW 等可微變體處理不確定性的方式與「事後診斷既有路徑」需求也不相同。",
+      "method": "提出 circumstantial-evidence 式可靠度：取既有 DTW 路徑的局部區段，用允許邊界彈性的 FlexDTW 重估對齊，再量測原路徑與 FlexDTW 路徑的一致程度；一致則判為可靠、分歧則判為不可靠。全程無需額外標註。",
+      "data": "在含 matching 與 non-matching 區段的 audio–audio 對齊任務上評估；報告聚合 AUROC 0.97。ISMIR 2026。",
+      "findings": "可靠度分數能有效區分路徑中可靠與不可靠片段（AUROC 0.97）；提供不依賴可微 DTW 訓練、可掛在既有對齊管線後的無監督診斷。",
+      "limitations": "主實驗是 audio–audio 而非歌詞文字–人聲；遷移到 CTC／Whisper 強制對齊與日文 mora 邊界需另驗。FlexDTW 重算成本與窗長超參對長曲的影響摘要未細述。",
+      "editor_note": "karaoke-jp 今日首選：對齊從「產出時間戳」升級到「時間戳可信任」。可與 7/19 FuSiLi 弱監督對齊、本週 CTCLRC／yohane／xingyu 串成「粗對齊 → 可靠度閘 → 人工修」。MeanAudio 弱連結：生成音與參考音的 DTW 診斷也可用。",
+      "relevance": {
+        "mean_audio": 2,
+        "karaoke_jp": 5
+      }
+    },
+    {
+      "slot": 2,
+      "track": "mean_audio",
+      "title": "Improving Text-to-Audio Instruction Following via Fine-Grained Feedback from Audio-Aware Large Language Models",
+      "authors": [
+        "Chun-Yi Kuan",
+        "Siwon Kim",
+        "Byeonggeun Kim",
+        "Suyoun Kim",
+        "Bo-Ru Lu",
+        "Qinming Tang",
+        "Ankur Gandhe",
+        "Hung-yi Lee",
+        "Chieh-Chi Kao",
+        "Chao Wang"
+      ],
+      "published": "2026-07-15",
+      "updated": "2026-07-15",
+      "source_url": "https://arxiv.org/abs/2607.13408",
+      "arxiv_id": "2607.13408",
+      "doi": "10.48550/arXiv.2607.13408",
+      "tags": [
+        "text-to-audio",
+        "reward alignment",
+        "ALLM judge"
+      ],
+      "quality": "新且重要",
+      "tldr": "用 audio-aware LLM 當細粒度裁判，檢查生成音中目標事件是否出現與時序是否正確，再建 preference pair 做 DPO；提出 S3Bench 敘事基準，提升多事件完整性與時序遵循，同時維持音訊品質。",
+      "insight": "洞見:MeanAudio 的 reward 長期卡在 CLAP／FAD 這類全域相似度，對「先 A 再 B」的指令幾乎沒有梯度。這篇把 ALLM 拉成 instruction-level judge（事件存在＋時序關係），再餵 DPO——與 7/8 Resonate、7/11 GRPO、7/17 FdAudio 同一條「後訓練對齊」軸，但訊號更細。對歌曲生成也可類推：歌詞段落是否依序出現、人聲進場時機是否對。",
+      "try_next": "可做:對 MeanAudio 生成結果用 Music Flamingo／ALLM 問「第 N 秒是否有人聲／指定樂器」建 preference；在 JPOP 歌詞條件生成上試「句級事件」DPO，並對照 S3Bench 式敘事 prompt。",
+      "problem": "近期 text-to-audio 音質已高，但多事件與時序指令遵循仍弱；既有評估與訓練訊號多偏全域相似度或感知品質，對 instruction-level 正確性監督不足。",
+      "method": "以 ALLM 作為細粒度裁判，驗證生成音中目標事件是否存在與時序關係；經基準與人工驗證後，用其回饋建構 preference pairs 做 DPO。另提出 S3Bench 敘事基準，專測多事件時序指令遵循。",
+      "data": "在既有基準與 S3Bench 上評估；ALLM 判斷經 benchmark 與 human verification。Interspeech 2026 long paper。",
+      "findings": "方法提升事件完整性、時序排序與聯合指令遵循準確率，同時維持音訊品質；顯示 instruction-level ALLM 回饋可有效驅動 TTA 偏好對齊。",
+      "limitations": "裁判仍是 ALLM，對音樂結構／唱詞語意的覆蓋度與偏差需另審；主軸偏通用音效事件而非完整歌曲／日文歌詞。DPO 計算成本與裁判提示敏感度摘要未完全展開。",
+      "editor_note": "MeanAudio 今日首選：把「聽起來像」升級成「指令層做對」。可與 FdAudio（FAD 後訓練）、MR-FlowDPO 並列成 reward 三件套：分佈距離、多 reward、細粒度 ALLM 事件／時序。karaoke-jp 中連結在「歌詞段落是否依序出現」的裁判設計。",
+      "relevance": {
+        "mean_audio": 5,
+        "karaoke_jp": 3
+      }
+    }
+  ],
+  "repo": {
+    "full_name": "AdemVessell/arkhe-lyric-lock",
+    "url": "https://github.com/AdemVessell/arkhe-lyric-lock",
+    "description_zh": "本機 CTC forced alignment 歌詞時間軸工具：在人聲 stem 上對齊，並以自評分承認不確定、歌詞缺失時 fail-loud，另附瀏覽器修齊工作台；對齊「可信任度」導向。",
+    "stars": 0,
+    "updated": "2026-07-20",
+    "why": "與今日 DTW 可靠度論文同一敘事：不只產時間戳，還要標出「這段不確定」。7/20 仍有 push，補 CTCLRC／yohane／xingyu 之外的 self-scoring／fail-loud 路線，適合當 karaoke-jp LRC QA 節點。",
+    "tags": [
+      "forced alignment",
+      "LRC",
+      "self-scoring"
+    ]
+  },
+  "discord_messages": [
+    "# 每日 MIR 論文精選 - 2026-07-21\n🌐 完整報告:https://lanternko.github.io/mir-paper-digest/reports/2026-07-21.html\n\n**論文 1｜Estimating the Reliability of Dynamic Time Warping Alignments Using Circumstantial Evidence**\n🔗 https://arxiv.org/abs/2607.15443\n🎯 主線:karaoke-jp（對齊可靠度）｜ISMIR 2026；7/16 上架\n\n**TLDR**:用「旁證」估 DTW 路徑片段可靠度——對局部路徑用 FlexDTW 放寬邊界重估，比對是否仍走同一路徑；音訊對齊上 AUROC 0.97，全程無監督。\n\n**為什麼選它**:karaoke-jp 缺的是「時間戳能不能信」的閘門，不是又一個 aligner。可直接掛在 LRC／字級對齊後端。\n\n**注意**:實驗是 audio–audio；歌詞–人聲與日文 mora 需另測。\n\n**下一步**:CTC／DTW 輸出切窗跑 FlexDTW，低分段落丟人工修齊。",
+    "**論文 2｜Improving Text-to-Audio Instruction Following via Fine-Grained Feedback from Audio-Aware Large Language Models**\n🔗 https://arxiv.org/abs/2607.13408\n🎯 主線:MeanAudio（reward／指令遵循）｜Interspeech 2026 long；7/15 上架\n\n**TLDR**:以 ALLM 當細粒度裁判檢查事件是否出現與時序是否正確，再建 preference 做 DPO；提出 S3Bench，提升多事件完整性與時序遵循且維持音質。\n\n**為什麼選它**:CLAP／FAD 偏全域，對「先 A 再 B」幾乎沒訊號；這篇把 instruction-level 對齊做實，接上本月 DPO／GRPO／FdAudio 後訓練主線。\n\n**注意**:裁判是 ALLM，音樂結構／唱詞語意覆蓋需另審。\n\n**下一步**:對歌曲生成用 ALLM 問句級事件建 DPO pair。",
+    "**GitHub Pick｜AdemVessell/arkhe-lyric-lock** ⭐0｜最近更新 2026-07-20\n🔗 https://github.com/AdemVessell/arkhe-lyric-lock\n\n本機 CTC 歌詞對齊＋自評分：承認不確定、缺歌詞 fail-loud，並附瀏覽器修齊台；與今日 DTW 可靠度論點同軸。\n\n**為什麼選它**:任務對口 karaoke-jp，補「對齊可信任」工程面；7/20 活躍。\n\n## 今天的 take-away\n- 對齊要可交付，先量片段可靠度：DTW + FlexDTW 旁證（2607.15443）。\n- TTA 後訓練可從全域相似度換成 ALLM 事件／時序裁判 + DPO（2607.13408）。\n- 工程：self-scoring forced align（arkhe-lyric-lock）可當 LRC QA 節點。"
+  ]
+}
