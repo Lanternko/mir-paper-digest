@@ -1,0 +1,106 @@
+{
+  "date": "2026-07-24",
+  "papers": [
+    {
+      "slot": 1,
+      "track": "mean_audio",
+      "title": "Pushing the Frontier of Full-Song Generation: Hierarchical Autoregressive Planning Meets Flow-Matching Rendering",
+      "authors": [
+        "Junyu Dai",
+        "Xinyue Fan",
+        "Weiqin Li",
+        "Xiangang Li",
+        "Yunjia Li",
+        "Bin Ma",
+        "Yukun Ma",
+        "Chongjia Ni",
+        "Yufei Shi",
+        "Biao Tian",
+        "Haoxu Wang",
+        "Menglin Wu",
+        "Jianwei Yu",
+        "Huaicheng Zhang",
+        "Han Zhao",
+        "Shengkui Zhao",
+        "Haina Zhu"
+      ],
+      "published": "2026-07-22",
+      "updated": "2026-07-23",
+      "source_url": "https://arxiv.org/abs/2607.20253",
+      "arxiv_id": "2607.20253",
+      "doi": "10.48550/arXiv.2607.20253",
+      "tags": [
+        "full-song generation",
+        "flow matching",
+        "lyrics-to-song"
+      ],
+      "quality": "新且重要",
+      "tldr": "提出歌詞／文字／屬性條件的全曲生成框架：hybird-LM 階層式自迴歸規劃 8-codebook RVQ token，FullDiT 在 VAE 連續潛空間做全曲 flow matching 渲染；支援純伴奏與保留旋律的翻唱，並以 DPO／GRPO／OPD 與 flow-based GRPO 做後訓練。",
+      "insight": "洞見:MeanAudio 從「短片段 TTM」走到「可交付全曲」的瓶頸，是離散 token 規劃與連續音質渲染要拆開再接回。這篇把 AR codec planning 與 full-song flow matching 明確分層，再把本月常見的 DPO／GRPO 後訓練同時打在 LM 與 DiT 兩端——等於把 SegTune、WanSong、FdAudio 那條「結構控制 + 後訓練」軸接到 lyrics-to-song 產品形態。對 karaoke-jp 也直接相關：歌詞進、全曲出，且 cover 支線要保旋律。",
+      "try_next": "可做:對照 MeanAudio 的 codec／flow 管線，試「歌詞段落 token 當 hierarchical plan、flow 只負責人聲+伴奏渲染」；翻唱支線可拿 JPOP 參考曲抽 melody cue 做 style transfer，並用今日 SongSQA 的時序曲線當 reward 訊號之一。",
+      "problem": "全長歌曲生成需同時處理歌詞條件、長程結構、人聲與伴奏音質，以及風格翻唱時的旋律保持；單一模型難以兼顧離散規劃效率與連續波形保真，後訓練訊號也常只打在其中一段。",
+      "method": "四元件架構：semantic-aware tokenizer 將音訊編成 8-codebook RVQ；hybird-LM 做階層式自迴歸全曲 token 規劃；FullDiT 在連續 VAE 潛空間以 codec token、歌詞與文字 caption 為條件做全曲 flow matching 渲染；兩層 melody module 從參考音抽離散旋律 cue 支援 cover。後訓練上對 hybird-LM 試 DPO／GRPO／OPD，對 FullDiT 用 flow-based GRPO。",
+      "data": "多語自動基準與 Artificial Analysis Music with Vocals leaderboard 評估；任務含 Lyrics-to-Song、Instrumental、Cover Song。細節以 tech report 為主。",
+      "findings": "在報告的多語自動評測與 leaderboard 設定下達 competitive 表現；顯示「AR 規劃 + flow 渲染 + reward 後訓練」可作為全曲生成的可擴充配方，並同時覆蓋歌詞條件、純伴奏與保旋律翻唱。",
+      "limitations": "tech report 型表述，資料規模、開源權重與日文／JPOP 歌詞細粒度對齊品質未充分展開；Automatic Analysis leaderboard 與 lab 內自動指標對唱詞可懂度／結構合法性的覆蓋仍需人工抽聽。封面旋律保持與 mean_audio 生成音的客觀對照亦未完整公開。",
+      "editor_note": "MeanAudio 今日首選：全曲 lyrics-to-song + flow matching 渲染 + multi-reward 後訓練一次打包。可與 7/13 SegTune、7/17 FdAudio、7/19 WanSong、7/21 ALLM-DPO 並列成「結構—音質—指令」三層。karaoke-jp 連結在歌詞條件與 melody-preserving cover。",
+      "relevance": {
+        "mean_audio": 5,
+        "karaoke_jp": 4
+      }
+    },
+    {
+      "slot": 2,
+      "track": "karaoke_jp",
+      "title": "Is One Score Enough? Assessing Singing Quality of Songs with Temporal Score Curves",
+      "authors": [
+        "Yishan Lv",
+        "Jing Luo",
+        "Xinyu Yang",
+        "Zhizheng Wu"
+      ],
+      "published": "2026-07-18",
+      "updated": "2026-07-18",
+      "source_url": "https://arxiv.org/abs/2607.16599",
+      "arxiv_id": "2607.16599",
+      "doi": "10.48550/arXiv.2607.16599",
+      "tags": [
+        "singing quality",
+        "temporal score",
+        "full-song SQA"
+      ],
+      "quality": "新且重要",
+      "tldr": "提出 SongSQA：全曲唱聲品質評估不只給一個分數，而產出時序片段品質曲線。先以教師模型偽標訓片段評分器，再用可學習 song embedding 與 self-attention 聚合，在多資料集上相對最強基線 KTAU 最高提升約 13.95%。",
+      "insight": "洞見:karaoke-jp 與唱聲管線缺的常不是「再一個全域 MOS」，而是「哪一段唱砸了、哪一段可交付」。SongSQA 把 full-song SQA 做成 temporal score curve，對接 7/21 DTW 可靠度那條「片段級可信任」敘事：對齊有 confidence，唱聲品質也該有 per-segment 曲線。生成側可反過來當 MeanAudio／lyrics-to-song 的 reward 或 fail-loud 閘門。",
+      "try_next": "可做:把 SongSQA 曲線掛在 karaoke 人聲 stem 上，低分段落對齊 LRC 行級時間戳做「需重錄／需修 pitch」標記；對全曲生成結果用曲線當 preference pair 的維度之一，對照單一 CLAP／FAD。",
+      "problem": "既有 Singing Quality Assessment 多針對短片段，不足以評估全長歌曲；全曲 SQA 需建模局部品質變化如何影響整體判斷，且片段級標註稀缺，若把整曲分數直接複製到每一段會把不同品質片段誤當等價。",
+      "method": "兩階段 SongSQA：Stage1 以預訓練教師產生偽標，訓練 Segment Score Predictor 做無人工片段標註的局部評分；Stage2 的 Song Quality Aggregator 融合片段特徵與預測分數，以可學習 song embedding 加 self-attention 捕捉片段表現與整曲品質的連結，同時輸出整體分與時序品質曲線。",
+      "data": "多個 singing quality 資料集；報告相對最強基線 KTAU 最高相對提升 13.95%，並在其他指標上一致提升。",
+      "findings": "片段偽標 + 注意力聚合能有效做全曲 SQA，並提供可解釋的 temporal score curve；顯示「單一總分」不足以描述唱聲表現的時間結構。",
+      "limitations": "片段監督仍依賴教師偽標，教師偏差會傳到曲線；摘要未詳述日文／JPOP 語料覆蓋、伴奏殘留與多語言歌詞條件。與 pitch／節奏錯誤類型的對齊解釋力需另驗。",
+      "editor_note": "karaoke-jp 今日首選：把唱聲評估從「一個分」升級成「可定位的時序曲線」。可與 DTW 可靠度、LRC 修齊工具串成「分離 → 對齊 → 品質曲線 → 人工／重生成」。MeanAudio 側可當生成唱聲的片段 reward。",
+      "relevance": {
+        "mean_audio": 3,
+        "karaoke_jp": 5
+      }
+    }
+  ],
+  "repo": {
+    "full_name": "TheAwaken1/AIraoke-Pinokio",
+    "url": "https://github.com/TheAwaken1/AIraoke-Pinokio",
+    "description_zh": "把歌詞轉錄做成卡拉 OK 風 MP4 的 Gradio／Pinokio 管線：Whisper 轉錄、LLM 修詞、Demucs 人聲分離，輸出 karaoke-style 影片；面向實用卡拉 OK，輸出品質會隨曲目變動。",
+    "stars": 7,
+    "updated": "2026-07-23",
+    "why": "與今日 SongSQA（唱聲品質曲線）與全曲 lyrics-to-song 同軸：工程上串起「分離 → 轉錄 → 修詞 → 卡拉 OK 渲染」。7/23 仍有 push、7 star，補已發送的 yohane／CTCLRC／arkhe 之外的影片渲染端。",
+    "tags": [
+      "karaoke",
+      "lyrics transcription",
+      "source separation"
+    ]
+  },
+  "discord_messages": [
+    "# 每日 MIR 論文精選 - 2026-07-24\n🌐 完整報告:https://lanternko.github.io/mir-paper-digest/reports/2026-07-24.html\n\n**論文 1｜Pushing the Frontier of Full-Song Generation: Hierarchical Autoregressive Planning Meets Flow-Matching Rendering**\n🔗 https://arxiv.org/abs/2607.20253\n🎯 主線:MeanAudio（全曲生成／flow matching）｜7/22 上架、7/23 v2\n\n**TLDR**:歌詞＋文字＋屬性條件的全曲框架——hybird-LM 階層式 AR 規劃 RVQ token，FullDiT 在 VAE 潛空間做全曲 flow matching；支援純伴奏與保旋律翻唱，並用 DPO／GRPO／OPD 與 flow-GRPO 後訓練。\n\n**為什麼選它**:把「規劃／渲染／reward」三層一次接到 lyrics-to-song 產品形態，是本週 MeanAudio 核心讀物。\n\n**注意**:tech report，開源與日文細粒度品質需另驗。\n\n**下一步**:試 hierarchical lyric plan + flow 渲染，並用片段級唱聲曲線當 reward。",
+    "**論文 2｜Is One Score Enough? Assessing Singing Quality of Songs with Temporal Score Curves**\n🔗 https://arxiv.org/abs/2607.16599\n🎯 主線:karaoke-jp（全曲唱聲品質）｜7/18 上架\n\n**TLDR**:SongSQA 不做單一總分，而產出時序品質曲線——教師偽標訓片段評分器，再用 song embedding + self-attention 聚合；KTAU 相對最強基線最高提升約 13.95%。\n\n**為什麼選它**:karaoke 要的是「哪一段不行」而非一個 MOS；接上本週對齊可靠度的片段級可信任敘事。\n\n**注意**:片段標是偽標，JPOP／日文覆蓋需另測。\n\n**下一步**:曲線對齊 LRC 行級時間戳，低分段標記重錄或重生成。",
+    "**GitHub Pick｜TheAwaken1/AIraoke-Pinokio** ⭐7｜最近更新 2026-07-23\n🔗 https://github.com/TheAwaken1/AIraoke-Pinokio\n\nWhisper 轉錄 + LLM 修詞 + Demucs 分離 → 卡拉 OK 風 MP4（Gradio／Pinokio）；實用管線，輸出會隨曲目波動。\n\n**為什麼選它**:補「分離—轉錄—渲染」工程端，對接今日全曲生成與唱聲品質曲線。\n\n## 今天的 take-away\n- 全曲生成可拆成 AR token 規劃 + flow matching 渲染 + multi-reward 後訓練（2607.20253）。\n- 唱聲評估要時序曲線，不要只給一個分（SongSQA, 2607.16599）。\n- 工程：AIraoke 可當 karaoke 影片渲染節點，曲線可當 QA／reward。"
+  ]
+}

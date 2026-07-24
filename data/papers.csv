@@ -151,3 +151,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-07-21,1,paper,karaoke_jp,Estimating the Reliability of Dynamic Time Warping Alignments Using Circumstantial Evidence,https://arxiv.org/abs/2607.15443,10.48550/arXiv.2607.15443,DTW alignment|alignment reliability|audio-audio,新且重要
 2026-07-21,2,paper,mean_audio,Improving Text-to-Audio Instruction Following via Fine-Grained Feedback from Audio-Aware Large Language Models,https://arxiv.org/abs/2607.13408,10.48550/arXiv.2607.13408,text-to-audio|reward alignment|ALLM judge,新且重要
 2026-07-21,0,repo,github,AdemVessell/arkhe-lyric-lock,https://github.com/AdemVessell/arkhe-lyric-lock,,forced alignment|LRC|self-scoring,
+2026-07-24,1,paper,mean_audio,Pushing the Frontier of Full-Song Generation: Hierarchical Autoregressive Planning Meets Flow-Matching Rendering,https://arxiv.org/abs/2607.20253,10.48550/arXiv.2607.20253,full-song generation|flow matching|lyrics-to-song,新且重要
+2026-07-24,2,paper,karaoke_jp,Is One Score Enough? Assessing Singing Quality of Songs with Temporal Score Curves,https://arxiv.org/abs/2607.16599,10.48550/arXiv.2607.16599,singing quality|temporal score|full-song SQA,新且重要
+2026-07-24,0,repo,github,TheAwaken1/AIraoke-Pinokio,https://github.com/TheAwaken1/AIraoke-Pinokio,,karaoke|lyrics transcription|source separation,
