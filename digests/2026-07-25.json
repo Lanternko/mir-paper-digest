@@ -1,0 +1,88 @@
+{
+  "date": "2026-07-25",
+  "papers": [
+    {
+      "slot": 1,
+      "track": "mean_audio",
+      "title": "FlowSonic: Stable Zero-Shot Music Editing via High-Order Trajectory Integration",
+      "authors": [
+        "Ali Boudaghi",
+        "Hadi Zare"
+      ],
+      "published": "2026-07-20",
+      "updated": "2026-07-20",
+      "source_url": "https://arxiv.org/abs/2607.17526",
+      "arxiv_id": "2607.17526",
+      "doi": "10.48550/arXiv.2607.17526",
+      "tags": [
+        "music editing",
+        "rectified flow",
+        "zero-shot"
+      ],
+      "quality": "新且重要",
+      "tldr": "在預訓練 rectified-flow DiT 上做零樣本音樂編輯：先決定性 inversion 進潛空間，重用 inversion 的 cross-attention 保結構，並以高階 ODE 積分穩定軌跡；音色轉移與風格修改任務上優於既有編輯法。",
+      "insight": "洞見:MeanAudio 從「文生音樂」走到「改既有錄音」的關鍵，不只是再 conditional 一次，而是 inversion 軌跡要數值穩定、結構要可重用。FlowSonic 把 rectified flow DiT 的決定性 inversion、cross-attention 結構鎖定、與高階 ODE 積分綁成一套零樣本編輯配方——直接接上本週全曲生成／flow 後訓練軸：生成之後還要能可控改音色與風格，且不把原曲結構拆掉。",
+      "try_next": "可做:在 MeanAudio flow 管線上試「real recording → high-order invert → edit prompt → re-generate」；對 JPOP 翻唱支線用 inversion 保旋律骨架、文字條件改伴奏風格，並用今日 cover 診斷框架的旋律／和聲維度當 fail-loud 閘門。",
+      "problem": "零樣本文字引導的真實音樂錄音編輯，需同時做到語意修改、原曲結構忠實保留，以及 inversion／生成全程的數值穩定；僅把 text-to-music 的 rectified-flow DiT 直接套用常因 inversion 不準與軌跡漂移而失敗。",
+      "method": "FlowSonic 建在預訓練 rectified-flow diffusion transformer 上：先決定性 inversion 真實錄音到潛空間；編輯時重用 inversion 抽出的 cross-attention 表示以鎖定音樂結構；並引入高階 ODE solver，系統比較不同數值積分方案對軌跡穩定、結構保留與語意可控的影響。",
+      "data": "音色轉移與風格修改任務上的綜合實驗；指標涵蓋語意對齊、和聲保留、結構一致性與感知音質。摘要未詳列公開資料集與開源權重。",
+      "findings": "FlowSonic 在報告的 timbre-transfer 與 genre-modification 設定下一致優於既有音樂編輯方法；幾何與實測分析顯示高階積分可提升潛空間軌跡穩定，使零樣本編輯更可靠。",
+      "limitations": "依賴既有預訓練 DiT／rectified-flow 權重，摘要未給開源、日文／JPOP 曲目覆蓋與歌詞條件編輯結果；高階 ODE 的計算成本與步數權衡未完整公開。與人聲 stem 分離後再編輯的管線需另接。",
+      "editor_note": "MeanAudio 今日首選：把 rectified flow 從「生成」推進到「穩定零樣本編輯」。可與 7/24 全曲 lyrics-to-song、7/17 FdAudio、7/21 ALLM-DPO 並列成「生成—後訓練—可逆編輯」。karaoke 側可用於保旋律的伴奏風格轉移。",
+      "relevance": {
+        "mean_audio": 5,
+        "karaoke_jp": 3
+      }
+    },
+    {
+      "slot": 2,
+      "track": "general_mir",
+      "title": "A Diagnostic Evaluation Framework for AI-Generated Cover Songs Using Music-Theoretic and Acoustic Features",
+      "authors": [
+        "Yingxin Liang"
+      ],
+      "published": "2026-07-22",
+      "updated": "2026-07-22",
+      "source_url": "https://arxiv.org/abs/2607.19688",
+      "arxiv_id": "2607.19688",
+      "doi": "10.48550/arXiv.2607.19688",
+      "tags": [
+        "cover evaluation",
+        "music theory features",
+        "diagnostic metrics"
+      ],
+      "quality": "新且重要",
+      "tldr": "提出五維診斷框架評估 AI 翻唱：旋律音高、和聲進行、調性一致、風格一致、編曲／製作。30 首翻唱基準顯示和聲與編曲嚴重錯誤率最高；低階特徵可曝光症狀，但尚難可靠取代專家判斷。",
+      "insight": "洞見:karaoke-jp 與全曲生成缺的常不是「再一個總分」，而是「錯在旋律、和聲還是編曲」。這篇把 AI cover 的失敗拆成可定位的五維診斷，補 7/24 SongSQA 時序唱聲曲線之外的音樂理論維度：全域分看不見的局部和聲錯、旋律 leap、編曲不完整。對 MeanAudio cover 支線是 fail-loud 與 preference 標註的檢查清單，而非再一個黑箱 MOS。",
+      "try_next": "可做:把五維對照 7/24 全曲生成 cover 輸出做人工抽聽表；旋律維度接 pitch contour／LRC 行級，和聲維度接 chord 估計；低分維度可當 DPO／GRPO pair 的拒絕理由。代碼：TiaaL/songecho-cover-metrics。",
+      "problem": "AI 翻唱常以局部音樂錯誤失敗（例如人聲輪廓可辨但和聲功能錯、調性在但編曲不完整），單一全域品質分無法定位問題；需要可診斷、可對照樂理與聲學特徵的評估框架。",
+      "method": "五維診斷：melodic pitch、harmonic progression、key consistency、style consistency、arrangement/production quality。基準含 5 首源曲 × 6 系統共 30 首翻唱，專家嚴重度標註與 9 個符號／聲學特徵；並試 interpretable percentile-rule 作為自動打分 pilot。",
+      "data": "30 covers（5 sources × 6 systems）；專家 severity ratings；9 symbolic/acoustic features。代碼與分析材料公開於 GitHub（songecho-cover-metrics）。",
+      "findings": "和聲進行與編曲的嚴重錯誤率最高（約 53% 與 47%），調性一致性相對較好；六首樣本同時「調性可接受但和聲嚴重錯」。大 leap 比例與旋律評分有名義關聯但未過多重比較校正；低階特徵可曝光症狀，尚不能可靠取代情境化樂理判斷。",
+      "limitations": "基準規模小（30 首）、系統與曲目覆蓋有限；日文／JPOP、伴奏殘留與唱詞可懂度未納入維度。自動特徵與規則尚未勝過固定 majority baseline，尚屬診斷清單而非可部署 scorer。",
+      "editor_note": "接 7/24 全曲 cover 與 SongSQA：生成側有 melody-preserving cover，評估側要五維診斷而非一個分。karaoke-jp 可把 melodic pitch 維度對齊 pitch／LRC 修齊流程。",
+      "relevance": {
+        "mean_audio": 4,
+        "karaoke_jp": 4
+      }
+    }
+  ],
+  "repo": {
+    "full_name": "thedavidweng/OpenKara",
+    "url": "https://github.com/thedavidweng/OpenKara",
+    "description_zh": "桌面卡拉 OK 應用（Rust／Tauri）：對本機音樂庫做 on-device AI stem 分離，並抓線上同步歌詞，把既有曲庫變成可唱的伴奏＋歌詞體驗；強調自有曲目可重用。",
+    "stars": 19,
+    "updated": "2026-07-25",
+    "why": "直接對接 karaoke-jp 工程鏈：本機分離 + 同步歌詞，補已發送的 AIraoke／yohane／CTCLRC 之外的桌面端。2026-07-25 仍有 push、19 star，topics 含 demucs、lrclib、karaoke。",
+    "tags": [
+      "karaoke",
+      "source separation",
+      "synced lyrics"
+    ]
+  },
+  "discord_messages": [
+    "# 每日 MIR 論文精選 - 2026-07-25\n🌐 完整報告:https://lanternko.github.io/mir-paper-digest/reports/2026-07-25.html\n\n**論文 1｜FlowSonic: Stable Zero-Shot Music Editing via High-Order Trajectory Integration**\n🔗 https://arxiv.org/abs/2607.17526\n🎯 主線:MeanAudio（rectified flow 零樣本編輯）｜7/20 上架\n\n**TLDR**:預訓練 rectified-flow DiT 上做真實錄音零樣本編輯——決定性 inversion、重用 cross-attention 保結構、高階 ODE 穩軌跡；音色轉移與風格修改優於既有編輯法。\n\n**為什麼選它**:生成之後還要能可控改曲；把 flow 從「文生」推到「可逆編輯」是本週 MeanAudio 關鍵缺口。\n\n**注意**:開源與 JPOP／人聲 stem 管線需另接。\n\n**下一步**:試 high-order invert → edit prompt；翻唱支線用 inversion 保旋律。",
+    "**論文 2｜A Diagnostic Evaluation Framework for AI-Generated Cover Songs Using Music-Theoretic and Acoustic Features**\n🔗 https://arxiv.org/abs/2607.19688\n🎯 主線:MIR 評估（AI 翻唱五維診斷）｜7/22 上架\n\n**TLDR**:五維診斷 AI cover：旋律、和聲、調性、風格、編曲。30 首基準顯示和聲／編曲嚴重錯最多；低階特徵可曝光症狀，尚難取代專家判斷。\n\n**為什麼選它**:接昨日全曲 cover 與 SongSQA——總分看不見的局部樂理錯需要可定位清單。\n\n**注意**:n=30，自動 scorer 尚未可靠。\n\n**下一步**:五維當 cover 抽聽表與 preference 拒絕理由。",
+    "**GitHub Pick｜thedavidweng/OpenKara** ⭐19｜最近更新 2026-07-25\n🔗 https://github.com/thedavidweng/OpenKara\n\n桌面卡拉 OK（Tauri／Rust）：本機 AI stem 分離 + 線上同步歌詞，把既有曲庫變成可唱伴奏。\n\n**為什麼選它**:補「分離—同步歌詞—本機播放」工程端，對接今日編輯與 cover 診斷。\n\n## 今天的 take-away\n- Rectified-flow 音樂編輯要靠穩定 inversion + 結構鎖定（FlowSonic, 2607.17526）。\n- AI 翻唱評估要五維診斷，不要只給一個分（2607.19688）。\n- 工程：OpenKara 可當本機 karaoke 節點；診斷維度可當 cover／生成的 QA。"
+  ]
+}
