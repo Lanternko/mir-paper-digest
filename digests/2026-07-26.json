@@ -1,0 +1,94 @@
+{
+  "date": "2026-07-26",
+  "papers": [
+    {
+      "slot": 1,
+      "track": "mean_audio",
+      "title": "StemFX: Learning Mixing Style Representations via Autoregressive FX Chain Prediction on Source-Separated Stems",
+      "authors": [
+        "Yuan-Chiao Cheng",
+        "Jui-Te Wu",
+        "Brian Chen",
+        "Yen-Tung Yeh",
+        "Yu-Hua Chen",
+        "Yi-Hsuan Yang"
+      ],
+      "published": "2026-07-17",
+      "updated": "2026-07-17",
+      "source_url": "https://arxiv.org/abs/2607.15634",
+      "arxiv_id": "2607.15634",
+      "doi": "10.48550/arXiv.2607.15634",
+      "tags": [
+        "mixing style",
+        "FX chain",
+        "source separation"
+      ],
+      "quality": "新且重要",
+      "tldr": "在分離後的 vocals/bass/drums/other stem 上，用 Transformer 自迴歸預測可變長度效果鏈以學習混音風格；約 10.5 萬首歌 Sep-Aug 訓練，檢索與風格轉移皆優於既有方法且遠快於推論期優化。",
+      "insight": "洞見:MeanAudio 生成與 karaoke 分離之後的共同缺口，是「混音風格」仍難用可讀、可執行的 per-stem FX 鏈表示。StemFX 把混音當序列生成：BSFiLM 編碼器吃分離 stem，自迴歸解碼器輸出可解釋的效果名＋參數 token；並用分離＋MultiAFx 增強把配對資料擴到約 10.5 萬曲——直接接上昨日 FlowSonic 編輯與 cover 診斷之後的「製作層」：生成／分離完還要能拷貝或遷移混音決定，而不是只優化一個黑箱 embedding。",
+      "try_next": "可做:對 MeanAudio 全曲輸出先 stem 分離再跑 StemFX，把預測 FX 鏈當 post-process recipe；karaoke-jp 人聲 stem 固定「乾聲→目標 KTV 濕聲」對，看是否能抄 EQ／壓限／殘響參數。開源：barry-mir/stemfx、MultiAFx。",
+      "problem": "混音風格由各 stem 上效果的選擇、順序與參數共同決定，但既有方法常只看立體聲混音、固定效果種類與長度，或依賴可微效果與稀缺多軌資料，難以在真實規模上學到可變長度、可解釋的 per-stem FX 鏈。",
+      "method": "StemFX 聯合訓練 BSFiLM 編碼器（band-split 多頻帶 CNN＋手作混音特徵 FiLM）與 Transformer 解碼器：以原 stem 與套用效果後的 stem 成對輸入，自迴歸預測 token 化 FX 鏈（效果名、參數名、量化值）。訓練資料以 SCNet 等分離模型從 FMA 抽出四軌 pseudo-stem，再用 MultiAFx（85 種效果、7 個 Python 函式庫）隨機增強，並做跨曲 stem 混搭以去相關音樂內容。",
+      "data": "訓練：FMA 約 10.5 萬曲 × 四 stem（vocals/bass/drums/other）＋ MultiAFx 隨機 1–10 效果／stem。評估：未見於訓練的 MUSDB18；檢索池 N=500；風格轉移含合成效果鏈與真實專業混音，以及 20 位聽眾 MUSHRA。代碼與權重宣稱開源（stemfx、MultiAFx）。",
+      "findings": "混音風格檢索上，StemFX 在各效果鏈長度皆勝過 AFx-Rep、Fx-Encoder++、CLAP 與同架構對比學習版 BSFiLM-CL（例如 8 效果時 Top-1 約 86.8% vs 對比學習 77.8%）。配對風格轉移上，自由生成 FX 鏈的 spectral fidelity 與聽感偏好最佳，且較推論期迭代優化快約 4000 倍以上；消融顯示「吃分離 stem」貢獻最大。",
+      "limitations": "只能預測訓練時效果詞彙內的裝置；依賴四軌分離結果，分離誤差會傳入表示；訓練鏈為隨機抽樣，未必對齊工程師的曲風慣例；FMA pseudo-stem 與專業多軌仍有 gap。日文／JPOP 曲庫與人聲為主的 karaoke 場景需另驗證。",
+      "editor_note": "MeanAudio 今日首選：生成與編輯之後補「可執行混音風格」。karaoke 側可接人聲／伴奏 stem 的 KTV 濕乾遷移。接 7/25 FlowSonic 與 cover 五維診斷的編曲／製作維度。",
+      "relevance": {
+        "mean_audio": 5,
+        "karaoke_jp": 4
+      }
+    },
+    {
+      "slot": 2,
+      "track": "general_mir",
+      "title": "Music I Care About: Automated Multimodal Benchmarking of LLM Music Perception Skills on (Almost) Any Music",
+      "authors": [
+        "Tomáš Sourada",
+        "Katia Vendrame",
+        "Jan Hajič jr"
+      ],
+      "published": "2026-07-07",
+      "updated": "2026-07-07",
+      "source_url": "https://arxiv.org/abs/2607.06015",
+      "arxiv_id": "2607.06015",
+      "doi": "10.48550/arXiv.2607.06015",
+      "tags": [
+        "music understanding",
+        "MLLM benchmark",
+        "multimodal"
+      ],
+      "quality": "新且重要",
+      "tldr": "提出 MusICA-MetaBench：由使用者提供的樂譜／MusicXML 等自動生成可考「音樂感知」的多選題，跨音訊、樂譜影像與符號檔比較 MLLM；並以 text-only 與白噪音基線證明題目真的需要聽／看音樂。",
+      "insight": "洞見:Music Flamingo 與音樂理解模型缺的常不是「再一個固定榜」，而是「對我在乎的曲目，能否測到真正的感知而不是 shortcut」。MusICA-MetaBench 用符號結構＋教學式模板 on-demand 建 benchmark，讓 JPOP／合唱／自己的 karaoke 曲庫也能變成可統計比較的感知測驗——補 7/25 cover 五維診斷與 7/16 美學 shortcut 之外的「多模態理解」軸。",
+      "try_next": "可做:用 ChoraleBricks 流程模板，改接一批 JPOP MusicXML 或自建 note-level score，對 Music Flamingo／Qwen-Music 跑同一組感知題；並固定 text-only 與 white-noise 基線當 fail-loud 閘門。",
+      "problem": "既有音樂 MLLM 基準多為靜態、評測成本高，且難以遷移到榜外曲目；不少宣稱「音樂理解」的題目其實不需要真正的音樂感知；也缺乏跨音訊／樂譜影像／符號檔的系統比較。",
+      "method": "MusICA-MetaBench 從使用者提供的結構化符號（如 MusicXML）與預定義教學式題型模板，自動生成多選問答，探測音訊、樂譜影像與符號檔上的音樂感知能力。以 ChoraleBricks 示範，並實驗決定能做可靠模型比較的 benchmark 規模；用純文字與白噪音基線檢驗題目是否真測感知。",
+      "data": "示範資料集 ChoraleBricks；由 MusicXML 等符號推導問答對。摘要未宣稱超大通用曲庫，重點是 dataset-specific、on-demand 的 meta-benchmark 框架。",
+      "findings": "在報告設定下可找到能做統計可靠模型比較的題量；相對 text-only 與 white-noise 基線，框架題目能區分出真正依賴音樂感知的表現，支持跨模態音樂感知評估。",
+      "limitations": "示範以合唱／樂譜友善資料為主，流行／日文歌詞語意與唱腔風格未必被題型覆蓋；依賴可用的符號或樂譜結構，純音訊無譜曲目要另接轉錄。模板偏感知而非生成品質或 karaoke 對齊誤差。",
+      "editor_note": "接 Music Flamingo／Qwen-Music 理解線：用「自己的曲」做可重現感知測驗，而不是只看固定公榜。與今日 StemFX 的製作層互補——一個測聽懂了沒，一個測混得好不好。",
+      "relevance": {
+        "mean_audio": 3,
+        "karaoke_jp": 3
+      }
+    }
+  ],
+  "repo": {
+    "full_name": "ijuinryukichi/lyric-align",
+    "url": "https://github.com/ijuinryukichi/lyric-align",
+    "description_zh": "已知正確歌詞、只要時間軸的 CJK 優先對齊工具：用字元級 fuzzy match 把歌詞錨到 ASR 詞級時間戳，輸出 LRC/SRT/ASS/JSON；針對無空白語言與唱聲／rap，可選 faster-whisper 與 Demucs 人聲分離。",
+    "stars": 0,
+    "updated": "2026-07-26",
+    "why": "直接補 karaoke-jp 的「官方歌詞＋時間」缺口：日文／中文不靠空白分詞，容忍 ASR 聽錯字但保留時序；topics 含 japanese、karaoke、lrc、forced-alignment。2026-07-26 仍有 push，可與昨日 OpenKara、今日 StemFX 人聲 stem 串成分離→對齊→混音。",
+    "tags": [
+      "lyrics alignment",
+      "CJK",
+      "karaoke"
+    ]
+  },
+  "discord_messages": [
+    "# 每日 MIR 論文精選 - 2026-07-26\n🌐 完整報告:https://lanternko.github.io/mir-paper-digest/reports/2026-07-26.html\n\n**論文 1｜StemFX: Learning Mixing Style Representations via Autoregressive FX Chain Prediction on Source-Separated Stems**\n🔗 https://arxiv.org/abs/2607.15634\n🎯 主線:MeanAudio（分離 stem 上的混音風格／FX 鏈）｜7/17 上架｜ISMIR 2026\n\n**TLDR**:在 vocals/bass/drums/other 上自迴歸預測可變長度效果鏈以學混音風格；約 10.5 萬曲 Sep-Aug 訓練，檢索與風格轉移優於既有方法，且遠快於推論期優化。\n\n**為什麼選它**:生成／編輯之後還要「可執行混音」；把分離＋FX 當可讀 recipe，接昨日 FlowSonic 與 cover 製作維度。\n\n**注意**:效果詞彙有界、依賴分離品質；JPOP／KTV 需另測。\n\n**下一步**:全曲生成→分離→StemFX 當 post-process；開源 barry-mir/stemfx。",
+    "**論文 2｜Music I Care About: Automated Multimodal Benchmarking of LLM Music Perception Skills on (Almost) Any Music**\n🔗 https://arxiv.org/abs/2607.06015\n🎯 主線:MIR／Music Flamingo（on-demand 音樂感知基準）｜7/7 上架\n\n**TLDR**:MusICA-MetaBench 從使用者樂譜／MusicXML 自動生成多選感知題，跨音訊、樂譜影像與符號檔評 MLLM；text-only 與白噪音基線證明題目真需要音樂感知。\n\n**為什麼選它**:固定公榜難以遷移到「我在乎的曲」；對 Music Flamingo 理解線是可重現、可自帶曲庫的測驗框架。\n\n**注意**:示範偏合唱／有譜資料；純音訊與日文歌詞語意需擴題型。\n\n**下一步**:用 JPOP MusicXML 對 Flamingo／Qwen-Music 跑同一套感知題＋基線閘門。",
+    "**GitHub Pick｜ijuinryukichi/lyric-align** ⭐0｜最近更新 2026-07-26\n🔗 https://github.com/ijuinryukichi/lyric-align\n\nCJK 優先歌詞對齊：已知正確歌詞，字元級 fuzzy 錨到 ASR 時序，輸出 LRC 等；可選 Whisper 與 Demucs。\n\n**為什麼選它**:補日文／中文卡拉 OK「官方歌詞只要時間」工程節點，可串分離→對齊→今日混音。\n\n## 今天的 take-away\n- 混音風格可用 per-stem 自迴歸 FX 鏈表示，且能靠分離＋增強做到十萬曲規模（StemFX, 2607.15634）。\n- 音樂理解基準應可 on-demand 對「自己的曲」測感知，並用 text-only／noise 基線防 shortcut（2607.06015）。\n- 工程：lyric-align 接 CJK LRC；StemFX／MultiAFx 接生成後製作。"
+  ]
+}

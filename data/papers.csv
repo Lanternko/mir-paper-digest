@@ -157,3 +157,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-07-25,1,paper,mean_audio,FlowSonic: Stable Zero-Shot Music Editing via High-Order Trajectory Integration,https://arxiv.org/abs/2607.17526,10.48550/arXiv.2607.17526,music editing|rectified flow|zero-shot,新且重要
 2026-07-25,2,paper,general_mir,A Diagnostic Evaluation Framework for AI-Generated Cover Songs Using Music-Theoretic and Acoustic Features,https://arxiv.org/abs/2607.19688,10.48550/arXiv.2607.19688,cover evaluation|music theory features|diagnostic metrics,新且重要
 2026-07-25,0,repo,github,thedavidweng/OpenKara,https://github.com/thedavidweng/OpenKara,,karaoke|source separation|synced lyrics,
+2026-07-26,1,paper,mean_audio,StemFX: Learning Mixing Style Representations via Autoregressive FX Chain Prediction on Source-Separated Stems,https://arxiv.org/abs/2607.15634,10.48550/arXiv.2607.15634,mixing style|FX chain|source separation,新且重要
+2026-07-26,2,paper,general_mir,Music I Care About: Automated Multimodal Benchmarking of LLM Music Perception Skills on (Almost) Any Music,https://arxiv.org/abs/2607.06015,10.48550/arXiv.2607.06015,music understanding|MLLM benchmark|multimodal,新且重要
+2026-07-26,0,repo,github,ijuinryukichi/lyric-align,https://github.com/ijuinryukichi/lyric-align,,lyrics alignment|CJK|karaoke,
