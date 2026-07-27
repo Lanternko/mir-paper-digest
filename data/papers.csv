@@ -160,3 +160,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-07-26,1,paper,mean_audio,StemFX: Learning Mixing Style Representations via Autoregressive FX Chain Prediction on Source-Separated Stems,https://arxiv.org/abs/2607.15634,10.48550/arXiv.2607.15634,mixing style|FX chain|source separation,新且重要
 2026-07-26,2,paper,general_mir,Music I Care About: Automated Multimodal Benchmarking of LLM Music Perception Skills on (Almost) Any Music,https://arxiv.org/abs/2607.06015,10.48550/arXiv.2607.06015,music understanding|MLLM benchmark|multimodal,新且重要
 2026-07-26,0,repo,github,ijuinryukichi/lyric-align,https://github.com/ijuinryukichi/lyric-align,,lyrics alignment|CJK|karaoke,
+2026-07-27,1,paper,karaoke_jp,CODA: Cascaded Online Discontinuity-Aware Alignment for Real-Time Image-Based Score Following,https://arxiv.org/abs/2607.21899,10.48550/arXiv.2607.21899,score following|online alignment|repeat recovery,新且重要
+2026-07-27,2,paper,general_mir,Music-JEPA: Learning a World Model of Sound from Action,https://arxiv.org/abs/2607.22000,10.48550/arXiv.2607.22000,world model|JEPA|piano transcription,新且重要
+2026-07-27,0,repo,github,Yancovenant/KaraokePlus,https://github.com/Yancovenant/KaraokePlus,,karaoke|lyrics alignment|source separation,

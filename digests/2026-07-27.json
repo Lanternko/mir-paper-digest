@@ -1,0 +1,91 @@
+{
+  "date": "2026-07-27",
+  "papers": [
+    {
+      "slot": 1,
+      "track": "karaoke_jp",
+      "title": "CODA: Cascaded Online Discontinuity-Aware Alignment for Real-Time Image-Based Score Following",
+      "authors": [
+        "Yining Yang",
+        "Ruogu Chen",
+        "Jie Han"
+      ],
+      "published": "2026-07-24",
+      "updated": "2026-07-24",
+      "source_url": "https://arxiv.org/abs/2607.21899",
+      "arxiv_id": "2607.21899",
+      "doi": "10.48550/arXiv.2607.21899",
+      "tags": [
+        "score following",
+        "online alignment",
+        "repeat recovery"
+      ],
+      "quality": "新且重要",
+      "tldr": "影像樂譜即時跟譜系統：系統→小節→音符級聯選取保證幾何一致，並以靜音觸發 break mode 從反覆／D.C.／coda 跳轉恢復；MSMD 上追蹤與跳轉恢復皆 SOTA，開源 ValleyC/CODA。",
+      "insight": "洞見:karaoke-jp 的「對齊」不只是歌詞 LRC 錨定，還包含樂譜／樂句層的即時位置與結構斷點恢復。CODA 把 image-based score following 從平行多頭偵測改成級聯選取（system→bar→note），並用靜音當可觀測跳轉線索——這正對應 JPOP 反覆、D.C.、coda 與唱者重唱時「跟丟後如何再鎖定」的工程痛點；可與 7/21 DTW 可靠度、7/26 歌詞對齊 pick 串成「音訊—樂譜—歌詞」多層對齊。",
+      "try_next": "可做:在 karaoke-jp 用樂譜影像／簡譜當第二軌時間軸，把 CODA 的 bar 級位置對到 LRC 行；靜音 break 規則可遷移到「間奏／換段後重新鎖定歌詞行」。先跑 ValleyC/CODA 的 MSMD demo，再評估真實 JPOP 掃描譜。",
+      "problem": "即時影像樂譜跟譜需在低延遲下處理串流音訊與高度重複的視覺樣式；既有多解析度方法對 system／bar／note 獨立預測，跨層不一致且搜尋空間過大，且幾乎無法從反覆、D.C.、coda 等結構斷點恢復。",
+      "method": "CODA 將固定頁面的跟譜改寫為候選選取：因果 Mamba 音訊編碼 + FiLM 條件視覺 CNN/FPN，級聯預測 active system→bar→bar-local note；beam search 結合可學時間先驗；靜音能量 hysteresis 進入 break mode，放寬轉移懲罰並擴大 beam 以重定位。兩階段 scheduled sampling 縮小訓練／推論落差。",
+      "data": "MSMD 鋼琴：354/19/94 訓練／驗證／測試；Setting I 合成譜+合成音，Setting II 合成譜+真實鋼琴錄音（16 首）。另建 repeat-aware jump benchmark：66 首含譜面反覆結構共 131 跳、28 首隨機跳 84 次。代碼公開 ValleyC/CODA。",
+      "findings": "Setting I 於 ≤0.10s 閾值約 0.914（CYOLO-SB 約 0.837），bar／system accuracy 約 0.975／0.991；Setting II 同閾值約 0.743 vs 0.630。跳轉測試上完整 CODA 在 annotated repeats 1s 內 system recovery 約 0.78；推論約 12.8ms/frame（約 78fps），滿足即時預算。",
+      "limitations": "目前僅 solo 鋼琴 MSMD；chamber／管弦、真實掃描商業樂譜與現場麥克風尚未公開評測。靜音觸發非萬能（無休止的跳轉較難）。JPOP／人聲伴奏與歌詞對齊需另接。",
+      "editor_note": "karaoke-jp 今日首選：把「即時對齊」從歌詞推回樂譜層，並正式處理反覆／跳轉。可與 7/21 DTW reliability、昨日 lyric-align 並列成對齊三件套。",
+      "relevance": {
+        "mean_audio": 2,
+        "karaoke_jp": 5
+      }
+    },
+    {
+      "slot": 2,
+      "track": "general_mir",
+      "title": "Music-JEPA: Learning a World Model of Sound from Action",
+      "authors": [
+        "Ziyu Wang",
+        "Kun Fang",
+        "Yann LeCun"
+      ],
+      "published": "2026-07-24",
+      "updated": "2026-07-24",
+      "source_url": "https://arxiv.org/abs/2607.22000",
+      "arxiv_id": "2607.22000",
+      "doi": "10.48550/arXiv.2607.22000",
+      "tags": [
+        "world model",
+        "JEPA",
+        "piano transcription"
+      ],
+      "quality": "新且重要",
+      "tldr": "以 JEPA 學鋼琴「動作→聲音」世界模型：音訊為 state、pianoroll+踏板為 action，潛空間預測下一 state；下游 beat／作曲家／調性具競爭力，並能以 planning 做轉譜，踏板連續估計優於監督基線。",
+      "insight": "洞見:音樂理解與 Music Flamingo 線需要的不只是被動對比學習，而是「動作如何改寫聲音」的動力學。Music-JEPA 把 LeCun 式 world model 接到鋼琴：state=2s 音訊、action=pianoroll+pedal，離線配對資料學潛空間轉移——比純 Audio-JEPA 更能捕捉 pitch／timing／velocity／踏板因果，並開啟「搜尋能解釋目標聲音的動作」的轉譜路徑。對 MeanAudio 是 representation／planning 視角的生成前結構；對 karaoke 是 MIDI／pitch 骨架的另一條反推路線。",
+      "try_next": "可做:等權重釋出後，用 state encoder 當鋼琴／伴奏特徵，測 beat 與 key 是否遷移到 JPOP 分離人聲；planning 轉譜對踏板／長音的優勢可對照 note-level 唱聲 pitch 管線。Demo：zzwaang.github.io/music-jepa-demo。",
+      "problem": "既有音訊 JEPA 多被動遮罩預測，未建模「樂器動作如何驅動聲音演進」，也少在 beat／key 等音樂概念與 planning 轉譜上驗證；需要能在潛空間學 action-conditioned 動力學的音樂世界模型。",
+      "method": "Music-JEPA：state／action 皆 ViT 編碼 log-mel 與 pianoroll+pedal；state predictor 以 cross-attention 條件於 action 預測下一 latent state，另有 action temporal prior；EMA teacher + layer norm 防 collapse。下游凍結 state encoder 做 probe；轉譜以 amortized inverse predictor 近似 latent planning，再解碼回 pianoroll。",
+      "data": "MAESTRO v3（約 200 小時鋼琴+對齊 MIDI）；beat 用 ASAP 子集；作曲家識別保留 11 位常見作曲家。總參數量約 19M（state encoder 約 6M）。代碼與預訓練權重宣稱將釋出；demo 頁已上線。",
+      "findings": "對 state／action 擾動敏感度高於 audio-only JEPA；下游 beat F1、key 等優於 AO-JEPA，並以約 7% MERT 參數量具競爭力。Planning 轉譜 note F1 低於全監督 SOTA，但連續 sustain pedal MAE 最佳。",
+      "limitations": "目前限古典鋼琴與顯式 pianoroll action；無 MIDI 的流行／人聲、多軌混音與 JPOP 尚未覆蓋。轉譜 note 級仍落後監督法；權重尚未即時開源。",
+      "editor_note": "理解主線大作：把 world model 從被動 JEPA 推到 action-conditioned 音樂動力學。可與 7/26 MusICA-MetaBench、7/15 Qwen-Music 並列「如何學到可規劃的音樂表徵」。",
+      "relevance": {
+        "mean_audio": 4,
+        "karaoke_jp": 3
+      }
+    }
+  ],
+  "repo": {
+    "full_name": "Yancovenant/KaraokePlus",
+    "url": "https://github.com/Yancovenant/KaraokePlus",
+    "description_zh": "現代化 KTV 管線：分支架構把 MDX 分離給聽感，原始音訊走 DSP 追蹤的 CTC 對齊矩陣做歌詞時間戳，目標 sub-20ms 同步與減少幻覺；Python 3.12／ONNX，MIT。",
+    "stars": 1,
+    "updated": "2026-07-25",
+    "why": "直接補 karaoke-jp「分離＋高精歌詞對齊」節點；2026-07-25 仍活躍、未發送過。可與今日 CODA 的樂譜跟譜、昨日 lyric-align 形成音訊／歌詞／樂譜三軌對齊實驗。",
+    "tags": [
+      "karaoke",
+      "lyrics alignment",
+      "source separation"
+    ]
+  },
+  "discord_messages": [
+    "# 每日 MIR 論文精選 - 2026-07-27\n🌐 完整報告:https://lanternko.github.io/mir-paper-digest/reports/2026-07-27.html\n\n**論文 1｜CODA: Cascaded Online Discontinuity-Aware Alignment for Real-Time Image-Based Score Following**\n🔗 https://arxiv.org/abs/2607.21899\n🎯 主線:karaoke-jp（即時影像樂譜跟譜／跳轉恢復）｜7/24 上架｜ISMIR 2026\n\n**TLDR**:級聯 system→bar→note 選取保證幾何一致，靜音 break mode 處理反覆／D.C.／coda；MSMD 追蹤與跳轉恢復 SOTA，代碼 ValleyC/CODA。\n\n**為什麼選它**:karaoke 對齊不只是 LRC——結構斷點後如何重鎖定是工程缺口。\n\n**注意**:目前 solo 鋼琴 MSMD；JPOP 掃描譜需另評。\n\n**下一步**:bar 級位置對 LRC 行；靜音規則遷移到換段重鎖。",
+    "**論文 2｜Music-JEPA: Learning a World Model of Sound from Action**\n🔗 https://arxiv.org/abs/2607.22000\n🎯 主線:MIR 理解（action-conditioned JEPA 世界模型）｜7/24 上架\n\n**TLDR**:音訊=state、pianoroll+踏板=action，潛空間預測下一 state；beat／key 具競爭力，planning 轉譜踏板連續估計佳。\n\n**為什麼選它**:把 LeCun 式 world model 接到音樂——比被動 JEPA 更能學「動作如何改寫聲音」。\n\n**注意**:限古典鋼琴；note 轉譜仍落後全監督。\n\n**下一步**:權重釋出後測 JPOP 分離人聲特徵；對照 pitch 轉譜管線。",
+    "**GitHub Pick｜Yancovenant/KaraokePlus** ⭐1｜最近更新 2026-07-25\n🔗 https://github.com/Yancovenant/KaraokePlus\n\nKTV 管線：MDX 分離聽感 + CTC 對齊矩陣做 sub-20ms 歌詞同步；Python／ONNX／MIT。\n\n**為什麼選它**:補「分離—高精對齊」工程節點，對接今日 CODA 樂譜跟譜。\n\n## 今天的 take-away\n- 影像樂譜即時跟譜要級聯一致＋靜音可恢復跳轉（CODA, 2607.21899）。\n- 音樂世界模型應以動作條件化學習聲音動力學，而不只被動 JEPA（2607.22000）。\n- 工程：KaraokePlus 可當分離＋歌詞對齊節點，與樂譜 bar 級位置並軌。"
+  ]
+}
