@@ -163,3 +163,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-07-27,1,paper,karaoke_jp,CODA: Cascaded Online Discontinuity-Aware Alignment for Real-Time Image-Based Score Following,https://arxiv.org/abs/2607.21899,10.48550/arXiv.2607.21899,score following|online alignment|repeat recovery,新且重要
 2026-07-27,2,paper,general_mir,Music-JEPA: Learning a World Model of Sound from Action,https://arxiv.org/abs/2607.22000,10.48550/arXiv.2607.22000,world model|JEPA|piano transcription,新且重要
 2026-07-27,0,repo,github,Yancovenant/KaraokePlus,https://github.com/Yancovenant/KaraokePlus,,karaoke|lyrics alignment|source separation,
+2026-07-28,1,paper,karaoke_jp,Music-Source-Separation-Training (MSST): A Unified Framework for Training and Evaluating Music Demixing Models,https://arxiv.org/abs/2607.23395,10.48550/arXiv.2607.23395,source separation|karaoke|training framework,新且重要
+2026-07-28,2,paper,mean_audio,HARP: Harmonic-Aware Residual Partitioning for Neural Audio Codecs,https://arxiv.org/abs/2607.16657,10.48550/arXiv.2607.16657,neural codec|RVQ|token audio,新且重要
+2026-07-28,0,repo,github,grazzolini/tuneforge,https://github.com/grazzolini/tuneforge,,karaoke|stem separation|lyrics transcription,

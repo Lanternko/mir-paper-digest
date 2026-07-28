@@ -1,0 +1,93 @@
+{
+  "date": "2026-07-28",
+  "papers": [
+    {
+      "slot": 1,
+      "track": "karaoke_jp",
+      "title": "Music-Source-Separation-Training (MSST): A Unified Framework for Training and Evaluating Music Demixing Models",
+      "authors": [
+        "Roman Solovyev",
+        "Ilya Kiselev",
+        "Alexander Stempkovskiy",
+        "Tatiana Gabruseva"
+      ],
+      "published": "2026-07-25",
+      "updated": "2026-07-25",
+      "source_url": "https://arxiv.org/abs/2607.23395",
+      "arxiv_id": "2607.23395",
+      "doi": "10.48550/arXiv.2607.23395",
+      "tags": [
+        "source separation",
+        "karaoke",
+        "training framework"
+      ],
+      "quality": "新且重要",
+      "tldr": "開源 MSS 統一訓練／驗證／推論框架：YAML 驅動多架構（BS/Mel-Band RoFormer、HTDemucs、SCNet 等），並用滑窗交叉淡化、TTA、ensemble、LoRA 等工程手段穩步抬升分離品質。",
+      "insight": "洞見:karaoke-jp 的人聲分離品質，往往卡在「整條 pipeline 可複現、可 ablation」，而不只是再換一個 SOTA backbone。MSST 把資料型別（七種 stem 組織）、加權 loss、Bleedless/Fullness 等實務指標、長音訊滑窗+TTA、與 ensemble/LoRA 收斂成同一 YAML 介面——這正是把 JPOP 多轨分離從「跟單 repo 抄推論」升級成「可系統比較與微調」的基礎設施；社群已在此上長出 crowd／去混響／aspiration／phantom-centre 等特化權重。",
+      "try_next": "可做:以 zfturbo/music-source-separation-training 當 karaoke-jp 的分離實驗台：固定 JPOP 子集測 vocals SDR／Bleedless，再試 LoRA 適配日文偶像／伴唱；ensemble 權重表可當「分離→對齊」前處理版本化依據。",
+      "problem": "音樂音源分離品質取決於整條工程管線（架構、資料增強、loss／metrics、長音訊推論、後處理），既有開源專案多鎖定單一模型族或已停維護，難以快速做可復現的 ablation 與落地迭代。",
+      "method": "MSST 以 YAML 統一訓練／驗證／推論：支援 BS-RoFormer、Mel-Band RoFormer、HTDemucs、SCNet、MDX23C 等多架構；七種資料型別與 per-stem 增強；可加權組合 L1/MSE、multi-STFT、quantile-masked、LogWMSE 等 loss；推論端滑窗交叉淡化、通道互換／極性反轉 TTA、時域加權 ensemble、LoRA 微調與 ONNX/TensorRT 匯出。",
+      "data": "訓練／評測圍繞 MUSDB18/HQ、MoisesDB 與自訂多軌資料；文件另索引社群特化權重（人聲、crowd、去混響、aspiration、phantom centre、鼓組分解等）。程式庫 MIT，對應公開 repo zfturbo/music-source-separation-training。",
+      "findings": "TTA 對多模型／多 stem 帶來小而一致的 SDR 增益（例：BS RoFormer vocals +0.03、MelBand vocals +0.06）。時域加權 ensemble 可把人聲 SDR 從單模約 11.2 抬至 11.61，bass 自 13.81–14.62 合至 14.87。框架亦催生大量非四軌特化權重生態。",
+      "limitations": "論文偏工程系統綜述與 ablation，非單一新架構 SOTA 宣告；真實 mastering 混音與線性 stem 加總的訓練假設仍有落差。日文 JPOP／偶像伴唱需另做域適配與主觀聽感驗證。",
+      "editor_note": "karaoke-jp 今日首選：把「分離」從單點模型升級成可版本化的實驗平台。可與昨日 KaraokePlus、7/16 唱聲分離適配串成人聲前處理鏈。",
+      "relevance": {
+        "mean_audio": 3,
+        "karaoke_jp": 5
+      }
+    },
+    {
+      "slot": 2,
+      "track": "mean_audio",
+      "title": "HARP: Harmonic-Aware Residual Partitioning for Neural Audio Codecs",
+      "authors": [
+        "Qiaoyu Yang",
+        "Lixing He",
+        "Binyue Deng",
+        "Weifeng Zhao"
+      ],
+      "published": "2026-07-18",
+      "updated": "2026-07-18",
+      "source_url": "https://arxiv.org/abs/2607.16657",
+      "arxiv_id": "2607.16657",
+      "doi": "10.48550/arXiv.2607.16657",
+      "tags": [
+        "neural codec",
+        "RVQ",
+        "token audio"
+      ],
+      "quality": "新且重要",
+      "tldr": "僅改訓練目標的 RVQ 頻帶階層：累積解碼保諧波上下文＋軟高斯子帶監督，推論與標準 RVQ 相同；音樂／語音／通用音訊重建與 MUSHRA 皆優於 DAC 與平行分帶。",
+      "insight": "洞見:MeanAudio 的 neural codec 不只求低比特率失真，還要「截斷階段時可預期、token 仍單一串流」。HARP 診斷標準 RVQ 的 spectral entanglement（各 stage 頻譜重心纏在一起）與平行分帶的跨頻不相干，改用 cumulative decoding＋subband contribution 監督把 bass→treble 寫進 codebook——推論零改架構，卻讓 bitrate scaling 先丟高頻再丟低頻。這對 flow／AR 音樂生成的 tokenizer 可解釋性與變比特率部署都是直接可遷移的訓練配方。",
+      "try_next": "可做:跟 QiaoyuYang/harp-codec 權重，在音樂生成 latent 上對照 DAC 的 stage 截斷失真曲線；若做 MeanAudio 條件生成，可試「只保留前 5 stage」當低成本 preview token。",
+      "problem": "RVQ neural codec 各 stage 對頻率無結構，截斷 bitrate 時失真不可預測；平行分帶雖專精各頻帶，卻拆碎 latent 並失去跨頻諧波上下文，也不利單一 token 串流建模。",
+      "method": "HARP 把 9 個 RVQ stage 分成 4 組（3-2-2-2，低→高頻），以累積 latent 解碼保諧波上下文，對各組波形增量做可學習高斯 mel 權重的子帶重建 loss，並用 stop-gradient 避免梯度不平衡；訓練可 group dropout 支援變比特率。推論與標準 DAC/RVQ 完全相同。",
+      "data": "訓練混用 MUSDB18-HQ、MTG-Jamendo、自有 10 萬+ 音樂軌、AudioSet、LibriTTS；評測 MUSDB 測試集、FSD50K eval、LibriTTS test-clean。DAC 式 backbone，44.1 kHz、9×1024 codebooks、約 7.7 kbps。代碼與權重：github.com/QiaoyuYang/harp-codec。",
+      "findings": "7.7 kbps 下 HARP 在音樂／語音／通用 SI-SDR 皆最佳（音樂 9.22 vs DAC 8.97／BSCodec 7.96）。MUSHRA（n=12）：4.3 kbps 中位 68 vs DAC 59，7.7 kbps 90 vs 84。低比特率優勢更大；諧波相位一致性優於平行分帶。",
+      "limitations": "訓練因額外解碼前向約 2–3× 變慢；實驗以 DAC 式 9-stage 為主，未全面覆蓋 FSQ/BSQ 等非 RVQ 變體。音樂生成下游（AR／flow）尚未直接報告。",
+      "editor_note": "MeanAudio 主線 codec 篇：用「只改 loss」換可預期的頻帶階層 token。可與 7/17 FdAudio、既有 codec/tokenizer 線並列。",
+      "relevance": {
+        "mean_audio": 5,
+        "karaoke_jp": 2
+      }
+    }
+  ],
+  "repo": {
+    "full_name": "grazzolini/tuneforge",
+    "url": "https://github.com/grazzolini/tuneforge",
+    "description_zh": "本地優先音樂練習桌面端：多軌 stem 分離、和弦／調／速度與歌詞轉錄、移調／retune／capo、跟唱播放與匯出；TypeScript/Tauri+FastAPI，MIT，無雲端帳號。",
+    "stars": 7,
+    "updated": "2026-07-27",
+    "why": "直接串起 karaoke-jp 的「分離→歌詞→跟唱」工程原型，且 2026-07-27 仍活躍、未發送過；可對照今日 MSST 分離框架與本機 LRC／練習 UI 一體化需求。",
+    "tags": [
+      "karaoke",
+      "stem separation",
+      "lyrics transcription"
+    ]
+  },
+  "discord_messages": [
+    "# 每日 MIR 論文精選 - 2026-07-28\n🌐 完整報告:https://lanternko.github.io/mir-paper-digest/reports/2026-07-28.html\n\n**論文 1｜Music-Source-Separation-Training (MSST): A Unified Framework for Training and Evaluating Music Demixing Models**\n🔗 https://arxiv.org/abs/2607.23395\n🎯 主線:karaoke-jp（人聲／多軌分離實驗平台）｜7/25 上架\n\n**TLDR**:YAML 統一多架構 MSS 訓練與推論，並整合滑窗、TTA、ensemble、LoRA；把分離品質從「單模權重」推回整條可複現管線。\n\n**為什麼選它**:karaoke 分離瓶頸常在資料／loss／長音訊推論，而不是再換一個 backbone。\n\n**注意**:偏工程系統；JPOP 域適配與 mastering 非線性需另測。\n\n**下一步**:固定 JPOP 子集比對 Bleedless／SDR，再 LoRA 適配伴唱。",
+    "**論文 2｜HARP: Harmonic-Aware Residual Partitioning for Neural Audio Codecs**\n🔗 https://arxiv.org/abs/2607.16657\n🎯 主線:MeanAudio（neural codec / RVQ token）｜7/18 上架｜Interspeech 2026\n\n**TLDR**:只改訓練目標，讓 RVQ stage 形成低→高頻階層並保諧波上下文；推論與標準 RVQ 相同，重建與 MUSHRA 優於 DAC 與平行分帶。\n\n**為什麼選它**:codec 截斷 bitrate 要可預期，單一 token 串流仍利於生成建模。\n\n**注意**:訓練變慢 2–3×；下游音樂生成尚未直接報告。\n\n**下一步**:對照 stage 截斷失真曲線，當低成本 preview token。",
+    "**GitHub Pick｜grazzolini/tuneforge** ⭐7｜最近更新 2026-07-27\n🔗 https://github.com/grazzolini/tuneforge\n\n本地優先練習桌面端：stem 分離 + 歌詞／和弦／調速 + 移調跟唱匯出；MIT，無雲端。\n\n**為什麼選它**:把今日 MSST 的分離能力接到可操作的 karaoke 練習 UI。\n\n## 今天的 take-away\n- 音源分離要當可 ablation 的平台，而不只換模型（MSST, 2607.23395）。\n- Neural codec 可用訓練配方寫入頻帶階層，推論零改架構（HARP, 2607.16657）。\n- 工程：TuneForge 可當本地「分離—歌詞—跟唱」一體原型。"
+  ]
+}
