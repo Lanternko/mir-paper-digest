@@ -1,0 +1,89 @@
+{
+  "date": "2026-07-29",
+  "papers": [
+    {
+      "slot": 1,
+      "track": "mean_audio",
+      "title": "Neural Morphing: Sequence-Optimized Token-Level Morphing in Neural Audio Codecs",
+      "authors": [
+        "Emmanouil Karystinaios"
+      ],
+      "published": "2026-07-14",
+      "updated": "2026-07-14",
+      "source_url": "https://arxiv.org/abs/2607.12725",
+      "arxiv_id": "2607.12725",
+      "doi": "10.48550/arXiv.2607.12725",
+      "tags": [
+        "neural codec",
+        "RVQ editing",
+        "audio morphing"
+      ],
+      "quality": "新且重要",
+      "tldr": "免訓練的 codec token 域音色 morph：RVQ 粗／中／細分組轉移＋連續性約束 beam 選 palette grain，解碼成「保節奏、換音色」的 VST3/AU 即時效果。",
+      "insight": "洞見:MeanAudio 的 neural codec 不只服務壓縮與生成 tokenizer，還能當可編輯的創作中間表示。Neural Morphing 把 DAC 的 9 層 RVQ 切成 coarse／middle／fine，只謹慎替換中高頻殘差、以 beam 抑制 palette 檔案間跳動——這等於把「codec latent 可操作」從論文想法落成 DAW 可調的 structure/detail 軸。對生成後編輯、stem 上色、或 MeanAudio 下游做 training-free 風格轉移，都比再訓練一個 conditional generator 更輕。",
+      "try_next": "可做:固定 DAC 權重，用 JPOP 鼓／人聲 loop 當 source、環境或合成音當 palette，掃 ρ 與 beam width 聽 envelope 與 chattering；可對照昨日 HARP 的 stage 頻帶階層，看 coarse gate 是否與頻帶語意對齊。",
+      "problem": "創意音訊 morph 常卡在「保 source 節奏結構、又要 palette 音色細節」：古典頻譜 morph 與 waveform mosaicing 難接 DAW 即時工作流，而多數 latent 編輯又需要為每個 palette 重訓模型。",
+      "method": "以預訓練 neural codec（主實驗 DAC 44.1 kHz、9 codebook）將 source 與 palette 編碼為 token grain；用 codec 誘導 descriptor 做近鄰檢索；RVQ-group transfer 分組處理粗／中／細 codebook；連續性約束下以 bounded beam search 取代逐 grain 貪婪選擇；JUCE 實作 VST3/AU 與 chunked realtime 路徑。",
+      "data": "評估以確定性 manifest：247 段 Freesound Creative Commons palette、WaivOps Lo-Fi Drums 的 8 秒 source；指標含 FAD、spectral convergence、LSD、palette-index jitter、envelope correlation、RTF 與 chunked parity。",
+      "findings": "Beam 相對 greedy 約可將 palette-index jitter 減半並降低跨檔切換；RVQ-group 提供可聽的 structure/detail 控制；參考路徑在測試 palette 規模下可低於 realtime（RTF≈0.22–0.24）。Chunk 越大越接近 full-context 頻譜指標。",
+      "limitations": "證據以打擊／短促 onset 素材為主；和聲、人聲、長旋律需另調 gate 與 descriptor。客觀指標只作部署與連續性 sanity check，尚無正式聽感偏好測驗。",
+      "editor_note": "MeanAudio 今日首選：codec 從「生成 tokenizer」跨到「training-free 創作效果」。可與 7/28 HARP、既有 DAC/RVQ 線並列。",
+      "relevance": {
+        "mean_audio": 5,
+        "karaoke_jp": 2
+      }
+    },
+    {
+      "slot": 2,
+      "track": "karaoke_jp",
+      "title": "MeloBottleneck: Self-Supervised Melody Skeleton Extraction with a Latent Subsequence Bottleneck",
+      "authors": [
+        "Fan Bu",
+        "Rongfeng Li",
+        "Linfeng Fan"
+      ],
+      "published": "2026-07-11",
+      "updated": "2026-07-11",
+      "source_url": "https://arxiv.org/abs/2607.10233",
+      "arxiv_id": "2607.10233",
+      "doi": "10.48550/arXiv.2607.10233",
+      "tags": [
+        "melody skeleton",
+        "symbolic MIDI",
+        "self-supervised"
+      ],
+      "quality": "新且重要",
+      "tldr": "自監督把旋律骨架當「長度可控、保序的 latent 子序列」：硬瓶頸選音＋節奏閉合成可獨立演奏的縮減旋律，跨域轉移優於偽標籤 note classifier。",
+      "insight": "洞見:karaoke-jp 的 MIDI／score 與 pitch 管線常被裝飾音、顫音、前倚音弄亂——真正需要的是「可當獨立旋律」的骨架，而不只是每個 note 的 keep/delete。MeloBottleneck 用 re-ornamentation 重建、凍結旋律 prior 與 ornament-invariant 目標學子序列，並在閉合時把刪除的時值吸回前一音，正好對齊 mora-to-note／導唱線簡化的工程需求：先縮結構，再對齊或渲染 LRC。",
+      "try_next": "可做:對 JPOP 主旋律 MIDI（或唱聲 f0 量化後的 monophonic 序列）掃 ρ，比骨架與人工導唱線的 note F1；下游可把骨架當 karaoke score 的簡化軌或 melody retrieval 索引。",
+      "problem": "旋律骨架抽取若靠手寫規則或程序化 keep/delete 偽標籤，會繼承生成器偏差，且 note-wise 決策不等於「連貫的縮減旋律」。",
+      "method": "SimpleMono 表示（pitch／duration／delta-time）；Transformer 壓縮器做 top-K 保序子序列與可微 soft gather；rhythmic closure 產生零間隔閉合骨架；seq2seq re-ornamentation 重建；凍結 AR melody prior；程序裝飾視角上的 ornament-invariant consistency 與 exclusion loss。",
+      "data": "訓練聚合中英日歐等民間 monophonic 語料；評測含合成 OOD ornament-to-skeleton（O2B）、TAVERN variation-to-theme（V2T）、九宮工尺 ornamented-to-gongche（O2G）。補充材料：github.com/m-july/Supplementary-Files-For-MelobottleNeck-arXiv-Submission。",
+      "findings": "偽標籤分類器在合成 O2B 最強，但 MeloBottleneck 在 V2T／O2G 零樣本轉移更穩。骨架化 query 與 document 後，BM25 片段檢索 Recall@K 與 MRR 上升且查詢更快。去除 ornament exclusion 對插入音抑制傷害最大。",
+      "limitations": "僅 monophonic 符號旋律；評估多在 oracle 壓縮比下測選音，自由長度預測較弱。骨架定義依賴程序裝飾器，風格不匹配時不變性訊號可能失準。未做人聲聽感閉合品質獨立評測。",
+      "editor_note": "karaoke-jp 的 score／導唱簡化篇：把「裝飾音噪音」從對齊與 MIDI 前處理拿掉。可與既有 pitch、transcription 線串接。",
+      "relevance": {
+        "mean_audio": 1,
+        "karaoke_jp": 4
+      }
+    }
+  ],
+  "repo": {
+    "full_name": "LemanuelPC/karaoke-room",
+    "url": "https://github.com/LemanuelPC/karaoke-room",
+    "description_zh": "自架卡拉 OK 全家桶：Demucs 分軌、WhisperX 字級歌詞對齊（含 CJK 羅馬字）、Tauri 大螢幕播放＋手機遙控與即時 stem 混音。",
+    "stars": 0,
+    "updated": "2026-07-16",
+    "why": "直接覆蓋 karaoke-jp 的分離→對齊→LRC 渲染→跟唱 UI 全鏈，且明確支援 CJK 羅馬字；2026-07-16 仍活躍、未發送過，可當本機實驗台對照今日骨架／codec 前處理。",
+    "tags": [
+      "karaoke",
+      "lyrics alignment",
+      "source separation"
+    ]
+  },
+  "discord_messages": [
+    "# 每日 MIR 論文精選 - 2026-07-29\n🌐 完整報告:https://lanternko.github.io/mir-paper-digest/reports/2026-07-29.html\n\n**論文 1｜Neural Morphing: Sequence-Optimized Token-Level Morphing in Neural Audio Codecs**\n🔗 https://arxiv.org/abs/2607.12725\n🎯 主線:MeanAudio（neural codec / RVQ 編輯）｜7/14 上架｜DAFx 2026\n\n**TLDR**:免訓練在 DAC token 上做 palette morph：RVQ 分組轉移＋beam 連貫選 grain，做成可保節奏換音色的 VST 效果。\n\n**為什麼選它**:codec 不只是生成 tokenizer，還能當 DAW 裡的 structure/detail 編輯軸。\n\n**注意**:證據偏打擊素材；尚無正式聽感測驗。\n\n**下一步**:JPOP loop 掃 ρ／beam，對照 HARP 的頻帶階層。",
+    "**論文 2｜MeloBottleneck: Self-Supervised Melody Skeleton Extraction with a Latent Subsequence Bottleneck**\n🔗 https://arxiv.org/abs/2607.10233\n🎯 主線:karaoke-jp（旋律骨架／score 簡化）｜7/11 上架\n\n**TLDR**:把骨架學成長度可控的 latent 子序列，節奏閉合成可獨立演奏的縮減旋律；跨域轉移優於偽標籤 note classifier。\n\n**為什麼選它**:karaoke 的 MIDI／導唱線常被裝飾音弄亂，需要「先縮結構再對齊」。\n\n**注意**:僅 monophonic 符號；自由長度預測仍弱。\n\n**下一步**:對 JPOP 主旋律掃 ρ，當導唱簡化或 retrieval 索引。",
+    "**GitHub Pick｜LemanuelPC/karaoke-room** ⭐0｜最近更新 2026-07-16\n🔗 https://github.com/LemanuelPC/karaoke-room\n\n自架卡拉 OK：Demucs 分軌 + WhisperX 字級對齊（CJK 羅馬字）+ Tauri 大螢幕與手機 stem 混音。\n\n**為什麼選它**:端到端串起 karaoke-jp 的分離—對齊—渲染—遙控鏈。\n\n## 今天的 take-away\n- Neural codec 可當 training-free 創作中間層，而不只是壓縮（Neural Morphing, 2607.12725）。\n- 旋律骨架應優化「連貫縮減序列」，而非 note-wise 偽標籤（MeloBottleneck, 2607.10233）。\n- 工程：karaoke-room 可當本機「分軌＋CJK 字級 LRC」實驗台。"
+  ]
+}

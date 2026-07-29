@@ -166,3 +166,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-07-28,1,paper,karaoke_jp,Music-Source-Separation-Training (MSST): A Unified Framework for Training and Evaluating Music Demixing Models,https://arxiv.org/abs/2607.23395,10.48550/arXiv.2607.23395,source separation|karaoke|training framework,新且重要
 2026-07-28,2,paper,mean_audio,HARP: Harmonic-Aware Residual Partitioning for Neural Audio Codecs,https://arxiv.org/abs/2607.16657,10.48550/arXiv.2607.16657,neural codec|RVQ|token audio,新且重要
 2026-07-28,0,repo,github,grazzolini/tuneforge,https://github.com/grazzolini/tuneforge,,karaoke|stem separation|lyrics transcription,
+2026-07-29,1,paper,mean_audio,Neural Morphing: Sequence-Optimized Token-Level Morphing in Neural Audio Codecs,https://arxiv.org/abs/2607.12725,10.48550/arXiv.2607.12725,neural codec|RVQ editing|audio morphing,新且重要
+2026-07-29,2,paper,karaoke_jp,MeloBottleneck: Self-Supervised Melody Skeleton Extraction with a Latent Subsequence Bottleneck,https://arxiv.org/abs/2607.10233,10.48550/arXiv.2607.10233,melody skeleton|symbolic MIDI|self-supervised,新且重要
+2026-07-29,0,repo,github,LemanuelPC/karaoke-room,https://github.com/LemanuelPC/karaoke-room,,karaoke|lyrics alignment|source separation,
