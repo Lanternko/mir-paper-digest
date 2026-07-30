@@ -169,3 +169,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-07-29,1,paper,mean_audio,Neural Morphing: Sequence-Optimized Token-Level Morphing in Neural Audio Codecs,https://arxiv.org/abs/2607.12725,10.48550/arXiv.2607.12725,neural codec|RVQ editing|audio morphing,新且重要
 2026-07-29,2,paper,karaoke_jp,MeloBottleneck: Self-Supervised Melody Skeleton Extraction with a Latent Subsequence Bottleneck,https://arxiv.org/abs/2607.10233,10.48550/arXiv.2607.10233,melody skeleton|symbolic MIDI|self-supervised,新且重要
 2026-07-29,0,repo,github,LemanuelPC/karaoke-room,https://github.com/LemanuelPC/karaoke-room,,karaoke|lyrics alignment|source separation,
+2026-07-30,1,paper,karaoke_jp,Dense-Sparse Dynamic Time Warping for Customizing Piano Concerto Accompaniments,https://arxiv.org/abs/2607.18189,10.48550/arXiv.2607.18189,DTW alignment|accompaniment sync|score-free,重要
+2026-07-30,2,paper,mean_audio,ReGen: Hierarchical Multi-Prompt Representation Generation for Efficient Waveform Diffusion Models,https://arxiv.org/abs/2607.09134,10.48550/arXiv.2607.09134,flow matching|neural codec|waveform DiT,新且重要
+2026-07-30,0,repo,github,lukenowak/karavox,https://github.com/lukenowak/karavox,,karaoke format|lyrics render|ASS subtitles,

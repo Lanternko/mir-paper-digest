@@ -1,0 +1,91 @@
+{
+  "date": "2026-07-30",
+  "papers": [
+    {
+      "slot": 1,
+      "track": "karaoke_jp",
+      "title": "Dense-Sparse Dynamic Time Warping for Customizing Piano Concerto Accompaniments",
+      "authors": [
+        "TJ Tsai",
+        "Kavi Dey",
+        "Yigitcan Ozer",
+        "Meinard Muller"
+      ],
+      "published": "2026-07-20",
+      "updated": "2026-07-20",
+      "source_url": "https://arxiv.org/abs/2607.18189",
+      "arxiv_id": "2607.18189",
+      "doi": "10.48550/arXiv.2607.18189",
+      "tags": [
+        "DTW alignment",
+        "accompaniment sync",
+        "score-free"
+      ],
+      "quality": "重要",
+      "tldr": "免樂譜的伴奏客製：用混合錄音當中介，Dense-Sparse DTW 只對齊有 timing 線索的稀疏幀，比分離後再對齊更穩、更簡單。",
+      "insight": "洞見:karaoke-jp 的「跟唱伴奏／LRC 對齊」常卡在譜面缺失與頻譜不匹配——用戶人聲、伴奏軌、完整混音三者的頻譜差很大。Dense-Sparse DTW 的關鍵不是再堆一個分離模型，而是只對 flux 高的幀做對齊、中間空隙線性插值：這直接對應「mora-to-note 只信 onset／重音、休止段別硬扯」的工程直覺。可遷移到 JPOP 的 user vocal vs instrumental vs full mix 三軌對齊，再把時間軸餵給 LRC 渲染或 TSM 伴奏。",
+      "try_next": "可做:取一首 JPOP（vocal / instrumental / full mix），用 chroma + subsequence DTW 對齊 vocal→mix，再以 γ∈[0.6,0.9] 跑 DS-DTW 對齊 instrumental→mix，對照 downbeat 誤差與現有 forced-aligner 字級時間軸。",
+      "problem": "Music Minus One 類伴奏固定節奏，演奏者無法改；多數自動伴奏又假設有 MIDI／樂譜。無譜時只能用「solo 錄音 + 伴奏軌 + 完整混音」三角對齊，但三者頻譜組成不同，標準 DTW 在休止與弱聲部容易歪掉。",
+      "method": "以混音 Mref 為中介：Puser–Mref 用 subsequence DTW（chroma + cosine）；Oacc–Mref 用 Dense-Sparse DTW——依 feature flux 保留約 γ 比例的高動態幀，其餘區間稀疏跳轉並限制最大伸縮 2×；推導 Puser–Oacc 路徑後對伴奏做 time-scale modification。對照 naive DTW、頻譜相減 ISA、Spleeter／HDemucs 分離後再對齊。",
+      "data": "Concerto Accompaniment Benchmark：四首鋼琴協奏曲樂章的 Oacc（MMO）、鋼琴家錄製的 Puser、IMSLP 混音 Mref，共約 2:51 音訊；小節拍點人工標註；150 組 scenario（含 tempo TSM 增強）。開源：github.com/HMC-MIR/PianoConcertoAccompaniment（不含 MMO 原檔）。",
+      "findings": "DS-DTW（γ≈0.8）在多數誤差容差下優於 naive DTW；2 秒容差錯誤率約從 2.7% 降到 0.6%。與 HDemucs 分離管線相當或更佳，且無訓練參數、不綁定樂器假設。γ 在 0.6–1.0 多數設定都勝過 γ=1（純 DTW）。",
+      "limitations": "ICASSP 2025 論文（2026-07 再上 arXiv）；目前僅離線、古典協奏曲、鋼琴主奏。MMO 原檔不開源。評估以拍點對齊誤差為主，未做人聲跟唱聽感或字級 LRC 實驗。",
+      "editor_note": "karaoke-jp 今日首選：把「無譜三軌對齊」做成可複現 benchmark。可與昨日 MeloBottleneck 骨架、既有 DTW／forced-align 線並讀。",
+      "relevance": {
+        "mean_audio": 1,
+        "karaoke_jp": 5
+      }
+    },
+    {
+      "slot": 2,
+      "track": "mean_audio",
+      "title": "ReGen: Hierarchical Multi-Prompt Representation Generation for Efficient Waveform Diffusion Models",
+      "authors": [
+        "Sang-Hoon Lee",
+        "Ha-Yeong Choi"
+      ],
+      "published": "2026-07-10",
+      "updated": "2026-07-10",
+      "source_url": "https://arxiv.org/abs/2607.09134",
+      "arxiv_id": "2607.09134",
+      "doi": "10.48550/arXiv.2607.09134",
+      "tags": [
+        "flow matching",
+        "neural codec",
+        "waveform DiT"
+      ],
+      "quality": "新且重要",
+      "tldr": "ICML 2026：用階層式 representation generation 取代 REPA，搭配 generalized flow matching，在超低碼率 codec／VAE 上強化波形擴散生成能力。",
+      "insight": "洞見:MeanAudio 的 neural codec + flow matching 管線常靠 REPA 把 DiT 中間層對齊 SSL／mel，但會隱性纏結 latent、壓掉生成容量。ReGen 改成「表示也是要生成的隨機變數」：同一 DiT 內對 SSL／mel／waveform 估多個向量場，用 masked multi-prompt infilling 與 GFM 的排斥項避免路徑塌成條件均值——這正好對齊 MeanAudio 在低幀率 latent（如 12.5 Hz）上既要語意又要高頻細節的張力。雖實驗以語音為主，架構可直接遷移到 music codec／text-to-music 的波形或 latent DiT。",
+      "try_next": "可做:在 MeanAudio 的 codec 或 Wave-VAE 設定上試 ReGen-H（SSL+mel）與 GFM（小 λ_neg），對照 REPA 的 CLAP／FAD 與聽感；觀察 4-step adversarial post-training 後 RTF 與金屬感 artifacts。",
+      "problem": "低碼率 neural codec／VAE 語意與聲學容量都不足；REPA 雖加速 DiT 訓練，卻可能糾纏 latent、限制生成力，尤其在高度壓縮表示下高頻易被平滑掉。",
+      "method": "ReGen：單一 Wave-DiT 階層式聯合生成 SSL、mel、waveform 向量場；masked multi-prompt CFM；generalized flow matching（吸引項減速度空間排斥項）。ReGenTokenizer：25 Hz FSQ、400 bps；ReGenVAE：12.5 Hz、32 維。再以 adversarial post-training 固定 4 步採樣。ReGenVoice 在 6.25 Hz latent 上做 LDM TTS。",
+      "data": "LibriTTS（約 0.5k 小時）、Emilia（多語，約 100k 小時；TTS 用 Emilia-en 約 40k）。評測含 LibriSpeech／LibriTTS reconstruction、Seed-en prompted reconstruction 與 zero-shot TTS；指標含 WER、PESQ、SPK-SIM、UTMOS、MOS 等。",
+      "findings": "低碼率重建與 prompted reconstruction 上 ReGenVAE／Tokenizer 相對既有 codec 在可懂度與說話人相似度更強；消融顯示階層 ReGen 優於 REPA，GFM 有助穩定。ReGenVoice（0.5B）在小數據仍有競爭力，25 NFE 時 RTF≈0.08。",
+      "limitations": "主實驗為語音 codec／TTS，非 music 語料；Emilia 的 MP3 失真會傷高頻。作者提到 STFT 權重過高可能出金屬聲。程式碼承諾釋出但 digest 撰寫時需自行確認是否已開源。",
+      "editor_note": "MeanAudio 方法篇：flow matching + 超低幀率 latent 的下一刀。與近期 HARP／Neural Morphing 的 codec 線、FdAudio 等 post-training 可並讀；音樂域需重跑實驗。",
+      "relevance": {
+        "mean_audio": 5,
+        "karaoke_jp": 1
+      }
+    }
+  ],
+  "repo": {
+    "full_name": "lukenowak/karavox",
+    "url": "https://github.com/lukenowak/karavox",
+    "description_zh": "開源卡拉 OK 容器格式 + GPL 工具鏈：把 KFN／CDG／.kar 轉成 Matroska master（可選角色音軌 + 可重樣式 soft ASS 歌詞），再匯出可攜 MP4。",
+    "stars": 0,
+    "updated": "2026-07-29",
+    "why": "karaoke-jp 的 LRC／渲染下游需要「不燒錄、可重樣式」的歌詞載體；karavox 明訂格式規格與 KFN／CDG／MIDI karaoke 匯入，2026-07-29 仍活躍且未發送過，可當本機 karaoke 資產中介層實驗。",
+    "tags": [
+      "karaoke format",
+      "lyrics render",
+      "ASS subtitles"
+    ]
+  },
+  "discord_messages": [
+    "# 每日 MIR 論文精選 - 2026-07-30\n🌐 完整報告:https://lanternko.github.io/mir-paper-digest/reports/2026-07-30.html\n\n**論文 1｜Dense-Sparse Dynamic Time Warping for Customizing Piano Concerto Accompaniments**\n🔗 https://arxiv.org/abs/2607.18189\n🎯 主線:karaoke-jp（無譜伴奏對齊）｜7/20 上架｜ICASSP 2025\n\n**TLDR**:用混音當中介，Dense-Sparse DTW 只對齊高 flux 幀，免樂譜客製 MMO 伴奏，比分離再對齊更穩。\n\n**為什麼選它**:karaoke 常有 vocal／伴奏／full mix 三軌頻譜不匹配；「只信有 timing 線索的幀」可遷移到 JPOP LRC／TSM。\n\n**注意**:古典鋼琴協奏曲、離線；MMO 原檔不開源。\n\n**下一步**:JPOP 三軌掃 γ，對照字級 forced-align 時間軸。",
+    "**論文 2｜ReGen: Hierarchical Multi-Prompt Representation Generation for Efficient Waveform Diffusion Models**\n🔗 https://arxiv.org/abs/2607.09134\n🎯 主線:MeanAudio（flow matching / neural codec）｜7/10 上架｜ICML 2026\n\n**TLDR**:以 representation generation 取代 REPA，加 GFM，在 12.5 Hz VAE／25 Hz codec 上強化波形擴散生成。\n\n**為什麼選它**:MeanAudio 低幀率 latent 也需要「語意＋高頻細節」不互相擠壓的 DiT 訓練法。\n\n**注意**:實驗以語音為主；音樂域需重驗證。\n\n**下一步**:在 MeanAudio codec 上對照 REPA vs ReGen-H＋GFM 的 CLAP／FAD。",
+    "**GitHub Pick｜lukenowak/karavox** ⭐0｜最近更新 2026-07-29\n🔗 https://github.com/lukenowak/karavox\n\n開源 karaoke 格式＋工具鏈：KFN／CDG／.kar → Matroska master（多角色音軌＋soft ASS 歌詞）→ 可攜 MP4。\n\n**為什麼選它**:給 karaoke-jp 的 LRC／渲染下游一個不燒錄、可重樣式的中介容器。\n\n## 今天的 take-away\n- 無譜三軌對齊可靠「稀疏 timing 幀」而不是硬上分離模型（DS-DTW, 2607.18189）。\n- REPA 可能擠壓 DiT 生成容量；表示生成＋GFM 更適合超低幀率 codec（ReGen, 2607.09134）。\n- 工程：karavox 可當 KFN／CDG 進 portable ASS 的格式層。"
+  ]
+}
