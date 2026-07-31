@@ -1,0 +1,96 @@
+{
+  "date": "2026-07-31",
+  "papers": [
+    {
+      "slot": 1,
+      "track": "karaoke_jp",
+      "title": "MPEcho: A Melody and Phoneme-Aware Generative Framework for Controllable Cover Song Generation",
+      "authors": [
+        "Wei-Jaw Lee",
+        "Hsuan-Yu Yeh",
+        "Ting-Yi Hu",
+        "Chih-Pin Tan",
+        "Fang-Duo Tsai",
+        "Yi-Hsuan Yang"
+      ],
+      "published": "2026-07-29",
+      "updated": "2026-07-29",
+      "source_url": "https://arxiv.org/abs/2607.26698",
+      "arxiv_id": "2607.26698",
+      "doi": "10.48550/arXiv.2607.26698",
+      "tags": [
+        "cover song gen",
+        "phoneme align",
+        "singing voice"
+      ],
+      "quality": "新且重要",
+      "tldr": "ISMIR：在 cover 生成中同時條件化旋律與音素時間軸，搭配唱聲專用 Phonsa 對齊器，把 PER 從約 46% 壓到約 19%。",
+      "insight": "洞見:karaoke-jp 的「歌詞正確 + mora-to-note timing」在生成端常被 sentence-level 歌詞與 V/UV 標籤糊掉。MPEcho 把 SVS 的 length regulator 搬進 ACE-Step/SongEcho 的 flow matching DiT：用 Phonsa 從參考唱聲抽出音素級 onset/offset，再與 F0 旋律一起做 IA-EiLM 條件——這直接對應 LRC/ruby 管線「字級時間軸要硬、不能只靠 word 級 filler」。另附：Jam 風格 word 級音素排列在 adapter finetune 下反而 PER 爆掉，說明條件信號的結構清晰度比「有 phoneme token」更關鍵。",
+      "try_next": "可做:用 Phonsa 或同類 Whisper 音素對齊在 JPOP 分離人聲上跑字/mora 級時間軸，對照 MFA；再把音素 duration 序列餵給現有 LTS/cover 骨架，量 PER 與 mora-to-note 誤差。",
+      "problem": "Cover song generation 要同時保住參考曲的旋律與歌詞，又允許重新編曲與唱腔。SOTA SongEcho 只加 F0 與 V/UV，語言控制仍停在粗粒度歌詞，生成唱詞 PER 高、聽起來「跟了調卻念錯字」。",
+      "method": "MPEcho：在 ACE-Step DiT + SongEcho IA-EiLM 上加 phoneme encoder 與 length regulator；旋律用 RMVPE 的 F0。訓練為 flow matching。Phonsa：Whisper 底、chunked self-attention、breath/boundary token，CTC+CE 多任務，支援有歌詞 forced align 與無監督 segmentation。推理用多條件 CFG/APG（text / lyrics / time-varying）解纏條件衝突。",
+      "data": "Phonsa：M4Singer、Opencpop 訓練（約 31h+1.6h val），GTsinger 測試（約 16.5h），皆為公開國語唱聲集。MPEcho：內部華語歌詞—歌曲集 13,045 軌約 1,427 小時；結構用 SongPrep、caption/tag 用 Qwen2-Audio-7B、key/BPM 用 Essentia。",
+      "findings": "Phonsa 音素邊界 MAE 約 32.6 ms vs MFA 233.9 ms。MPEcho（旋律+SVS 式音素）PER 降至 0.1865（SongEcho 0.4562）；僅音素會傷旋律與 Audiobox；Jam 式 word 級音素 PER 反而升至 0.71。多條件 guidance 再抬 RPA/RCA 與聽感；主觀 25 人 MOS 以 M+P + multi-condition 最高。",
+      "limitations": "資料與評估以國語為主，未驗證日文 mora/kana。僅單人聲 cover 場景。Phonsa 嚴格 20 ms 邊界 F1 仍偏低。MPEcho 訓練集為內部曲庫、非全開源；CLAP 分數因中文舊曲 domain gap 普遍偏低。",
+      "editor_note": "karaoke-jp 今日首選：把「音素級 timing」從 SVS 拉進 full-song cover。可與近期 WanSong、歌詞對齊、forced aligner 線並讀；日文需重訓/適配 phoneme set。",
+      "relevance": {
+        "mean_audio": 3,
+        "karaoke_jp": 5
+      }
+    },
+    {
+      "slot": 2,
+      "track": "mean_audio",
+      "title": "MMAC: A Massive Multi-dimensional Benchmark for Audio Captioning",
+      "authors": [
+        "Weijie Wu",
+        "Junbo Li",
+        "Lin Li",
+        "Jun Fang",
+        "Qingyang Hong"
+      ],
+      "published": "2026-07-29",
+      "updated": "2026-07-30",
+      "source_url": "https://arxiv.org/abs/2607.27109",
+      "arxiv_id": "2607.27109",
+      "doi": "10.48550/arXiv.2607.27109",
+      "tags": [
+        "audio caption",
+        "eval benchmark",
+        "AudioLLM"
+      ],
+      "quality": "新且重要",
+      "tldr": "5,638 段音訊、6 大能力 × 15 維度的 free-form 音訊字幕基準，分開量測 Coverage／Precision／Accuracy。",
+      "insight": "洞見:MeanAudio 的 text-to-audio 與 caption 資料管線常只追 BLEU/CIDEr 或整體 CLAP，卻說不清模型是「沒寫到」還是「寫錯了」。MMAC 在統一 open-ended prompt 下，按維度檢查是否主動提及與是否與標籤一致——這正好對齊 MeanAudio 在 caption 清洗、instruction-following 與 reward 設計時需要的診斷訊號：Coverage 升但 Precision 降，代表「越寫越灌水」。",
+      "try_next": "可做:在 MeanAudio 現有 caption/評測子集上仿 MMAC 拆 Coverage vs Precision；用長 caption 消融看 FAD/CLAP 與假細節是否同步惡化，再決定 reward 要罰 omission 還是 hallucination。",
+      "problem": "AudioLLM 時代 caption 已從短句走向 fine-grained free-form，但既有基準多給單一相似度或任務分數，難以診斷資訊覆蓋與描述可靠度，也分不清漏寫與寫錯。",
+      "method": "MMAC：按 6 類能力（content / background / persona / paralinguistic / dynamic / implication）與 15 細維組織測試子集；同一 open-ended prompt 產自然語言 caption。評測只檢查該子集目標維度：是否提及（Coverage）、提及是否正確（Precision）、兩者合成 Accuracy（漏寫記 0）。標籤來自原始轉寫/事件標籤、聲學量測（F0、syllable rate）與 LLM+人工覆核；不足維度用合成補齊。",
+      "data": "5,638 clips、總長約 13.04 小時、>20 來源；含語音、場景音、動態變化與隱含義等。Implication／部分 dynamic 用文本語料 + TTS（IndexTTS2 等）合成並人工品檢。",
+      "findings": "各模型在維度間差異大：Gemini 2.5 Pro 的 Accuracy/Precision 較強，Qwen3-Omni-Captioner Coverage 最高。Caption 專用 SFT 抬 Coverage 卻不穩抬 Precision；強制加長 caption 會抬 Coverage 但降 Precision。LLM judge 與人工在 10% 分層子集上排名高度一致（Kendall W≈0.981）。",
+      "limitations": "以語音／環境音為主，音樂生成語料覆蓋有限。人類評估用了 LLM 預標，可能有 anchoring bias。作者承諾釋出 benchmark 與 code，撰寫時需自行確認是否已上線。",
+      "editor_note": "MeanAudio 資料/評估篇：比「再多一個整體分數」更有用。可與近期 instruction-following TTA、CLAP 探測、Music Flamingo 理解線並讀。",
+      "relevance": {
+        "mean_audio": 5,
+        "karaoke_jp": 1
+      }
+    }
+  ],
+  "repo": {
+    "full_name": "BarnsL/Lyric-Immersion-and-Karaoke",
+    "url": "https://github.com/BarnsL/Lyric-Immersion-and-Karaoke",
+    "description_zh": "透明 always-on-top 卡拉 OK 疊層：同步歌詞並加 furigana／romaji／pinyin 等讀音與英譯，浮在 Spotify／YouTube／任何媒體播放器上。",
+    "stars": 0,
+    "updated": "2026-07-30",
+    "why": "karaoke-jp 需要日文 ruby/kana 與可讀 timing 的桌面渲染；此專案直接做 furigana 疊層、Gaming/Karaoke/Subtitles 三模式，2026-07-30 仍活躍且未發送過，可當 LRC/ruby 下游與日文跟唱 UI 參考。",
+    "tags": [
+      "karaoke overlay",
+      "furigana",
+      "lyrics sync"
+    ]
+  },
+  "discord_messages": [
+    "# 每日 MIR 論文精選 - 2026-07-31\n🌐 完整報告:https://lanternko.github.io/mir-paper-digest/reports/2026-07-31.html\n\n**論文 1｜MPEcho: A Melody and Phoneme-Aware Generative Framework for Controllable Cover Song Generation**\n🔗 https://arxiv.org/abs/2607.26698\n🎯 主線:karaoke-jp（唱聲音素 + cover 生成）｜7/29 上架｜ISMIR\n\n**TLDR**:在 SongEcho 上加 SVS 式音素 encoder + length regulator，搭配 Phonsa 唱聲音素對齊，PER 從約 46% 降到約 19%。\n\n**為什麼選它**:karaoke 的 LRC／mora timing 與「唱對字」同一瓶頸；音素級時間軸比 V/UV 或 word filler 更硬。\n\n**注意**:國語資料為主；日文 mora 需重適配。\n\n**下一步**:JPOP 分離人聲上跑 Phonsa 級對齊，對照 MFA 與字級 LRC。",
+    "**論文 2｜MMAC: A Massive Multi-dimensional Benchmark for Audio Captioning**\n🔗 https://arxiv.org/abs/2607.27109\n🎯 主線:MeanAudio（caption / 評估）｜7/29 上架｜7/30 更新\n\n**TLDR**:5,638 clips、6 類 × 15 維 free-form caption 基準，分開報 Coverage／Precision／Accuracy。\n\n**為什麼選它**:MeanAudio 資料與 reward 常分不清「漏寫」與「寫錯」；MMAC 給診斷向評測。\n\n**注意**:音樂域覆蓋有限；benchmark 釋出狀態需確認。\n\n**下一步**:在既有 caption 子集拆 Coverage vs Precision，再調 instruction reward。",
+    "**GitHub Pick｜BarnsL/Lyric-Immersion-and-Karaoke** ⭐0｜最近更新 2026-07-30\n🔗 https://github.com/BarnsL/Lyric-Immersion-and-Karaoke\n\n透明 always-on-top 歌詞疊層：furigana／romaji 等讀音 + 英譯，跟 Spotify／YouTube 同步；Gaming／Karaoke／Subtitles 三模式。\n\n**為什麼選它**:karaoke-jp 的日文 ruby 與桌面渲染可直接參考。\n\n## 今天的 take-away\n- Cover 生成要「跟調又念對字」，需要音素級 timing，不是只加 F0（MPEcho, 2607.26698）。\n- Caption 評估應拆 Coverage 與 Precision；寫長不等於寫對（MMAC, 2607.27109）。\n- 工程：Lyric Immersion 可當 furigana 疊層與 LRC 下游 UI 原型。"
+  ]
+}

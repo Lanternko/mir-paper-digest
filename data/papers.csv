@@ -172,3 +172,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-07-30,1,paper,karaoke_jp,Dense-Sparse Dynamic Time Warping for Customizing Piano Concerto Accompaniments,https://arxiv.org/abs/2607.18189,10.48550/arXiv.2607.18189,DTW alignment|accompaniment sync|score-free,重要
 2026-07-30,2,paper,mean_audio,ReGen: Hierarchical Multi-Prompt Representation Generation for Efficient Waveform Diffusion Models,https://arxiv.org/abs/2607.09134,10.48550/arXiv.2607.09134,flow matching|neural codec|waveform DiT,新且重要
 2026-07-30,0,repo,github,lukenowak/karavox,https://github.com/lukenowak/karavox,,karaoke format|lyrics render|ASS subtitles,
+2026-07-31,1,paper,karaoke_jp,MPEcho: A Melody and Phoneme-Aware Generative Framework for Controllable Cover Song Generation,https://arxiv.org/abs/2607.26698,10.48550/arXiv.2607.26698,cover song gen|phoneme align|singing voice,新且重要
+2026-07-31,2,paper,mean_audio,MMAC: A Massive Multi-dimensional Benchmark for Audio Captioning,https://arxiv.org/abs/2607.27109,10.48550/arXiv.2607.27109,audio caption|eval benchmark|AudioLLM,新且重要
+2026-07-31,0,repo,github,BarnsL/Lyric-Immersion-and-Karaoke,https://github.com/BarnsL/Lyric-Immersion-and-Karaoke,,karaoke overlay|furigana|lyrics sync,
