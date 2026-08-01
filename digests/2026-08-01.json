@@ -1,0 +1,95 @@
+{
+  "date": "2026-08-01",
+  "papers": [
+    {
+      "slot": 1,
+      "track": "karaoke_jp",
+      "title": "VocalRender: Score-Native Singing Voice Synthesis for Real-World Composition",
+      "authors": [
+        "Yukun Chen",
+        "Tianrui Wang",
+        "Zhaoxi Mu",
+        "Xinyu Yang",
+        "EngSiong Chng"
+      ],
+      "published": "2026-07-30",
+      "updated": "2026-07-30",
+      "source_url": "https://arxiv.org/abs/2607.27768",
+      "arxiv_id": "2607.27768",
+      "doi": "10.48550/arXiv.2607.27768",
+      "tags": [
+        "singing voice synth",
+        "score-native",
+        "flow matching"
+      ],
+      "quality": "新且重要",
+      "tldr": "以歌詞＋音高＋符號時值＋BPM 直接合成唱聲，用交錯 lyric–note 與自迴歸擴散（ARDM）免顯式 duration，自然度 CMOS 領先最強 baseline 約 0.42。",
+      "insight": "洞見:karaoke-jp 的 mora-to-note / LRC 管線常被「先算好 duration 再合成」綁死，melisma 又讓歌詞與 pitch 兩路條件對不齊。VocalRender 把 score 做成 syllable 級交錯序列（一字多音自然展開），ARDM 邊生成 continuous latent 邊決定長度——這正是「作曲家寫譜 → 可聽唱聲」所需，而不是再塞 F0 曲線或參考音訊。主觀 score-following（MS-MOS）與 prosody CMOS 勝過依賴硬對齊的 SoulX-Singer，說明「可聽的節奏」比 IOU/RPA 數字更重要。",
+      "try_next": "可做:把 JPOP 樂譜／MIDI＋假名歌詞轉成 interleaved syllable–pitch–note-value 格式，接 VocalRender 或同構 ARDM；量 PER、mora 邊界誤差與 melisma 段；並用 LibreSVIP 對齊各 SVS 工程格式。",
+      "problem": "既有 SVS 多需預定義時長、顯式 duration predictor，或時間對齊的聲學參考（F0／參考音），與實際作曲工作流不合；lyric 與 melody 分兩路條件時，melisma 對齊模糊，也難靠精標資料規模化。",
+      "method": "VocalRender：score-native 輸入（BPM + 各音節後接 MIDI pitch 與符號 note value 列表）；連續音訊 VAE（25 Hz latent）+ ARDM（AR transformer 出條件 + LocDiT/flow matching 生成 latent patch）並以 stop predictor 結束；可選短參考 latent 做音色 in-context。消融顯示交錯 prompt 比 cascaded 更能保節奏對齊。",
+      "data": "公開線 CrawlSinger-OS 約 2,300 小時（OpenSinger、MuChin、SongFormDB、Muse 等，SingCrawl/VocalParse 管線精標）；內部 CrawlSinger 約 5,600 小時。評測：Opencpop（過濾洩漏）與 2026-06 後新歌組成的 CrawlSinger-Eval（OOD）。",
+      "findings": "Opencpop WER 約 4.44（Pro 3.88），SIM 約 0.92；N-CMOS 相對最強 baseline SoulX-Singer 約 +0.42；MS-MOS 最高約 2.96。OOD 上 intelligibility／SIM 較穩。大資料顯著抬 SIM 與旋律 RPA；交錯表示對節奏 IOU 關鍵。",
+      "limitations": "公開實驗以國語為主，日文 mora／kana 需另驗。訓練標註多為 audio-centric 自動轉譜，與 intent-centric 作曲譜有 domain gap；轉譜可能過度切碎音與半音。CrawlSinger 內部資料與完整權重／管線可再現性需對照 code repo。",
+      "editor_note": "karaoke-jp 今日首選：score → 唱聲、免 duration 前端。可與 MPEcho 音素 timing、VocalParse 轉譜、LibreSVIP 工程格式轉換並讀；日文需換 phoneme set 與資料。",
+      "relevance": {
+        "mean_audio": 2,
+        "karaoke_jp": 5
+      }
+    },
+    {
+      "slot": 2,
+      "track": "mean_audio",
+      "title": "MusicMark: A Robust Generative Watermarking Framework for Music Generation",
+      "authors": [
+        "Seohwan Yun",
+        "Jeeyoung Yun",
+        "Yongjin Kim",
+        "Juyeon Lee",
+        "Sungwoong Kim"
+      ],
+      "published": "2026-07-13",
+      "updated": "2026-07-13",
+      "source_url": "https://arxiv.org/abs/2607.11117",
+      "arxiv_id": "2607.11117",
+      "doi": "10.48550/arXiv.2607.11117",
+      "tags": [
+        "music watermark",
+        "generative",
+        "neural codec"
+      ],
+      "quality": "新且重要",
+      "tldr": "首個音樂生成式浮水印：在 diffusion 語義 latent 中嵌訊息，抗 EnCodec／DAC／SNAC 重合成與 cover-song，攻擊下 Abs 約 0.87 vs post-hoc 約 0.40。",
+      "insight": "洞見:MeanAudio 管線若只做 post-hoc 扰动浮水印，neural codec 會把「聽不見的殘差」當垃圾丟掉，provenance 直接斷。MusicMark 把 watermark adapter 掛進 ACE-Step 式 latent denoising 的解耦 cross-attention，讓訊息成為內容的一部分；再以 latent consistency 對齊未浮水印 latent，避免品質崩。這對「生成即標記、codec 往返後仍可追溯」是可遷移模板，也反向證明 codec 評估不只要 FAD/CLAP，還要看 watermark 存活。",
+      "try_next": "可做:在 MeanAudio／flow-matching TTA 或 song DiT 上插同樣 adapter+detector；用 EnCodec 與 cover（人聲分離+RVC）做壓力測；比較 post-hoc vs generative 的 FAD／CLAP／PER 與 bit accuracy。",
+      "problem": "AI 音樂爆發後需要 provenance，但既有浮水印多為 speech、且為 post-hoc 微擾；音樂頻寬與複調敏感，post-hoc 難抗轉換，尤其 neural codec 重合成會抹掉殘差，且生成與浮水印可分離而遭繞過。",
+      "method": "MusicMark：凍結 ACE-Step 基底，訓練 watermark adapter（bit embedding + 解耦 cross-attention，加權進 latent）與 detector（mel → 預訓練音訊編碼器 → 時序 presence／bit head）。損失＝flow matching + latent consistency + 多尺度 mel/STFT/波形 fidelity + detection/message BCE；訓練含 noise、濾波、MP3、EnCodec、cover-song 等攻擊（非可微用 STE）。",
+      "data": "訓練：Muse 約 50K 英文物曲對、約 625 小時。評測：自 Suno metadata 建 2K lyric–prompt 集（20 類攻擊）與 300 對品質子集。Cover-song 攻擊：分離人聲後 RVC 換唱再混伴奏，可選 cut。",
+      "findings": "無攻擊時各方近完美；攻擊均值 MusicMark Acc/Bit/Abs 約 0.994/0.987/0.869，同資料訓練的 AudioSeal-M Abs 約 0.40。Neural codec 下 post-hoc Abs 常近 0，MusicMark 仍高 bit。Cover+Cut Abs 約 0.813 vs post-hoc 接近崩潰。FAD/CLAP/美學與 ACE-Step 相當，PER 略降；人工 MOS 與基底接近。",
+      "limitations": "基底鎖定 ACE-Step、英文 Muse 為主；訊息容量與其他生成架構（AR token、flow matching 純 TTA）泛化未全面驗證。Cover 攻擊管線依賴特定分離／VC 設定。程式與權重公開狀態需自行確認。",
+      "editor_note": "MeanAudio 側「生成＋codec 安全」必讀：浮水印要進 semantic latent，不是事後貼。可與 MSST 分離、MPEcho cover、HARP/codec 線並讀。",
+      "relevance": {
+        "mean_audio": 5,
+        "karaoke_jp": 2
+      }
+    }
+  ],
+  "repo": {
+    "full_name": "SoulMelody/LibreSVIP",
+    "url": "https://github.com/SoulMelody/LibreSVIP",
+    "description_zh": "跨平台、多語系的唱聲工程通用轉換器：在各種 SVS／唱聲專案格式之間互轉，提供 CLI、WebUI 與解析序列化工具鏈。",
+    "stars": 118,
+    "updated": "2026-08-01",
+    "why": "karaoke-jp 常卡在 MIDI／score／各家 SVS 工程檔不相通；LibreSVIP 直接做 singing-voice-synthesis 專案格式轉換，2026-08-01 仍活躍、118★，可當 score-native（如 VocalRender）上下游的格式橋。",
+    "tags": [
+      "SVS conversion",
+      "singing score",
+      "cross-platform"
+    ]
+  },
+  "discord_messages": [
+    "# 每日 MIR 論文精選 - 2026-08-01\n🌐 完整報告:https://lanternko.github.io/mir-paper-digest/reports/2026-08-01.html\n\n**論文 1｜VocalRender: Score-Native Singing Voice Synthesis for Real-World Composition**\n🔗 https://arxiv.org/abs/2607.27768\n🎯 主線:karaoke-jp（score-native SVS）｜7/30 上架\n\n**TLDR**:歌詞＋音高＋符號時值＋BPM 直接合成；交錯 lyric–note + ARDM 免顯式 duration，自然度 CMOS 領先約 0.42。\n\n**為什麼選它**:karaoke 需要「譜 → 唱」而不是先硬塞 duration／F0；melisma 對齊與 mora-to-note 同一瓶頸。\n\n**注意**:公開結果偏國語；自動轉譜 vs 作曲譜有 domain gap。\n\n**下一步**:JPOP 假名譜轉 interleaved 格式試跑；對照 mora 邊界與 PER。",
+    "**論文 2｜MusicMark: A Robust Generative Watermarking Framework for Music Generation**\n🔗 https://arxiv.org/abs/2607.11117\n🎯 主線:MeanAudio（生成式浮水印／codec）｜7/13 上架\n\n**TLDR**:在 diffusion 語義 latent 嵌訊息；抗 neural codec 與 cover-song，攻擊 Abs 約 0.87（post-hoc 約 0.40），品質接近基底。\n\n**為什麼選它**:MeanAudio 的 codec 往返會抹掉 post-hoc 浮水印；生成時寫進 latent 才扛得住 provenance。\n\n**注意**:實驗以 ACE-Step + 英文 Muse 為主。\n\n**下一步**:在自有 TTA／song DiT 上試 adapter+EnCodec 壓力測。",
+    "**GitHub Pick｜SoulMelody/LibreSVIP** ⭐118｜最近更新 2026-08-01\n🔗 https://github.com/SoulMelody/LibreSVIP\n\n跨平台唱聲工程通用轉換器：多種 SVS 專案格式互轉，CLI／WebUI。\n\n**為什麼選它**:score-native 管線上下游需要格式橋；與今日 VocalRender 互補。\n\n## 今天的 take-away\n- SVS 要作曲友好：交錯 score + 自迴歸決定長度，勝過硬 duration（VocalRender, 2607.27768）。\n- 音樂 provenance：浮水印應進 semantic latent，post-hoc 扛不住 neural codec（MusicMark, 2607.11117）。\n- 工程：LibreSVIP 可當各家 SVS 工程檔與 MIDI／score 的轉換層。"
+  ]
+}
