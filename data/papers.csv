@@ -178,3 +178,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-08-01,1,paper,karaoke_jp,VocalRender: Score-Native Singing Voice Synthesis for Real-World Composition,https://arxiv.org/abs/2607.27768,10.48550/arXiv.2607.27768,singing voice synth|score-native|flow matching,新且重要
 2026-08-01,2,paper,mean_audio,MusicMark: A Robust Generative Watermarking Framework for Music Generation,https://arxiv.org/abs/2607.11117,10.48550/arXiv.2607.11117,music watermark|generative|neural codec,新且重要
 2026-08-01,0,repo,github,SoulMelody/LibreSVIP,https://github.com/SoulMelody/LibreSVIP,,SVS conversion|singing score|cross-platform,
+2026-08-02,1,paper,mean_audio,Anysynth:Zero-Shot Instrument Cloning via In-Context Learning and Asymmetric Hierarchical Guidance,https://arxiv.org/abs/2607.11143,10.48550/arXiv.2607.11143,flow matching|instrument cloning|zero-shot,新且重要
+2026-08-02,2,paper,mean_audio,Qwen-Audio-VAE Technical Report,https://arxiv.org/abs/2607.11738,10.48550/arXiv.2607.11738,neural codec|audio VAE|text-to-audio,新且重要
+2026-08-02,0,repo,github,haomingkoo/singlah,https://github.com/haomingkoo/singlah,,karaoke|romaji|pitch analysis,

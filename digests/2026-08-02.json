@@ -1,0 +1,105 @@
+{
+  "date": "2026-08-02",
+  "papers": [
+    {
+      "slot": 1,
+      "track": "mean_audio",
+      "title": "Anysynth:Zero-Shot Instrument Cloning via In-Context Learning and Asymmetric Hierarchical Guidance",
+      "authors": [
+        "Chong Jing",
+        "Junan Zhang",
+        "Jing Yang",
+        "Yulun Wu",
+        "Fan Fan",
+        "Zhizheng Wu"
+      ],
+      "published": "2026-07-13",
+      "updated": "2026-07-18",
+      "source_url": "https://arxiv.org/abs/2607.11143",
+      "arxiv_id": "2607.11143",
+      "doi": "10.48550/arXiv.2607.11143",
+      "tags": [
+        "flow matching",
+        "instrument cloning",
+        "zero-shot"
+      ],
+      "quality": "新且重要",
+      "tldr": "零樣本樂器克隆：以未壓縮參考音訊＋目標 MIDI 做 in-context flow matching，免 CLAP 定長 embedding；非對稱分層 CFG 解耦音色與音符條件，音色隨 prompt 變長而提升。",
+      "insight": "洞見:MeanAudio 若把參考音色壓成 CLAP 定長向量，細節音色（起音、共鳴、演奏噪音）先被丟光，再強的 DiT 也只能「像那一類樂器」。Anysynth 把 Reference Audio 原樣丟進 DiT self-attention，生成時動態取樣音色細節，並用 Asymmetric Hierarchical CFG 分開 MIDI 與 timbre 的 guidance 強度——這正是「條件語義層次不同就不該共用同一 CFG 權重」的實作模板，也解釋為何 prompt-length scaling 只出現在 embedding-free 系統。",
+      "try_next": "可做:在 MeanAudio／song DiT 上改成 uncompressed reference in-context conditioning，對比 CLAP 向量 baseline 的 FAD、CLAP score 與音色相似度；對唱聲 stem 試同樣非對稱 CFG（lyric／F0 一路、timbre 一路）；量測不同參考長度對 timbre fidelity 的曲線。",
+      "problem": "零樣本樂器克隆要在僅有短參考音＋參考 MIDI 時，用任意目標 MIDI 重現未見過樂器的音色。既有方法多依賴 CLAP 等預訓練 embedding 把參考壓成定長向量，細粒度聲學線索被丟棄，音色還原不足。",
+      "method": "Anysynth：embedding-free 的 in-context flow matching；DiT 直接以未壓縮 reference audio 與 target MIDI 為條件，self-attention 在生成時動態檢索聲學細節。提出 Asymmetric Hierarchical CFG：依 MIDI 與 reference-timbre 的語義—聲學依賴結構，分開引導強度，避免梯度衝突。",
+      "data": "論文以 zero-shot instrument cloning 設定評估（目標 MIDI + 未見樂器的短參考音／參考 MIDI）；demo 於 anysynth-demo.github.io。細節資料集規模與分割以原文／補充材料為準。",
+      "findings": "相對 embedding-based 與自迴歸 baseline，AnySynth 在音質、音色相似度與旋律遵從上更佳；且呈現 prompt-length scaling：參考越長音色保真越穩，此性質在 embedding 系統中不存在。非對稱分層 CFG 同時提升 note accuracy 與 timbre fidelity。",
+      "limitations": "被 ISMIR 2026 reject；公開摘要未給出完整數值表與訓練資料授權細節。實驗是否涵蓋唱聲／人聲「樂器」需自行驗證。embedding-free 的記憶與延遲成本相對 CLAP 條件更高。",
+      "editor_note": "MeanAudio 今日首選：條件別再一律壓成 CLAP 向量；flow matching + 非對稱 CFG 可直接試在 TTM／樂器克隆。與 HARP codec、MusicMark latent 條件線並讀。",
+      "relevance": {
+        "mean_audio": 5,
+        "karaoke_jp": 2
+      }
+    },
+    {
+      "slot": 2,
+      "track": "mean_audio",
+      "title": "Qwen-Audio-VAE Technical Report",
+      "authors": [
+        "Ziyue Jiang",
+        "Dake Guo",
+        "Zekai Zhang",
+        "Hangrui Hu",
+        "Ting He",
+        "Xinfa Zhu",
+        "Xiong Wang",
+        "Yongqi Wang",
+        "Jiapeng Wang",
+        "Wenxiang Guo",
+        "Zhifang Guo",
+        "Chenfei Wu",
+        "Dayiheng Liu",
+        "Jin Xu"
+      ],
+      "published": "2026-07-13",
+      "updated": "2026-07-13",
+      "source_url": "https://arxiv.org/abs/2607.11738",
+      "arxiv_id": "2607.11738",
+      "doi": "10.48550/arXiv.2607.11738",
+      "tags": [
+        "neural codec",
+        "audio VAE",
+        "text-to-audio"
+      ],
+      "quality": "新且重要",
+      "tldr": "低位元率連續音訊 VAE：因果編解碼＋window Transformer＋多判別器，5M 小時跨域訓練；32 分鐘音訊僅需約 541 ms 編碼，兼顧重建與大規模 TTA 吞吐。",
+      "insight": "洞見:MeanAudio 的瓶頸常不在 DiT 本體，而在「latent 夠好、編碼夠快、壓縮夠狠」。Qwen-Audio-VAE 把設計原則寫死：VAE 不僅要高保真重建，還要能撐大規模 text-to-audio 訓練的編碼吞吐；非對稱編解碼＋latency-aware encoder pruning 正是為了把編碼時間打下來。這與離散 RVQ codec（EnCodec／DAC／HARP）形成對照：連續 latent + 快編碼可能是全曲級 flow matching 更務實的骨幹。",
+      "try_next": "可做:用公開 speech／music／sound 重建基準對照 Qwen-Audio-VAE vs EnCodec/DAC/HARP 的 FAD、mel 失真與 encode 吞吐；把 MeanAudio 的 flow matching 換到其 latent，量測訓練步數與 CLAP／FAD；並測唱聲 stem 與 JPOP 混音的 domain gap。",
+      "problem": "通用音訊生成需要同時滿足高保真重建、緊湊 latent 與足夠快的編碼，才能支撐大規模 text-to-audio 訓練；既有 codec／VAE 常在品質、壓縮率與編碼延遲之間失衡。",
+      "method": "Qwen-Audio-VAE：因果 encoder-decoder、window Transformer blocks、multi-discriminator 訓練；非對稱編解碼骨幹，並以 latency-aware encoder pruning 拉高編碼吞吐。目標是低位元率、快編碼的連續 autoencoder，服務可擴展的 general audio generation。",
+      "data": "約 5 million hours 多領域音訊大規模訓練；於公開 speech、music、sound 重建基準評估跨域泛化與編碼效率。",
+      "findings": "跨 speech／music／sound 重建基準泛化良好；編碼 32 分鐘音訊約需 541 ms，展現高吞吐。整體在重建品質與壓縮率之間取得較強平衡，適合作為大規模生成的 representation backbone。",
+      "limitations": "技術報告性質，權重／訓練配方／授權細節需對照官方釋出。與離散 RVQ 在生成端（AR token vs continuous flow）的端到端比較未在摘要完整展開。音樂專用（複調、唱聲）極限需獨立測。",
+      "editor_note": "MeanAudio 的 latent 基建必讀：連續 VAE + 編碼吞吐。可與 HARP、Neural Morphing、MusicMark codec 抗性並讀；Qwen-Music 理解線可當上下游。",
+      "relevance": {
+        "mean_audio": 5,
+        "karaoke_jp": 1
+      }
+    }
+  ],
+  "repo": {
+    "full_name": "haomingkoo/singlah",
+    "url": "https://github.com/haomingkoo/singlah",
+    "description_zh": "多語卡拉 OK 網頁應用：同步歌詞、即時拼音／日文 Romaji／韓文羅馬化、音高分析，並支援離線 PWA。",
+    "stars": 0,
+    "updated": "2026-08-01",
+    "why": "karaoke-jp 需要假名／Romaji 顯示與 pitch 回饋的前端；singlah 直接做日文 Romaji + 同步歌詞 + pitch analysis，2026-08-01 仍更新，可當 LRC 渲染與唱聲 pitch 管線的 UI 參考。",
+    "tags": [
+      "karaoke",
+      "romaji",
+      "pitch analysis"
+    ]
+  },
+  "discord_messages": [
+    "# 每日 MIR 論文精選 - 2026-08-02\n🌐 完整報告:https://lanternko.github.io/mir-paper-digest/reports/2026-08-02.html\n\n**論文 1｜Anysynth: Zero-Shot Instrument Cloning via In-Context Learning and Asymmetric Hierarchical Guidance**\n🔗 https://arxiv.org/abs/2607.11143\n🎯 主線:MeanAudio（in-context flow matching／樂器克隆）｜7/13 上架、7/18 更新\n\n**TLDR**:未壓縮參考音＋目標 MIDI 做 DiT flow matching，免 CLAP 定長向量；非對稱分層 CFG 解耦音色與音符，音色隨 prompt 變長而提升。\n\n**為什麼選它**:MeanAudio 條件若一律壓成 embedding，音色細節先死；in-context + 非對稱 CFG 是可遷移模板。\n\n**注意**:ISMIR 2026 reject；唱聲是否適用需另驗。\n\n**下一步**:自有 TTM 上對比 CLAP 向量 vs 未壓縮 reference 條件。",
+    "**論文 2｜Qwen-Audio-VAE Technical Report**\n🔗 https://arxiv.org/abs/2607.11738\n🎯 主線:MeanAudio（連續音訊 VAE／codec 基建）｜7/13 上架\n\n**TLDR**:低位元率連續 VAE，5M 小時跨域訓練；32 分鐘音訊編碼約 541 ms，兼顧重建與大規模 TTA 吞吐。\n\n**為什麼選它**:全曲 flow matching 的瓶頸常在 latent 與 encode 速度，不只是生成器本體。\n\n**注意**:技術報告，權重與音樂極限需對照官方釋出。\n\n**下一步**:對照 EnCodec/DAC/HARP 的重建與 encode 吞吐；試接 MeanAudio latent。",
+    "**GitHub Pick｜haomingkoo/singlah** ⭐0｜最近更新 2026-08-01\n🔗 https://github.com/haomingkoo/singlah\n\n多語卡拉 OK 網頁：同步歌詞、拼音／日文 Romaji／韓文羅馬化、pitch 分析、離線 PWA。\n\n**為什麼選它**:karaoke-jp 需要 Romaji 顯示與 pitch 回饋的前端參考。\n\n## 今天的 take-away\n- 樂器克隆：條件別再一律壓 CLAP；in-context flow matching + 非對稱 CFG（Anysynth, 2607.11143）。\n- 生成基建：連續 VAE 要同時打重建與編碼吞吐（Qwen-Audio-VAE, 2607.11738）。\n- 工程：singlah 可當日文 Romaji 卡拉 OK UI／pitch 回饋原型。"
+  ]
+}
