@@ -1,0 +1,90 @@
+{
+  "date": "2026-08-03",
+  "papers": [
+    {
+      "slot": 1,
+      "track": "mean_audio",
+      "title": "MusiChat: Vibe Composing for Music Creation",
+      "authors": [
+        "Callie C. Liao",
+        "Duoduo Liao",
+        "Ellie L. Zhang"
+      ],
+      "published": "2026-07-27",
+      "updated": "2026-07-27",
+      "source_url": "https://arxiv.org/abs/2607.24873",
+      "arxiv_id": "2607.24873",
+      "doi": "10.48550/arXiv.2607.24873",
+      "tags": [
+        "lyric-aligned generation",
+        "controllable music",
+        "interactive editing"
+      ],
+      "quality": "新且重要",
+      "tldr": "對話式 vibe composing：分層可控生成把「歌詞對齊的結構」與「表達面實現」拆開，記憶狀態跨輪迭代改曲，而非每次重抽整首。",
+      "insight": "洞見:TTM／MeanAudio 若只做 prompt→整首重生成，迭代編輯成本爆炸。MusiChat 把生成切成 lyric-aligned structure 與 surface realization 兩層，再用 memory-augmented 狀態與 intent routing 做結構保留的局部改動——這正是「條件層次不同就應分開編輯」的產品化模板，也直接對齊 karaoke 場景：先鎖歌詞結構，再調風格／伴奏而不重抽對齊。",
+      "try_next": "可做:在 MeanAudio／song DiT 上拆 structure decoder 與 realization decoder，對「改風格但保留歌詞時間軸」做 A/B；用固定 LRC／mora 時間軸當 structure 條件，量測結構漂移與 CLAP／FAD；接 karaoke-jp 的 iterative refine UI。",
+      "problem": "現有 AI 音樂生成多採 prompt 後整首重生成，使用者難以在既有作品上做多輪局部精修，結構與意圖容易在重抽時被破壞。",
+      "method": "MusiChat：階層可控生成框架，將歌詞對齊的音樂結構生成與表達面實現分離；LLM 與 hybrid symbolic music engine 透過記憶增強架構維護當前作品狀態與使用者歷史；hybrid intent routing 同時處理精確音樂編輯與開放式創作請求，增量轉換既有 artifact 而非從零重生成。",
+      "data": "客觀分析與使用者研究：單輪／多輪互動正確率分別 95.31% 與 100%；旋律自然度 like:dislike 約 2:1、音樂品質約 3:1。細節基準與對照系統以原文為準。",
+      "findings": "相對整首重抽范式，MusiChat 支援連貫多輪共創；人評顯示旋律自然度與整體品質偏好明顯，且多輪意圖追蹤穩定。",
+      "limitations": "摘要未完整公開訓練資料授權、模型權重與對齊到波形級 TTM 的端到端配方；like/dislike 比值非標準化 MOS，跨語（尤其日文歌詞／mora）泛化需另測。",
+      "editor_note": "MeanAudio 今日首選：別再「改一句 prompt 就整首重抽」。歌詞結構層與 realization 層分離 + 狀態記憶，可直接試在 song DiT／karaoke 編輯迴路。",
+      "relevance": {
+        "mean_audio": 5,
+        "karaoke_jp": 4
+      }
+    },
+    {
+      "slot": 2,
+      "track": "karaoke_jp",
+      "title": "CrowdioSet and PaRIRset: Two Datasets Towards Live Music Source Separation",
+      "authors": [
+        "Enric Gusó",
+        "Xavier Serra"
+      ],
+      "published": "2026-07-30",
+      "updated": "2026-07-30",
+      "source_url": "https://arxiv.org/abs/2607.27828",
+      "arxiv_id": "2607.27828",
+      "doi": "10.48550/arXiv.2607.27828",
+      "tags": [
+        "source separation",
+        "live music",
+        "audience noise"
+      ],
+      "quality": "新且重要",
+      "tldr": "現場混音 MSS 的兩套公開資料：CrowdioSet（真實氛圍＋零樣本唱和噪音）與 PaRIRset（40 場專業場館立體聲 IR），明顯縮小 studio→live 落差。",
+      "insight": "洞見:karaoke-jp 的人聲分離若只在 studio stem 上訓，一碰到現場（場館響應、觀眾噪音、合唱）就崩。CrowdioSet 用 Freesound 氛圍＋對 MUSDB／MOISES 人聲做 zero-shot singing voice conversion 的 sing-along，PaRIRset 用真實場館 IR——這把「domain gap 要靠資料而不是再疊一層通用 SE」寫成可複現配方，ISMIR 接受且全開源。",
+      "try_next": "可做:用 CrowdioSet／PaRIRset 微調既有 vocal separator，對 JPOP 現場／卡拉 OK 房錄比 SDR 與主觀 intelligibility；把 audience noise 當 data aug 進 karaoke-jp 前處理；對照僅 SE-RIR 增廣的 baseline。",
+      "problem": "多數音樂源分離模型只在錄音室資料上訓練，忽略場館聲學、喇叭響應與觀眾噪音，因此在現場錄音上泛化差，難以服務現場卡拉 OK 與 live remix。",
+      "method": "提出兩套資料並訓練：CrowdioSet 含約 4800 條真實氛圍軌與由零樣本唱聲轉換合成的 sing-along，用於 live 去噪；PaRIRset 為 40 個專業音樂會場地、麥克風陣列量測的立體聲脈衝響應。兩者與 MSS 模型聯合使用以縮小 studio→live 落差。",
+      "data": "CrowdioSet（Freesound 氛圍＋MUSDB18／MOISESDB 人聲合成唱和）、PaRIRset（40 venues stereo IR）；範例、程式、權重與資料公開於專案頁。ISMIR 2026 accepted。",
+      "findings": "加入 CrowdioSet 後 live 去噪與分離在客觀與主觀評測均更佳；相較僅用語音增強任務的真實 RIR，加入 PaRIRset 可進一步提升 MSS 表現。",
+      "limitations": "合成 sing-along 與真實觀眾合唱仍有 domain 差距；日文卡拉 OK 房／小空間 IR 覆蓋未在摘要強調；下游對齊／LRC 是否受益需端到端實驗。",
+      "editor_note": "karaoke-jp 人聲分離必備資料包：live domain 不是加 SE 就好。與 MSST、se2svs 唱聲分離線並讀；先用 CrowdioSet 做 data aug。",
+      "relevance": {
+        "mean_audio": 2,
+        "karaoke_jp": 5
+      }
+    }
+  ],
+  "repo": {
+    "full_name": "grazzolini/tuneforge",
+    "url": "https://github.com/grazzolini/tuneforge",
+    "description_zh": "本機優先的音樂學習桌面應用：stem 分離、和弦／調性／速度與歌詞轉錄、音高平移與 retune、capo 轉調、匯出、調音器與節拍器，無需雲端帳號。",
+    "stars": 9,
+    "updated": "2026-07-29",
+    "why": "karaoke-jp 需要「分離人聲→歌詞／對齊→pitch 參考」的本機管線；tuneforge 把 stem separation、lyrics transcription 與 pitch 工具收在同一桌面 app，2026-07-29 仍活躍，可當 karaoke-jp 工程整合與 UI 參考。",
+    "tags": [
+      "stem separation",
+      "lyrics transcription",
+      "local-first"
+    ]
+  },
+  "discord_messages": [
+    "# 每日 MIR 論文精選 - 2026-08-03\n🌐 完整報告:https://lanternko.github.io/mir-paper-digest/reports/2026-08-03.html\n\n**論文 1｜MusiChat: Vibe Composing for Music Creation**\n🔗 https://arxiv.org/abs/2607.24873\n🎯 主線:MeanAudio（歌詞對齊結構＋對話式迭代生成）｜7/27 上架\n\n**TLDR**:分層可控生成拆開「歌詞對齊結構」與「表達面實現」，記憶狀態跨輪改曲，而非每次重抽整首。\n\n**為什麼選它**:MeanAudio／karaoke 若只會 prompt→重生成，對齊與結構都會被洗掉；structure/realization 分離是可遷移模板。\n\n**注意**:權重與跨語（日文 mora）泛化需另驗；人評為 like/dislike 非完整 MOS。\n\n**下一步**:在 song DiT 上鎖 LRC 時間軸做結構保留編輯 A/B。",
+    "**論文 2｜CrowdioSet and PaRIRset: Two Datasets Towards Live Music Source Separation**\n🔗 https://arxiv.org/abs/2607.27828\n🎯 主線:karaoke-jp（現場人聲分離資料）｜7/30 上架｜ISMIR 2026\n\n**TLDR**:CrowdioSet（真實氛圍＋合成唱和）與 PaRIRset（40 場館 IR）縮小 studio→live MSS 落差，資料／碼／權重公開。\n\n**為什麼選它**:卡拉 OK／現場混音不是再加一層通用 SE 就夠；domain gap 要用對資料。\n\n**注意**:合成 sing-along 與真實合唱仍有差距；JP 小空間需另測。\n\n**下一步**:用 CrowdioSet 微調 vocal separator，對 JPOP 現場／卡拉 OK 房錄評測。",
+    "**GitHub Pick｜grazzolini/tuneforge** ⭐9｜最近更新 2026-07-29\n🔗 https://github.com/grazzolini/tuneforge\n\n本機音樂學習桌面 app：stem 分離、和弦／調性／速度、歌詞轉錄、pitch／retune／capo、調音器與節拍器。\n\n**為什麼選它**:karaoke-jp 需要分離＋歌詞＋pitch 一站式本機管線參考。\n\n## 今天的 take-away\n- 生成別整首重抽：lyric structure 與 realization 分層＋狀態記憶（MusiChat, 2607.24873）。\n- 現場人聲分離：CrowdioSet／PaRIRset 補 audience 與 venue IR（2607.27828）。\n- 工程：tuneforge 可當本機 stem＋lyrics＋pitch 整合原型。"
+  ]
+}

@@ -181,3 +181,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-08-02,1,paper,mean_audio,Anysynth:Zero-Shot Instrument Cloning via In-Context Learning and Asymmetric Hierarchical Guidance,https://arxiv.org/abs/2607.11143,10.48550/arXiv.2607.11143,flow matching|instrument cloning|zero-shot,新且重要
 2026-08-02,2,paper,mean_audio,Qwen-Audio-VAE Technical Report,https://arxiv.org/abs/2607.11738,10.48550/arXiv.2607.11738,neural codec|audio VAE|text-to-audio,新且重要
 2026-08-02,0,repo,github,haomingkoo/singlah,https://github.com/haomingkoo/singlah,,karaoke|romaji|pitch analysis,
+2026-08-03,1,paper,mean_audio,MusiChat: Vibe Composing for Music Creation,https://arxiv.org/abs/2607.24873,10.48550/arXiv.2607.24873,lyric-aligned generation|controllable music|interactive editing,新且重要
+2026-08-03,2,paper,karaoke_jp,CrowdioSet and PaRIRset: Two Datasets Towards Live Music Source Separation,https://arxiv.org/abs/2607.27828,10.48550/arXiv.2607.27828,source separation|live music|audience noise,新且重要
+2026-08-03,0,repo,github,grazzolini/tuneforge,https://github.com/grazzolini/tuneforge,,stem separation|lyrics transcription|local-first,
