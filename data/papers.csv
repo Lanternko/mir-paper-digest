@@ -184,3 +184,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-08-03,1,paper,mean_audio,MusiChat: Vibe Composing for Music Creation,https://arxiv.org/abs/2607.24873,10.48550/arXiv.2607.24873,lyric-aligned generation|controllable music|interactive editing,新且重要
 2026-08-03,2,paper,karaoke_jp,CrowdioSet and PaRIRset: Two Datasets Towards Live Music Source Separation,https://arxiv.org/abs/2607.27828,10.48550/arXiv.2607.27828,source separation|live music|audience noise,新且重要
 2026-08-03,0,repo,github,grazzolini/tuneforge,https://github.com/grazzolini/tuneforge,,stem separation|lyrics transcription|local-first,
+2026-08-05,1,paper,mean_audio,P-MUSE: Prompt-MIDI-Optional Model for Unified Instrumental Music Synthesis and Editing,https://arxiv.org/abs/2608.01920,10.48550/arXiv.2608.01920,MIDI-to-music|music editing|prompt conditioning,新且重要
+2026-08-05,2,paper,general_mir,Separate-and-Detect: Unified Drum Transcription and Stem Generation via Latent Diffusion,https://arxiv.org/abs/2608.01093,10.48550/arXiv.2608.01093,drum transcription|source separation|latent diffusion,新且重要
+2026-08-05,0,repo,github,moriwx/FA-Kara,https://github.com/moriwx/FA-Kara,,lyrics alignment|ruby/furigana|karaoke,

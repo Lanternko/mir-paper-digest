@@ -1,0 +1,96 @@
+{
+  "date": "2026-08-05",
+  "papers": [
+    {
+      "slot": 1,
+      "track": "mean_audio",
+      "title": "P-MUSE: Prompt-MIDI-Optional Model for Unified Instrumental Music Synthesis and Editing",
+      "authors": [
+        "Chong Jing",
+        "Junan Zhang",
+        "Jing Yang",
+        "Yulun Wu",
+        "Fan Fan",
+        "Zhizheng Wu"
+      ],
+      "published": "2026-08-03",
+      "updated": "2026-08-04",
+      "source_url": "https://arxiv.org/abs/2608.01920",
+      "arxiv_id": "2608.01920",
+      "doi": "10.48550/arXiv.2608.01920",
+      "tags": [
+        "MIDI-to-music",
+        "music editing",
+        "prompt conditioning"
+      ],
+      "quality": "新且重要",
+      "tldr": "把「僅 prompt 音」與「prompt+MIDI ICL」兩種 MIDI-to-Music 范式用課程學習統一起來，並以 fill-in-the-middle 同時涵蓋生成與局部編輯。",
+      "insight": "洞見:MeanAudio／樂器克隆管線常在兩種條件完備度之間切換——有對齊 MIDI 時要強控制，沒有時又得退化成純 prompt。P-MUSE 用 multi-stage curriculum 讓模型對 prompt-MIDI-optional 輸入共用一套權重，再用 fill-in-the-middle 把「整段合成」與「局部填空編輯」寫成同一任務；再加上 phase-aware CFG 與 Tail-Drop，直接對應「條件層次不同就應可選注入」的工程模板。",
+      "try_next": "可做:在 MeanAudio／song DiT 上重現 prompt-MIDI-optional curriculum，對「有／無對齊 MIDI」做 MIDI following 與 timbre similarity A/B；把 fill-in-the-middle mask 接到 karaoke 伴奏局部改音色；對照固定 CFG 與 phase-aware schedule 的 FAD／CLAP。",
+      "problem": "現有 MIDI-to-Music 系統通常只能選一種范式：僅用 prompt 音做條件生成（缺對齊 MIDI 時可用，但控制較弱），或用成對 prompt 音＋MIDI 的 in-context learning（控制強，卻依賴對齊 MIDI）。兩者分裂，且生成與局部編輯也常分成不同管線。",
+      "method": "P-MUSE：instrumental MIDI-to-Music 框架，以 multi-stage curriculum learning 支援 prompt-MIDI-optional 輸入，統一「僅 prompt」與「prompt+MIDI ICL」；以共享的 fill-in-the-middle 表述同時涵蓋音樂生成與局部編輯；並提出 Transcription-to-Audio 的 phase-aware classifier-free guidance 排程原則與 Tail-Drop 策略。",
+      "data": "建立涵蓋多種 prompt 模式、生成／編輯任務與四類代表性樂器（piano、guitar、bass、drums）的綜合 benchmark；demo 於 https://p-muse.github.io/。具體訓練集規模與授權以原文為準。",
+      "findings": "統一模型可在 prompt 可選 MIDI 條件下維持 MIDI following 與音色相似度；fill-in-the-middle 使生成與局部編輯共用配方；phase-aware CFG 與 Tail-Drop 經理論與實證支持。",
+      "limitations": "目前聚焦 instrumental MIDI-to-Music，未涵蓋唱聲／歌詞對齊生成；四樂器 benchmark 是否覆蓋 JPOP 編曲慣例需另驗；權重與完整訓練配方公開程度以專案頁為準。",
+      "editor_note": "MeanAudio 今日首選：條件完備度不固定時，別再為「有／無 MIDI」各養一套模型。curriculum + FITM 編輯是可直接抄的產品化模板。",
+      "relevance": {
+        "mean_audio": 5,
+        "karaoke_jp": 2
+      }
+    },
+    {
+      "slot": 2,
+      "track": "general_mir",
+      "title": "Separate-and-Detect: Unified Drum Transcription and Stem Generation via Latent Diffusion",
+      "authors": [
+        "Wei-Han Hsu",
+        "Chih-Cheng Chang",
+        "Bo-Yu Chen",
+        "Li Su",
+        "Yi-Hsuan Yang"
+      ],
+      "published": "2026-08-02",
+      "updated": "2026-08-02",
+      "source_url": "https://arxiv.org/abs/2608.01093",
+      "arxiv_id": "2608.01093",
+      "doi": "10.48550/arXiv.2608.01093",
+      "tags": [
+        "drum transcription",
+        "source separation",
+        "latent diffusion"
+      ],
+      "quality": "新且重要",
+      "tldr": "重提 separate-and-detect：五軌鼓 stem 的 latent diffusion 分離器＋固定 onset 偵測，同時交出可編輯 stem 與符號轉寫。",
+      "insight": "洞見:自動鼓轉錄若只從混合音直接映射到符號，會丟掉 remix／production 真正需要的可編輯 stem。本文把 ADT 拉回「先生成五軌鼓 stem，再固定 detector 轉 onset」——生成式 demixing 當可解釋前端，而不是黑盒 event 分類。對 karaoke-jp／製作管線的啟發是：分離與轉錄不該是兩套互不溝通的模型，onset／timbre 輔助分支只在訓練期塑形、推理丟掉，也是可遷移的設計。",
+      "try_next": "可做:把 separate-and-detect 思路試在人聲／伴奏 stem：先 latent 分離再固定對齊器；對照端到端 ADT 與 U-Net drum sep baseline 的 F1 與 stem 可聽度；評估 kick/snare 外 toms／cymbals 在 JPOP 混音上的泛化。",
+      "problem": "Automatic Drum Transcription 常被做成混合音→符號事件的直接映射，雖有轉錄分數，卻捨棄對編輯、remix 與製作有用的聲學 stem。",
+      "method": "separate-and-detect：五 stem latent diffusion 分離器（kick、snare、toms、hi-hats、cymbals）在緊湊 VAE latent 空間聯合生成；固定 onset detector 將各 stem 轉成符號事件。訓練期另加 onset branch（OB）與 timbre branch（TB）塑形分離器，推理時丟棄。",
+      "data": "在合成鼓 multitrack 上訓練；於 MDB Drums 與 ENST-Drums 評估。ISMIR 2026 accepted。",
+      "findings": "相對強 U-Net 鼓分離 baseline，整體轉錄 F1 一致提升；在評估協議下 kick／snare F1 也優於代表性端到端 ADT，同時額外提供分離音軌。消融顯示 OB 對轉錄增益最穩，TB 則牽動重建、stem 品質與 onset 偵測的權衡。",
+      "limitations": "訓練以合成鼓 multitrack 為主，真實現場／多層 sample 鼓組 domain gap 需另測；目前僅鼓組，未擴到人聲或全頻 MSS；代碼／權重公開狀態以論文後續為準。",
+      "editor_note": "ISMIR 2026 鼓線：生成式 demixing 可以同時當 separation 與 transcription 前端。別只追 F1——可編輯 stem 才是產品價值。",
+      "relevance": {
+        "mean_audio": 3,
+        "karaoke_jp": 3
+      }
+    }
+  ],
+  "repo": {
+    "full_name": "moriwx/FA-Kara",
+    "url": "https://github.com/moriwx/FA-Kara",
+    "description_zh": "基於注音歌詞文本與人聲音頻的自動打軸工具：MMS forced alignment，輸出 ASS／LRC（含 ruby），面向日語卡拉 OK／NicoKara 工作流。",
+    "stars": 44,
+    "updated": "2026-08-04",
+    "why": "karaoke-jp 核心是「人聲 stem＋已知歌詞→時間軸」。FA-Kara 要求 UVR/MSST 人聲與振假名注音歌詞，用 MMS_FA 對齊並輸出 o.ass、o_rlf.lrc、o_ruby.lrc（可進 NicoKaraMaker3），直接對齊 lyrics alignment／kana-ruby／LRC 渲染主線；2026-08-04 仍活躍。",
+    "tags": [
+      "lyrics alignment",
+      "ruby/furigana",
+      "karaoke"
+    ]
+  },
+  "discord_messages": [
+    "# 每日 MIR 論文精選 - 2026-08-05\n🌐 完整報告:https://lanternko.github.io/mir-paper-digest/reports/2026-08-05.html\n\n**論文 1｜P-MUSE: Prompt-MIDI-Optional Model for Unified Instrumental Music Synthesis and Editing**\n🔗 https://arxiv.org/abs/2608.01920\n🎯 主線:MeanAudio（MIDI-to-Music 生成＋局部編輯）｜8/3 上架、8/4 v2\n\n**TLDR**:課程學習統一「僅 prompt」與「prompt+MIDI ICL」，fill-in-the-middle 同時做生成與局部編輯，並附 phase-aware CFG。\n\n**為什麼選它**:條件完備度不固定時不該養兩套模型；FITM 編輯也是 MeanAudio 產品化關鍵。\n\n**注意**:目前是 instrumental，唱聲／歌詞線需另接。\n\n**下一步**:在 song DiT 上做 prompt-MIDI-optional curriculum 與固定 CFG 對照。",
+    "**論文 2｜Separate-and-Detect: Unified Drum Transcription and Stem Generation via Latent Diffusion**\n🔗 https://arxiv.org/abs/2608.01093\n🎯 主線:MIR（鼓 stem 生成＋轉錄）｜8/2 上架｜ISMIR 2026\n\n**TLDR**:五軌鼓 latent diffusion 先分離，再固定 onset 偵測——同時交可編輯 stem 與符號事件。\n\n**為什麼選它**:轉錄不該丟掉 remix 用的 stem；生成式 demixing 可當可解釋前端。\n\n**注意**:合成鼓訓練為主；尚未擴到人聲／全頻 MSS。\n\n**下一步**:把 separate-and-detect 思路試在 vocal/accomp 分離＋固定對齊器。",
+    "**GitHub Pick｜moriwx/FA-Kara** ⭐44｜最近更新 2026-08-04\n🔗 https://github.com/moriwx/FA-Kara\n\n人聲＋注音歌詞→自動打軸：MMS_FA，輸出 ASS／LRC（含 ruby），可進 NicoKaraMaker3；建議日語曲＋UVR/MSST 人聲。\n\n**為什麼選它**:karaoke-jp 的 alignment→ruby LRC 工作流可直接對照與整合。\n\n## 今天的 take-away\n- MIDI-to-Music：prompt-MIDI-optional curriculum + FITM 編輯（P-MUSE, 2608.01920）。\n- 鼓轉錄：separate-and-detect 同時給 stem 與 onset（2608.01093）。\n- 工程：FA-Kara 做人聲＋振假名→ASS/LRC 打軸原型。"
+  ]
+}
