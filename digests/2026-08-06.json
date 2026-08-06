@@ -1,0 +1,105 @@
+{
+  "date": "2026-08-06",
+  "papers": [
+    {
+      "slot": 1,
+      "track": "karaoke_jp",
+      "title": "CLASVS: Continuous-Latent Autoregression for Melody-Preserving Lyric Editing in Singing Voice Synthesis",
+      "authors": [
+        "Yizhong Geng",
+        "Tian-Hao Zhang",
+        "Chunfeng Wang",
+        "Wenxin Fu",
+        "Yingming Gao",
+        "Ruimin Wang",
+        "Zhou Pan",
+        "Kun Zhan",
+        "Liang Li",
+        "Ya Li"
+      ],
+      "published": "2026-08-04",
+      "updated": "2026-08-04",
+      "source_url": "https://arxiv.org/abs/2608.03253",
+      "arxiv_id": "2608.03253",
+      "doi": "10.48550/arXiv.2608.03253",
+      "tags": [
+        "lyric editing",
+        "singing voice synthesis",
+        "continuous AR"
+      ],
+      "quality": "新且重要",
+      "tldr": "連續 latent 自回歸做旋律保留的歌詞編輯：SCT 路由分離目標歌詞與參考旋律，PSCG 解訓練跟原詞、推論要改詞的衝突。",
+      "insight": "洞見:karaoke-jp／翻唱管線真正卡的常不是「從零合成唱聲」，而是「保留原唱 timing、歌手身分與自然度，只改詞」。CLASVS 點出 reference-conditioned 編輯的訓練—推論衝突：訓練把 reference 與原詞綁在一起，推論卻要改詞壓過源詞相關 cue，且 AR 歷史上一處 source-following 就會連鎖。它用 State-Control-Transition 把目標歌詞與參考旋律控制常駐、把上一個 latent patch 侷限在局部 Transition，再用 Progressive State-Control Grounding 在無成對編輯標註的 Mandarin 重建上學會這份契約——這比再堆一個離散 codebook 更貼「改詞不改腔」的產品需求。",
+      "try_next": "可做:在日語／JPOP 人聲 stem 上重現「已知旋律 reference + 改詞」協議，對照 Vevo2 式離散 AR；把 SCT 的 lyric／melody 雙控制接到 karaoke-jp 的 LRC 改詞與 re-sing 原型；量 PER、pitch 一致性、singer similarity 與聽感。",
+      "problem": "Reference-conditioned、旋律保留的歌詞編輯要求：替換歌詞時仍保住表演 timing、歌手身分與自然度。連續 latent 自回歸避開有限 codebook，但編輯任務存在重建沒有的衝突——訓練把 reference cue 與原詞綁定，推論卻要改詞覆蓋源詞相關 cue，且 AR 歷史誤差會傳播。",
+      "method": "CLASVS：Continuous-Latent Autoregression for Singing Voice Synthesis。State-Control-Transition（SCT）路由讓目標歌詞與參考旋律控制常駐，向因果 planner 回饋語音進度語意，並把前一個 latent patch 限制在局部 Transition。Progressive State-Control Grounding（PSCG）以成對編輯無關、內容一致的 Mandarin 重建學習此契約，無需 score annotation。",
+      "data": "兩個 Mandarin benchmark，四種編輯操作對照離散 AR Vevo2；demo：https://piedpiperg.github.io/Liyric-SVS/。訓練為 edit-free 內容一致重建設定，細節以原文為準。",
+      "findings": "在兩套 Mandarin benchmark 上，CLASVS 四種操作皆優於離散 AR Vevo2，macro-PER 降 46.2%，同時維持旋律、singer similarity 與感知品質，形成 score-annotation-free 歌詞編輯的強連續 AR 操作點。",
+      "limitations": "目前公開結果以 Mandarin 為主，日語／mora 與 JPOP 混音泛化未證明；需 reference 表演與可改詞文本；權重與完整訓練配方公開程度以專案頁為準；連續 AR 延遲與長曲穩定性需另測。",
+      "editor_note": "karaoke-jp 今日首選：不是再做一版 SVS，而是「改詞不改腔」的連續 AR 契約。SCT+PSCG 直接對齊 LRC 改詞→重唱產品路徑。",
+      "relevance": {
+        "mean_audio": 3,
+        "karaoke_jp": 5
+      }
+    },
+    {
+      "slot": 2,
+      "track": "mean_audio",
+      "title": "MeloCodec: Harnessing Melodic Priors for High-Fidelity Singing Voice Representation",
+      "authors": [
+        "Yizhong Geng",
+        "Wenxin Fu",
+        "Kecan Mao",
+        "Qifei Li",
+        "Yingming Gao",
+        "Ruimin Wang",
+        "Chunfeng Wang",
+        "Hao Li",
+        "Ya Li",
+        "Wei Chen"
+      ],
+      "published": "2026-08-04",
+      "updated": "2026-08-04",
+      "source_url": "https://arxiv.org/abs/2608.03021",
+      "arxiv_id": "2608.03021",
+      "doi": "10.48550/arXiv.2608.03021",
+      "tags": [
+        "neural codec",
+        "singing voice",
+        "melodic prior"
+      ],
+      "quality": "新且重要",
+      "tldr": "為唱聲 codec 引入旋律先驗：Tokenize-then-Fuse 先鎖離散旋律分支再融合，兩階段訓練防 codebook collapse，提升音高一致與可控。",
+      "insight": "洞見:LLM 時代 audio tokenizer 多用力灌 semantic prior 保可懂度，但唱聲對頻率／音高敏感，缺 explicit acoustic／melodic prior 會直接傷 fidelity。MeloCodec 不把旋律當事後損失，而是用 Tokenize-then-Fuse：先預訓練離散旋律分支鎖住結構，再融合；兩階段訓練擋 codebook collapse。對 MeanAudio／song codec 的工程含義是：條件先驗要「先 tokenize 鎖結構、再 fuse」，而不是一次端到端硬塞——pitch 可控、音色幾乎不崩，正好餵給後續 lyric edit／flow matching 管線。",
+      "try_next": "可做:在 MeanAudio 的 singing／song tokenizer 上重現 melodic branch + Tokenize-then-Fuse，對照純 semantic codec 的 pitch 一致性、FAD／CLAP 與音色漂移；把 pitch 操控接到 karaoke 改調與 CLASVS 式改詞後重編碼。",
+      "problem": "Neural audio codec 是 LLM 式音訊生成的基礎 tokenizer。語意先驗已廣泛用來提升語言可懂度，但明確聲學／旋律先驗整合不足，限制了對頻率敏感領域（尤其唱聲）的合成保真度；直接融合顯式先驗又常造成優化不穩。",
+      "method": "MeloCodec：把 melodic prior 納入唱聲表示。Tokenize-then-Fuse：先預訓練離散旋律分支鎖定結構，再做特徵融合，避免直接 fuse 的不穩定。兩階段訓練策略防止 codebook collapse 並穩定收斂。",
+      "data": "唱聲表示實驗（ICME 2026 accepted）；7 頁、3 圖、3 表。具體訓練集規模與 baseline 名稱以原文為準。",
+      "findings": "相對 baseline，MeloCodec 在唱聲表示上更優，提升 pitch 一致性，並能在最小音色劣化下做可控 pitch 操控。",
+      "limitations": "聚焦唱聲表示，未宣稱通用 speech／環境音 codec 全面領先；旋律分支對無音高或複雜和聲混音的泛化需另測；代碼／權重公開狀態以論文後續為準。",
+      "editor_note": "MeanAudio codec 線：semantic 不夠，唱聲要 melodic prior。Tokenize-then-Fuse 是可抄的穩定融合模板。",
+      "relevance": {
+        "mean_audio": 5,
+        "karaoke_jp": 4
+      }
+    }
+  ],
+  "repo": {
+    "full_name": "chenmozhijin/LDDC",
+    "url": "https://github.com/chenmozhijin/LDDC",
+    "description_zh": "跨平台精準歌詞下載與匹配工具：支援逐字／卡拉 OK 歌詞，多進程快速匹配，輸出逐字 LRC、逐行 LRC、增強 LRC、SRT、ASS，並可接桌面歌詞與 foobar2000 外掛。",
+    "stars": 1667,
+    "updated": "2026-08-05",
+    "why": "karaoke-jp 除了 alignment 模型，還缺「曲庫／本機音檔→可用的逐字時間軸歌詞」工程層。LDDC 做多源搜尋（QQ／網易／酷狗／Lrclib 等）、多進程匹配、本機匹配與多格式匯出（含逐字 LRC／ASS），正好補 FA-Kara 打軸前的歌詞取得與格式管線；1667★、2026-08-05 仍活躍，GPL-3.0。",
+    "tags": [
+      "lyrics download",
+      "word-level LRC",
+      "karaoke"
+    ]
+  },
+  "discord_messages": [
+    "# 每日 MIR 論文精選 - 2026-08-06\n🌐 完整報告:https://lanternko.github.io/mir-paper-digest/reports/2026-08-06.html\n\n**論文 1｜CLASVS: Continuous-Latent Autoregression for Melody-Preserving Lyric Editing in Singing Voice Synthesis**\n🔗 https://arxiv.org/abs/2608.03253\n🎯 主線:karaoke-jp（旋律保留歌詞編輯／SVS）｜8/4 上架\n\n**TLDR**:連續 latent AR 做改詞不改腔：SCT 路由分離歌詞與旋律控制，PSCG 解訓練—推論衝突；Mandarin 上 macro-PER 降 46.2%。\n\n**為什麼選它**:karaoke 產品常要「保留原唱 timing／音色，只換詞」；連續 AR + 狀態控制契約比再堆 codebook 更貼這條路徑。\n\n**注意**:公開結果以 Mandarin 為主；日語／JPOP 泛化與權重公開需另驗。\n\n**下一步**:在日語人聲 stem 上重現 reference+改詞協議，接 LRC 改詞→re-sing 原型。",
+    "**論文 2｜MeloCodec: Harnessing Melodic Priors for High-Fidelity Singing Voice Representation**\n🔗 https://arxiv.org/abs/2608.03021\n🎯 主線:MeanAudio（唱聲 neural codec）｜8/4 上架｜ICME 2026\n\n**TLDR**:Tokenize-then-Fuse 先鎖離散旋律分支再融合，兩階段訓練防 codebook collapse，提升 pitch 一致性與可控 pitch 操控。\n\n**為什麼選它**:LLM tokenizer 偏 semantic 時，唱聲 fidelity 會先死在音高；melodic prior 是 MeanAudio／song codec 可直接抄的穩定融合模板。\n\n**注意**:聚焦唱聲；通用音訊與權重狀態以原文為準。\n\n**下一步**:在 song tokenizer 上對照純 semantic codec 的 pitch／FAD／音色漂移。",
+    "**GitHub Pick｜chenmozhijin/LDDC** ⭐1667｜最近更新 2026-08-05\n🔗 https://github.com/chenmozhijin/LDDC\n\n精準歌詞下載匹配：多進程、多源（含 Lrclib 等）、輸出逐字 LRC／ASS 等；桌面歌詞與 foobar2000 外掛可選。\n\n**為什麼選它**:karaoke-jp 需要「取得可用的逐字時間軸歌詞」工程層，與 FA-Kara 打軸前處理互補。\n\n## 今天的 take-away\n- 改詞不改腔：連續 AR + SCT/PSCG 契約（CLASVS, 2608.03253）。\n- 唱聲 codec：Tokenize-then-Fuse 灌 melodic prior（MeloCodec, 2608.03021）。\n- 工程：LDDC 補齊逐字歌詞下載／匹配／多格式匯出。"
+  ]
+}

@@ -187,3 +187,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-08-05,1,paper,mean_audio,P-MUSE: Prompt-MIDI-Optional Model for Unified Instrumental Music Synthesis and Editing,https://arxiv.org/abs/2608.01920,10.48550/arXiv.2608.01920,MIDI-to-music|music editing|prompt conditioning,新且重要
 2026-08-05,2,paper,general_mir,Separate-and-Detect: Unified Drum Transcription and Stem Generation via Latent Diffusion,https://arxiv.org/abs/2608.01093,10.48550/arXiv.2608.01093,drum transcription|source separation|latent diffusion,新且重要
 2026-08-05,0,repo,github,moriwx/FA-Kara,https://github.com/moriwx/FA-Kara,,lyrics alignment|ruby/furigana|karaoke,
+2026-08-06,1,paper,karaoke_jp,CLASVS: Continuous-Latent Autoregression for Melody-Preserving Lyric Editing in Singing Voice Synthesis,https://arxiv.org/abs/2608.03253,10.48550/arXiv.2608.03253,lyric editing|singing voice synthesis|continuous AR,新且重要
+2026-08-06,2,paper,mean_audio,MeloCodec: Harnessing Melodic Priors for High-Fidelity Singing Voice Representation,https://arxiv.org/abs/2608.03021,10.48550/arXiv.2608.03021,neural codec|singing voice|melodic prior,新且重要
+2026-08-06,0,repo,github,chenmozhijin/LDDC,https://github.com/chenmozhijin/LDDC,,lyrics download|word-level LRC|karaoke,
