@@ -1,0 +1,95 @@
+{
+  "date": "2026-08-07",
+  "papers": [
+    {
+      "slot": 1,
+      "track": "mean_audio",
+      "title": "InvFlowFD: Reference-Free and Background-Set-Free Perceptual Music Quality Metric with Flow Matching Inversion",
+      "authors": [
+        "Alon Ziv",
+        "Harel Pogoda",
+        "Yossi Adi"
+      ],
+      "published": "2026-08-04",
+      "updated": "2026-08-04",
+      "source_url": "https://arxiv.org/abs/2608.04142",
+      "arxiv_id": "2608.04142",
+      "doi": "10.48550/arXiv.2608.04142",
+      "tags": [
+        "flow matching",
+        "music quality metric",
+        "reference-free eval"
+      ],
+      "quality": "新且重要",
+      "tldr": "用預訓練 Flow Matching 做無參考、無 background set 的音樂感知品質：flow inversion 後對 prior 比對，可排模型與失真並貼近人耳。",
+      "insight": "洞見:MeanAudio 日常評估常卡在「要 clean reference」或「要一坨 clean background set」兩種負擔——FAD 類指標後者尤其痛。InvFlowFD 把問題收成：只要一個預訓練 unconditional Flow Matching，對候選音做 Euler inversion，再拿 inverted 樣本群與 prior 的距離當分數。工程含義是：同一條 flow backbone 既生成也當品質探針，不必再維護參考曲庫；Yossi Adi 線上 ISMIR 2026 作品，直接對齊 flow matching 主線的「生成—評估共用幾何」。",
+      "try_next": "可做:在 MeanAudio 的 music／song 生成實驗上，把 InvFlowFD 與 FAD／CLAP／人工 MOS 並列；量測不同 distortion 與模型世代的排序一致性；若本機有 FM 權重，試用簡單 Euler inversion 當離線 ranker，看是否能替換或校準現有 FAD pipeline。",
+      "problem": "現有無參考音樂感知品質方法雖不需成對 noisy-clean，但仍依賴 background set 來聚合 clean 音訊統計，部署與公平比較都受限；生成模型排行與失真偵測需要更少假設的指標。",
+      "method": "InvFlowFD：僅用預訓練 Flow Matching backbone。對音訊做 unconditional flow inversion（簡單 Euler 積分），再比較一組 inverted 樣本與 prior 分布的差異，得到背景集無關、參考無關的品質估計。",
+      "data": "對照既有指標，並做完整 human study；報告與人耳對失真與生成模型品質的相關性。ISMIR 2026。細節與 baseline 以原文為準。",
+      "findings": "InvFlowFD 與人類對聲音失真、以及生成模型品質判斷高度相關；相對既有方法更彈性、限制更少，且能正確排序音樂生成模型。",
+      "limitations": "依賴預訓練 unconditional FM 的領域涵蓋；音樂類型／混音條件外推需另測；計算成本為 inversion 軌跡，長音或 batch 延遲需工程化；非端到端可解釋的「聽感維度」拆解。",
+      "editor_note": "MeanAudio 評估線首選：flow matching 不只生成，也可當 reference-free 品質探針。ISMIR 2026，可直接進日常 ranker 對照表。",
+      "relevance": {
+        "mean_audio": 5,
+        "karaoke_jp": 2
+      }
+    },
+    {
+      "slot": 2,
+      "track": "mean_audio",
+      "title": "AudioScape-TTA: A Structured Soundscape Benchmark for Fine-Grained Text-to-Audio Evaluation",
+      "authors": [
+        "Jinting Wang",
+        "Yuguang Yang",
+        "Shengyu Li",
+        "Yan Rong",
+        "Shan Yang",
+        "Xiaoda Yang",
+        "Li Liu"
+      ],
+      "published": "2026-08-05",
+      "updated": "2026-08-05",
+      "source_url": "https://arxiv.org/abs/2608.04479",
+      "arxiv_id": "2608.04479",
+      "doi": "10.48550/arXiv.2608.04479",
+      "tags": [
+        "text-to-audio",
+        "evaluation benchmark",
+        "rubric QA"
+      ],
+      "quality": "新且重要",
+      "tldr": "結構化 soundscape 基準做細粒度 TTA 評估：事件密度／結構複雜度＋2.2k 對、2.5 萬條二元 rubric QA，比全局相似度更貼語意失敗。",
+      "insight": "洞見:TTA 進步快，但「是否聽指令」仍常被 CLAP／全局相似度糊掉——事件沒出現、屬性錯、語音內容跑掉，分數可能仍高。AudioScape-TTA 用 modality-aware 語意結構標註 soundscape，再用 audio-grounded rubric 驗事件實現、聲學屬性與語音內容；這是 MeanAudio caption／instruction-following 該補的診斷層：不是再多一個單一分數，而是可擴展的二元 QA 失敗分解。",
+      "try_next": "可做:把 MeanAudio 與開源 TTA 模型跑 AudioScape-TTA 的 rubric 子集，對照 CLAP／FAD；優先盯 attribute control、speech-content、compositional soundscape 三類失敗；若要做 reward alignment，可把 rubric 通過率當稀疏 reward 信號。",
+      "problem": "TTA 能否忠實滿足複雜文字指令仍難判定；既有基準多靠全局相似度，對細粒度語意失敗（事件、屬性、語音內容）洞察不足。",
+      "method": "AudioScape-TTA：以 modality-aware 語意結構表示真實 soundscape，用 event density 與 structural complexity 刻畫生成複雜度；提出 rubric-based、audio-grounded 評估框架，以細粒度語意準則驗證事件實現、聲學屬性與語音內容。",
+      "data": "2,258 對 audio-text，含 25,707 條 binary QA rubrics；實驗涵蓋 13 個代表性開源 TTA 模型，並做人為驗證對齊人耳語意判斷。",
+      "findings": "13 個開源 TTA 在細粒度屬性控制、語音內容保留與組合 soundscape 生成上仍有持續缺口；rubric 評估比傳統全局相似度更貼近人類語意判斷。",
+      "limitations": "基準以 soundscape／事件為主，長篇音樂結構與日語歌詞指令覆蓋有限；rubric 品質依賴標註協議；二進位 QA 可能簡化連續聽感；資料與授權細節以原文為準。",
+      "editor_note": "與 InvFlowFD 互補：一個量「好不好聽／像不像真」，一個量「指令有沒有做到」。MeanAudio 評估雙軌今天齊。",
+      "relevance": {
+        "mean_audio": 5,
+        "karaoke_jp": 1
+      }
+    }
+  ],
+  "repo": {
+    "full_name": "cf2xh123/karaoke-forge",
+    "url": "https://github.com/cf2xh123/karaoke-forge",
+    "description_zh": "本機優先的打軸歌詞與卡拉 OK MV 工具箱：Whisper 對齊、FFmpeg 燒錄、Gradio UI，支援網易雲連結、Demucs 人聲分離、LRC/SRT/VTT/ASS/JSON 匯出與 KTV 樣式字幕。",
+    "stars": 1,
+    "updated": "2026-08-06",
+    "why": "karaoke-jp 需要一條「音檔／連結 → 對齊時間軸 → 多格式字幕 → 可選 MV／伴奏」的本機管線。karaoke-forge（0.13.0 Alpha）把 Whisper 對齊、官方歌詞保留、Demucs 分離、ASS 樣式與 FFmpeg 合成串成可跑流程，與昨日 LDDC（歌詞下載匹配）上下游互補；2026-08-06 仍活躍、MIT。",
+    "tags": [
+      "karaoke",
+      "lyrics alignment",
+      "Whisper"
+    ]
+  },
+  "discord_messages": [
+    "# 每日 MIR 論文精選 - 2026-08-07\n🌐 完整報告:https://lanternko.github.io/mir-paper-digest/reports/2026-08-07.html\n\n**論文 1｜InvFlowFD: Reference-Free and Background-Set-Free Perceptual Music Quality Metric with Flow Matching Inversion**\n🔗 https://arxiv.org/abs/2608.04142\n🎯 主線:MeanAudio（flow matching 評估）｜8/4 上架｜ISMIR 2026\n\n**TLDR**:預訓練 Flow Matching 做無參考、無 background set 的音樂感知品質：Euler inversion 後對 prior 比對，可排模型與失真並貼近人耳。\n\n**為什麼選它**:FAD 類指標要 clean background set；InvFlowFD 把評估收成「同一條 FM backbone 當品質探針」，直接餵 MeanAudio 生成實驗的離線 ranker。\n\n**注意**:依賴預訓練 FM 領域涵蓋；inversion 成本與跨曲風泛化需另測。\n\n**下一步**:與 FAD／CLAP／MOS 並列跑一輪模型排序一致性。",
+    "**論文 2｜AudioScape-TTA: A Structured Soundscape Benchmark for Fine-Grained Text-to-Audio Evaluation**\n🔗 https://arxiv.org/abs/2608.04479\n🎯 主線:MeanAudio（TTA 細粒度評估）｜8/5 上架\n\n**TLDR**:結構化 soundscape 基準＋2,258 對、25,707 條二元 rubric QA，診斷事件／屬性／語音內容失敗，比全局相似度更貼語意。\n\n**為什麼選它**:CLAP 高分仍可能漏事件、錯屬性；rubric 失敗分解是 instruction-following 與 reward alignment 該補的診斷層。\n\n**注意**:偏 soundscape，長篇音樂與日語歌詞指令覆蓋有限。\n\n**下一步**:用 rubric 子集對照開源 TTA，優先盯 attribute／speech／composition 三類失敗。",
+    "**GitHub Pick｜cf2xh123/karaoke-forge** ⭐1｜最近更新 2026-08-06\n🔗 https://github.com/cf2xh123/karaoke-forge\n\n本機卡拉 OK 管線：Whisper 打軸、官方歌詞保留、Demucs 分離、LRC/ASS 等匯出、FFmpeg 燒 MV；Gradio UI，MIT，0.13.0 Alpha。\n\n**為什麼選它**:與 LDDC（下載匹配）上下游互補，補齊「對齊→字幕→MV」本機工程層。\n\n## 今天的 take-away\n- 評估不必再養 background set：FM inversion 當 reference-free 音樂品質探針（InvFlowFD, 2608.04142）。\n- 指令有沒有做到：rubric QA 比全局相似度更能拆 TTA 語意失敗（AudioScape-TTA, 2608.04479）。\n- 工程：karaoke-forge 串 Whisper 對齊＋Demucs＋字幕／MV，karaoke-jp 本機管線可抄。"
+  ]
+}

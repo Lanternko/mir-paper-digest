@@ -190,3 +190,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-08-06,1,paper,karaoke_jp,CLASVS: Continuous-Latent Autoregression for Melody-Preserving Lyric Editing in Singing Voice Synthesis,https://arxiv.org/abs/2608.03253,10.48550/arXiv.2608.03253,lyric editing|singing voice synthesis|continuous AR,新且重要
 2026-08-06,2,paper,mean_audio,MeloCodec: Harnessing Melodic Priors for High-Fidelity Singing Voice Representation,https://arxiv.org/abs/2608.03021,10.48550/arXiv.2608.03021,neural codec|singing voice|melodic prior,新且重要
 2026-08-06,0,repo,github,chenmozhijin/LDDC,https://github.com/chenmozhijin/LDDC,,lyrics download|word-level LRC|karaoke,
+2026-08-07,1,paper,mean_audio,InvFlowFD: Reference-Free and Background-Set-Free Perceptual Music Quality Metric with Flow Matching Inversion,https://arxiv.org/abs/2608.04142,10.48550/arXiv.2608.04142,flow matching|music quality metric|reference-free eval,新且重要
+2026-08-07,2,paper,mean_audio,AudioScape-TTA: A Structured Soundscape Benchmark for Fine-Grained Text-to-Audio Evaluation,https://arxiv.org/abs/2608.04479,10.48550/arXiv.2608.04479,text-to-audio|evaluation benchmark|rubric QA,新且重要
+2026-08-07,0,repo,github,cf2xh123/karaoke-forge,https://github.com/cf2xh123/karaoke-forge,,karaoke|lyrics alignment|Whisper,
