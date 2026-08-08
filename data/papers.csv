@@ -193,3 +193,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-08-07,1,paper,mean_audio,InvFlowFD: Reference-Free and Background-Set-Free Perceptual Music Quality Metric with Flow Matching Inversion,https://arxiv.org/abs/2608.04142,10.48550/arXiv.2608.04142,flow matching|music quality metric|reference-free eval,新且重要
 2026-08-07,2,paper,mean_audio,AudioScape-TTA: A Structured Soundscape Benchmark for Fine-Grained Text-to-Audio Evaluation,https://arxiv.org/abs/2608.04479,10.48550/arXiv.2608.04479,text-to-audio|evaluation benchmark|rubric QA,新且重要
 2026-08-07,0,repo,github,cf2xh123/karaoke-forge,https://github.com/cf2xh123/karaoke-forge,,karaoke|lyrics alignment|Whisper,
+2026-08-08,1,paper,mean_audio,On the Geometry of Music Bandwidth Extension in Latent Spaces of Audio Codecs,https://arxiv.org/abs/2608.03721,10.48550/arXiv.2608.03721,neural codec|bandwidth extension|latent geometry,新且重要
+2026-08-08,2,paper,karaoke_jp,Music Restoration via Latent Operator Optimization and Diffusion Model Priors,https://arxiv.org/abs/2608.01972,10.48550/arXiv.2608.01972,music restoration|singing voice|latent diffusion,新且重要
+2026-08-08,0,repo,github,ennisaaaaaaaa-stack/ocean-listen,https://github.com/ennisaaaaaaaa-stack/ocean-listen,,lyrics|stem separation|MIDI,

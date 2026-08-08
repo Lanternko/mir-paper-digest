@@ -1,0 +1,94 @@
+{
+  "date": "2026-08-08",
+  "papers": [
+    {
+      "slot": 1,
+      "track": "mean_audio",
+      "title": "On the Geometry of Music Bandwidth Extension in Latent Spaces of Audio Codecs",
+      "authors": [
+        "Hendrik Vincent Koops",
+        "Hao Hao Tan",
+        "Elio Quinton"
+      ],
+      "published": "2026-08-04",
+      "updated": "2026-08-04",
+      "source_url": "https://arxiv.org/abs/2608.03721",
+      "arxiv_id": "2608.03721",
+      "doi": "10.48550/arXiv.2608.03721",
+      "tags": [
+        "neural codec",
+        "bandwidth extension",
+        "latent geometry"
+      ],
+      "quality": "新且重要",
+      "tldr": "音樂頻寬擴展：在多種 neural codec latent 上，clean／degraded 質心的單一 transport 向量加法，竟可逼近大型 diffusion／Flow Matching 還原。",
+      "insight": "洞見:MeanAudio 常把 codec latent 當「黑盒 token 空間」，再砸條件生成做 BWE／去噪。這篇 ISMIR 2026 工作表明：若干 codec 的 latent 幾何已與頻寬對齊——只要在參考集估 clean／degraded 質心差、對 degraded latent 做向量加法，就能與大型 diffusion、Schrödinger Bridge、Flow Matching 變體競爭。工程含義是：先量 latent 是否可被簡單 arithmetic baseline 吃掉，再決定要不要上大模型；也給「codec 選型／latent 設計」多了一個可操作的診斷：幾何對齊時，可學參數的邊際貢獻要誠實用這個 baseline 量。",
+      "try_next": "可做:在 MeanAudio 的 codec（或候选 VAE）上複製「質心 transport 向量」baseline：對 bandwidth-limited 音樂 latent 做加法還原，並與既有 FM／diffusion BWE 並列；若 baseline 已接近，優先調 codec 訓練目標或 latent 正規化，而不是先堆更大條件生成器。",
+      "problem": "音樂頻寬擴展與音訊還原愈來愈依賴大規模條件 latent 生成（diffusion、Schrödinger Bridge、Flow Matching 等）；但若 codec latent 本身已帶可利用的幾何結構，複雜條件模型的邊際收益可能被高估，且缺少可解釋的簡單 baseline。",
+      "method": "在多種 neural audio codec 的 latent 空間分析音樂 BWE：比較 SOTA 條件生成方法與簡單算術變換；核心 baseline 是在參考集上估 clean 與 degraded latent 質心差（單一 transport 向量），再加到 degraded latent 上做還原。",
+      "data": "ISMIR 2026；companion site ismir26latentgeo.github.io。涵蓋多種 SOTA codec 與條件生成變體；具體資料集、指標與表格以原文為準。",
+      "findings": "單一 transport 向量加法在若干 codec latent 上可達與大型 diffusion 模型相當的 BWE 表現；顯示部分 latent 空間結構與音訊頻寬對齊，複雜條件模型相對簡單向量加法的增益可能有限。作者建議將此算術變換列為音樂 BWE 研究的 baseline，以量化學習參數的真實貢獻。",
+      "limitations": "結論依賴所測 codec 與失真類型（以頻寬限制為主）；其他失真（強噪、編解碼偽影、混音差異）未必同樣近似可平移；參考集估計 transport 需代表性；不是端到端可部署產品管線。",
+      "editor_note": "MeanAudio codec／生成線必讀：先測 latent 幾何 baseline，再談大模型 BWE。ISMIR 2026，直接可進評估腳本。",
+      "relevance": {
+        "mean_audio": 5,
+        "karaoke_jp": 1
+      }
+    },
+    {
+      "slot": 2,
+      "track": "karaoke_jp",
+      "title": "Music Restoration via Latent Operator Optimization and Diffusion Model Priors",
+      "authors": [
+        "Michal Švento",
+        "Eloi Moliner",
+        "Valtteri Kallinen",
+        "Lauri Juvela",
+        "Vesa Välimäki",
+        "Pavel Rajmic"
+      ],
+      "published": "2026-08-03",
+      "updated": "2026-08-03",
+      "source_url": "https://arxiv.org/abs/2608.01972",
+      "arxiv_id": "2608.01972",
+      "doi": "10.48550/arXiv.2608.01972",
+      "tags": [
+        "music restoration",
+        "singing voice",
+        "latent diffusion"
+      ],
+      "quality": "新且重要",
+      "tldr": "LOUDAR：預訓練 autoencoder latent 上把未知失真當可學算子，推斷時輪流估 clean latent 與算子，無條件 latent diffusion 當 clean prior；測唱聲效果去除。",
+      "insight": "洞見:karaoke-jp 實務常遇到「唱聲被混響／效果器搞髒、卻沒有成對 clean 標註」——監督式效果去除一換失真就崩。LOUDAR（ISMIR 2026）把未知失真建模成 latent operator，推論時 per-input 適配，再用無條件 latent diffusion prior 把估計拉回 clean 流形；評估含 singing voice effect removal 與吉他失真去除。對 MeanAudio 也是同一套「codec latent + diffusion prior + 未知 forward」的 inverse 模板，可與昨天 InvFlowFD 的 flow 幾何視角對讀。",
+      "try_next": "可做:在 karaoke-jp 管線的人聲 stem 上試 LOUDAR 類 per-input operator 適配（或論文開源後對照），對比固定監督 de-reverb／de-FX；同時用 MeanAudio 的 autoencoder latent 檢查 operator 是否跨曲風穩定。",
+      "problem": "音樂還原要從未知效果、失真或損壞中恢復乾淨訊號；多數系統依賴成對資料與特定失真監督，當 forward process 事先未知時難以泛化。",
+      "method": "LOUDAR（Latent-space Optimization of Unknown Distortion for Audio Restoration）：在預訓練音訊 autoencoder 的 latent 空間把未知失真建模為可學習 latent operator；推斷時交替估計 clean latent 與更新 operator 參數，並以無條件 latent diffusion 作為 clean prior 正則化。",
+      "data": "ISMIR 2026。評估包含唱聲效果去除與還原、以及吉他失真去除；與監督／無監督、波形與 latent 域 baseline 比較。細節以原文為準。",
+      "findings": "LOUDAR 相對 degraded 輸入穩定提升，並在波形與 latent 域的監督／無監督 baseline 間具競爭力；因 degradation 模型 per-input 適配，適用面較廣。",
+      "limitations": "依賴預訓練 autoencoder 與 latent diffusion prior 的領域涵蓋；推斷為交替優化，延遲與超參敏感；唱聲／吉他設定外推到日語卡拉 OK 混音條件需另測；非即時。",
+      "editor_note": "karaoke-jp 唱聲清理與 MeanAudio latent inverse 雙吃；ISMIR 2026，與 slot1 的 codec 幾何形成「先看結構、再看推斷」配對。",
+      "relevance": {
+        "mean_audio": 4,
+        "karaoke_jp": 4
+      }
+    }
+  ],
+  "repo": {
+    "full_name": "ennisaaaaaaaa-stack/ocean-listen",
+    "url": "https://github.com/ennisaaaaaaaa-stack/ocean-listen",
+    "description_zh": "給 AI 的聽覺管線：先把音訊分成 music／solo／voice／mixed，再跑淺聽或深聽——Demucs 分軌、basic-pitch MIDI、f0／顫音、人聲質地與歌詞（faster-whisper）等結構化輸出。",
+    "stars": 14,
+    "updated": "2026-08-02",
+    "why": "karaoke-jp 需要「一首歌 → 人聲／伴奏、音高軌、音符、歌詞」的可程式化中間層。ocean-listen（fork whale-listen，MIT）用 HPSS＋PANNs 預分類路由，深聽含 6-track Demucs、per-stem MIDI 清理與 vocal multi-part；2026-08 仍有 dynamics／phrase 等提交，可當本機分析腳本原型，與 karaoke-forge／LDDC 上下游互補。",
+    "tags": [
+      "lyrics",
+      "stem separation",
+      "MIDI"
+    ]
+  },
+  "discord_messages": [
+    "# 每日 MIR 論文精選 - 2026-08-08\n🌐 完整報告:https://lanternko.github.io/mir-paper-digest/reports/2026-08-08.html\n\n**論文 1｜On the Geometry of Music Bandwidth Extension in Latent Spaces of Audio Codecs**\n🔗 https://arxiv.org/abs/2608.03721\n🎯 主線:MeanAudio（neural codec latent 幾何）｜8/4 上架｜ISMIR 2026\n\n**TLDR**:多種 codec latent 上，clean／degraded 質心的單一 transport 向量加法，音樂 BWE 可逼近大型 diffusion／Flow Matching。\n\n**為什麼選它**:MeanAudio 常直接上條件生成做還原；這篇強迫你先問「latent 幾何是不是已經對齊頻寬」——簡單 baseline 吃掉後，大模型邊際收益才誠實。\n\n**注意**:主要針對頻寬限制；其他失真未必同樣可平移。\n\n**下一步**:在自用 codec 上複製質心 transport baseline，與 FM BWE 並列。",
+    "**論文 2｜Music Restoration via Latent Operator Optimization and Diffusion Model Priors（LOUDAR）**\n🔗 https://arxiv.org/abs/2608.01972\n🎯 主線:karaoke-jp／MeanAudio（唱聲還原＋latent diffusion）｜8/3 上架｜ISMIR 2026\n\n**TLDR**:未知失真當 latent operator，推斷時輪流估 clean latent 與算子，無條件 latent diffusion 當 prior；評估含唱聲效果去除與吉他失真。\n\n**為什麼選它**:卡拉 OK 人聲常帶混響／效果卻無 clean 對；per-input 適配比固定監督 de-FX 更貼實務，也共用 MeanAudio 的 codec＋diffusion prior 模板。\n\n**注意**:推斷優化延遲；日語混音條件需另測。\n\n**下一步**:人聲 stem 上對照固定 de-reverb 與 LOUDAR 類適配。",
+    "**GitHub Pick｜ennisaaaaaaaa-stack/ocean-listen** ⭐14｜最近更新 2026-08-02\n🔗 https://github.com/ennisaaaaaaaa-stack/ocean-listen\n\n音訊預分類 → 淺聽／深聽：Demucs 分軌、MIDI、f0／顫音、人聲質地、faster-whisper 歌詞；MIT，結構化 JSON 輸出。\n\n**為什麼選它**:karaoke-jp 需要可程式化中間表徵（人聲、音高、歌詞、音符），可當本機分析原型。\n\n## 今天的 take-away\n- Codec latent 先量幾何：質心 transport 向量可當音樂 BWE 硬 baseline（2608.03721）。\n- 未知效果別硬監督：latent operator＋diffusion prior 做唱聲還原（LOUDAR, 2608.01972）。\n- 工程：ocean-listen 串分軌／MIDI／歌詞，karaoke-jp 中間層可抄。"
+  ]
+}
