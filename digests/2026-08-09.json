@@ -1,0 +1,94 @@
+{
+  "date": "2026-08-09",
+  "papers": [
+    {
+      "slot": 1,
+      "track": "karaoke_jp",
+      "title": "Audio-to-Score Transcription using Pre-trained Features, Data Augmentation, and the New SheetSage-A2S Dataset",
+      "authors": [
+        "Eoin Cummins",
+        "Zhongyi Huang",
+        "Alexandre D'Hooge",
+        "Zhuoro Mo",
+        "Yaolong Ju"
+      ],
+      "published": "2026-08-06",
+      "updated": "2026-08-06",
+      "source_url": "https://arxiv.org/abs/2608.06165",
+      "arxiv_id": "2608.06165",
+      "doi": "10.48550/arXiv.2608.06165",
+      "tags": [
+        "audio-to-score",
+        "music transcription",
+        "popular music"
+      ],
+      "quality": "新且重要",
+      "tldr": "SheetSage-A2S：首個流行樂 audio-to-score 資料（約 61 小時、**kern），搭配 MuQ 預訓練特徵與增強；古典 SER 4.98%、流行 20.92%。",
+      "insight": "洞見:karaoke-jp 的 MIDI／score 支線長期卡在「古典多、流行少」的資料與模型；SheetSage-A2S（ACM MM 2026）直接把 A2S 拉到流行樂：9468 clips／6066 首歌、**kern 編碼，並用 MuQ 音樂預訓練特徵＋增強提升泛化。古典 Quartets 上 SER 4.98% 大幅優於既有 15.3% SOTA，流行集 20.92% 當公開 benchmark。對日語卡拉 OK 管線的含義是：人聲 pitch 軌之外，可多一條「全曲／伴奏→可編輯樂譜」路徑，供 mora-to-note、練習模式與 LRC 對拍；注意流行 SER 仍高，日語與 JPOP 編曲需另測。",
+      "try_next": "可做:用開源 SheetSage2Kern 模型在日語流行／卡拉 OK 混音上抽樣測 SER 與節奏誤差；對人聲 stem 與 full mix 分別跑 A2S，看是否該先分軌再轉譜；輸出 **kern／MIDI 接 karaoke-jp 的 note timing 對齊。",
+      "problem": "既有 audio-to-score（A2S）系統多聚焦古典，流行音樂的資料與基準稀缺，難以支撐流行曲轉可編輯樂譜的研究與工程。",
+      "method": "提出 SheetSage-A2S 資料集（音訊對應 **kern 樂譜編碼）；A2S 模型改用 MuQ 預訓練音樂音訊特徵並加入資料增強，以提升泛化；在古典與流行設定上以 symbol error rate（SER）評估。",
+      "data": "ACM MM 2026。SheetSage-A2S：約 61 小時、9468 clips、6066 首不重複流行曲，**kern 編碼。古典評估用 Quartets collection。資料集／模型／程式碼公開於 Multimodal-Music-Research-Lab/SheetSage2Kern_model。",
+      "findings": "古典 Quartets 上 SER 4.98%，顯著優於既有 SOTA 的 15.3%；流行 SheetSage-A2S 上 SER 20.92%，作為未來研究的強基準。預訓練特徵與增強有助泛化。",
+      "limitations": "流行樂 SER 仍約兩成，尚未達可直接上架產品品質；**kern 與多聲部／人聲主旋律取捨需對齊卡拉 OK 需求；未特別針對日語歌詞／唱法與 JPOP 混音條件驗證；相關 DOI 指向 ACM 紀錄，細節以原文為準。",
+      "editor_note": "karaoke-jp 的 score／MIDI 支線里程碑：流行樂 A2S 有資料也有開源模型，可直接進管線實驗。",
+      "relevance": {
+        "mean_audio": 2,
+        "karaoke_jp": 5
+      }
+    },
+    {
+      "slot": 2,
+      "track": "mean_audio",
+      "title": "Rethinking Automatic Music Mixing as Sequential Stem Blending",
+      "authors": [
+        "Yen-Tung Yeh",
+        "Chung-Jui Chan",
+        "Yun-Ning Hung",
+        "Yi-Hsuan Yang"
+      ],
+      "published": "2026-08-06",
+      "updated": "2026-08-06",
+      "source_url": "https://arxiv.org/abs/2608.05506",
+      "arxiv_id": "2608.05506",
+      "doi": "10.48550/arXiv.2608.05506",
+      "tags": [
+        "music mixing",
+        "flow matching",
+        "stem blending"
+      ],
+      "quality": "新且重要",
+      "tldr": "自動混音改成「依序把 stem 混進成長中的 submix」：條件 latent flow matching，degradation 合成訓練，任意軌數。",
+      "insight": "洞見:MeanAudio 的 flow matching 多半做生成／還原；這篇把同一套 latent FM 接到「工程混音」——仿人聲工程師一次只混一軌，以當前 submix 為條件逐步 blend，軌數可變。訓練用 degradation 合成，從多軌與 source separation 資料模擬真實 stem blending。對 karaoke-jp 也很直接：分軌後要把人聲重新貼回伴奏、或做練習用減音量混音，sequential blending 比單次全軌 parallel 更符合「先分再合」流程，也與昨天 LOUDAR／codec latent 幾何形成「latent 上怎麼操作音樂」的連續閱讀。",
+      "try_next": "可做:在 karaoke-jp 人聲／伴奏 stem 上試 sequential blending 心智模型（或等 demo／開源後對照）：固定 accompaniment 當 submix、逐步混入 vocal；並用 MeanAudio 的 codec latent 檢查條件 FM 是否比 waveform 混音更穩。",
+      "problem": "自動音樂混音多採平行架構一次處理所有軌；難以模擬工程師「一軌一軌加入」的流程，且輸入軌數固定或難以擴充。",
+      "method": "將自動混音重述為 sequential stem blending：以成長中的 submix 為條件，用 latent flow matching 模型逐軌混入新 stem，支援任意數量輸入軌；以 degradation-based data synthesis 從既有多軌與分軌資料合成訓練樣本。",
+      "data": "eess.AS；作者含 Yi-Hsuan Yang 團隊。於 stem blending 與 automatic music mixing 基準評估；demo：sequential-mixing-demo.vercel.app。具體資料集與指標以原文為準。",
+      "findings": "在 stem blending 與自動混音基準上展現有效性；條件 latent flow matching 可處理任意軌數的逐步混音，degradation 合成提供可擴充的訓練路徑。",
+      "limitations": "混音風格與主觀偏好仍難完全涵蓋；依賴 latent 表示與 degradation 是否貼近真實工程；即時／互動編輯延遲未在摘要中詳述；日語卡拉 OK 人聲主導的 mix 平衡需另測。",
+      "editor_note": "MeanAudio flow matching 從生成跨到混音工程；分軌後「怎麼合回去」的可遷移模板。",
+      "relevance": {
+        "mean_audio": 5,
+        "karaoke_jp": 3
+      }
+    }
+  ],
+  "repo": {
+    "full_name": "Ryan5453/unblend",
+    "url": "https://github.com/Ryan5453/unblend",
+    "description_zh": "統一 API 的音樂分軌庫：HTDemucs、BS-RoFormer、Mel-Band RoFormer 一站呼叫；Demucs 後端在等品質下約 6×（單 stem 可更高）加速，另有 CLI／Python API／ONNX 瀏覽器與 Cog。",
+    "stars": 29,
+    "updated": "2026-08-08",
+    "why": "karaoke-jp 與 MeanAudio 都離不開穩定分軌。unblend（MIT，2026-08-08 仍在推）把主流 separator 收成同一介面，加速 Demucs 並支援批次目錄分離，適合當本機「人聲／伴奏」前置，與今天的 sequential mixing、A2S 譜面管線串接，也比單一模 GUI 更好嵌進腳本。",
+    "tags": [
+      "source separation",
+      "Demucs",
+      "vocals"
+    ]
+  },
+  "discord_messages": [
+    "# 每日 MIR 論文精選 - 2026-08-09\n🌐 完整報告:https://lanternko.github.io/mir-paper-digest/reports/2026-08-09.html\n\n**論文 1｜Audio-to-Score Transcription + SheetSage-A2S Dataset**\n🔗 https://arxiv.org/abs/2608.06165\n🎯 主線:karaoke-jp（流行樂轉譜／MIDI）｜8/6 上架｜ACM MM 2026\n\n**TLDR**:首個流行樂 A2S 資料（約 61h、**kern）＋ MuQ 特徵與增強；古典 SER 4.98%、流行 20.92%。\n\n**為什麼選它**:卡拉 OK 的 score／note timing 不能只靠古典四重奏模型；這篇把 A2S 拉到流行曲並開源資料與模型，可接 mora-to-note 與練習模式。\n\n**注意**:流行 SER 仍約兩成；日語／JPOP 需另測。\n\n**下一步**:人聲 stem vs full mix 分別跑 SheetSage2Kern，接 karaoke-jp 對齊。",
+    "**論文 2｜Rethinking Automatic Music Mixing as Sequential Stem Blending**\n🔗 https://arxiv.org/abs/2608.05506\n🎯 主線:MeanAudio（latent flow matching 混音）｜8/6 上架\n\n**TLDR**:混音改成依序把 stem 混進成長 submix；條件 latent flow matching，degradation 合成訓練，任意軌數。\n\n**為什麼選它**:MeanAudio 的 FM 從生成跨到工程混音；分軌後「人聲貼回伴奏／減音量練習混」正是 karaoke-jp 日常。\n\n**注意**:主觀風格與日語人聲主導 mix 需另測；延遲細節看全文。\n\n**下一步**:固定 accompaniment 當 submix，逐步混入 vocal 對照平行混音。",
+    "**GitHub Pick｜Ryan5453/unblend** ⭐29｜最近更新 2026-08-08\n🔗 https://github.com/Ryan5453/unblend\n\nHTDemucs／BS-RoFormer／Mel-Band RoFormer 統一 API；Demucs 等品質加速約 6×；CLI、Python、ONNX、Cog；MIT。\n\n**為什麼選它**:karaoke-jp 人聲分離與 MeanAudio 評估的共用前置，比 GUI 更好嵌腳本。\n\n## 今天的 take-away\n- 流行樂 A2S 終於有資料＋開源模型：SheetSage-A2S 當 score／MIDI 支線起點（2608.06165）。\n- 混音也可 sequential flow matching：submix 條件、任意軌數（2608.05506）。\n- 工程：unblend 統一 separator API，串「分軌 → 混回／轉譜」。"
+  ]
+}
