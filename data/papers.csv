@@ -199,3 +199,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-08-09,1,paper,karaoke_jp,"Audio-to-Score Transcription using Pre-trained Features, Data Augmentation, and the New SheetSage-A2S Dataset",https://arxiv.org/abs/2608.06165,10.48550/arXiv.2608.06165,audio-to-score|music transcription|popular music,新且重要
 2026-08-09,2,paper,mean_audio,Rethinking Automatic Music Mixing as Sequential Stem Blending,https://arxiv.org/abs/2608.05506,10.48550/arXiv.2608.05506,music mixing|flow matching|stem blending,新且重要
 2026-08-09,0,repo,github,Ryan5453/unblend,https://github.com/Ryan5453/unblend,,source separation|Demucs|vocals,
+2026-08-15,1,paper,karaoke_jp,Pitch Contour Tokenization using VQ-VAE and Its Application on Korean Traditional Music Analysis,https://arxiv.org/abs/2608.10979,10.48550/arXiv.2608.10979,pitch contour|VQ-VAE|singing analysis,新且重要
+2026-08-15,2,paper,mean_audio,MuseCritic: Learning Multi-Aspect Song Rewards through Natural-Language Aesthetic Critiques,https://arxiv.org/abs/2608.11755,10.48550/arXiv.2608.11755,reward model|song generation|preference alignment,新且重要
+2026-08-15,0,repo,github,karaoke-studio/karaoke-studio,https://github.com/karaoke-studio/karaoke-studio,,karaoke|lyrics|ruby,

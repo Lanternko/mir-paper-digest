@@ -1,0 +1,104 @@
+{
+  "date": "2026-08-15",
+  "papers": [
+    {
+      "slot": 1,
+      "track": "karaoke_jp",
+      "title": "Pitch Contour Tokenization using VQ-VAE and Its Application on Korean Traditional Music Analysis",
+      "authors": [
+        "Seonguk Ju",
+        "Seola Cho",
+        "Sooin Chung",
+        "Danbinaerin Han",
+        "Dasaem Jeong"
+      ],
+      "published": "2026-08-11",
+      "updated": "2026-08-11",
+      "source_url": "https://arxiv.org/abs/2608.10979",
+      "arxiv_id": "2608.10979",
+      "doi": "10.48550/arXiv.2608.10979",
+      "tags": [
+        "pitch contour",
+        "VQ-VAE",
+        "singing analysis"
+      ],
+      "quality": "新且重要",
+      "tldr": "用 VQ-VAE 把連續 pitch contour 切成可對齊的 token；無監督學到 sigimsae 與 pansori 兩大調式，可遷移唱聲裝飾音分析。",
+      "insight": "洞見:karaoke-jp 的 pitch 支線常被迫「先切 note 再對 mora」，但裝飾音、滑音與傳統唱法本來就不適合硬框成 MIDI note。這篇（ISMIR 2026）用 VQ-VAE 直接從 unlabeled 音訊學固定長度 contour 片段的 codebook，並用時間／音高變換的 best-alignment 重建目標，讓 token 對切分位置與輕微 timing／音域偏移更穩。在韓傳音樂上，token 無監督對上專家定義的 sigimsae，且 pansori 上可對齊 Gyemyeonjo／Ujo 調式。對日語卡拉 OK 的含義是：enka／J-pop 的 kobushi、portamento 與 vibrato 可先當 contour token 做語料分析、對齊與錯誤診斷，再決定是否落到 note／MIDI。",
+      "try_next": "可做:在日語人聲 stem 上抽 pitch contour，重訓或 zero-shot 套用同類 codebook；對照 note-level pitch 與 contour token 在 LRC 對拍、練習評分上的誤差；把 token 序列當 karaoke-jp 的 pitch 前置特徵。",
+      "problem": "許多音樂傳統以連續 pitch 運動組織，難以先切成 note 再分析；分析所需的離散單位事先並不存在。",
+      "method": "以 VQ-VAE 將固定長度 pitch contour 片段量化為有限 codebook；訓練時在一組時間與音高域候選變換中取 best alignment 再算重建損失，提升 token 對切分位置與小幅變形的穩定性。",
+      "data": "ISMIR 2026。應用於韓傳音樂；評估是否無監督還原專家 sigimsae 類別，以及 pansori 上 token 與 Gyemyeonjo／Ujo 兩主調式的對齊。具體資料規模以原文為準。",
+      "findings": "學得的 token 能無監督對應專家定義的 sigimsae；在 pansori 中個別 token 對齊兩大主調式，可作為以 contour 為中心的語料分析單位。",
+      "limitations": "主實驗在韓傳音樂；日語／JPOP 混音與人聲分離後的 pitch 品質需另測；固定長度片段可能切壞長滑音；與 mora-to-note 的產品介面仍需橋接。",
+      "editor_note": "karaoke-jp 唱聲 pitch 不該只認 MIDI note；contour token 給裝飾音與對齊一條更誠實的表示路徑。",
+      "relevance": {
+        "mean_audio": 2,
+        "karaoke_jp": 5
+      }
+    },
+    {
+      "slot": 2,
+      "track": "mean_audio",
+      "title": "MuseCritic: Learning Multi-Aspect Song Rewards through Natural-Language Aesthetic Critiques",
+      "authors": [
+        "Jiabao Zhuang",
+        "Changhao Jiang",
+        "Hanchen Wang",
+        "Jiahao Chen",
+        "Zhixiong Yang",
+        "Zhenghao Xiang",
+        "Yifei Cao",
+        "Jiajun Sun",
+        "Hui Li",
+        "Ming Zhang",
+        "Tao Ji",
+        "Tao Gui",
+        "Qi Zhang",
+        "Xuanjing Huang"
+      ],
+      "published": "2026-08-12",
+      "updated": "2026-08-12",
+      "source_url": "https://arxiv.org/abs/2608.11755",
+      "arxiv_id": "2608.11755",
+      "doi": "10.48550/arXiv.2608.11755",
+      "tags": [
+        "reward model",
+        "song generation",
+        "preference alignment"
+      ],
+      "quality": "新且重要",
+      "tldr": "MuseCritic：先寫五維美學 critique 再預測連續 reward；SongEval MSE 降、Arena 71.35%，GRPO 全面提升 Muse-0.6B。",
+      "insight": "洞見:MeanAudio 的 reward alignment 長期卡在「整首歌一個分數、說不清為何扣分」。MuseCritic 把 reward 做成 semi-scalar：先產生涵蓋五個美學維度的自然語言 critique，再以 critique 為中間表示預測連續分數；兩階段訓練用 teacher critique 做 SFT，再以模型自身 critique 做 reward learning，減輕 train／infer 分布差。域內 SongEval 200 首 macro MSE 0.2875→0.2316，LCC／SRCC／Kendall 提升；域外 Music Arena 733 pair 準確率 71.35% 居首；接 GRPO 後 Muse-0.6B 在 SongEval 與 Audiobox Aesthetics 九項美學指標全面上升。對 MeanAudio 是可讀、可優化的歌級 reward 模板；對 karaoke-jp 也可想像「歌詞可懂度／人聲與伴奏平衡」等 critique 維度。",
+      "try_next": "可做:讀開源 WuqnEl/MuseCritic，用同一套 critique→score 管線替換 MeanAudio 現有 CLAP／FAD 單一標量；自訂日語／卡拉 OK 相關 critique 維度做小規模 preference pair 測試。",
+      "problem": "長篇歌曲生成需要可靠美學 reward，但既有評估多為單次前向的純分數，缺少可讀解釋，且完整歌曲的 reward 模型仍稀缺。",
+      "method": "提出 MuseCritic：半標量 reward 模型，先生成五維美學自然語言 critique，再據此預測連續 reward；兩階段訓練（teacher critique SFT → self-critique reward learning）緩解分布偏移；並以 GRPO 將 reward 接回歌曲生成優化。",
+      "data": "域內：SongEval 測試集 200 首。域外：Music Arena 733 偏好對。生成優化：Muse-0.6B 於 SongEval 與 Audiobox Aesthetics 九項美學指標。程式碼：github.com/WuqnEl/MuseCritic。",
+      "findings": "相對基線，macro MSE 由 0.2875 降至 0.2316；macro LCC／SRCC／Kendall 達 0.9068／0.8838／0.7178；Music Arena 準確率 71.35% 最高；GRPO+MuseCritic 提升 Muse-0.6B 全部九項美學指標。",
+      "limitations": "美學維度與 teacher 品質會主導 reward 偏差；日語歌詞、唱法與卡拉 OK 場景未在摘要中驗證；GRPO 成本與 reward hacking 風險需監控；開源權重與可重現訓練細節以 repo 為準。",
+      "editor_note": "MeanAudio reward alignment 的關鍵拼圖：可讀 critique + 連續分數 + 可接 GRPO 的歌級信號。",
+      "relevance": {
+        "mean_audio": 5,
+        "karaoke_jp": 2
+      }
+    }
+  ],
+  "repo": {
+    "full_name": "karaoke-studio/karaoke-studio",
+    "url": "https://github.com/karaoke-studio/karaoke-studio",
+    "description_zh": "面向日語卡拉 OK／B 站翻唱的 Windows 桌面管線：下載、音訊處理、多源歌詞（含雙行 ruby LRC）、音高分析、字幕影片與 Hi-Res on/off vocal 匯出。",
+    "stars": 12,
+    "updated": "2026-08-14",
+    "why": "直接對上 karaoke-jp：網易／QQ／酷狗／LRCLIB 歌詞、KRC／YRC 轉 LRC、ruby 雙行、StrangeUtaGame 音高分析、60/120fps 字幕影片與 on/off vocal MKV。2026-08-14 仍在推（GPL-3.0），可當本機端到端參考與工程對照，不必從零拼下載→分軌→LRC→渲染。",
+    "tags": [
+      "karaoke",
+      "lyrics",
+      "ruby"
+    ]
+  },
+  "discord_messages": [
+    "# 每日 MIR 論文精選 - 2026-08-15\n🌐 完整報告:https://lanternko.github.io/mir-paper-digest/reports/2026-08-15.html\n\n**論文 1｜Pitch Contour Tokenization (VQ-VAE) for Korean Traditional Music**\n🔗 https://arxiv.org/abs/2608.10979\n🎯 主線:karaoke-jp（唱聲 pitch／裝飾音）｜8/11 上架｜ISMIR 2026\n\n**TLDR**:VQ-VAE 把連續 pitch contour 量化成可對齊 token；無監督對上 sigimsae 與 pansori 兩大調式。\n\n**為什麼選它**:karaoke-jp 不該只認 MIDI note；連續 contour token 更適合滑音、vibrato 與裝飾音分析，可遷移日語人聲。\n\n**注意**:主實驗在韓傳音樂；JPOP 混音與 mora-to-note 橋接需另測。\n\n**下一步**:日語 vocal stem 抽 contour，對照 note-level 誤差，接 LRC／練習評分。",
+    "**論文 2｜MuseCritic: Multi-Aspect Song Rewards via Natural-Language Critiques**\n🔗 https://arxiv.org/abs/2608.11755\n🎯 主線:MeanAudio（reward alignment）｜8/12 上架\n\n**TLDR**:先寫五維美學 critique 再預測連續 reward；SongEval MSE↓、Arena 71.35%；GRPO 全面拉升 Muse-0.6B。\n\n**為什麼選它**:整首歌級、可讀、可優化的 reward——正是 MeanAudio preference／alignment 缺的中間層。\n\n**注意**:teacher 與美學維度會主導偏差；日語／卡拉 OK 場景未驗證；留意 reward hacking。\n\n**下一步**:試開源 WuqnEl/MuseCritic，替換單一 CLAP／FAD 標量。",
+    "**GitHub Pick｜karaoke-studio/karaoke-studio** ⭐12｜最近更新 2026-08-14\n🔗 https://github.com/karaoke-studio/karaoke-studio\n\n日語卡拉 OK Windows 管線：下載、音訊、多源歌詞（ruby 雙行 LRC）、音高、字幕影片、Hi-Res on/off vocal；GPL-3.0。\n\n**為什麼選它**:karaoke-jp 端到端工程對照，ruby／LRC／音高／分軌輸出一次齊。\n\n## 今天的 take-away\n- 唱聲 pitch 可用 contour token，不必先硬切 note（2608.10979）。\n- 歌級 reward 可走「critique → 連續分數 → GRPO」（2608.11755）。\n- 工程：karaoke-studio 當本機 JP 卡拉 OK 全管線參考。"
+  ]
+}
