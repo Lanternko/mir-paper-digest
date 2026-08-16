@@ -1,0 +1,106 @@
+{
+  "date": "2026-08-16",
+  "papers": [
+    {
+      "slot": 1,
+      "track": "mean_audio",
+      "title": "Beyond Reconstruction: Full-Context Generative DiT for Music Generation",
+      "authors": [
+        "Yunjia Li",
+        "Menglin Wu",
+        "Junyu Dai",
+        "Xinyue Fan",
+        "Xiangang Li",
+        "Haoxu Wang",
+        "Jianwei Yu",
+        "Huaicheng Zhang",
+        "Han Zhao",
+        "Weiqin Li",
+        "Yufei Shi",
+        "Cheng Wen",
+        "Sitong Zhao",
+        "Qixi Zheng",
+        "Haina Zhu",
+        "Wei Li"
+      ],
+      "published": "2026-08-09",
+      "updated": "2026-08-11",
+      "source_url": "https://arxiv.org/abs/2608.08787",
+      "arxiv_id": "2608.08787",
+      "doi": "10.48550/arXiv.2608.08787",
+      "tags": [
+        "music generation",
+        "DiT",
+        "lyrics conditioning"
+      ],
+      "quality": "新且重要",
+      "tldr": "FullDiT 把混合生成的 codec 渲染改成「不完美離散計劃」的全上下文生成：EMDC 對齊 LM 錯誤、4-CFG 分控 codec／歌詞／caption；自動指標與商業系統對打居前。",
+      "insight": "洞見:MeanAudio 常把 AR 語言規劃器與 diffusion／flow 渲染器串起來，但訓練時渲染器吃乾淨 codec token、推論卻吃 LM 的錯 token——codec-interface exposure bias 會直接傷有人聲的整曲品質。FullDiT 不把渲染當重建，而當「從不完美離散計劃做全上下文生成」：非因果 self-attention 看完整聲學 latent，並融合八路 frame-aligned RVQ 與獨立編碼的 caption／lyrics；訓練用 EMDC 依各 codebook 的 teacher-forced top-1 錯誤率抽 near-miss 替代 token，目標音訊不變；推論用 4-CFG 獨立縮放 codec、lyric、caption 引導。消融顯示 EMDC 在合成損壞下 ViSQOL +0.77，全曲上下文與渲染側文本條件也有幫助；完整系統在 18 項自動指標中 15 項勝過五套商業系統，並進入 Artificial Analysis Music with Vocals 榜前三。對 MeanAudio：這是 hybrid 管線該怎麼「對齊訓練／推論 codec 介面」的可抄模板；歌詞條件也直接碰到 karaoke-jp 的歌詞—人聲一致性。",
+      "try_next": "可做:在 MeanAudio hybrid 渲染器上復現 EMDC（按 codebook 錯誤率抽 near-miss）與 4-CFG（codec／lyric／caption 分路）；用固定 LM plan 做 A/B，量測日語歌詞可懂度與整曲結構穩定性。",
+      "problem": "混合音樂生成把 AR 規劃與 diffusion／flow 渲染串接時，渲染器訓練吃乾淨目標 codec token、部署卻吃不完美的 LM 預測，造成 codec-interface exposure bias。",
+      "method": "提出 FullDiT：條件式 DiT，融合八路 frame-aligned RVQ 與獨立編碼的 caption／lyrics，對完整聲學 latent 做非因果注意力；訓練用 EMDC 依各 codebook top-1 錯誤率與 cosine-KNN 抽 near-miss 條件；推論用 4-CFG 獨立縮放 codec／lyric／caption。",
+      "data": "以匹配消融評估 EMDC、全曲上下文與渲染側文本條件；與五套商業系統比較 18 項自動指標；並報告 Artificial Analysis Music with Vocals Leaderboard。Demo：selinacloudl.github.io/fulldit-demo/。",
+      "findings": "EMDC 在合成損壞下 ViSQOL 提升 0.77，且在固定 LM token 的非平手比較中明顯偏好；全曲上下文與 renderer-side 文本條件有增益；完整系統 15/18 自動指標勝過五套商業系統，Music with Vocals 榜居前三。",
+      "limitations": "摘要未給日語／JPOP 專項；EMDC 依賴對 LM top-1 錯誤率的估計，換骨架或 codec 需重校；4-CFG 權重調參成本高；開源權重與訓練細節以原文／demo 為準。",
+      "editor_note": "MeanAudio hybrid 生成的關鍵修正：渲染不是重建，而是帶 lyrics／caption 的全上下文生成，並用 EMDC 對齊 LM 錯誤。",
+      "relevance": {
+        "mean_audio": 5,
+        "karaoke_jp": 3
+      }
+    },
+    {
+      "slot": 2,
+      "track": "karaoke_jp",
+      "title": "Frame-Level Pansori Mode Classification with Complementary Audio Representations",
+      "authors": [
+        "Sangheon Park",
+        "Seonguk Ju",
+        "Suin Chung",
+        "Danbinaerin Han",
+        "Dasaem Jeong"
+      ],
+      "published": "2026-08-06",
+      "updated": "2026-08-06",
+      "source_url": "https://arxiv.org/abs/2608.06633",
+      "arxiv_id": "2608.06633",
+      "doi": "10.48550/arXiv.2608.06633",
+      "tags": [
+        "singing analysis",
+        "mode classification",
+        "source separation"
+      ],
+      "quality": "新且重要",
+      "tldr": "46 小時 frame-level pansori 調式標註；比較 mel／F0／MIDI／多文化 SSL，並用 hold-out 作品測 shortcut；分離會拿掉 changjo 靠的打擊線索。",
+      "insight": "洞見:karaoke-jp 的唱聲理解不只是 pitch 數字，還包含「調式／唱法語彙」——但若模型只背曲目而不學真正的聲學線索，上線就會在新歌崩。這篇（ISMIR 2026）給出 46 小時、涵蓋五個 canonical batang 的 frame-level pansori 調式標註，並並排比較 mel spectrogram、F0 contour、MIDI piano roll 與 multi-cultural SSL 四種輸入；用兩套 split 偵測 shortcut learning，作品整首 hold-out 時三個主調式 F1 只掉 2.1–3.6，顯示學到的是調式相關特徵而非曲目記憶。分類結果更戳人：source separation 會移除 changjo 依賴的打擊樂 cue；泛用多文化預訓練在 Ujo–Gyemyeonjo 區分上特別失敗。跨模態分歧的質性分析還能對上音樂學文獻與現代創作 pansori 的樂譜分析。對日語卡拉 OK：人聲 stem 與混音、F0 與音色表徵、以及「hold-out 作品」式驗證，都可直接搬到 enka／JPOP 的調性與唱法標籤。",
+      "try_next": "可做:用同一套「多表徵 + 作品 hold-out」協議，在日語人聲 stem 上標粗粒度唱法／調式標籤；比較分離前後 F0／mel 對練習評分的影響，避免模型靠伴奏 shortcut。",
+      "problem": "Pansori 調式（jo）由音高集合、微音裝飾（sigimsae）與人聲音色交織定義，需要 frame-level 標註與能偵測 shortcut 的評估，才能可靠分類。",
+      "method": "建立 46 小時專家 frame-level 五 batang 標註；在 mel、F0、MIDI roll、多文化 SSL 四種輸入上訓練；以兩種 split（含整首作品 hold-out）測 shortcut；並分析 source separation 與跨模態分歧。",
+      "data": "ISMIR 2026。46 小時 frame-level pansori 調式標註，涵蓋五個 canonical batang；三個主調式報告 F1 與 hold-out 降幅。",
+      "findings": "作品 hold-out 時三主調式 F1 僅降 2.1–3.6，傾向學到調式特徵而非曲目記憶；分離移除 changjo 依賴的打擊 cue；多文化預訓練在 Ujo–Gyemyeonjo 上失敗；跨模態分歧可對上音樂學現象。",
+      "limitations": "主體為韓傳 pansori，日語／JPOP 需另標；部分 batang 樣本可能較少；frame-level 標註成本高；分離對其他調式的副作用需逐類檢查。",
+      "editor_note": "接續昨日 pitch contour：這次是 frame-level 調式標註與「別靠伴奏 shortcut」的唱聲分析協議，karaoke-jp 可直接借鑑。",
+      "relevance": {
+        "mean_audio": 1,
+        "karaoke_jp": 5
+      }
+    }
+  ],
+  "repo": {
+    "full_name": "Asvarox/allkaraoke",
+    "url": "https://github.com/Asvarox/allkaraoke",
+    "description_zh": "瀏覽器端線上卡拉 OK 派對遊戲：音高偵測、UltraStar 曲庫相容、WebRTC，可當 pitch 對拍與派對 UX 參考。",
+    "stars": 250,
+    "updated": "2026-08-16",
+    "why": "karaoke-jp 需要可互動的 pitch 反饋與曲庫管線；allkaraoke（250★，2026-08-16 仍推）把 pitch detection 與 UltraStar 格式做到瀏覽器派對場景，適合對照 mora-to-note 評分 UX 與即時音高可視化，不必從零做多人同步。",
+    "tags": [
+      "karaoke",
+      "pitch detection",
+      "ultrastar"
+    ]
+  },
+  "discord_messages": [
+    "# 每日 MIR 論文精選 - 2026-08-16\n🌐 完整報告:https://lanternko.github.io/mir-paper-digest/reports/2026-08-16.html\n\n**論文 1｜FullDiT: Full-Context Generative DiT for Music Generation**\n🔗 https://arxiv.org/abs/2608.08787\n🎯 主線:MeanAudio（hybrid 生成／lyrics 條件）｜8/9 上架・8/11 更新\n\n**TLDR**:渲染改成「不完美離散計劃」的全上下文生成；EMDC 對齊 LM 錯誤、4-CFG 分控 codec／歌詞／caption；18 項自動指標 15 勝商業系統。\n\n**為什麼選它**:直接打中 MeanAudio hybrid 的 codec exposure bias，且 lyrics 條件接上有人聲整曲。\n\n**注意**:日語專項未報；EMDC 錯誤率需重校；4-CFG 調參成本高。\n\n**下一步**:在自家渲染器試 EMDC + 分路 CFG，固定 LM plan 做 A/B。",
+    "**論文 2｜Frame-Level Pansori Mode Classification**\n🔗 https://arxiv.org/abs/2608.06633\n🎯 主線:karaoke-jp（唱聲調式／F0／分離）｜8/6 上架｜ISMIR 2026\n\n**TLDR**:46h frame-level 調式標註；mel／F0／MIDI／SSL 對照；作品 hold-out F1 只掉 2–4 點；分離會拿掉 changjo 的打擊線索。\n\n**為什麼選它**:接續昨日 contour token——這次是「別靠曲目／伴奏 shortcut」的唱聲分析協議，可搬到 JP 人聲評分。\n\n**注意**:主體韓傳 pansori；frame 標註成本高；日語需另標。\n\n**下一步**:日語 vocal stem 上粗標唱法，比較分離前後 F0／mel 對評分影響。",
+    "**GitHub Pick｜Asvarox/allkaraoke** ⭐250｜最近更新 2026-08-16\n🔗 https://github.com/Asvarox/allkaraoke\n\n瀏覽器線上卡拉 OK：音高偵測、UltraStar 相容、WebRTC 派對同步。\n\n**為什麼選它**:karaoke-jp 即時 pitch 反饋與曲庫 UX 的現成工程對照，250★ 且今日仍在更新。\n\n## 今天的 take-away\n- Hybrid 音樂生成：渲染應當「從不完美 plan 做全上下文生成」，EMDC＋分路 CFG 對齊 LM 錯誤（2608.08787）。\n- 唱聲調式分類要防 shortcut：作品 hold-out + 多表徵；分離可能拿掉有用伴奏 cue（2608.06633）。\n- 工程：allkaraoke 當瀏覽器 pitch 卡拉 OK 與 UltraStar 曲庫參考。"
+  ]
+}
