@@ -1,0 +1,103 @@
+{
+  "date": "2026-08-17",
+  "papers": [
+    {
+      "slot": 1,
+      "track": "mean_audio",
+      "title": "MiDashengLM-Gen: Unified Audio Scene Generation via LLM-Driven Autoregressive Flow Matching",
+      "authors": [
+        "Xingwei Sun",
+        "Heinrich Dinkel",
+        "Gang Li",
+        "Jiahao Mei",
+        "Yadong Niu",
+        "Zerui Han",
+        "Yuepeng Jiang",
+        "Jiahao Zhou",
+        "Lichun Fan",
+        "Jian Luan"
+      ],
+      "published": "2026-08-12",
+      "updated": "2026-08-12",
+      "source_url": "https://arxiv.org/abs/2608.11804",
+      "arxiv_id": "2608.11804",
+      "doi": "10.48550/arXiv.2608.11804",
+      "tags": [
+        "flow matching",
+        "text-to-audio",
+        "LLM"
+      ],
+      "quality": "新且重要",
+      "tldr": "MiDashengLM-Gen 把預訓練 LLM 與 per-token 條件流匹配串成端到端混合音訊生成，英語 WER 從 12.15% 降到 2.79%，接近專用 TTS。",
+      "insight": "洞見:MeanAudio 若把「凍結文字編碼器 + 獨立音訊解碼器」當預設，跨模態無法聯合優化，混合場景裡的 intelligibility 常先崩。MiDashengLM-Gen（小米）把預訓練 LLM 與 per-token conditional flow matching 接成單一端到端序列：LLM 驅動、自回歸、可變長，一次生成同時含語音、音樂與音效的混合場景，並宣稱是首個以端到端訓練完成通用 text-to-audio 的此類路線。關鍵數字在可懂度：Seed-TTS 上英語 WER 從既有統一模型的 12.15% 降到 2.79%，逼近專用 TTS 的 1.24%；多語 WER 也具競爭力，MECAT 上混合音訊品質仍可維持。程式與權重已開源（GitHub / Hugging Face），demo 頁可聽。對 MeanAudio：這是「LLM 語義控制 + flow matching 聲學渲染」合一、且敢用 WER 硬指標打 intelligibility 的模板；若日後要在 JPOP／人聲曲裡保歌詞可懂度，混合場景端到端與 per-token CFM 都值得對標。",
+      "try_next": "可做:把 MeanAudio 的文字條件從凍結 encoder 改成可微調 LLM 前綴，並在 codec／latent 上試 per-token CFM；用固定 caption 測日語歌詞／spoken 片段的 WER 與 CLAP，對照雙階段 TTS+混音基線。",
+      "problem": "現有混合音訊生成多採凍結、解耦的文字編碼器再餵獨立音訊解碼器，跨模態無法端到端優化，導致場景裡語音可懂度差、時間控制弱。",
+      "method": "提出 MiDashengLM-Gen：預訓練 LLM 與 per-token conditional flow matching 耦合，自回歸、可變長地端到端生成含語音／音樂／音效的混合音訊場景。",
+      "data": "Seed-TTS（英語 WER 等）、多語設定、MECAT 混合音訊品質；code/checkpoint：github.com/xiaomi-research/midashenglm-gen、huggingface.co/mispeech/midashenglm-gen；demo：xingws.github.io/midashenglm-gen-demo/。",
+      "findings": "相對既有統一模型，Seed-TTS 英語 WER 12.15%→2.79%，接近專用 TTS（1.24%）；多語 WER 具競爭力；MECAT 混合生成品質仍維持競爭水準。",
+      "limitations": "主報告偏語音 intelligibility 與混合場景，非純音樂／日語 JPOP 專項；長曲結構與歌詞—旋律對齊未在摘要展開；開源權重的授權與訓練資料細節需自行核對。",
+      "editor_note": "MeanAudio 本週核心模板：端到端 LLM + per-token flow matching，用 WER 把「混合場景可懂度」拉到接近專用 TTS。",
+      "relevance": {
+        "mean_audio": 5,
+        "karaoke_jp": 2
+      }
+    },
+    {
+      "slot": 2,
+      "track": "mean_audio",
+      "title": "MusicLayout: Explicit Structural Planning for Controllable Text-to-Music Generation",
+      "authors": [
+        "Shuyu Li",
+        "Kejun Zhang",
+        "Jiahe Lei",
+        "Shulei Ji",
+        "Zihao Wang",
+        "Jiaxing Yu",
+        "Wanying Wu",
+        "Lei Wang"
+      ],
+      "published": "2026-08-10",
+      "updated": "2026-08-14",
+      "source_url": "https://arxiv.org/abs/2608.09035",
+      "arxiv_id": "2608.09035",
+      "doi": "10.48550/arXiv.2608.09035",
+      "tags": [
+        "text-to-music",
+        "structure control",
+        "layout planning"
+      ],
+      "quality": "新且重要",
+      "tldr": "MusicLayout 在文字與音訊 token 之間插入可檢視／可改的段落—織體—樂器時間對齊佈局，讓 text-to-music 的長程結構先規劃再生成。",
+      "insight": "洞見:昨日 FullDiT 談的是「從不完美離散 plan 做全上下文渲染」；今天 MusicLayout 補上另一半——plan 本身該長什麼樣、能不能在出聲前被改。多數 TTM 只靠全局文字 prompt，段落、織體、重複／變奏與樂器編排都隱式擠在模型裡，難檢查也難局部修。MusicLayout 定義時間對齊的中間表示：section、texture、repetition／variation、instrument-level arrangement，作為文字意圖與音訊之間的可解釋規劃層；在統一自回歸框架裡先生成 layout，再條件化預測音訊 token，且生成後的 layout 可在出聲前檢視與修改。評估含 layout 條件生成、layout 操控實驗與 matched-data 消融，證據指向顯式佈局有助長程結構與 layout 級控制。實作已開源（XaryLee/MusicLayout）。對 MeanAudio：可當 hybrid／AR 管線的「可編輯結構 plan」介面，與 FullDiT 的 codec plan 疊加時，先定段落與配器再渲 latent，會更適合整曲與人聲段落排程。",
+      "try_next": "可做:為 MeanAudio 定義精簡 layout schema（段落起迄、人聲有無、主奏樂器），先 LM 吐 layout 再條件生成；A/B 比較「僅 caption」vs「caption+layout」的段落邊界與重複結構穩定性。",
+      "problem": "Text-to-music 多依賴全局文字提示，結構組織隱式且難以在生成音訊前檢視、控制或修訂。",
+      "method": "提出 MusicLayout 中間表示（段落、織體、重複／變奏、樂器編排的時間對齊佈局）；統一自回歸模型先生成 layout，再條件化生成音訊 token，並支援出聲前修改 layout。",
+      "data": "layout 條件生成、layout 操控實驗、matched-data 消融；開源：github.com/XaryLee/MusicLayout。",
+      "findings": "顯式 layout 規劃可改善長程結構組織，並支持 layout 層級的可控編輯；消融與操控實驗提供結構控制證據。",
+      "limitations": "摘要未給大規模聽感／自動指標全表；layout 標註或偽標成本、對日語歌詞段落的語意約束未詳述；與 diffusion／flow 渲染器的介面需另接。",
+      "editor_note": "接續 FullDiT：先讓結構 plan 可讀可改，再談渲染對齊——TTM 可控性的「規劃層」補丁。",
+      "relevance": {
+        "mean_audio": 5,
+        "karaoke_jp": 1
+      }
+    }
+  ],
+  "repo": {
+    "full_name": "Celesca/viora",
+    "url": "https://github.com/Celesca/viora",
+    "description_zh": "本機優先的 AI 卡拉 OK 框架：隨選生成、音節級歌詞同步、即時歌唱評分（目前以泰語為主，流程可對照日語 mora 管線）。",
+    "stars": 0,
+    "updated": "2026-08-14",
+    "why": "karaoke-jp 缺的是「歌詞對齊 + 即時評分」可跑通的端到端骨架；viora（2026-08-14 仍推）把 on-demand karaoke 生成、syllable-level lyric sync 與 real-time singing assessment 串成 local-first 框架，雖語種是泰語，但音節級同步與評分迴路可直接對照日語 kana／mora-to-note 與練習 UX，不必從零搭管線。",
+    "tags": [
+      "karaoke",
+      "lyrics sync",
+      "singing assessment"
+    ]
+  },
+  "discord_messages": [
+    "# 每日 MIR 論文精選 - 2026-08-17\n🌐 完整報告: https://lanternko.github.io/mir-paper-digest/reports/2026-08-17.html\n\n**論文 1｜MiDashengLM-Gen: LLM-Driven Autoregressive Flow Matching**\n🔗 https://arxiv.org/abs/2608.11804\n🎯 主線: MeanAudio（flow matching／混合 T2A）｜8/12 上架\n\n**TLDR**: 預訓練 LLM + per-token 條件流匹配端到端生成混合音訊；英語 WER 12.15%→2.79%，逼近專用 TTS。\n\n**為什麼選它**: 直接打中 MeanAudio「解耦 encoder 傷 intelligibility」痛點，且開源權重可對標。\n\n**注意**: 主指標偏語音可懂度與混合場景，非日語／純音樂專項。\n\n**下一步**: 可微調 LLM 前綴 + per-token CFM，固定 caption 測日語片段 WER／CLAP。",
+    "**論文 2｜MusicLayout: Explicit Structural Planning for TTM**\n🔗 https://arxiv.org/abs/2608.09035\n🎯 主線: MeanAudio（結構可控 text-to-music）｜8/10 上架・8/14 更新\n\n**TLDR**: 在文字與音訊之間插入可檢視／可改的段落—織體—樂器時間佈局，先規劃長程結構再生成。\n\n**為什麼選它**: 接續昨日 FullDiT 的 plan／渲染分工——這次 plan 本身可讀可改。\n\n**注意**: 大規模聽感表未在摘要展開；接 diffusion／flow 渲染需另做介面。\n\n**下一步**: 定義精簡 layout schema，A/B「僅 caption」vs「caption+layout」。",
+    "**GitHub Pick｜Celesca/viora** ⭐0｜最近更新 2026-08-14\n🔗 https://github.com/Celesca/viora\n\n本機 AI 卡拉 OK：隨選生成、音節級歌詞同步、即時歌唱評分（泰語為主）。\n\n**為什麼選它**: karaoke-jp 可對照的 syllable sync + 評分端到端骨架，比再堆一個 demo 更實用。\n\n## 今天的 take-away\n- 混合 T2A：端到端 LLM + per-token flow matching，用 WER 把場景內語音可懂度拉到接近專用 TTS（2608.11804）。\n- TTM 可控性：先出可編輯 MusicLayout（段落／織體／配器），再條件化音訊 token（2608.09035）。\n- 工程：viora 當 local karaoke 的音節對齊與即時評分管線參考。"
+  ]
+}

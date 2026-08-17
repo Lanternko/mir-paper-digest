@@ -205,3 +205,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-08-16,1,paper,mean_audio,Beyond Reconstruction: Full-Context Generative DiT for Music Generation,https://arxiv.org/abs/2608.08787,10.48550/arXiv.2608.08787,music generation|DiT|lyrics conditioning,新且重要
 2026-08-16,2,paper,karaoke_jp,Frame-Level Pansori Mode Classification with Complementary Audio Representations,https://arxiv.org/abs/2608.06633,10.48550/arXiv.2608.06633,singing analysis|mode classification|source separation,新且重要
 2026-08-16,0,repo,github,Asvarox/allkaraoke,https://github.com/Asvarox/allkaraoke,,karaoke|pitch detection|ultrastar,
+2026-08-17,1,paper,mean_audio,MiDashengLM-Gen: Unified Audio Scene Generation via LLM-Driven Autoregressive Flow Matching,https://arxiv.org/abs/2608.11804,10.48550/arXiv.2608.11804,flow matching|text-to-audio|LLM,新且重要
+2026-08-17,2,paper,mean_audio,MusicLayout: Explicit Structural Planning for Controllable Text-to-Music Generation,https://arxiv.org/abs/2608.09035,10.48550/arXiv.2608.09035,text-to-music|structure control|layout planning,新且重要
+2026-08-17,0,repo,github,Celesca/viora,https://github.com/Celesca/viora,,karaoke|lyrics sync|singing assessment,
