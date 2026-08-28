@@ -208,3 +208,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-08-17,1,paper,mean_audio,MiDashengLM-Gen: Unified Audio Scene Generation via LLM-Driven Autoregressive Flow Matching,https://arxiv.org/abs/2608.11804,10.48550/arXiv.2608.11804,flow matching|text-to-audio|LLM,新且重要
 2026-08-17,2,paper,mean_audio,MusicLayout: Explicit Structural Planning for Controllable Text-to-Music Generation,https://arxiv.org/abs/2608.09035,10.48550/arXiv.2608.09035,text-to-music|structure control|layout planning,新且重要
 2026-08-17,0,repo,github,Celesca/viora,https://github.com/Celesca/viora,,karaoke|lyrics sync|singing assessment,
+2026-08-28,1,paper,karaoke_jp,Singer-Informed Vocal Source Separation for Multi-Singer Music Mixtures,https://arxiv.org/abs/2608.14516,10.48550/arXiv.2608.14516,vocal separation|multi-singer|FiLM,新且重要
+2026-08-28,2,paper,mean_audio,VoxAudio: Vocalized Audio Synthesis via Multi-Reward Autoregressive Flow Matching,https://arxiv.org/abs/2608.12951,10.48550/arXiv.2608.12951,flow matching|text-to-audio|reward alignment,新且重要
+2026-08-28,0,repo,github,Ai110002/ktv-studio,https://github.com/Ai110002/ktv-studio,,karaoke|Japanese romaji|vocal separation,

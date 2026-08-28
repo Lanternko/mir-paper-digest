@@ -1,0 +1,92 @@
+{
+  "date": "2026-08-28",
+  "papers": [
+    {
+      "slot": 1,
+      "track": "karaoke_jp",
+      "title": "Singer-Informed Vocal Source Separation for Multi-Singer Music Mixtures",
+      "authors": [
+        "Jocelyn Xu",
+        "Minje Kim"
+      ],
+      "published": "2026-08-14",
+      "updated": "2026-08-14",
+      "source_url": "https://arxiv.org/abs/2608.14516",
+      "arxiv_id": "2608.14516",
+      "doi": "10.48550/arXiv.2608.14516",
+      "tags": [
+        "vocal separation",
+        "multi-singer",
+        "FiLM"
+      ],
+      "quality": "新且重要",
+      "tldr": "用短 enrollment 嵌入目標歌手，以拼接或 FiLM 條件化分離模型，把多歌手混音的目標人聲 SI-SDR 從 0.33 拉到 5.58 dB。",
+      "insight": "洞見:karaoke-jp 管線若只做「單一 vocal stem」，對合唱、對唱、雙人 JPOP 會直接失敗——誰的人聲該留下來、誰該被壓掉，從來不是一般 MSS 的預設。這篇把 short enrollment 當條件：學到目標歌手嵌入後，用 feature concatenation 或 FiLM 注入分離網路，讓模型盯住指定歌手並壓制干擾。資料上以 DAMP-VSEP 建 duet，做品質過濾與非重疊 enrollment；實驗顯示單人場景基線已夠好，但多歌手時本方法把目標 SI-SDR 從 0.33 dB 提到 5.58 dB，FAD 也顯示更貼近目標分布。程式與 checkpoint 已開源。對 karaoke-jp：這是「目標歌手可指定的人聲分離」模板，可接在 Demucs／BS-RoFormer 之後做第二段 singer ID 條件抽取，特別適合對唱與合唱曲的練習軌／伴唱軌製作。",
+      "try_next": "可做:在 JPOP 對唱片段上錄 5–10 秒 enrollment，比較 FiLM vs concat 的目標 SI-SDR 與歌詞 ASR WER；把成功抽出的目標人聲餵給既有對齊／pitch 模組，看 mora-to-note 是否更穩。",
+      "problem": "既有音樂音源分離多只抽一條人聲軌，無法在多歌手混音中指定並分離目標歌手。",
+      "method": "以目標歌手短 enrollment 學嵌入，經 feature concatenation 或 FiLM 條件化分離網路，抑制非目標干擾。",
+      "data": "基於 DAMP-VSEP 建構的 duet 資料（品質過濾、非重疊 enrollment）；solo／duet 評估；指標含目標歌手 SI-SDR 與 FAD；code：github.com/jocelynxu01/singer-separation-paper。",
+      "findings": "單人混音時基線已強；多歌手時本方法將目標 SI-SDR 由 0.33 dB 提升至 5.58 dB，FAD 顯示感知品質與對目標分布對齊亦改善。",
+      "limitations": "目前證據主在 duet／DAMP-VSEP 衍生設定，未涵蓋大型商業 JPOP 多軌或三人以上疊唱；enrollment 品質與語種／音色外推需自行驗證；與日語歌詞對齊管線的端到端評測未在摘要展開。",
+      "editor_note": "karaoke-jp 本週硬需求：多歌手混音裡「指定目標人聲」——enrollment + FiLM／concat 是可落地的第二段條件分離。",
+      "relevance": {
+        "mean_audio": 2,
+        "karaoke_jp": 5
+      }
+    },
+    {
+      "slot": 2,
+      "track": "mean_audio",
+      "title": "VoxAudio: Vocalized Audio Synthesis via Multi-Reward Autoregressive Flow Matching",
+      "authors": [
+        "Wenxiang Guo",
+        "Changhao Pan",
+        "Ziyue Jiang",
+        "Zhou Zhao",
+        "Fei Wu"
+      ],
+      "published": "2026-08-13",
+      "updated": "2026-08-17",
+      "source_url": "https://arxiv.org/abs/2608.12951",
+      "arxiv_id": "2608.12951",
+      "doi": "10.48550/arXiv.2608.12951",
+      "tags": [
+        "flow matching",
+        "text-to-audio",
+        "reward alignment"
+      ],
+      "quality": "新且重要",
+      "tldr": "VoxAudio 以因果自回歸流匹配生成「場景中嵌可懂語音」的音訊，並用多獎勵 NFT 同時優化語義、語言、美學與時間對齊。",
+      "insight": "洞見:MeanAudio 若把「場景音」與「可懂人聲」拆成 T2A + 事後 TTS 混音，就丟了何時開口、如何與背景互動的控制權；純 T2A 又常把引號內語音渲成含糊嗡嗡聲。VoxAudio 用 chunk-wise causal factorization、每 chunk 獨立噪聲級，支援滑動窗串流、KV cache 與可變時長，並以隨機 chunk 邊界預訓練換任意粒度推理。偏好面用 multi-reward Negative-aware FineTuning（NFT）同時拉語義忠實、語言正確、美學與時間 grounding。資料面建 VoxCorpus（caption 內嵌逐字稿＋時間區間）與 VoxBench（區間標註＋時間 grounding 指標）。四個涵蓋一般音訊／語音／統一 vocalized audio 的基準驗證有效性與效率；程式與 demo 已公開。對 MeanAudio：這是「AR flow matching + 多獎勵」處理混合場景 intelligibility 的完整配方，可直接對標日前 MiDashengLM-Gen 的 WER 路線，並補上時間區間監督與串流推理。",
+      "try_next": "可做:在 MeanAudio 混音場景 caption 中加上「引號逐字稿＋起迄秒」，試 multi-reward NFT；用固定日語 spoken／唱詞片段測 WER 與時間 grounding，對照 TTS+混音基線。",
+      "problem": "既有 T2A 常把嵌入語音渲成不可懂低語，或另接 TTS 再混音，因而喪失語音何時出現、如何與場景互動的控制。",
+      "method": "提出因果自回歸流匹配：chunk-wise 因果分解與獨立噪聲級支援串流與可變時長；multi-reward NFT 聯合優化語義、語言、美學與時間 grounding。",
+      "data": "自建 VoxCorpus（caption 含逐字稿與時間區間）、VoxBench（區間標註與時間 grounding 指標）；另於一般音訊／語音／統一 vocalized audio 共四基準評估；code/demo：voxaudio.github.io。",
+      "findings": "在涵蓋一般音訊、語音與統一 vocalized audio 的基準上驗證方法有效且具串流效率；多獎勵與區間監督有助可懂語音與時間對齊。",
+      "limitations": "摘要未展開大規模音樂／日語 JPOP 專項數字；主場景偏 podcast／配音式 vocalized audio，非純音樂人聲；獎勵權重與日語字幕區間標註成本需自行評估。",
+      "editor_note": "MeanAudio 混合場景下一槍：AR flow matching + multi-reward，把「場景裡可懂語音」與時間 grounding 一起優化。",
+      "relevance": {
+        "mean_audio": 5,
+        "karaoke_jp": 2
+      }
+    }
+  ],
+  "repo": {
+    "full_name": "Ai110002/ktv-studio",
+    "url": "https://github.com/Ai110002/ktv-studio",
+    "description_zh": "本機卡拉 OK 翻唱工作室：Demucs 人聲分離、KTV 字幕（日語附 romaji）、七段 EQ、音訊／影片翻唱錄製，全程離線。",
+    "stars": 0,
+    "updated": "2026-08-27",
+    "why": "karaoke-jp 缺的是「分離 → 日語歌詞／romaji → 對齊字幕 → 翻唱錄製」可本機跑通的一條龍。ktv-studio（2026-08-27 仍推）串起 Demucs、LRCLIB／Whisper 詞級時間戳、日語 romaji 與逐字高亮，並支援貼上正確歌詞重對齊，正好當 karaoke-jp 工程骨架，不必再從零拼 CLI。",
+    "tags": [
+      "karaoke",
+      "Japanese romaji",
+      "vocal separation"
+    ]
+  },
+  "discord_messages": [
+    "# 每日 MIR 論文精選 - 2026-08-28\n🌐 完整報告: https://lanternko.github.io/mir-paper-digest/reports/2026-08-28.html\n\n**論文 1｜Singer-Informed Vocal Source Separation**\n🔗 https://arxiv.org/abs/2608.14516\n🎯 主線: karaoke-jp（多歌手人聲分離）｜8/14 上架\n\n**TLDR**: 短 enrollment 嵌入目標歌手，以 concat／FiLM 條件化分離；多歌手目標 SI-SDR 0.33→5.58 dB。\n\n**為什麼選它**: 一般 MSS 只吐一條 vocal，對唱／合唱直接撞牆；這是可指定目標歌手的第二段條件分離。\n\n**注意**: 主證據在 DAMP-VSEP duet；商業 JPOP 多軌與日語對齊端到端未展開。\n\n**下一步**: JPOP 對唱上比 FiLM vs concat，再把抽出人聲餵對齊／pitch。",
+    "**論文 2｜VoxAudio: Multi-Reward Autoregressive Flow Matching**\n🔗 https://arxiv.org/abs/2608.12951\n🎯 主線: MeanAudio（T2A／flow matching／reward）｜8/13 上架・8/17 更新\n\n**TLDR**: 因果 AR 流匹配生成「場景中嵌可懂語音」；multi-reward NFT 同時優化語義、語言、美學與時間 grounding。\n\n**為什麼選它**: 打中 MeanAudio「T2A 語音含糊／TTS 事後混音失控」痛點，補齊區間監督與串流推理。\n\n**注意**: 主場景偏 podcast／配音，非日語純音樂專項。\n\n**下一步**: caption 加引號逐字稿＋秒級區間，測日語片段 WER 與時間 grounding。",
+    "**GitHub Pick｜Ai110002/ktv-studio** ⭐0｜最近更新 2026-08-27\n🔗 https://github.com/Ai110002/ktv-studio\n\n本機卡拉 OK 翻唱：Demucs 分離、KTV 字幕（日語 romaji）、七段 EQ、音／影片錄製，全程離線。\n\n**為什麼選它**: 分離→日語歌詞／romaji→詞級高亮→翻唱錄製的本機一條龍，直接當 karaoke-jp 工程骨架。\n\n## 今天的 take-away\n- 多歌手人聲：enrollment + FiLM／concat，把目標 SI-SDR 從近零拉到可用（2608.14516）。\n- 混合 T2A：AR flow matching + multi-reward NFT，把場景內可懂語音與時間 grounding 一起優化（2608.12951）。\n- 工程：ktv-studio 把 Demucs、日語 romaji 字幕與翻唱錄製串成本機可跑管線。"
+  ]
+}
