@@ -1,0 +1,100 @@
+{
+  "date": "2026-08-29",
+  "papers": [
+    {
+      "slot": 1,
+      "track": "karaoke_jp",
+      "title": "YingMusic-Singer: Controllable Singing Voice Synthesis with Flexible Lyric Manipulation and Annotation-free Melody Guidance",
+      "authors": [
+        "Chunbo Hao",
+        "Junjie Zheng",
+        "Guobin Ma",
+        "Yuepeng Jiang",
+        "Huakang Chen",
+        "Wenjie Tian",
+        "Gongyu Chen",
+        "Zihao Chen",
+        "Lei Xie"
+      ],
+      "published": "2026-03-25",
+      "updated": "2026-07-03",
+      "source_url": "https://arxiv.org/abs/2603.24589",
+      "arxiv_id": "2603.24589",
+      "doi": "10.48550/arXiv.2603.24589",
+      "tags": [
+        "singing voice",
+        "lyric editing",
+        "melody control"
+      ],
+      "quality": "重要",
+      "tldr": "無須手動對齊：以音色參考、旋律人聲與改寫歌詞三輸入做擴散式唱聲合成，並提出 LyricEditBench 評測保旋律改詞。",
+      "insight": "洞見:karaoke-jp 若要「改詞但留原曲旋律／音色」，最大摩擦常是手動對齊與可控性不足——要麼只能整段重唱，要麼卡在音素對齊標註。YingMusic-Singer 把任務收成三輸入：可選音色參考、提供旋律的人聲片段、改寫後歌詞，全程不需手動對齊；以純擴散架構搭配 curriculum learning 與 Group Relative Policy Optimization，在旋律保留與歌詞遵從上勝過可比的無對齊基線 Vevo2，並釋出 LyricEditBench 作為首個「保旋律改詞」基準。程式、權重、基準與 demo 已公開（ASLP-lab/YingMusic-Singer-Plus）。對 karaoke-jp：這是「LRC／歌詞編輯 → 保旋律重唱」的直接模板，可接在人聲分離與歌詞對齊之後，做 JPOP 練習軌的局部改詞實驗，而不必先建完整 mora 對齊標註管線。",
+      "try_next": "可做:取一首 JPOP 分離人聲，改寫一句日語歌詞，跑 YingMusic-Singer 對照 Vevo2；用 LyricEditBench 指標或人工聽感檢查旋律漂移與歌詞可懂度，再決定是否接上既有 LRC 渲染。",
+      "problem": "既有唱聲合成若要改詞並保留旋律，往往可控性不足，或依賴費力的手動對齊／精細標註。",
+      "method": "提出全擴散式 YingMusic-Singer：以可選音色參考、旋律人聲與改寫歌詞為輸入，無需手動對齊；採 curriculum learning 與 GRPO 強化旋律保留與歌詞遵從。",
+      "data": "提出 LyricEditBench（首個保旋律改詞評測基準）；與 Vevo2 等無手動對齊可比基線比較；code/weights：github.com/ASLP-lab/YingMusic-Singer-Plus；INTERSPEECH 2026。",
+      "findings": "在旋律保留與歌詞遵從上優於可比無對齊基線 Vevo2；公開基準與權重，使「保旋律改詞」可被複現與對齊比較。",
+      "limitations": "初版為 2026-03、更新至 2026-07，非本週全新稿；摘要未展開大規模日語 JPOP／kana-ruby 專項數字；實務上仍需自行驗證分離人聲品質與日語音素邊界。",
+      "editor_note": "karaoke-jp 本週優先：無對齊保旋律改詞——LyricEditBench + 開源權重，可直接當改詞重唱實驗骨架。",
+      "relevance": {
+        "mean_audio": 2,
+        "karaoke_jp": 5
+      }
+    },
+    {
+      "slot": 2,
+      "track": "mean_audio",
+      "title": "FlowSep 2: Self-Supervised Flow Matching for Language-Queried Audio Source Separation",
+      "authors": [
+        "Yi Yuan",
+        "Xubo Liu",
+        "Haohe Liu",
+        "Xiyuan Kang",
+        "Mark D. Plumbley",
+        "Wenwu Wang"
+      ],
+      "published": "2026-08-22",
+      "updated": "2026-08-25",
+      "source_url": "https://arxiv.org/abs/2608.22111",
+      "arxiv_id": "2608.22111",
+      "doi": "10.48550/arXiv.2608.22111",
+      "tags": [
+        "flow matching",
+        "source separation",
+        "text query"
+      ],
+      "quality": "新且重要",
+      "tldr": "以文字查詢做音源分離：用 rectified flow matching + DiT 在潛空間生成目標源，並以 Self-Flow 自監督強化語義結構。",
+      "insight": "洞見:MeanAudio 與 karaoke-jp 都常卡在「遮罩式分離」：重疊事件時目標被過度壓制或分離不全，而語言查詢（LASS）本應比固定 stem 類別更靈活。FlowSep2 不預測 mask，改以 text-conditioned rectified flow matching，在潛空間從高斯噪聲生成目標源表徵，條件同時吃混音表徵與文字查詢，骨幹為 Diffusion Transformer；再導入 Self-Flow 自監督流匹配，讓潛空間在生成目標下更有語義結構。多個 LASS 基準顯示 SOTA，重疊場景分離更穩。對 MeanAudio：這是「rectified flow + 語言條件分離」的完整配方，可對標既有 mask／Demucs 管線；對 karaoke-jp：可用自然語言指定「主唱／和聲／特定音色」做第二段條件抽取，補昨天 singer enrollment 分離之外的文字介面。",
+      "try_next": "可做:在 JPOP 混音上用中／英／日語 query（如「lead vocal」「female harmony」）跑 FlowSep2，對照 Demucs／BS-RoFormer 的 SI-SDR 與下游歌詞 ASR WER；再試 Self-Flow 有無的消融。",
+      "problem": "多數語言查詢音源分離仍用判別式 mask，重疊複雜場景易過度壓制目標或分離不全。",
+      "method": "提出 FlowSep2：以文字與混音條件的 rectified flow matching（DiT）在潛空間生成目標源；並以 Self-Flow 自監督強化語義結構化表徵。",
+      "data": "多個 LASS 基準評估；著重重疊聲事件場景；投稿 IEEE/ACM TASLP；更新於 2026-08-25。",
+      "findings": "於多個 LASS 基準達 SOTA；在重疊聲事件的困難場景展現更佳分離效果。",
+      "limitations": "摘要未給日語唱詞／商業 JPOP 專項數字；生成式分離延遲與即時性未在摘要展開；Self-Flow 對音樂人聲的外推需自行驗證。",
+      "editor_note": "MeanAudio 本週硬貨：rectified flow LASS——語言條件生成式分離，可同時服務 T2A 混音診斷與 karaoke 條件抽人聲。",
+      "relevance": {
+        "mean_audio": 5,
+        "karaoke_jp": 4
+      }
+    }
+  ],
+  "repo": {
+    "full_name": "yasoukyoku/UtaiSynthesizer",
+    "url": "https://github.com/yasoukyoku/UtaiSynthesizer",
+    "description_zh": "本機唱聲合成／轉換工作室：SVS、RVC／SVC、音源分離、鋼琴捲簾與 UTAU 工作流，Rust+Tauri，支援 DirectML／Windows。",
+    "stars": 26,
+    "updated": "2026-08-26",
+    "why": "karaoke-jp 需要可本機跑的「分離 → 唱聲合成／轉換 → 鋼琴捲簾」工程面；UtaiSynthesizer（2026-08-26 仍推）把 SVS、voice conversion、source separation 與 UTAU／piano-roll 串在一起，正好銜接今天 YingMusic-Singer 的改詞重唱實驗，不必再從零拼 CLI。",
+    "tags": [
+      "singing voice",
+      "source separation",
+      "UTAU"
+    ]
+  },
+  "discord_messages": [
+    "# 每日 MIR 論文精選 - 2026-08-29\n🌐 完整報告: https://lanternko.github.io/mir-paper-digest/reports/2026-08-29.html\n\n**論文 1｜YingMusic-Singer: Controllable SVS with Lyric Manipulation**\n🔗 https://arxiv.org/abs/2603.24589\n🎯 主線: karaoke-jp（保旋律改詞／無對齊 SVS）｜3/25 上架・7/3 更新\n\n**TLDR**: 音色參考＋旋律人聲＋改寫歌詞三輸入，無需手動對齊；curriculum + GRPO，並釋出 LyricEditBench。\n\n**為什麼選它**: karaoke-jp 改詞重唱最痛的是對齊成本；這篇把流程收成可複現的開源配方。\n\n**注意**: 非本週全新稿；日語 JPOP／kana 專項數字摘要未展開。\n\n**下一步**: JPOP 分離人聲改一句詞，對照 Vevo2 聽旋律漂移與歌詞可懂度。",
+    "**論文 2｜FlowSep 2: Self-Supervised Flow Matching for LASS**\n🔗 https://arxiv.org/abs/2608.22111\n🎯 主線: MeanAudio（rectified flow／語言條件分離）｜8/22 上架・8/25 更新\n\n**TLDR**: 不用 mask，改以文字＋混音條件的 rectified flow matching（DiT）生成目標源；Self-Flow 強化語義潛空間。\n\n**為什麼選它**: 打中 mask 分離在重疊場景的過度壓制問題，又直接服務 MeanAudio 的 flow matching 主線。\n\n**注意**: 日語唱詞／即時延遲未在摘要展開。\n\n**下一步**: 用中英日 query 抽主唱／和聲，對照 Demucs 與下游歌詞 ASR。",
+    "**GitHub Pick｜yasoukyoku/UtaiSynthesizer** ⭐26｜最近更新 2026-08-26\n🔗 https://github.com/yasoukyoku/UtaiSynthesizer\n\n本機 SVS／SVC 工作室：唱聲合成、RVC、音源分離、鋼琴捲簾與 UTAU，Rust+Tauri，支援 DirectML／Windows。\n\n**為什麼選它**: 把分離→唱聲合成／轉換→piano-roll 串成本機可跑管線，正好承接今天的保旋律改詞實驗。\n\n## 今天的 take-away\n- 保旋律改詞：無手動對齊的擴散 SVS + LyricEditBench，可當 karaoke-jp 改詞重唱骨架（2603.24589）。\n- 語言條件分離：rectified flow matching 取代 mask，重疊場景更穩，同時餵 MeanAudio 與 karaoke 抽人聲（2608.22111）。\n- 工程：UtaiSynthesizer 提供 Windows 本機 SVS／分離／UTAU 工作流，降低實驗拼裝成本。"
+  ]
+}

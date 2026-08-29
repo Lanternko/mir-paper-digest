@@ -211,3 +211,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-08-28,1,paper,karaoke_jp,Singer-Informed Vocal Source Separation for Multi-Singer Music Mixtures,https://arxiv.org/abs/2608.14516,10.48550/arXiv.2608.14516,vocal separation|multi-singer|FiLM,新且重要
 2026-08-28,2,paper,mean_audio,VoxAudio: Vocalized Audio Synthesis via Multi-Reward Autoregressive Flow Matching,https://arxiv.org/abs/2608.12951,10.48550/arXiv.2608.12951,flow matching|text-to-audio|reward alignment,新且重要
 2026-08-28,0,repo,github,Ai110002/ktv-studio,https://github.com/Ai110002/ktv-studio,,karaoke|Japanese romaji|vocal separation,
+2026-08-29,1,paper,karaoke_jp,YingMusic-Singer: Controllable Singing Voice Synthesis with Flexible Lyric Manipulation and Annotation-free Melody Guidance,https://arxiv.org/abs/2603.24589,10.48550/arXiv.2603.24589,singing voice|lyric editing|melody control,重要
+2026-08-29,2,paper,mean_audio,FlowSep 2: Self-Supervised Flow Matching for Language-Queried Audio Source Separation,https://arxiv.org/abs/2608.22111,10.48550/arXiv.2608.22111,flow matching|source separation|text query,新且重要
+2026-08-29,0,repo,github,yasoukyoku/UtaiSynthesizer,https://github.com/yasoukyoku/UtaiSynthesizer,,singing voice|source separation|UTAU,
