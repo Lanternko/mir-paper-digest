@@ -1,0 +1,108 @@
+{
+  "date": "2026-08-30",
+  "papers": [
+    {
+      "slot": 1,
+      "track": "general_mir",
+      "title": "UniVerse: Benchmarking and Enhancing LALMs on Culturally Inclusive Low-Resource Music Understanding",
+      "authors": [
+        "Ziya Zhou",
+        "Shangda Wu",
+        "Shenyang Xu",
+        "Yutong Zheng",
+        "Dafang Liang",
+        "Suin Chung",
+        "Danbinaerin Han",
+        "Junyan Jiang",
+        "Yongyi Zang",
+        "Ruibin Yuan",
+        "Rongxiu Zhong",
+        "Shilei Zhang",
+        "Junlan Feng",
+        "Jinglei Liu",
+        "Haotian Zhou",
+        "Zijin Li",
+        "Dasaem Jeong",
+        "Wei Xue",
+        "Yike Guo"
+      ],
+      "published": "2026-08-18",
+      "updated": "2026-08-18",
+      "source_url": "https://arxiv.org/abs/2608.17852",
+      "arxiv_id": "2608.17852",
+      "doi": "10.48550/arXiv.2608.17852",
+      "tags": [
+        "music understanding",
+        "LALM",
+        "low-resource"
+      ],
+      "quality": "新且重要",
+      "tldr": "UniVerse 以 5042 題跨文化低資源音樂理解基準與自動多輪對話資料，系統性檢驗 LALM 在民謠傳統上的適應與落差。",
+      "insight": "洞見:Music Flamingo 路線把音樂理解推到全曲、跨文化與歌詞，但評估與微調資料仍偏高資源流行／西方語境；民謠與低資源傳統即使進了預訓練，結構與風格仍常抓不住。UniVerse 補上可複現解法：UniVerseBench 以專家引導、高度自動化管線建 5,042 題 Q&A，覆蓋 38+ 文化／語言實體；並用全自動、模型生成的多輪對話集 UniVerseSet，在 dense 與 MoE 架構上系統試 multimodal imbalance learning。結果顯示自動資料＋不平衡感知訓練有實質提升，但模型仍難抓細粒度聲學特徵——表面對齊與深度音樂理解之間仍有溝。對 karaoke-jp／JPOP：這提醒「日語唱詞＋文化脈絡」不能只靠英文 caption／通用 LALM；對 MeanAudio：caption／理解評測應納入低資源與文化維度，避免只優化主流流行分佈。",
+      "try_next": "可做:把 UniVerseBench 裡與東亞／日語相關子集對照 Music Flamingo 或既有 LALM 的答題錯誤類型；再從 UniVerseSet 抽一批多輪對話，試做 JPOP 全曲 caption＋歌詞理解的小規模微調，看細粒度聲學題是否仍崩。",
+      "problem": "現有 LALM 在音樂 caption、類型與事件偵測進步明顯，但對多元音樂傳統（尤其資源稀缺、文獻薄弱的民謠）適應不足，也缺少專屬評測與訓練解法。",
+      "method": "提出 UniVerse：建 UniVerseBench（專家引導、自動化管線的跨文化 Q&A）與 UniVerseSet（全自動多輪對話訓練集）；並在 dense／MoE 上系統檢驗 multimodal imbalance learning。",
+      "data": "UniVerseBench：5,042 題 Q&A、38+ 文化／語言實體；UniVerseSet：模型生成多輪對話；於代表性 LALM（dense 與 MoE）上評估；2026-08-18 上架。",
+      "findings": "全自動資料策展搭配 imbalance-aware 訓練帶來非平凡提升；但模型仍難以捕捉細粒度聲學特徵，暴露表面對齊與深度音樂理解的落差。",
+      "limitations": "摘要未給日語 JPOP／歌詞轉錄專項數字；民謠為主的基準對外推到商業流行唱聲管線需自行驗證；「自動生成訓練資料」可能引入生成器偏差。",
+      "editor_note": "Music Flamingo 本週對位：跨文化低資源音樂理解基準＋訓練配方——直接補「理解主線」的評測缺口，並提醒 karaoke／MeanAudio 勿只優化高資源流行。",
+      "relevance": {
+        "mean_audio": 3,
+        "karaoke_jp": 4
+      }
+    },
+    {
+      "slot": 2,
+      "track": "mean_audio",
+      "title": "AllMusicCaps: Album Reviews as Complementary Supervision for Music CLAP",
+      "authors": [
+        "Pablo Alonso-Jiménez",
+        "Xavier Lizarraga-Seijas",
+        "Xavier Serra",
+        "Dmitry Bogdanov"
+      ],
+      "published": "2026-08-26",
+      "updated": "2026-08-26",
+      "source_url": "https://arxiv.org/abs/2608.25244",
+      "arxiv_id": "2608.25244",
+      "doi": "10.48550/arXiv.2608.25244",
+      "tags": [
+        "CLAP",
+        "caption/data",
+        "retrieval"
+      ],
+      "quality": "新且重要",
+      "tldr": "以 AllMusic 專輯樂評經 LLM 清洗成約 24.5 萬 caption 補強 Music CLAP，並以 SigReg 提升檢索與零樣本分類。",
+      "insight": "洞見:開源 Music CLAP 多半吃 LLM 從 tag／網搜改寫的 caption，準但表達窄；MeanAudio 若要更好的文字條件與評估，缺的是敘事、評價形容與場景框架。AllMusicCaps 把 AllMusic 專家樂評當互補監督：先用 LLM 管線抽出描述性音樂語句並改寫成可訓練 caption（摘要寫約 24.5 萬則），再重訪訓練配方，以 SigReg（鼓勵 embedding 近似各向同性高斯）強化 MLP probing 與 text-to-music retrieval。人寫 caption 基準 Song Describer 上檢索增益最大，尤其是既有 caption 集覆蓋不到的複雜查詢；最終模型在 text-to-music retrieval、零樣本分類與多數 probing 勝過開源 CLAP 基線，並釋出資料與權重。對 MeanAudio：這是「人寫樂評 → 清洗 caption → CLAP」的可複現資料配方，可直接換掉或混入既有合成 caption；對 karaoke-jp：更豐富的敘事／場景文字也利於以文字查詢抽人聲或風格條件。",
+      "try_next": "可做:下載 AllMusicCaps 權重，在 Song Describer 與一批 JPOP 中／日文複雜 query 上對照 LAION-CLAP／MS-CLAP 的檢索；再混 10–20% 樂評 caption 重訓小 CLAP，看 FAD／CLAP score 與複雜 prompt 是否變穩。",
+      "problem": "開源 text-audio contrastive（CLAP）多依賴 tag／網搜衍生的 LLM caption，準確但表達偏窄，難覆蓋複雜、敘事性音樂描述。",
+      "method": "以 AllMusic 專家樂評為互補監督：LLM 前處理抽出描述句並改寫成訓練 caption；訓練時加入 SigReg 正則，鼓勵 embedding 空間接近各向同性高斯。",
+      "data": "AllMusic 樂評衍生 caption 語料（摘要約 24.5 萬則）；於 Song Describer（人寫 caption）做檢索；另評 text-to-music retrieval、零樣本分類與 MLP probing；釋出資料與權重；2026-08-26 上架。",
+      "findings": "樂評監督在人寫 caption 基準上帶來最大檢索增益，尤其複雜查詢；SigReg 改善 probing 與檢索；整體勝過開源 CLAP 風格基線。",
+      "limitations": "樂評偏專輯級、英語為主，對單曲級日語唱詞／JPOP 場景需外推驗證；「24,5346」寫法疑為筆誤，實際規模以釋出語料為準；LLM 清洗可能過濾掉有用但非「描述性」的評價語。",
+      "editor_note": "MeanAudio 本週硬貨：人寫樂評補強 CLAP——caption／資料與評估主線一次補齊，可直接餵 text-to-music 條件與 CLAP score。",
+      "relevance": {
+        "mean_audio": 5,
+        "karaoke_jp": 2
+      }
+    }
+  ],
+  "repo": {
+    "full_name": "xiaomi-research/midashenglm-gen",
+    "url": "https://github.com/xiaomi-research/midashenglm-gen",
+    "description_zh": "MiDashengLM-Gen：以預訓練 LLM＋音訊 tokenizer 為骨幹，逐 token 條件 flow matching，做可變長混合音訊場景生成（語音／音樂／音效／環境聲）。",
+    "stars": 98,
+    "updated": "2026-08-13",
+    "why": "MeanAudio 需要可跑的「LLM 條件＋autoregressive flow matching」生成配方；此 repo 提供程式、權重與 demo（對應 arXiv:2608.11804），正好銜接今天 AllMusicCaps 強化的文字－音樂對齊，用來測複雜場景 prompt 與混合音訊生成。",
+    "tags": [
+      "flow matching",
+      "text-to-audio",
+      "LLM"
+    ]
+  },
+  "discord_messages": [
+    "# 每日 MIR 論文精選 - 2026-08-30\n🌐 完整報告: https://lanternko.github.io/mir-paper-digest/reports/2026-08-30.html\n\n**論文 1｜UniVerse: Culturally Inclusive Low-Resource Music Understanding**\n🔗 https://arxiv.org/abs/2608.17852\n🎯 主線: Music Flamingo／跨文化音樂理解｜8/18 上架\n\n**TLDR**: UniVerseBench 5042 題跨 38+ 文化實體＋UniVerseSet 自動多輪對話，系統檢驗 LALM 在低資源民謠傳統上的適應與落差。\n\n**為什麼選它**: 對齊 Music Flamingo 理解主線，把評測從高資源流行拉到文化包容／低資源，直接暴露「表面對齊 ≠ 深度聽懂」。\n\n**注意**: 日語 JPOP／歌詞專項數字摘要未給；自動生成訓練資料可能有偏差。\n\n**下一步**: 對照 Music Flamingo 在東亞相關子集的錯誤類型，並試小規模 JPOP 全曲理解微調。",
+    "**論文 2｜AllMusicCaps: Album Reviews as Complementary Supervision for Music CLAP**\n🔗 https://arxiv.org/abs/2608.25244\n🎯 主線: MeanAudio（CLAP／caption／資料）｜8/26 上架\n\n**TLDR**: AllMusic 樂評經 LLM 洗成約 24.5 萬 caption 補強 Music CLAP；SigReg 提升檢索、零樣本分類與 probing，並釋出資料與權重。\n\n**為什麼選它**: 打中開源 CLAP「合成 caption 表達窄」的瓶頸，補 MeanAudio 文字條件與評估最缺的人寫敘事監督。\n\n**注意**: 樂評偏專輯級英語；對單曲日語唱詞需外推。\n\n**下一步**: 用複雜中／日文 query 對照 LAION-CLAP，再混樂評 caption 重訓小 CLAP。",
+    "**GitHub Pick｜xiaomi-research/midashenglm-gen** ⭐98｜最近更新 2026-08-13\n🔗 https://github.com/xiaomi-research/midashenglm-gen\n\nMiDashengLM-Gen：LLM 驅動的逐 token autoregressive flow matching，生成語音／音樂／音效混合場景；含權重與 demo。\n\n**為什麼選它**: 把今天 CLAP／文字對齊的增益接到可跑的 flow matching 混合音訊生成管線。\n\n## 今天的 take-away\n- 理解：UniVerse 把 LALM 評測拉到跨文化低資源，提醒 Music Flamingo 路線仍缺深度聲學理解（2608.17852）。\n- 資料／CLAP：AllMusic 樂評 caption + SigReg，複雜 query 檢索與開源 CLAP 基線全面升級（2608.25244）。\n- 生成工程：midashenglm-gen 提供 LLM＋flow matching 混合場景生成，可接強化後的文字－音樂對齊。"
+  ]
+}
