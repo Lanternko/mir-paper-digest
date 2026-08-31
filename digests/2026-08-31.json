@@ -1,0 +1,89 @@
+{
+  "date": "2026-08-31",
+  "papers": [
+    {
+      "slot": 1,
+      "track": "general_mir",
+      "title": "MuSP-Bench: Advanced Multimodal Benchmarking of Music Understanding across Score and Performance",
+      "authors": [
+        "Milan Liessens Dujardin",
+        "Song-Ze Yu",
+        "Kevin Miao"
+      ],
+      "published": "2026-08-28",
+      "updated": "2026-08-28",
+      "source_url": "https://arxiv.org/abs/2608.28212",
+      "arxiv_id": "2608.28212",
+      "doi": "10.48550/arXiv.2608.28212",
+      "tags": [
+        "music understanding",
+        "score+performance",
+        "benchmark"
+      ],
+      "quality": "新且重要",
+      "tldr": "MuSP-Bench 以 490 題人寫問題，跨樂譜與演奏音訊測 frontier MLLM 的音樂理解，暴露讀譜與聽演奏皆弱。",
+      "insight": "洞見:Music Flamingo 路線把音樂理解推向全曲、跨模態與複雜推理，但多數基準仍偏音訊 caption／類型標籤，較少同時逼模型讀「樂譜意圖」與「演奏實現」。MuSP-Bench 用人寫 490 題涵蓋樂譜、演奏、詮釋與長程推理（古典鋼琴與管弦），並在多種輸入條件下測 frontier 多模態大模型：結果顯示模型讀譜已明顯吃力，聽演奏音訊推理更弱。這直接補上「score↔performance」雙模態理解缺口——對 karaoke-jp／JPOP，提醒「歌詞／音高／節奏」之外還有記譜意圖與現場實現的落差；對 MeanAudio，也提醒生成與評估不能只優化文字描述，還要能對齊結構性音樂意圖。",
+      "try_next": "可做:把 MuSP-Bench 的 score／performance 子集對照 Music Flamingo 或既有 LALM 錯誤類型；另挑幾首 JPOP，手做「簡譜／旋律線＋人聲 stem」小評測，看模型能否回答對位、休止與情緒詮釋題。",
+      "problem": "樂手常用樂譜傳達意圖、用演奏實現聲音，但現有多模態模型是否真能同時理解兩者，缺少針對性的人寫基準。",
+      "method": "提出 MuSP-Bench：490 題人寫基準，涵蓋樂譜、演奏、詮釋與長程推理；在多種輸入條件下評估 frontier 多模態大模型。",
+      "data": "MuSP-Bench：490 題，古典鋼琴與管弦作品；涵蓋 score-based、performance-based、interpretive、long-horizon；2026-08-28 上架並釋出基準。",
+      "findings": "Frontier MLLM 讀譜已明顯吃力，推理演奏音訊更弱；暴露「樂譜意圖 ↔ 演奏實現」雙模態理解仍是短板。",
+      "limitations": "曲目以古典鋼琴／管弦為主，對 JPOP、日語唱詞與卡拉 OK 管線需外推；摘要未給各模型分數表，細節以基準頁為準；題量 490 相對中等。",
+      "editor_note": "Music Flamingo 本週對位：score＋performance 音樂理解基準——直接測「讀譜／聽演奏」雙通道，補理解主線最缺的結構性評測。",
+      "relevance": {
+        "mean_audio": 3,
+        "karaoke_jp": 3
+      }
+    },
+    {
+      "slot": 2,
+      "track": "mean_audio",
+      "title": "Do Text-to-Music Models Really Follow Instructions? A Counterfactual Evaluation of Key and Beat Grouping",
+      "authors": [
+        "Yining Wang"
+      ],
+      "published": "2026-08-12",
+      "updated": "2026-08-12",
+      "source_url": "https://arxiv.org/abs/2608.11899",
+      "arxiv_id": "2608.11899",
+      "doi": "10.48550/arXiv.2608.11899",
+      "tags": [
+        "text-to-music",
+        "evaluation",
+        "controllability"
+      ],
+      "quality": "新且重要",
+      "tldr": "以 matched counterfactual（中性＋目標互換）重評 text-to-music 的調性與拍組可控性，區分「碰巧出現」與「指令造成」。",
+      "insight": "洞見:MeanAudio 常把「prompt 屬性命中率」當可控性證據，但目標屬性可能只是模型輸出先驗裡本來就常見。本文用 matched counterfactual：同一家族含省略該屬性的中性輸入，以及互換目標的兩條匹配輸入，凍結介面、共享 seed 渲染。用此法重看三套開源系統的全域調性與拍組（beat grouping）：ACE-Step 1.5 與 Stable Audio 3 Medium 有實質調性控制，LeVo2 則無；拍組上模型會往罕見三拍靠攏，但高四拍命中多半繼承自中性輸出——Stable Audio 3 中性就有 0.97 四拍，顯式四拍指令反而只到 0.56。off-attribute placebo、外部辨識器、盲測專家與多 seed 哨兵支撐歸因。結論：先驗不均時，agreement 只描述「產出什麼」，中性／互換對照才測「指令有沒有改它」——這是 MeanAudio 評估與 reward alignment 必備的方法論升級。",
+      "try_next": "可做:把自家 MeanAudio／flow matching 系統的 key、tempo、拍號做成中性＋目標互換三元組，固定 seed 重跑；再把「先驗高」屬性從 CLAP／命中率報表拆成 instruction-attributable 分數。",
+      "problem": "Prompted attribute agreement 常被當成 text-to-music 可控性證據，但屬性可能只因輸出先驗常見而「碰巧出現」，並非指令造成。",
+      "method": "提出 matched counterfactual 評估：中性輸入＋兩條目標互換輸入，凍結原生介面、共享 seed；並用 placebo、外部辨識器、盲測與多 seed 哨兵驗證歸因。",
+      "data": "三套開源系統：ACE-Step 1.5、Stable Audio 3 Medium、LeVo2；評全域 key 與 beat grouping；含 off-attribute placebo、外部 recognizer、專家盲測；2026-08-12 上架。",
+      "findings": "調性：ACE-Step／Stable Audio 有實質控制，LeVo2 無。拍組：模型可被導向罕見三拍，但高四拍 agreement 多半來自中性先驗（例：Stable Audio 3 中性 0.97、顯式四拍 0.56）。",
+      "limitations": "目前聚焦 key 與 beat grouping 兩類全域屬性，未覆蓋歌詞、音色、結構等；系統版本與介面綁定，外推到其他 TTM／TTA 需重跑；摘要未給完整樣本數細節。",
+      "editor_note": "MeanAudio 本週硬貨：反事實可控性評估——把「命中率」拆成「指令歸因」，直接升級 text-to-music 評估與 reward 設計。",
+      "relevance": {
+        "mean_audio": 5,
+        "karaoke_jp": 1
+      }
+    }
+  ],
+  "repo": {
+    "full_name": "stevelittlefish/forced-aligner",
+    "url": "https://github.com/stevelittlefish/forced-aligner",
+    "description_zh": "面向卡拉 OK 的歌詞 forced alignment HTTP 服務：給人聲與已知歌詞，回傳逐字時間戳；不做轉錄，只對已知文本對齊。",
+    "stars": 0,
+    "updated": "2026-08-30",
+    "why": "karaoke-jp 需要穩的「已知歌詞 → 時間軸」對齊，而不是再猜字。此服務把 forced alignment 做成可插 LAN 的 GPU 微服務（可接 Demucs／Whisper 管線），正好補字級／詞級 timing，可往 mora-to-note 與 LRC 渲染延伸。",
+    "tags": [
+      "lyrics alignment",
+      "karaoke",
+      "forced alignment"
+    ]
+  },
+  "discord_messages": [
+    "# 每日 MIR 論文精選 - 2026-08-31\n🌐 完整報告: https://lanternko.github.io/mir-paper-digest/reports/2026-08-31.html\n\n**論文 1｜MuSP-Bench: Music Understanding across Score and Performance**\n🔗 https://arxiv.org/abs/2608.28212\n🎯 主線: Music Flamingo／音樂理解｜8/28 上架\n\n**TLDR**: 490 題人寫基準跨樂譜與演奏，測 frontier MLLM；讀譜已弱、聽演奏推理更弱。\n\n**為什麼選它**: 對齊 Music Flamingo 理解主線，補上「score↔performance」雙模態評測缺口。\n\n**注意**: 曲目偏古典鋼琴／管弦；對 JPOP／日語唱詞需外推。\n\n**下一步**: 對照既有 LALM 錯誤類型，並手做 JPOP 簡譜＋人聲小評測。",
+    "**論文 2｜Do Text-to-Music Models Really Follow Instructions?**\n🔗 https://arxiv.org/abs/2608.11899\n🎯 主線: MeanAudio（評估／可控性）｜8/12 上架\n\n**TLDR**: matched counterfactual（中性＋目標互換）重評調性與拍組可控性，區分碰巧命中與指令歸因。\n\n**為什麼選它**: 打中 MeanAudio「agreement≠control」的評估盲點，直接升級 reward／可控性實驗設計。\n\n**注意**: 目前只涵蓋 key 與 beat grouping；其他屬性需重跑協議。\n\n**下一步**: 對自家 TTM 做中性＋互換三元組，拆出 instruction-attributable 分數。",
+    "**GitHub Pick｜stevelittlefish/forced-aligner** ⭐0｜最近更新 2026-08-30\n🔗 https://github.com/stevelittlefish/forced-aligner\n\n卡拉 OK 用歌詞 forced alignment 服務：人聲＋已知歌詞 → 逐字時間戳；專注對齊不做轉錄。\n\n**為什麼選它**: karaoke-jp 缺穩的已知歌詞 timing 微服務，可直接接分離／LRC／mora-to-note 管線。\n\n## 今天的 take-away\n- 理解：MuSP-Bench 暴露 frontier MLLM 讀譜／聽演奏雙弱，Music Flamingo 路線需補 score↔performance 評測（2608.28212）。\n- 評估：text-to-music 的屬性命中率可能只是輸出先驗；要用中性＋互換對照測真可控（2608.11899）。\n- 工程：forced-aligner 把「已知歌詞對齊」做成可插服務，補 karaoke timing 關鍵一環。"
+  ]
+}
