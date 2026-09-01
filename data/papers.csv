@@ -220,3 +220,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-08-31,1,paper,general_mir,MuSP-Bench: Advanced Multimodal Benchmarking of Music Understanding across Score and Performance,https://arxiv.org/abs/2608.28212,10.48550/arXiv.2608.28212,music understanding|score+performance|benchmark,新且重要
 2026-08-31,2,paper,mean_audio,Do Text-to-Music Models Really Follow Instructions? A Counterfactual Evaluation of Key and Beat Grouping,https://arxiv.org/abs/2608.11899,10.48550/arXiv.2608.11899,text-to-music|evaluation|controllability,新且重要
 2026-08-31,0,repo,github,stevelittlefish/forced-aligner,https://github.com/stevelittlefish/forced-aligner,,lyrics alignment|karaoke|forced alignment,
+2026-09-01,1,paper,karaoke_jp,Towards Unified Song Generation and Singing Voice Conversion with Accompaniment Co-Generation,https://arxiv.org/abs/2606.07015,10.48550/arXiv.2606.07015,singing voice|song generation|SVC,重要
+2026-09-01,2,paper,mean_audio,Fourier is Frontier: Frequency-Aware Autoencoding for High-Fidelity Music Reconstruction,https://arxiv.org/abs/2608.19843,10.48550/arXiv.2608.19843,neural codec|continuous latent|music VAE,新且重要
+2026-09-01,0,repo,github,bmachuletz/NeonStageKaraoke,https://github.com/bmachuletz/NeonStageKaraoke,,karaoke|lyrics alignment|local-first,

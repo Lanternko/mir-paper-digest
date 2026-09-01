@@ -1,0 +1,101 @@
+{
+  "date": "2026-09-01",
+  "papers": [
+    {
+      "slot": 1,
+      "track": "karaoke_jp",
+      "title": "Towards Unified Song Generation and Singing Voice Conversion with Accompaniment Co-Generation",
+      "authors": [
+        "Ziyu Zhang",
+        "Chunyu Qiang",
+        "Xiaopeng Wang",
+        "Yuxin Guo",
+        "Kang Yin",
+        "Wenjie Tian",
+        "Jingbin Hu",
+        "Tianlun Zuo",
+        "Zhao Guo",
+        "Teng Ma",
+        "Yuzhe Liang",
+        "Chen Zhang",
+        "Lei Xie"
+      ],
+      "published": "2026-06-05",
+      "updated": "2026-06-14",
+      "source_url": "https://arxiv.org/abs/2606.07015",
+      "arxiv_id": "2606.07015",
+      "doi": "10.48550/arXiv.2606.07015",
+      "tags": [
+        "singing voice",
+        "song generation",
+        "SVC"
+      ],
+      "quality": "重要",
+      "tldr": "UniSinger 用 MM-DiT＋flow matching 統一「可克隆音色的歌曲生成」與「伴奏共生成 SVC」，課表式 masking 化解多任務衝突。",
+      "insight": "洞見:karaoke-jp 常把唱聲轉換與歌詞到整曲生成當兩條管線：前者顧音色、後者顧結構，卻少同時處理人聲與伴奏的協同。UniSinger 把兩者接到同一 MM-DiT／flow matching 骨架，用跨任務 speaker embedding（從 SVC 煉出再轉給 song gen）做零樣本音色克隆，並以四階段 modality masking 課表（一般歌曲→一般 SVC→克隆音色歌曲→伴奏共生成 SVC）緩解梯度衝突。評測上歌曲生成 PER 19.61%、Spk-Sim 68.85% 優於 SongLM／YuE／ACE-Step／DiffRhythm+；SVC 也達可比 SOTA，且伴奏共生成版在 Harmony MOS 更高。對 karaoke-jp：這暗示「人聲 stem＋BGM」不該最後才混，生成／轉換階段就該共建模；對 MeanAudio：flow matching＋課表 masking＋跨任務 speaker prior 可直接搬到多條件 TTM。",
+      "try_next": "可做:在自家管線用 Demucs 人聲＋參考音色，試「已知歌詞 phoneme＋speaker embedding」條件，對照只做 SVC 再 SingSong 配樂；另量測日語／JPOP 短片段的 PER 與人聲-伴奏和諧度。",
+      "problem": "歌曲生成缺少細粒度零樣本音色克隆，SVC 又常忽略人聲與伴奏協同；兩任務分開建模難以共享結構與音色先驗。",
+      "method": "提出 UniSinger：MM-DiT＋flow matching、跨任務 speaker embedding，以及任務專屬 modality masking 的四階段課表學習，統一克隆音色歌曲生成與伴奏共生成 SVC。",
+      "data": "約 30k 小時 in-the-wild 歌曲；訓練用 20k 小時處理後歌曲＋5k 小時伴奏歌唱；評測 500 段中英／男女平衡內部集；對照 SongLM、YuE、ACE-Step、DiffRhythm+、HQ-SVC 等。",
+      "findings": "歌曲生成：PER 19.61%、Spk-Sim 68.85%，多項 SongEval 領先。SVC：客觀指標可比或優於強基線；伴奏共生成版 Harmony MOS 更高，顯示任務互為先驗。",
+      "limitations": "評測集為內部 15–20 秒短片段，長曲與日語／JPOP 外推未證明；訓練含專有資料，再現門檻高；摘要未完整報告 FAD 等全表。",
+      "editor_note": "karaoke-jp 本週對位：把 SVC 與 lyrics/phoneme→song 收到同一 flow matching 骨架，並強制人聲-伴奏共生成——直接打中唱聲管線缺口。",
+      "relevance": {
+        "mean_audio": 4,
+        "karaoke_jp": 5
+      }
+    },
+    {
+      "slot": 2,
+      "track": "mean_audio",
+      "title": "Fourier is Frontier: Frequency-Aware Autoencoding for High-Fidelity Music Reconstruction",
+      "authors": [
+        "Kangdi Wang",
+        "Yusheng Dai",
+        "Jin Xu"
+      ],
+      "published": "2026-08-20",
+      "updated": "2026-08-20",
+      "source_url": "https://arxiv.org/abs/2608.19843",
+      "arxiv_id": "2608.19843",
+      "doi": "10.48550/arXiv.2608.19843",
+      "tags": [
+        "neural codec",
+        "continuous latent",
+        "music VAE"
+      ],
+      "quality": "新且重要",
+      "tldr": "ear-VAE2 以 complex STFT 連續潛空間重做音樂 VAE，Spec-SnakeBeta＋Duplex-Aware Refiner 修高頻／相位／立體聲崩壞。",
+      "insight": "洞見:MeanAudio 的 latent diffusion／flow 上限往往卡在 codec：波形 VAE 沒有明確頻率軸，高壓縮時高頻流失、相位不連貫、立體聲塌縮。本文在配平預算下比較五種表示，complex STFT 全頻與高頻距離最低；據此提出 ear-VAE2：頻率軸上的 Spec-SnakeBeta 週期激活，以及依 duplex 定位理論分頻帶修正幅度／相位的 Duplex-Aware Refiner（低頻偏相位、高頻偏幅度）。Song Describer 546 軌上七項重建指標有五項最佳點估計，Refiner 再降 Mel Distance 19.4% 且輸出維度少約 45%；下游生成器用 ear-VAE2 latent 在 12 項自動指標皆優於原 VAE。這是 MeanAudio「換更大 generator 救不回 codec 丟掉的細節」的硬提醒。",
+      "try_next": "可做:把自家 MeanAudio／flow matching 的 VAE 換成或並跑 complex-STFT 分支，固定 latent rate 比對高頻 Mel／立體聲 CCPC；再測人聲 stem 重建是否改善唱詞可懂度。",
+      "problem": "連續潛空間音樂生成器的解碼器在高壓縮下常丟高頻、相位與立體聲線索，而波形 VAE 缺少可對頻帶下手的明確頻率軸。",
+      "method": "提出 ear-VAE2：以 complex STFT 為骨幹的連續頻譜 VAE，含 Spec-SnakeBeta 與依 duplex 理論分帶的 Duplex-Aware Refiner；並做表示／激活／refiner 對照實驗。",
+      "data": "重建評測：Song Describer Dataset 546 軌；訓練約兩百萬公開曲＋1 萬小時專有 48 kHz；對照 ear-VAE、Stable Audio Open、LeVo 2、SAME-L。",
+      "findings": "complex STFT 在配平預算下全頻／高頻距離最低；完整 ear-VAE2 七項重建有五項最佳；Refiner 降 Mel Distance 19.4%；下游 12 項自動指標皆提升。",
+      "limitations": "跨系統比較用各模型原生設定，非完全配平；訓練含專有資料；聽者差異與更廣任務覆蓋仍開放；摘要未列全部下游分數表。",
+      "editor_note": "MeanAudio 本週硬貨：連續 latent codec 回到頻率軸——直接抬升 latent 音樂生成的重建天花板。",
+      "relevance": {
+        "mean_audio": 5,
+        "karaoke_jp": 2
+      }
+    }
+  ],
+  "repo": {
+    "full_name": "bmachuletz/NeonStageKaraoke",
+    "url": "https://github.com/bmachuletz/NeonStageKaraoke",
+    "description_zh": "Local-first 卡拉 OK 平台：Unity 舞台、活動／排隊、GPU 輔助歌詞對齊，支援詞級／音節級時間軸與毫秒級編輯器。",
+    "stars": 0,
+    "updated": "2026-08-31",
+    "why": "karaoke-jp 需要可自架、可審核的詞級／音節級 timing，而不只是線上轉錄。Neon Stage 把 GPU lyrics alignment、stem 混音與舞台渲染串成一條可審稿管線，正好對齊 LRC／ruby 前的對齊與人工校正環節。",
+    "tags": [
+      "karaoke",
+      "lyrics alignment",
+      "local-first"
+    ]
+  },
+  "discord_messages": [
+    "# 每日 MIR 論文精選 - 2026-09-01\n🌐 完整報告: https://lanternko.github.io/mir-paper-digest/reports/2026-09-01.html\n\n**論文 1｜UniSinger: Unified Song Generation + SVC**\n🔗 https://arxiv.org/abs/2606.07015\n🎯 主線: karaoke-jp（唱聲／整曲）｜6/14 更新\n\n**TLDR**: MM-DiT＋flow matching 統一可克隆音色的歌曲生成與伴奏共生成 SVC，課表 masking 化解衝突。\n\n**為什麼選它**: 直接打中「人聲轉換 vs 整曲生成」分裂——karaoke 需要音色克隆與人聲-伴奏協同。\n\n**注意**: 評測偏短片段內部集；日語／JPOP 外推未證明。\n\n**下一步**: 用 Demucs 人聲＋參考音色測 phoneme＋speaker 條件，並看日語短句 PER。",
+    "**論文 2｜Fourier is Frontier (ear-VAE2)**\n🔗 https://arxiv.org/abs/2608.19843\n🎯 主線: MeanAudio（neural codec／連續 latent）｜8/20 上架\n\n**TLDR**: complex STFT 音樂 VAE＋Spec-SnakeBeta／Duplex Refiner，修高頻、相位與立體聲崩壞。\n\n**為什麼選它**: latent 生成上限常卡在 codec；這篇把頻率軸還給連續 VAE，下游指標全面提升。\n\n**注意**: 跨系統非完全配平；訓練含專有資料。\n\n**下一步**: 固定 latent rate 並跑 complex-STFT 分支，比高頻 Mel 與人聲可懂度。",
+    "**GitHub Pick｜bmachuletz/NeonStageKaraoke** ⭐0｜最近更新 2026-08-31\n🔗 https://github.com/bmachuletz/NeonStageKaraoke\n\nLocal-first 卡拉 OK：Unity 舞台、GPU 歌詞對齊、詞／音節時間軸與毫秒編輯器（仍在積極開發）。\n\n**為什麼選它**: 補 karaoke-jp 需要的可自架對齊＋人工校正環節，可接 LRC／ruby／mora timing。\n\n## 今天的 take-away\n- 唱聲：UniSinger 證明 SVC 與 song gen 可共享 speaker／結構先驗，人聲-伴奏應共生成（2606.07015）。\n- Codec：ear-VAE2 用頻率軸修 latent 重建，MeanAudio 換更大 generator 救不回 codec 丟掉的細節（2608.19843）。\n- 工程：Neon Stage 把 GPU 對齊與舞台渲染做成可審稿本機管線，對齊 karaoke timing 痛點。"
+  ]
+}
