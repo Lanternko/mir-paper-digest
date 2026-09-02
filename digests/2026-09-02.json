@@ -1,0 +1,101 @@
+{
+  "date": "2026-09-02",
+  "papers": [
+    {
+      "slot": 1,
+      "track": "karaoke_jp",
+      "title": "TUTTI: Toward generalizable audio-to-score transcription via fully synthesized data",
+      "authors": [
+        "Jianhuai Hu",
+        "Yashan Wang",
+        "Shangda Wu",
+        "Zhancheng Guo",
+        "Shijie Liang",
+        "Wuna Meng",
+        "Chuanqi Yang",
+        "Xiaobing Li",
+        "Feng Yu",
+        "Maosong Sun"
+      ],
+      "published": "2026-09-01",
+      "updated": "2026-09-01",
+      "source_url": "https://arxiv.org/abs/2609.00640",
+      "arxiv_id": "2609.00640",
+      "doi": "10.48550/arXiv.2609.00640",
+      "tags": [
+        "audio-to-score",
+        "MIDI/score",
+        "synthetic data"
+      ],
+      "quality": "新且重要",
+      "tldr": "TUTTI 用 NotaGen 合成 36 萬多軌音訊－譜對做 Transformer 預訓練，再微調到真實資料，跨樂器 A2S 達 SOTA 並可轉移到未見薩克斯風。",
+      "insight": "洞見:karaoke-jp 要的不只是人聲 stem，還要可渲染的 MIDI／score（mora-to-note、LRC 對齊後的譜面）。A2S 長期卡在「真實配對稀缺→只能做單樂器專模」。TUTTI 把問題改成資料中心：用 NotaGen 生成 363,610 筆多樂器 ABC，經 EPR（VirtuosoNet／規則抖動）與 sfizz 渲染，DualDTW 對齊後切 ≤14.8s 片段；模型則是純 Transformer 編碼器＋階層 patch／字元解碼，直接 spectrogram→ABC，不靠 CNN 前端。全樂器預訓練在 ASAP／弦樂四重奏全面超既有專模（四重奏 MV2H 95.6 vs 84.9）；未見過的 tenor／alto 薩克斯風也能到 voice=100，顯示多音色預訓練學到可遷移的聲學先驗。對 karaoke-jp：這條「合成譜→渲染→對齊→轉錄」管線可反過來餵給日語／JPOP 的 score／MIDI 擴增；對 MeanAudio：大規模合成配對＋標準 Transformer 的資料優先策略，也可搬到 caption／CLAP 配對擴充。",
+      "try_next": "可做:把 TuttiCorpus／NotaGen 管線改成「人聲 MIDI＋伴奏」雙軌合成，測日語歌音節級 pitch／duration 轉錄；或拿自家 JPOP 短片段微調，對照現有 piano／quartet 數字。",
+      "problem": "高品質真實音訊－樂譜配對極稀缺，既有 A2S 模型多鎖定單樂器，難以泛化到多樂器與未見音色。",
+      "method": "提出 TUTTI：標準 Transformer encoder-decoder（階層 patch／字元解碼）直接 spectrogram→ABC；以 NotaGen 合成 TuttiCorpus（36 萬＋多樂器配對）預訓練後再微調真實下游集。",
+      "data": "TuttiCorpus：363,610 筆合成多樂器音訊－ABC；下游 ASAP 鋼琴、弦樂四重奏、真人薩克斯風錄音；MV2H 五維指標；對照 Zeng／Alfaro-Contreras／Martínez-Sevilla 等專模。",
+      "findings": "全樂器預訓練優於單樂器預訓練與無預訓練；ASAP／四重奏達整體 SOTA（四重奏 MV2H 95.6）；未見薩克斯風 voice 準確率 100，顯示跨音色轉移。",
+      "limitations": "片段上限約 14.8 秒，全文／長曲尚待擴展；合成古典風格為主，流行／日語唱聲外推未證；ABC 輸出與實務 MIDI／MusicXML 管線仍需轉換。",
+      "editor_note": "karaoke-jp 本週硬貨：把「可擴增的音訊→譜」做成資料優先基礎模型——直接對齊 MIDI／score 與 mora-to-note 上游。",
+      "relevance": {
+        "mean_audio": 3,
+        "karaoke_jp": 5
+      }
+    },
+    {
+      "slot": 2,
+      "track": "general_mir",
+      "title": "TAG-Bench: Benchmarking Temporal Audio Grounding in Large Audio Language Models",
+      "authors": [
+        "Yuhang Dai",
+        "Xin Shu",
+        "Zengxi Li",
+        "Lei Xie",
+        "Xiangang Li",
+        "Jianwei Yu"
+      ],
+      "published": "2026-09-01",
+      "updated": "2026-09-01",
+      "source_url": "https://arxiv.org/abs/2609.01542",
+      "arxiv_id": "2609.01542",
+      "doi": "10.48550/arXiv.2609.01542",
+      "tags": [
+        "Music Flamingo",
+        "LALM",
+        "temporal grounding"
+      ],
+      "quality": "新且重要",
+      "tldr": "TAG-Bench 用 1,750 筆人工核驗查詢評測 LALM 的時間定位；最佳僅 31.2 mIoU，多段出現計數準確率全場不超過 13.2%。",
+      "insight": "洞見:Music Flamingo／Audio Flamingo 系擅長描述「聽到什麼」，但 karaoke 與長曲導航真正需要的是「何時發生」——詞句、情緒、事件的時間區間。TAG-Bench 補上這塊：1,750 筆人核查詢、149.5 小時、八個診斷子集（字詞／聲學事件／語意／情緒，短片到約 17–20 分），22.1% 為一對多目標。21 個系統裡 FireRedAudio 領先 31.2 mIoU，卻是唯一在兩組長音子集破 20 的；R@0.7 僅 21.5%，且所有模型在多段查詢都嚴重漏報（計數準確率最高 13.2%）。Audio Flamingo 3 僅 8.7 mIoU，顯示理解強≠時間定位強。對 karaoke-jp：這就是歌詞／段落／情緒區段 grounding 的評測模板；對 MeanAudio／Music Flamingo：caption／QA 分數再高，若不能吐可靠時間戳，編輯與對齊管線仍接不上。",
+      "try_next": "可做:把 TAG 協議套到 JPOP 人聲＋歌詞查詢（verse／chorus／特定歌詞句），對照 WhisperX／forced aligner 基線；並測 Music Flamingo 是否能輸出可解析時間戳。",
+      "problem": "LALM 能描述音訊內容，但缺乏統一基準檢驗其能否依自然語言查詢回傳所有匹配時間區間，尤其長音訊與一對多出現。",
+      "method": "建構 TAG-Bench：人核查詢－錄音對、八子集診斷、union-IoU／Recall／計數準確率／解析失敗率；以同一自由格式協議評測 21 個通用 LALM、omni 與時間專家模型。",
+      "data": "1,750 查詢、149.5 小時；來源含 AudioSet-strong／AudioCaps／Clotho／DESED、朗讀語音與長篇播客等；22.1% 多區間；對照 Audio Flamingo 系列、MOSS-Audio、Gemini-3.1-Pro、LAT-Audio、TimeAudio 等。",
+      "findings": "最佳 31.2 mIoU（FireRedAudio），長音子集最高約 21.7；9／21 系統 <5 mIoU；一對多計數準確率全場 ≤13.2%；理解向模型（如 AF3）時間定位仍弱。",
+      "limitations": "子集間來源／時長／抽象度未獨立控制，跨子集對比僅描述性；最長約 20 分；自由格式輸出使分數混雜 grounding 與格式遵從；每錄音僅一查詢。",
+      "editor_note": "Music Flamingo 主線補洞：把「何時」從 caption／QA 裡拆出來量——karaoke 對齊與長曲導航都靠這能力。",
+      "relevance": {
+        "mean_audio": 3,
+        "karaoke_jp": 4
+      }
+    }
+  ],
+  "repo": {
+    "full_name": "qiuqiao/SOFA",
+    "url": "https://github.com/qiuqiao/SOFA",
+    "description_zh": "面向唱聲的強制對齊器（Singing-Oriented Forced Aligner）：把歌詞／音素對齊到人聲音訊，服務 SVS 與卡拉 OK timing。",
+    "stars": 237,
+    "updated": "2026-09-02",
+    "why": "karaoke-jp 的 mora-to-note 與 LRC 前一步就是可靠的唱聲 forced alignment。SOFA 專門針對 singing（非純語音 MFA），近期仍活躍更新，可直接接人聲分離後的 stem 做詞／音素級時間軸，再餵給 ruby／MIDI 渲染。",
+    "tags": [
+      "forced alignment",
+      "singing voice",
+      "lyrics timing"
+    ]
+  },
+  "discord_messages": [
+    "# 每日 MIR 論文精選 - 2026-09-02\n🌐 完整報告: https://lanternko.github.io/mir-paper-digest/reports/2026-09-02.html\n\n**論文 1｜TUTTI: Generalizable Audio-to-Score**\n🔗 https://arxiv.org/abs/2609.00640\n🎯 主線: karaoke-jp（MIDI／score 轉錄）｜9/1 上架\n\n**TLDR**: NotaGen 合成 36 萬多樂器音訊－譜對預訓練 Transformer，跨樂器 A2S 達 SOTA，未見薩克斯風也能轉移。\n\n**為什麼選它**: karaoke 需要可渲染的 score／MIDI；這篇用資料優先打通多樂器 audio→ABC。\n\n**注意**: 片段約 14.8s；流行／日語唱聲外推未證。\n\n**下一步**: 改成人聲 MIDI＋伴奏合成管線，測 JPOP 短片段 pitch／duration。",
+    "**論文 2｜TAG-Bench: Temporal Audio Grounding for LALMs**\n🔗 https://arxiv.org/abs/2609.01542\n🎯 主線: Music Flamingo／LALM 時間定位｜9/1 上架\n\n**TLDR**: 1,750 人核查詢評測「何時發生」；最佳僅 31.2 mIoU，多段計數準確率全場 ≤13.2%。\n\n**為什麼選它**: 理解強≠時間戳可靠——karaoke 段落／歌詞 grounding 與長曲導航都卡在這裡。\n\n**注意**: 跨子集非嚴格控制變因；自由格式分數含格式遵從。\n\n**下一步**: 用 JPOP 歌詞句查詢對照 WhisperX／forced aligner，並測 Music Flamingo 時間戳。",
+    "**GitHub Pick｜qiuqiao/SOFA** ⭐237｜最近更新 2026-09-02\n🔗 https://github.com/qiuqiao/SOFA\n\nSinging-Oriented Forced Aligner：專為唱聲的歌詞／音素強制對齊（非純語音 MFA）。\n\n**為什麼選它**: 直接補 karaoke-jp 的 mora／LRC 前對齊環節，可接人聲 stem→時間軸→ruby／MIDI。\n\n## 今天的 take-away\n- 譜面：TUTTI 證明大規模合成配對可撐起跨樂器 A2S，score／MIDI 上游能走資料優先（2609.00640）。\n- 時間：TAG-Bench 顯示 LALM／Flamingo 系「何時」仍弱，多段出現幾乎都漏報（2609.01542）。\n- 工程：SOFA 把唱聲 forced alignment 做成可接管線的對齊器，對齊 karaoke timing 痛點。"
+  ]
+}

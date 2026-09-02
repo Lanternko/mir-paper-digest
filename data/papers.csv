@@ -223,3 +223,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-09-01,1,paper,karaoke_jp,Towards Unified Song Generation and Singing Voice Conversion with Accompaniment Co-Generation,https://arxiv.org/abs/2606.07015,10.48550/arXiv.2606.07015,singing voice|song generation|SVC,重要
 2026-09-01,2,paper,mean_audio,Fourier is Frontier: Frequency-Aware Autoencoding for High-Fidelity Music Reconstruction,https://arxiv.org/abs/2608.19843,10.48550/arXiv.2608.19843,neural codec|continuous latent|music VAE,新且重要
 2026-09-01,0,repo,github,bmachuletz/NeonStageKaraoke,https://github.com/bmachuletz/NeonStageKaraoke,,karaoke|lyrics alignment|local-first,
+2026-09-02,1,paper,karaoke_jp,TUTTI: Toward generalizable audio-to-score transcription via fully synthesized data,https://arxiv.org/abs/2609.00640,10.48550/arXiv.2609.00640,audio-to-score|MIDI/score|synthetic data,新且重要
+2026-09-02,2,paper,general_mir,TAG-Bench: Benchmarking Temporal Audio Grounding in Large Audio Language Models,https://arxiv.org/abs/2609.01542,10.48550/arXiv.2609.01542,Music Flamingo|LALM|temporal grounding,新且重要
+2026-09-02,0,repo,github,qiuqiao/SOFA,https://github.com/qiuqiao/SOFA,,forced alignment|singing voice|lyrics timing,
