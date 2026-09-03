@@ -226,3 +226,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-09-02,1,paper,karaoke_jp,TUTTI: Toward generalizable audio-to-score transcription via fully synthesized data,https://arxiv.org/abs/2609.00640,10.48550/arXiv.2609.00640,audio-to-score|MIDI/score|synthetic data,新且重要
 2026-09-02,2,paper,general_mir,TAG-Bench: Benchmarking Temporal Audio Grounding in Large Audio Language Models,https://arxiv.org/abs/2609.01542,10.48550/arXiv.2609.01542,Music Flamingo|LALM|temporal grounding,新且重要
 2026-09-02,0,repo,github,qiuqiao/SOFA,https://github.com/qiuqiao/SOFA,,forced alignment|singing voice|lyrics timing,
+2026-09-03,1,paper,karaoke_jp,Decoupled Latent Flow Matching for Few-Step Joint Vocal-Accompaniment Separation,https://arxiv.org/abs/2608.30913,10.48550/arXiv.2608.30913,vocal separation|flow matching|few-step,新且重要
+2026-09-03,2,paper,general_mir,On the Human and Computer Alignment of Attribute-Based Music Matches,https://arxiv.org/abs/2609.00987,10.48550/arXiv.2609.00987,CLAP|music similarity|evaluation,新且重要
+2026-09-03,0,repo,github,vocoder712/OpenUtauMobile,https://github.com/vocoder712/OpenUtauMobile,,singing voice synthesis|OpenUtau|mobile SVS,

@@ -1,0 +1,100 @@
+{
+  "date": "2026-09-03",
+  "papers": [
+    {
+      "slot": 1,
+      "track": "karaoke_jp",
+      "title": "Decoupled Latent Flow Matching for Few-Step Joint Vocal-Accompaniment Separation",
+      "authors": [
+        "Lishi Zuo",
+        "Youzhi Tu",
+        "Lu Yi",
+        "Zezhong Jin",
+        "Chongxin Gan",
+        "Man-Wai Mak",
+        "KongAik Lee"
+      ],
+      "published": "2026-08-31",
+      "updated": "2026-08-31",
+      "source_url": "https://arxiv.org/abs/2608.30913",
+      "arxiv_id": "2608.30913",
+      "doi": "10.48550/arXiv.2608.30913",
+      "tags": [
+        "vocal separation",
+        "flow matching",
+        "few-step"
+      ],
+      "quality": "新且重要",
+      "tldr": "把人聲／伴奏分離做成「VAE 潛空間上的聯合 flow matching」，再以 latent Flow2GAN 壓到 1–4 步，兼顧 karaoke stem 與 MeanAudio 少步生成。",
+      "insight": "洞見:karaoke-jp 的第一關幾乎永遠是人聲 stem；MeanAudio 則一直在問 flow matching 能不能少步、還穩。這篇把兩件事綁在同一條管線：混合物與目標源先過凍結 VAE 進潛空間，再以聯合 latent flow 同時生成 vocal＋accompaniment（concat 成 2C×L），而不是兩個互不相關的回歸頭。接著用 DDT 式語意／聲學解耦——Separation Encoder 抽源條件（並用 REPA 對齊凍結 MERT 第 12 層人聲嵌入），Velocity Decoder 只負責速度場——避免兩邊互相踩腳。少步部分直接把 Flow2GAN 搬進潛空間：共享 1D CNN discriminator + latent ℓ1，1 步就能把人聲 ViSQOL 從 20 步 baseline 的 3.717 拉到 3.826、SDR 4.693→5.895 dB，且優於同模型的波形域 Flow2GAN；4 步兩軌 ViSQOL 再一起升。凍結 Separation Encoder 再訓 Velocity Decoder 也能抬高預訓練天花板，繼續聯合微調反而會把伴奏 SDR 打崩。對 karaoke-jp：這是「可部署的 joint vocal/伴奏分離」藍圖；對 MeanAudio：latent few-step + 語意解耦可直接搬到 text-to-audio／stem 條件生成。",
+      "try_next": "可做:用自家 JPOP 全曲（非 20s 片段）對照 Demucs／BS-RoFormer，量 LRC 前處理的人聲可懂度與伴奏殘留；並試把 Separation Encoder 條件改成語言查詢（à la FlowSep）做歌詞段／角色人聲抽取。",
+      "problem": "人聲與伴奏在同一首歌裡共享節奏／和聲結構，分開預測會忽略跨源依賴；而波形級 diffusion／flow matching 對長音樂又太貴，難以當 karaoke 前置分離器用。",
+      "method": "提出聯合 latent flow matching：凍結 VAE 編碼混合物與雙源，DiT 速度場條件於混合物潛向量；Separation Encoder＋Velocity Decoder 語意／聲學解耦（REPA→MERT）；再以 latent Flow2GAN 對抗後訓練做 1／4 步生成。",
+      "data": "訓練把和聲人聲併入伴奏；評估為訓練集 hold-out 的 50 段非重疊 20 秒片段。指標：ViSQOL（主）、MR-STFT loss、SDR。對照 VAE 重建上界、20 步 flow、波形域 Flow2GAN、以及解耦凍結策略消融。",
+      "findings": "1 步 latent Flow2GAN：人聲 ViSQOL 3.717→3.826、SDR 4.693→5.895 dB，優於波形域 Flow2GAN；4 步兩軌 ViSQOL 皆升。凍結 Separation Encoder 再訓 Velocity Decoder 可抬高 ceiling；繼續聯合微調會嚴重傷害伴奏 SDR。",
+      "limitations": "訓練語料細節與公開基準（如 MUSDB 正式 split）交代不足，僅 50×20s hold-out，未與 Demucs 等強判別式分離器正面對打；少步 refinement 對人聲增益大於伴奏；與 VAE 重建上界仍有明顯落差；長曲／多歌手／日語唱腔外推未證。",
+      "editor_note": "karaoke stem × MeanAudio few-step 同場：聯合 latent flow + 解耦條件，是可部署人聲分離的一條清楚路徑。",
+      "relevance": {
+        "mean_audio": 5,
+        "karaoke_jp": 5
+      }
+    },
+    {
+      "slot": 2,
+      "track": "general_mir",
+      "title": "On the Human and Computer Alignment of Attribute-Based Music Matches",
+      "authors": [
+        "Roser Batlle-Roca",
+        "Woosung Choi",
+        "Joan Serrà",
+        "Fabio Morreale",
+        "Wei-Hsiang Liao",
+        "Xavier Serra",
+        "Emilia Gómez",
+        "Yuki Mitsufuji"
+      ],
+      "published": "2026-09-01",
+      "updated": "2026-09-01",
+      "source_url": "https://arxiv.org/abs/2609.00987",
+      "arxiv_id": "2609.00987",
+      "doi": "10.48550/arXiv.2609.00987",
+      "tags": [
+        "CLAP",
+        "music similarity",
+        "evaluation"
+      ],
+      "quality": "新且重要",
+      "tldr": "MATCHA 用 83 位專家、1105 筆屬性級三元組評測「音樂是否相像」；旋律共識最高，且沒有單一計算指標能對齊全部音樂屬性。",
+      "insight": "洞見:MeanAudio／生成音樂一碰上「是不是抄了訓練資料」，大家習慣丟 CLAP／CoverID 分數——但這些分數跟人耳在旋律、和聲、節奏、人聲、音色上的判斷到底對不齊？UPF＋Sony 這組把問題拆成屬性級：300 個三元組（抄襲／翻唱／AI 生成各半）、83 位專家、1105 筆評分，釋出 MATCHA。結果：屬性級比「整體像不像」好評很多——旋律共識最高（同意率 >85%，κ≈0.60），和聲／音色較吵；案例平均同意率 77.3%。計算側呈「部分對齊」：CoverID 對旋律／和聲最準，CLAP 偏人聲，DEfNet 偏節奏／音色，KL(PaSST) 抓旋律幾乎沒用——沒有單一指標通吃。AI-SAO（Stability 管線）子集甚至接近隨機共識（κ≤0.19），多數人選 Neither，顯示爛生成會讓「相似度評測」失真。對 MeanAudio：CLAP／FAD／reward 之外，該補一套屬性級、有人標的 replication／match 閘門；對 karaoke-jp：voice 屬性的中等共識（κ 0.32–0.47）也提醒「人聲像不像」不能只靠一個 embedding。",
+      "try_next": "可做:把 MATCHA 協議套到自家 MeanAudio 輸出 vs 訓練近鄰（旋律／人聲／音色分開打），對照 CLAP 與 CoverID；並加一批 JPOP／日語人聲三元組測跨語穩定度。",
+      "problem": "生成音樂的複製／原創性評估多用音訊相似度指標，但這些指標與人類在不同音樂屬性上的判斷是否對齊，仍缺乏系統驗證。",
+      "method": "設計屬性級三元組迫選實驗（旋律／和聲／節奏／人聲／音色），建構 MATCHA；以同意率與 Fleiss’ κ 量測人際共識，再用 Kendall’s τ 對齊 MiRA 指標（CoverID、KL-PaSST、CLAP、DEfNet）。",
+      "data": "MATCHA：300 三元組（150 人寫／150 AI）、83 專家、1105 評分；來源含 SMP 抄襲、Discogs-VI 翻唱、Stability AI 管線與媒體報導 AI 曲。公開 metadata／標註（音訊因版權受限）。",
+      "findings": "屬性級可達實質共識（旋律最佳）；案例平均同意率 77.3%。CoverID↔旋律／和聲，CLAP↔人聲，DEfNet↔節奏／音色；無單一指標全覆蓋。AI-SAO 子集共識近隨機，顯示生成品質會搞垮相似度評測。",
+      "limitations": "刺激偏向「強匹配」配對，非一般相似度連續譜；西方／英語人聲為主；音訊不全開；相似度≠法律抄襲；AS 子集的生成瑕疵可能低估 AI 案例的可評性。",
+      "editor_note": "生成音樂評價補洞：別再只報一個 CLAP——MATCHA 證明屬性級人標才是 replication／match 的可靠錨點。",
+      "relevance": {
+        "mean_audio": 5,
+        "karaoke_jp": 2
+      }
+    }
+  ],
+  "repo": {
+    "full_name": "vocoder712/OpenUtauMobile",
+    "url": "https://github.com/vocoder712/OpenUtauMobile",
+    "description_zh": "OpenUtau 的行動版開源唱聲合成（SVS）軟體：在手機上跑虛擬歌手工程，對齊日系 UTAU／OpenUtau 工作流。",
+    "stars": 299,
+    "updated": "2026-09-02",
+    "why": "karaoke-jp 不只需要分離與對齊，還需要可迭代的唱聲合成端。OpenUtauMobile 把 OpenUtau 生態搬到行動裝置（★299、近期仍在推 CI／多平台建置），可當 JP 唱聲／音素／音符編輯的輕量實驗床，和今天的人聲分離、LRC／mora 管線形成「分離→對齊→合成」閉環。",
+    "tags": [
+      "singing voice synthesis",
+      "OpenUtau",
+      "mobile SVS"
+    ]
+  },
+  "discord_messages": [
+    "# 每日 MIR 論文精選 - 2026-09-03\n🌐 完整報告: https://lanternko.github.io/mir-paper-digest/reports/2026-09-03.html\n\n**論文 1｜Decoupled Latent Flow Matching for Joint Vocal-Accompaniment Separation**\n🔗 https://arxiv.org/abs/2608.30913\n🎯 主線: karaoke-jp（人聲分離）× MeanAudio（few-step flow）｜8/31 上架\n\n**TLDR**: VAE 潛空間聯合生成人聲＋伴奏，再用 latent Flow2GAN 壓到 1–4 步；1 步人聲 ViSQOL／SDR 已超 20 步 baseline。\n\n**為什麼選它**: karaoke 前置 stem 與 MeanAudio 少步生成同一條技術債——這篇用解耦條件＋潛空間對抗一次還。\n\n**注意**: hold-out 僅 50×20s；未正面打 Demucs；人聲增益大於伴奏。\n\n**下一步**: JPOP 全曲對照 BS-RoFormer，並試語言查詢條件做人聲段抽取。",
+    "**論文 2｜MATCHA: Human–Computer Alignment of Attribute-Based Music Matches**\n🔗 https://arxiv.org/abs/2609.00987\n🎯 主線: MeanAudio 評價／CLAP／原創性｜9/1 上架｜UPF＋Sony\n\n**TLDR**: 83 專家、1105 筆屬性級三元組；旋律共識最高，CLAP／CoverID／DEfNet 各管一畝田，沒有單一指標通吃。\n\n**為什麼選它**: 生成音樂「像不像訓練資料」不能只報一個 embedding——這是有人標的屬性級錨點。\n\n**注意**: 刺激偏強匹配；音訊不全開；相似度≠法律抄襲。\n\n**下一步**: 用 MATCHA 協議打自家 MeanAudio 近鄰（旋律／人聲／音色分開），並加 JPOP 三元組。",
+    "**GitHub Pick｜vocoder712/OpenUtauMobile** ⭐299｜最近更新 2026-09-02\n🔗 https://github.com/vocoder712/OpenUtauMobile\n\nOpenUtau 行動版開源 SVS：在手機上跑虛擬歌手／日系唱聲工程。\n\n**為什麼選它**: 補齊 karaoke-jp「分離→對齊→合成」的合成端，可當 JP 音素／音符編輯的輕量實驗床。\n\n## 今天的 take-away\n- 分離：聯合 latent flow + 解耦條件，讓人聲／伴奏少步生成變得可部署（2608.30913）。\n- 評價：MATCHA 證明屬性級人標才穩；CLAP 擅人聲、CoverID 擅旋律，別再迷信單一分數（2609.00987）。\n- 工程：OpenUtauMobile 把日系 SVS 工作流搬進行動裝置，方便閉環實驗。"
+  ]
+}
