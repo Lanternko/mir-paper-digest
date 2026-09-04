@@ -1,0 +1,92 @@
+{
+  "date": "2026-09-04",
+  "papers": [
+    {
+      "slot": 1,
+      "track": "karaoke_jp",
+      "title": "MeloDISinger: Melody-Aware & Duration-Preserving Singing Voice Editing with Audio Infilling",
+      "authors": [
+        "Yoonjeong Park",
+        "Jaekwon Im",
+        "Juhan Nam"
+      ],
+      "published": "2026-06-29",
+      "updated": "2026-06-29",
+      "source_url": "https://arxiv.org/abs/2606.30580",
+      "arxiv_id": "2606.30580",
+      "doi": "10.48550/arXiv.2606.30580",
+      "tags": [
+        "singing voice editing",
+        "flow matching",
+        "duration control"
+      ],
+      "quality": "重要",
+      "tldr": "MeloDISinger 用旋律感知的時長比例（MeloDRP）＋flow-matching infilling，在固定總時長下改唱詞，同時保住旋律與未編輯區。",
+      "insight": "洞見:karaoke-jp 常要「改一句歌詞但不打亂伴奏對齊」——這正是 text-based singing voice editing（SVE）的硬約束：總時長必須鎖死、旋律／節奏要跟原唱、未改區要原樣保留。KAIST 這組提出 MeloDISinger：核心 MeloDRP 不預測絕對音素時長，而是在每個編輯 span 的固定 budget 下預測時長比例（softmax 強制加總=1），再乘回原 span 長度；插入／刪除／替換各有對應的 budget 規則。旋律側用原唱 F0 推導的 pseudo-MIDI，經 cross-attention 與音素特徵融合，並用音素–音符時間重疊 mask 當 guided-attention，學軟對齊而非硬一對一。聲學端是條件 flow-matching mel decoder，只在 edit mask 內做 infilling，邊界外直接拷貝原 mel。評估管線也對症：WhisperX 對齊＋LLM 產「塞得進原唱時長」的改詞，避免語音編輯式改詞在唱歌上時間不可行。GTSinger-En（13h／3 歌手）上對 EditSinger、Vevo2：MeloDISinger 的 DDUR≈0（嚴格保時長），Mix 場景 WER/CER 約 39.4/27.6 對 Vevo2 的 50.9/38.4，且 22 人 MOS 在 Lyric／Melody／Naturalness 全面領先。對 karaoke-jp：這是「LRC／歌詞修正後重唱、仍對得上伴奏」的關鍵模組；對 MeanAudio：span-wise duration ratio + flow-matching infilling 可直接搬到條件生成的局部重寫。",
+      "try_next": "可做:在日語 JPOP 人聲上接 WhisperX／SOFA 對齊後跑改詞（假名／漢字替換），量 DDUR 與伴奏同步漂移；並把 MeloDRP 的 pseudo-MIDI 條件換成 karaoke-jp 的 mora-to-note 時間軸做消融。",
+      "problem": "改唱詞時必須鎖住總時長以對齊伴奏，並保住原旋律與未編輯區；既有 SVE 多半無法嚴格保時長，或重用原音素時長導致發音／節奏不自然。",
+      "method": "MeloDRP 在固定 span budget 下預測時長比例，並以 pseudo-MIDI cross-attention＋時間重疊 guided-attention 做旋律感知分配；flow-matching mel decoder 只對 edit mask 做 infilling。",
+      "data": "訓練／評估：GTSinger-En（約 13 小時英語唱聲、3 歌手）；44.1 kHz、hop 512、128 mel。評測 60 段未見歌曲、六種改詞情境（Ins/Del/Mix/Rep-P/Rep-S/Rep-SM）；對照 EditSinger（重現）、Vevo2；客觀 WER/CER（Whisper-large-v3）、DC/DDUR、FPC；主觀 22 人 MOS。",
+      "findings": "嚴格保時長（DDUR≈0）；多數情境 intelligibility 與 FPC 優於基線；Mix 上 WER/CER 約 39.4/27.6 vs Vevo2 50.9/38.4；MOS 在歌詞跟隨／旋律／自然度全面最高，尤其音節結構改變的 Rep-SM／Mix。",
+      "limitations": "資料僅英語 GTSinger-En、規模小（13h／3 歌手）；推論需 100 步 Euler；EditSinger 為論文重現非官方碼；日語／多歌手／全曲伴奏同步未驗證；melody-aware 客觀指標仍不足。",
+      "editor_note": "karaoke 改詞要對得上伴奏：固定時長比例＋flow infilling，是可落地的唱聲局部重寫藍圖。",
+      "relevance": {
+        "mean_audio": 4,
+        "karaoke_jp": 5
+      }
+    },
+    {
+      "slot": 2,
+      "track": "mean_audio",
+      "title": "SonicCaps: Large-Scale Diverse and Fine-Grained Captioning for Improved Audio-Retrieval",
+      "authors": [
+        "Zineb Lahrichi",
+        "Marc Ferras",
+        "Gaël Richard",
+        "Geoffroy Peeters"
+      ],
+      "published": "2026-09-02",
+      "updated": "2026-09-02",
+      "source_url": "https://arxiv.org/abs/2609.02343",
+      "arxiv_id": "2609.02343",
+      "doi": "10.48550/arXiv.2609.02343",
+      "tags": [
+        "audio captioning",
+        "CLAP",
+        "dataset"
+      ],
+      "quality": "新且重要",
+      "tldr": "SonicCaps 用 Qwen3-Omni 為約 70 萬段音訊生成約 1500 萬條多樣 caption（每段約 24 條），並以多 caption 抽樣訓練 CLAP，提升檢索與零樣本分類。",
+      "insight": "洞見:MeanAudio 的 caption／CLAP／reward 一直卡在「描述太泛、一音一詞、聽覺本來就一對多」。Sony CTC＋Telecom Paris 用 Qwen3-Omni（音訊＋文字條件）做三階段管線：保真 recaption → 多樣性 recaption（約 24 條／clip：主描述、改寫、短改寫、tags）→ 後處理，釋出 SonicCaps（~700k clips／~15M captions；公開以 caption＋audio id 為主）。重點不只是更大，而是訓練時的多 caption 抽樣：把 baseline 語料與 SonicCaps 的 main／rephrased／short／tags 按比例混抽。SonicCLAP_AR 在 AudioCaps-Val 上 T2A R@5/R@10 達 79.5/91.3，商業驗證集也同步抬升，優於只訓 AudioCaps+WavCaps 或單一 caption 來源。人評上 fidelity-focused caption 更完整、正確、細節豐富，且用這類 caption 訓出的 SonicCLAP_MOS 與人耳 MOS 更對齊。對 MeanAudio：這是下一輪 text-to-audio／CLAP／偏好對齊該換上的監督訊號；對 karaoke-jp／Music Flamingo：細粒度、多風格 caption 也是歌詞／音色／結構描述的資料配方參考。",
+      "try_next": "可做:下載 SonicCaps caption 配方，對自家音樂／JPOP 子集做同等「每曲 20+ 條」再 caption，並用多 caption 抽樣重訓 CLAP，對照現有 MusicCaps／內部 caption 在檢索與 reward 相關上的差距。",
+      "problem": "既有音訊 caption 資料語意單一、細節不足，且多為一音一詞，無法反映聽覺的一對多歧義，限制 CLAP 與下游生成／檢索。",
+      "method": "以 Qwen3-Omni 做保真與多樣性 recaption（約 24 captions／clip），再以多 caption 抽樣策略訓練 CLAP；並釋出面向檢索的 SonicCLAP_AR 與對齊人評的 SonicCLAP_MOS。",
+      "data": "SonicCaps：約 700k clips、約 15M captions（公開 caption＋audio id）；來源涵蓋公開音訊－語言語料並與 WavCaps／AudioCaps／Clotho 等對照。評估：AudioCaps-Val 與商業驗證集之 T2A／A2T；零樣本分類；60 段人評 pairwise。",
+      "findings": "人評認為 SonicCaps 更描述性、精確；多 caption 混抽顯著優於單一來源。SonicCLAP_AR：AudioCaps-Val T2A R@5/R@10≈79.5/91.3，商業集亦提升；SonicCLAP_MOS 與人耳偏好更對齊。",
+      "limitations": "公開以 caption／id 為主、音訊本身受限；合成 caption 仍可能幻覺；偏一般音訊／Foley，音樂與日語歌詞場景需另驗證；商業基準不可複現。",
+      "editor_note": "MeanAudio 的 CLAP／caption 該升級了：一音多詞＋保真細節，比再堆一點 noisy web caption 更值錢。",
+      "relevance": {
+        "mean_audio": 5,
+        "karaoke_jp": 2
+      }
+    }
+  ],
+  "repo": {
+    "full_name": "wavtechyukky/LeapSinger",
+    "url": "https://github.com/wavtechyukky/LeapSinger",
+    "description_zh": "快速唱聲聲學模型：諧波＋噪音激勵先成偽 mel，再用 1 步 rectified flow 精煉；附 NHVSing vocoder，支援多說話人／風格與 OpenUTAU／ONNX 匯出。",
+    "stars": 47,
+    "updated": "2026-09-03",
+    "why": "把 MeanAudio 最關心的「少步／1-step rectified flow」直接做進唱聲聲學模型，並對接 OpenUTAU 生態——正好銜接今天 MeloDISinger 的唱聲編輯與 karaoke-jp 合成端。近期活躍（9/3 仍推），CPU 上 RTF≈0.03 量級，適合當本地 SVS 實驗床。",
+    "tags": [
+      "singing voice synthesis",
+      "rectified flow",
+      "OpenUTAU"
+    ]
+  },
+  "discord_messages": [
+    "# 每日 MIR 論文精選 - 2026-09-04\n🌐 完整報告: https://lanternko.github.io/mir-paper-digest/reports/2026-09-04.html\n\n**論文 1｜MeloDISinger: Melody-Aware Duration-Preserving Singing Voice Editing**\n🔗 https://arxiv.org/abs/2606.30580\n🎯 主線: karaoke-jp（改詞仍對伴奏）× MeanAudio（flow matching）｜KAIST｜Interspeech 2026\n\n**TLDR**: MeloDRP 在固定 span 時長預算下分配音素比例，再用 flow-matching infilling 只重寫編輯區——總時長鎖死、旋律與未改區保留。\n\n**為什麼選它**: karaoke／LRC 修正後重唱最怕「歌詞對了、伴奏對不齊」；這篇把硬時長約束＋pseudo-MIDI 旋律條件一次做對。\n\n**注意**: 目前主要是英語 GTSinger-En（13h／3 歌手）；日語外推與 100 步推論成本需另測。\n\n**下一步**: 接 SOFA／WhisperX 日語對齊後做假名改詞，量 DDUR 與伴奏漂移。",
+    "**論文 2｜SonicCaps: Diverse Fine-Grained Captions for Audio-Retrieval**\n🔗 https://arxiv.org/abs/2609.02343\n🎯 主線: MeanAudio caption／CLAP｜Sony CTC＋Telecom Paris｜9/2 上架\n\n**TLDR**: Qwen3-Omni 為 ~700k 音訊生成 ~15M 條多樣 caption（約 24／clip）；多 caption 抽樣訓出的 SonicCLAP_AR 明顯抬升檢索與零樣本分類。\n\n**為什麼選它**: MeanAudio 的監督訊號長期太「一音一詞、描述太泛」——這是可下載的資料配方＋兩顆專用 CLAP。\n\n**注意**: 公開偏 caption／id；音樂／日語場景與幻覺風險需自測。\n\n**下一步**: 用同等多 caption 配方重標自家音樂子集，重訓 CLAP 對照 reward 相關。",
+    "**GitHub Pick｜wavtechyukky/LeapSinger** ⭐47｜最近更新 2026-09-03\n🔗 https://github.com/wavtechyukky/LeapSinger\n\n1-step rectified flow 唱聲聲學模型＋NHVSing vocoder；多說話人／風格，可匯出 OpenUTAU／ONNX。\n\n**為什麼選它**: MeanAudio 少步生成 × karaoke-jp 合成端同場；CPU RTF≈0.03，適合本地閉環實驗。\n\n## 今天的 take-away\n- 改詞：固定時長比例＋flow infilling，讓唱聲局部重寫仍對得上伴奏（2606.30580）。\n- Caption／CLAP：一音多詞＋保真細節，比再堆 noisy web caption 更能抬檢索與人耳對齊（2609.02343）。\n- 工程：LeapSinger 把 1-step rectified flow 帶進 OpenUTAU 生態，方便接上分離／對齊之後的合成。"
+  ]
+}

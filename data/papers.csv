@@ -229,3 +229,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-09-03,1,paper,karaoke_jp,Decoupled Latent Flow Matching for Few-Step Joint Vocal-Accompaniment Separation,https://arxiv.org/abs/2608.30913,10.48550/arXiv.2608.30913,vocal separation|flow matching|few-step,新且重要
 2026-09-03,2,paper,general_mir,On the Human and Computer Alignment of Attribute-Based Music Matches,https://arxiv.org/abs/2609.00987,10.48550/arXiv.2609.00987,CLAP|music similarity|evaluation,新且重要
 2026-09-03,0,repo,github,vocoder712/OpenUtauMobile,https://github.com/vocoder712/OpenUtauMobile,,singing voice synthesis|OpenUtau|mobile SVS,
+2026-09-04,1,paper,karaoke_jp,MeloDISinger: Melody-Aware & Duration-Preserving Singing Voice Editing with Audio Infilling,https://arxiv.org/abs/2606.30580,10.48550/arXiv.2606.30580,singing voice editing|flow matching|duration control,重要
+2026-09-04,2,paper,mean_audio,SonicCaps: Large-Scale Diverse and Fine-Grained Captioning for Improved Audio-Retrieval,https://arxiv.org/abs/2609.02343,10.48550/arXiv.2609.02343,audio captioning|CLAP|dataset,新且重要
+2026-09-04,0,repo,github,wavtechyukky/LeapSinger,https://github.com/wavtechyukky/LeapSinger,,singing voice synthesis|rectified flow|OpenUTAU,
