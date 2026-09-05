@@ -1,0 +1,1009 @@
+<!doctype html>
+<html lang="zh-Hant" data-standard-version="2026-05-26" data-standard-digest="2187e8b96f">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="mir-digest-product-standard" content="2026-05-26:2187e8b96f">
+  <title>MIR Paper Digest - 2026-09-05</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&family=Inter+Tight:wght@400;500;600&family=Noto+Serif+TC:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+:root {
+      --bg-base: #faf9fc;
+      --bg-surface: #ffffff;
+      --bg-sunken: #f3f3f7;
+      --bg-hover: #ede8f0;
+
+      --accent: #785561;
+      --accent-ink: #563742;
+      --accent-soft: #fed1df;
+      --accent-tint: rgba(254, 209, 223, 0.50);
+      --accent-wash: #fdf1f5;
+
+      --teal: #3a7a6a;
+      --teal-soft: #d4efe8;
+      --teal-wash: #eef8f5;
+
+      --amber: #b77d2a;
+      --amber-soft: rgba(183, 125, 42, 0.10);
+
+      --text-primary: #2f3337;
+      --text-secondary: #5c5f64;
+      --text-tertiary: #8a8a92;
+      --text-on-accent: #fff7f7;
+
+      --border: rgba(176, 178, 184, 0.32);
+      --border-strong: rgba(120, 85, 97, 0.30);
+
+      --radius: 14px;
+      --radius-sm: 10px;
+      --radius-lg: 20px;
+      --shadow-card: 0 1px 0 rgba(120, 85, 97, 0.04), 0 8px 24px rgba(60, 50, 55, 0.04);
+      --shadow-elev: 0 1px 0 rgba(120, 85, 97, 0.06), 0 18px 48px rgba(60, 50, 55, 0.08);
+
+      --font-serif: "Source Serif 4", "Source Serif Pro", ui-serif, Georgia, serif;
+      --font-sans: "Inter Tight", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+      --font-zh: "Noto Serif TC", var(--font-serif);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg-base);
+      color: var(--text-primary);
+      font-family: var(--font-zh), var(--font-sans);
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      line-height: 1.6;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── Topbar ──────────────────────────── */
+    .topbar {
+      position: sticky; top: 0; z-index: 30;
+      background: rgba(250, 249, 252, 0.82);
+      backdrop-filter: saturate(1.4) blur(18px);
+      -webkit-backdrop-filter: saturate(1.4) blur(18px);
+      border-bottom: 1px solid var(--border);
+    }
+    .topbar-inner {
+      max-width: 1200px; margin: 0 auto;
+      padding: 12px 32px;
+      display: flex; align-items: center; gap: 16px;
+    }
+    .brand {
+      display: flex; align-items: baseline; gap: 10px;
+      font-family: var(--font-zh), var(--font-serif);
+      font-size: 19px; font-weight: 600; letter-spacing: -0.015em;
+      color: var(--accent-ink);
+      text-decoration: none;
+    }
+    .brand:hover { text-decoration: none; color: var(--accent); }
+    .brand-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent-soft);
+      border: 1px solid var(--accent);
+      display: inline-block;
+      transform: translateY(-1px);
+    }
+    .brand .sub {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-tertiary);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding-left: 12px;
+      border-left: 1px solid var(--border);
+    }
+    .nav {
+      display: flex; align-items: center; gap: 4px;
+      margin-left: auto;
+      font-family: var(--font-sans); font-size: 13px;
+    }
+    .nav a, .nav-pill {
+      background: transparent; border: none; cursor: pointer;
+      padding: 6px 14px; border-radius: 9999px;
+      color: var(--text-secondary);
+      font: inherit; font-size: 13px; font-weight: 500;
+      transition: background .18s, color .18s;
+      text-decoration: none;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .nav a:hover, .nav-pill:hover { background: var(--bg-hover); color: var(--text-primary); text-decoration: none; }
+    .nav-pill.active {
+      background: var(--accent-tint);
+      color: var(--accent-ink);
+    }
+    .issue-badge {
+      font-family: var(--font-mono);
+      font-size: 10px; font-weight: 500;
+      padding: 3px 9px; border-radius: 999px;
+      background: var(--bg-sunken);
+      color: var(--text-tertiary);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── Canvas ──────────────────────────── */
+    .canvas {
+      max-width: 1200px; width: 100%;
+      margin: 0 auto;
+      padding: 40px 32px 80px;
+    }
+
+    /* ── Hero ────────────────────────────── */
+    .hero {
+      padding-bottom: 32px;
+      margin-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+    }
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      color: var(--text-tertiary);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    h1 {
+      font-family: var(--font-zh), var(--font-serif);
+      font-weight: 500;
+      font-size: 40px;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+    }
+    h1 em {
+      font-style: italic;
+      color: var(--accent);
+      font-weight: 400;
+    }
+    .subtitle {
+      font-family: var(--font-sans);
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      max-width: 560px;
+    }
+
+    /* ── Footnote ────────────────────────── */
+    .footnote {
+      margin-top: 40px;
+      padding: 14px 18px;
+      background: var(--bg-sunken);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+    }
+    .footnote summary {
+      font-family: var(--font-mono);
+      font-size: 11px; font-weight: 500;
+      color: var(--text-tertiary);
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      list-style: none;
+    }
+    .footnote summary::-webkit-details-marker { display: none; }
+    .footnote summary::before { content: "▸ "; }
+    .footnote[open] summary::before { content: "▾ "; }
+    .footnote-body {
+      margin-top: 10px;
+      font-family: var(--font-sans);
+      font-size: 12.5px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    .footnote-body span { display: block; margin-top: 4px; }
+
+    /* ── Toolbar / Filters ──────────────── */
+    .toolbar {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+    .toolbar-label {
+      font-family: var(--font-mono);
+      font-size: 10px; font-weight: 500;
+      color: var(--text-tertiary);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding-right: 8px;
+    }
+    .filter-btn {
+      border: 1px solid var(--border);
+      border-radius: 9999px;
+      background: var(--bg-surface);
+      color: var(--text-secondary);
+      font-family: var(--font-sans);
+      font-size: 13px; font-weight: 500;
+      padding: 7px 16px;
+      cursor: pointer;
+      transition: background .18s, border-color .18s, color .18s;
+    }
+    .filter-btn:hover { background: var(--bg-hover); border-color: var(--border-strong); color: var(--text-primary); }
+    .filter-btn[aria-pressed="true"] {
+      background: var(--accent-tint);
+      border-color: var(--accent);
+      color: var(--accent-ink);
+      font-weight: 600;
+    }
+    .filter-btn-important {
+      margin-left: auto;
+      color: var(--accent);
+      border-color: var(--border-strong);
+    }
+    .filter-btn-important[aria-pressed="true"] {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--text-on-accent);
+    }
+
+    /* ── Main layout ────────────────────── */
+    .digest-layout {
+      display: grid;
+      grid-template-columns: 220px minmax(0, 1fr);
+      gap: 28px;
+      align-items: start;
+    }
+
+    /* ── Paper nav (left sidebar) ───────── */
+    .paper-nav {
+      position: sticky; top: 76px;
+    }
+    .paper-nav-title {
+      font-family: var(--font-mono);
+      font-size: 10px; font-weight: 500;
+      color: var(--text-tertiary);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      padding: 0 4px;
+    }
+    .paper-nav-list {
+      list-style: none; display: grid; gap: 4px;
+    }
+    .paper-nav-list a {
+      display: flex; align-items: center; gap: 10px;
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-sans);
+      font-size: 12.5px; font-weight: 500;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: background .15s, color .15s;
+      line-height: 1.35;
+    }
+    .paper-nav-list a:hover { background: var(--bg-hover); color: var(--text-primary); }
+    .paper-nav-list a .nav-num {
+      width: 26px; height: 22px;
+      display: inline-flex; align-items: center; justify-content: center;
+      border-radius: 7px;
+      background: var(--bg-sunken);
+      color: var(--accent);
+      font-family: var(--font-mono);
+      font-size: 10px; font-weight: 600;
+      flex-shrink: 0;
+    }
+    .paper-nav-list a .nav-track {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--text-tertiary);
+      letter-spacing: 0.06em;
+      display: block;
+      margin-top: 1px;
+    }
+
+    .nav-stats {
+      margin-top: 20px;
+      padding: 16px;
+      background: var(--accent-wash);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-sm);
+    }
+    .nav-stats-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+    }
+    .nav-stat strong {
+      display: block;
+      font-family: var(--font-zh), var(--font-serif);
+      font-size: 22px; font-weight: 500;
+      color: var(--accent-ink);
+      letter-spacing: -0.02em;
+    }
+    .nav-stat span {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--text-tertiary);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .nav-note {
+      margin-top: 14px;
+      font-family: var(--font-sans);
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+
+    /* ── Cards ───────────────────────────── */
+    .cards { display: grid; gap: 20px; }
+
+    .paper-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow-card);
+      transition: border-color .2s, box-shadow .2s;
+      scroll-margin-top: 80px;
+    }
+    .paper-card:hover {
+      border-color: var(--border-strong);
+    }
+
+    .paper-head {
+      display: flex; gap: 14px;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+    .paper-number {
+      width: 44px; height: 38px;
+      display: inline-flex; align-items: center; justify-content: center;
+      border-radius: 10px;
+      background: var(--accent);
+      color: var(--text-on-accent);
+      font-family: var(--font-mono);
+      font-size: 13px; font-weight: 600;
+      flex-shrink: 0;
+    }
+    .paper-meta {
+      display: flex; flex-wrap: wrap;
+      justify-content: flex-end; gap: 6px;
+    }
+    .track, .quality, .freshness, .tag, .track-hint {
+      display: inline-flex; align-items: center;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-family: var(--font-sans);
+      font-size: 11px; font-weight: 600;
+      line-height: 1.2;
+    }
+    .track {
+      background: var(--accent-soft);
+      color: var(--accent-ink);
+    }
+    .track-hint {
+      background: var(--teal-soft);
+      color: var(--teal);
+    }
+    .quality {
+      background: var(--amber-soft);
+      color: var(--amber);
+    }
+    .freshness {
+      background: var(--bg-sunken);
+      color: var(--text-tertiary);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.02em;
+    }
+
+    h2 {
+      font-family: var(--font-zh), var(--font-serif);
+      font-weight: 500;
+      font-size: 22px;
+      letter-spacing: -0.015em;
+      line-height: 1.25;
+      margin: 14px 0 8px;
+      max-width: 600px;
+    }
+    h2 a {
+      color: inherit;
+      text-decoration: none;
+    }
+    h2 a:hover {
+      color: var(--accent);
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+    .paper-card-body {
+      cursor: pointer;
+    }
+    .one-line {
+      font-family: var(--font-sans);
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      max-width: 600px;
+      margin-bottom: 16px;
+    }
+
+    .tag-row {
+      display: flex; flex-wrap: wrap; gap: 6px;
+      margin-bottom: 16px;
+    }
+    .tag {
+      background: var(--bg-sunken);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      font-size: 11px;
+    }
+
+    /* ── Quick read grid ────────────────── */
+    .quick-read {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .quick-read div {
+      padding: 14px 16px;
+      background: var(--bg-sunken);
+      border-radius: var(--radius-sm);
+    }
+    .label {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 10px; font-weight: 500;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .quick-read p {
+      font-family: var(--font-sans);
+      font-size: 13px;
+      color: var(--text-primary);
+      line-height: 1.55;
+    }
+
+    /* ── Card actions ───────────────────── */
+    .card-actions {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin-top: 8px;
+    }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      font-family: var(--font-sans);
+      font-size: 13px; font-weight: 500;
+      padding: 9px 18px;
+      border-radius: 9999px;
+      border: 1px solid var(--border);
+      background: var(--bg-surface);
+      color: var(--text-primary);
+      cursor: pointer;
+      transition: background .18s, border-color .18s, color .18s, transform .08s;
+      text-decoration: none;
+    }
+    .btn:hover { background: var(--bg-hover); text-decoration: none; }
+    .btn:active { transform: translateY(1px); }
+    .btn-primary {
+      background: var(--accent);
+      color: var(--text-on-accent);
+      border-color: var(--accent);
+    }
+    .btn-primary:hover { background: var(--accent-ink); border-color: var(--accent-ink); }
+    .btn-teal {
+      background: var(--teal-wash);
+      border-color: var(--teal);
+      color: var(--teal);
+    }
+    .btn-teal:hover { background: var(--teal-soft); }
+
+    /* ── Star rating ────────────────────── */
+    .star-rating {
+      display: inline-flex; align-items: center; gap: 2px;
+      margin-left: auto;
+    }
+    .star-rating button {
+      width: 30px; height: 30px;
+      background: none; border: none;
+      cursor: pointer;
+      font-size: 18px;
+      color: var(--border);
+      line-height: 1;
+      padding: 0;
+      transition: color .12s, transform .08s;
+      display: inline-flex; align-items: center; justify-content: center;
+    }
+    .star-rating button:hover { transform: scale(1.2); }
+    .star-rating button.filled { color: var(--accent); }
+    .star-rating button.preview { color: var(--accent-soft); }
+    .star-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-tertiary);
+      letter-spacing: 0.06em;
+      margin-right: 4px;
+      white-space: nowrap;
+    }
+    .paper-card.is-rated { border-left: 3px solid var(--accent); }
+    .paper-card.is-important { border-left: 3px solid var(--accent); background: var(--accent-wash); }
+
+    /* ── Details panel ──────────────────── */
+    .details-panel {
+      display: none;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+    .paper-card.is-open .details-panel { display: block; }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    .detail-section {
+      padding: 16px;
+      background: var(--bg-sunken);
+      border-radius: var(--radius-sm);
+    }
+    .detail-section h3 {
+      font-family: var(--font-mono);
+      font-size: 10px; font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .detail-section p, .detail-section ul {
+      font-family: var(--font-sans);
+      font-size: 13px;
+      color: var(--text-primary);
+      line-height: 1.6;
+      max-width: 60ch;
+    }
+    .detail-section ul { padding-left: 18px; }
+    .detail-section li + li { margin-top: 6px; }
+
+    .meta-list { display: grid; gap: 10px; }
+    .meta-list div {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 10px;
+    }
+    dt {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--text-tertiary);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding-top: 2px;
+    }
+    dd { font-family: var(--font-sans); font-size: 13px; }
+
+    /* ── Footer ──────────────────────────── */
+    footer {
+      max-width: 1200px; margin: 0 auto;
+      padding: 0 32px 40px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-tertiary);
+      letter-spacing: 0.06em;
+    }
+
+    .is-hidden { display: none; }
+
+    /* ── Scrollbar ───────────────────────── */
+    ::-webkit-scrollbar { width: 10px; height: 10px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 999px; border: 2px solid var(--bg-base); }
+    ::-webkit-scrollbar-thumb:hover { background: var(--border-strong); }
+
+    /* ── Print ───────────────────────────── */
+    @media print {
+      .topbar { position: static; }
+      .toolbar, .card-actions, .paper-nav { display: none; }
+      .hero, .digest-layout { grid-template-columns: 1fr; }
+      .details-panel { display: block; }
+      .paper-card { break-inside: avoid; box-shadow: none; }
+    }
+
+    /* ── Responsive ──────────────────────── */
+    @media (max-width: 960px) {
+      .digest-layout { grid-template-columns: 1fr; }
+      .paper-nav { position: static; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+      .paper-nav-title { grid-column: 1 / -1; }
+      .paper-nav-list { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 6px; }
+      .paper-nav-list a { padding: 6px 10px; }
+      .nav-stats { grid-column: 1 / -1; }
+    }
+    @media (max-width: 820px) {
+      h1 { font-size: 32px; }
+    }
+    @media (max-width: 640px) {
+      .canvas { padding: 24px 16px 60px; }
+      .topbar-inner { padding: 10px 16px; flex-wrap: wrap; gap: 8px; }
+      .brand .sub { display: none; }
+      .issue-badge { display: none; }
+      h1 { font-size: 28px; }
+      h2 { font-size: 19px; }
+      .paper-card { padding: 20px; }
+      .paper-head { display: grid; grid-template-columns: 44px 1fr; }
+      .paper-meta { justify-content: flex-start; }
+      .quick-read, .detail-grid { grid-template-columns: 1fr; }
+      .meta-list div { grid-template-columns: 1fr; gap: 2px; }
+      .paper-nav-list { flex-direction: column; }
+      footer { padding: 0 16px 32px; }
+    }
+    .source-link,
+    .details-toggle {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      font-family: var(--font-sans);
+      font-size: 13px; font-weight: 500;
+      padding: 9px 18px;
+      border-radius: 9999px;
+      border: 1px solid var(--border);
+      background: var(--bg-surface);
+      color: var(--text-primary);
+      cursor: pointer;
+      transition: background .18s, border-color .18s, color .18s, transform .08s;
+      text-decoration: none;
+    }
+    .source-link {
+      background: var(--teal-wash);
+      border-color: var(--teal);
+      color: var(--teal);
+    }
+    .source-link:hover { background: var(--teal-soft); text-decoration: none; }
+    .details-toggle:hover { background: var(--bg-hover); }
+    .details-toggle:active,
+    .source-link:active { transform: translateY(1px); }
+    body { overflow-x: hidden; }
+    .canvas, .topbar-inner, footer, .digest-layout > *, .paper-card,
+    .paper-card-body, .quick-read > *, .detail-section { min-width: 0; }
+    .paper-card { overflow: hidden; }
+    .paper-card h2, .one-line, .quick-read p, .detail-section p,
+    .meta-list dd { overflow-wrap: anywhere; }
+    .repo-pick {
+      margin-top: 18px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-card);
+      padding: 18px;
+      overflow: hidden;
+    }
+    .repo-pick .repo-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 6px;
+    }
+    .repo-pick h2 {
+      margin: 0 0 8px;
+      font-family: var(--font-zh), var(--font-serif);
+      font-size: 21px;
+      font-weight: 500;
+      line-height: 1.25;
+    }
+    .repo-pick h2 a { color: var(--text-primary); text-decoration: none; overflow-wrap: anywhere; }
+    .repo-pick h2 a:hover { color: var(--accent); }
+    .repo-pick p { margin: 0 0 8px; color: var(--text-secondary); font-family: var(--font-sans); font-size: 14px; overflow-wrap: anywhere; }
+    .repo-pick .repo-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+    @media (max-width: 640px) {
+      .nav { width: 100%; margin-left: 0; overflow-x: auto; justify-content: flex-start; }
+      .nav a, .nav-pill { flex-shrink: 0; }
+      .hero, .digest-layout { max-width: 342px; margin-left: 0; margin-right: auto; }
+      .paper-card { width: 100%; }
+      .card-actions { align-items: flex-start; }
+      .star-rating { width: 100%; margin-left: 0; justify-content: flex-end; }
+      .star-rating button { width: 26px; height: 28px; }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="../index.html" aria-label="MIR Paper Digest home">
+        <span class="brand-dot"></span>
+        MIR Paper Digest
+        <span class="sub">Daily Brief</span>
+      </a>
+      <nav class="nav" aria-label="Site navigation">
+        <a class="nav-pill active" href="#">2026-09-05</a>
+        <a class="nav-pill" href="../index.html">All Issues</a>
+        <span class="issue-badge">2 papers</span>
+      </nav>
+    </div>
+  </div>
+  <main class="canvas">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Daily research brief · 2026-09-05</p>
+        <h1>每日 MIR 論文<em>精選</em></h1>
+        <p class="subtitle">近期主線往 Music Flamingo、歌詞辨識、JPOP 與卡拉 OK 靠攏;今天先看最能轉成下一個小實驗的兩篇。</p>
+      </div>
+    </section>
+    <section class="digest-layout">
+      <aside class="paper-nav" aria-label="Paper navigation">
+        <div class="paper-nav-title">Papers</div>
+        <ol class="paper-nav-list">
+          <li><a href="#paper-1">
+            <span class="nav-num">01</span>
+            <span>MIDI-Informed Singing Accompaniment Gener...<span class="nav-track">karaoke-jp</span></span>
+          </a></li>
+          <li><a href="#paper-2">
+            <span class="nav-num">02</span>
+            <span>Audio Flamingo Next: Next-Generation Open...<span class="nav-track">MIR</span></span>
+          </a></li>
+        </ol>
+      </aside>
+      <div class="cards" aria-label="論文卡片">
+
+        <article class="paper-card" data-track="karaoke_jp" id="paper-1">
+          <div class="paper-head">
+            <div class="paper-number">01</div>
+            <div class="paper-meta">
+              <span class="track">karaoke-jp</span>
+              <span class="quality">重要</span>
+              <span class="freshness">2026-05-05 · 123d</span>
+            </div>
+          </div>
+          <div class="paper-card-body">
+          <h2><a href="https://arxiv.org/abs/2602.22029" target="_blank" rel="noopener">MIDI-Informed Singing Accompaniment Generation in a Compositional Song Pipeline</a></h2>
+          <p class="one-line">MIDI-SAG 把人聲 MIDI 的拍點與和聲條件注入可控 TTM，搭配結構規劃與 outpainting，讓 score-to-song 能做長曲且 intro／bridge 仍連貫。</p>
+          <div class="tag-row">
+            <span class="track-hint">可轉譯</span>
+            <span class="tag">score-to-song</span>
+            <span class="tag">MIDI-SAG</span>
+            <span class="tag">accompaniment</span>
+          </div>
+          <div class="quick-read">
+            <div>
+              <span class="label">Insight</span>
+              <p>洞見:karaoke-jp／專業創作真正要的不是再一個黑盒 lyrics-to-song，而是能鎖住旋律主權的 score-to-song。台大＋Taiwan AI Labs 指出：把 SVS 再接 audio-only SAG（如 Melodist）在長曲會崩——intro／bridge 沒有人聲可當條件。MIDI-SAG 改走 MIDI-to-audio：從人聲 MIDI（或 SOME＋唱聲 beat 估計）抽出拍點／旋律，再用 AccoMontage2 做旋律配和聲，把 beat＋chord 當時間變條件經 MuseControlLite adapter 餵進 Stable Audio Open；結構規劃標好 section 邊界後，先生成有人聲段、再以 outpainting 補無聲段。實作只需約 2.5k 小時資料、單卡 RTX 3090。Exp1（10s，無 GT MIDI）APA 0.595 勝過 AnyAccomp 0.457／FastSAG 0.000；Exp2（同 backbone、47s）Rhythm F1／Key Acc 從 audio-SAG 的 0.64／0.55 升到 GT-MIDI 的 0.91／0.93（無 GT 仍有 0.77／0.91）；Exp3 全曲 90–120s 對 Suno／DiffRhythm／ACE-Step／LeVo，PER 最低（0.213），Audiobox／SongEval 具競爭力。對 karaoke-jp：這是「歌詞＋MIDI／mora-to-note → 分軌人聲＋伴奏」的模組藍圖；對 MeanAudio：symbolic beat／chord conditioning＋結構 outpainting 可直接搬到可控 text-to-music。</p>
+            </div>
+            <div>
+              <span class="label">Try next</span>
+              <p>可做:用 JPOP 人聲 MIDI（或 SOFA 對齊後的 mora-to-note）當條件，接自家 SVS 後跑 MIDI-SAG 式伴奏；量 Rhythm F1／Chord F1，並對 intro／間奏做 section-wise outpainting 消融。</p>
+            </div>
+          </div>
+          </div>
+          <div class="card-actions">
+            <a class="source-link" href="https://arxiv.org/abs/2602.22029" target="_blank" rel="noopener">Open Paper &#8599;</a>
+            <button class="details-toggle" type="button" aria-expanded="false" aria-controls="paper-1-panel">展開摘要與實驗建議</button>
+            <div class="star-rating" data-paper-id="2026-09-05-1" aria-label="Rate this paper">
+              <span class="star-label">重要度</span>
+              <button type="button" data-value="1" aria-label="1 star">&#9733;</button>
+              <button type="button" data-value="2" aria-label="2 stars">&#9733;</button>
+              <button type="button" data-value="3" aria-label="3 stars">&#9733;</button>
+              <button type="button" data-value="4" aria-label="4 stars">&#9733;</button>
+              <button type="button" data-value="5" aria-label="5 stars">&#9733;</button>
+            </div>
+          </div>
+          <div class="details-panel" id="paper-1-panel">
+            <div class="detail-grid">
+              <section class="detail-section" data-standard-section="problem">
+                <h3>Problem</h3>
+                <p>既有 score-to-song 多只能做短片段；長曲中 intro／bridge 等人聲靜音段會讓 audio-only SAG 失去條件，節奏與和聲連貫性崩壞。</p>
+              </section>
+              <section class="detail-section" data-standard-section="method">
+                <h3>Method</h3>
+                <p>以人聲 MIDI 衍生拍點／和弦為時間變條件，經輕量 adapter 微調 TTM 做 MIDI-SAG；加上全曲結構規劃與分段 outpainting，組成可編輯的 score-to-song（亦可接 lyrics-to-melody）pipeline。</p>
+              </section>
+              <section class="detail-section" data-standard-section="data">
+                <h3>Data</h3>
+                <p>SAG 微調約 2.5k 小時音訊、單卡 RTX 3090；SVS 用約 10 小時雙歌手內部語料訓 FastSpeech。評估：MUSDB18（Exp1／2）、GPT 產 200 條 90–120s 提示（Exp3）；指標含 APA、Rhythm F1、Key Acc、CLAP、PER、Audiobox-Aesthetics、SongEval，以及 33 人 MOS。</p>
+              </section>
+              <section class="detail-section" data-standard-section="findings">
+                <h3>Findings</h3>
+                <p>無 GT MIDI 的 10s APA 0.595 優於 AnyAccomp／FastSAG；同 backbone 下 MIDI 條件大幅抬升 Rhythm F1／Key Acc（最高 0.91／0.93）；全曲生成 PER 0.213 低於對照，美學指標與開源 SOTA 相當，並保留分軌與中間 MIDI 可編輯性。</p>
+              </section>
+              <section class="detail-section" data-standard-section="limitations">
+                <h3>Limitations</h3>
+                <p>作者自述為早期探索；實作偏華語 SVS／流行 MIDI；依賴預訓練 SVS／TTM／配和聲模組；全曲對照含商業系統且提示由 GPT 生成；日語／假名／ruby 與 karaoke LRC 工作流未驗證；程式碼標示將開源。</p>
+              </section>
+              <section class="detail-section" data-standard-section="editor-note">
+                <h3>Editor Note</h3>
+                <p>要把 karaoke 從「整首歌黑盒生成」拉回「旋律可編、伴奏可對齊」：MIDI 拍點＋和弦條件是關鍵槓桿。</p>
+              </section>
+              <section class="detail-section" data-standard-section="metadata">
+                <h3>Metadata</h3>
+                <dl class="meta-list">
+                  <div><dt>Authors</dt><dd>Fang-Duo Tsai, Yi-An Lai, Fei-Yueh Chen, Hsueh-Wei Fu, Wei-Jaw Lee 等 7 位</dd></div>
+                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2602.22029">arxiv.org/abs/2602.22029</a></dd></div>
+                  <div><dt>Relevance</dt><dd>MeanAudio 4 / karaoke 5 · max 5</dd></div>
+                </dl>
+              </section>
+            </div>
+          </div>
+        </article>
+    
+
+        <article class="paper-card" data-track="general_mir" id="paper-2">
+          <div class="paper-head">
+            <div class="paper-number">02</div>
+            <div class="paper-meta">
+              <span class="track">MIR</span>
+              <span class="quality">重要</span>
+              <span class="freshness">2026-04-13 · 145d</span>
+            </div>
+          </div>
+          <div class="paper-card-body">
+          <h2><a href="https://arxiv.org/abs/2604.10905" target="_blank" rel="noopener">Audio Flamingo Next: Next-Generation Open Audio-Language Models for Speech, Sound, and Music</a></h2>
+          <p class="one-line">AF-Next 把 Audio Flamingo 系列推到可處理最長 30 分鐘音訊，並引入時間對齊的 Temporal Audio CoT；訓練資料逾 100 萬小時，含 Music Flamingo／歌詞理解。</p>
+          <div class="tag-row">
+            <span class="track-hint">MIR 觀點</span>
+            <span class="tag">Music Flamingo</span>
+            <span class="tag">LALM</span>
+            <span class="tag">temporal CoT</span>
+          </div>
+          <div class="quick-read">
+            <div>
+              <span class="label">Insight</span>
+              <p>洞見:Music Flamingo 之後，下一個瓶頸是「長音訊＋可解釋時間推理＋非英語歌詞」。NVIDIA＋UMD 的 Audio Flamingo Next（AF-Next）沿用 AF3／Music Flamingo 架構（AF-Whisper＋adaptor＋Qwen2.5-7B＋串流 TTS），但把 RoPE 換成依絕對時間戳旋轉的 RoTE，並提出 Temporal Audio Chain-of-Thought：中間推理步驟必須掛在時間戳上。資料面把 Music Flamingo 的 MF-Skills 與擴充的非英語 music-to-lyrics 納入，並把長音訊（最長 30 分鐘）做成核心訓練而非事後對齊；總量約 108M samples／約 1M 小時。四階段課程（pre／mid／post，含 GRPO）後，在 20+ 理解與推理基準上大幅領先同規模開源模型，並對更大／閉源模型具競爭力。開源三變體：Instruct／Think／Captioner。對 karaoke-jp：長曲時間 grounding＋多語歌詞理解，正是 LRC／段落 QA／唱詞對齊的上游能力；對 MeanAudio：Captioner 與時間戳 caption 可直接餵 caption／reward／結構條件。</p>
+            </div>
+            <div>
+              <span class="label">Try next</span>
+              <p>可做:用 AF-Next-Captioner／Think 對 JPOP 全曲做時間戳段落 caption＋歌詞 QA，對照 Music Flamingo；量時間定位誤差，並把輸出當 MeanAudio 的結構／歌詞條件。</p>
+            </div>
+          </div>
+          </div>
+          <div class="card-actions">
+            <a class="source-link" href="https://arxiv.org/abs/2604.10905" target="_blank" rel="noopener">Open Paper &#8599;</a>
+            <button class="details-toggle" type="button" aria-expanded="false" aria-controls="paper-2-panel">展開摘要與實驗建議</button>
+            <div class="star-rating" data-paper-id="2026-09-05-2" aria-label="Rate this paper">
+              <span class="star-label">重要度</span>
+              <button type="button" data-value="1" aria-label="1 star">&#9733;</button>
+              <button type="button" data-value="2" aria-label="2 stars">&#9733;</button>
+              <button type="button" data-value="3" aria-label="3 stars">&#9733;</button>
+              <button type="button" data-value="4" aria-label="4 stars">&#9733;</button>
+              <button type="button" data-value="5" aria-label="5 stars">&#9733;</button>
+            </div>
+          </div>
+          <div class="details-panel" id="paper-2-panel">
+            <div class="detail-grid">
+              <section class="detail-section" data-standard-section="problem">
+                <h3>Problem</h3>
+                <p>開源 LALM 多停在短片段與學術基準，對長、嘈雜、真實音訊的理解與可解釋時間推理不足，音樂／非英語歌詞覆蓋也偏弱。</p>
+              </section>
+              <section class="detail-section" data-standard-section="method">
+                <h3>Method</h3>
+                <p>強化 AF-Whisper＋RoTE 時間位置編碼；用逾百萬小時課程式訓練；引入 Temporal Audio CoT，並開源 Instruct／Think／Captioner 三變體。</p>
+              </section>
+              <section class="detail-section" data-standard-section="data">
+                <h3>Data</h3>
+                <p>約 108M samples／約 1M 小時，涵蓋 MF-Skills、擴充 music-to-lyrics、長音訊 caption／QA、AudioSkills-XL、AF-Think-Time（約 43K，思維鏈平均約 446 詞）等。評估：20+ 音訊理解與推理基準，含長音訊任務。</p>
+              </section>
+              <section class="detail-section" data-standard-section="findings">
+                <h3>Findings</h3>
+                <p>同規模開源大幅領先，並常能匹敵甚至超過更大／閉源模型；支援最長約 30 分鐘輸入、多輪對話、時間戳 caption 與多語 ASR；真實場景遷移表現穩健。</p>
+              </section>
+              <section class="detail-section" data-standard-section="limitations">
+                <h3>Limitations</h3>
+                <p>網路音訊仍嘈雜且語言／領域不均；長距稀疏證據推理仍難；既有基準尚未充分覆蓋多說話人 ASR、diarization、時間戳 caption、voice-to-voice；釋出為研究用途授權。</p>
+              </section>
+              <section class="detail-section" data-standard-section="editor-note">
+                <h3>Editor Note</h3>
+                <p>Music Flamingo 路線的下一站：把「聽得懂長歌＋說得出時間點」做成開源 LALM 的預設能力。</p>
+              </section>
+              <section class="detail-section" data-standard-section="metadata">
+                <h3>Metadata</h3>
+                <dl class="meta-list">
+                  <div><dt>Authors</dt><dd>Sreyan Ghosh, Arushi Goel, Kaousheik Jayakumar, Lasha Koroshinadze, Nishit Anand 等 18 位</dd></div>
+                  <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2604.10905">arxiv.org/abs/2604.10905</a></dd></div>
+                  <div><dt>Relevance</dt><dd>MeanAudio 3 / karaoke 4 · max 4</dd></div>
+                </dl>
+              </section>
+            </div>
+          </div>
+        </article>
+    
+      </div>
+    </section>
+
+    <section class="repo-pick" aria-label="GitHub pick">
+      <div class="repo-eyebrow">GitHub pick of the day</div>
+      <h2><a href="https://github.com/wavtechyukky/NHVSing" target="_blank" rel="noopener">wavtechyukky/NHVSing</a></h2>
+      <div class="repo-meta"><span class="tag">★ 49</span><span class="tag">更新 2026-09-04</span><span class="tag">singing vocoder</span><span class="tag">OpenUtau</span><span class="tag">NHV</span></div>
+      <p>專為唱聲優化的 Neural Homomorphic Vocoder：V3／V3.1（hop256）與 V3X／V3.1X（hop512，對接 OpenUtau）；支援 JIT／單檔 ONNX，MIT 授權。</p>
+      <p><strong>為什麼相關:</strong>昨天的 LeapSinger 就是接這顆唱聲 vocoder。NHVSing V3 用 MRD＋更快的 fft_corr 激勵合成，並有面向 OpenUtau 的 hop512 變體——正好接上今天 MIDI-SAG 的 SVS／分軌合成端，也服務 karaoke-jp 本地渲染。9/4 仍有推送。</p>
+      <div class="card-actions">
+        <a class="source-link" href="https://github.com/wavtechyukky/NHVSing" target="_blank" rel="noopener">Open Repo &#8599;</a>
+      </div>
+    </section>
+    
+    <details class="footnote">
+      <summary>閱讀順序與篩選原則</summary>
+      <div class="footnote-body">
+        <span><strong>1.</strong> 近期主線:Music Flamingo、歌詞辨識、JPOP、卡拉 OK 與 karaoke-jp。</span>
+        <span><strong>2.</strong> 生成主線仍保留:text-to-audio/music、flow、caption、codec、評估與 reward alignment。</span>
+        <span><strong>3.</strong> 只收高品質:新穎度、重要性、baseline、資料與可落地性一起看。</span>
+      </div>
+    </details>
+  </main>
+  <footer>Generated by the MIR digest automation · Product standard 2026-05-26 · 2187e8b96f · 2026-09-05 09:05:21 Asia/Taipei</footer>
+  <script>
+
+    const cards = Array.from(document.querySelectorAll('.paper-card'));
+    const RATINGS_KEY = 'mir-ratings';
+    function loadRatings() {
+      try { return JSON.parse(localStorage.getItem(RATINGS_KEY)) || {}; } catch { return {}; }
+    }
+    function saveRating(paperId, value) {
+      const ratings = loadRatings();
+      if (value === 0) delete ratings[paperId];
+      else ratings[paperId] = value;
+      localStorage.setItem(RATINGS_KEY, JSON.stringify(ratings));
+    }
+    function applyStars(widget, filled) {
+      widget.querySelectorAll('button[data-value]').forEach(btn => {
+        const value = parseInt(btn.dataset.value);
+        btn.classList.toggle('filled', value <= filled);
+        btn.classList.remove('preview');
+      });
+      const card = widget.closest('.paper-card');
+      card.classList.toggle('is-rated', filled > 0);
+      card.classList.toggle('is-important', filled >= 3);
+    }
+    function initStarWidget(widget) {
+      const paperId = widget.dataset.paperId;
+      applyStars(widget, loadRatings()[paperId] || 0);
+      const buttons = widget.querySelectorAll('button[data-value]');
+      buttons.forEach(btn => {
+        btn.addEventListener('mouseenter', () => {
+          const value = parseInt(btn.dataset.value);
+          buttons.forEach(b => {
+            const other = parseInt(b.dataset.value);
+            b.classList.remove('filled');
+            b.classList.toggle('preview', other <= value);
+          });
+        });
+        btn.addEventListener('click', () => {
+          const value = parseInt(btn.dataset.value);
+          const previous = loadRatings()[paperId] || 0;
+          const next = previous === value ? 0 : value;
+          saveRating(paperId, next);
+          applyStars(widget, next);
+        });
+      });
+      widget.addEventListener('mouseleave', () => {
+        applyStars(widget, loadRatings()[paperId] || 0);
+      });
+    }
+    document.querySelectorAll('.star-rating').forEach(initStarWidget);
+    function toggleCard(card) {
+      const isOpen = card.classList.toggle('is-open');
+      const btn = card.querySelector('.details-toggle');
+      btn.setAttribute('aria-expanded', String(isOpen));
+      btn.textContent = isOpen ? '收合' : '展開摘要與實驗建議';
+    }
+    document.querySelectorAll('.details-toggle').forEach(btn => {
+      btn.addEventListener('click', () => toggleCard(btn.closest('.paper-card')));
+    });
+    document.querySelectorAll('.paper-card-body').forEach(body => {
+      body.addEventListener('click', event => {
+        if (event.target.closest('a, button, input, .card-actions, .star-rating')) return;
+        toggleCard(body.closest('.paper-card'));
+      });
+    });
+    document.querySelectorAll('.paper-nav-list a').forEach(link => {
+      link.addEventListener('click', event => {
+        event.preventDefault();
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          target.style.borderColor = 'var(--accent)';
+          target.style.boxShadow = '0 0 0 4px var(--accent-tint)';
+          setTimeout(() => {
+            target.style.borderColor = '';
+            target.style.boxShadow = '';
+          }, 1500);
+        }
+      });
+    });
+
+  </script>
+</body>
+</html>

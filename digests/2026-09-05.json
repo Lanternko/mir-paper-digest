@@ -1,0 +1,110 @@
+{
+  "date": "2026-09-05",
+  "papers": [
+    {
+      "slot": 1,
+      "track": "karaoke_jp",
+      "title": "MIDI-Informed Singing Accompaniment Generation in a Compositional Song Pipeline",
+      "authors": [
+        "Fang-Duo Tsai",
+        "Yi-An Lai",
+        "Fei-Yueh Chen",
+        "Hsueh-Wei Fu",
+        "Wei-Jaw Lee",
+        "Hao-Chung Cheng",
+        "Yi-Hsuan Yang"
+      ],
+      "published": "2026-02-24",
+      "updated": "2026-05-05",
+      "source_url": "https://arxiv.org/abs/2602.22029",
+      "arxiv_id": "2602.22029",
+      "doi": "10.48550/arXiv.2602.22029",
+      "tags": [
+        "score-to-song",
+        "MIDI-SAG",
+        "accompaniment"
+      ],
+      "quality": "重要",
+      "tldr": "MIDI-SAG 把人聲 MIDI 的拍點與和聲條件注入可控 TTM，搭配結構規劃與 outpainting，讓 score-to-song 能做長曲且 intro／bridge 仍連貫。",
+      "insight": "洞見:karaoke-jp／專業創作真正要的不是再一個黑盒 lyrics-to-song，而是能鎖住旋律主權的 score-to-song。台大＋Taiwan AI Labs 指出：把 SVS 再接 audio-only SAG（如 Melodist）在長曲會崩——intro／bridge 沒有人聲可當條件。MIDI-SAG 改走 MIDI-to-audio：從人聲 MIDI（或 SOME＋唱聲 beat 估計）抽出拍點／旋律，再用 AccoMontage2 做旋律配和聲，把 beat＋chord 當時間變條件經 MuseControlLite adapter 餵進 Stable Audio Open；結構規劃標好 section 邊界後，先生成有人聲段、再以 outpainting 補無聲段。實作只需約 2.5k 小時資料、單卡 RTX 3090。Exp1（10s，無 GT MIDI）APA 0.595 勝過 AnyAccomp 0.457／FastSAG 0.000；Exp2（同 backbone、47s）Rhythm F1／Key Acc 從 audio-SAG 的 0.64／0.55 升到 GT-MIDI 的 0.91／0.93（無 GT 仍有 0.77／0.91）；Exp3 全曲 90–120s 對 Suno／DiffRhythm／ACE-Step／LeVo，PER 最低（0.213），Audiobox／SongEval 具競爭力。對 karaoke-jp：這是「歌詞＋MIDI／mora-to-note → 分軌人聲＋伴奏」的模組藍圖；對 MeanAudio：symbolic beat／chord conditioning＋結構 outpainting 可直接搬到可控 text-to-music。",
+      "try_next": "可做:用 JPOP 人聲 MIDI（或 SOFA 對齊後的 mora-to-note）當條件，接自家 SVS 後跑 MIDI-SAG 式伴奏；量 Rhythm F1／Chord F1，並對 intro／間奏做 section-wise outpainting 消融。",
+      "problem": "既有 score-to-song 多只能做短片段；長曲中 intro／bridge 等人聲靜音段會讓 audio-only SAG 失去條件，節奏與和聲連貫性崩壞。",
+      "method": "以人聲 MIDI 衍生拍點／和弦為時間變條件，經輕量 adapter 微調 TTM 做 MIDI-SAG；加上全曲結構規劃與分段 outpainting，組成可編輯的 score-to-song（亦可接 lyrics-to-melody）pipeline。",
+      "data": "SAG 微調約 2.5k 小時音訊、單卡 RTX 3090；SVS 用約 10 小時雙歌手內部語料訓 FastSpeech。評估：MUSDB18（Exp1／2）、GPT 產 200 條 90–120s 提示（Exp3）；指標含 APA、Rhythm F1、Key Acc、CLAP、PER、Audiobox-Aesthetics、SongEval，以及 33 人 MOS。",
+      "findings": "無 GT MIDI 的 10s APA 0.595 優於 AnyAccomp／FastSAG；同 backbone 下 MIDI 條件大幅抬升 Rhythm F1／Key Acc（最高 0.91／0.93）；全曲生成 PER 0.213 低於對照，美學指標與開源 SOTA 相當，並保留分軌與中間 MIDI 可編輯性。",
+      "limitations": "作者自述為早期探索；實作偏華語 SVS／流行 MIDI；依賴預訓練 SVS／TTM／配和聲模組；全曲對照含商業系統且提示由 GPT 生成；日語／假名／ruby 與 karaoke LRC 工作流未驗證；程式碼標示將開源。",
+      "editor_note": "要把 karaoke 從「整首歌黑盒生成」拉回「旋律可編、伴奏可對齊」：MIDI 拍點＋和弦條件是關鍵槓桿。",
+      "relevance": {
+        "mean_audio": 4,
+        "karaoke_jp": 5
+      }
+    },
+    {
+      "slot": 2,
+      "track": "general_mir",
+      "title": "Audio Flamingo Next: Next-Generation Open Audio-Language Models for Speech, Sound, and Music",
+      "authors": [
+        "Sreyan Ghosh",
+        "Arushi Goel",
+        "Kaousheik Jayakumar",
+        "Lasha Koroshinadze",
+        "Nishit Anand",
+        "Zhifeng Kong",
+        "Siddharth Gururani",
+        "Sang-gil Lee",
+        "Jaehyeon Kim",
+        "Aya Aljafari",
+        "Chao-Han Huck Yang",
+        "Sungwon Kim",
+        "Ramani Duraiswami",
+        "Dinesh Manocha",
+        "Mohammad Shoeybi",
+        "Bryan Catanzaro",
+        "Ming-Yu Liu",
+        "Wei Ping"
+      ],
+      "published": "2026-04-13",
+      "updated": "2026-04-13",
+      "source_url": "https://arxiv.org/abs/2604.10905",
+      "arxiv_id": "2604.10905",
+      "doi": "10.48550/arXiv.2604.10905",
+      "tags": [
+        "Music Flamingo",
+        "LALM",
+        "temporal CoT"
+      ],
+      "quality": "重要",
+      "tldr": "AF-Next 把 Audio Flamingo 系列推到可處理最長 30 分鐘音訊，並引入時間對齊的 Temporal Audio CoT；訓練資料逾 100 萬小時，含 Music Flamingo／歌詞理解。",
+      "insight": "洞見:Music Flamingo 之後，下一個瓶頸是「長音訊＋可解釋時間推理＋非英語歌詞」。NVIDIA＋UMD 的 Audio Flamingo Next（AF-Next）沿用 AF3／Music Flamingo 架構（AF-Whisper＋adaptor＋Qwen2.5-7B＋串流 TTS），但把 RoPE 換成依絕對時間戳旋轉的 RoTE，並提出 Temporal Audio Chain-of-Thought：中間推理步驟必須掛在時間戳上。資料面把 Music Flamingo 的 MF-Skills 與擴充的非英語 music-to-lyrics 納入，並把長音訊（最長 30 分鐘）做成核心訓練而非事後對齊；總量約 108M samples／約 1M 小時。四階段課程（pre／mid／post，含 GRPO）後，在 20+ 理解與推理基準上大幅領先同規模開源模型，並對更大／閉源模型具競爭力。開源三變體：Instruct／Think／Captioner。對 karaoke-jp：長曲時間 grounding＋多語歌詞理解，正是 LRC／段落 QA／唱詞對齊的上游能力；對 MeanAudio：Captioner 與時間戳 caption 可直接餵 caption／reward／結構條件。",
+      "try_next": "可做:用 AF-Next-Captioner／Think 對 JPOP 全曲做時間戳段落 caption＋歌詞 QA，對照 Music Flamingo；量時間定位誤差，並把輸出當 MeanAudio 的結構／歌詞條件。",
+      "problem": "開源 LALM 多停在短片段與學術基準，對長、嘈雜、真實音訊的理解與可解釋時間推理不足，音樂／非英語歌詞覆蓋也偏弱。",
+      "method": "強化 AF-Whisper＋RoTE 時間位置編碼；用逾百萬小時課程式訓練；引入 Temporal Audio CoT，並開源 Instruct／Think／Captioner 三變體。",
+      "data": "約 108M samples／約 1M 小時，涵蓋 MF-Skills、擴充 music-to-lyrics、長音訊 caption／QA、AudioSkills-XL、AF-Think-Time（約 43K，思維鏈平均約 446 詞）等。評估：20+ 音訊理解與推理基準，含長音訊任務。",
+      "findings": "同規模開源大幅領先，並常能匹敵甚至超過更大／閉源模型；支援最長約 30 分鐘輸入、多輪對話、時間戳 caption 與多語 ASR；真實場景遷移表現穩健。",
+      "limitations": "網路音訊仍嘈雜且語言／領域不均；長距稀疏證據推理仍難；既有基準尚未充分覆蓋多說話人 ASR、diarization、時間戳 caption、voice-to-voice；釋出為研究用途授權。",
+      "editor_note": "Music Flamingo 路線的下一站：把「聽得懂長歌＋說得出時間點」做成開源 LALM 的預設能力。",
+      "relevance": {
+        "mean_audio": 3,
+        "karaoke_jp": 4
+      }
+    }
+  ],
+  "repo": {
+    "full_name": "wavtechyukky/NHVSing",
+    "url": "https://github.com/wavtechyukky/NHVSing",
+    "description_zh": "專為唱聲優化的 Neural Homomorphic Vocoder：V3／V3.1（hop256）與 V3X／V3.1X（hop512，對接 OpenUtau）；支援 JIT／單檔 ONNX，MIT 授權。",
+    "stars": 49,
+    "updated": "2026-09-04",
+    "why": "昨天的 LeapSinger 就是接這顆唱聲 vocoder。NHVSing V3 用 MRD＋更快的 fft_corr 激勵合成，並有面向 OpenUtau 的 hop512 變體——正好接上今天 MIDI-SAG 的 SVS／分軌合成端，也服務 karaoke-jp 本地渲染。9/4 仍有推送。",
+    "tags": [
+      "singing vocoder",
+      "OpenUtau",
+      "NHV"
+    ]
+  },
+  "discord_messages": [
+    "# 每日 MIR 論文精選 - 2026-09-05\n🌐 完整報告: https://lanternko.github.io/mir-paper-digest/reports/2026-09-05.html\n\n**論文 1｜MIDI-SAG: MIDI-Informed Singing Accompaniment Generation**\n🔗 https://arxiv.org/abs/2602.22029\n🎯 主線: karaoke-jp score-to-song × MeanAudio 可控 TTM｜台大＋Taiwan AI Labs\n\n**TLDR**: 用人聲 MIDI 的拍點／和弦當時間變條件微調 Stable Audio Open，再加結構規劃與 outpainting——長曲 intro／bridge 也能連貫，且旋律主權留在作者手上。\n\n**為什麼選它**: karaoke／專業創作要的是可編輯分軌，不是再一個黑盒 lyrics-to-song；同 backbone 下 Rhythm F1／Key Acc 從 0.64／0.55 拉到 0.91／0.93。\n\n**注意**: 早期探索、偏華語 SVS；日語 mora／LRC 流程需自測。\n\n**下一步**: 用 JPOP MIDI／SOFA 對齊當條件，接 SVS 後跑伴奏並量 Rhythm／Chord F1。",
+    "**論文 2｜Audio Flamingo Next (AF-Next)**\n🔗 https://arxiv.org/abs/2604.10905\n🎯 主線: Music Flamingo／音樂理解｜NVIDIA＋UMD｜開源 Instruct／Think／Captioner\n\n**TLDR**: 逾 100 萬小時課程訓練＋RoTE 時間編碼＋Temporal Audio CoT；可吃最長 30 分鐘音訊，並把 MF-Skills 與非英語 music-to-lyrics 納入。\n\n**為什麼選它**: 長歌時間 grounding 與多語歌詞理解，正是 karaoke LRC／段落 QA 與 MeanAudio caption 的上游。\n\n**注意**: 資料分布仍不均；長距稀疏證據與若干能力尚缺標準評測；研究授權。\n\n**下一步**: 用 Captioner／Think 對 JPOP 全曲做時間戳 caption＋歌詞 QA，對照 Music Flamingo。",
+    "**GitHub Pick｜wavtechyukky/NHVSing** ⭐49｜最近更新 2026-09-04\n🔗 https://github.com/wavtechyukky/NHVSing\n\n唱聲優化 NHV vocoder：V3.1（hop256）與 V3.1X（hop512／OpenUtau）；JIT／ONNX，MIT。\n\n**為什麼選它**: LeapSinger 的聲碼器本尊，接上今天 MIDI-SAG 的 SVS／分軌合成與 karaoke 本地渲染。\n\n## 今天的 take-away\n- Score-to-song：MIDI 拍點＋和弦條件，比 audio-only SAG 更能撐長曲無聲段（2602.22029）。\n- Music understanding：AF-Next 把 30 分鐘長音訊與時間對齊 CoT 做成開源預設（2604.10905）。\n- 工程：NHVSing 把高品質唱聲 vocoder 對進 OpenUtau／ONNX，方便閉環實驗。"
+  ]
+}

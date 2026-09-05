@@ -232,3 +232,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-09-04,1,paper,karaoke_jp,MeloDISinger: Melody-Aware & Duration-Preserving Singing Voice Editing with Audio Infilling,https://arxiv.org/abs/2606.30580,10.48550/arXiv.2606.30580,singing voice editing|flow matching|duration control,重要
 2026-09-04,2,paper,mean_audio,SonicCaps: Large-Scale Diverse and Fine-Grained Captioning for Improved Audio-Retrieval,https://arxiv.org/abs/2609.02343,10.48550/arXiv.2609.02343,audio captioning|CLAP|dataset,新且重要
 2026-09-04,0,repo,github,wavtechyukky/LeapSinger,https://github.com/wavtechyukky/LeapSinger,,singing voice synthesis|rectified flow|OpenUTAU,
+2026-09-05,1,paper,karaoke_jp,MIDI-Informed Singing Accompaniment Generation in a Compositional Song Pipeline,https://arxiv.org/abs/2602.22029,10.48550/arXiv.2602.22029,score-to-song|MIDI-SAG|accompaniment,重要
+2026-09-05,2,paper,general_mir,"Audio Flamingo Next: Next-Generation Open Audio-Language Models for Speech, Sound, and Music",https://arxiv.org/abs/2604.10905,10.48550/arXiv.2604.10905,Music Flamingo|LALM|temporal CoT,重要
+2026-09-05,0,repo,github,wavtechyukky/NHVSing,https://github.com/wavtechyukky/NHVSing,,singing vocoder|OpenUtau|NHV,
