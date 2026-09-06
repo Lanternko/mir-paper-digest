@@ -1,0 +1,89 @@
+{
+  "date": "2026-09-06",
+  "papers": [
+    {
+      "slot": 1,
+      "track": "karaoke_jp",
+      "title": "Local Chord Corruption Is Not Recognizer Replay: Chord-Condition Propagation in MIDI-SAG",
+      "authors": [
+        "Weiwen Huang"
+      ],
+      "published": "2026-09-03",
+      "updated": "2026-09-03",
+      "source_url": "https://arxiv.org/abs/2609.03584",
+      "arxiv_id": "2609.03584",
+      "doi": "10.48550/arXiv.2609.03584",
+      "tags": [
+        "MIDI-SAG",
+        "chord condition",
+        "ACR robustness"
+      ],
+      "quality": "新且重要",
+      "tldr": "把局部三全音和弦破壞與完整 ACR 重放對打：前者測機制，後者才代表上線條件；根音替換的輸出衝擊遠大於同根音型和變化。",
+      "insight": "洞見:昨天剛談的 MIDI-SAG，今天立刻碰上「和弦條件怎麼測才算數」。深圳大學這篇把兩種常見壓力測試拆開：合成的局部 chord corruption（中央 4 秒三全音）容易對齊、好重現，但測的是機制敏感度；完整 ACR replay（CNN–CRF／DeepChroma+CRF 的全曲預測再餵進固定 MIDI-SAG）才對應部署時分析前端真正交出的條件流。在 30 對軌×3 seeds、固定人聲／seed／context／評分窗下，中央三全音在 STFT／CQT／CENS 的 changed-target 與 inside-output 效應都大於 CNN–CRF replay；CENS target gap 在 29/30 軌為正（均值 0.462）。完整 replay 事件質量以根音變化為主（約 76%），三全音只占約 1.8%；相對根音替換造成的全窗 CENS 輸出變化是同根音 quality flip 的 2.88 倍。把 surrogate 的 changed-block 時間支援與關係組成對齊後，與 replay 的距離明顯下降。對 karaoke-jp：score-to-song／MIDI 伴奏若接 ACR 或自動配和聲，評測必須分清「機制探測」與「上線條件傳播」，不能只用局部 corruption 當部署結論；對 MeanAudio：任何時間變 chord／beat conditioning 的 reward／消融，也應同時報完整條件流與局部干預。",
+      "try_next": "可做:在自家 MIDI-SAG／可控 TTM 上重放同一協議——固定 generator，對 JPOP 混音跑 CNN–CRF／DeepChroma 全曲條件 vs 中央 4s 根音／quality 干預；量 CENS／Rhythm F1／Chord F1，並用 support+relation 對齊的 surrogate 當中間基線。",
+      "problem": "和弦條件 SAG／可控生成常用局部合成破壞當魯棒性證據，但那無法代表 ACR 實際輸出的異質根音／型和／無和弦時序流；兩者結論可能相反卻常被混為一談。",
+      "method": "配對 chord-condition propagation：固定 MIDI-SAG、人聲、seed、context 與評分窗，只改和弦條件；對比中央 4 秒三全音 corruption 與 CNN–CRF／DeepChroma+CRF 完整 replay，並用支援區間＋關係組成匹配的 surrogate 校準。",
+      "data": "從 34 軌池 4,102 候選窗篩出 30 對 12 秒窗；每軌 47.554 秒 MIDI-SAG context；seeds 42／123／2027；指標含 changed-target、inside-output 與全窗輸出變化（STFT chroma／CQT／CENS，0.5 秒塊）。",
+      "findings": "局部三全音效應系統性大於完整 ACR replay（CENS gap 29/30 為正）；根音替換衝擊約為同根音型和翻轉的 2.88 倍；支援與關係匹配後 surrogate 更接近兩條 ACR 路徑的 replay。",
+      "limitations": "單作者短文、固定單一 MIDI-SAG checkpoint；評估窗與特徵偏 chroma 族；未覆蓋日語／假名對齊或 LRC 下游；ACR 路徑僅兩種經典系統，現代端到端 ACR／配和聲未測。",
+      "editor_note": "接續 9/5 的 MIDI-SAG：先把「和弦條件怎麼測」講清楚，再談 karaoke score-to-song 的部署魯棒性。",
+      "relevance": {
+        "mean_audio": 3,
+        "karaoke_jp": 5
+      }
+    },
+    {
+      "slot": 2,
+      "track": "mean_audio",
+      "title": "Neural Music Enhancement with Dual Time-Frequency Spectral Representations for Prediction and Discrimination",
+      "authors": [
+        "Fei Liu",
+        "Yang Ai",
+        "Zhen-Hua Ling"
+      ],
+      "published": "2026-09-03",
+      "updated": "2026-09-03",
+      "source_url": "https://arxiv.org/abs/2609.03357",
+      "arxiv_id": "2609.03357",
+      "doi": "10.48550/arXiv.2609.03357",
+      "tags": [
+        "music enhancement",
+        "STFT-CQT",
+        "chroma loss"
+      ],
+      "quality": "新",
+      "tldr": "DSME 用 STFT 預測振幅／相位、CQT 八度分段判真，再加 chroma loss；在去噪／去殘響／混合失真上勝過 Mel2Mel+DiffWave 與 MP-SENet。",
+      "insight": "洞見:UGC 音樂（含卡拉 OK 手機錄、現場殘響）要進 MeanAudio／歌詞對齊前，常先卡在「聽得髒」。中科大提出的 DSME 把生成與判真拆到兩種譜：generator 在可逆 STFT 上顯式預測振幅＋相位（DenseNet＋TF-Transformer＋mask／雙參數相位頭），discriminator 改吃對齊八度的 CQT，並做八度分段後上採樣對齊時間解析度；另加 chroma-spectrum loss 壓 pitch／和聲一致性。在 Medley-solos-DB（去掉低品質電吉他）上對去噪、去殘響、混合失真三任務，客觀指標多勝過 Mel2Mel+DiffWave、TFC-CPq、MP-SENet——例如去噪 fwSSNR 14.80、FAD 0.30；去殘響 FAD 0.30、LSD 0.68。對 MeanAudio：chroma／CQT 監督與雙譜分工可搬到 codec 重建、reward 與 preference 資料清洗；對 karaoke-jp：現場／UGC 唱聲＋伴奏先過 DSME 再做人聲分離與歌詞對齊，有機會降噪音與殘響對 ALT／alignment 的干擾。",
+      "try_next": "可做:用 DSME（或同構 STFT 生成＋CQT／chroma 判真）清一批 JPOP UGC／卡拉 OK 手機錄，再跑人聲分離＋SOFA／forced align；對照前後的 FAD、歌詞 WER／對齊誤差，並把 chroma loss 接到 MeanAudio 重建消融。",
+      "problem": "非專業環境錄到的音樂常夾雜背景噪音與殘響，既有增強多沿用語音套路或只在 mel／複譜上做，相位與音樂八度／音高結構仍弱。",
+      "method": "GAN 架構 DSME：STFT 振幅－相位生成器（可逆重建）＋八度分段 CQT 判別器；訓練含 hinge GAN、feature matching、振幅 MSE、chroma MSE 與 anti-wrapping 相位損失。",
+      "data": "Medley-solos-DB 清理後約 5.4k／3.0k／11.3k 句訓／驗／測；評估去噪、去殘響、混合失真；指標含 fwSSNR、MRS、L1-SD、FAD、LSD、ViSQOL 與主觀聽感（demo 頁可聽）。",
+      "findings": "三任務客觀指標整體領先所列基線；chroma loss 與雙譜分工對 pitch／和聲一致性有幫助；主觀測試亦支持雙譜設計。",
+      "limitations": "資料以 solo 樂器為主，多軌流行混音與唱聲／日語卡拉 OK 場景未充分驗證；混合失真上部分指標（如 FAD）對 MP-SENet 並非全面碾壓；程式碼／權重釋出情況需再確認；ISCSLP 短文篇幅限制細節。",
+      "editor_note": "把「清乾淨再生成／對齊」當成 MeanAudio 與 karaoke pipeline 的前置模組，而不是事後補丁。",
+      "relevance": {
+        "mean_audio": 4,
+        "karaoke_jp": 3
+      }
+    }
+  ],
+  "repo": {
+    "full_name": "huiishan99/extension-Furigana-for-Spotify",
+    "url": "https://github.com/huiishan99/extension-Furigana-for-Spotify",
+    "description_zh": "Spotify Desktop 本地振假名／片假名／羅馬字歌詞擴充（Spicetify）：讀漢字、跟歌詞、不需 Spotify 帳密；另有透明雙行桌面歌詞疊層。",
+    "stars": 1,
+    "updated": "2026-09-05",
+    "why": "karaoke-jp 明確要 kana／ruby。這個 Spicetify 擴充把振假名直接嵌進 Spotify 歌詞，本機跑、MIT，9/5 仍在推——正好當 JPOP 聽歌／對詞的日常 ruby 參考，也可對照自家 LRC＋ruby 渲染。",
+    "tags": [
+      "furigana",
+      "Japanese lyrics",
+      "Spicetify"
+    ]
+  },
+  "discord_messages": [
+    "# 每日 MIR 論文精選 - 2026-09-06\n🌐 完整報告: https://lanternko.github.io/mir-paper-digest/reports/2026-09-06.html\n\n**論文 1｜Chord-Condition Propagation in MIDI-SAG**\n🔗 https://arxiv.org/abs/2609.03584\n🎯 主線: karaoke-jp × MIDI-SAG 和弦條件評測｜深圳大學\n\n**TLDR**: 局部三全音破壞測的是機制；完整 ACR 重放才代表上線條件。根音替換對輸出的衝擊約為同根音型和翻轉的 2.88 倍。\n\n**為什麼選它**: 緊接昨天的 MIDI-SAG——score-to-song 若接 ACR／自動配和聲，魯棒性結論必須分清「探測」與「部署」。\n\n**注意**: 單一 generator checkpoint；未覆蓋日語 mora／LRC 下游。\n\n**下一步**: 固定自家 SAG／TTM，對 JPOP 跑完整 ACR vs 局部根音干預，並用量測對齊的 surrogate。",
+    "**論文 2｜DSME: Dual-Spectrum Music Enhancement**\n🔗 https://arxiv.org/abs/2609.03357\n🎯 主線: MeanAudio 前置增強／品質｜中科大｜ISCSLP 2026\n\n**TLDR**: STFT 顯式振幅－相位生成＋CQT 八度判真＋chroma loss；去噪／去殘響／混合失真客觀指標勝過 Mel2Mel+DiffWave 與 MP-SENet。\n\n**為什麼選它**: UGC／現場錄音進生成或對齊前，雙譜＋chroma 監督是可遷移的清洗槓桿。\n\n**注意**: 以 solo 資料為主；唱聲／多軌流行需自測。\n\n**下一步**: 清一批 JPOP UGC 再跑分離＋對齊，並把 chroma loss 接到 MeanAudio 重建消融。",
+    "**GitHub Pick｜huiishan99/extension-Furigana-for-Spotify** ⭐1｜最近更新 2026-09-05\n🔗 https://github.com/huiishan99/extension-Furigana-for-Spotify\n\nSpotify 本機振假名／片假名／羅馬字歌詞（Spicetify）＋透明雙行疊層；不需 Spotify 憑證。\n\n**為什麼選它**: 直接對上 karaoke-jp 的 kana／ruby 日常需求，可當 LRC＋ruby 渲染的對照實作。\n\n## 今天的 take-away\n- MIDI-SAG 之後：局部 chord corruption ≠ 部署時的 ACR 條件流；根音錯誤最傷（2609.03584）。\n- MeanAudio／karaoke 前置：STFT 生成＋CQT／chroma 判真，適合作為 UGC 清洗模組（2609.03357）。\n- 工程：Spotify 振假名擴充把 ruby 嵌進聽歌流，補上 JPOP 對詞日常環。"
+  ]
+}
