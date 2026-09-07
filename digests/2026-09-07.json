@@ -1,0 +1,108 @@
+{
+  "date": "2026-09-07",
+  "papers": [
+    {
+      "slot": 1,
+      "track": "karaoke_jp",
+      "title": "SoulX-Singer: Towards High-Quality Zero-Shot Singing Voice Synthesis",
+      "authors": [
+        "Jiale Qian",
+        "Hao Meng",
+        "Tian Zheng",
+        "Pengcheng Zhu",
+        "Haopeng Lin",
+        "Yuhang Dai",
+        "Hanke Xie",
+        "Wenxiao Cao",
+        "Ruixuan Shang",
+        "Jun Wu",
+        "Hongmei Liu",
+        "Hanlin Wen",
+        "Jian Zhao",
+        "Zhonglin Jiang",
+        "Yong Chen",
+        "Shunshun Yin",
+        "Ming Tao",
+        "Jianguo Wei",
+        "Lei Xie",
+        "Xinsheng Wang"
+      ],
+      "published": "2026-02-08",
+      "updated": "2026-03-16",
+      "source_url": "https://arxiv.org/abs/2602.07803",
+      "arxiv_id": "2602.07803",
+      "doi": "10.48550/arXiv.2602.07803",
+      "tags": [
+        "zero-shot SVS",
+        "flow matching",
+        "MIDI control"
+      ],
+      "quality": "重要",
+      "tldr": "SoulX-Singer 以 4.2 萬小時唱聲訓練 flow matching DiT，同時支援 MIDI 樂譜與 F0 旋律控制，並釋出嚴格零樣本評測基準。",
+      "insight": "洞見:近期零樣本 SVS（Vevo2／YingMusic-Singer）多走「從現成歌抽旋律」路線，缺 note-level duration，歌詞與伴奏容易對不齊。SoulX-Singer 把工業部署缺口講清楚：資料升到約 42k 小時（國語／英語各約 20k、粵語約 2k），pipeline 先做 lead vocal 分離＋去殘響、語種辨識後歌詞轉錄、ROSVOT note 轉錄，再以 note 為單位（text／pitch／rest／lyric／slur）對齊。模型是 NAR flow matching DiT：長度調節器把 note 級條件展到 mel 時間軸；訓練時隨機 drop note pitch 或 F0，推論可切 score-control（純 MIDI＋歌詞）或 melody-control（F0＋歌詞）。對 karaoke-jp：這幾乎是「分離→歌詞→MIDI／pitch→可對齊唱聲」的參考端到端；mora-to-note／LRC 若要合成示範軌，score-control 比純旋律驅動好接。對 MeanAudio：flow matching＋雙條件門控、兩階段短句／長句訓練，可對照自家可控生成。限制是語言軸未含日語，日文 kana／ruby 需另接。",
+      "try_next": "可做:用官方權重在 JPOP 混音上跑 score-control（外部 MIDI＋假名／羅馬字歌詞）與 melody-control（抽出 F0），量 intelligibility／對齊誤差，並把其分離＋ROSVOT 注記管線對照自家 karaoke-jp 資料清洗。",
+      "problem": "開源 SVS 仍難工業部署：資料規模小、零樣本弱，且近期旋律驅動系統缺少 note duration，導致唱詞與伴奏時序難對齊。",
+      "method": "大規模注記管線（分離／去殘響／歌詞與 note 轉錄）＋ flow matching DiT；長度調節對齊 note 與 mel；雙門控支援 MIDI 樂譜或連續 F0；兩階段短段／長段訓練。",
+      "data": "約 42,000 小時唱聲（國語／英語／粵語）；評測含 GMO-SVS（公開語料重組）與 SoulX-Singer-Eval（50 名未見歌手、note-level 標註、訓練－測試嚴格分離）。",
+      "findings": "在多語與多樣音樂條件下報告 SOTA 級合成品質；統一框架可做音色克隆、風格遷移與歌詞／樂譜編輯；並提供可重現的零樣本評測協議。",
+      "limitations": "訓練語言未含日語；技術報告細節與外部複現成本仍高；旋律／樂譜品質依賴上游分離與 ROSVOT；與完整 karaoke LRC／ruby 下游尚未串接驗證。",
+      "editor_note": "當月新文偏語音時，選這篇「重要但稍舊」的開源零樣本 SVS——直接服務 karaoke-jp 的 MIDI／對齊／唱聲主線。",
+      "relevance": {
+        "mean_audio": 4,
+        "karaoke_jp": 5
+      }
+    },
+    {
+      "slot": 2,
+      "track": "general_mir",
+      "title": "Auditory Illusion Benchmark for Large Audio Language Models",
+      "authors": [
+        "Hayoon Kim",
+        "Eunice Hong",
+        "Kyogu Lee"
+      ],
+      "published": "2026-09-02",
+      "updated": "2026-09-02",
+      "source_url": "https://arxiv.org/abs/2609.02277",
+      "arxiv_id": "2609.02277",
+      "doi": "10.48550/arXiv.2609.02277",
+      "tags": [
+        "LALM benchmark",
+        "auditory illusion",
+        "music perception"
+      ],
+      "quality": "新且重要",
+      "tldr": "AIB 是首個針對大型音訊語言模型的聽覺錯覺基準：十種音樂／聲響／語音錯覺，對照人類聽感，檢驗是否具備類人先驗。",
+      "insight": "洞見:Music Flamingo／LALM 評測多停在辨識與問答正確率，很少問「模型會不會像人一樣聽錯」。首爾大學提出 AIB：十種經典聽覺錯覺（含 missing fundamental、Shepard tone、Risset rhythm、speech-to-song 等），分物理驅動與物理＋知識先驗，跨音樂／聲響／語音；完整集約 1.48 萬刺激，另有 mini set。指標拆 Human-Likeness Accuracy、Reality Alignment 與 Illusion Susceptibility Index，並用 20 名絕對音感聽者做人基線。結果：低階聲學錯覺上多數模型偏訊號忠實、人類則高度易感；牽涉語言／音樂先驗時部分模型較像人，但沒有模型貼齊人類剖面。對 Music Flamingo／音樂理解：可把 Shepard／speech-to-song 當「感知對齊」壓力測，而不只考 caption／標籤。對 karaoke-jp：speech-to-song 與音高錯覺直接關係「怎麼聽成歌／怎麼判音高」。",
+      "try_next": "可做:把 AIB mini set（或 Shepard／speech-to-song 子集）接到 Music Flamingo／自家 LALM，報 HLA／RA／ISI；並用同一刺激測唱聲 pitch 估計是否被 missing fundamental 類錯覺帶偏。",
+      "problem": "現有音訊／多模態基準幾乎都綁客觀標籤，無法檢驗大型音訊語言模型是否內化人類聽感偏誤與錯覺。",
+      "method": "整理十種錯覺並標機制與領域；生成錯覺／對照刺激；改寫成二／三選一感知題；對多個 LALM 與人類聽測對齊，報 HLA、RA、ISI。",
+      "data": "完整集 10,385 錯覺＋4,444 對照（共 14,829）；mini set 1,566；人類基線為 20 名絕對音感聽者多數決；程式與刺激產生器開源。",
+      "findings": "物理錯覺上模型多偏訊號、人類易感；知識／音樂／語言先驗類錯覺上部分模型較接近人，但整體無人形剖面；顯示高階先驗與低階聽覺處理可能脫鉤。",
+      "limitations": "排除雙耳生理依賴錯覺；人類樣本限絕對音感者、規模不大；選擇題格式簡化了開放式感知；ICASSP 短文對個別模型細節有限。",
+      "editor_note": "給 Music Flamingo 路線補一塊「感知對齊」評測，而不只堆正確率。",
+      "relevance": {
+        "mean_audio": 3,
+        "karaoke_jp": 3
+      }
+    }
+  ],
+  "repo": {
+    "full_name": "nuterian/song",
+    "url": "https://github.com/nuterian/song",
+    "description_zh": "本機 forced alignment：音訊＋已知歌詞 → 行／詞級 LRC／SRT／VTT，並可渲卡拉 OK 影片；Demucs 人聲＋wav2vec2 CTC＋Whisper 交叉校對，免 API。",
+    "stars": 0,
+    "updated": "2026-09-06",
+    "why": "karaoke-jp 最常卡在「歌詞已知但時間軸未知」。這個工具把分離、全域 CTC、分段 Whisper 串成可編輯對齊器，直接輸出 LRC——正好當 JPOP／AI 歌的對齊基線與 GUI 參考。",
+    "tags": [
+      "forced alignment",
+      "LRC",
+      "karaoke"
+    ]
+  },
+  "discord_messages": [
+    "# 每日 MIR 論文精選 - 2026-09-07\n🌐 完整報告: https://lanternko.github.io/mir-paper-digest/reports/2026-09-07.html\n\n**論文 1｜SoulX-Singer: Zero-Shot Singing Voice Synthesis**\n🔗 https://arxiv.org/abs/2602.07803\n🎯 主線: karaoke-jp × 零樣本 SVS／MIDI｜Soul AI Lab 等\n\n**TLDR**: 4.2 萬小時唱聲＋flow matching DiT；同時支援 MIDI 樂譜與 F0 旋律控制，並釋出嚴格零樣本評測基準。\n\n**為什麼選它**: 當月新文偏語音時，寧選這篇「重要」開源 SVS——分離→歌詞→note→可對齊合成，直接服務 karaoke-jp。\n\n**注意**: 訓練語言未含日語；上游分離／ROSVOT 品質會傳遞。\n\n**下一步**: JPOP 上對打 score-control vs melody-control，並對照自家注記管線。",
+    "**論文 2｜AIB: Auditory Illusion Benchmark for LALMs**\n🔗 https://arxiv.org/abs/2609.02277\n🎯 主線: Music Flamingo／音樂理解評測｜首爾大學｜ICASSP 2026\n\n**TLDR**: 首個聽覺錯覺基準：十種音樂／聲響／語音錯覺，對照人類聽感；低階錯覺模型偏訊號，知識先驗類較像人但仍不齊。\n\n**為什麼選它**: LALM 評測缺「會不會像人一樣聽錯」這一維——對 Music Flamingo 與 pitch／speech-to-song 感知很有用。\n\n**注意**: 人類樣本為絕對音感者；排除雙耳生理錯覺。\n\n**下一步**: 用 AIB mini／Shepard／speech-to-song 子集測自家 LALM 的 HLA／ISI。",
+    "**GitHub Pick｜nuterian/song** ⭐0｜最近更新 2026-09-06\n🔗 https://github.com/nuterian/song\n\n本機 forced alignment：Demucs＋wav2vec2 CTC＋Whisper → 行／詞級 LRC，可渲卡拉 OK 影片；專為「歌詞已知、時間未知」設計。\n\n**為什麼選它**: 直接補 karaoke-jp 的 LRC／對齊工程缺口，可當 JPOP 與 AI 歌的對齊基線。\n\n## 今天的 take-away\n- SVS 要能接伴奏，note-level duration／MIDI 控制比純旋律驅動更關鍵（2602.07803）。\n- Music Flamingo 類模型除了答對，還該測聽覺錯覺與感知對齊（2609.02277）。\n- 工程：已知歌詞做 forced alignment 出 LRC，是 karaoke pipeline 最便宜的下一步（nuterian/song）。"
+  ]
+}
