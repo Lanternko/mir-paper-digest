@@ -241,3 +241,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-09-07,1,paper,karaoke_jp,SoulX-Singer: Towards High-Quality Zero-Shot Singing Voice Synthesis,https://arxiv.org/abs/2602.07803,10.48550/arXiv.2602.07803,zero-shot SVS|flow matching|MIDI control,重要
 2026-09-07,2,paper,general_mir,Auditory Illusion Benchmark for Large Audio Language Models,https://arxiv.org/abs/2609.02277,10.48550/arXiv.2609.02277,LALM benchmark|auditory illusion|music perception,新且重要
 2026-09-07,0,repo,github,nuterian/song,https://github.com/nuterian/song,,forced alignment|LRC|karaoke,
+2026-09-08,1,paper,karaoke_jp,VocalCoachBench: Benchmarking Audio-Language Models on Expert Feedback for Singing,https://arxiv.org/abs/2609.04241,10.48550/arXiv.2609.04241,singing assessment|Music Flamingo|expert feedback,新且重要
+2026-09-08,2,paper,mean_audio,Pitch-class Steering for Diffusion-based Music Generation via Latent-space Probes,https://arxiv.org/abs/2609.04516,10.48550/arXiv.2609.04516,text-to-music|latent diffusion|pitch control,新且重要
+2026-09-08,0,repo,github,Ryan5453/lyricscribe,https://github.com/Ryan5453/lyricscribe,,lyrics transcription|ALT|singing ASR,

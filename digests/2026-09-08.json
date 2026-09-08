@@ -1,0 +1,92 @@
+{
+  "date": "2026-09-08",
+  "papers": [
+    {
+      "slot": 1,
+      "track": "karaoke_jp",
+      "title": "VocalCoachBench: Benchmarking Audio-Language Models on Expert Feedback for Singing",
+      "authors": [
+        "Hayeon Bang",
+        "Hounsu Kim",
+        "Wonil Kim",
+        "Juhan Nam"
+      ],
+      "published": "2026-08-06",
+      "updated": "2026-08-06",
+      "source_url": "https://arxiv.org/abs/2609.04241",
+      "arxiv_id": "2609.04241",
+      "doi": "10.48550/arXiv.2609.04241",
+      "tags": [
+        "singing assessment",
+        "Music Flamingo",
+        "expert feedback"
+      ],
+      "quality": "新且重要",
+      "tldr": "KAIST 提出 VocalCoachBench：515 段唱聲由 18 位專業聲樂教練標註，把音訊語言模型評測從「描述」推到「診斷＋矯正建議」。",
+      "insight": "洞見:Music Flamingo／LALM 評測多停在辨識、caption、問答，很少問「能不能像聲樂教練一樣指出問題並給可執行建議」。VocalCoachBench 用 same-song（Amazing Grace／DAMP-S-AG，207 段）控難度做 triplet 排名，再用 diverse-song（九個公開唱聲集，308 段）測 segment-grounded 回饋；共 1,056 份專家提交、12,051 條原子主張（診斷／矯正／優點）。結構化任務含 Top-3 issue、triplet ranking、段落標籤；開放式則用 claim coverage／contradiction／correction validity。結果很刺眼：12 個近期 ALM 能做粗比較與大類問題，但細粒度 Top-3 常低於 label-prior，嚴格診斷對齊低於 7%。對 karaoke-jp：這正是「唱得怎麼樣／哪裡不準／怎麼改」的評測骨架，可接到 pitch／rhythm／diction 與 LRC 段落。對 Music Flamingo：從描述正確率升級到診斷對齊。限制是目前以英語 solo 為主，日文／JPOP 需另標。",
+      "try_next": "可做:把 Music Flamingo／自家 LALM 接到 structured Top-3 issue 與 claim-based diagnosis；並用 JPOP 小樣（假名＋音高誤差）試做日文版 issue taxonomy。",
+      "problem": "現有音訊語言模型基準偏重辨識與描述，無法檢驗模型是否能對唱聲做出有根據、可矯正的專家級回饋。",
+      "method": "雙子集標註（same-song 可控比較＋diverse-song 段落回饋）；結構化任務與原子主張式開放評測；對 12 個近期 ALM 做診斷／矯正對齊實驗。",
+      "data": "515 錄音、18 位專業教練、約 1,056 份提交與 12,051 原子主張；same-song 207（Amazing Grace）、diverse-song 308（九個公開英語唱聲集）。",
+      "findings": "模型大致能比較表現與指出粗問題域，但細粒度 issue 與嚴格診斷對齊仍極弱（嚴格診斷對齊 <7%），顯示「會聽」不等於「會教」。",
+      "limitations": "標註與評測以英語 solo 為主；原子主張經 LLM 輔助拆解／翻譯；開放式回饋本質上多解，指標仍是近似；尚未覆蓋日文／混音卡拉 OK 場景。",
+      "editor_note": "今天最貼 karaoke-jp × Music Flamingo：把唱聲理解從 caption 拉到「診斷＋矯正」評測。",
+      "relevance": {
+        "mean_audio": 2,
+        "karaoke_jp": 5
+      }
+    },
+    {
+      "slot": 2,
+      "track": "mean_audio",
+      "title": "Pitch-class Steering for Diffusion-based Music Generation via Latent-space Probes",
+      "authors": [
+        "Yushi Ye",
+        "Wilson Zheng",
+        "Yongyi Zang"
+      ],
+      "published": "2026-09-03",
+      "updated": "2026-09-03",
+      "source_url": "https://arxiv.org/abs/2609.04516",
+      "arxiv_id": "2609.04516",
+      "doi": "10.48550/arXiv.2609.04516",
+      "tags": [
+        "text-to-music",
+        "latent diffusion",
+        "pitch control"
+      ],
+      "quality": "新且重要",
+      "tldr": "用約 12.5 萬參數的卷積 probe 讀 Stable Audio Open 的 VAE latent 音級，再於推論時以梯度輕推 denoising，免重訓即可控旋律。",
+      "insight": "洞見:可控音樂生成近年多攻自回歸（MusicGen 等），擴散系常要重訓條件模組或手寫屬性損失。本文在 Stable Audio Open（CLAP 文本＋Oobleck VAE＋DiT）的 latent 上訓一個 ~125k 參數 1D CNN probe，解 frame-level 12 音級；推論時把 probe 當可微損失，對 denoising latent 做 RMS 正規化梯度更新，不改底座。MAESTRO 音訊－MIDI 對上 micro-F1≈0.66；27 次試驗（9 個文字 prompt × 3 條目標旋律）顯示旋律一致性約提升 2.4×。對 MeanAudio：這是「不重訓、只加小 probe」的 pitch／melody 控制模板，可對照自家 flow／rectified flow 的 latent 是否也解得出 pitch-class。對 karaoke-jp：用戶給 MIDI／音級序列、文字管風格，正好對「歌詞／樂譜控歌」中的旋律軸。限制是目前以鋼琴 MAESTRO 與 pitch-class（無八度）為主，唱聲／多聲部與長曲仍待驗證。",
+      "try_next": "可做:在自家 MeanAudio／Stable Audio 類 latent 上複現 pitch-class probe，量 micro-F1；再用一條 JPOP 主旋律 MIDI 做 inference-time steering，對照未引導基線的 pitch 命中率。",
+      "problem": "文字 prompt 對擴散式 text-to-music 只能粗控風格，難以指定具體旋律；現有可控方法多需重訓或只服務自回歸架構。",
+      "method": "在 VAE latent 訓輕量卷積 pitch-class probe；推論時以 BCE 對目標音級序列反傳，RMS 正規化後夾限更新 denoising latent；底座凍結。",
+      "data": "probe 訓於 MAESTRO 音訊－MIDI（約 2,637／417 片段）；評測 9 個文字 prompt × 3 目標旋律共 27 次試驗；底座為 Stable Audio Open。",
+      "findings": "latent 可解出 frame-level 音級（micro-F1≈0.66），且在 denoising 噪訊下仍可用；probe 引導使旋律一致性顯著高於未引導基線（約 2.4×，Wilcoxon p<1e-5）。",
+      "limitations": "訓練域偏鋼琴；控制目標為 pitch-class 而非完整音高／時值；評測規模小、偏短片段；尚未證明對唱聲或多軌混音同樣有效。",
+      "editor_note": "MeanAudio 可控生成的輕量路線：先確認 latent 解不開 pitch，再開 inference-time steering。",
+      "relevance": {
+        "mean_audio": 5,
+        "karaoke_jp": 3
+      }
+    }
+  ],
+  "repo": {
+    "full_name": "Ryan5453/lyricscribe",
+    "url": "https://github.com/Ryan5453/lyricscribe",
+    "description_zh": "自動歌詞轉錄（ALT）研究工具鏈：下載 Jam-ALT／MUSDB-ALT、Demucs 人聲分離、批次 ASR、評測繪圖、特徵分析與微調；對齊「未知歌詞」場景。",
+    "stars": 1,
+    "updated": "2026-09-02",
+    "why": "昨天的 forced alignment 假設歌詞已知；LyricScribe 補的是「歌詞未知／要先轉錄」：標準化 ALT 資料集、分離、轉寫與評測一條龍，正好當 karaoke-jp 上游 ASR／歌詞轉錄基線。",
+    "tags": [
+      "lyrics transcription",
+      "ALT",
+      "singing ASR"
+    ]
+  },
+  "discord_messages": [
+    "# 每日 MIR 論文精選 - 2026-09-08\n🌐 完整報告: https://lanternko.github.io/mir-paper-digest/reports/2026-09-08.html\n\n**論文 1｜VocalCoachBench: Expert Feedback for Singing**\n🔗 https://arxiv.org/abs/2609.04241\n🎯 主線: karaoke-jp × Music Flamingo／唱聲診斷｜KAIST\n\n**TLDR**: 515 段唱聲＋18 位專業教練標註；把 ALM 評測從描述推到「診斷＋矯正」。細粒度 Top-3 弱、嚴格診斷對齊 <7%。\n\n**為什麼選它**: Music Flamingo 路線缺「會不會教唱歌」這一維；same-song／diverse-song 設計可直接啟發 karaoke 評分與段落回饋。\n\n**注意**: 目前以英語 solo 為主；日文／JPOP 需另標。\n\n**下一步**: 接 Music Flamingo 跑 Top-3 issue／claim diagnosis；試做日文 issue taxonomy。",
+    "**論文 2｜Pitch-class Steering for Diffusion Music via Latent Probes**\n🔗 https://arxiv.org/abs/2609.04516\n🎯 主線: MeanAudio／可控 text-to-music｜CMU｜MLSP 2026\n\n**TLDR**: ~125k 參數 probe 讀 Stable Audio Open 的 VAE latent 音級，推論時梯度輕推 denoising，免重訓；旋律一致性約升 2.4×。\n\n**為什麼選它**: 擴散系可控生成常要重訓；這篇給「小 probe＋inference-time steering」模板，對 MeanAudio 的 pitch／melody 控制很實用。\n\n**注意**: 訓練偏鋼琴 MAESTRO；目標是 pitch-class 非完整 MIDI。\n\n**下一步**: 在自家 latent 上複現 probe micro-F1，再用一條 JPOP 主旋律做 steering 對照。",
+    "**GitHub Pick｜Ryan5453/lyricscribe** ⭐1｜最近更新 2026-09-02\n🔗 https://github.com/Ryan5453/lyricscribe\n\n自動歌詞轉錄研究 CLI：Jam-ALT／MUSDB-ALT 下載、Demucs 分離、批次 ASR、評測與微調——補「歌詞未知」上游。\n\n**為什麼選它**: 對齊工具假設歌詞已知；ALT 管線才是 karaoke-jp 從混音到可對齊文字的第一步。\n\n## 今天的 take-away\n- 唱聲 ALM 要從「聽得懂」測到「診斷對齊／矯正有效」（2609.04241）。\n- 擴散 text-to-music 可用小 probe 在 latent 上做 pitch-class steering，不必重訓底座（2609.04516）。\n- 工程：歌詞未知用 ALT（lyricscribe），歌詞已知再用 forced alignment 出 LRC。"
+  ]
+}
