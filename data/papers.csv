@@ -244,3 +244,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-09-08,1,paper,karaoke_jp,VocalCoachBench: Benchmarking Audio-Language Models on Expert Feedback for Singing,https://arxiv.org/abs/2609.04241,10.48550/arXiv.2609.04241,singing assessment|Music Flamingo|expert feedback,新且重要
 2026-09-08,2,paper,mean_audio,Pitch-class Steering for Diffusion-based Music Generation via Latent-space Probes,https://arxiv.org/abs/2609.04516,10.48550/arXiv.2609.04516,text-to-music|latent diffusion|pitch control,新且重要
 2026-09-08,0,repo,github,Ryan5453/lyricscribe,https://github.com/Ryan5453/lyricscribe,,lyrics transcription|ALT|singing ASR,
+2026-09-09,1,paper,karaoke_jp,Lead Vocal Separation from Vocal Ensemble Mixtures Using Phoneme Alignment,https://arxiv.org/abs/2609.06488,10.48550/arXiv.2609.06488,phoneme alignment|vocal separation|jaCappella,新且重要
+2026-09-09,2,paper,general_mir,Knowing When Not to Answer: Pseudo-Ensembles for Abstention in Music Audio-Language Models,https://arxiv.org/abs/2609.04362,10.48550/arXiv.2609.04362,Music Flamingo|abstention|MuChoMusic,新且重要
+2026-09-09,0,repo,github,gabrielxcom/ELYSY,https://github.com/gabrielxcom/ELYSY,,karaoke|LRC|forced alignment,

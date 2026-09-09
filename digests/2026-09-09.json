@@ -1,0 +1,91 @@
+{
+  "date": "2026-09-09",
+  "papers": [
+    {
+      "slot": 1,
+      "track": "karaoke_jp",
+      "title": "Lead Vocal Separation from Vocal Ensemble Mixtures Using Phoneme Alignment",
+      "authors": [
+        "Yuma Narahata",
+        "Tomohiko Nakamura",
+        "Yuki Saito",
+        "Hiroshi Saruwatari"
+      ],
+      "published": "2026-09-06",
+      "updated": "2026-09-06",
+      "source_url": "https://arxiv.org/abs/2609.06488",
+      "arxiv_id": "2609.06488",
+      "doi": "10.48550/arXiv.2609.06488",
+      "tags": [
+        "phoneme alignment",
+        "vocal separation",
+        "jaCappella"
+      ],
+      "quality": "新且重要",
+      "tldr": "在 BS-RoFormer 上用 FiLM 注入主唱音素對齊，於日文 a cappella 語料 jaCappella 分離主唱；平均 SI-SDRi 優於純音訊與僅活動標籤基線。",
+      "insight": "洞見:合唱／多部和聲場景裡，目標與干擾都是人聲且常同詞同音素，單靠頻譜很難指認誰是主唱。本文把「歌詞已知且對齊」當成可控輔助：在 SOTA 音樂分離骨架 BS-RoFormer 插入 FiLM，以 frame-level 音素標籤（P=36，含 silence／padding）調變中間表徵。資料用 jaCappella（50 首六部：Vo/S/A/T/Bs/VP，日文兒歌／校歌改編），40/10 切分；音素對齊先 DTW 再人工以 Praat 校正，屬理想對齊上界實驗。結果：Vo SI-SDRi 基線 9.87 → activity-only 13.05 → proposed 14.85 dB；Other 同向提升。音素重疊分析顯示，相對基線的增益跨重疊條件仍在，但相對 activity-only 的優勢隨「同音素其他聲部數」上升而縮小——音素類別資訊在可區分時最有用。對 karaoke-jp：這是「音素／假名對齊 → 主唱分離 → 歌詞辨識／minus-one」的日文管線證據；對齊品質直接綁分離上限。限制：假設準確音素對齊；尚無主觀聽感；實務需接自動對齊誤差。",
+      "try_next": "可做:用 karaoke-jp 的假名／mora 對齊當 FiLM 條件，在日文混音小樣上比 audio-only vs activity-only vs phoneme；並量自動對齊誤差對 SI-SDRi 的敏感度。",
+      "problem": "六部和聲／a cappella 中主唱與其他聲部皆為唱聲、時頻重疊且常共享歌詞音素，僅靠音訊很難穩定抽出主唱以支援歌詞辨識與 minus-one。",
+      "method": "以 BS-RoFormer 為骨架，在 band-split 與各 Transformer 後插入 FiLM，用主唱 frame-level 音素嵌入調變中間特徵；對照純音訊基線與僅唱歌／靜音活動條件。",
+      "data": "jaCappella：50 首六部合唱、48 kHz；訓練 40／評測 10（每子集一首）；人工校正音素對齊（P=36）；實作基於 Music-Source-Separation-Training。",
+      "findings": "音素條件平均 Vo SI-SDRi 14.85 dB，高於 activity-only 13.05 與基線 9.87；Other 同步改善。音素重疊愈多，相對 activity-only 的額外增益愈小。",
+      "limitations": "實驗假設人工校正的準確音素對齊；尚未測自動對齊誤差；無主觀評測；語料為日文兒歌／校歌 a cappella，非流行混音卡拉 OK。",
+      "editor_note": "今天最貼 karaoke-jp：日文語料＋音素對齊條件化主唱分離，直接連到假名／LRC 與 minus-one。",
+      "relevance": {
+        "mean_audio": 2,
+        "karaoke_jp": 5
+      }
+    },
+    {
+      "slot": 2,
+      "track": "general_mir",
+      "title": "Knowing When Not to Answer: Pseudo-Ensembles for Abstention in Music Audio-Language Models",
+      "authors": [
+        "Aanya Maheshwari",
+        "Vatsal Raina"
+      ],
+      "published": "2026-09-03",
+      "updated": "2026-09-03",
+      "source_url": "https://arxiv.org/abs/2609.04362",
+      "arxiv_id": "2609.04362",
+      "doi": "10.48550/arXiv.2609.04362",
+      "tags": [
+        "Music Flamingo",
+        "abstention",
+        "MuChoMusic"
+      ],
+      "quality": "新且重要",
+      "tldr": "對單一音樂音訊語言模型做選項順序擾動組成偽集成，免重訓即可估不確定性並決定棄權；TinyMU 於 MuChoMusic 準確率與錯誤排序皆提升。",
+      "insight": "洞見:Music Flamingo／音樂 ALM 評測幾乎只報 MCQA 準確率，強迫作答讓「猜對」與「真懂」無法分開。真正訓練多模型集成太貴，單次 softmax 熵又校準差。本文用「答案不變」的輸入擾動從單一預訓練模型造偽集成：主方法是打亂 A–D 選項順序，另試損壞音訊與對調選項標籤；平均多個預測分布後即可用總熵（EoE）、期望熵（EE）與互資訊做棄權。在 TinyMU（229M）× MuChoMusic 上，四種選項排列平均把準確率從 55.7% 拉到 59.2%，錯誤保留曲線 AUC 從 0.293 降到 0.261，優於單次熵。對 Music Flamingo：這是「會不會知道自己不懂」的低成本外掛，可接到唱聲診斷／歌詞問答，避免硬答誤導。對 karaoke-jp：評分或教練回饋系統同樣需要棄權閾值。限制：目前聚焦 compact TinyMU 與四選一 MCQA；開放生成與更大模型是否同效未證。",
+      "try_next": "可做:對 Music Flamingo／自家唱聲問答用選項順序偽集成算互資訊，畫 error-retention；再設棄權閾值測「答得少但更準」是否改善診斷可信度。",
+      "problem": "音樂音訊語言模型的 MCQA 評測強迫作答，無法區分真實理解與幸運猜測，且訓練完整模型集成成本過高。",
+      "method": "以不改變正確答案的擾動（選項順序洗牌為主）從單一模型構造偽集成；用 EoE／EE／互資訊與負置信度做選擇性預測與棄權。",
+      "data": "TinyMU（約 229M）於 MuChoMusic 四選一音樂問答；讀取首 token 的 A–D 機率；以 error retention curve 評估不確定性排序。",
+      "findings": "四種選項排列平均提升準確率 55.7%→59.2%；偽集成不確定性優於單次熵（error-retention AUC 0.293→0.261）；僅需數次前向、無需重訓。",
+      "limitations": "實驗限於 compact TinyMU 與封閉選項 MCQA；開放式生成、更大音樂 ALM、以及日文／唱聲診斷任務的遷移尚未驗證。",
+      "editor_note": "Music Flamingo 路線補「何時不答」：低成本偽集成棄權，讓準確率數字更誠實。",
+      "relevance": {
+        "mean_audio": 2,
+        "karaoke_jp": 3
+      }
+    }
+  ],
+  "repo": {
+    "full_name": "gabrielxcom/ELYSY",
+    "url": "https://github.com/gabrielxcom/ELYSY",
+    "description_zh": "本機 karaoke／歌詞對齊工具：Demucs 人聲分離、WhisperX forced alignment、逐字 LRC／SRT、手動 tap 編輯與多格式匯出（MIT）。",
+    "stars": 0,
+    "updated": "2026-09-09",
+    "why": "把分離＋對齊＋LRC 編輯收成一條可跑管線，正好承接今天論文的「音素／歌詞對齊條件化分離」與 karaoke-jp 的 LRC 渲染下游。",
+    "tags": [
+      "karaoke",
+      "LRC",
+      "forced alignment"
+    ]
+  },
+  "discord_messages": [
+    "# 每日 MIR 論文精選 - 2026-09-09\n🌐 完整報告: https://lanternko.github.io/mir-paper-digest/reports/2026-09-09.html\n\n**論文 1｜Lead Vocal Separation via Phoneme Alignment**\n🔗 https://arxiv.org/abs/2609.06488\n🎯 主線: karaoke-jp／音素對齊＋主唱分離｜東京大學｜APSIPA 2026\n\n**TLDR**: BS-RoFormer＋FiLM 注入主唱音素對齊；jaCappella 上 Vo SI-SDRi 9.87→14.85 dB，優於僅活動標籤。\n\n**為什麼選它**: 日文六部和聲語料上證明「對齊音素」能當主唱分離條件，直接對假名／LRC／minus-one 管線。\n\n**注意**: 假設人工準確對齊；流行混音卡拉 OK 與自動對齊誤差尚未測。\n\n**下一步**: 用假名／mora 對齊當條件，比 audio-only／activity／phoneme；量自動對齊誤差敏感度。",
+    "**論文 2｜Pseudo-Ensembles for Abstention in Music ALMs**\n🔗 https://arxiv.org/abs/2609.04362\n🎯 主線: Music Flamingo／何時不答｜TinyMU × MuChoMusic\n\n**TLDR**: 打亂選項順序做偽集成，免重訓估不確定性；準確率 55.7%→59.2%，錯誤排序優於單次熵。\n\n**為什麼選它**: 音樂 ALM 評測缺「棄權」；這給 Music Flamingo／唱聲問答一個便宜的可信度外掛。\n\n**注意**: 目前限 compact TinyMU 與四選一；開放生成未證。\n\n**下一步**: 在 Music Flamingo 上跑選項洗牌偽集成，設棄權閾值看診斷可信度。",
+    "**GitHub Pick｜gabrielxcom/ELYSY** ⭐0｜最近更新 2026-09-09\n🔗 https://github.com/gabrielxcom/ELYSY\n\n本機 Demucs＋WhisperX forced alignment → 逐字 LRC／SRT＋karaoke 編輯器（MIT）。\n\n**為什麼選它**: 工程上把「分離→對齊→LRC」串起來，承接論文 1 的對齊條件化分離與 karaoke-jp 渲染。\n\n## 今天的 take-away\n- 日文 a cappella 上，音素對齊條件化可顯著提升主唱分離（2609.06488）。\n- 音樂 ALM 可用選項順序偽集成做棄權，不必重訓集成（2609.04362）。\n- 工程：ELYSY 提供本機 Demucs＋WhisperX→LRC 的可跑基線。"
+  ]
+}
