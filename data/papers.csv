@@ -247,3 +247,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-09-09,1,paper,karaoke_jp,Lead Vocal Separation from Vocal Ensemble Mixtures Using Phoneme Alignment,https://arxiv.org/abs/2609.06488,10.48550/arXiv.2609.06488,phoneme alignment|vocal separation|jaCappella,新且重要
 2026-09-09,2,paper,general_mir,Knowing When Not to Answer: Pseudo-Ensembles for Abstention in Music Audio-Language Models,https://arxiv.org/abs/2609.04362,10.48550/arXiv.2609.04362,Music Flamingo|abstention|MuChoMusic,新且重要
 2026-09-09,0,repo,github,gabrielxcom/ELYSY,https://github.com/gabrielxcom/ELYSY,,karaoke|LRC|forced alignment,
+2026-09-10,1,paper,karaoke_jp,Low-Latency Spell Correction for Japanese Music Search Queries,https://arxiv.org/abs/2609.04262,10.48550/arXiv.2609.04262,Japanese music search|spell correction|multi-script,新且重要
+2026-09-10,2,paper,general_mir,Harmonica: Accurate and Lightweight Instrument-Agnostic Music Transcription,https://arxiv.org/abs/2609.04640,10.48550/arXiv.2609.04640,AMT|harmonic convolution|MIDI transcription,新且重要
+2026-09-10,0,repo,github,afeibukaixin/Lyrics-Plus,https://github.com/afeibukaixin/Lyrics-Plus,,LRC|karaoke|romanization,

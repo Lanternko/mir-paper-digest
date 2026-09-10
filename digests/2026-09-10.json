@@ -1,0 +1,94 @@
+{
+  "date": "2026-09-10",
+  "papers": [
+    {
+      "slot": 1,
+      "track": "karaoke_jp",
+      "title": "Low-Latency Spell Correction for Japanese Music Search Queries",
+      "authors": [
+        "Anshul Garg",
+        "Pavni Tandon",
+        "Karan Bhukar",
+        "Tanmay Khandelwal",
+        "Ujjal Kumar Dutta"
+      ],
+      "published": "2026-09-02",
+      "updated": "2026-09-02",
+      "source_url": "https://arxiv.org/abs/2609.04262",
+      "arxiv_id": "2609.04262",
+      "doi": "10.48550/arXiv.2609.04262",
+      "tags": [
+        "Japanese music search",
+        "spell correction",
+        "multi-script"
+      ],
+      "quality": "新且重要",
+      "tldr": "針對日文音樂搜尋的輕量 BART 拼寫校正：四書寫系統＋腳本感知合成錯字；exact-match 41.09%、CER 11.62%，GPU 推論低於 4ms。",
+      "insight": "洞見:日文卡拉 OK／JPOP 搜尋常混用羅馬字、平假名、片假名與漢字，錯誤型態也不同（flick 鄰鍵、QWERTY、濁點／半濁點、大小假名、IME 同音）。傳統編輯距離對這類「語音＋腳本轉換」失誤很弱。本文用腳本感知合成錯字（鍵盤鄰接、查詢日誌語音混淆先驗、濁清交替、大小假名）訓練 3+3 層 BART，並在合成前把混合腳本曲名正規化成單一 canonical 腳本，對齊「索引只存純腳本」的產品約束，顯著降低幻覺。自訂 byte-level BPE 建在音樂目錄詞彙上。評測 exact-match 41.09%、CER 11.62%，CER 優於對照且延遲 <4ms。對 karaoke-jp：這是曲目／歌手檢索前端的實務模組，假名／羅馬字輸入與目錄漢字標題之間的橋；也可當 LRC／歌詞庫對齊前的 query canonicalize。限制：工業目錄與日誌語料未公開；exact-match 仍不高，需搭配檢索召回；非歌詞對齊本體。",
+      "try_next": "可做:對 karaoke-jp 曲庫做「羅馬字／假名 query → 正規化標題」小模型，比 edit-distance／SymSpell；量混合腳本與濁點錯誤的召回提升。",
+      "problem": "日文音樂搜尋同時面對四種書寫系統與各自典型打字／IME 錯誤，標準編輯距離難以捕捉語音與腳本轉換失誤，且需滿足即時搜尋延遲。",
+      "method": "腳本感知合成錯字管線＋混合腳本正規化後再噪聲；自訂音樂目錄 BPE；緊湊 BART seq2seq（3 encoder＋3 decoder）做查詢→校正。",
+      "data": "目錄約 2.8M 標題（藝術家／專輯／曲目等）合成 50–100 錯字／標題，另納入約 3M 真實 Q2E 校正對；自建評測集報告 exact-match 與 CER。",
+      "findings": "exact-match 41.09%、CER 11.62%，CER 為評測系統最低；腳本正規化與腳本感知增強在 ablation 中有效；單 GPU 推論 <4ms。",
+      "limitations": "訓練／評測依賴未公開的商業目錄與查詢日誌；exact-match 仍有限，需與檢索系統聯評；未涵蓋歌詞內容對齊或唱聲輸入。",
+      "editor_note": "今天最貼 karaoke-jp：日文多腳本曲目搜尋校正，直接服務 JPOP／卡拉 OK 選歌與假名／羅馬字輸入。",
+      "relevance": {
+        "mean_audio": 1,
+        "karaoke_jp": 5
+      }
+    },
+    {
+      "slot": 2,
+      "track": "general_mir",
+      "title": "Harmonica: Accurate and Lightweight Instrument-Agnostic Music Transcription",
+      "authors": [
+        "Longshen Ou",
+        "Héctor Martel",
+        "Joe Hennessy-Priest",
+        "Taemin Cho"
+      ],
+      "published": "2026-09-04",
+      "updated": "2026-09-04",
+      "source_url": "https://arxiv.org/abs/2609.04640",
+      "arxiv_id": "2609.04640",
+      "doi": "10.48550/arXiv.2609.04640",
+      "tags": [
+        "AMT",
+        "harmonic convolution",
+        "MIDI transcription"
+      ],
+      "quality": "新且重要",
+      "tldr": "多深度諧波卷積的儀器無關 AMT 家族：x-large 達 SOTA；nano 僅 26.3K 參數、1622×即時，開發集 frame F1 0.796，高於 Basic Pitch 14.6pp。",
+      "insight": "洞見:多數 AMT 要嘛鎖單一樂器、要嘛衝多軌混音，真正「未知單一樂器仍準」的儀器無關基準反而稀缺；大 seq2seq 又難上裝置。Harmonica 以 CQT＋多層諧波卷積（shift-and-aggregate，相對 HD-Conv 省 28.5% 諧波層參數）在多抽象層聚合諧波／次諧波證據，再接 FGLSTM 做 onset／sustain／offset。八資料集統一重訓對照後，各尺度皆領先：x-large（15.1M）多項 in-domain frame／OnP 第一（如 MAESTRO OnP .968／Frm .922）；medium 近 SOTA 且 848×即時；nano（26.3K、1622×）開發集 frame F1 0.796，較 Basic Pitch 高 14.6pp。對 karaoke-jp：輕量 MIDI／音高軌可接 mora-to-note、導唱與 minus-one 節奏錨；對 MeanAudio：符號條件／評測可用的高效轉寫器。限制：單樂器設定，非人聲歌詞對齊；唱聲／日文流行混音未單列；offset 仍依 threshold 解碼。",
+      "try_next": "可做:用 Harmonica-nano／medium 轉日文伴奏小樣 MIDI，對齊 karaoke-jp 的 mora 時間軸，比 Basic Pitch 的 OnP／Frm 與手標差異。",
+      "problem": "真實場景樂器種類多變，儀器特定 AMT 難泛化；大模型又難部署，儀器無關且高效率的轉寫基準不足。",
+      "method": "CQT 前端＋多深度諧波卷積 trunk（參數高效 shift-and-aggregate）＋FGLSTM 三頭預測 onset／sustain／offset，再 threshold 解碼為 MIDI note。",
+      "data": "MAESTRO、MAPS、GuitarSet、GAPS、EGDB、GOAT、URMP-stem、Slakh-stem 等八套；溫度採樣多源訓練；另持出 4.3 小時開發集調閾值。",
+      "findings": "各尺度整體最佳；x-large 多項 SOTA；nano 26.3K／1622×、開發集 frame F1 0.796（+14.6pp vs Basic Pitch）；諧波聚合 ablation 支持多深度設計。",
+      "limitations": "評估為單樂器音訊－MIDI，非多源混音歸因；未聚焦唱聲／歌詞；解碼仍依固定閾值；商業／日文卡拉 OK 語料未測。",
+      "editor_note": "高效儀器無關轉寫，補 karaoke-jp 的 MIDI／score 與裝置端導唱錨點；也可當生成模型的符號條件。",
+      "relevance": {
+        "mean_audio": 2,
+        "karaoke_jp": 4
+      }
+    }
+  ],
+  "repo": {
+    "full_name": "afeibukaixin/Lyrics-Plus",
+    "url": "https://github.com/afeibukaixin/Lyrics-Plus",
+    "description_zh": "macOS 同步歌詞伴侶（Tauri／React／Rust）：桌面／選單列／Dynamic Island、LRC 詞級 karaoke、羅馬拼音／翻譯、對接 Apple Music 與 Spotify（MIT）。",
+    "stars": 40,
+    "updated": "2026-09-09",
+    "why": "把「搜到對的歌」之後的歌詞顯示、羅馬字／翻譯與詞級 LRC 渲染做成可跑產品；正好承接今天日文多腳本搜尋校正與 karaoke-jp 的 ruby／LRC 下游。",
+    "tags": [
+      "LRC",
+      "karaoke",
+      "romanization"
+    ]
+  },
+  "discord_messages": [
+    "# 每日 MIR 論文精選 - 2026-09-10\n🌐 完整報告: https://lanternko.github.io/mir-paper-digest/reports/2026-09-10.html\n\n**論文 1｜Japanese Music Search Spell Correction**\n🔗 https://arxiv.org/abs/2609.04262\n🎯 主線: karaoke-jp／日文多腳本搜尋｜Amazon｜cs.SD\n\n**TLDR**: 腳本感知合成錯字＋輕量 BART；exact-match 41.09%、CER 11.62%，GPU <4ms。\n\n**為什麼選它**: 羅馬字／假名／漢字混用是 JPOP／卡拉 OK 選歌痛點；正規化＋合成資料給可部署前端。\n\n**注意**: 目錄與日誌未公開；exact-match 仍需搭配檢索。\n\n**下一步**: 在自有曲庫上比 edit-distance／小 seq2seq 的假名→標題召回。",
+    "**論文 2｜Harmonica: Instrument-Agnostic AMT**\n🔗 https://arxiv.org/abs/2609.04640\n🎯 主線: MIR／MIDI 轉寫｜BandLab｜ICASSP 2027 投稿\n\n**TLDR**: 多深度諧波卷積；x-large SOTA；nano 26.3K、1622×即時，frame F1 0.796（+14.6pp vs Basic Pitch）。\n\n**為什麼選它**: 輕量 MIDI／音高軌可接 karaoke-jp 的 mora-to-note 與導唱錨點。\n\n**注意**: 單樂器設定；唱聲／日文混音未單列。\n\n**下一步**: nano／medium 轉伴奏 MIDI，對齊 mora 時間軸並比 Basic Pitch。",
+    "**GitHub Pick｜afeibukaixin/Lyrics-Plus** ⭐40｜最近更新 2026-09-09\n🔗 https://github.com/afeibukaixin/Lyrics-Plus\n\nmacOS 同步歌詞：LRC 詞級 karaoke、羅馬拼音／翻譯、Dynamic Island；對接 Apple Music／Spotify（MIT）。\n\n**為什麼選它**: 補齊「搜到歌 → 顯示／ruby／LRC」產品鏈，承接論文 1 的日文搜尋與 karaoke-jp 渲染。\n\n## 今天的 take-away\n- 日文音樂搜尋需要腳本感知拼寫校正，而非純編輯距離（2609.04262）。\n- 多深度諧波卷積把儀器無關 AMT 推到可上裝置的效率邊界（2609.04640）。\n- 工程：Lyrics-Plus 提供本機 LRC／羅馬字／詞級 karaoke 顯示基線。"
+  ]
+}
