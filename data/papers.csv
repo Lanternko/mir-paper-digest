@@ -250,3 +250,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-09-10,1,paper,karaoke_jp,Low-Latency Spell Correction for Japanese Music Search Queries,https://arxiv.org/abs/2609.04262,10.48550/arXiv.2609.04262,Japanese music search|spell correction|multi-script,新且重要
 2026-09-10,2,paper,general_mir,Harmonica: Accurate and Lightweight Instrument-Agnostic Music Transcription,https://arxiv.org/abs/2609.04640,10.48550/arXiv.2609.04640,AMT|harmonic convolution|MIDI transcription,新且重要
 2026-09-10,0,repo,github,afeibukaixin/Lyrics-Plus,https://github.com/afeibukaixin/Lyrics-Plus,,LRC|karaoke|romanization,
+2026-09-11,1,paper,karaoke_jp,Automatic Lyric Transcription for Greek Songs: Scaling and Task Composition Effects in Whisper Adaptation,https://arxiv.org/abs/2609.11302,10.48550/arXiv.2609.11302,lyrics transcription|Whisper|forced alignment,新且重要
+2026-09-11,2,paper,general_mir,Unifying Score and Performance for Fine-Grained Music Understanding in Audio-Language Models,https://arxiv.org/abs/2609.10351,10.48550/arXiv.2609.10351,music understanding|audio-language model|score-performance,新且重要
+2026-09-11,0,repo,github,MelismaApp/melisma,https://github.com/MelismaApp/melisma,,LRC|furigana|karaoke,

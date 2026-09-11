@@ -1,0 +1,92 @@
+{
+  "date": "2026-09-11",
+  "papers": [
+    {
+      "slot": 1,
+      "track": "karaoke_jp",
+      "title": "Automatic Lyric Transcription for Greek Songs: Scaling and Task Composition Effects in Whisper Adaptation",
+      "authors": [
+        "Maria Frangiadaki",
+        "Dimitrios Damianos",
+        "Kosmas Kritsis",
+        "Vassilis Katsouros"
+      ],
+      "published": "2026-09-10",
+      "updated": "2026-09-10",
+      "source_url": "https://arxiv.org/abs/2609.11302",
+      "arxiv_id": "2609.11302",
+      "doi": "10.48550/arXiv.2609.11302",
+      "tags": [
+        "lyrics transcription",
+        "Whisper",
+        "forced alignment"
+      ],
+      "quality": "新且重要",
+      "tldr": "針對希臘語低資源 ALT：以 GAD 經人聲分離＋CTC 對齊建資料；Whisper Large-v3 兩階段適應達 WER 27.2%，為首個希臘歌詞轉錄基準。",
+      "insight": "洞見:歌詞轉錄（ALT）比 ASR 更難，因為旋律變奏、節奏不規則與伴奏干擾；低資源語言更缺基準。本文做希臘 ALT 的受控 Whisper 適應研究：模型縮放、transcribe–translate 多任務比例，以及兩階段 speech→singing 適應。資料上以 Greek Audio Dataset（GAD）經 source separation 與 CTC forced alignment 做成段落級對齊唱聲集。結果顯示縮放穩定有效；多任務對小容量模型像正則；Whisper Large-v3 兩階段適應 WER 27.2%，明顯優於 zero-shot，建立首個希臘 ALT 基準（Interspeech 2026）。對 karaoke-jp：管線「分離→強制對齊→Whisper 適應」可直接遷移到日文／JPOP；多任務與兩階段策略可當日文歌詞辨識的實驗模板。限制：語種為希臘非日文；WER 仍偏高；資料與評測細節需對照全文。",
+      "try_next": "可做:用同樣「分離＋CTC 對齊」流程切一段日文 JPOP，比 Whisper 直推 vs speech→singing 兩階段適應的 CER／句對齊率。",
+      "problem": "ALT 受旋律、節奏與伴奏干擾，難度高於 ASR；希臘等低資源語言缺乏受控基準與適應策略比較。",
+      "method": "Whisper 適應實驗：縮放、transcribe–translate 多任務比例、兩階段 speech-to-singing；以分離＋CTC 強制對齊建段落級唱聲資料。",
+      "data": "基於 Greek Audio Dataset（GAD）策展的段落級對齊唱聲集；評測報告 WER，對照 zero-shot 與不同容量／任務組成。",
+      "findings": "縮放一致提升；多任務主要幫助小模型；Large-v3 兩階段適應 WER 27.2%，顯著優於 zero-shot，成為首個希臘 ALT 基準。",
+      "limitations": "語種非日文；絕對 WER 仍高；公開可複現細節與日文遷移效果需另驗；伴奏殘留與對齊誤差未完全消除。",
+      "editor_note": "今天最貼 karaoke-jp：低資源 ALT 的 Whisper 適應配方與「分離＋CTC 對齊」資料管線，可直接當日文歌詞轉錄實驗骨架。",
+      "relevance": {
+        "mean_audio": 1,
+        "karaoke_jp": 5
+      }
+    },
+    {
+      "slot": 2,
+      "track": "general_mir",
+      "title": "Unifying Score and Performance for Fine-Grained Music Understanding in Audio-Language Models",
+      "authors": [
+        "Milan Liessens Dujardin",
+        "Song-Ze Yu",
+        "Kevin Miao"
+      ],
+      "published": "2026-09-09",
+      "updated": "2026-09-09",
+      "source_url": "https://arxiv.org/abs/2609.10351",
+      "arxiv_id": "2609.10351",
+      "doi": "10.48550/arXiv.2609.10351",
+      "tags": [
+        "music understanding",
+        "audio-language model",
+        "score-performance"
+      ],
+      "quality": "新且重要",
+      "tldr": "提出 MuNo-SP 統一樂譜與演奏文字表徵，並建 MAESTROCaps（148 篇長分析＋3.1 萬 QA）；人評優於 MIDI-only，強化 LALM 細粒度音樂理解監督。",
+      "insight": "洞見:LALM 在 tagging／檢索／caption 已有進展，但對力度、樂句、咬字、時間與演奏技法等「怎麼被彈出來」的細聽仍弱；粗 caption 監督撐不起教育／演奏場景。本文提出 MuNo-SP（Music Notation unifying Score and Performance）文字表徵，把樂譜內容與演奏資訊一起編碼，並用對齊的 score–performance 自動生成長篇聽覺分析與音樂 QA。據此建 MAESTROCaps：148 對古典鋼琴對齊樣本 → 148 篇長分析＋31,080 QA。人評九段中八段多數票偏好 MuNo-SP 分析勝過 MIDI-only；score–performance 理解基準亦更強。對 Music Flamingo／karaoke-jp：符號＋演奏對齊監督可遷移到「歌詞／mora／導唱」細粒度問答；對 MeanAudio：可當更可稽核的音樂理解／caption 監督來源。限制：古典鋼琴 MAESTRO，非唱聲／日文流行；表示為文字非音訊端到端；授權 NC-SA。",
+      "try_next": "可做:把一段日文導唱的音高軌＋歌詞時間軸編成簡化 MuNo-SP 風格文字，測 LALM 能否回答「哪句拖拍／哪字咬不穩」。",
+      "problem": "既有 ALM 訓練多靠粗弱對齊 caption，難以學到力度、樂句、咬字與時間等演奏層細節，限制教育與藝術實務用途。",
+      "method": "MuNo-SP 文字表徵統一樂譜與演奏；以對齊 score–performance 自動生成長篇分析與 QA，監督 LALM 細粒度音樂理解。",
+      "data": "MAESTROCaps：148 對齊古典鋼琴 score–performance → 148 篇長分析與 31,080 QA；含人評與 score–performance 理解基準。",
+      "findings": "人評九段中八段多數票偏好 MuNo-SP 勝過 MIDI-only；在 score–performance 理解基準上亦優於 MIDI-only 基線。",
+      "limitations": "資料限古典鋼琴，未覆蓋唱聲／JPOP；表徵是文字管線非端到端音訊；授權為 CC BY-NC-SA；大規模 LALM 泛化未全面報告。",
+      "editor_note": "補 Music Flamingo 線的細粒度監督：把 score 與演奏對齊寫進可訓練文字，比純 MIDI caption 更貼教育／導唱場景。",
+      "relevance": {
+        "mean_audio": 3,
+        "karaoke_jp": 3
+      }
+    }
+  ],
+  "repo": {
+    "full_name": "MelismaApp/melisma",
+    "url": "https://github.com/MelismaApp/melisma",
+    "description_zh": "Android 詞級同步歌詞 App（Kotlin／Compose）：吃系統 MediaSession，支援 LRC／TTML、furigana／羅馬字與 karaoke 動效；不需 Spotify 帳號（AGPL-3.0）。",
+    "stars": 1,
+    "updated": "2026-09-10",
+    "why": "topics 直接含 furigana、romanization、LRC、karaoke；正好承接今天 ALT 管線與 karaoke-jp 的 ruby／詞級渲染下游，且昨天 Lyrics-Plus 是 macOS，這支補 Android。",
+    "tags": [
+      "LRC",
+      "furigana",
+      "karaoke"
+    ]
+  },
+  "discord_messages": [
+    "# 每日 MIR 論文精選 - 2026-09-11\n🌐 完整報告: https://lanternko.github.io/mir-paper-digest/reports/2026-09-11.html\n\n**論文 1｜Greek Automatic Lyric Transcription (Whisper)**\n🔗 https://arxiv.org/abs/2609.11302\n🎯 主線: karaoke-jp／ALT｜Interspeech 2026\n\n**TLDR**: GAD＋人聲分離＋CTC 對齊；Whisper Large-v3 兩階段適應 WER 27.2%，首個希臘 ALT 基準。\n\n**為什麼選它**: 「分離→強制對齊→Whisper 適應」是日文歌詞轉錄可直接抄的實驗骨架；多任務與縮放結果也可當超參先驗。\n\n**注意**: 語種非日文；WER 仍偏高。\n\n**下一步**: 日文 JPOP 小樣比直推 vs speech→singing 兩階段適應。",
+    "**論文 2｜MuNo-SP: Score+Performance for Music LALMs**\n🔗 https://arxiv.org/abs/2609.10351\n🎯 主線: MIR／Music Flamingo 細粒度理解\n\n**TLDR**: MuNo-SP 統一樂譜與演奏文字表徵；MAESTROCaps 148 分析＋3.1 萬 QA；人評優於 MIDI-only。\n\n**為什麼選它**: 粗 caption 學不到力度／樂句／時間細節；對齊 score–performance 監督更貼教育與導唱問答。\n\n**注意**: 古典鋼琴；CC BY-NC-SA；非唱聲端到端。\n\n**下一步**: 用音高軌＋歌詞時間軸做成簡化 MuNo-SP，測「哪句拖拍」問答。",
+    "**GitHub Pick｜MelismaApp/melisma** ⭐1｜最近更新 2026-09-10\n🔗 https://github.com/MelismaApp/melisma\n\nAndroid 詞級同步歌詞：LRC／TTML、furigana／羅馬字、karaoke 動效；吃 MediaSession，免 Spotify 登入（AGPL-3.0）。\n\n**為什麼選它**: 補齊 karaoke-jp 的 Android 端 ruby／LRC 渲染；與昨天 macOS Lyrics-Plus 形成跨平台對照。\n\n## 今天的 take-away\n- 低資源 ALT 可用「分離＋CTC 對齊＋Whisper 兩階段適應」建立基準（2609.11302）。\n- 細粒度音樂理解需要把 score 與演奏對齊寫進監督，而不只靠粗 caption（2609.10351）。\n- 工程：Melisma 提供本機詞級歌詞＋furigana／karaoke 顯示基線（Android）。"
+  ]
+}
