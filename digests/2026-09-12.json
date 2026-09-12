@@ -1,0 +1,98 @@
+{
+  "date": "2026-09-12",
+  "papers": [
+    {
+      "slot": 1,
+      "track": "karaoke_jp",
+      "title": "Iterative Audio Separation with Mixture Consistency via MIMO Model Extension",
+      "authors": [
+        "Yukara Ikemiya",
+        "WeiHsiang Liao",
+        "Yuki Mitsufuji"
+      ],
+      "published": "2026-09-07",
+      "updated": "2026-09-07",
+      "source_url": "https://arxiv.org/abs/2609.07226",
+      "arxiv_id": "2609.07226",
+      "doi": "10.48550/arXiv.2609.07226",
+      "tags": [
+        "source separation",
+        "mixture consistency",
+        "MIMO"
+      ],
+      "quality": "新且重要",
+      "tldr": "提出將分離模型擴成 MIMO，在維持 mixture consistency 下做迭代預測；接 SOTA 分離器可顯著提升人聲／音源分離品質。",
+      "insight": "洞見:karaoke-jp 與唱聲分析高度依賴「可保留相位／音色」的人聲分離；多數 SOTA 仍是單步 SISO／SIMO 回歸，擴散等迭代法雖聽感更好，卻常破壞 mixture consistency。本文把既有分離架構擴成 MIMO：額外輸入先前估計，在不犧牲架構優勢與 mixture consistency 的前提下做迭代精煉，並系統消融 discriminator 與生成式擴展。實驗顯示接到現有 SOTA 分離器後指標顯著上升。對 karaoke-jp：可直接當 BS-Roformer／HT-Demucs 等人聲分離後處理的迭代 refinement 模板，減少伴奏殘留同時保住相位，利於後續歌詞對齊、pitch 與 mora timing。限制：摘要未細列音樂／唱聲基準數字；需對照全文確認開源與超參。",
+      "try_next": "可做:取一段 JPOP，用既有人聲分離器出 stem，再套一輪 MIMO 迭代 refinement，比 CER／對齊誤差與聽感殘留。",
+      "problem": "需要相位與音色忠實的應用（含唱聲下游）要求 mixture consistency，但迭代分離／擴散法常與此衝突；單步回歸又限制聽感上限。",
+      "method": "將分離模型擴成 MIMO，把先前估計作為額外輸入，在保持 mixture consistency 下做迭代預測；並消融 discriminator 與生成式擴展。",
+      "data": "接多個 SOTA 分離模型做消融與對照；摘要報告顯著提升，細節需對照全文與補充材料。",
+      "findings": "MIMO 迭代框架可疊加在現有分離架構上，在維持 mixture consistency 的同時顯著改善分離表現。",
+      "limitations": "公開摘要未給出完整音樂／唱聲基準表；實務超參、延遲與是否開源需另查；未專門針對日文唱聲評測。",
+      "editor_note": "今天最貼 karaoke-jp：把「可迭代、又保 mixture consistency」的分離 refinement 接進既有 vocal stem 管線，是對齊／pitch 前最值得試的一步。",
+      "relevance": {
+        "mean_audio": 2,
+        "karaoke_jp": 5
+      }
+    },
+    {
+      "slot": 2,
+      "track": "mean_audio",
+      "title": "Semantic Refinement of Universal Audio Representations through Audio-Description Alignment",
+      "authors": [
+        "Lejun Min",
+        "Junyu Dai",
+        "Ruichen Zheng",
+        "Xinyue Fan",
+        "Yang Xiang",
+        "Huaichen Zhang",
+        "Xingchen Song",
+        "Yufei Shi",
+        "Han Zhao",
+        "Xiangang Li"
+      ],
+      "published": "2026-09-08",
+      "updated": "2026-09-08",
+      "source_url": "https://arxiv.org/abs/2609.08429",
+      "arxiv_id": "2609.08429",
+      "doi": "10.48550/arXiv.2609.08429",
+      "tags": [
+        "audio representation",
+        "caption alignment",
+        "CLAP-style"
+      ],
+      "quality": "新且重要",
+      "tldr": "在 BEST-RQ＋重建＋CTC 基礎上加正確音訊－描述對齊，線性探針與 LLM 讀出皆提升；正確配對解釋約 87% 線性增益。",
+      "insight": "洞見:通用音訊表徵要同時留住聲學細節與高層語意，才能服務 speech／music／環境音與不同容量下游。本文在 BEST-RQ、重建與 CTC 之上加入 audio-description alignment，並用 matched／shuffled／correct pairing 軌跡拆開「多一個對比目標」與「正確對應」的貢獻。凍結後以時間均值線性探針與 sequence-aware LLM 讀出評估：三組種子下，正確對齊使域平衡分類分別提升 4.66 與 2.59 點，且各域皆正；正確配對解釋約 87% 線性探針增益，LLM 在 captioning 上對應優勢最明顯。另有 24 層延續版本在共用評估器下與領先公開編碼器競爭。對 MeanAudio：直接補強 caption／CLAP 式對齊與表徵精煉配方；對 Music Flamingo：說明「正確描述對齊」比單純加對比損失更關鍵。限制：非端到端生成模型；音樂細粒度（歌詞／唱法）需另測。",
+      "try_next": "可做:用同一批音樂 caption，比 shuffled vs correct pairing 對 CLAP／檢索分數的影響，確認對齊品質是否真的主導增益。",
+      "problem": "通用音訊編碼器難同時保留聲學細節與可讀取的高層語意，且難以分清對比損失本身與正確音訊－描述對應各自的貢獻。",
+      "method": "在 BEST-RQ＋重建＋CTC 基礎上加入 audio-description alignment；以 matched／shuffled／correct 軌跡對照，並用線性探針與 LLM 讀出評估。",
+      "data": "跨 speech／music／環境音的域平衡分類與 captioning；三組配對種子；另評 24 層延續編碼器與公開編碼器。",
+      "findings": "正確對齊提升線性探針 4.66 點、LLM 讀出 2.59 點且各域皆正；正確配對約解釋 87% 線性增益；稠密聲學目標具互補性。",
+      "limitations": "焦點在表徵精煉而非生成；音樂歌詞／唱法細粒度未專門報告；LLM 讀出設定與資料授權需對照全文。",
+      "editor_note": "補 MeanAudio 的 caption／對齊主線：先把「描述是否正確配對」當成可消融變因，再談對比損失與編碼器容量。",
+      "relevance": {
+        "mean_audio": 5,
+        "karaoke_jp": 2
+      }
+    }
+  ],
+  "repo": {
+    "full_name": "hudzax/amai-lyrics",
+    "url": "https://github.com/hudzax/amai-lyrics",
+    "description_zh": "Spicetify 擴充：Spotify 歌詞逐行翻譯，並為日文加 Furigana／Romaji、韓文加羅馬化；可顯示於 playbar（需自備 Gemini API key，AGPL）。",
+    "stars": 5,
+    "updated": "2026-09-12",
+    "why": "直接對上 karaoke-jp 的 kana／ruby 渲染與日文歌詞閱讀；昨天 Melisma 是 Android 本機 LRC，這支補 Spotify／Spicetify 桌面端，且與 9/6 的 Furigana-for-Spotify 擴充不同（翻譯＋Romaji＋playbar）。",
+    "tags": [
+      "furigana",
+      "romaji",
+      "Spotify"
+    ]
+  },
+  "discord_messages": [
+    "# 每日 MIR 論文精選 - 2026-09-12\n🌐 完整報告: https://lanternko.github.io/mir-paper-digest/reports/2026-09-12.html\n\n**論文 1｜Iterative Audio Separation (MIMO)**\n🔗 https://arxiv.org/abs/2609.07226\n🎯 主線: karaoke-jp／人聲分離｜Sony\n\n**TLDR**: 把分離模型擴成 MIMO，在保 mixture consistency 下做迭代精煉；接 SOTA 分離器可顯著提升品質。\n\n**為什麼選它**: 唱聲對齊／pitch 前的 stem 品質常卡在「迭代聽感 vs 相位一致」；此框架兩者兼顧，可當 Demucs／Roformer 後處理。\n\n**注意**: 摘要未細列唱聲基準；需查全文與開源情況。\n\n**下一步**: JPOP 小樣比單步分離 vs 再加一輪 MIMO refinement 的對齊／殘留。",
+    "**論文 2｜Audio-Description Alignment for Universal Audio Reps**\n🔗 https://arxiv.org/abs/2609.08429\n🎯 主線: MeanAudio／caption 對齊\n\n**TLDR**: BEST-RQ＋重建＋CTC 上加正確音訊－描述對齊；線性探針＋4.66、LLM＋2.59；正確配對解釋約 87% 線性增益。\n\n**為什麼選它**: 拆開「多一個對比損失」與「描述是否正確配對」——對 MeanAudio／CLAP／Music Flamingo caption 管線很關鍵。\n\n**注意**: 表徵精煉非生成；歌詞細粒度未專門測。\n\n**下一步**: 同批音樂 caption 做 shuffled vs correct pairing，看檢索／CLAP 分數差。",
+    "**GitHub Pick｜hudzax/amai-lyrics** ⭐5｜最近更新 2026-09-12\n🔗 https://github.com/hudzax/amai-lyrics\n\nSpicetify 擴充：Spotify 逐行翻譯＋日文 Furigana／Romaji、韓文羅馬化，可掛 playbar（自備 Gemini key，AGPL）。\n\n**為什麼選它**: 補 karaoke-jp 桌面端 ruby／羅馬字顯示；對照昨天 Android Melisma 與 9/6 Furigana-for-Spotify。\n\n## 今天的 take-away\n- 人聲分離可在保 mixture consistency 下做 MIMO 迭代 refinement，利於對齊／pitch 上游（2609.07226）。\n- caption／表徵精煉要消融「正確配對」本身，而不只加對比損失（2609.08429）。\n- 工程：amai-lyrics 提供 Spotify 上的 Furigana／Romaji 閱讀基線。"
+  ]
+}

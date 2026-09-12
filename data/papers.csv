@@ -253,3 +253,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-09-11,1,paper,karaoke_jp,Automatic Lyric Transcription for Greek Songs: Scaling and Task Composition Effects in Whisper Adaptation,https://arxiv.org/abs/2609.11302,10.48550/arXiv.2609.11302,lyrics transcription|Whisper|forced alignment,新且重要
 2026-09-11,2,paper,general_mir,Unifying Score and Performance for Fine-Grained Music Understanding in Audio-Language Models,https://arxiv.org/abs/2609.10351,10.48550/arXiv.2609.10351,music understanding|audio-language model|score-performance,新且重要
 2026-09-11,0,repo,github,MelismaApp/melisma,https://github.com/MelismaApp/melisma,,LRC|furigana|karaoke,
+2026-09-12,1,paper,karaoke_jp,Iterative Audio Separation with Mixture Consistency via MIMO Model Extension,https://arxiv.org/abs/2609.07226,10.48550/arXiv.2609.07226,source separation|mixture consistency|MIMO,新且重要
+2026-09-12,2,paper,mean_audio,Semantic Refinement of Universal Audio Representations through Audio-Description Alignment,https://arxiv.org/abs/2609.08429,10.48550/arXiv.2609.08429,audio representation|caption alignment|CLAP-style,新且重要
+2026-09-12,0,repo,github,hudzax/amai-lyrics,https://github.com/hudzax/amai-lyrics,,furigana|romaji|Spotify,
