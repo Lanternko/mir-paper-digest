@@ -256,3 +256,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-09-12,1,paper,karaoke_jp,Iterative Audio Separation with Mixture Consistency via MIMO Model Extension,https://arxiv.org/abs/2609.07226,10.48550/arXiv.2609.07226,source separation|mixture consistency|MIMO,新且重要
 2026-09-12,2,paper,mean_audio,Semantic Refinement of Universal Audio Representations through Audio-Description Alignment,https://arxiv.org/abs/2609.08429,10.48550/arXiv.2609.08429,audio representation|caption alignment|CLAP-style,新且重要
 2026-09-12,0,repo,github,hudzax/amai-lyrics,https://github.com/hudzax/amai-lyrics,,furigana|romaji|Spotify,
+2026-09-13,1,paper,karaoke_jp,Beyond SDR: How Music Source Separation Reshapes Rhythm-Relevant Signal Properties,https://arxiv.org/abs/2609.04224,10.48550/arXiv.2609.04224,source separation|SDR|microrhythm,重要
+2026-09-13,2,paper,mean_audio,SCAPES: Semantically Conditioned Autoregressive Prior for Environmental Sounds,https://arxiv.org/abs/2609.04634,10.48550/arXiv.2609.04634,flow matching|neural codec|text-to-audio,新且重要
+2026-09-13,0,repo,github,pymss-project/pymss-studio,https://github.com/pymss-project/pymss-studio,,source separation|desktop GUI|stems,
