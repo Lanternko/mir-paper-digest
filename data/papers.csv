@@ -259,3 +259,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-09-13,1,paper,karaoke_jp,Beyond SDR: How Music Source Separation Reshapes Rhythm-Relevant Signal Properties,https://arxiv.org/abs/2609.04224,10.48550/arXiv.2609.04224,source separation|SDR|microrhythm,重要
 2026-09-13,2,paper,mean_audio,SCAPES: Semantically Conditioned Autoregressive Prior for Environmental Sounds,https://arxiv.org/abs/2609.04634,10.48550/arXiv.2609.04634,flow matching|neural codec|text-to-audio,新且重要
 2026-09-13,0,repo,github,pymss-project/pymss-studio,https://github.com/pymss-project/pymss-studio,,source separation|desktop GUI|stems,
+2026-09-14,1,paper,karaoke_jp,Silent Metronome: Rhythmic Grounding for Live Music Accompaniment,https://arxiv.org/abs/2609.07688,10.48550/arXiv.2609.07688,live accompaniment|beat alignment|causal generation,新且重要
+2026-09-14,2,paper,mean_audio,Discriminative Flow Matching: Beyond Time-Conditioning in Generative Restoration via Flow-State Representations,https://arxiv.org/abs/2609.04525,10.48550/arXiv.2609.04525,flow matching|discriminative state|audio restoration,新且重要
+2026-09-14,0,repo,github,Yudaotor/lyrimuse,https://github.com/Yudaotor/lyrimuse,,desktop lyrics|word-sync|karaoke,

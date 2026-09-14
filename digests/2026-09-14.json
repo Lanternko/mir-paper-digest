@@ -1,0 +1,91 @@
+{
+  "date": "2026-09-14",
+  "papers": [
+    {
+      "slot": 1,
+      "track": "karaoke_jp",
+      "title": "Silent Metronome: Rhythmic Grounding for Live Music Accompaniment",
+      "authors": [
+        "Kevin Bretz",
+        "Derya Soydaner",
+        "Aske Plaat"
+      ],
+      "published": "2026-09-07",
+      "updated": "2026-09-07",
+      "source_url": "https://arxiv.org/abs/2609.07688",
+      "arxiv_id": "2609.07688",
+      "doi": "10.48550/arXiv.2609.07688",
+      "tags": [
+        "live accompaniment",
+        "beat alignment",
+        "causal generation"
+      ],
+      "quality": "新且重要",
+      "tldr": "嚴格因果的現場伴奏模型易因自推節奏而漂移；Silent Metronome 把拍／小節相位當獨立條件通道，beat 對齊提升 3.2 倍。",
+      "insight": "洞見:karaoke-jp 的 mora-to-note、LRC 與現場跟唱都假設「時間軸可信」；嚴格因果伴奏若只能從自己生成的音訊推 tempo／meter／相位，誤差會像人類合奏沒有共享節拍器一樣越漂越遠。SiMe 把拍內與小節內相位編成週期函數，搭配 tempo、拍號，走獨立條件通道——參考與生成音訊解耦，理論上不會漂移。輔助頭（含預測自身未來 token）再塑 latent。以 ground-truth 節拍標註時，beat alignment 較嚴格因果基線提升 3.2 倍，並超過有 1 秒前瞻的非因果參考；輸入－伴奏一致性仍貼近該參考。對 karaoke-jp：別再把「跟拍」當模型隱式副產物，應把節拍相位當一等公民條件；對 MeanAudio 的串流生成也提醒：節奏通道要外掛、可共享。限制：主結果依賴 GT 節拍；真實線上 beat tracker 誤差鏈尚未完整報告。",
+      "try_next": "可做:在 JPOP vocal／伴奏串流設定中，把 All-in-One 或 madmom 的 beat／downbeat 當 SiMe 式條件，量測 mora onset 與 LRC 字級漂移。",
+      "problem": "現場伴奏模型必須在聽不到未來的情況下逐幀提交輸出；若只能從自身不完美的過去推節奏，tempo／meter／相位誤差會累積成可聽的節奏漂移。",
+      "method": "Silent Metronome（SiMe）將拍內與小節內相位編碼為週期函數，與 tempo、拍號組成獨立條件通道；並用輔助頭（含未來 token 預測）塑造 latent。",
+      "data": "摘要報告以 ground-truth 節拍標註為條件的對照；含嚴格因果基線與具 1 秒前瞻的非因果參考。",
+      "findings": "beat alignment 提升 3.2 倍並超過有前瞻的非因果參考；輸入－伴奏一致性仍落在該參考一個點內。作者主張串流伴奏應像人類合奏一樣共享節奏訊號，而非只靠推斷。",
+      "limitations": "最佳結果依賴 GT 節拍；線上 beat tracking 誤差如何回灌尚未詳述；論文短（5 頁），跨風格與唱聲場景泛化待驗證。",
+      "editor_note": "今天最貼 karaoke-jp：把節拍相位當獨立條件，直接對上 mora timing／LRC 對齊的「時間軸可信」問題。",
+      "relevance": {
+        "mean_audio": 3,
+        "karaoke_jp": 5
+      }
+    },
+    {
+      "slot": 2,
+      "track": "mean_audio",
+      "title": "Discriminative Flow Matching: Beyond Time-Conditioning in Generative Restoration via Flow-State Representations",
+      "authors": [
+        "Shrishti Saha Shetu",
+        "Emanuël A. P. Habets",
+        "Andreas Brendel"
+      ],
+      "published": "2026-09-03",
+      "updated": "2026-09-03",
+      "source_url": "https://arxiv.org/abs/2609.04525",
+      "arxiv_id": "2609.04525",
+      "doi": "10.48550/arXiv.2609.04525",
+      "tags": [
+        "flow matching",
+        "discriminative state",
+        "audio restoration"
+      ],
+      "quality": "新且重要",
+      "tldr": "CFM 還原任務中「同一時間座標≠同一還原進度」；改用判別式 flow-state 表徵條件化速度場，語音增強與影像去噪皆優於時間條件基線。",
+      "insight": "洞見:MeanAudio 主線大量依賴 Conditional Flow Matching，但多數配方仍用全域時間 t 當進度座標。還原／enhancement 場景裡，初態與目標的統計依賴因樣本而異——同一 t 可能對應完全不同的劣化程度與難度。作者提出 Discriminative Flow-State Hypothesis：判別式模型學到的表徵會依劣化嚴重度組織，並在生成過程朝乾淨流形走；因此可用 Discriminative Flow-State Representations 取代顯式時間，去條件化 FM 速度場。語音增強與影像去噪實驗顯示可自適應推理並穩定勝過 CFM／擴散相關基線。對 MeanAudio：這是「狀態感知 flow」的可遷移想法——caption／codec／reward 條件之外，還可問進度該不該仍綁死 t；對 karaoke-jp 則間接服務人聲還原與分離後清理。限制：主實驗是語音增強與影像，非 text-to-music／唱聲生成；音樂域需另驗證。",
+      "try_next": "可做:在既有 MeanAudio CFM 管線中，用 CLAP／品質判別器 latent 取代或並行 t，比較 FAD／CLAP 與聽感收斂步數。",
+      "problem": "標準 CFM 用單一全域插值座標（常解釋為時間）描述生成進度，但還原任務中樣本的劣化程度與目標距離差異大，同一座標並不代表相同還原狀態。",
+      "method": "提出 Discriminative Flow Matching：以判別式訓練得到的 flow-state 表徵條件化 Flow Matching 速度場，取代顯式時間條件。",
+      "data": "語音增強與影像去噪基準；對照 CFM 與相關擴散式還原基線；含 latent-space 軌跡分析。",
+      "findings": "判別式表徵能刻畫還原進度並支援自適應推理；在語音增強與影像去噪上一致優於時間條件 CFM／擴散相關基線。",
+      "limitations": "任務以還原為主，非開放式 text-to-audio／音樂生成；音樂與唱聲領域尚未直接驗證；授權為 CC BY-NC-SA 需留意。",
+      "editor_note": "補 MeanAudio 的 flow 配方：進度條件可以是「狀態」而非死板的 t，值得接到生成與還原實驗。",
+      "relevance": {
+        "mean_audio": 5,
+        "karaoke_jp": 2
+      }
+    }
+  ],
+  "repo": {
+    "full_name": "Yudaotor/lyrimuse",
+    "url": "https://github.com/Yudaotor/lyrimuse",
+    "description_zh": "macOS 桌面端字級同步歌詞（Swift／SwiftUI）：支援 Apple Music、Spotify、QQ／網易雲／酷狗，以及瀏覽器中的 YouTube Music／Spotify；浮動疊加、Dynamic Island、選單列與翻譯／羅馬字。GPL-3.0，定位為活躍維護的 LyricsX 替代。",
+    "stars": 42,
+    "updated": "2026-09-14",
+    "why": "對上 karaoke-jp 的 LRC／字級渲染與「時間軸可信」：今天論文 1 談節拍相位條件，lyrimuse 則是把對齊好的歌詞可靠地呈現給使用者的工程端。可當字級同步 UI 與多來源歌詞管線的參考實作。",
+    "tags": [
+      "desktop lyrics",
+      "word-sync",
+      "karaoke"
+    ]
+  },
+  "discord_messages": [
+    "# 每日 MIR 論文精選 - 2026-09-14\n🌐 完整報告: https://lanternko.github.io/mir-paper-digest/reports/2026-09-14.html\n\n**論文 1｜Silent Metronome (Live Accompaniment)**\n🔗 https://arxiv.org/abs/2609.07688\n🎯 主線: karaoke-jp／節拍相位條件\n\n**TLDR**: 嚴格因果現場伴奏易自推節奏而漂移；SiMe 把拍／小節相位當獨立條件通道，beat 對齊提升 3.2 倍。\n\n**為什麼選它**: mora-to-note 與 LRC 都吃「時間軸可信」；節奏應像合奏一樣被共享，而非只從生成音訊推斷。\n\n**注意**: 主結果依賴 GT 節拍；線上 beat tracker 誤差鏈未完整報告。\n\n**下一步**: 用 All-in-One／madmom 的 beat 當條件，量測 JPOP 的 mora onset 與 LRC 漂移。",
+    "**論文 2｜Discriminative Flow Matching**\n🔗 https://arxiv.org/abs/2609.04525\n🎯 主線: MeanAudio／狀態感知 CFM\n\n**TLDR**: 還原任務中同一時間座標≠同一進度；用判別式 flow-state 表徵條件化速度場，語音增強與影像去噪皆勝過時間條件基線。\n\n**為什麼選它**: 給 MeanAudio 一條可遷移的「進度＝狀態」flow 配方，不綁死全域 t。\n\n**注意**: 主實驗是語音／影像還原，非 text-to-music；CC BY-NC-SA。\n\n**下一步**: 在 CFM 管線用 CLAP／品質判別器 latent 取代或並行 t，比 FAD／CLAP 與步數。",
+    "**GitHub Pick｜Yudaotor/lyrimuse** ⭐42｜最近更新 2026-09-14\n🔗 https://github.com/Yudaotor/lyrimuse\n\nmacOS 字級同步桌面歌詞（SwiftUI）：多串流來源＋浮動疊加／Dynamic Island；活躍維護的 LyricsX 替代（GPL-3.0）。\n\n**為什麼選它**: 承接論文 1 的「時間軸可信」——對齊之後還要可靠渲染；可當 karaoke-jp LRC／字級 UI 參考。\n\n## 今天的 take-away\n- 串流伴奏／對齊要把節拍相位當一等公民條件，不要只靠模型自推（2609.07688）。\n- Flow Matching 的進度條件可以是判別式狀態，而不必死綁時間 t（2609.04525）。\n- 工程：lyrimuse 把字級同步歌詞做到可日常用的桌面端。"
+  ]
+}
