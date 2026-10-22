@@ -1,0 +1,71 @@
+{
+  "date": "2026-10-22",
+  "papers": [
+    {
+      "slot": 1,
+      "track": "mean_audio",
+      "title": "Exploring Representation Autoencoders for Text-to-Audio Generation",
+      "authors": [
+        "Bernardo V. Miranda",
+        "Hugo Malard",
+        "Gaël Richard",
+        "Mathieu Fontaine",
+        "Slim Essid"
+      ],
+      "published": "2026-10-09",
+      "updated": "2026-10-09",
+      "source_url": "https://arxiv.org/abs/2610.26881",
+      "arxiv_id": "2610.26881",
+      "doi": "10.48550/arXiv.2610.26881",
+      "tags": ["text-to-audio", "representation autoencoder", "rectified flow"],
+      "quality": "新且重要",
+      "tldr": "把凍結的自監督音訊編碼器配上訓練過的解碼器當 latent 空間，再訓練 rectified flow；重建較差的空間，生成表現卻不輸傳統 VAE。",
+      "insight": "洞見:text-to-audio 選 latent 空間時，重建指標（如 FAD 重建、SNR）不是好的代理指標；語意結構更好的 SSL latent 讓 flow 更好學，這直接挑戰「先把 codec／VAE 重建做到最好」的慣例。",
+      "try_next": "可做:在 MeanAudio 的 flow matching 設定下，把現有 latent 換成某個凍結 SSL 編碼器 + 解碼器，固定模型大小與步數，比較 FAD、CLAP 與重建誤差的相關性。",
+      "problem": "文字轉音訊（TTA）模型通常使用端到端以重建目標訓練的自編碼器作為 latent 空間；影像生成已證明「凍結預訓練編碼器 + 訓練解碼器」的 Representation Autoencoder（RAE）有效，但在音訊上很少被探討。",
+      "method": "作者替兩個預訓練的自監督（SSL）音訊編碼器訓練解碼器（稱為 AuRA），先比較其重建品質與近期 TTA 系統所用自編碼器；再於 SSL latent 與基線 latent 兩種空間各自訓練 rectified flow 模型，藉此隔離自編碼器對生成的影響。",
+      "data": "摘要與 abs 頁未點名兩個 SSL 編碼器與資料集（abs 頁只列出 5 位作者，另有 10 位未顯示）；細節需讀全文，本文未能解析 PDF，故不在此臆測。",
+      "findings": "在 SSL latent 空間中的生成表現與基線相當或更好，儘管其重建表現不同（較弱）。結論：「重建品質本身不足以作為生成表現的代理指標」。",
+      "limitations": "僅依摘要整理，未驗證具體數字、編碼器與評估設定；abs 頁未提供程式碼連結；是否能擴展到音樂（而非一般音訊）仍待確認。",
+      "editor_note": "與 MeanAudio 路線最直接相關：若 latent 好不好學比重建更重要，就值得重新檢視 MeanAudio 的 latent 選擇。作者清單在 abs 頁被截斷，此處僅列出前 5 位。",
+      "relevance": {"mean_audio": 5, "karaoke_jp": 0}
+    },
+    {
+      "slot": 2,
+      "track": "general_mir",
+      "title": "Structural Context from Audio and Lyric Evidence for Music Structure Analysis Using the New SheetSage-MSA Dataset",
+      "authors": ["Hongbing Li", "Yaolong Ju"],
+      "published": "2026-10-19",
+      "updated": "2026-10-19",
+      "source_url": "https://arxiv.org/abs/2610.26253",
+      "arxiv_id": "2610.26253",
+      "doi": "10.48550/arXiv.2610.26253",
+      "tags": ["music structure analysis", "lyrics", "dataset"],
+      "quality": "新",
+      "tldr": "SCALE 以分離的音訊路徑處理邊界與段落標籤，並用時間戳歌詞與歌詞重複來修正副歌，在 HarmonixSet 上勝過 SongFormer。",
+      "insight": "洞見:歌詞的重複結構是便宜又有效的曲式線索；只要有逐字或逐行時間戳（如 karaoke 管線產出的 LRC），就能順手拿來提升副歌偵測。",
+      "try_next": "可做:把 karaoke-jp 管線輸出的 LRC／mora 時間戳轉成「歌詞重複相似度矩陣」，餵給現成曲式分析模型，檢查日文歌的副歌邊界是否變準。",
+      "problem": "音樂結構分析（MSA）要找出段落邊界與功能標籤，但細粒度標註稀少、現有系統常用同一個編碼器同時做邊界與標籤，且多半只看音訊、忽略歌詞中的結構線索。",
+      "method": "提出 SCALE：用兩條各自任務專用的音訊路徑，分別建模局部轉換與長距離結構脈絡，並利用帶時間戳的歌詞與歌詞重複性來精修副歌預測。",
+      "data": "新建 SheetSage-MSA 資料集（源自 SheetSage）：9,010 首歌、13,880 筆清理後的片段標註，約 82.5 小時；於 HarmonixSet 評估。",
+      "findings": "在 HarmonixSet 上，相較 SongFormer，HR.5F 高 3.5 個百分點、HR3F 高 4.2 個百分點、ACC 高 0.9 個百分點；附有 demo 與原始碼頁面。",
+      "limitations": "僅 5 頁短文，摘要未提限制；歌詞時間戳來源與語言覆蓋（是否含日文）未知；結果只依摘要整理，未驗證全文。",
+      "editor_note": "不是 karaoke 專屬，但「時間戳歌詞 → 結構」正好是 karaoke-jp 管線的副產品，可遷移性高。",
+      "relevance": {"mean_audio": 1, "karaoke_jp": 3}
+    }
+  ],
+  "repo": {
+    "full_name": "Megageorgio/mlabeler",
+    "url": "https://github.com/Megageorgio/mlabeler",
+    "description_zh": "歌聲資料標註編輯器（Kotlin／Compose Multiplatform，MIT）：可編輯音素與詞層、音符與音高、UTAU oto，支援 DiffSinger 資料集與自動標註 toolkit，一套程式碼跨 Windows、macOS、Linux、Android、iOS。",
+    "stars": 19,
+    "updated": "2026-10-16",
+    "why": "karaoke-jp 要做 mora-to-note 對齊與唱聲 pitch，最缺的是能人工校正音素、音符、pitch 的標註工具；它直接支援 DiffSinger 與 oto 格式，可拿來修正自動對齊結果或製作小型日文唱聲標註集。注意星數不高、專案偏新，自動標註 toolkit 需另外下載數 GB 模型。",
+    "tags": ["singing voice", "labeling", "DiffSinger"]
+  },
+  "discord_messages": [
+    "# 每日 MIR 論文精選 - 2026-10-22\n🌐 網站: https://lanternko.github.io/mir-paper-digest/reports/2026-10-22.html\n\n## 論文 1｜Exploring Representation Autoencoders for Text-to-Audio Generation\n🔗 https://arxiv.org/abs/2610.26881\n👥 Bernardo V. Miranda, Hugo Malard, Gaël Richard 等｜2026-10-09｜品質:新且重要\n\n**TL;DR**: 把凍結的自監督音訊編碼器配上訓練過的解碼器當 latent 空間，再訓練 rectified flow；重建較差的空間，生成表現卻不輸傳統 VAE。\n\n**問題**: TTA 模型通常用以重建目標訓練的自編碼器當 latent，RAE 在影像有效，音訊上少被探討。\n**方法**: 替兩個預訓練 SSL 音訊編碼器訓練解碼器，並在 SSL 與基線 latent 上各訓練 rectified flow 以隔離影響。\n**發現**: SSL 空間的生成表現相當或更好；重建品質不足以預測生成品質。\n**限制**: 僅依摘要整理，編碼器與資料集未驗證；無程式碼連結；音樂是否適用待確認。\n\n**洞見**: 選 latent 空間不該只看重建指標，語意結構更好的 SSL latent 讓 flow 更好學。\n**可做**: 在 MeanAudio 設定下換成凍結 SSL 編碼器 + 解碼器，比較 FAD、CLAP 與重建誤差的相關性。",
+    "## 論文 2｜Structural Context from Audio and Lyric Evidence for Music Structure Analysis Using the New SheetSage-MSA Dataset\n🔗 https://arxiv.org/abs/2610.26253\n👥 Hongbing Li, Yaolong Ju｜2026-10-19｜品質:新\n\n**TL;DR**: SCALE 以分離的音訊路徑處理邊界與段落標籤，並用時間戳歌詞與歌詞重複來修正副歌，在 HarmonixSet 上勝過 SongFormer。\n\n**問題**: 細粒度曲式標註稀少、邊界與標籤共用同一編碼器、且多半忽略歌詞線索。\n**方法**: 兩條任務專用音訊路徑建模局部轉換與長距離脈絡，再以時間戳歌詞與歌詞重複性精修副歌。\n**資料**: 新資料集 SheetSage-MSA：9,010 首歌、13,880 筆標註、約 82.5 小時。\n**發現**: HarmonixSet 上相較 SongFormer，HR.5F +3.5、HR3F +4.2、ACC +0.9（百分點）。\n**限制**: 5 頁短文；歌詞時間戳來源與語言覆蓋（是否含日文）未知；僅依摘要整理。\n\n**洞見**: 歌詞重複是便宜有效的曲式線索，karaoke 管線的 LRC 可順手利用。\n**可做**: 把 LRC／mora 時間戳轉成歌詞重複相似度矩陣，檢查日文歌副歌邊界是否變準。",
+    "**GitHub Pick｜Megageorgio/mlabeler** ⭐19｜最近更新 2026-10-16\n🔗 https://github.com/Megageorgio/mlabeler\n\n歌聲資料標註編輯器（Kotlin／Compose Multiplatform，MIT）：可編輯音素與詞層、音符與音高、UTAU oto，支援 DiffSinger 資料集與自動標註 toolkit，跨 Windows、macOS、Linux、Android、iOS。\n\n**為什麼選它**: karaoke-jp 需要能人工校正音素、音符、pitch 的工具，可用來修正自動對齊結果或建小型日文唱聲標註集。注意星數不高、專案偏新，toolkit 需另外下載數 GB 模型。\n\n## 今天的 take-away\n- latent 空間好不好學，比重建指標更重要；MeanAudio 的 latent 選擇值得用 SSL 編碼器做對照實驗（2610.26881）。\n- 歌詞時間戳不只用於顯示，歌詞重複結構也能改善副歌與曲式偵測，karaoke 管線有現成副產品可用（2610.26253）。\n- 工程參考：mlabeler 提供音素／音符／pitch 的跨平台標註編輯，補 karaoke-jp 資料校正的缺口。"
+  ]
+}

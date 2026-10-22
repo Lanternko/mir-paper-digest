@@ -262,3 +262,18 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-09-14,1,paper,karaoke_jp,Silent Metronome: Rhythmic Grounding for Live Music Accompaniment,https://arxiv.org/abs/2609.07688,10.48550/arXiv.2609.07688,live accompaniment|beat alignment|causal generation,新且重要
 2026-09-14,2,paper,mean_audio,Discriminative Flow Matching: Beyond Time-Conditioning in Generative Restoration via Flow-State Representations,https://arxiv.org/abs/2609.04525,10.48550/arXiv.2609.04525,flow matching|discriminative state|audio restoration,新且重要
 2026-09-14,0,repo,github,Yudaotor/lyrimuse,https://github.com/Yudaotor/lyrimuse,,desktop lyrics|word-sync|karaoke,
+2026-09-26,1,paper,mean_audio,DriftAudio: Marginal Drifting for Distributional Post-Training of One-Step Text-to-Audio Generators,https://arxiv.org/abs/2609.27598,10.48550/arXiv.2609.27598,one-step TTA|distributional post-training|FAD/CLAP,新且重要
+2026-09-26,2,paper,karaoke_jp,MIDIBack: Harmony-Aware Singing Pitch Correction via Joint Vocal-Accompaniment Symbolic Modeling,https://arxiv.org/abs/2609.28008,10.48550/arXiv.2609.28008,singing pitch correction|OctupleMIDI|accompaniment conditioning,新且重要
+2026-09-26,0,repo,github,nnyj/utasub,https://github.com/nnyj/utasub,,forced alignment|lyrics ASR|romaji/ASS,
+2026-09-28,1,paper,karaoke_jp,SRF-SVB: Style-Consistent Singing Voice Beautifying via Rectified Flow,https://arxiv.org/abs/2609.25610,10.48550/arXiv.2609.25610,singing voice beautifying|rectified flow|style preservation,新且重要
+2026-09-28,2,paper,mean_audio,Joint Analysis of Latent Dimensionality and Frame Rate in Continuous Audio Encoders,https://arxiv.org/abs/2609.29780,10.48550/arXiv.2609.29780,continuous audio encoder|latent width|frame rate,新
+2026-09-28,0,repo,github,BilyHurington/KiraKara,https://github.com/BilyHurington/KiraKara,,karaoke-ja|mora alignment|furigana,
+2026-09-29,1,paper,karaoke_jp,Training-Free Pronunciation Transcription via Text-Constrained Acoustic Rescoring,https://arxiv.org/abs/2609.30924,10.48550/arXiv.2609.30924,日文發音轉寫|G2P/S2P 融合|免訓練 rescoring,新且重要
+2026-09-29,2,paper,mean_audio,Don't CLAP: Are Music-Text Models Bag-of-Words?,https://arxiv.org/abs/2609.30540,10.48550/arXiv.2609.30540,CLAP score 可信度|music-text 對比模型|屬性綁定評估,新且重要
+2026-09-29,0,repo,github,changhongw/mlm,https://github.com/changhongw/mlm,,旋律—歌詞對齊|音節級標註|對比學習,
+2026-10-09,1,paper,karaoke_jp,SheetSage2: Coherent Lead-Sheet Transcription with Synthetic Supervision,https://arxiv.org/abs/2610.05336,10.48550/arXiv.2610.05336,lead sheet transcription|synthetic supervision|structured decoding,新且重要
+2026-10-09,2,paper,mean_audio,AudioGAR: Bridging Reconstruction and Generation in Latent Audio Generative Models,https://arxiv.org/abs/2610.05691,10.48550/arXiv.2610.05691,latent audio generation|codec decoder|FAD,新且重要
+2026-10-09,0,repo,github,ServeurpersoCom/yue2.cpp,https://github.com/ServeurpersoCom/yue2.cpp,,music generation|ggml inference|quantization,
+2026-10-22,1,paper,mean_audio,Exploring Representation Autoencoders for Text-to-Audio Generation,https://arxiv.org/abs/2610.26881,10.48550/arXiv.2610.26881,text-to-audio|representation autoencoder|rectified flow,新且重要
+2026-10-22,2,paper,general_mir,Structural Context from Audio and Lyric Evidence for Music Structure Analysis Using the New SheetSage-MSA Dataset,https://arxiv.org/abs/2610.26253,10.48550/arXiv.2610.26253,music structure analysis|lyrics|dataset,新
+2026-10-22,0,repo,github,Megageorgio/mlabeler,https://github.com/Megageorgio/mlabeler,,singing voice|labeling|DiffSinger,
