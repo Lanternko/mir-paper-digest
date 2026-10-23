@@ -1,0 +1,65 @@
+{
+  "date": "2026-10-23",
+  "papers": [
+    {
+      "slot": 1,
+      "track": "mean_audio",
+      "title": "Rubric-Based Optimization for Text-to-Music Generation",
+      "authors": ["Ping Wang", "Guang Yang", "Shao-Rong Su", "Junkai Wu", "Pang Wei Koh", "Noah A. Smith"],
+      "published": "2026-10-02",
+      "updated": "2026-10-05",
+      "source_url": "https://arxiv.org/abs/2610.03589",
+      "arxiv_id": "2610.03589",
+      "doi": "10.48550/arXiv.2610.03589",
+      "tags": ["text-to-music", "reward alignment", "DPO"],
+      "quality": "新且重要",
+      "tldr": "用音訊語言模型依評分準則打分，當作 DPO 與 DiffusionNFT 的獎勵來微調文字轉音樂模型；整體感知品質提升，但調性等可量測屬性無法靠它改善。",
+      "insight": "洞見:ALM 評分準則適合優化「好不好聽」這類籠統的感知品質，而 tempo、key 這類可量測屬性應直接用客觀獎勵；獎勵來源要依屬性類型分工，單一評估器最佳化還會犧牲其他指標。",
+      "try_next": "可做:對 MeanAudio 這類 flow matching 模型，用 ALM 評分準則加上 tempo／key 的客觀獎勵組成混合獎勵，做小規模偏好微調，並同時追蹤 CLAP 與 FAD 避免單一指標過度最佳化。",
+      "problem": "文字轉音樂的對齊（alignment）缺乏可靠的獎勵訊號：人類偏好標註昂貴，單一自動評估器又容易被過度最佳化。",
+      "method": "以預訓練音訊語言模型（ALM）依評分準則對候選片段打分；分數轉成偏好對用於 MusicGen-small 與 ACE-Step v1 的 DPO，並作為純量獎勵用於 ACE-Step v1 的 DiffusionNFT。另對 tempo、key、樂器配置比較客觀獎勵與 ALM 準則。",
+      "data": "評估於 MusicCaps，指標含 CLAP、SongEval、Audiobox-Aesthetics；另有針對 tempo、key、instrumentation 的屬性實驗。",
+      "findings": "在 MusicCaps 上三項指標同時進步，ACE-Step 搭配 DiffusionNFT 增幅最大；MusicGen-small 上優化單一評估器會使其他評估器變差。tempo、key、樂器直接用客觀獎勵可穩定改善，ALM 準則對 tempo 與樂器僅部分遷移、對 key 完全無效。",
+      "limitations": "僅依摘要整理，未驗證具體數值與實驗設定；實驗模型為 MusicGen-small 與 ACE-Step，是否適用於 flow matching 小模型（如 MeanAudio）待確認。",
+      "editor_note": "MeanAudio 路線的 reward alignment 直接參考：它給出「哪些屬性可以信任 ALM 打分、哪些不行」的實證邊界，對設計獎勵很實用。",
+      "relevance": {"mean_audio": 5, "karaoke_jp": 0}
+    },
+    {
+      "slot": 2,
+      "track": "general_mir",
+      "title": "Revisiting Input Time-frequency Representations in Multi-pitch Estimation for Vocal Ensembles",
+      "authors": ["Junyoung Koh", "Hao-Wen Dong"],
+      "published": "2026-10-02",
+      "updated": "2026-10-07",
+      "source_url": "https://arxiv.org/abs/2610.03656",
+      "arxiv_id": "2610.03656",
+      "doi": "10.48550/arXiv.2610.03656",
+      "tags": ["multi-pitch estimation", "singing voice", "STFT"],
+      "quality": "新",
+      "tldr": "在合唱等多人歌聲的多音高估計中，單純的線性 STFT 輸入反而勝過常用的 HCQT，運算也便宜得多，且較短的分析視窗更適合變動的唱聲音高。",
+      "insight": "洞見:唱聲音高隨時間變動大，時間解析度可能比頻率解析度更重要；在人聲相關的 pitch 模型裡，花錢算 HCQT 未必值得，簡單的 STFT 加短視窗就是強基線。",
+      "try_next": "可做:在 karaoke-jp 的唱聲 pitch 流程中，用同一個模型比較 STFT（短視窗）與 CQT 類輸入的 pitch 準確度與推論速度，確認是否能省下特徵計算成本。",
+      "problem": "多歌手合唱的音高範圍重疊、基頻靠近，諧波容易碰撞；現有模型多採 harmonic CQT（HCQT）輸入，但在訓練時即時混音生成資料的情境下計算成本高。",
+      "method": "系統性比較 HCQT 與線性 STFT 作為輸入表示，並測試更長的視窗、更寬的頻率覆蓋，以及把輸入限制在預測音高範圍內的影響。",
+      "data": "abs 頁未點名資料集與模型細節，需讀全文，本文未能解析 PDF，故不在此臆測。",
+      "findings": "儘管頻率解析度固定，STFT 表現優於 HCQT 且運算便宜得多；拉長視窗或加寬頻率範圍沒有進一步提升，限制輸入音高範圍則會縮小 STFT 的優勢。結論是更細的頻率解析度未必有助於合唱音高估計。",
+      "limitations": "僅依摘要整理，未驗證具體數字與資料集；針對多人合唱，是否適用於單人主唱與日文流行歌（含伴奏）尚待確認。",
+      "editor_note": "不是 karaoke 專屬，但屬於唱聲 pitch 的輸入表示選擇，對 mora-to-note 管線的特徵設計有參考價值。",
+      "relevance": {"mean_audio": 0, "karaoke_jp": 3}
+    }
+  ],
+  "repo": {
+    "full_name": "BilyHurington/MiliKara",
+    "url": "https://github.com/BilyHurington/MiliKara",
+    "description_zh": "用歌曲與歌詞自動做出逐字掃光日語卡拉 OK 影片（Python，MIT）：假名注音、人聲分離（MelBand／BS-RoFormer）、按拍（mora）級強制對齊，並以 libass 燒錄字幕，全部本機執行，另有詳細模式可逐字微調時間與本機 HTTP API。",
+    "stars": 46,
+    "updated": "2026-10-13",
+    "why": "幾乎就是 karaoke-jp 管線的完整參考實作：LRC 行時間當軟錨點、長音與促音處理、拍級對齊與 libass 渲染都已串好，可直接對照自己的 pipeline 找缺口。注意介面與文件以簡體中文為主，專案仍在快速迭代。",
+    "tags": ["karaoke", "lyrics alignment", "mora"]
+  },
+  "discord_messages": [
+    "# 每日 MIR 論文精選 - 2026-10-23\n🌐 網站: https://lanternko.github.io/mir-paper-digest/reports/2026-10-23.html\n\n## 論文 1｜Rubric-Based Optimization for Text-to-Music Generation\n🔗 https://arxiv.org/abs/2610.03589\n👥 Ping Wang, Guang Yang, Shao-Rong Su 等｜2026-10-02｜品質:新且重要\n\n**TL;DR**: 用音訊語言模型依評分準則打分，當作 DPO 與 DiffusionNFT 的獎勵來微調文字轉音樂模型；整體感知品質提升，但調性等可量測屬性無法靠它改善。\n\n**問題**: 文字轉音樂的對齊缺乏可靠獎勵訊號，單一自動評估器又容易被過度最佳化。\n**方法**: ALM 依準則打分，轉成偏好對做 DPO（MusicGen-small、ACE-Step）或當獎勵做 DiffusionNFT（ACE-Step）。\n**資料**: MusicCaps；指標 CLAP、SongEval、Audiobox-Aesthetics。\n**發現**: 三項指標同步進步；tempo、key、樂器用客觀獎勵最穩，ALM 準則對 key 無效。\n**限制**: 僅依摘要整理，未驗證數值；對 flow matching 小模型是否適用待確認。\n\n**洞見**: ALM 準則適合籠統的感知品質，可量測屬性應直接用客觀獎勵。\n**可做**: 對 MeanAudio 用 ALM 準則加 tempo／key 客觀獎勵做小規模偏好微調，並追蹤 CLAP 與 FAD。",
+    "## 論文 2｜Revisiting Input Time-frequency Representations in Multi-pitch Estimation for Vocal Ensembles\n🔗 https://arxiv.org/abs/2610.03656\n👥 Junyoung Koh, Hao-Wen Dong｜2026-10-02｜品質:新\n\n**TL;DR**: 在合唱等多人歌聲的多音高估計中，單純的線性 STFT 輸入反而勝過常用的 HCQT，運算也便宜得多，且較短的分析視窗更適合變動的唱聲音高。\n\n**問題**: 合唱音高重疊、諧波碰撞，HCQT 輸入在即時混音訓練下成本高。\n**方法**: 比較 HCQT 與線性 STFT，並測試視窗長度、頻率範圍與限制音高範圍的影響。\n**發現**: STFT 較準且便宜；拉長視窗或加寬頻率無進一步增益。\n**限制**: 僅依摘要整理，資料集未驗證；是否適用單人主唱加伴奏待確認。\n\n**洞見**: 唱聲音高變動大，時間解析度可能比頻率解析度重要，STFT 加短視窗是強基線。\n**可做**: 在 karaoke-jp 的 pitch 流程比較 STFT 與 CQT 類輸入的準確度與速度。",
+    "**GitHub Pick｜BilyHurington/MiliKara** ⭐46｜最近更新 2026-10-13\n🔗 https://github.com/BilyHurington/MiliKara\n\n用歌曲與歌詞自動做出逐字掃光日語卡拉 OK 影片（Python，MIT）：假名注音、人聲分離、拍級強制對齊，libass 燒錄字幕，全部本機執行。\n\n**為什麼選它**: 幾乎是 karaoke-jp 管線的完整參考實作，LRC 行時間當軟錨點、長音與促音處理、拍級對齊都已串好。文件以簡體中文為主，專案仍在快速迭代。\n\n## 今天的 take-away\n- 獎勵來源要依屬性分工：ALM 準則管感知品質，tempo／key 用客觀獎勵（2610.03589）。\n- 唱聲 pitch 的輸入表示不必迷信 HCQT，STFT 加短視窗是便宜的強基線（2610.03656）。\n- 工程參考：MiliKara 可直接對照 karaoke-jp 的拍級對齊與 LRC 渲染流程。"
+  ]
+}

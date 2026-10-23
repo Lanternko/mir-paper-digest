@@ -277,3 +277,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-10-22,1,paper,mean_audio,Exploring Representation Autoencoders for Text-to-Audio Generation,https://arxiv.org/abs/2610.26881,10.48550/arXiv.2610.26881,text-to-audio|representation autoencoder|rectified flow,新且重要
 2026-10-22,2,paper,general_mir,Structural Context from Audio and Lyric Evidence for Music Structure Analysis Using the New SheetSage-MSA Dataset,https://arxiv.org/abs/2610.26253,10.48550/arXiv.2610.26253,music structure analysis|lyrics|dataset,新
 2026-10-22,0,repo,github,Megageorgio/mlabeler,https://github.com/Megageorgio/mlabeler,,singing voice|labeling|DiffSinger,
+2026-10-23,1,paper,mean_audio,Rubric-Based Optimization for Text-to-Music Generation,https://arxiv.org/abs/2610.03589,10.48550/arXiv.2610.03589,text-to-music|reward alignment|DPO,新且重要
+2026-10-23,2,paper,general_mir,Revisiting Input Time-frequency Representations in Multi-pitch Estimation for Vocal Ensembles,https://arxiv.org/abs/2610.03656,10.48550/arXiv.2610.03656,multi-pitch estimation|singing voice|STFT,新
+2026-10-23,0,repo,github,BilyHurington/MiliKara,https://github.com/BilyHurington/MiliKara,,karaoke|lyrics alignment|mora,
