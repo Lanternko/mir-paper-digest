@@ -1,0 +1,102 @@
+{
+ "date": "2026-10-24",
+ "papers": [
+  {
+   "slot": 1,
+   "track": "karaoke_jp",
+   "title": "KunSet: A Corpus and Benchmark for Lyrics Alignment and Rhyme Retrieval in Kunqu Opera",
+   "authors": [
+    "Lejun Min",
+    "Siqi Chen",
+    "Delong Wang",
+    "Tong Zheng",
+    "Yunqi Lu",
+    "Zhishan Zhou",
+    "Ke Chen",
+    "Yuting Zhong",
+    "Junrong Li",
+    "Shengran Jin",
+    "Beixuan Pei",
+    "Jun Chen",
+    "Yang Li"
+   ],
+   "published": "2026-10-21",
+   "updated": "2026-10-21",
+   "source_url": "https://arxiv.org/abs/2610.29031",
+   "arxiv_id": "2610.29031",
+   "doi": "10.48550/arXiv.2610.29031",
+   "tags": [
+    "lyrics alignment",
+    "syllable-level 標註",
+    "傳統音樂語料"
+   ],
+   "quality": "新",
+   "tldr": "崑曲缺乏可分析的數位語料；KunSet 釋出 155.2 小時、48 萬筆音節級歌詞與音韻標註，並以 forced aligner 微調做歌詞對齊、凍結 HuBERT 做同韻檢索，兩項基準都優於基線。",
+   "insight": "洞見:這篇不是日文，但它處理的問題與 karaoke-jp 的歌詞對齊幾乎同構：唱腔拖得很長、字音被旋律拉伸，一般語音 forced aligner 很容易失準。作者的做法值得學——先用迭代式 ML 預標註，再由 200 多位受訓標註員在專用線上系統做兩輪審核，最後得到音節級的時間與音韻屬性（如韻腳）。對齊模型則是微調 forced-alignment 並加上「acoustic anchor decoder」，也就是在長拖腔下用聲學錨點穩住邊界。對 karaoke-jp 的啟發有兩個：一是『模型預標＋人工審核』的資料流程，可以拿來擴充日文 mora 級標註；二是把音韻屬性（韻、長音）掛在每個音節上，與 mora-to-note timing 的資料結構相容。要誠實說：語言是崑曲用的中文方言唱腔，與現代 J-pop 的節奏、混音與伴奏差很多，摘要也沒給具體的對齊誤差數字。",
+   "try_next": "可做:讀 KunSet 的標註流程與 acoustic anchor decoder 設計，拿一小批日文唱聲試做 mora 級預標＋人工修正，比較有／無錨點解碼在長音「ー」上的邊界誤差。",
+   "problem": "崑曲數位化稀少且難標註；要分析演唱需要音節級歌詞對齊，分析發音則需把韻腳等音韻屬性連到每個音節。",
+   "method": "建立 KunSet：總長 155.2 小時、其中 106.3 小時有標註，共 482,164 筆音節級歌詞與音韻屬性標註，經迭代式 ML 輔助預標並由 200 多位受訓標註員兩輪審核。基準有兩項：微調 forced-alignment 模型並加 acoustic anchor decoder 做歌詞對齊，以及用凍結的中文 HuBERT 特徵做同韻檢索。",
+   "data": "KunSet 崑曲演出語料（155.2 小時媒體、106.3 小時標註、48 萬筆標註）；資料與模型 checkpoint 皆公開釋出。",
+   "findings": "以 KunSet 訓練的模型在歌詞對齊與同韻檢索兩項任務上都勝過各自基線。",
+   "limitations": "摘要未給對齊誤差與檢索指標的具體數字，基線也未列出；內容是崑曲這種傳統唱腔，與日文流行歌的節奏、混音差異大，遷移性未知；只做對齊與同韻檢索兩項任務。",
+   "editor_note": "雖非日文，卻是少見的『長拖腔音節級對齊』語料與標註流程示範，標註管線和錨點解碼值得 karaoke-jp 借鏡。",
+   "relevance": {
+    "mean_audio": 1,
+    "karaoke_jp": 4
+   }
+  },
+  {
+   "slot": 2,
+   "track": "mean_audio",
+   "title": "MQAScore: Fine-Grained Text-Music Alignment Evaluation via Large Audio Language Model",
+   "authors": [
+    "Wei-Jaw Lee",
+    "Chun-Ping Wang",
+    "Xuanjun Chen",
+    "Yi-Hsuan Yang"
+   ],
+   "published": "2026-10-22",
+   "updated": "2026-10-22",
+   "source_url": "https://arxiv.org/abs/2610.31083",
+   "arxiv_id": "2610.31083",
+   "doi": "10.48550/arXiv.2610.31083",
+   "tags": [
+    "text-to-music 評估",
+    "LALM",
+    "CLAP 替代"
+   ],
+   "quality": "新且重要",
+   "tldr": "CLAP 式整體相似度把所有描述屬性壓成單一分數；MQAScore 改讓大型音訊語言模型逐一回答曲風、樂器、情緒、人聲、用途的是非題，提供更細緻、可解釋的文字–音樂對齊評分。",
+   "insight": "洞見:MeanAudio 這類 text-to-audio／music 系統最常用的 CLAP score 只給一個全域分數，看不出 prompt 裡哪個屬性沒被生成出來。MQAScore 把文字拆成原子概念，沿五個維度（genre、instrument、mood/theme、vocal、usage）各問 LALM 一個二元問題，用回答『是』的機率當分數，因此能指出漏了什麼。評估器本身是否可靠也被認真處理：作者用有無標註與 LLM 引導的概念替換建構驗證標籤，並提出 Sensitivity-Invariance Ratio，衡量評估器對『改變語意的替換』是否選擇性地敏感。結論是概念層級計分同時改善問答式與相似度式評估器。對 MeanAudio 很實用：可作為 FAD、CLAP 之外的補充指標，也可能當 reward alignment 的細粒度訊號。限制是它依賴某個 LALM 的判斷，LALM 自身的偏誤會進到分數；且只評 clip 級屬性，不管時間結構。",
+   "try_next": "可做:在 MeanAudio 的現有輸出上，同時算 CLAP 與 MQAScore，找出 CLAP 高但 vocal 或 instrument 維度失分的樣本，檢視是否與人耳感受一致。",
+   "problem": "文字–音樂對齊常用文字與音訊嵌入的全域相似度，把所有屬性壓成一個分數，看不出缺了哪一項描述。",
+   "method": "MQAScore 把描述拆成原子音樂概念，沿 genre、instrument、mood/theme、vocal、usage 五個 clip 級維度，以大型音訊語言模型對二元問題回答肯定的機率計分；並用存在／不存在標註加 LLM 引導的概念替換建立驗證標籤，提出 Sensitivity-Invariance Ratio 衡量評估器的選擇性。",
+   "data": "摘要未列出具體資料集名稱與規模；驗證標籤由 presence/absence 標註與 LLM 引導的概念替換構成。",
+   "findings": "概念層級計分同時改善問答式與相似度式評估器；MQAScore 可作為全域相似度之外、更可靠且可解釋的細粒度補充。",
+   "limitations": "摘要未給具體相關係數或數字；依賴 LALM 的判斷，其偏誤會影響分數；僅涵蓋 clip 級五個維度，不含時間結構與歌詞；投稿 ICASSP 2027，尚未同行審查。",
+   "editor_note": "CLAP score 的可解釋替代方案，對 MeanAudio 的評估與 reward 設計都有直接參考價值。",
+   "relevance": {
+    "mean_audio": 5,
+    "karaoke_jp": 1
+   }
+  }
+ ],
+ "repo": {
+  "full_name": "geazibuceli/lyriclens",
+  "url": "https://github.com/geazibuceli/lyriclens",
+  "description_zh": "本機執行的多語言唱聲歌詞轉錄工具：支援日文、韓文、中文、英文等七種語言與自動偵測，以 Whisper（Small／實驗性原生對齊／Large-v3）搭配可選的 Demucs 人聲分離，並排比較有無分離的結果；提供波形定位、分段編輯、匯入既有 TXT／LRC 歌詞，並可匯出 TXT、JSON、SRT、LRC。預設限制 10 分鐘、150 MiB。",
+  "stars": 1,
+  "updated": "2026-10-21",
+  "why": "直接對上 karaoke-jp 的『歌詞辨識＋人聲分離＋LRC』環節，且能並排比較有無人聲分離對辨識的影響，適合當 baseline 與人工校正介面參考。注意：repo 沒有標示授權，Whisper 對日文唱聲的準確度也需自行驗證；星數僅 1，屬早期專案。",
+  "tags": [
+   "lyrics transcription",
+   "vocal separation",
+   "LRC"
+  ]
+ },
+ "discord_messages": [
+  "# 每日 MIR 論文精選 - 2026-10-24\n🌐 完整報告: https://lanternko.github.io/mir-paper-digest/reports/2026-10-24.html\n\n**論文 1｜KunSet (Kunqu 歌詞對齊語料)**\n🔗 https://arxiv.org/abs/2610.29031\n🎯 主線: karaoke-jp／音節級歌詞對齊\n\n**TLDR**: 崑曲缺乏可分析的數位語料。KunSet 釋出 155.2 小時、48 萬筆音節級歌詞與音韻標註，歌詞對齊（微調 forced aligner＋acoustic anchor decoder）與同韻檢索（凍結 HuBERT）都優於基線。\n\n**為什麼選它**: 長拖腔下的音節級對齊與 karaoke-jp 的長音「ー」問題同構；『ML 預標＋兩輪人工審核』的標註流程可借來擴充日文 mora 級資料。\n\n**注意**: 摘要沒給對齊誤差數字；崑曲唱腔與日本流行歌差異大，遷移性未知。\n\n**下一步**: 試做日文唱聲 mora 級預標，比較有／無錨點解碼在長音上的邊界誤差。",
+  "**論文 2｜MQAScore (細粒度文字–音樂對齊評估)**\n🔗 https://arxiv.org/abs/2610.31083\n🎯 主線: MeanAudio／評估與 reward\n\n**TLDR**: CLAP 式整體相似度把所有屬性壓成一個分數。MQAScore 讓大型音訊語言模型針對 genre、instrument、mood/theme、vocal、usage 逐一回答是非題，以肯定機率計分，並提出 Sensitivity-Invariance Ratio 檢驗評估器可靠度。\n\n**為什麼選它**: 能指出 prompt 裡『哪個屬性』沒生成出來，可補充 FAD／CLAP，也可能成為 reward alignment 的細粒度訊號。\n\n**注意**: 依賴 LALM 的判斷與偏誤；只評 clip 級屬性；摘要沒給具體數字，投稿 ICASSP 2027 尚未審查。\n\n**下一步**: 對 MeanAudio 輸出同時算 CLAP 與 MQAScore，找 CLAP 高但 vocal／instrument 失分的樣本，對照人耳。",
+  "**GitHub Pick｜geazibuceli/lyriclens** ⭐1｜最近更新 2026-10-21\n🔗 https://github.com/geazibuceli/lyriclens\n\n本機多語言唱聲歌詞轉錄工具：Whisper（Small／Large-v3）＋可選 Demucs 人聲分離，可並排比較有無分離的結果；支援日文等七種語言、波形定位與分段編輯、匯入 TXT／LRC，匯出 TXT／JSON／SRT／LRC。\n\n**為什麼選它**: 對上 karaoke-jp 的辨識＋人聲分離＋LRC 環節，適合當 baseline 與校正介面參考；注意 repo 未標示授權、星數僅 1、日文唱聲準確度需自行驗證。\n\n## 今天的 take-away\n- 長拖腔下的音節級對齊需要好資料與錨點解碼；預標＋人工審核流程可複用到日文 mora 標註（2610.29031）。\n- 單一 CLAP 分數看不出缺了哪個屬性；概念級 LALM 評分是更可解釋的補充（2610.31083）。\n- 工程：LyricLens 讓『有無人聲分離』的歌詞辨識可並排比較，值得當 baseline。"
+ ]
+}

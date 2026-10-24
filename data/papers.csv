@@ -280,3 +280,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-10-23,1,paper,mean_audio,Rubric-Based Optimization for Text-to-Music Generation,https://arxiv.org/abs/2610.03589,10.48550/arXiv.2610.03589,text-to-music|reward alignment|DPO,新且重要
 2026-10-23,2,paper,general_mir,Revisiting Input Time-frequency Representations in Multi-pitch Estimation for Vocal Ensembles,https://arxiv.org/abs/2610.03656,10.48550/arXiv.2610.03656,multi-pitch estimation|singing voice|STFT,新
 2026-10-23,0,repo,github,BilyHurington/MiliKara,https://github.com/BilyHurington/MiliKara,,karaoke|lyrics alignment|mora,
+2026-10-24,1,paper,karaoke_jp,KunSet: A Corpus and Benchmark for Lyrics Alignment and Rhyme Retrieval in Kunqu Opera,https://arxiv.org/abs/2610.29031,10.48550/arXiv.2610.29031,lyrics alignment|syllable-level 標註|傳統音樂語料,新
+2026-10-24,2,paper,mean_audio,MQAScore: Fine-Grained Text-Music Alignment Evaluation via Large Audio Language Model,https://arxiv.org/abs/2610.31083,10.48550/arXiv.2610.31083,text-to-music 評估|LALM|CLAP 替代,新且重要
+2026-10-24,0,repo,github,geazibuceli/lyriclens,https://github.com/geazibuceli/lyriclens,,lyrics transcription|vocal separation|LRC,
