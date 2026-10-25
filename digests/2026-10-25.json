@@ -1,0 +1,65 @@
+{
+ "date": "2026-10-25",
+ "papers": [
+  {
+   "slot": 1,
+   "track": "karaoke_jp",
+   "title": "Reference-Free Singing Pitch Correction via Music-Constrained Sequence Editing",
+   "authors": ["Biao Dong", "Jiajun Li", "Binzhen Zhu", "Mingwei Yi", "Tong Liu", "Yuanhao Zhang", "Jiqing Han", "Yongjun He"],
+   "published": "2026-10-08",
+   "updated": "2026-10-08",
+   "source_url": "https://arxiv.org/abs/2610.11524",
+   "arxiv_id": "2610.11524",
+   "doi": "10.48550/arXiv.2610.11524",
+   "tags": ["唱聲 pitch", "音高修正", "符號音樂編碼器"],
+   "quality": "新",
+   "tldr": "不靠目標旋律或伴奏，只從演唱本身判斷每個音符要不要修、修多少；音符級音高準確率由 73.25 提升到 83.43，比情境基線高 3.99 個百分點。",
+   "insight": "洞見:傳統修音需要參考旋律或伴奏，但卡拉 OK 場景常常兩者都沒有。這篇把問題改寫成『音符序列編輯』：用預訓練符號音樂編碼器加輕量的唱聲領域 adapter 讀入演唱 MIDI，再由兩個輕量輸出頭分別預測『該不該修』與『帶正負號的音高偏移』，最後用由估計調性分布得到的 tonal prior 對候選偏移重新排序，讓修正偏向調內音。對 karaoke-jp 有用的是兩點：一是把唱聲先轉成音符層級再做判斷，與 mora-to-note 的資料結構相容；二是『不用參考譜也能評分／修正』可延伸成演唱評分或自動校正 MIDI 的後處理。限制是它只處理音符級音高，不含音色與時間；輸入是演唱 MIDI，上游轉錄錯誤會直接傳進來；摘要未提日文資料。",
+   "try_next": "可做:拿 karaoke-jp 的人聲 pitch 轉錄輸出當輸入，檢查該方法的 tonal prior 在日文流行歌轉調與調式不明處是否過度修正，並與簡單的最近半音量化基線比較。",
+   "problem": "既有唱聲音高修正多半依賴目標旋律或伴奏軌，但實際使用時這些參考常常拿不到。",
+   "method": "把無參考修音定義為受音樂約束的序列編輯：預訓練符號音樂編碼器加輕量唱聲 adapter 產生上下文表示；兩個輕量輸出頭以分解式音高編輯分布聯合建模『是否需要修正』與『帶正負號的音高修改量』；再用由估計調性分布導出的 tonal prior 對候選偏移重排序。",
+   "data": "真實的業餘與專業歌手成對演唱錄音（摘要未給具體資料集名稱與規模）。",
+   "findings": "音符級音高準確率從 73.25 提升到 83.43，比以上下文為基礎的基線高 3.99 個百分點，並在修正錯誤與保留原本正確音符之間取得平衡。",
+   "limitations": "摘要未說明資料集名稱、語言與規模；只在音符級音高上評估，不含音色、節奏與主觀聽感；依賴上游 MIDI 轉錄品質；投稿 ICASSP 2027，尚未同行審查。",
+   "editor_note": "無需參考譜的音符級修正與評分思路，可直接接在 karaoke-jp 的唱聲 pitch／MIDI 輸出後面。",
+   "relevance": {"mean_audio": 1, "karaoke_jp": 4}
+  },
+  {
+   "slot": 2,
+   "track": "mean_audio",
+   "title": "MIDI-REPA: Improving Text-to-Music Generation with Symbolic Representation Alignment",
+   "authors": ["Song-Ze Yu", "Fang-Duo Tsai", "Yi-Hsuan Yang"],
+   "published": "2026-10-14",
+   "updated": "2026-10-14",
+   "source_url": "https://arxiv.org/abs/2610.20967",
+   "arxiv_id": "2610.20967",
+   "doi": "10.48550/arXiv.2610.20967",
+   "tags": ["text-to-music", "flow matching", "表示對齊"],
+   "quality": "新且重要",
+   "tldr": "用自動音樂轉錄得到的 MIDI 鋼琴捲簾，對齊 flow-matching DiT 的中間層表示；不增加訓練資料，單張 RTX 3090 約 31 小時即可訓練並維持競爭力。",
+   "insight": "洞見:旋律、節奏、和聲、結構用符號形式表示很精簡，但 text-to-music 模型通常只從稠密音訊自己學。MIDI-REPA 借用 REPA 的想法：用自動音樂轉錄（MuScriptor）從訓練音訊導出 MIDI／鋼琴捲簾，當作監督訊號去對齊 flow-matching DiT 的中間表示。作者系統性地探討『對齊什麼、在哪一層、在流軌跡的哪個時間』，結論是把鋼琴捲簾對齊到較早的 DiT 層、並貫穿完整流軌跡效果最好。這對 MeanAudio 很有參考價值：它是便宜的輔助 loss，不需要新資料或改架構，且與 flow matching／rectified flow 主線相容。限制是只在 122M 的 FluxAudio-S 與 ICME 學術挑戰設定上驗證，MIDI 品質取決於轉錄器；鋼琴捲簾對非音高類音訊（音效、人聲音色）幫助未知。",
+   "try_next": "可做:在 MeanAudio 的 DiT 早期層加一個鋼琴捲簾對齊 loss（先用公開的 JamendoMIDI 與轉錄管線），比較有無對齊的 CLAP、FAD 與收斂速度。",
+   "problem": "text-to-music 靠擴大模型、資料與算力，卻仍直接從稠密音訊學習音樂結構，而旋律、節奏、和聲其實可以用符號形式緊湊表示。",
+   "method": "以 122M 參數的 FluxAudio-S（2026 ICME Academic Text-To-Music Challenge 基線）為底，從自動音樂轉錄得到 MIDI 監督，對齊 flow-matching DiT 的中間表示；探討對齊的內容、層位與流時間，最佳為 MuScriptor 導出的鋼琴捲簾對齊早期 DiT 層並貫穿全部流軌跡。",
+   "data": "ICME 學術 text-to-music 挑戰設定；作者釋出轉錄管線與 JamendoMIDI（由 Jamendo 音樂轉錄得到的 MIDI）。",
+   "findings": "不用額外訓練資料或技巧，在 ATTM 客觀指標上仍具競爭力，且可在單張 RTX 3090 上約 31 小時訓練完成；符號監督是簡單又廉價的學習訊號。",
+   "limitations": "僅在小型 122M 模型與單一挑戰設定驗證；結果依賴自動轉錄品質；摘要未給具體指標數字；5 頁短文，投稿 ICASSP 2027，尚未同行審查。",
+   "editor_note": "低成本、可直接移植到 flow-matching 音樂生成的輔助監督，作者也釋出程式與資料，值得 MeanAudio 實驗。",
+   "relevance": {"mean_audio": 5, "karaoke_jp": 1}
+  }
+ ],
+ "repo": {
+  "full_name": "lexasoft123/SingZ",
+  "url": "https://github.com/lexasoft123/SingZ",
+  "description_zh": "給歌手練習用的跨平台應用：丟入歌曲即用 AI 拆成人聲、鼓、貝斯、吉他、鋼琴、其他六軌，可逐軌靜音（關掉人聲即卡拉 OK），並提供同步歌詞、即時音高表、移調與引導式聲樂訓練；桌面版為 Electron + React + TypeScript，全部在本機執行，支援日文等多國語言介面。",
+  "stars": 8,
+  "updated": "2026-10-25",
+  "why": "把人聲分離、同步卡拉 OK 歌詞與即時 pitch 偵測整合成可用產品，適合當 karaoke-jp 前後端流程與 UX 的參考。注意：repo 未標示授權，歌詞同步與音高偵測的準確度未見公開評估，需自行驗證。",
+  "tags": ["karaoke", "source separation", "pitch detection"]
+ },
+ "discord_messages": [
+  "# 每日 MIR 論文精選 - 2026-10-25\n🌐 完整報告: https://lanternko.github.io/mir-paper-digest/reports/2026-10-25.html\n\n**論文 1｜無參考唱聲音高修正**\n🔗 https://arxiv.org/abs/2610.11524\n🎯 主線: karaoke-jp／唱聲 pitch\n\n**TLDR**: 不靠目標旋律或伴奏，只從演唱本身判斷每個音符要不要修、修多少；音符級音高準確率由 73.25 提升到 83.43，比情境基線高 3.99 個百分點。\n\n**為什麼選它**: 把唱聲先轉成音符層級再做『修正必要性＋帶號偏移』預測，並用調性 prior 重排序；與 mora-to-note 的資料結構相容，可延伸成演唱評分或 MIDI 後處理。\n\n**注意**: 摘要未說明資料集與語言；只評音符級音高；依賴上游 MIDI 轉錄；投稿 ICASSP 2027 尚未審查。\n\n**下一步**: 把 karaoke-jp 的 pitch 轉錄輸出餵進去，與最近半音量化基線比較。",
+  "**論文 2｜MIDI-REPA (符號表示對齊的 text-to-music)**\n🔗 https://arxiv.org/abs/2610.20967\n🎯 主線: MeanAudio／flow matching 生成\n\n**TLDR**: 用自動音樂轉錄得到的 MIDI 鋼琴捲簾，對齊 flow-matching DiT 的中間層表示；不增加訓練資料，單張 RTX 3090 約 31 小時即可訓練並維持競爭力。\n\n**為什麼選它**: 是便宜的輔助 loss，不改架構、與 flow matching 主線相容；最佳設定是把鋼琴捲簾對齊到早期 DiT 層並貫穿全流軌跡；作者釋出轉錄管線與 JamendoMIDI。\n\n**注意**: 只在 122M 的 FluxAudio-S 與單一挑戰設定驗證；依賴轉錄品質；摘要無具體數字；投稿 ICASSP 2027 尚未審查。\n\n**下一步**: 在 MeanAudio 早期 DiT 層加鋼琴捲簾對齊 loss，比較 CLAP、FAD 與收斂速度。",
+  "**GitHub Pick｜lexasoft123/SingZ** ⭐8｜最近更新 2026-10-25\n🔗 https://github.com/lexasoft123/SingZ\n\n跨平台歌手練習應用：AI 拆成六軌（人聲／鼓／貝斯／吉他／鋼琴／其他）、逐軌靜音即成卡拉 OK，附同步歌詞、即時音高表、移調與聲樂訓練；全部本機執行，支援日文介面。\n\n**為什麼選它**: 整合人聲分離、同步歌詞與 pitch 偵測，適合當 karaoke-jp 流程與 UX 參考；注意未標示授權、準確度無公開評估。\n\n## 今天的 take-away\n- 唱聲先轉音符層級，就能做不需參考譜的修正與評分（2610.11524）。\n- 符號（MIDI）監督是 flow-matching 音樂生成的廉價輔助訊號，值得在 MeanAudio 試（2610.20967）。\n- 工程：SingZ 示範分離＋歌詞＋音高的完整練唱產品流程。"
+ ]
+}
