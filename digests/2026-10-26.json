@@ -1,0 +1,97 @@
+{
+ "date": "2026-10-26",
+ "papers": [
+  {
+   "slot": 1,
+   "track": "karaoke_jp",
+   "title": "ARIA: Audio-Driven Melody-Tone Relation Modeling for Cantonese Lyric Authoring",
+   "authors": [
+    "Shengyu Li",
+    "Jinting Wang",
+    "Li Liu"
+   ],
+   "published": "2026-10-06",
+   "updated": "2026-10-06",
+   "source_url": "https://arxiv.org/abs/2610.07902",
+   "arxiv_id": "2610.07902",
+   "doi": "10.48550/arXiv.2610.07902",
+   "tags": [
+    "lyric generation",
+    "tone-melody alignment",
+    "singing audio"
+   ],
+   "quality": "新",
+   "tldr": "ARIA 從帶字元時間戳的粵語歌聲音訊預測 0243 聲調序列，再以檢索增強方式生成符合聲調的歌詞，並附帶新建的對齊資料集。",
+   "insight": "洞見:粵語聲調與旋律音高必須咬合，這和日文 mora 與音符的對應是同一類「語言韻律 ↔ 旋律」約束；ARIA 示範了可從歌聲音訊（而非符號旋律）直接推出這種約束。",
+   "try_next": "可做:把「由已對齊歌聲預測語言韻律標籤」的想法搬到 karaoke-jp，試著從人聲 + 字級時間戳預測日文音高重音（高低）序列，檢查它與 pitch 軌跡的一致度。",
+   "problem": "粵語填詞要求詞的聲調貼合旋律音高，但既有歌詞生成方法多假設已有符號旋律；實際創作者常只有哼唱或演唱音訊，音高隱含、帶雜訊且無結構。",
+   "method": "兩階段：(1) TRATE（Tri-Stream Relation-Aware Tone Estimator）結合多種聲學線索與聲調關係結構，從帶字元時間戳的音訊預測 0243 聲調序列；(2) DRA-TCLG（解耦的檢索增強聲調條件歌詞生成器）依預測的聲調規劃，搭配檢索到的詞彙指引生成流暢歌詞。",
+   "data": "作者自建大規模資料集：真實粵語歌唱錄音，含對齊的音訊、粵拼（Jyutping）與 0243 聲調標註。具體規模請見論文。",
+   "findings": "摘要宣稱在聲調預測與聲調一致的歌詞生成兩項任務上皆有強勁結果（具體數字本摘要未取得，需讀全文）。論文為 EMNLP 2026 Findings 接收稿，24 頁含附錄。",
+   "limitations": "僅讀過摘要，未驗證實驗數字與基線；針對粵語，遷移到日文需重新定義韻律標籤；輸入需字元級時間戳，等於依賴前置的歌詞對齊品質。",
+   "editor_note": "今天最貼 karaoke-jp / 歌詞線：雖然是粵語，但「從歌聲對齊資料學語言韻律與旋律關係」的設計可借鏡。",
+   "relevance": {
+    "mean_audio": 1,
+    "karaoke_jp": 4
+   }
+  },
+  {
+   "slot": 2,
+   "track": "general_mir",
+   "title": "HMU-Bench: Hierarchical Music Understanding Benchmark for Omni Models",
+   "authors": [
+    "Zheqi Dai",
+    "Boyang Wang",
+    "Zhiyue Wu",
+    "Yiyang Xu",
+    "Xinming Shi",
+    "Ruibin Yuan",
+    "Xuerui Yang",
+    "Chao Yan",
+    "Qiuqiang Kong"
+   ],
+   "published": "2026-10-11",
+   "updated": "2026-10-11",
+   "source_url": "https://arxiv.org/abs/2610.15773",
+   "arxiv_id": "2610.15773",
+   "doi": "10.48550/arXiv.2610.15773",
+   "tags": [
+    "music understanding",
+    "benchmark",
+    "omni models"
+   ],
+   "quality": "重要",
+   "tldr": "HMU-Bench 是中英雙語音樂理解基準，分記譜與音訊兩部分；七個 omni 模型在記譜表現佳，但音訊平均分在 0–4 量表上都沒超過 1.4。",
+   "insight": "洞見:記譜（符號）與音訊的排名只有弱相關，代表「看得懂樂譜」不等於「聽得懂音樂」，評估 Music Flamingo 類模型時兩種模態必須分開報告。",
+   "try_next": "可做:挑 HMU-Bench 的音訊子集（92 段錄音），用自己的音樂理解模型跑一遍，並比較 LLM 評分與人工核對在八度、移調題上的差異。",
+   "problem": "現有 omni 模型的音樂理解能力缺乏同時涵蓋記譜與音訊、並區分推理層級的評測，且 LLM 評分可能漏掉細節錯誤。",
+   "method": "建立雙語基準：記譜部分有 1,029 組中英題對，涵蓋六個音樂領域，並標為擷取、單步推理、多步推理；音訊部分有 92 段錄音共 460 組題對，編成五種範圍與難度配置。題目與參考答案經人工審查，評估七個 omni 模型。",
+   "data": "所有音樂皆由 Suno 生成（非真實錄音）；資料、標註、評估提示詞與已評分回應預定於 GitHub 釋出。",
+   "findings": "最強模型在記譜部分得分高，但音訊部分沒有任何模型平均超過 1.4（0–4）；記譜與音訊排名僅弱相關；移調案例研究發現 LLM 評分漏掉的八度錯誤。作者建議分開報告模態，符號輸出需做事件層級檢查。",
+   "limitations": "僅 5 頁短文，僅讀過摘要；音樂全為 Suno 合成，可能與真實錄音分佈不同；題量不大（音訊 460 題），且評分仍依賴 LLM 評審。",
+   "editor_note": "Music Flamingo 與音樂理解主線的評測參考；重點是音訊模態仍遠落後，而不是記譜分數。",
+   "relevance": {
+    "mean_audio": 2,
+    "karaoke_jp": 2
+   }
+  }
+ ],
+ "repo": {
+  "full_name": "lucidrains/HS-TasNet",
+  "url": "https://github.com/lucidrains/HS-TasNet",
+  "description_zh": "HS-TasNet（Hybrid Spectrogram-TasNet，L-Acoustics 提出的即時低延遲音樂音源分離）的 PyTorch 實作，附 Trainer、MUSDB 訓練腳本與 sounddevice 即時串流推論，可替換 RNN 模組。MIT 授權。",
+  "stars": 112,
+  "updated": "2026-10-13",
+  "why": "karaoke-jp 的第一步是人聲分離；這個專案是輕量、可讀的低延遲分離實作，適合拿來做即時卡拉 OK 場景或改 RNN 骨幹的實驗。注意：最近推送為 10 月中，非極新，且為社群重現而非官方權重。",
+  "tags": [
+   "source separation",
+   "low-latency",
+   "real-time"
+  ]
+ },
+ "discord_messages": [
+  "# 每日 MIR 論文精選 - 2026-10-26\n🌐 完整報告: https://lanternko.github.io/mir-paper-digest/reports/2026-10-26.html\n\n**論文 1｜karaoke-jp｜新**\n**ARIA: Audio-Driven Melody-Tone Relation Modeling for Cantonese Lyric Authoring**\nhttps://arxiv.org/abs/2610.07902\n\nARIA 從帶字元時間戳的粵語歌聲音訊預測 0243 聲調序列，再以檢索增強方式生成符合聲調的歌詞，並附帶新建的對齊資料集。\n\n洞見:粵語聲調與旋律音高必須咬合，這和日文 mora 與音符的對應是同一類「語言韻律 ↔ 旋律」約束；ARIA 示範了可從歌聲音訊（而非符號旋律）直接推出這種約束。\n可做:把「由已對齊歌聲預測語言韻律標籤」的想法搬到 karaoke-jp，試著從人聲 + 字級時間戳預測日文音高重音（高低）序列，檢查它與 pitch 軌跡的一致度。\n\n限制: 僅讀過摘要，未驗證實驗數字與基線；針對粵語，遷移到日文需重新定義韻律標籤；輸入需字元級時間戳，等於依賴前置的歌詞對齊品質。",
+  "**論文 2｜MIR｜重要**\n**HMU-Bench: Hierarchical Music Understanding Benchmark for Omni Models**\nhttps://arxiv.org/abs/2610.15773\n\nHMU-Bench 是中英雙語音樂理解基準，分記譜與音訊兩部分；七個 omni 模型在記譜表現佳，但音訊平均分在 0–4 量表上都沒超過 1.4。\n\n洞見:記譜（符號）與音訊的排名只有弱相關，代表「看得懂樂譜」不等於「聽得懂音樂」，評估 Music Flamingo 類模型時兩種模態必須分開報告。\n可做:挑 HMU-Bench 的音訊子集（92 段錄音），用自己的音樂理解模型跑一遍，並比較 LLM 評分與人工核對在八度、移調題上的差異。\n\n限制: 僅 5 頁短文，僅讀過摘要；音樂全為 Suno 合成，可能與真實錄音分佈不同；題量不大（音訊 460 題），且評分仍依賴 LLM 評審。",
+  "**GitHub 精選｜lucidrains/HS-TasNet** (★112)\nhttps://github.com/lucidrains/HS-TasNet\n\nHS-TasNet（Hybrid Spectrogram-TasNet，L-Acoustics 提出的即時低延遲音樂音源分離）的 PyTorch 實作，附 Trainer、MUSDB 訓練腳本與 sounddevice 即時串流推論，可替換 RNN 模組。MIT 授權。\n\n為什麼選它: karaoke-jp 的第一步是人聲分離；這個專案是輕量、可讀的低延遲分離實作，適合拿來做即時卡拉 OK 場景或改 RNN 骨幹的實驗。注意：最近推送為 10 月中，非極新，且為社群重現而非官方權重。\n\n## 今天的 take-away\n- 歌詞/歌聲相關的語言韻律（聲調、重音、mora）可以從已對齊的歌聲資料學到，ARIA 是粵語版範例。\n- 音樂理解評測要把記譜與音訊分開看：HMU-Bench 顯示音訊端仍是主要弱點。\n- 做 karaoke 管線時，人聲分離的延遲與可改性值得先壓測，HS-TasNet 可當輕量起點。"
+ ]
+}

@@ -286,3 +286,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-10-25,1,paper,karaoke_jp,Reference-Free Singing Pitch Correction via Music-Constrained Sequence Editing,https://arxiv.org/abs/2610.11524,10.48550/arXiv.2610.11524,唱聲 pitch|音高修正|符號音樂編碼器,新
 2026-10-25,2,paper,mean_audio,MIDI-REPA: Improving Text-to-Music Generation with Symbolic Representation Alignment,https://arxiv.org/abs/2610.20967,10.48550/arXiv.2610.20967,text-to-music|flow matching|表示對齊,新且重要
 2026-10-25,0,repo,github,lexasoft123/SingZ,https://github.com/lexasoft123/SingZ,,karaoke|source separation|pitch detection,
+2026-10-26,1,paper,karaoke_jp,ARIA: Audio-Driven Melody-Tone Relation Modeling for Cantonese Lyric Authoring,https://arxiv.org/abs/2610.07902,10.48550/arXiv.2610.07902,lyric generation|tone-melody alignment|singing audio,新
+2026-10-26,2,paper,general_mir,HMU-Bench: Hierarchical Music Understanding Benchmark for Omni Models,https://arxiv.org/abs/2610.15773,10.48550/arXiv.2610.15773,music understanding|benchmark|omni models,重要
+2026-10-26,0,repo,github,lucidrains/HS-TasNet,https://github.com/lucidrains/HS-TasNet,,source separation|low-latency|real-time,
