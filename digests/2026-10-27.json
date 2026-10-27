@@ -1,0 +1,94 @@
+{
+ "date": "2026-10-27",
+ "papers": [
+  {
+   "slot": 1,
+   "track": "mean_audio",
+   "title": "Melody Guidance for Audio Diffusion Models Without Retraining",
+   "authors": [
+    "Cristobal Andrade",
+    "Sebastian J. Schlecht",
+    "Ben Maman",
+    "Meinard Müller"
+   ],
+   "published": "2026-10-23",
+   "updated": "2026-10-23",
+   "source_url": "https://arxiv.org/abs/2610.32211",
+   "arxiv_id": "2610.32211",
+   "doi": "10.48550/arXiv.2610.32211",
+   "tags": [
+    "melody control",
+    "diffusion guidance",
+    "singing voice"
+   ],
+   "quality": "新",
+   "tldr": "不重新訓練，用可微分音高偵測器在取樣時引導既有無條件音訊擴散模型，並以合成旋律初始化，讓生成的鋼琴、吉他與歌聲跟隨目標旋律。",
+   "insight": "洞見:旋律控制不必靠成對的音高/MIDI 資料訓練條件模型；把可微分 pitch detector 當取樣期引導，就能替現成生成模型加上控制。",
+   "try_next": "可做:把同樣的取樣期音高引導接到 MeanAudio 的 flow matching 取樣器（改用 ODE 步中的梯度修正），測試能否在不微調下控制旋律輪廓。",
+   "problem": "旋律控制通常需要在音訊與音高曲線或 MIDI 配對資料上訓練條件生成模型，成本高且無法套用到既有的無條件模型。",
+   "method": "推論時以可微分音高偵測器計算與目標旋律的差距，並把梯度導向與擴散模型本身的分佈先驗取得平衡；為了穩定，取樣起點用目標旋律的簡單合成版本取代純雜訊。作者稱主要貢獻是這個平衡兩種方向的取樣方法。",
+   "data": "摘要提到在鋼琴、吉他與歌聲上實驗；具體資料集與模型名稱本摘要未取得，需讀全文。",
+   "findings": "摘要宣稱旋律準確度可與專為旋律控制訓練的條件模型相當，同時保留音質；具體數字未取得。",
+   "limitations": "僅讀過摘要，未驗證數字與基線；方法依賴可微分音高偵測器的品質，多音（polyphonic）或複雜混音情境未見說明；引導會增加取樣運算量，細節待查。",
+   "editor_note": "今天最貼 MeanAudio 主線：訓練免費的控制手法，且實驗含歌聲，也能對照 karaoke-jp 的唱聲 pitch。",
+   "relevance": {
+    "mean_audio": 4,
+    "karaoke_jp": 2
+   }
+  },
+  {
+   "slot": 2,
+   "track": "karaoke_jp",
+   "title": "Interpretable Singing Emotion Recognition Using Acoustic and Vocal Technique Features",
+   "authors": [
+    "Fotini Kiriakopoulou",
+    "Vassilis Lyberatos",
+    "Spyridon Kantarelis",
+    "Athanasios Voulodimos",
+    "Giorgos Stamou"
+   ],
+   "published": "2026-10-23",
+   "updated": "2026-10-23",
+   "source_url": "https://arxiv.org/abs/2610.32629",
+   "arxiv_id": "2610.32629",
+   "doi": "10.48550/arXiv.2610.32629",
+   "tags": [
+    "singing voice",
+    "emotion recognition",
+    "vocal technique"
+   ],
+   "quality": "待觀察",
+   "tldr": "以韻律、頻譜、音素與唱法技巧描述子建立可解釋的歌唱情緒辨識，並用 SHAP 與 Grad-CAM 分析，發現顫音與咽音技巧是情緒表達的重要線索。",
+   "insight": "洞見:把歌聲當成獨立訊號、用少量歌唱專屬特徵，就能降低跨歌手變異並讓模型決策可追溯；顫音與發音速率的互動也提示唱法特徵值得納入唱聲分析。",
+   "try_next": "可做:從 karaoke-jp 的人聲分離輸出抽取顫音、音高與發音速率特徵，檢查它們與歌詞對齊誤差或演唱風格是否相關。",
+   "problem": "歌唱情緒辨識多靠深度模型，準確但難以解釋是哪些嗓音特性驅動情緒，也常忽略歌聲是獨特訊號。",
+   "method": "提出以一組精簡的歌唱專屬描述子（涵蓋韻律、頻譜、音素與唱法技巧）為輸入的可解釋框架，用 SHAP 解釋模型決策，並以 Grad-CAM 質性檢視唱法技巧表徵。",
+   "data": "摘要提到在 VocalSet 上做域外評估；訓練所用的主要情緒資料集本摘要未取得，需讀全文。",
+   "findings": "摘要宣稱歌唱專屬特徵降低跨歌手變異，唱法描述子提供可解釋洞見；顫音與咽音技巧是情緒表達的顯著線索，且顫音的作用與發音速率相關。具體準確率未取得。",
+   "limitations": "僅讀過摘要，未驗證數字；與歌詞辨識或對齊無直接關係，對 karaoke-jp 管線屬間接參考；資料語言與規模不明。",
+   "editor_note": "與主線距離較遠，列為「待觀察」；價值在於唱聲特徵（顫音、發音速率）的可解釋分析方法。",
+   "relevance": {
+    "mean_audio": 1,
+    "karaoke_jp": 2
+   }
+  }
+ ],
+ "repo": {
+  "full_name": "FuouM/Lyric-Sync",
+  "url": "https://github.com/FuouM/Lyric-Sync",
+  "description_zh": "歌聲歌詞逐音節計時工具：輸入人聲分軌與歌詞，輸出詞級與音節級時間戳；內含 CLI/函式庫與 DAW 風格網頁編輯器（波形、音高、音節片段、Auto-time），模型以 ONNX 本機執行，使用 HuBERT 強制對齊、RMVPE 等。Apache-2.0。",
+  "stars": 0,
+  "updated": "2026-10-26",
+  "why": "直接對應 karaoke-jp 的歌詞對齊與 LRC 時間軸：支援英文與日文（romaji）歌詞，可釘選可信時間點再重解其餘。注意：星數為 0、專案很新，且日文需先轉 romaji，不支援中文；模型約 800 MB。",
+  "tags": [
+   "lyrics alignment",
+   "syllable timing",
+   "singing voice"
+  ]
+ },
+ "discord_messages": [
+  "# 每日 MIR 論文精選 - 2026-10-27\n🌐 完整報告: https://lanternko.github.io/mir-paper-digest/reports/2026-10-27.html\n\n**論文 1｜MeanAudio｜新**\n**Melody Guidance for Audio Diffusion Models Without Retraining**\nhttps://arxiv.org/abs/2610.32211\n\n不重新訓練，用可微分音高偵測器在取樣時引導既有無條件音訊擴散模型，並以合成旋律初始化，讓生成的鋼琴、吉他與歌聲跟隨目標旋律。\n\n洞見:旋律控制不必靠成對的音高/MIDI 資料訓練條件模型；把可微分 pitch detector 當取樣期引導，就能替現成生成模型加上控制。\n可做:把同樣的取樣期音高引導接到 MeanAudio 的 flow matching 取樣器（改用 ODE 步中的梯度修正），測試能否在不微調下控制旋律輪廓。\n\n限制: 僅讀過摘要，未驗證數字與基線；方法依賴可微分音高偵測器的品質，多音（polyphonic）或複雜混音情境未見說明；引導會增加取樣運算量，細節待查。",
+  "**論文 2｜karaoke-jp｜待觀察**\n**Interpretable Singing Emotion Recognition Using Acoustic and Vocal Technique Features**\nhttps://arxiv.org/abs/2610.32629\n\n以韻律、頻譜、音素與唱法技巧描述子建立可解釋的歌唱情緒辨識，並用 SHAP 與 Grad-CAM 分析，發現顫音與咽音技巧是情緒表達的重要線索。\n\n洞見:把歌聲當成獨立訊號、用少量歌唱專屬特徵，就能降低跨歌手變異並讓模型決策可追溯；顫音與發音速率的互動也提示唱法特徵值得納入唱聲分析。\n可做:從 karaoke-jp 的人聲分離輸出抽取顫音、音高與發音速率特徵，檢查它們與歌詞對齊誤差或演唱風格是否相關。\n\n限制: 僅讀過摘要，未驗證數字；與歌詞辨識或對齊無直接關係，對 karaoke-jp 管線屬間接參考；資料語言與規模不明。",
+  "**GitHub 精選｜FuouM/Lyric-Sync** (★0)\nhttps://github.com/FuouM/Lyric-Sync\n\n歌聲歌詞逐音節計時工具：輸入人聲分軌與歌詞，輸出詞級與音節級時間戳；內含 CLI/函式庫與 DAW 風格網頁編輯器（波形、音高、音節片段、Auto-time），模型以 ONNX 本機執行，使用 HuBERT 強制對齊、RMVPE 等。Apache-2.0。\n\n為什麼選它: 直接對應 karaoke-jp 的歌詞對齊與 LRC 時間軸：支援英文與日文（romaji）歌詞，可釘選可信時間點再重解其餘。注意：星數為 0、專案很新，且日文需先轉 romaji，不支援中文；模型約 800 MB。\n\n## 今天的 take-away\n- 旋律控制可以在取樣期靠可微分音高偵測器達成，不必重訓條件模型，值得試在 MeanAudio 的取樣器上。\n- 歌唱情緒分析顯示顫音與發音速率等唱法特徵具可解釋性，可當唱聲分析的輔助特徵。\n- 歌詞音節級對齊已有可本機執行、可人工修正的工具，Lyric-Sync 適合拿來對照 karaoke-jp 的對齊流程。"
+ ]
+}

@@ -289,3 +289,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-10-26,1,paper,karaoke_jp,ARIA: Audio-Driven Melody-Tone Relation Modeling for Cantonese Lyric Authoring,https://arxiv.org/abs/2610.07902,10.48550/arXiv.2610.07902,lyric generation|tone-melody alignment|singing audio,新
 2026-10-26,2,paper,general_mir,HMU-Bench: Hierarchical Music Understanding Benchmark for Omni Models,https://arxiv.org/abs/2610.15773,10.48550/arXiv.2610.15773,music understanding|benchmark|omni models,重要
 2026-10-26,0,repo,github,lucidrains/HS-TasNet,https://github.com/lucidrains/HS-TasNet,,source separation|low-latency|real-time,
+2026-10-27,1,paper,mean_audio,Melody Guidance for Audio Diffusion Models Without Retraining,https://arxiv.org/abs/2610.32211,10.48550/arXiv.2610.32211,melody control|diffusion guidance|singing voice,新
+2026-10-27,2,paper,karaoke_jp,Interpretable Singing Emotion Recognition Using Acoustic and Vocal Technique Features,https://arxiv.org/abs/2610.32629,10.48550/arXiv.2610.32629,singing voice|emotion recognition|vocal technique,待觀察
+2026-10-27,0,repo,github,FuouM/Lyric-Sync,https://github.com/FuouM/Lyric-Sync,,lyrics alignment|syllable timing|singing voice,
