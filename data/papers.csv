@@ -292,3 +292,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-10-27,1,paper,mean_audio,Melody Guidance for Audio Diffusion Models Without Retraining,https://arxiv.org/abs/2610.32211,10.48550/arXiv.2610.32211,melody control|diffusion guidance|singing voice,新
 2026-10-27,2,paper,karaoke_jp,Interpretable Singing Emotion Recognition Using Acoustic and Vocal Technique Features,https://arxiv.org/abs/2610.32629,10.48550/arXiv.2610.32629,singing voice|emotion recognition|vocal technique,待觀察
 2026-10-27,0,repo,github,FuouM/Lyric-Sync,https://github.com/FuouM/Lyric-Sync,,lyrics alignment|syllable timing|singing voice,
+2026-10-28,1,paper,general_mir,STEMMA: Song-to-Stem Multi-Audio Reasoning for Large Audio Language Models,https://arxiv.org/abs/2610.11884,10.48550/arXiv.2610.11884,music QA|multi-audio reasoning|stems,新且重要
+2026-10-28,2,paper,mean_audio,MIRA: A Musical Intent Refinement Agent for Aligning Text-to-Music Generation with User Intent,https://arxiv.org/abs/2610.10355,10.48550/arXiv.2610.10355,text-to-music|intent alignment|test-time agent,重要
+2026-10-28,0,repo,github,timoncool/YuE2-Studio,https://github.com/timoncool/YuE2-Studio,,lyrics-to-song|score generation|text-to-music,

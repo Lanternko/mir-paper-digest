@@ -1,0 +1,65 @@
+{
+ "date": "2026-10-28",
+ "papers": [
+  {
+   "slot": 1,
+   "track": "general_mir",
+   "title": "STEMMA: Song-to-Stem Multi-Audio Reasoning for Large Audio Language Models",
+   "authors": ["Hoyeol Sohn", "Wonil Kim", "Keunhyoung Kim", "Sangeun Kum", "Taehyoung Kim", "Dongjoo Moon", "Theerasak Charoenchob", "Teeratep Weerapang", "Jongpil Lee", "Juhan Nam"],
+   "published": "2026-10-08",
+   "updated": "2026-10-08",
+   "source_url": "https://arxiv.org/abs/2610.11884",
+   "arxiv_id": "2610.11884",
+   "doi": "10.48550/arXiv.2610.11884",
+   "tags": ["music QA", "multi-audio reasoning", "stems"],
+   "quality": "新且重要",
+   "tldr": "STEMMA 以歌曲製作的來源關係（同曲、同段落、哪些 stem 屬於哪個混音）自動建構多音訊音樂問答，微調後大型音訊語言模型的多音訊推理明顯變強。",
+   "insight": "洞見:現有大型音訊語言模型與音樂 QA 資料集多半只看單一錄音，或把不相干的曲目拿來比較。STEMMA 的切入點很實用：用目錄裡的製作來源（provenance）當標籤，先指定想考的關係（是否同一首、同一段落、某個 stem 屬不屬於某個混音），再去目錄找符合與不符合的片段，因此標籤不靠人工標註也不靠模型猜。作者釋出評測用的 STEMMA-Bench 與依曲目切分的訓練集 STEMMA-Instruct，微調兩個音訊語言模型後多音訊推理提升，結構性關係進步最多，同時單音訊的音樂理解沒有退步。對 Music Flamingo 這條線，這提供了一個可以直接拿來檢驗『模型是否真的聽得出段落與人聲／伴奏關係』的基準；對 karaoke-jp 則是人聲 stem 與完整混音之間對應判斷的訓練訊號。要誠實說的是：這是 5 頁短文，摘要沒有給具體分數，是否包含歌聲或日文曲目也沒有交代。",
+   "try_next": "可做:拿 STEMMA-Bench 測 Music Flamingo，特別看「這個人聲 stem 是否屬於這個混音」這類題，並對照 karaoke-jp 分離結果的人工聽感。",
+   "problem": "大型音訊語言模型與音樂 QA 資料集多半只處理單一錄音，缺少需要同時比較多段音訊（同曲／同段落／stem 與混音對應）的推理評測與訓練資料。",
+   "method": "採「關係優先」的建構策略：先指定目標關係，再從目錄中找出符合與不符合的片段，標籤直接取自目錄的製作來源資訊；釋出 STEMMA-Bench（評測）與 STEMMA-Instruct（依曲目切分的訓練集）。",
+   "data": "來自音樂目錄的曲目、段落與 stem；評測集 STEMMA-Bench，訓練集 STEMMA-Instruct（track-disjoint）；微調兩個音訊語言模型。",
+   "findings": "在 STEMMA-Instruct 上微調後，多音訊推理改善，結構性關係的進步最大，且單音訊音樂理解能力得以保留。",
+   "limitations": "5 頁、1 張圖、3 個表的短文；摘要未給具體數字與所用模型名稱；未說明是否涵蓋歌聲／日文歌曲；標籤依賴目錄來源資訊，資料規模與授權未知。",
+   "editor_note": "音樂理解線今天最值得看：用製作來源當免費標籤，直接考模型分不分得出 stem 與混音的關係，可拿來檢驗 Music Flamingo。",
+   "relevance": {"mean_audio": 2, "karaoke_jp": 3}
+  },
+  {
+   "slot": 2,
+   "track": "mean_audio",
+   "title": "MIRA: A Musical Intent Refinement Agent for Aligning Text-to-Music Generation with User Intent",
+   "authors": ["Zekai Liu", "Zhilin Wang", "Xuzheng He", "Yu Cheng", "Yang Yang"],
+   "published": "2026-10-07",
+   "updated": "2026-10-07",
+   "source_url": "https://arxiv.org/abs/2610.10355",
+   "arxiv_id": "2610.10355",
+   "doi": "10.48550/arXiv.2610.10355",
+   "tags": ["text-to-music", "intent alignment", "test-time agent"],
+   "quality": "重要",
+   "tldr": "文字轉音樂只靠整體 text-audio 分數看不出有沒有符合使用者意圖；MIRA 把需求拆成可驗證的 rubric，用測試時樹搜尋修改 prompt，讓開源生成器逼近商用系統。",
+   "insight": "洞見:CLAP 這類整體相關分數對『樂器、結構、節奏、情緒走向』等具體需求並不敏感，尤其 prompt 本身寫得含糊時。MIRA 的做法是把使用者請求拆成一組可獨立驗證的 rubric 項目（明確要求加上隱含意圖），並建立由音樂專家整理真實平台需求的 MuRA-Bench。方法上它是 test-time agent：不動生成器權重，在有限預算內把請求轉成 rubric、產生音樂、依 rubric 驗證，再用軌跡感知的樹搜尋修改 prompt。摘要稱可讓開源生成器達到接近 Suno、Mureka 的表現。對 MeanAudio 這代表一條不需重訓的評估與對齊路線，也可以和 reward alignment 實驗互補。限制是：摘要沒有給任何數字、benchmark 規模或 rubric 數量，驗證 rubric 的裁判是什麼模型也未說明，且 test-time 搜尋會增加每次生成的成本。",
+   "try_next": "可做:用 MeanAudio 的輸出當黑箱生成器，自己寫 5–10 條 rubric 做小規模 prompt 修訂搜尋，對照 CLAP 分數與人工聽感是否一致。",
+   "problem": "整體 text-audio 相關分數無法反映生成音樂是否符合使用者意圖，尤其是 prompt 不明確，或有樂器、結構、節奏、情緒走向等具體需求時。",
+   "method": "將請求轉成由可獨立驗證項目組成的 rubric（含明確要求與隱含意圖）；MIRA 為測試時 agent，對黑箱生成器在有限預算內做 prompt 修訂：生成、依 rubric 驗證、以軌跡感知的樹搜尋迭代。另提出 MuRA-Bench。",
+   "data": "MuRA-Bench：由音樂專家整理的真實平台使用者需求；評測開源與商用生成器。",
+   "findings": "摘要稱 MIRA 在開源與商用生成器上都改善意圖對齊，並讓開源生成器達到與 Suno、Mureka 等商用系統相當的水準。",
+   "limitations": "摘要未提供任何具體分數、benchmark 規模與 rubric 數量；rubric 驗證所用的裁判模型未說明；測試時搜尋增加生成成本；v1 剛上線，無 comments。",
+   "editor_note": "給 MeanAudio 的免重訓對齊思路：把 prompt 當搜尋空間、用 rubric 取代單一 CLAP 分數。數字要等讀全文才能信。",
+   "relevance": {"mean_audio": 4, "karaoke_jp": 1}
+  }
+ ],
+ "repo": {
+  "full_name": "timoncool/YuE2-Studio",
+  "url": "https://github.com/timoncool/YuE2-Studio",
+  "description_zh": "YuE2（M-A-P 的開源歌曲生成模型，先寫樂譜再演唱）的桌面工作室：輸入風格與歌詞，模型先產生含旋律與和弦的樂譜，再演出成帶人聲的完整歌曲，樂譜可編輯並用不同音色重新渲染。底層是 yue2.cpp（C++/CUDA 原生移植），外殼為 Rust＋React 的 Tauri 視窗，單一執行檔、可離線、6GB VRAM 以上的 NVIDIA 顯卡即可，另提供 MCP 伺服器供 agent 操控。授權 MIT。",
+  "stars": 1420,
+  "updated": "2026-10-28",
+  "why": "歌詞轉歌曲的完整開源範例，且『先出樂譜再演唱』的兩階段設計與 MeanAudio、歌詞對齊、MIDI／score 都有交集；C++ 移植與 MCP 介面也值得參考。注意：這是模型的應用外殼，模型本體授權與訓練資料需另外查證。",
+  "tags": ["lyrics-to-song", "score generation", "text-to-music"]
+ },
+ "discord_messages": [
+  "# 每日 MIR 論文精選 - 2026-10-28\n🌐 完整報告: https://lanternko.github.io/mir-paper-digest/reports/2026-10-28.html\n\n**論文 1｜STEMMA: Song-to-Stem Multi-Audio Reasoning**\n🔗 https://arxiv.org/abs/2610.11884\n🎯 主線: 音樂理解／Music Flamingo\n\n**TLDR**: 以歌曲製作的來源關係（同曲、同段落、哪些 stem 屬於哪個混音）自動建構多音訊音樂問答，微調後大型音訊語言模型的多音訊推理明顯變強，且單音訊能力不退步。\n\n**為什麼選它**: 標籤取自目錄來源資訊而非人工或模型猜測，可直接拿來檢驗 Music Flamingo 分不分得出段落與人聲／伴奏關係。\n\n**注意**: 5 頁短文，摘要沒有具體分數與模型名稱，是否含歌聲或日文曲目未交代。\n\n**下一步**: 用 STEMMA-Bench 測 Music Flamingo，特別看「人聲 stem 是否屬於此混音」這類題。",
+  "**論文 2｜MIRA: Musical Intent Refinement Agent**\n🔗 https://arxiv.org/abs/2610.10355\n🎯 主線: MeanAudio／text-to-music 對齊與評估\n\n**TLDR**: 整體 text-audio 分數看不出有沒有符合使用者意圖；MIRA 把需求拆成可驗證的 rubric，用測試時樹搜尋修改 prompt，讓開源生成器逼近 Suno、Mureka 等商用系統。\n\n**為什麼選它**: 不動生成器權重的對齊路線，並提出 MuRA-Bench（音樂專家整理的真實需求），可和 reward alignment 實驗互補。\n\n**注意**: 摘要沒有任何數字、benchmark 規模或 rubric 數量，裁判模型未說明，test-time 搜尋會增加生成成本。\n\n**下一步**: 以 MeanAudio 輸出為黑箱，自寫 5–10 條 rubric 做小規模 prompt 搜尋，對照 CLAP 與人工聽感。",
+  "**GitHub Pick｜timoncool/YuE2-Studio** ⭐1420｜最近更新 2026-10-28\n🔗 https://github.com/timoncool/YuE2-Studio\n\nYuE2 開源歌曲模型的桌面工作室：輸入風格與歌詞，先生成含旋律與和弦的可編輯樂譜，再演唱成完整歌曲；底層為 C++/CUDA 移植，Tauri 單一執行檔，6GB VRAM 起可離線跑，並有 MCP 介面。授權 MIT。\n\n**為什麼選它**: 歌詞轉歌曲的完整開源範例，『先樂譜再演唱』與 MIDI／score、歌詞對齊相關；模型本體授權另需查證。\n\n## 今天的 take-away\n- 用製作來源當免費標籤，是檢驗音樂理解模型的好方法（2610.11884）。\n- 文字轉音樂的評估該從單一 CLAP 分數轉向可驗證 rubric（2610.10355）。\n- 工程：YuE2 Studio 顯示兩階段（樂譜→演唱）生成已能在消費級 GPU 上本機跑。"
+ ]
+}
