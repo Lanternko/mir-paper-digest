@@ -1,0 +1,90 @@
+{
+ "date": "2026-10-29",
+ "papers": [
+  {
+   "slot": 1,
+   "track": "mean_audio",
+   "title": "What Do Audio-Language Judges of Generated Music Listen For? Four Probes with Controls from Expert Ratings",
+   "authors": [
+    "Mateusz Modrzejewski",
+    "Tomasz Radzikowski"
+   ],
+   "published": "2026-10-09",
+   "updated": "2026-10-09",
+   "source_url": "https://arxiv.org/abs/2610.13247",
+   "arxiv_id": "2610.13247",
+   "doi": "10.48550/arXiv.2610.13247",
+   "tags": [
+    "music evaluation",
+    "audio-language judge",
+    "MusicEval"
+   ],
+   "quality": "新且重要",
+   "tldr": "拿開源音訊語言模型當生成音樂的評審前，先用四種探針檢查它到底在聽音訊、看 prompt，還是被題目措辭與順序牽著走。",
+   "insight": "洞見:用音訊語言模型當音樂生成的評審已很常見，但只看與專家評分的相關性，分不出評審究竟在回應音訊、prompt 還是問法。作者設計四個探針：拿掉音訊、換成另一模型對同一 prompt 的音訊、對調成對比較的順序、改寫指令，並用人類評分算出對照基準。在 MusicEval 全部 2,748 段音樂上測五個開源評審：沒有音訊時沒有任何評審勝過『只靠 prompt 預測』的基準；有音訊時所有評審在 prompt 對齊上確實跟著所聽到的片段走，但音樂品質只有兩個做到；四個較小評審的成對判斷受位置影響多於品質；改寫指令對品質相關性的影響約等於換一個評審。對 MeanAudio 這類以 CLAP／FAD 與 reward alignment 為核心的流程，這直接提醒：用音訊語言模型當 reward 或評分器前，要先做這些對照。限制：只測開源評審與 MusicEval／SongEval，結論是否推廣到更強的閉源評審未知，且 MusicEval 的 prompt 分配本身就限制了純 prompt 評審的上限。",
+   "try_next": "可做:對自己用的 reward／評分模型跑「拿掉音訊」與「對調順序」兩個探針，確認分數真的來自音訊。",
+   "problem": "音訊語言模型常被當作生成音樂的評審，但與專家評分的相關性無法說明它是否真的在聽音訊，還是被 prompt 或題目措辭影響。",
+   "method": "提出四個探針（移除音訊、替換為其他模型對同一 prompt 的片段、對調成對比較順序、改寫指令），其中三個與由人類評分算出的對照基準比較，並建議評審報告都附上這四項。",
+   "data": "五個開源音訊語言模型評審；MusicEval 全部 2,748 段音樂；後兩個探針另用 SongEval 歌曲。",
+   "findings": "無音訊時無評審勝過只靠 prompt 的基準；有音訊時皆跟隨片段的 prompt 對齊，僅兩個在音樂品質上做到；四個小評審成對判斷受位置影響多於品質；改寫指令對品質相關性的影響約同於換評審。",
+   "limitations": "只測五個開源評審與 MusicEval／SongEval；MusicEval 的 prompt 分配限制模型層級的純 prompt 評審表現；10 頁含 15 個表，未涵蓋閉源評審與其他語言。",
+   "editor_note": "想用音訊語言模型當 reward 或評分器的人必讀：先確認它真的在聽，也要注意措辭與順序偏誤。",
+   "relevance": {
+    "mean_audio": 4,
+    "karaoke_jp": 1
+   }
+  },
+  {
+   "slot": 2,
+   "track": "karaoke_jp",
+   "title": "Restore, Separate, Restore: A Modular Framework for Music Source Restoration",
+   "authors": [
+    "Tobias Morocutti",
+    "Emmanouil Karystinaios",
+    "Gerhard Widmer"
+   ],
+   "published": "2026-10-06",
+   "updated": "2026-10-06",
+   "source_url": "https://arxiv.org/abs/2610.08284",
+   "arxiv_id": "2610.08284",
+   "doi": "10.48550/arXiv.2610.08284",
+   "tags": [
+    "source restoration",
+    "source separation",
+    "vocals"
+   ],
+   "quality": "新",
+   "tldr": "音樂音源修復不只分離，還要還原被 EQ、壓縮與編碼破壞的原始 stem；三階段流程先修復混音、再分成八個 stem、最後做 stem 專屬修復。",
+   "insight": "洞見:一般音源分離假設混音是 stem 的線性相加，但真實發行的母帶還經過 EQ、壓縮等非線性處理與編碼損失。這篇把問題定義為 Music Source Restoration：目標是還原未經處理的原始樂器 stem。作者提出三階段模組化流程：先用混音修復模型清掉劣化，再用單一模型把修復後的混音分成八類（人聲、吉他、鍵盤、合成器、貝斯、鼓、打擊、管弦），最後對每個 stem 用針對分離殘留瑕疵微調的專家模型修復。摘要稱每一階段在 MSR Challenge 測試集上都比前一階段更好，程式碼與模型公開。對 karaoke-jp，人聲 stem 的乾淨度直接影響後面的歌詞對齊與唱聲 pitch 估計，特別是舊歌或壓縮嚴重的日文歌曲；這提供一條分離之後再修復人聲的思路。限制：摘要沒有給具體指標數字，也未說明人聲修復對下游對齊或轉錄的實際幫助。",
+   "try_next": "可做:取一首壓縮嚴重的日文歌，比較分離後的人聲在加入人聲修復專家前後，歌詞強制對齊的時間誤差是否改善。",
+   "problem": "標準音源分離無法處理母帶中的非線性製作效果（EQ、壓縮）與傳輸劣化（編碼瑕疵），因此得不到未經處理的原始 stem。",
+   "method": "三階段流程：混音修復模型、八 stem 分離模型（含人聲）、針對分離殘留瑕疵微調的 stem 專屬修復專家；每一階段依序改善。",
+   "data": "MSR Challenge 測試集；八類 stem：人聲、吉他、鍵盤、合成器、貝斯、鼓、打擊、管弦。",
+   "findings": "摘要稱每個階段在 MSR Challenge 測試集上都比前一階段進步；程式碼與模型已公開。",
+   "limitations": "摘要未提供具體指標數字與頁數；未評估對歌詞對齊、轉錄等下游任務的幫助；是否涵蓋日文歌曲或歌聲特性也未說明。",
+   "editor_note": "給 karaoke pipeline 的人聲前處理新選項，且有公開程式碼可試；數字與下游效益要讀全文才能確認。",
+   "relevance": {
+    "mean_audio": 1,
+    "karaoke_jp": 3
+   }
+  }
+ ],
+ "repo": {
+  "full_name": "frank3215/nicokara-pipeline",
+  "url": "https://github.com/frank3215/nicokara-pipeline",
+  "description_zh": "把歌曲加歌詞行變成 ニコカラ 風格字幕軌的流程：逐音節顏色掃過、振り仮名正確落在漢字上、雙行交替顯示。先用 demucs 分離人聲，再以 autoruby 產生讀音，經 FA-Kara（以日文卡拉 OK 資料微調的 MMS_FA）強制對齊，最後輸出 libass 的 ASS 與燒錄 mp4，或 NicoKaraMaker3／RhythmicaLyrics 用的 ruby LRC。不含歌詞與媒體，授權 MIT。",
+  "stars": 0,
+  "updated": "2026-10-17",
+  "why": "幾乎就是 karaoke-jp 的完整流程範例：人聲分離、讀音標註、強制對齊、ASS／LRC 渲染，README 還整理了 libass 字級與排版踩過的坑。注意：專案很新、星數為 0，品質靠自行驗證。",
+  "tags": [
+   "karaoke",
+   "forced alignment",
+   "furigana"
+  ]
+ },
+ "discord_messages": [
+  "# 每日 MIR 論文精選 - 2026-10-29\n🌐 完整報告: https://lanternko.github.io/mir-paper-digest/reports/2026-10-29.html\n\n**論文 1｜What Do Audio-Language Judges of Generated Music Listen For?**\n🔗 https://arxiv.org/abs/2610.13247\n🎯 主線: MeanAudio／評估與 reward\n\n**TLDR**: 以四種探針（拿掉音訊、換片段、對調順序、改寫指令）檢查音訊語言模型評審是否真的在聽音樂，而不是被 prompt、位置或措辭影響。\n\n**為什麼選它**: 在 MusicEval 的 2,748 段音樂上，五個開源評審沒有音訊時都沒勝過只靠 prompt 的基準，成對判斷還會受位置影響；想用它當 reward 或評分器前值得先對照。\n\n**注意**: 只測開源評審與 MusicEval／SongEval，閉源評審未涵蓋。\n\n**下一步**: 對自己用的評分模型跑「拿掉音訊」與「對調順序」兩個探針。",
+  "**論文 2｜Restore, Separate, Restore: Music Source Restoration**\n🔗 https://arxiv.org/abs/2610.08284\n🎯 主線: karaoke-jp／人聲分離前處理\n\n**TLDR**: 音源修復不只分離，還要還原被 EQ、壓縮與編碼破壞的原始 stem；三階段流程為混音修復、八 stem 分離、stem 專屬修復。\n\n**為什麼選它**: 乾淨的人聲 stem 影響歌詞對齊與唱聲 pitch 估計，且程式碼與模型公開。\n\n**注意**: 摘要沒有具體指標數字，也未評估下游對齊或轉錄。\n\n**下一步**: 比較人聲修復前後，強制對齊的時間誤差是否改善。",
+  "**GitHub Pick｜frank3215/nicokara-pipeline** ⭐0｜最近更新 2026-10-17\n🔗 https://github.com/frank3215/nicokara-pipeline\n\n把歌曲與歌詞變成 ニコカラ 風格字幕：demucs 分離人聲、自動標讀音、FA-Kara 強制對齊，輸出 ASS／燒錄 mp4 或 ruby LRC。授權 MIT。\n\n**為什麼選它**: 幾乎是 karaoke-jp 流程的完整範例，附 libass 排版踩坑紀錄；專案很新、星數為 0，需自行驗證。\n\n## 今天的 take-away\n- 用音訊語言模型當評審前，先做拿掉音訊與換順序的對照（2610.13247）。\n- 分離之後再做 stem 專屬修復，是改善人聲品質的新方向（2610.08284）。\n- 工程：nicokara-pipeline 把分離、讀音、對齊、渲染串成可跑的 karaoke 流程。"
+ ]
+}
