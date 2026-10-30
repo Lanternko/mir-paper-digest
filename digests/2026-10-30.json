@@ -1,0 +1,65 @@
+{
+ "date": "2026-10-30",
+ "papers": [
+  {
+   "slot": 1,
+   "track": "mean_audio",
+   "title": "Relational Synthesis: Structure-Mediated Concatenative Synthesis for Foley and Retrieval-Augmented Audio Generation",
+   "authors": ["Keren Shao", "Ayaka Kawano", "Shlomo Dubnov"],
+   "published": "2026-10-05",
+   "updated": "2026-10-05",
+   "source_url": "https://arxiv.org/abs/2610.05768",
+   "arxiv_id": "2610.05768",
+   "doi": "10.48550/arXiv.2610.05768",
+   "tags": ["audio generation", "retrieval-augmented", "concatenative synthesis"],
+   "quality": "新",
+   "tldr": "從檢索到的來源片段與另一段參考片段出發，把參考的時間結構與振幅起伏轉移到來源的聲音顆粒上，合成出不抄來源又保持音色一致的新音訊。",
+   "insight": "洞見:檢索增強的音訊生成常面臨兩難：直接複製檢索到的片段會洩漏來源，完全重新生成又可能偏離聲學特性。作者提出 relational synthesis，是拼接式合成的變體，把目標成本換成一種類 Gromov 的結構成本，只比較片段之間的關係結構，而非逐點比對聲學特徵。做法是把參考片段的時間結構與振幅動態轉移到來源片段的 grain 重排上。摘要稱它搭配神經式檢索增強生成時，在時間吻合度、聲學保真度與洩漏指標上表現良好。對 MeanAudio 這類 text-to-audio 流程，這提供一條不經過再訓練、以檢索加結構轉移來控制節奏與包絡的後處理思路，也提醒評估要同時看洩漏。限制：這是 5 頁的 ICASSP 投稿稿，摘要沒有給具體數字，也未說明與強生成基線的比較，音樂場景是否適用不明。",
+   "try_next": "可做:對 MeanAudio 生成的音效，嘗試用檢索片段加參考包絡做結構轉移，檢查時間吻合度是否提升。",
+   "problem": "檢索增強的音訊生成需要在『與來源聲學一致』和『不直接複製來源』之間取捨，現有拼接式合成的目標成本無法兼顧。",
+   "method": "把拼接式合成的目標成本改為類 Gromov 的關係式結構成本，將參考片段的時間結構與振幅動態轉移到來源片段 grain 的重排上，並與神經式檢索增強生成搭配使用。",
+   "data": "摘要未列出資料集；論文為 5 頁、2 張圖、2 個表，附音訊 demo。",
+   "findings": "摘要稱方法搭配神經式檢索增強生成時，在時間吻合度、聲學保真度與洩漏指標上表現良好。",
+   "limitations": "只讀到摘要與頁面備註：未見具體數值、基線比較與主觀聆聽結果；為 ICASSP 2027 投稿稿，尚未經審查；是否能用於音樂而非 Foley 未知。",
+   "editor_note": "給想在 text-to-audio 之外加一層可控、低洩漏檢索流程的人參考；數字要讀全文確認。",
+   "relevance": {"mean_audio": 3, "karaoke_jp": 0}
+  },
+  {
+   "slot": 2,
+   "track": "general_mir",
+   "title": "End-to-End Historical Music Restoration in Latent Space",
+   "authors": ["Steven Cho", "Junghyun Koo", "Raphael Lafargue", "Tushar Dhyani", "Eloi Moliner", "Yuki Mitsufuji"],
+   "published": "2026-09-30",
+   "updated": "2026-09-30",
+   "source_url": "https://arxiv.org/abs/2610.00607",
+   "arxiv_id": "2610.00607",
+   "doi": "10.48550/arXiv.2610.00607",
+   "tags": ["music restoration", "flow matching", "benchmark"],
+   "quality": "新",
+   "tldr": "針對沒有劣化前原始錄音的早期管弦樂，用模擬歷史錄音鏈的合成劣化建立監督式基準，並以潛空間 flow matching 模型做端到端修復。",
+   "insight": "洞見:早期錄音沒有劣化前的真值，過去的修復研究多半只做超解析度或獨奏等狹窄任務，管弦樂幾乎沒人碰。作者的作法是用更貼近歷史錄音鏈的合成劣化產生成對資料，建立端到端管弦樂修復的監督式基準，再訓練潛空間 flow matching 模型。摘要稱它在有參考、無參考與主觀評估上都優於既有基線，並釋出 9.3 小時、無授權限制、無配對的歷史古典音樂測試集，以及程式碼與音訊 demo。對本專案的啟發有兩點：flow matching 在潛空間做條件重建，和 MeanAudio 的技術路線相通；而用合成劣化造配對資料，也能用在老歌或低位元率日文歌的人聲前處理。限制：5 頁 ICASSP 投稿稿，我只讀到摘要，沒有具體指標；測試集限於古典管弦樂，與流行人聲差距大。",
+   "try_next": "可做:套用其劣化模擬思路，對壓縮嚴重的日文歌人聲製造成對資料，測試修復後歌詞對齊誤差是否下降。",
+   "problem": "早期歷史錄音缺乏劣化前的原始真值，現有修復工作多為超解析度等狹窄任務或獨奏，管弦樂的端到端修復缺乏監督式基準。",
+   "method": "以模擬歷史錄音鏈的合成劣化建立成對資料，訓練潛空間 flow matching 模型做端到端修復，並以有參考、無參考與主觀評估比較基線。",
+   "data": "合成劣化的訓練配對；另釋出 9.3 小時、無授權限制的無配對歷史古典音樂測試集。",
+   "findings": "摘要稱模型在有參考、無參考與主觀評估上優於既有基線；程式碼與音訊 demo 公開。",
+   "limitations": "只讀到摘要：沒有具體指標數字；合成劣化是否貼近真實歷史錄音仍待驗證；測試資料為古典管弦樂，不含流行或人聲；為投稿稿，尚未經審查。",
+   "editor_note": "flow matching 用在音訊修復的實例，劣化模擬與測試集可借來做人聲前處理實驗。",
+   "relevance": {"mean_audio": 2, "karaoke_jp": 1}
+  }
+ ],
+ "repo": {
+  "full_name": "Harmonese/py-roller",
+  "url": "https://github.com/Harmonese/py-roller",
+  "description_zh": "把無時間戳的純文字歌詞對齊到歌曲並輸出 LRC 的命令列流程：Whisper large-v3 找出歌詞實例，再用 CTC 細化時間；有英文、普通話與通用音素（mul）設定，可選 Demucs 人聲分離，預設要求完整有序歌詞。授權 MIT。",
+  "stars": 1,
+  "updated": "2026-10-20",
+  "why": "直接對應歌詞對齊與 LRC 輸出，ordered 模式與無法對齊行不造假時間的設計值得參考。注意：只輸出行級 LRC，不保證逐字卡拉 OK 時間，日文未在驗證名單內，星數僅 1。",
+  "tags": ["lyrics alignment", "LRC", "CTC"]
+ },
+ "discord_messages": [
+  "# 每日 MIR 論文精選 - 2026-10-30\n🌐 完整報告: https://lanternko.github.io/mir-paper-digest/reports/2026-10-30.html\n\n**論文 1｜Relational Synthesis: Structure-Mediated Concatenative Synthesis for Foley and Retrieval-Augmented Audio Generation**\n🔗 https://arxiv.org/abs/2610.05768\n🎯 主線: MeanAudio／檢索增強音訊生成\n\n**TLDR**: 從檢索到的來源片段與參考片段出發，把參考的時間結構與振幅起伏轉移到來源的聲音顆粒上，合成不抄來源又音色一致的新音訊。\n\n**為什麼選它**: 以關係式結構成本取代拼接合成的目標成本，摘要稱搭配神經檢索增強生成時，時間吻合度、保真度與洩漏指標表現良好。\n\n**注意**: 只讀到摘要，無具體數字與基線比較；為 ICASSP 2027 投稿稿。\n\n**下一步**: 對生成音效嘗試檢索片段加參考包絡的結構轉移。",
+  "**論文 2｜End-to-End Historical Music Restoration in Latent Space**\n🔗 https://arxiv.org/abs/2610.00607\n🎯 主線: 泛 MIR／flow matching 音訊修復\n\n**TLDR**: 針對沒有原始真值的早期管弦樂，用模擬歷史錄音鏈的合成劣化建立監督式基準，並以潛空間 flow matching 做端到端修復。\n\n**為什麼選它**: 摘要稱優於既有基線，並釋出 9.3 小時無授權限制的歷史古典音樂測試集、程式碼與 demo；劣化模擬思路可借來做人聲前處理。\n\n**注意**: 只讀到摘要，無具體指標；測試資料限古典管弦樂。\n\n**下一步**: 對壓縮嚴重的日文歌人聲造成對資料，看對齊誤差是否下降。",
+  "**GitHub Pick｜Harmonese/py-roller** ⭐1｜最近更新 2026-10-20\n🔗 https://github.com/Harmonese/py-roller\n\n把純文字歌詞對齊到歌曲並輸出 LRC：Whisper large-v3 找歌詞實例、CTC 細化時間，可選 Demucs 人聲分離。授權 MIT。\n\n**為什麼選它**: 歌詞對齊流程完整，找不到的行不造假時間；但只輸出行級 LRC，日文不在驗證名單，星數僅 1，需自行驗證。\n\n## 今天的 take-away\n- 檢索加結構轉移是不經再訓練就能控制生成音訊節奏與包絡的思路（2610.05768）。\n- flow matching 加合成劣化配對，可用於修復，也可借來做人聲前處理（2610.00607）。\n- 工程：py-roller 提供行級歌詞對齊基準，可與逐字對齊工具比較。"
+ ]
+}
