@@ -1,0 +1,106 @@
+{
+ "date": "2026-10-31",
+ "papers": [
+  {
+   "slot": 1,
+   "track": "mean_audio",
+   "title": "MuLaCover: Flexible Cover Song Generation via Symbolic Tonal Control",
+   "authors": [
+    "Lynn Yi",
+    "Zihan Xiong",
+    "Junjie Cao",
+    "Xiaolong Weng",
+    "Yingzhe Ma",
+    "Gus Xia",
+    "Jinliang Liu",
+    "Yuxin Xie",
+    "Xianwei Zhuang",
+    "Yuguo Yin",
+    "Qiao Jin",
+    "Gongxi Zhu",
+    "Jiayu Wang",
+    "Junjie Liang",
+    "Qin Yue",
+    "Ziyu Wang",
+    "Dading Chong",
+    "Meng Cao",
+    "Jiahuan Zhou",
+    "Dongchao Yang"
+   ],
+   "published": "2026-10-19",
+   "updated": "2026-10-19",
+   "source_url": "https://arxiv.org/abs/2610.26684",
+   "arxiv_id": "2610.26684",
+   "doi": "10.48550/arXiv.2610.26684",
+   "tags": [
+    "cover song generation",
+    "text-to-song",
+    "symbolic conditioning"
+   ],
+   "quality": "新",
+   "tldr": "在預訓練的文字轉歌曲模型上加入可編輯的符號 lead sheet 條件，不需逐幀對齊參考音訊，就能保留旋律與和弦並自由調整速度與結構。",
+   "insight": "洞見:翻唱生成常見做法是直接條件於參考音訊，會被逐幀對齊綁住，速度與結構很難改。MuLaCover 改成把來源旋律與和弦抽成可編輯的 lead sheet，再作為條件餵給預訓練的 text-to-song 基礎模型，因此輸出保留旋律與和聲，卻能自由改速度、段落結構並做分段生成。訓練上用部分不匹配的音訊—符號配對做課程學習，以提升多樣性與穩健性。摘要稱在開源系統中達到最佳，並以客觀指標、主觀評分與專家訪談顯示與 Suno-v5.5 相當。對 MeanAudio 這條線，這是把符號控制接到大型生成模型上的具體範例，可參考其條件注入方式。限制：我只讀到摘要頁，沒有具體數字；與商用系統的比較細節與歌詞、日文是否適用都不明。",
+   "try_next": "可做:讀全文確認 lead sheet 條件的注入方式，評估能否把相似的符號條件接到 MeanAudio 的 flow matching 骨幹上。",
+   "problem": "翻唱歌曲生成若依賴參考音訊的逐幀對齊，會限制速度、結構與分段的彈性，也難以由使用者編輯旋律或和弦。",
+   "method": "以可編輯的符號 lead sheet 作為條件，驅動預訓練的 text-to-song 基礎模型，並用部分不匹配的音訊—符號配對做課程訓練。",
+   "data": "摘要未列出訓練資料細節；作者表示音訊樣本與程式碼公開於專案頁。",
+   "findings": "摘要稱在開源系統中達到最先進表現，並在客觀指標、主觀評分與專家訪談中與 Suno-v5.5 相比具競爭力。",
+   "limitations": "只讀到摘要頁：缺少具體指標、資料規模與消融；與商用系統的比較方式未知；未說明對日文歌詞或人聲品質的表現；為預印本，尚未經審查。",
+   "editor_note": "給想把符號旋律控制接上文字轉歌曲模型的人；數字與條件注入細節請讀全文。",
+   "relevance": {
+    "mean_audio": 4,
+    "karaoke_jp": 1
+   }
+  },
+  {
+   "slot": 2,
+   "track": "general_mir",
+   "title": "Whistle and Wrong Lyrics: Synthetic Queries Are Not Enough for Real-World Query-by-Melody",
+   "authors": [
+    "Luigi Rivolta"
+   ],
+   "published": "2026-10-18",
+   "updated": "2026-10-18",
+   "source_url": "https://arxiv.org/abs/2610.25371",
+   "arxiv_id": "2610.25371",
+   "doi": "10.48550/arXiv.2610.25371",
+   "tags": [
+    "query-by-melody",
+    "singing/whistle retrieval",
+    "synthetic data"
+   ],
+   "quality": "新",
+   "tldr": "用 11,083 首歌的人聲旋律合成口哨與無意義音節哼唱來訓練純旋律檢索，結果只提升合成查詢，真實查詢幾乎無法遷移，作者主張缺的是真實資料。",
+   "insight": "洞見:旋律檢索想處理口哨或歌詞唱錯的查詢，直覺作法是大量合成訓練資料。作者從 11,083 首歌的人聲旋律合成口哨與無意義音節唱法，發現訓練後合成查詢的檢索變好，但在 MLEnd 真實表演者的查詢上沒有遷移；改用真實口哨做封閉集微調（表演者互不重疊切分），口哨對哼唱的 top-1 準確率只小幅提升。之後再用商用神經音樂模型與開源流程各產生一輪合成資料，同樣無法遷移，結論是缺的是真實查詢。對 karaoke-jp 的啟示：唱聲轉旋律或 pitch 相關模型若只靠合成人聲訓練，真實使用者唱聲上可能失靈，驗證集要留真人錄音。限制：只讀到摘要頁，沒有具體數字；屬單一作者的負面結果，範圍限於旋律檢索，是否適用於唱聲 pitch 或對齊任務未驗證。",
+   "try_next": "可做:替自己的唱聲 pitch 或對齊流程準備一小批真人錄音當留出測試集，對照合成人聲訓練的表現落差。",
+   "problem": "旋律檢索要面對口哨或歌詞唱錯的真實查詢，但真實標註資料稀少，常以合成查詢補足，其遷移性未知。",
+   "method": "從 11,083 首歌的人聲旋律合成口哨與無意義音節唱法訓練純旋律檢索系統，並在 MLEnd 真實表演者查詢上測試，另做真實口哨封閉集微調與兩輪不同來源的合成資料實驗。",
+   "data": "11,083 首歌的人聲旋律合成查詢；真實查詢來自 MLEnd 測試表演者。",
+   "findings": "合成資料只改善合成查詢；真實口哨封閉集微調使口哨對哼唱 top-1 小幅提升；商用與開源兩輪合成資料同樣無法遷移，結論是需要收集真實查詢。",
+   "limitations": "只讀到摘要頁：無具體數字；單一作者、15 頁預印本；結論限於旋律檢索，真實查詢規模不明；未涵蓋日文歌詞或完整 MIR 管線。",
+   "editor_note": "一篇誠實的負面結果，提醒合成唱聲資料的遷移風險；留真人測試集的好理由。",
+   "relevance": {
+    "mean_audio": 1,
+    "karaoke_jp": 2
+   }
+  }
+ ],
+ "repo": {
+  "full_name": "scragnog/HOT-Step-CPP",
+  "url": "https://github.com/scragnog/HOT-Step-CPP",
+  "description_zh": "以 GGML 與 C++ 引擎在本機執行的音樂生成桌面應用：依風格描述與歌詞產生立體聲歌曲，可切換 ACE-Step 1.5、MiniMax-Music3、YuE2、Stable Audio 3 四種後端，並內建 LoRA 風格訓練（Training Studio）。MIT 授權，支援 Windows/Linux/macOS。",
+  "stars": 188,
+  "updated": "2026-10-28",
+  "why": "一個工具同時涵蓋多個開源 text-to-music 後端與本機適配器訓練，適合在自己的 GPU 上比較不同生成模型的行為，作為 MeanAudio 的對照基準；是否好用需實測，專案以應用為主、非研究程式碼。",
+  "tags": [
+   "music generation",
+   "ACE-Step",
+   "GGML"
+  ]
+ },
+ "discord_messages": [
+  "# 每日 MIR 論文精選 - 2026-10-31\n網站：https://lanternko.github.io/mir-paper-digest/reports/2026-10-31.html\n\n## 1. MuLaCover：用符號調性控制做彈性翻唱生成\narXiv 2610.26684（2026-10-19）｜MeanAudio｜新\nhttps://arxiv.org/abs/2610.26684\n\n**TL;DR** 在預訓練的文字轉歌曲模型上加入可編輯的符號 lead sheet 條件，不需逐幀對齊參考音訊，就能保留旋律與和弦並自由調整速度與結構。\n\n洞見:翻唱生成常見做法是直接條件於參考音訊，會被逐幀對齊綁住，速度與結構很難改。MuLaCover 改成把來源旋律與和弦抽成可編輯的 lead sheet，再作為條件餵給預訓練的 text-to-song 基礎模型，因此輸出保留旋律與和聲，卻能自由改速度、段落結構並做分段生成。訓練上用部分不匹配的音訊—符號配對做課程學習，以提升多樣性與穩健性。摘要稱在開源系統中達到最佳，並以客觀指標、主觀評分與專家訪談顯示與 Suno-v5.5 相當。對 MeanAudio 這條線，這是把符號控制接到大型生成模型上的具體範例，可參考其條件注入方式。限制：我只讀到摘要頁，沒有具體數字；與商用系統的比較細節與歌詞、日文是否適用都不明。\n\n可做:讀全文確認 lead sheet 條件的注入方式，評估能否把相似的符號條件接到 MeanAudio 的 flow matching 骨幹上。",
+  "## 2. Whistle and Wrong Lyrics：合成查詢不足以應付真實旋律檢索\narXiv 2610.25371（2026-10-18）｜MIR｜新\nhttps://arxiv.org/abs/2610.25371\n\n**TL;DR** 用 11,083 首歌的人聲旋律合成口哨與無意義音節哼唱來訓練純旋律檢索，結果只提升合成查詢，真實查詢幾乎無法遷移，作者主張缺的是真實資料。\n\n洞見:旋律檢索想處理口哨或歌詞唱錯的查詢，直覺作法是大量合成訓練資料。作者從 11,083 首歌的人聲旋律合成口哨與無意義音節唱法，發現訓練後合成查詢的檢索變好，但在 MLEnd 真實表演者的查詢上沒有遷移；改用真實口哨做封閉集微調（表演者互不重疊切分），口哨對哼唱的 top-1 準確率只小幅提升。之後再用商用神經音樂模型與開源流程各產生一輪合成資料，同樣無法遷移，結論是缺的是真實查詢。對 karaoke-jp 的啟示：唱聲轉旋律或 pitch 相關模型若只靠合成人聲訓練，真實使用者唱聲上可能失靈，驗證集要留真人錄音。限制：只讀到摘要頁，沒有具體數字；屬單一作者的負面結果，範圍限於旋律檢索，是否適用於唱聲 pitch 或對齊任務未驗證。\n\n可做:替自己的唱聲 pitch 或對齊流程準備一小批真人錄音當留出測試集，對照合成人聲訓練的表現落差。",
+  "## GitHub pick：scragnog/HOT-Step-CPP（★188）\nhttps://github.com/scragnog/HOT-Step-CPP\n\n以 GGML 與 C++ 引擎在本機執行的音樂生成桌面應用：依風格描述與歌詞產生立體聲歌曲，可切換 ACE-Step 1.5、MiniMax-Music3、YuE2、Stable Audio 3 四種後端，並內建 LoRA 風格訓練（Training Studio）。MIT 授權，支援 Windows/Linux/macOS。\n\n為什麼選它：一個工具同時涵蓋多個開源 text-to-music 後端與本機適配器訓練，適合在自己的 GPU 上比較不同生成模型的行為，作為 MeanAudio 的對照基準；是否好用需實測，專案以應用為主、非研究程式碼。\n\n## 今天的 take-away\n1. 符號控制（lead sheet）接大型 text-to-song 模型，可保旋律又自由改速度與結構，值得評估用在 MeanAudio。\n2. 合成唱聲訓練資料不一定能遷移到真人唱聲，唱聲相關實驗要保留真人測試集。\n3. 本機多後端生成工具可當作 MeanAudio 的對照基準。"
+ ]
+}

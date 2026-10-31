@@ -301,3 +301,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-10-30,1,paper,mean_audio,Relational Synthesis: Structure-Mediated Concatenative Synthesis for Foley and Retrieval-Augmented Audio Generation,https://arxiv.org/abs/2610.05768,10.48550/arXiv.2610.05768,audio generation|retrieval-augmented|concatenative synthesis,新
 2026-10-30,2,paper,general_mir,End-to-End Historical Music Restoration in Latent Space,https://arxiv.org/abs/2610.00607,10.48550/arXiv.2610.00607,music restoration|flow matching|benchmark,新
 2026-10-30,0,repo,github,Harmonese/py-roller,https://github.com/Harmonese/py-roller,,lyrics alignment|LRC|CTC,
+2026-10-31,1,paper,mean_audio,MuLaCover: Flexible Cover Song Generation via Symbolic Tonal Control,https://arxiv.org/abs/2610.26684,10.48550/arXiv.2610.26684,cover song generation|text-to-song|symbolic conditioning,新
+2026-10-31,2,paper,general_mir,Whistle and Wrong Lyrics: Synthetic Queries Are Not Enough for Real-World Query-by-Melody,https://arxiv.org/abs/2610.25371,10.48550/arXiv.2610.25371,query-by-melody|singing/whistle retrieval|synthetic data,新
+2026-10-31,0,repo,github,scragnog/HOT-Step-CPP,https://github.com/scragnog/HOT-Step-CPP,,music generation|ACE-Step|GGML,
