@@ -304,3 +304,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-10-31,1,paper,mean_audio,MuLaCover: Flexible Cover Song Generation via Symbolic Tonal Control,https://arxiv.org/abs/2610.26684,10.48550/arXiv.2610.26684,cover song generation|text-to-song|symbolic conditioning,新
 2026-10-31,2,paper,general_mir,Whistle and Wrong Lyrics: Synthetic Queries Are Not Enough for Real-World Query-by-Melody,https://arxiv.org/abs/2610.25371,10.48550/arXiv.2610.25371,query-by-melody|singing/whistle retrieval|synthetic data,新
 2026-10-31,0,repo,github,scragnog/HOT-Step-CPP,https://github.com/scragnog/HOT-Step-CPP,,music generation|ACE-Step|GGML,
+2026-11-01,1,paper,mean_audio,Smorph: Playable Sound Morphing with Diffusion Models,https://arxiv.org/abs/2610.06478,10.48550/arXiv.2610.06478,sound morphing|diffusion guidance|audio generation,新
+2026-11-01,2,paper,general_mir,From Isolated Feature to Orbits: Discovering Music Concepts via Multi-SAE Alignment,https://arxiv.org/abs/2610.01864,10.48550/arXiv.2610.01864,interpretability|sparse autoencoder|music foundation model,新
+2026-11-01,0,repo,github,anime-song/tsumugi,https://github.com/anime-song/tsumugi,,music transcription|audio-to-MIDI|singing voice,

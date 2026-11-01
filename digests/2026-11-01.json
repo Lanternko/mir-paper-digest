@@ -1,0 +1,65 @@
+{
+ "date": "2026-11-01",
+ "papers": [
+  {
+   "slot": 1,
+   "track": "mean_audio",
+   "title": "Smorph: Playable Sound Morphing with Diffusion Models",
+   "authors": ["Annie Chu", "Hugo Flores García", "Johannes Imort", "Oriol Nieto", "Bryan Pardo", "Jordan Rudess", "Prem Seetharaman", "Justin Salamon"],
+   "published": "2026-10-05",
+   "updated": "2026-10-05",
+   "source_url": "https://arxiv.org/abs/2610.06478",
+   "arxiv_id": "2610.06478",
+   "doi": "10.48550/arXiv.2610.06478",
+   "tags": ["sound morphing", "diffusion guidance", "audio generation"],
+   "quality": "新",
+   "tldr": "用免訓練的引導框架在擴散模型中固定聲音的時間結構、只改變音色身分，讓兩種聲音之間的變形軌跡平滑又可由樂手演奏操控，已被 ISMIR 2026 接受。",
+   "insight": "洞見:現有擴散式聲音變形把時間結構與音色身分綁在一起，使用者無法固定其中一個、只動另一個。Smorph 是免訓練的引導框架，保留聲音隨時間的演變，同時把「是什麼聲音」換掉，例如固定音高從銅管變成弦樂；支援 prompt 對 prompt、音訊對 prompt、音訊對音訊三種模式。摘要稱變形軌跡平滑，時間結構與來源保留明顯優於基線，但某些情況下往目標的轉換偏保守；探索性研究中樂手認為軌跡有表現力且可演奏。對 MeanAudio 這條線，它示範了不重新訓練、只在推論時對預訓練生成模型加結構約束的做法，可類比到 flow matching 模型的推論期引導。限制：我只讀到摘要頁，沒有數字、資料集名稱與基線細節；是否適用 flow matching 模型未驗證。",
+   "try_next": "可做:讀全文確認引導是作用在哪一層的注意力或潛在表示，評估能否在 MeanAudio 的推論階段做類似的時間結構錨定。",
+   "problem": "擴散式聲音變形把時間結構和音色身分耦合，使用者難以固定一個、只改變另一個，也不易做成可即時演奏的互動。",
+   "method": "免訓練的引導框架：保留聲音的時間演變，只改變聲音身分；支援 prompt 對 prompt、音訊對 prompt、音訊對音訊三種變形模式。",
+   "data": "摘要稱在多個不同資料集上評估，但未列出資料集名稱；另有一項探索性的樂手使用研究。",
+   "findings": "摘要稱變形軌跡平滑，時間結構與來源保留明顯優於基線，但某些設定下朝目標的轉換較保守；樂手形容軌跡有表現力且可演奏。",
+   "limitations": "只讀到摘要頁：缺少具體指標、資料集與基線；樂手研究為探索性且規模不明；以聲音設計為主，非歌曲或歌詞生成；為 ISMIR 2026 接受稿，細節待全文確認。",
+   "editor_note": "給想了解推論期結構引導如何用在預訓練擴散模型的人；數字與實作細節請讀全文與 demo 頁。",
+   "relevance": {"mean_audio": 3, "karaoke_jp": 0}
+  },
+  {
+   "slot": 2,
+   "track": "general_mir",
+   "title": "From Isolated Feature to Orbits: Discovering Music Concepts via Multi-SAE Alignment",
+   "authors": ["Liwei Lin", "Gus Xia"],
+   "published": "2026-10-01",
+   "updated": "2026-10-01",
+   "source_url": "https://arxiv.org/abs/2610.01864",
+   "arxiv_id": "2610.01864",
+   "doi": "10.48550/arXiv.2610.01864",
+   "tags": ["interpretability", "sparse autoencoder", "music foundation model"],
+   "quality": "新",
+   "tldr": "以音高移調的輸入配對來對齊多個稀疏自編碼器的特徵，找出音樂基礎模型內部和弦、調性、旋律型態的結構化軌道，而非單一孤立特徵。",
+   "insight": "洞見:探針與稀疏自編碼器（SAE）通常只找出單一特徵，但和弦、調性這類音樂概念本質上是跨音高與時間的結構化關係。作者以音高移調作為歸納偏置：對輸入做移調配對，對齊其 SAE 表徵，找出有序的音高相關特徵「軌道」。摘要稱在兩個先進音樂基礎模型上，能還原和弦、調性與旋律型態的軌道結構，且只需少量錨點範例就能解讀整個概念家族。對 Music Flamingo 與音樂理解的關注，這是檢視音樂模型內部表徵的工具思路。限制：我只讀到摘要頁，不知是哪兩個模型、數字如何；與日文歌詞或唱聲任務無直接關聯。",
+   "try_next": "可做:讀全文確認用了哪兩個音樂基礎模型，並思考能否用移調配對檢查自己的音樂表徵是否具備音高等變性。",
+   "problem": "常見可解釋性方法只找單一特徵，難以呈現和弦、調性等跨音高與時間的結構化音樂概念。",
+   "method": "以音高移調為歸納偏置，建立移調輸入配對並對齊多個 SAE 的表徵，找出有序的音高相關特徵軌道，只需少量錨點範例即可解讀概念家族。",
+   "data": "摘要僅稱在兩個先進的音樂基礎模型上實驗，未列出模型名稱與資料集。",
+   "findings": "摘要稱能在兩個音樂基礎模型中還原和弦、調性與旋律型態的軌道結構。",
+   "limitations": "只讀到摘要頁：缺少模型名稱、定量結果與消融；方法聚焦音高結構，對節奏、音色或歌詞概念是否適用未知；為預印本，尚未經審查。",
+   "editor_note": "給想看音樂模型內部如何編碼音高結構的人；實驗細節請讀全文。",
+   "relevance": {"mean_audio": 1, "karaoke_jp": 0}
+  }
+ ],
+ "repo": {
+  "full_name": "anime-song/tsumugi",
+  "url": "https://github.com/anime-song/tsumugi",
+  "description_zh": "不分樂器的自動音樂轉錄（音訊轉 MIDI）模型，以 Neural Semi-CRF 擴充 Transkun 的做法，鋼琴、吉他、貝斯、人聲、弦樂等有音高的聲音都用同一個模型轉錄，附 Colab 推論範例與日文 README。MIT 授權。",
+  "stars": 97,
+  "updated": "2026-10-17",
+  "why": "可處理人聲在內的各種音軌，對 karaoke-jp 的唱聲轉 MIDI 與音符時間標註有參考價值；README 自述快速人聲跑音會不穩、長音可能被切成多個短音，需自己實測。",
+  "tags": ["music transcription", "audio-to-MIDI", "singing voice"]
+ },
+ "discord_messages": [
+  "# 每日 MIR 論文精選 - 2026-11-01\n網站：https://lanternko.github.io/mir-paper-digest/reports/2026-11-01.html\n\n## 1. Smorph：可演奏的擴散式聲音變形\narXiv 2610.06478（2026-10-05）｜MeanAudio｜新\nhttps://arxiv.org/abs/2610.06478\n\n**TL;DR** 用免訓練的引導框架在擴散模型中固定聲音的時間結構、只改變音色身分，讓兩種聲音之間的變形軌跡平滑又可由樂手演奏操控，已被 ISMIR 2026 接受。\n\n洞見:現有擴散式聲音變形把時間結構與音色身分綁在一起，使用者無法固定其中一個、只動另一個。Smorph 是免訓練的引導框架，保留聲音隨時間的演變，同時把「是什麼聲音」換掉，例如固定音高從銅管變成弦樂；支援 prompt 對 prompt、音訊對 prompt、音訊對音訊三種模式。摘要稱軌跡平滑，時間結構與來源保留明顯優於基線，但某些情況下往目標的轉換偏保守。對 MeanAudio 這條線，它示範了不重新訓練、只在推論時對預訓練生成模型加結構約束的做法。限制：我只讀到摘要頁，沒有數字、資料集名稱與基線細節；是否適用 flow matching 模型未驗證。\n\n可做:讀全文確認引導是作用在哪一層的注意力或潛在表示，評估能否在 MeanAudio 的推論階段做類似的時間結構錨定。",
+  "## 2. From Isolated Feature to Orbits：用多個 SAE 對齊找出音樂概念\narXiv 2610.01864（2026-10-01）｜MIR｜新\nhttps://arxiv.org/abs/2610.01864\n\n**TL;DR** 以音高移調的輸入配對來對齊多個稀疏自編碼器的特徵，找出音樂基礎模型內部和弦、調性、旋律型態的結構化軌道，而非單一孤立特徵。\n\n洞見:探針與稀疏自編碼器（SAE）通常只找出單一特徵，但和弦、調性這類音樂概念本質上是跨音高與時間的結構化關係。作者以音高移調作為歸納偏置：對輸入做移調配對，對齊其 SAE 表徵，找出有序的音高相關特徵「軌道」。摘要稱在兩個先進音樂基礎模型上，能還原和弦、調性與旋律型態的軌道結構，且只需少量錨點範例就能解讀整個概念家族。對 Music Flamingo 與音樂理解的關注，這是檢視音樂模型內部表徵的工具思路。限制：我只讀到摘要頁，不知是哪兩個模型、數字如何；與日文歌詞或唱聲任務無直接關聯。\n\n可做:讀全文確認用了哪兩個音樂基礎模型，並思考能否用移調配對檢查自己的音樂表徵是否具備音高等變性。",
+  "## GitHub pick：anime-song/tsumugi（★97）\nhttps://github.com/anime-song/tsumugi\n\n不分樂器的自動音樂轉錄（音訊轉 MIDI）模型，以 Neural Semi-CRF 擴充 Transkun 的做法，鋼琴、吉他、貝斯、人聲、弦樂等有音高的聲音都用同一個模型轉錄，附 Colab 推論範例與日文 README。MIT 授權。\n\n為什麼選它：可處理人聲在內的各種音軌，對 karaoke-jp 的唱聲轉 MIDI 與音符時間標註有參考價值；README 自述快速人聲跑音會不穩、長音可能被切成多個短音，需自己實測。\n\n## 今天的 take-away\n1. 推論期的免訓練結構引導（Smorph）是不重訓就能對預訓練生成模型加控制的思路，值得想想 MeanAudio 能否借用。\n2. 用移調配對對齊 SAE 特徵，可檢視音樂基礎模型是否真的編碼了音高結構。\n3. tsumugi 可作為 karaoke-jp 唱聲轉 MIDI 的候選基準，但快速人聲的穩定度要自己驗證。"
+ ]
+}
