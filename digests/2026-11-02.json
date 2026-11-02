@@ -1,0 +1,91 @@
+{
+ "date": "2026-11-02",
+ "papers": [
+  {
+   "slot": 1,
+   "track": "mean_audio",
+   "title": "GS-Codec: A Gaussian-Splatting Bottleneck for Neural Audio Coding",
+   "authors": [
+    "Ron Aluf",
+    "Alon Canfi",
+    "Eliya Nachmani"
+   ],
+   "published": "2026-10-03",
+   "updated": "2026-10-03",
+   "source_url": "https://arxiv.org/abs/2610.04651",
+   "arxiv_id": "2610.04651",
+   "doi": "10.48550/arXiv.2610.04651",
+   "tags": [
+    "neural codec",
+    "Gaussian splatting",
+    "speech codec"
+   ],
+   "quality": "待觀察",
+   "tldr": "以一維高斯基元取代量化器瓶頸，編碼器片段被擬合成高斯加權和，事後調整基元數與位元深度即可改變位元率；語音上與 EnCodec、DAC 相當或更好。",
+   "insight": "洞見:多數神經編解碼器用向量或純量量化當瓶頸，GS-Codec 改成把每段潛在表示擬合為一維高斯基元的加權和，再由輕量預測網路一次前向預測參數、避開推論時的迭代最佳化；量化只在訓練後套用，所以不重訓就能調整位元率。摘要稱在 SIM、STOI、UTMOS 上不輸 EnCodec 與 DAC，WER 相當，並被 NeurIPS 2026 接受。對 MeanAudio 這條線，是潛在空間設計的另一種思路，但目前只在語音驗證。限制：我只讀到摘要頁，沒有位元率數字、訓練資料與預測網路誤差；是否適用音樂或一般音訊未知。",
+   "try_next": "可做:讀全文確認各位元率下的數字與預測網路的擬合誤差，再評估高斯基元表示是否能用於音樂的連續潛在空間。",
+   "problem": "既有神經音訊編解碼器依賴學習式碼本或固定純量格點的量化瓶頸，位元率調整往往需要重新訓練。",
+   "method": "把編碼器輸出片段擬合為一維高斯基元的加權和（借自 3D 高斯潑濺），由 GS Predictor Net 一次前向預測參數；端到端訓練，純量量化僅在訓練後套用於參數，位元率靠基元數與位元深度調整。",
+   "data": "摘要列出 SIM、STOI、UTMOS、WER 四項指標，並與 EnCodec、DAC 比較；訓練資料未在摘要頁說明。",
+   "findings": "摘要稱在相近位元率下，說話者相似度、可懂度與感知品質匹配或超過 EnCodec 與 DAC，WER 相當。",
+   "limitations": "只讀到摘要頁：缺少位元率、資料集與預測網路誤差；框架為語音編解碼器，對音樂與歌聲未驗證；基線僅提到兩個；為預印本。",
+   "editor_note": "屬於神經 codec 主線但目前僅限語音，列為待觀察；想借用其可調位元率設計的人請讀全文。",
+   "relevance": {
+    "mean_audio": 2,
+    "karaoke_jp": 0
+   }
+  },
+  {
+   "slot": 2,
+   "track": "general_mir",
+   "title": "Learning Jazz Pianist Style with Cross-Attention Conditioning",
+   "authors": [
+    "Drew Edwards",
+    "Akira Maezawa",
+    "Simon Dixon"
+   ],
+   "published": "2026-10-02",
+   "updated": "2026-10-02",
+   "source_url": "https://arxiv.org/abs/2610.02918",
+   "arxiv_id": "2610.02918",
+   "doi": "10.48550/arXiv.2610.02918",
+   "tags": [
+    "symbolic music",
+    "performer style",
+    "conditional generation"
+   ],
+   "quality": "新",
+   "tldr": "預訓練符號音樂 Transformer 的表徵已能高準確辨識爵士鋼琴家，加上對鋼琴家身分嵌入的交叉注意力後，可生成特定風格的續寫。",
+   "insight": "洞見:作者發現預訓練符號音樂 Transformer 的內部表徵已編碼鋼琴家身分，在兩個基準上分類準確度很高；再加入對學習到的鋼琴家嵌入做交叉注意力，就能以演奏者風格條件化生成。評估用滑動視窗分類器判斷續寫是否歸屬正確鋼琴家，另以只用合成生成訓練的分類器在 12 位真實鋼琴家上達到 87% 片段級與 95% 曲目級準確度。分類器還被用來標出最能代表某位鋼琴家的片段。對 karaoke-jp，可類比為「演唱者風格」條件化的概念參考，但這是符號鋼琴資料，不是歌聲。限制：我只讀到摘要頁，未見資料集與預訓練模型名稱；評估靠分類器，且僅 12 位鋼琴家。",
+   "try_next": "可做:查看作者的專案頁與 demo，確認交叉注意力條件化的實作方式，再想想能否套到歌手音色或唱腔嵌入。",
+   "problem": "演奏者風格容易被聽出卻難以形式化描述，也缺乏能以特定演奏者風格條件化生成的方法。",
+   "method": "取預訓練符號音樂 Transformer，加入對學習到的鋼琴家身分嵌入的交叉注意力；用分類器評估條件化生成並找出最具代表性的片段。",
+   "data": "摘要稱用兩個分類基準與 12 位鋼琴家；資料集名稱與預訓練模型未在摘要頁說明。作者在備註中提供程式碼、檢查點與音訊示範的專案頁。",
+   "findings": "條件化續寫被滑動視窗分類器歸給正確鋼琴家的比例遠高於無條件基線；僅用合成資料訓練的分類器在 12 類真實鋼琴家上達 87% 片段級、95% 曲目級準確度。",
+   "limitations": "只讀到摘要頁：資料集與基線細節缺；評估依賴分類器，風格相似度未必等於聽感；僅 12 位鋼琴家，符號資料不涵蓋音色與歌聲；為預印本。",
+   "editor_note": "給想做演奏者風格條件化的人；是符號音樂而非音訊，與主線只有概念上的連結。",
+   "relevance": {
+    "mean_audio": 1,
+    "karaoke_jp": 1
+   }
+  }
+ ],
+ "repo": {
+  "full_name": "Osdsoh7817/Score2ConVec",
+  "url": "https://github.com/Osdsoh7817/Score2ConVec",
+  "description_zh": "Windows 桌面程式：載入 MIDI 旋律並輸入歌詞，轉成 ContentVec 特徵，讓既有的 SVC／RVC 聲音模型依樂譜唱出來。",
+  "stars": 3,
+  "updated": "2026-10-14",
+  "why": "流程是 MIDI 加歌詞到歌聲，與 karaoke-jp 的 mora 對音符 timing 方向相反但可對照；專案很小（3 星、5 次提交），README 自述音質取決於 MIDI 精準度，需 8GB VRAM 的 NVIDIA GPU，授權未確認。",
+  "tags": [
+   "singing voice",
+   "MIDI to singing",
+   "lyrics"
+  ]
+ },
+ "discord_messages": [
+  "# 每日 MIR 論文精選 - 2026-11-02\n網站：https://lanternko.github.io/mir-paper-digest/reports/2026-11-02.html\n\n## 1. GS-Codec: A Gaussian-Splatting Bottleneck for Neural Audio Coding\narXiv 2610.04651（2026-10-03）｜MeanAudio｜待觀察\nhttps://arxiv.org/abs/2610.04651\n\n**TL;DR** 以一維高斯基元取代量化器瓶頸，編碼器片段被擬合成高斯加權和，事後調整基元數與位元深度即可改變位元率；語音上與 EnCodec、DAC 相當或更好。\n\n洞見:多數神經編解碼器用向量或純量量化當瓶頸，GS-Codec 改成把每段潛在表示擬合為一維高斯基元的加權和，再由輕量預測網路一次前向預測參數、避開推論時的迭代最佳化；量化只在訓練後套用，所以不重訓就能調整位元率。摘要稱在 SIM、STOI、UTMOS 上不輸 EnCodec 與 DAC，WER 相當，並被 NeurIPS 2026 接受。對 MeanAudio 這條線，是潛在空間設計的另一種思路，但目前只在語音驗證。限制：我只讀到摘要頁，沒有位元率數字、訓練資料與預測網路誤差；是否適用音樂或一般音訊未知。\n\n可做:讀全文確認各位元率下的數字與預測網路的擬合誤差，再評估高斯基元表示是否能用於音樂的連續潛在空間。",
+  "## 2. Learning Jazz Pianist Style with Cross-Attention Conditioning\narXiv 2610.02918（2026-10-02）｜MIR｜新\nhttps://arxiv.org/abs/2610.02918\n\n**TL;DR** 預訓練符號音樂 Transformer 的表徵已能高準確辨識爵士鋼琴家，加上對鋼琴家身分嵌入的交叉注意力後，可生成特定風格的續寫。\n\n洞見:作者發現預訓練符號音樂 Transformer 的內部表徵已編碼鋼琴家身分，在兩個基準上分類準確度很高；再加入對學習到的鋼琴家嵌入做交叉注意力，就能以演奏者風格條件化生成。評估用滑動視窗分類器判斷續寫是否歸屬正確鋼琴家，另以只用合成生成訓練的分類器在 12 位真實鋼琴家上達到 87% 片段級與 95% 曲目級準確度。分類器還被用來標出最能代表某位鋼琴家的片段。對 karaoke-jp，可類比為「演唱者風格」條件化的概念參考，但這是符號鋼琴資料，不是歌聲。限制：我只讀到摘要頁，未見資料集與預訓練模型名稱；評估靠分類器，且僅 12 位鋼琴家。\n\n可做:查看作者的專案頁與 demo，確認交叉注意力條件化的實作方式，再想想能否套到歌手音色或唱腔嵌入。",
+  "## GitHub pick：Osdsoh7817/Score2ConVec（★3）\nhttps://github.com/Osdsoh7817/Score2ConVec\n\nWindows 桌面程式：載入 MIDI 旋律並輸入歌詞，轉成 ContentVec 特徵，讓既有的 SVC／RVC 聲音模型依樂譜唱出來。\n\n為什麼選它：流程是 MIDI 加歌詞到歌聲，與 karaoke-jp 的 mora 對音符 timing 方向相反但可對照；專案很小（3 星、5 次提交），README 自述音質取決於 MIDI 精準度，需 8GB VRAM 的 NVIDIA GPU，授權未確認。\n\n## 今天的 take-away\n- 神經 codec 開始探索不靠量化器的瓶頸，但 GS-Codec 目前僅在語音驗證。\n- 符號音樂模型的內部表徵已含演奏者身分，交叉注意力即可條件化。\n- karaoke-jp 可留意 MIDI＋歌詞到歌聲的小型工具，品質取決於輸入旋律精準度。"
+ ]
+}

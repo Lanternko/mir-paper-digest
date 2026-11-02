@@ -307,3 +307,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-11-01,1,paper,mean_audio,Smorph: Playable Sound Morphing with Diffusion Models,https://arxiv.org/abs/2610.06478,10.48550/arXiv.2610.06478,sound morphing|diffusion guidance|audio generation,新
 2026-11-01,2,paper,general_mir,From Isolated Feature to Orbits: Discovering Music Concepts via Multi-SAE Alignment,https://arxiv.org/abs/2610.01864,10.48550/arXiv.2610.01864,interpretability|sparse autoencoder|music foundation model,新
 2026-11-01,0,repo,github,anime-song/tsumugi,https://github.com/anime-song/tsumugi,,music transcription|audio-to-MIDI|singing voice,
+2026-11-02,1,paper,mean_audio,GS-Codec: A Gaussian-Splatting Bottleneck for Neural Audio Coding,https://arxiv.org/abs/2610.04651,10.48550/arXiv.2610.04651,neural codec|Gaussian splatting|speech codec,待觀察
+2026-11-02,2,paper,general_mir,Learning Jazz Pianist Style with Cross-Attention Conditioning,https://arxiv.org/abs/2610.02918,10.48550/arXiv.2610.02918,symbolic music|performer style|conditional generation,新
+2026-11-02,0,repo,github,Osdsoh7817/Score2ConVec,https://github.com/Osdsoh7817/Score2ConVec,,singing voice|MIDI to singing|lyrics,
