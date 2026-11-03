@@ -1,0 +1,95 @@
+{
+ "date": "2026-11-03",
+ "papers": [
+  {
+   "slot": 1,
+   "track": "mean_audio",
+   "title": "High-Fidelity Song Generation with Joint Discrete and Continuous Modeling",
+   "authors": [
+    "Zheqi Dai",
+    "Zhiyue Wu",
+    "Ruibin Yuan",
+    "Haolin He",
+    "Chunyat Wu",
+    "Xuerui Yang",
+    "Qiuqiang Kong",
+    "Chao Yan"
+   ],
+   "published": "2026-10-11",
+   "updated": "2026-10-11",
+   "source_url": "https://arxiv.org/abs/2610.15802",
+   "arxiv_id": "2610.15802",
+   "doi": "10.48550/arXiv.2610.15802",
+   "tags": [
+    "song generation",
+    "flow matching",
+    "lyrics-to-song"
+   ],
+   "quality": "新且重要",
+   "tldr": "以離散 token 做長程規劃、再用連續語意特徵的流模型補回細節，讓歌詞轉整首歌的 SongEval 與歌詞可懂度（PER）同時提升。",
+   "insight": "洞見:離散 token 好規劃但量化會丟資訊，且分階段訓練讓下游目標無法回饋規劃器。作者用 VQ token 做自回歸規劃，另以 SSL 變分編碼器提供連續語意目標，並讓全序列流模型透過可微讀出把梯度傳回語言模型，而不必對 token 取樣求導。在 192 個共用提示上，48D 設定的 SongEval 由 4.152 升至 4.269，micro-PER 由 20.26% 降到 14.47%，專家聽測也較高。對 MeanAudio 這條線，是『離散規劃＋flow matching 渲染』的具體可借鏡做法。限制：我只讀到摘要頁，沒有看到訓練資料量、模型大小與完整基線。",
+   "try_next": "可做:讀全文確認讀出（readout）的設計與 48D 之外的消融，再評估能否把類似的連續語意目標接到自己的 text-to-music flow matching 流程。",
+   "problem": "整首歌生成需要長程規劃，又要保留人聲與伴奏細節；純離散 token 受量化限制，分階段優化也讓下游目標無法影響規劃器。",
+   "method": "VQ tokenizer 供自回歸規劃；另訓 SSL 衍生的變分編碼器給連續語意目標；全序列流模型以完整 token 計畫與規劃器預測狀態的可微讀出為條件，產生語意特徵再做聲學渲染，流匹配梯度經讀出傳回語言模型。",
+   "data": "評估為 192 個共用提示，指標含 SongEval、micro-PER 與專家聽測，另做語意探針與條件重建分析；訓練資料未在摘要頁說明。",
+   "findings": "48D 設定相對離散基線：SongEval 4.152→4.269，micro-PER 20.26%→14.47%，專家聽測分數明顯較高（摘要稱 substantially higher）。",
+   "limitations": "只讀到摘要頁：訓練資料、模型規模、與其他開源歌曲生成系統的對照未確認；評估集僅 192 提示；PER 衡量英文或何種語言的歌詞未知；為預印本。",
+   "editor_note": "與歌詞可懂度和生成主線都貼近，是今天最貼 MeanAudio 的一篇；實際效益要看全文的基線與資料。",
+   "relevance": {
+    "mean_audio": 4,
+    "karaoke_jp": 2
+   }
+  },
+  {
+   "slot": 2,
+   "track": "general_mir",
+   "title": "MUB: An Identity-Masked Benchmark for Music Understanding in Multimodal Language Models",
+   "authors": [
+    "Kun Liu",
+    "Lyra Tao"
+   ],
+   "published": "2026-10-16",
+   "updated": "2026-10-16",
+   "source_url": "https://arxiv.org/abs/2610.22989",
+   "arxiv_id": "2610.22989",
+   "doi": "10.48550/arXiv.2610.22989",
+   "tags": [
+    "music understanding",
+    "benchmark",
+    "tempo/key"
+   ],
+   "quality": "待觀察",
+   "tldr": "MUB 以 500 首去除身分資訊的錄音評測速度、調性、拍號與段落區間，但作者自承尚未與多模態語言模型比較，仍是待驗證的資源。",
+   "insight": "洞見:MUB 的賣點是遮蔽曲名、藝人等中繼資料，並要求模型輸出純量速度與整首錄音的區間，而非選擇題。500 首涵蓋 24 個大小調、47–180 BPM 與 4,676 個標註區間；基線是簡單 DSP 估計器的速度準確度 53.6%，以及恆猜 4/4 的拍號準確度 98.4%（顯示拍號極不平衡）。對 Music Flamingo 類音樂理解評估有參考價值，但作者坦承尚未跑多模態語言模型、標註一致性未驗證、調性指標不對稱，且錄音版權尚未釐清。",
+   "try_next": "可做:先別當成可用基準；若要用，可只取其遮蔽協定與區間輸出格式，自己在有授權的資料上對 Music Flamingo 跑速度與段落任務。",
+   "problem": "現有音樂問答與時間定位評測多為選擇題或片段級，難以檢驗多模態模型是否真的聽懂速度與整曲結構，也易因中繼資料洩漏而作弊。",
+   "method": "整理 500 首移除識別中繼資料的錄音，沿用既有速度、調性、拍號與結構區間標註，強調純量速度預測與整首錄音區間輸出，並記錄遮蔽協定；附 DSP 與常數基線。",
+   "data": "500 首錄音，24 個調、47–180 BPM、4,676 個標註區間；標註來自既有資源。",
+   "findings": "DSP 速度估計器準確度 53.6%；恆猜 4/4 的拍號準確度 98.4%。尚無多模態語言模型的比較結果。",
+   "limitations": "作者自述：調性指標不對稱、標註一致性未驗證、拍號嚴重不平衡、錄音版權未解決，且尚未與當代多模態語言模型比較；我只讀到摘要頁。",
+   "editor_note": "主題貼近音樂理解，但目前是未完成的評測資源，列為待觀察；價值在評測設計而非結果。",
+   "relevance": {
+    "mean_audio": 1,
+    "karaoke_jp": 1
+   }
+  }
+ ],
+ "repo": {
+  "full_name": "nomadkaraoke/karaoke-gen",
+  "url": "https://github.com/nomadkaraoke/karaoke-gen",
+  "description_zh": "自動產生卡拉 OK 影片：下載音訊與歌詞、分離伴奏、用轉錄模型同步歌詞、渲染 CDG，並可上傳到 YouTube／Dropbox／Google Drive。",
+  "stars": 183,
+  "updated": "2026-11-02",
+  "why": "整條流程（分離、歌詞對齊、卡拉 OK 渲染）正好是 karaoke-jp pipeline 的現成對照，可拿來比對 LRC／逐字時間軸的做法；MIT 授權、專案近日仍在更新。我只看了專案描述，未實測對日文的支援。",
+  "tags": [
+   "karaoke",
+   "lyrics alignment",
+   "source separation"
+  ]
+ },
+ "discord_messages": [
+  "# 每日 MIR 論文精選 - 2026-11-03\n網站：https://lanternko.github.io/mir-paper-digest/reports/2026-11-03.html\n\n## 1. High-Fidelity Song Generation with Joint Discrete and Continuous Modeling\narXiv 2610.15802（2026-10-11）｜MeanAudio｜新且重要\nhttps://arxiv.org/abs/2610.15802\n\n**TL;DR** 以離散 token 做長程規劃、再用連續語意特徵的流模型補回細節，讓歌詞轉整首歌的 SongEval 與歌詞可懂度（PER）同時提升。\n\n洞見:離散 token 好規劃但量化會丟資訊，且分階段訓練讓下游目標無法回饋規劃器。作者用 VQ token 做自回歸規劃，另以 SSL 變分編碼器提供連續語意目標，並讓全序列流模型透過可微讀出把梯度傳回語言模型，而不必對 token 取樣求導。在 192 個共用提示上，48D 設定的 SongEval 由 4.152 升至 4.269，micro-PER 由 20.26% 降到 14.47%，專家聽測也較高。對 MeanAudio 這條線，是『離散規劃＋flow matching 渲染』的具體可借鏡做法。限制：我只讀到摘要頁，沒有看到訓練資料量、模型大小與完整基線。\n\n可做:讀全文確認讀出（readout）的設計與 48D 之外的消融，再評估能否把類似的連續語意目標接到自己的 text-to-music flow matching 流程。",
+  "## 2. MUB: An Identity-Masked Benchmark for Music Understanding in Multimodal Language Models\narXiv 2610.22989（2026-10-16）｜MIR｜待觀察\nhttps://arxiv.org/abs/2610.22989\n\n**TL;DR** MUB 以 500 首去除身分資訊的錄音評測速度、調性、拍號與段落區間，但作者自承尚未與多模態語言模型比較，仍是待驗證的資源。\n\n洞見:MUB 的賣點是遮蔽曲名、藝人等中繼資料，並要求模型輸出純量速度與整首錄音的區間，而非選擇題。500 首涵蓋 24 個大小調、47–180 BPM 與 4,676 個標註區間；基線是簡單 DSP 估計器的速度準確度 53.6%，以及恆猜 4/4 的拍號準確度 98.4%（顯示拍號極不平衡）。對 Music Flamingo 類音樂理解評估有參考價值，但作者坦承尚未跑多模態語言模型、標註一致性未驗證、調性指標不對稱，且錄音版權尚未釐清。\n\n可做:先別當成可用基準；若要用，可只取其遮蔽協定與區間輸出格式，自己在有授權的資料上對 Music Flamingo 跑速度與段落任務。",
+  "## GitHub pick：nomadkaraoke/karaoke-gen（★183）\nhttps://github.com/nomadkaraoke/karaoke-gen\n\n自動產生卡拉 OK 影片：下載音訊與歌詞、分離伴奏、用轉錄模型同步歌詞、渲染 CDG，並可上傳到 YouTube／Dropbox／Google Drive。\n\n為什麼選它：整條流程（分離、歌詞對齊、卡拉 OK 渲染）正好是 karaoke-jp pipeline 的現成對照，可拿來比對 LRC／逐字時間軸的做法；MIT 授權、專案近日仍在更新。我只看了專案描述，未實測對日文的支援。\n\n## 今天的 take-away\n- 歌曲生成開始把離散規劃與連續 flow matching 渲染接在一起，歌詞可懂度（PER）也成了可量測的目標。\n- 音樂理解評測要先看協定與限制：MUB 還沒有模型結果，只適合借設計。\n- karaoke-gen 可當 karaoke-jp pipeline 的對照組，重點看歌詞同步與渲染環節。"
+ ]
+}
