@@ -1,0 +1,65 @@
+{
+ "date": "2026-11-04",
+ "papers": [
+  {
+   "slot": 1,
+   "track": "mean_audio",
+   "title": "Text-to-music Generation via Structured Captions AND Interpretable Evaluation",
+   "authors": ["Junkai Wu", "Zhepei Wang", "Ge Zhu", "Sarah Hye-yeon Lee", "Mari Ostendorf", "Nicholas J. Bryan"],
+   "published": "2026-10-31",
+   "updated": "2026-10-31",
+   "source_url": "https://arxiv.org/abs/2611.00685",
+   "arxiv_id": "2611.00685",
+   "doi": "10.48550/arXiv.2611.00685",
+   "tags": ["text-to-music", "structured captions", "evaluation"],
+   "quality": "新且重要",
+   "tldr": "作者用結構化 caption（SCAP）微調 flow-based 音樂生成模型，文字對齊與音質都比自由格式 caption 好，並提出比 CLAP 更貼近人類偏好的 Music DSG 評估。",
+   "insight": "洞見:caption 的「形式」本身就是生成品質的槓桿。把描述拆成結構化欄位後，模型更容易學到文字與音樂屬性的對應；而 Music DSG 借用 Davidsonian Scene Graph 的思路，把 prompt 拆成可逐項驗證的問題，比單一 CLAP 分數更可解釋，也更接近人類偏好。",
+   "try_next": "可做:把 MeanAudio 的訓練 caption 改寫成固定欄位（風格、樂器、速度、情緒等）做小規模 ablation，並用逐項檢查式評估補 CLAP/FAD 的不足。",
+   "problem": "text-to-music 的 caption 通常是自由格式，品質參差，且 CLAP 這類單一相似度分數難以解釋模型到底漏掉了哪些 prompt 細節。",
+   "method": "以結構化 caption（SCAP）微調預訓練的 flow-based diffusion transformer，與自由格式 caption 做受控對照；推論時搭配多階段 prompt rewriter；另提出受 Davidsonian Scene Graph 啟發的 Music DSG 評估協定。",
+   "data": "摘要頁未列出資料集規模與細節；需讀全文確認訓練資料與人類評測設定。",
+   "findings": "依摘要，SCAP 微調同時提升文字對齊與輸出品質，Music DSG 與人類偏好的相關性高於 CLAP。",
+   "limitations": "本次僅讀取 arXiv 摘要頁，未讀全文，具體數字、資料來源與泛化範圍尚未驗證；與 MeanAudio 的少步生成設定是否相容也需自行測試。",
+   "editor_note": "caption 與評估是 MeanAudio 路線都用得上的兩個環節，今天最貼主線的一篇。",
+   "relevance": {"mean_audio": 5, "karaoke_jp": 1}
+  },
+  {
+   "slot": 2,
+   "track": "mean_audio",
+   "title": "How Close to the Theme? Similarity-Label Conditioning for Game Music Generation",
+   "authors": ["Shangxuan Luo", "Zixun Guo", "Jinjie Shi", "Joshua Reiss"],
+   "published": "2026-10-31",
+   "updated": "2026-10-31",
+   "source_url": "https://arxiv.org/abs/2611.01047",
+   "arxiv_id": "2611.01047",
+   "doi": "10.48550/arXiv.2611.01047",
+   "tags": ["symbolic music", "controllable generation", "game music"],
+   "quality": "待觀察",
+   "tldr": "在預訓練 MIDI 模型上，用「兩段樂句的相似度標籤」做條件，讓使用者控制新段落離參考主題多近；旋律重述最明顯，聽感評分也與旋律重疊最相關。",
+   "insight": "洞見:與其只給風格或情緒標籤，用「和參考段落有多像」當連續控制軸，更貼近作曲時「變奏到什麼程度」的需求。參考段落被壓成一個 context vector，相似度標籤決定重述或偏離的程度，這種條件化方式可遷移到音訊生成的參考音訊控制。",
+   "try_next": "可做:把相似度標籤的想法移到 audio 端，以參考音訊 embedding 加相似度分數做條件，測試 text-to-music 能否在保留主題與自由變化之間調節。",
+   "problem": "遊戲音樂常需要圍繞主題做變奏，但現有生成模型缺乏「與主題相似到什麼程度」的明確控制。",
+   "method": "微調預訓練 MIDI 音樂模型，以 Super Mario 曲目的段落配對與相似度標籤為訓練資料，參考段落以 context vector 摘要。",
+   "data": "Super Mario 曲目的段落配對；測試用 157 個 context。",
+   "findings": "依摘要，要求「相似」的輸出確實更接近 context，差距在旋律重述上最大；聽感測試的評分與旋律重疊的關聯最強。",
+   "limitations": "屬符號（MIDI）領域，且資料僅限單一遊戲系列，泛化性存疑；本次只讀摘要頁，未驗證細節與規模；與音訊生成主線距離較遠。",
+   "editor_note": "不是主線，但可控性設計有參考價值，視為「待觀察」。",
+   "relevance": {"mean_audio": 3, "karaoke_jp": 1}
+  }
+ ],
+ "repo": {
+  "full_name": "sjsjcircle/lyricprompter",
+  "url": "https://github.com/sjsjcircle/lyricprompter",
+  "description_zh": "多語（韓/日/英）自動歌詞提詞機：離線人聲分離與強制對齊產生音節/mora 時間軸，現場再以音訊對音訊即時追蹤。",
+  "stars": 0,
+  "updated": "2026-10-30",
+  "why": "流程涵蓋人聲分離、日文 mora 分割、強制對齊到 karaoke wipe，與 karaoke-jp pipeline 高度重疊，可參考其自動音節切分與 OLTW 即時追蹤。注意：目前 0 星、無授權條款、僅支援 Apple Silicon macOS，成熟度未知，先當設計參考。",
+  "tags": ["lyrics alignment", "karaoke", "singing voice"]
+ },
+ "discord_messages": [
+  "# 每日 MIR 論文精選 - 2026-11-04\n網站：https://lanternko.github.io/mir-paper-digest/reports/2026-11-04.html\n\n## 1. Text-to-music Generation via Structured Captions AND Interpretable Evaluation\narXiv 2611.00685（2026-10-31）｜MeanAudio｜新且重要\nhttps://arxiv.org/abs/2611.00685\n\n**TL;DR** 作者用結構化 caption（SCAP）微調 flow-based 音樂生成模型，文字對齊與音質都比自由格式 caption 好，並提出比 CLAP 更貼近人類偏好的 Music DSG 評估。\n\n洞見:caption 的「形式」本身就是生成品質的槓桿。把描述拆成結構化欄位後，模型更容易學到文字與音樂屬性的對應；Music DSG 借用 Davidsonian Scene Graph 思路，把 prompt 拆成可逐項驗證的問題，比單一 CLAP 分數更可解釋。\n\n可做:把 MeanAudio 的訓練 caption 改寫成固定欄位（風格、樂器、速度、情緒等）做小規模 ablation，並用逐項檢查式評估補 CLAP/FAD 的不足。\n\n限制：只讀了摘要頁，具體數字與資料細節待讀全文確認。",
+  "## 2. How Close to the Theme? Similarity-Label Conditioning for Game Music Generation\narXiv 2611.01047（2026-10-31）｜MeanAudio｜待觀察\nhttps://arxiv.org/abs/2611.01047\n\n**TL;DR** 在預訓練 MIDI 模型上，用「兩段樂句的相似度標籤」做條件，讓使用者控制新段落離參考主題多近；旋律重述最明顯，聽感評分也與旋律重疊最相關。\n\n洞見:與其只給風格或情緒標籤，用「和參考段落有多像」當連續控制軸，更貼近作曲時「變奏到什麼程度」的需求，可遷移到音訊生成的參考音訊控制。\n\n可做:把相似度標籤的想法移到 audio 端，以參考音訊 embedding 加相似度分數做條件，測試能否在保留主題與自由變化之間調節。\n\n限制：屬符號領域，資料僅 Super Mario 曲目，泛化性存疑；只讀摘要頁。",
+  "## GitHub pick：sjsjcircle/lyricprompter（★0）\nhttps://github.com/sjsjcircle/lyricprompter\n\n多語（韓/日/英）自動歌詞提詞機：離線人聲分離與強制對齊產生音節/mora 時間軸，現場再以音訊對音訊即時追蹤。\n\n為什麼挑它：流程涵蓋人聲分離、日文 mora 分割、強制對齊到 karaoke wipe，與 karaoke-jp pipeline 高度重疊。注意目前 0 星、無授權條款、僅支援 Apple Silicon macOS，先當設計參考。\n\n## 今天的 take-away\n- caption 結構化與可解釋評估（Music DSG）值得放進 MeanAudio 的實驗清單，補足 CLAP 的盲點。\n- 相似度標籤是一種「連續可控」的條件化思路，可嘗試搬到音訊端。\n- lyricprompter 的自動 mora 切分與 OLTW 追蹤，可對照 karaoke-jp 的對齊流程。"
+ ]
+}

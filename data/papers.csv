@@ -313,3 +313,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-11-03,1,paper,mean_audio,High-Fidelity Song Generation with Joint Discrete and Continuous Modeling,https://arxiv.org/abs/2610.15802,10.48550/arXiv.2610.15802,song generation|flow matching|lyrics-to-song,新且重要
 2026-11-03,2,paper,general_mir,MUB: An Identity-Masked Benchmark for Music Understanding in Multimodal Language Models,https://arxiv.org/abs/2610.22989,10.48550/arXiv.2610.22989,music understanding|benchmark|tempo/key,待觀察
 2026-11-03,0,repo,github,nomadkaraoke/karaoke-gen,https://github.com/nomadkaraoke/karaoke-gen,,karaoke|lyrics alignment|source separation,
+2026-11-04,1,paper,mean_audio,Text-to-music Generation via Structured Captions AND Interpretable Evaluation,https://arxiv.org/abs/2611.00685,10.48550/arXiv.2611.00685,text-to-music|structured captions|evaluation,新且重要
+2026-11-04,2,paper,mean_audio,How Close to the Theme? Similarity-Label Conditioning for Game Music Generation,https://arxiv.org/abs/2611.01047,10.48550/arXiv.2611.01047,symbolic music|controllable generation|game music,待觀察
+2026-11-04,0,repo,github,sjsjcircle/lyricprompter,https://github.com/sjsjcircle/lyricprompter,,lyrics alignment|karaoke|singing voice,
