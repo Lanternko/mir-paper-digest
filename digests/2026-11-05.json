@@ -1,0 +1,91 @@
+{
+ "date": "2026-11-05",
+ "papers": [
+  {
+   "slot": 1,
+   "track": "mean_audio",
+   "title": "MFlowAudio: Efficient Text-to-Audio Synthesis via Mamba-based Stateful Flow Matching",
+   "authors": [
+    "Hao Dai",
+    "Panyu Chen",
+    "Jagmohan Chauhan"
+   ],
+   "published": "2026-10-30",
+   "updated": "2026-10-30",
+   "source_url": "https://arxiv.org/abs/2610.41852",
+   "arxiv_id": "2610.41852",
+   "doi": "10.48550/arXiv.2610.41852",
+   "tags": [
+    "text-to-audio",
+    "flow matching",
+    "Mamba"
+   ],
+   "quality": "新且重要",
+   "tldr": "以 Mamba 取代 Transformer 骨幹做 flow matching 文字轉音訊，支援分塊串流生成，宣稱保真度持平、速度快 14.5% 以上、延遲固定 1.8 秒。",
+   "insight": "洞見:Transformer 擴散模型的自注意力隨長度二次成長，長音訊生成慢。作者提出 TCMamba（TimeMamba 以線性成本捕捉長程因果、ChannelMamba 建模諧波等跨通道關係），再加上 Stateful Flow Matching：分塊訓練、以固定成本快取狀態做串流生成，並設計提示中途改變時處理向量場衝突的引導機制。作者宣稱保真度與最新方法相當、生成快 14.5% 以上、串流延遲固定 1.8 秒。對 MeanAudio 這條線，是『flow matching 加高效骨幹』的直接對照，可看串流與中途換提示是否適用於音樂。限制：我只讀到摘要頁，未見資料集、基線與指標數字。",
+   "try_next": "可做:讀全文確認評估指標（FAD、CLAP）與基線，並評估 SFM 的分塊串流能否套到自己的 MeanAudio 流程。",
+   "problem": "Transformer 式擴散模型的自注意力為二次複雜度，長篇音訊生成速度慢，也難以串流。",
+   "method": "潛空間 flow matching 搭配 TCMamba 骨幹（TimeMamba＋ChannelMamba 雙向掃描），並提出 Stateful Flow Matching 支援分塊訓練、固定成本快取的串流生成，與處理提示切換的引導機制。",
+   "data": "摘要頁未說明訓練資料與評估集；作者提供 Hugging Face Spaces 展示。",
+   "findings": "作者宣稱保真度與最新方法相當，生成速度快超過 14.5%，串流延遲固定為 1.8 秒。",
+   "limitations": "只讀到摘要頁：資料、基線、指標與音樂場景的表現均未確認；速度與延遲數字為作者自述；為預印本，且是通用音訊而非專門針對音樂。",
+   "editor_note": "與 MeanAudio 的效率與串流方向高度相關，是今天最貼主線的一篇；實際價值要看全文的對照。",
+   "relevance": {
+    "mean_audio": 4,
+    "karaoke_jp": 0
+   }
+  },
+  {
+   "slot": 2,
+   "track": "mean_audio",
+   "title": "A Tutorial on Generative Models for Music Audio",
+   "authors": [
+    "Mateusz Modrzejewski",
+    "Joanna Kurkowska",
+    "Dorien Herremans"
+   ],
+   "published": "2026-10-28",
+   "updated": "2026-10-28",
+   "source_url": "https://arxiv.org/abs/2610.38252",
+   "arxiv_id": "2610.38252",
+   "doi": "10.48550/arXiv.2610.38252",
+   "tags": [
+    "music generation",
+    "tutorial",
+    "evaluation"
+   ],
+   "quality": "重要",
+   "tldr": "一本涵蓋 codec、自回歸與遮罩 token、擴散與 flow matching、偏好優化及評估與版權議題的音樂音訊生成教學專著，適合當地圖查閱。",
+   "insight": "洞見:這份教學以統一符號整理音樂音訊生成：神經音訊 codec 與自編碼器、自回歸與遮罩 token 模型、擴散與 flow matching、加速採樣與偏好優化，並用範例把訓練目標、採樣流程對應到已發表系統，附表格比較表示法、方法、輸入、任務與釋出資訊。範圍含器樂片段、帶人聲整首歌、編輯與即時伴奏，也談自動指標與學習式評審、聽測設計、資料來源與記憶化。作者提醒各系統在資料、規模與評估上差異大，跨系統比較難以判斷進步來自何處。限制：我只讀到摘要頁，未讀章節內容。",
+   "try_next": "可做:拿它的比較表當 MeanAudio 相關工作清單，核對評估（FAD、CLAP、聽測）與偏好優化章節，補自己實驗報告缺的部分。",
+   "problem": "音樂音訊生成方法快速增生，新進者缺少以統一符號整理、並連到評估與資料議題的入門與參考資料。",
+   "method": "專著形式的教學：以一致符號說明 codec、token 模型、擴散與 flow matching、快速採樣、偏好優化，輔以範例、應用章節與比較表。",
+   "data": "無新實驗；為文獻綜整，涵蓋器樂、帶人聲歌曲、編輯與即時伴奏等系統。",
+   "findings": "非實證論文；結論是現有系統結合既有範式與新的表示、規劃階段和後訓練，但資料、規模與評估差異限制了跨系統比較。",
+   "limitations": "只讀到摘要頁；教學專著沒有新結果，內容深度與涵蓋的系統完整度未驗證；文獻會隨領域快速過時。",
+   "editor_note": "不是新方法，但對 MeanAudio 主線是難得的整理資料，列為重要；先當索引使用。",
+   "relevance": {
+    "mean_audio": 5,
+    "karaoke_jp": 1
+   }
+  }
+ ],
+ "repo": {
+  "full_name": "pablopramparo/ultrasongs",
+  "url": "https://github.com/pablopramparo/ultrasongs",
+  "description_zh": "從音訊或影片加歌詞產生 Ultrastar Deluxe 歌曲檔：本機執行 Demucs 人聲分離、torchcrepe 音高、faster-whisper 轉錄，並附視覺化時間軸編輯器。",
+  "stars": 8,
+  "updated": "2026-10-18",
+  "why": "流程（人聲分離、逐字音高、歌詞模糊對齊、BPM 拍點映射、輸出可唱的音符檔）與 karaoke-jp 的 mora-to-note 與 pitch 需求相近，可對照其對齊與音符化做法；GPL-3.0、僅 8 星且作者標明仍是進行中。我只看了 README，未實測日文支援。",
+  "tags": [
+   "karaoke",
+   "singing voice",
+   "lyrics alignment"
+  ]
+ },
+ "discord_messages": [
+  "# 每日 MIR 論文精選 - 2026-11-05\n網站：https://lanternko.github.io/mir-paper-digest/reports/2026-11-05.html\n\n## 1. MFlowAudio: Efficient Text-to-Audio Synthesis via Mamba-based Stateful Flow Matching\narXiv 2610.41852（2026-10-30）｜MeanAudio｜新且重要\nhttps://arxiv.org/abs/2610.41852\n\n**TL;DR** 以 Mamba 取代 Transformer 骨幹做 flow matching 文字轉音訊，支援分塊串流生成，宣稱保真度持平、速度快 14.5% 以上、延遲固定 1.8 秒。\n\n洞見:Transformer 擴散模型的自注意力隨長度二次成長，長音訊生成慢。作者提出 TCMamba（TimeMamba 以線性成本捕捉長程因果、ChannelMamba 建模諧波等跨通道關係），再加上 Stateful Flow Matching：分塊訓練、以固定成本快取狀態做串流生成，並設計提示中途改變時處理向量場衝突的引導機制。作者宣稱保真度與最新方法相當、生成快 14.5% 以上、串流延遲固定 1.8 秒。對 MeanAudio 這條線，是『flow matching 加高效骨幹』的直接對照，可看串流與中途換提示是否適用於音樂。限制：我只讀到摘要頁，未見資料集、基線與指標數字。\n\n可做:讀全文確認評估指標（FAD、CLAP）與基線，並評估 SFM 的分塊串流能否套到自己的 MeanAudio 流程。",
+  "## 2. A Tutorial on Generative Models for Music Audio\narXiv 2610.38252（2026-10-28）｜MeanAudio｜重要\nhttps://arxiv.org/abs/2610.38252\n\n**TL;DR** 一本涵蓋 codec、自回歸與遮罩 token、擴散與 flow matching、偏好優化及評估與版權議題的音樂音訊生成教學專著，適合當地圖查閱。\n\n洞見:這份教學以統一符號整理音樂音訊生成：神經音訊 codec 與自編碼器、自回歸與遮罩 token 模型、擴散與 flow matching、加速採樣與偏好優化，並用範例把訓練目標、採樣流程對應到已發表系統，附表格比較表示法、方法、輸入、任務與釋出資訊。範圍含器樂片段、帶人聲整首歌、編輯與即時伴奏，也談自動指標與學習式評審、聽測設計、資料來源與記憶化。作者提醒各系統在資料、規模與評估上差異大，跨系統比較難以判斷進步來自何處。限制：我只讀到摘要頁，未讀章節內容。\n\n可做:拿它的比較表當 MeanAudio 相關工作清單，核對評估（FAD、CLAP、聽測）與偏好優化章節，補自己實驗報告缺的部分。",
+  "## GitHub pick：pablopramparo/ultrasongs（★8）\nhttps://github.com/pablopramparo/ultrasongs\n\n從音訊或影片加歌詞產生 Ultrastar Deluxe 歌曲檔：本機執行 Demucs 人聲分離、torchcrepe 音高、faster-whisper 轉錄，並附視覺化時間軸編輯器。\n\n為什麼選它：流程（人聲分離、逐字音高、歌詞模糊對齊、BPM 拍點映射、輸出可唱的音符檔）與 karaoke-jp 的 mora-to-note 與 pitch 需求相近，可對照其對齊與音符化做法；GPL-3.0、僅 8 星且作者標明仍是進行中。我只看了 README，未實測日文支援。\n\n## 今天的 take-away\n- 文字轉音訊開始用 Mamba 加串流式 flow matching 換取長音訊效率，值得對照 MeanAudio。\n- 想系統回顧音樂生成（codec、token、flow、偏好優化、評估），這份教學專著可當索引。\n- ultrasongs 可對照 karaoke-jp 的音高與音符化流程，但仍是早期專案。"
+ ]
+}

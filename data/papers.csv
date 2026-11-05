@@ -316,3 +316,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-11-04,1,paper,mean_audio,Text-to-music Generation via Structured Captions AND Interpretable Evaluation,https://arxiv.org/abs/2611.00685,10.48550/arXiv.2611.00685,text-to-music|structured captions|evaluation,新且重要
 2026-11-04,2,paper,mean_audio,How Close to the Theme? Similarity-Label Conditioning for Game Music Generation,https://arxiv.org/abs/2611.01047,10.48550/arXiv.2611.01047,symbolic music|controllable generation|game music,待觀察
 2026-11-04,0,repo,github,sjsjcircle/lyricprompter,https://github.com/sjsjcircle/lyricprompter,,lyrics alignment|karaoke|singing voice,
+2026-11-05,1,paper,mean_audio,MFlowAudio: Efficient Text-to-Audio Synthesis via Mamba-based Stateful Flow Matching,https://arxiv.org/abs/2610.41852,10.48550/arXiv.2610.41852,text-to-audio|flow matching|Mamba,新且重要
+2026-11-05,2,paper,mean_audio,A Tutorial on Generative Models for Music Audio,https://arxiv.org/abs/2610.38252,10.48550/arXiv.2610.38252,music generation|tutorial|evaluation,重要
+2026-11-05,0,repo,github,pablopramparo/ultrasongs,https://github.com/pablopramparo/ultrasongs,,karaoke|singing voice|lyrics alignment,
