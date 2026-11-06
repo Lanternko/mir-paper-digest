@@ -1,0 +1,96 @@
+{
+ "date": "2026-11-06",
+ "papers": [
+  {
+   "slot": 1,
+   "track": "general_mir",
+   "title": "PianoBench: Evaluating Musical Perception and Reasoning in Language Models",
+   "authors": [
+    "Louis Bradshaw",
+    "Irmak Bukey",
+    "Daniel Chenyu Lin",
+    "John Thickstun",
+    "Chris Donahue"
+   ],
+   "published": "2026-11-02",
+   "updated": "2026-11-02",
+   "source_url": "https://arxiv.org/abs/2611.03839",
+   "arxiv_id": "2611.03839",
+   "doi": "10.48550/arXiv.2611.03839",
+   "tags": [
+    "music understanding",
+    "benchmark",
+    "audio-language model"
+   ],
+   "quality": "新且重要",
+   "tldr": "PianoBench 以逾 2 萬小時鋼琴教學影片建立音樂理解基準，發現音訊語言模型最高僅 52.8%，但給文字譜後前沿模型可達 93.2%。",
+   "insight": "洞見:模型『聽』與『推理』之間有明顯落差：開放權重音訊語言模型在音訊輸入下最高 52.8%，只略勝無音訊對照；前沿模型用思維鏈、拿到音樂轉寫文字時可達 93.2%。作者再用交錯的音樂與口語講解做中期訓練，讓 Qwen 3.5 9B Base 在附轉寫的零樣本準確率由 42.8% 升到 56.0%，暗示教學影片是被忽略的多模態監督來源。對 Music Flamingo 與音樂理解主線，這是檢驗『模型到底聽到什麼』的基準。限制：我只讀到摘要頁，題型與評分細節未確認。",
+   "try_next": "可做:用 PianoBench 的無音訊對照測試手邊音樂 LLM，確認它是真的在聽還是靠文字先驗。",
+   "problem": "多模態語言模型在泛音樂理解基準持續進步，但不清楚它們究竟能感知並推理哪些音樂特徵。",
+   "method": "從新建的多模態資料集（逾 2 萬小時、鋼琴教學影片中音樂轉寫與口語講解交錯）衍生基準，同一問題提供音訊與符號兩種等價輸入；並測試以交錯音樂教學資料做中期訓練。",
+   "data": "自建資料集：逾 20,000 小時鋼琴教學影片的音樂轉寫與口語講解；細節僅見摘要。",
+   "findings": "開放權重音訊語言模型最高 52.8%，僅小幅優於無音訊對照；前沿模型在文字轉寫加思維鏈下達 93.2%；中期訓練使 Qwen 3.5 9B Base 零樣本由 42.8% 升至 56.0%。",
+   "limitations": "只讀到摘要頁；限於鋼琴單一樂器，不涵蓋人聲與日文歌曲；轉寫品質與題型分布未驗證；為預印本。",
+   "editor_note": "直接回答音樂 LLM 到底聽到什麼，對 Music Flamingo 關注點很有用，列為今日第一篇。",
+   "relevance": {
+    "mean_audio": 1,
+    "karaoke_jp": 1
+   }
+  },
+  {
+   "slot": 2,
+   "track": "general_mir",
+   "title": "MEX: The Musical Expectation Benchmark Suite",
+   "authors": [
+    "Mathias Rose Bjare",
+    "Augustin Bouquillard",
+    "Giorgia Cantisani",
+    "Seung-Goo Kim",
+    "Stefan Lattner",
+    "Gerhard Widmer"
+   ],
+   "published": "2026-11-01",
+   "updated": "2026-11-01",
+   "source_url": "https://arxiv.org/abs/2611.01843",
+   "arxiv_id": "2611.01843",
+   "doi": "10.48550/arXiv.2611.01843",
+   "tags": [
+    "music expectation",
+    "benchmark",
+    "surprisal"
+   ],
+   "quality": "重要",
+   "tldr": "MEX 提供四項任務，檢驗模型估計的驚奇度與不確定度是否符合人類音樂期待，並附開源程式可從音訊估計這些指標。",
+   "insight": "洞見:把生成式音樂模型的 surprisal 與 uncertainty 當成『音樂資訊動態』指標，用感知與認知科學的證據來驗證：(1) 重複時指標是否下降（in-context learning）、(2) 峰值是否對齊段落邊界、(3) 音訊估計的音高驚奇是否與符號模型一致、(4) 能否預測腦電反應。對生成主線的價值，是提供 FAD、CLAP 之外、以感知為依據的評估角度。作者聲明這不是窮盡的描述。限制：我只讀到摘要頁，資料集與基線結果未確認。",
+   "try_next": "可做:用其開源程式對自己的生成模型算 surprisal，看段落邊界處是否出現峰值。",
+   "problem": "缺乏系統化方法驗證計算模型估計的音樂期待（驚奇度、不確定度）是否真的對應人類感知。",
+   "method": "整合並擴充 MIR 與認知科學既有任務，在標準資料集上建立四項測試，涵蓋符號與音訊，並提供基線模型與自有資料工具。",
+   "data": "標準資料集（含電生理反應相關任務）；具體資料集名稱摘要頁未列。",
+   "findings": "這是基準套件，摘要未給量化結果；貢獻在於任務定義與開源評測程式碼。",
+   "limitations": "只讀到摘要頁；無量化結果可查；作者自述不構成音樂期待的完整刻畫；與生成評估的連結是我的推論。",
+   "editor_note": "偏評估方法論，和生成主線間接相關，作為評估指標的補充閱讀。",
+   "relevance": {
+    "mean_audio": 3,
+    "karaoke_jp": 0
+   }
+  }
+ ],
+ "repo": {
+  "full_name": "sdercolin/utaformatix3",
+  "url": "https://github.com/sdercolin/utaformatix3",
+  "description_zh": "在多種歌聲合成軟體專案之間轉換的網頁工具，支援 VSQX、VPR、UST、USTX、SVP、MusicXML、MIDI 等格式，並能轉換日文歌詞的假名與羅馬字、CV 與 VCV。",
+  "stars": 376,
+  "updated": "2026-11-05",
+  "why": "karaoke-jp 的 mora-to-note 與 MIDI／score 輸出需要處理日文歌詞與音符對應，其假名與羅馬字轉換、歌詞字典映射及音高轉換的做法可對照。我只看了 README，未實測；注意它面向歌聲合成專案格式，不是歌詞對齊工具。",
+  "tags": [
+   "singing voice",
+   "kana",
+   "MIDI"
+  ]
+ },
+ "discord_messages": [
+  "# 每日 MIR 論文精選 - 2026-11-06\n網站：https://lanternko.github.io/mir-paper-digest/reports/2026-11-06.html\n\n## 論文 1：PianoBench: Evaluating Musical Perception and Reasoning in Language Models\n作者：Louis Bradshaw, Irmak Bukey, Daniel Chenyu Lin 等\n日期：2026-11-02　品質：新且重要\n連結：https://arxiv.org/abs/2611.03839\n\n**TL;DR**：PianoBench 以逾 2 萬小時鋼琴教學影片建立音樂理解基準，發現音訊語言模型最高僅 52.8%，但給文字譜後前沿模型可達 93.2%。\n\n洞見:模型『聽』與『推理』之間有明顯落差：開放權重音訊語言模型在音訊輸入下最高 52.8%，只略勝無音訊對照；前沿模型用思維鏈、拿到音樂轉寫文字時可達 93.2%。作者再用交錯的音樂與口語講解做中期訓練，讓 Qwen 3.5 9B Base 在附轉寫的零樣本準確率由 42.8% 升到 56.0%，暗示教學影片是被忽略的多模態監督來源。對 Music Flamingo 與音樂理解主線，這是檢驗『模型到底聽到什麼』的基準。限制：我只讀到摘要頁，題型與評分細節未確認。\n\n可做:用 PianoBench 的無音訊對照測試手邊音樂 LLM，確認它是真的在聽還是靠文字先驗。\n\n限制：只讀到摘要頁；限於鋼琴單一樂器，不涵蓋人聲與日文歌曲；轉寫品質與題型分布未驗證；為預印本。",
+  "## 論文 2：MEX: The Musical Expectation Benchmark Suite\n作者：Mathias Rose Bjare, Augustin Bouquillard, Giorgia Cantisani 等\n日期：2026-11-01　品質：重要\n連結：https://arxiv.org/abs/2611.01843\n\n**TL;DR**：MEX 提供四項任務，檢驗模型估計的驚奇度與不確定度是否符合人類音樂期待，並附開源程式可從音訊估計這些指標。\n\n洞見:把生成式音樂模型的 surprisal 與 uncertainty 當成『音樂資訊動態』指標，用感知與認知科學的證據來驗證：(1) 重複時指標是否下降（in-context learning）、(2) 峰值是否對齊段落邊界、(3) 音訊估計的音高驚奇是否與符號模型一致、(4) 能否預測腦電反應。對生成主線的價值，是提供 FAD、CLAP 之外、以感知為依據的評估角度。作者聲明這不是窮盡的描述。限制：我只讀到摘要頁，資料集與基線結果未確認。\n\n可做:用其開源程式對自己的生成模型算 surprisal，看段落邊界處是否出現峰值。\n\n限制：只讀到摘要頁；無量化結果可查；作者自述不構成音樂期待的完整刻畫；與生成評估的連結是我的推論。",
+  "## GitHub pick：sdercolin/utaformatix3\nhttps://github.com/sdercolin/utaformatix3\n在多種歌聲合成軟體專案之間轉換的網頁工具，支援 VSQX、VPR、UST、USTX、SVP、MusicXML、MIDI 等格式，並能轉換日文歌詞的假名與羅馬字、CV 與 VCV。\n星數 376，最近更新 2026-11-05\n\nkaraoke-jp 的 mora-to-note 與 MIDI／score 輸出需要處理日文歌詞與音符對應，其假名與羅馬字轉換、歌詞字典映射及音高轉換的做法可對照。我只看了 README，未實測；注意它面向歌聲合成專案格式，不是歌詞對齊工具。\n\n## 今天的 take-away\n- 音樂 LLM 的瓶頸可能在『聽』而非『推理』：同樣內容給文字轉寫，準確率大幅躍升。\n- 評估生成與理解模型時，無音訊對照與感知式指標（如 surprisal）都值得加進流程。\n- 日文歌詞的假名、羅馬字與音符映射，可參考歌聲合成社群的格式轉換經驗。"
+ ]
+}

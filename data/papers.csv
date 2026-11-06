@@ -319,3 +319,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-11-05,1,paper,mean_audio,MFlowAudio: Efficient Text-to-Audio Synthesis via Mamba-based Stateful Flow Matching,https://arxiv.org/abs/2610.41852,10.48550/arXiv.2610.41852,text-to-audio|flow matching|Mamba,新且重要
 2026-11-05,2,paper,mean_audio,A Tutorial on Generative Models for Music Audio,https://arxiv.org/abs/2610.38252,10.48550/arXiv.2610.38252,music generation|tutorial|evaluation,重要
 2026-11-05,0,repo,github,pablopramparo/ultrasongs,https://github.com/pablopramparo/ultrasongs,,karaoke|singing voice|lyrics alignment,
+2026-11-06,1,paper,general_mir,PianoBench: Evaluating Musical Perception and Reasoning in Language Models,https://arxiv.org/abs/2611.03839,10.48550/arXiv.2611.03839,music understanding|benchmark|audio-language model,新且重要
+2026-11-06,2,paper,general_mir,MEX: The Musical Expectation Benchmark Suite,https://arxiv.org/abs/2611.01843,10.48550/arXiv.2611.01843,music expectation|benchmark|surprisal,重要
+2026-11-06,0,repo,github,sdercolin/utaformatix3,https://github.com/sdercolin/utaformatix3,,singing voice|kana|MIDI,
