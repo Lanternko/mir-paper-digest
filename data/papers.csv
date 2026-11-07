@@ -322,3 +322,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-11-06,1,paper,general_mir,PianoBench: Evaluating Musical Perception and Reasoning in Language Models,https://arxiv.org/abs/2611.03839,10.48550/arXiv.2611.03839,music understanding|benchmark|audio-language model,新且重要
 2026-11-06,2,paper,general_mir,MEX: The Musical Expectation Benchmark Suite,https://arxiv.org/abs/2611.01843,10.48550/arXiv.2611.01843,music expectation|benchmark|surprisal,重要
 2026-11-06,0,repo,github,sdercolin/utaformatix3,https://github.com/sdercolin/utaformatix3,,singing voice|kana|MIDI,
+2026-11-07,1,paper,karaoke_jp,SubRoformer: Subband Time-Domain Representation for Music Source Separation,https://arxiv.org/abs/2611.08130,10.48550/arXiv.2611.08130,source separation|vocals|RoFormer,新且重要
+2026-11-07,2,paper,karaoke_jp,A Unified Multi-Encoder Framework for Music Lyric Intelligibility Assessment: Bridging Invasive and Non-Invasive Paradigms,https://arxiv.org/abs/2611.07485,10.48550/arXiv.2611.07485,lyrics|intelligibility|evaluation,新
+2026-11-07,0,repo,github,puddings-world/MandpopDataPipeline,https://github.com/puddings-world/MandpopDataPipeline,,karaoke|lyrics alignment|source separation,

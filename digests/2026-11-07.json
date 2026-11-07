@@ -1,0 +1,96 @@
+{
+ "date": "2026-11-07",
+ "papers": [
+  {
+   "slot": 1,
+   "track": "karaoke_jp",
+   "title": "SubRoformer: Subband Time-Domain Representation for Music Source Separation",
+   "authors": [
+    "Chunyat Wu",
+    "Chuang Ding",
+    "Paris Smaragdis",
+    "Qiuqiang Kong"
+   ],
+   "published": "2026-11-05",
+   "updated": "2026-11-05",
+   "source_url": "https://arxiv.org/abs/2611.08130",
+   "arxiv_id": "2611.08130",
+   "doi": "10.48550/arXiv.2611.08130",
+   "tags": [
+    "source separation",
+    "vocals",
+    "RoFormer"
+   ],
+   "quality": "新且重要",
+   "tldr": "SubRoFormer 先把混音拆成低取樣率的頻帶時域訊號，再用殘差 RoFormer 分離，MUSDB18-HQ 四軌平均 SDR 達 10.63 dB 並開源。",
+   "insight": "洞見:波形輸入取樣點太多、單一頻譜解析度又得在各頻段共用時頻取捨；作者改成可學習的子頻帶時域表示，讓各頻段以較低速率處理，再用門控殘差融合細節。僅用 MUSDB18-HQ 訓練、各 stem 專屬模型的平均 SDR 為 10.63 dB；加 500 首額外訓練歌曲的單一四軌模型達 11.59 dB，皆為作者聲稱在比較系統中最佳。對 karaoke-jp，人聲分離是歌詞辨識、對齊與唱聲 pitch 的第一步，分離品質會往下游傳遞。限制:我只讀到摘要頁，逐 stem 數字與運算成本未確認。",
+   "try_next": "可做:用作者釋出的權重在日文歌曲上抽樣比較現用人聲分離，再看歌詞對齊誤差是否隨之下降。",
+   "problem": "音樂分離常用的波形輸入樣本數過多，單一解析度頻譜又迫使各頻段共用同一時頻取捨。",
+   "method": "以子頻帶模組將混音分解為頻率局部化、較低速率的訊號進行分離並重建目標波形，再用殘差 RoFormer 在壓縮時間特徵上建模跨時間與跨頻帶關係，經門控殘差融合預測各音源的複數遮罩。",
+   "data": "MUSDB18-HQ 測試集；另有加入 500 首額外訓練歌曲的設定。細節僅見摘要。",
+   "findings": "僅用 MUSDB18-HQ 訓練時四軌平均 SDR 10.63 dB（各目標專屬模型）；加 500 首額外歌曲的單一多軌模型為 11.59 dB；作者稱兩種設定皆為所比較系統中的最佳，並釋出程式碼與權重。",
+   "limitations": "只讀到摘要頁；未確認各 stem（特別是人聲）的個別 SDR、推論速度與參數量；評測以西洋流行為主的 MUSDB18-HQ，不含日文歌曲；為預印本。",
+   "editor_note": "人聲分離是 karaoke-jp pipeline 最上游的一環，且有程式碼與權重可直接試，列為今日第一篇。",
+   "relevance": {
+    "mean_audio": 1,
+    "karaoke_jp": 4
+   }
+  },
+  {
+   "slot": 2,
+   "track": "karaoke_jp",
+   "title": "A Unified Multi-Encoder Framework for Music Lyric Intelligibility Assessment: Bridging Invasive and Non-Invasive Paradigms",
+   "authors": [
+    "Jing Yang",
+    "Shenghao Liao",
+    "Shuqing Zhang",
+    "Yongyi Deng",
+    "Pan Li",
+    "Zerui Han",
+    "Gongping Huang"
+   ],
+   "published": "2026-11-05",
+   "updated": "2026-11-05",
+   "source_url": "https://arxiv.org/abs/2611.07485",
+   "arxiv_id": "2611.07485",
+   "doi": "10.48550/arXiv.2611.07485",
+   "tags": [
+    "lyrics",
+    "intelligibility",
+    "evaluation"
+   ],
+   "quality": "新",
+   "tldr": "作者用多編碼器框架同時支援有參考與無參考兩種設定，預測歌曲歌詞可懂度，在 Cadenza 資料集上 RMSE 為 26.61，較基線改善 9.2%。",
+   "insight": "洞見:既有語音可懂度指標在音樂中表現不佳，因為韻律、時序與頻譜動態不同。作者結合局部聲學與語義對齊、全域音樂語義，以及 ASR 衍生的文字線索，在 ICASSP 2026 Cadenza 資料集上得到最佳 RMSE 26.61，比基線好 9.2%。對 karaoke-jp，這類模型可當作人聲分離與歌聲合成後『歌詞聽不聽得清』的自動指標，補足只看 SDR 的盲區。限制:我只讀到摘要頁，編碼器選擇與消融未確認。",
+   "try_next": "可做:拿 ASR 轉寫文字當輔助特徵的思路，替日文分離後人聲建立簡易可懂度分數，檢查與人耳判斷是否一致。",
+   "problem": "語音可懂度指標套用在音樂上表現不佳，而歌詞可懂度攸關聽障者的音樂體驗與理解。",
+   "method": "提出統一的多編碼器框架，同時支援 invasive（有參考）與 non-invasive（無參考）建模，融合局部聲學語義對齊、全域音樂語義與 ASR 衍生文字線索，預測歌詞可懂度。",
+   "data": "ICASSP 2026 Cadenza 資料集；細節僅見摘要。",
+   "findings": "最佳模型 RMSE 為 26.61，較基線改善 9.2%；作者稱在該資料集上優於各基線，並展現彈性與穩健性。",
+   "limitations": "只讀到摘要頁；僅在單一資料集驗證，語言以英文為主的可能性未確認；RMSE 絕對值難以直觀解讀；與日文歌詞及人聲分離輸出的關係為我的推論；為預印本。",
+   "editor_note": "歌詞可懂度是少見直接針對歌詞的評估題目，可作 karaoke-jp 的品質指標靈感，列為第二篇。",
+   "relevance": {
+    "mean_audio": 1,
+    "karaoke_jp": 3
+   }
+  }
+ ],
+ "repo": {
+  "full_name": "puddings-world/MandpopDataPipeline",
+  "url": "https://github.com/puddings-world/MandpopDataPipeline",
+  "description_zh": "華語流行歌資料集建構管線：從歌名自動完成 YouTube 下載、Demucs 人聲分離、歌詞取得與兩階段時間對齊，輸出音軌與帶時間戳的 LRC，供卡拉 OK 與音樂 AI 研究使用。",
+  "stars": 0,
+  "updated": "2026-11-06",
+  "why": "流程與 karaoke-jp 幾乎同構（人聲分離 → 歌詞對齊 → LRC），其對齊驗證與資料集化的做法可參考。我只看了 README，未實測；星數為 0、專案較新，且以個人使用與華語流行歌為主，不是日文專用。",
+  "tags": [
+   "karaoke",
+   "lyrics alignment",
+   "source separation"
+  ]
+ },
+ "discord_messages": [
+  "# 每日 MIR 論文精選 - 2026-11-07\n網站：https://lanternko.github.io/mir-paper-digest/reports/2026-11-07.html\n\n## 論文 1：SubRoformer: Subband Time-Domain Representation for Music Source Separation\n作者：Chunyat Wu, Chuang Ding, Paris Smaragdis 等\n日期：2026-11-05　品質：新且重要\n連結：https://arxiv.org/abs/2611.08130\n\n**TL;DR**：SubRoFormer 先把混音拆成低取樣率的頻帶時域訊號，再用殘差 RoFormer 分離，MUSDB18-HQ 四軌平均 SDR 達 10.63 dB 並開源。\n\n洞見:波形輸入取樣點太多、單一頻譜解析度又得在各頻段共用時頻取捨；作者改成可學習的子頻帶時域表示，讓各頻段以較低速率處理，再用門控殘差融合細節。僅用 MUSDB18-HQ 訓練、各 stem 專屬模型的平均 SDR 為 10.63 dB；加 500 首額外訓練歌曲的單一四軌模型達 11.59 dB，皆為作者聲稱在比較系統中最佳。對 karaoke-jp，人聲分離是歌詞辨識、對齊與唱聲 pitch 的第一步，分離品質會往下游傳遞。限制:我只讀到摘要頁，逐 stem 數字與運算成本未確認。\n\n可做:用作者釋出的權重在日文歌曲上抽樣比較現用人聲分離，再看歌詞對齊誤差是否隨之下降。\n\n限制：只讀到摘要頁；未確認各 stem（特別是人聲）的個別 SDR、推論速度與參數量；評測以西洋流行為主的 MUSDB18-HQ，不含日文歌曲；為預印本。",
+  "## 論文 2：A Unified Multi-Encoder Framework for Music Lyric Intelligibility Assessment: Bridging Invasive and Non-Invasive Paradigms\n作者：Jing Yang, Shenghao Liao, Shuqing Zhang 等\n日期：2026-11-05　品質：新\n連結：https://arxiv.org/abs/2611.07485\n\n**TL;DR**：作者用多編碼器框架同時支援有參考與無參考兩種設定，預測歌曲歌詞可懂度，在 Cadenza 資料集上 RMSE 為 26.61，較基線改善 9.2%。\n\n洞見:既有語音可懂度指標在音樂中表現不佳，因為韻律、時序與頻譜動態不同。作者結合局部聲學與語義對齊、全域音樂語義，以及 ASR 衍生的文字線索，在 ICASSP 2026 Cadenza 資料集上得到最佳 RMSE 26.61，比基線好 9.2%。對 karaoke-jp，這類模型可當作人聲分離與歌聲合成後『歌詞聽不聽得清』的自動指標，補足只看 SDR 的盲區。限制:我只讀到摘要頁，編碼器選擇與消融未確認。\n\n可做:拿 ASR 轉寫文字當輔助特徵的思路，替日文分離後人聲建立簡易可懂度分數，檢查與人耳判斷是否一致。\n\n限制：只讀到摘要頁；僅在單一資料集驗證，語言以英文為主的可能性未確認；RMSE 絕對值難以直觀解讀；與日文歌詞及人聲分離輸出的關係為我的推論；為預印本。",
+  "## GitHub pick：puddings-world/MandpopDataPipeline\nhttps://github.com/puddings-world/MandpopDataPipeline\n華語流行歌資料集建構管線：從歌名自動完成 YouTube 下載、Demucs 人聲分離、歌詞取得與兩階段時間對齊，輸出音軌與帶時間戳的 LRC，供卡拉 OK 與音樂 AI 研究使用。\n星數 0，最近更新 2026-11-06\n\n流程與 karaoke-jp 幾乎同構（人聲分離 → 歌詞對齊 → LRC），其對齊驗證與資料集化的做法可參考。我只看了 README，未實測；星數為 0、專案較新，且以個人使用與華語流行歌為主，不是日文專用。\n\n## 今天的 take-away\n- 人聲分離（SubRoFormer）是 karaoke-jp 的最上游，值得用日文歌曲實測其權重。\n- 歌詞可懂度模型可作為分離與合成後的自動品質指標，補足 SDR 的盲區。\n- 從歌名到帶時間戳 LRC 的資料工廠思路，可借來整理 karaoke-jp 的對齊資料。"
+ ]
+}
