@@ -1,0 +1,65 @@
+{
+ "date": "2026-11-08",
+ "papers": [
+  {
+   "slot": 1,
+   "track": "mean_audio",
+   "title": "FUSEMOS: Perceptual Evaluation of Text-to-Music Generation with Dual-Encoder Fusion and Ranking-Aware Composite Loss",
+   "authors": ["Jing Yang", "Haoyu Wang", "Ningning Pan", "Zhao Wang", "Jianxuan Yang", "Gongping Huang"],
+   "published": "2026-11-05",
+   "updated": "2026-11-05",
+   "source_url": "https://arxiv.org/abs/2611.07562",
+   "arxiv_id": "2611.07562",
+   "doi": "10.48550/arXiv.2611.07562",
+   "tags": ["text-to-music", "evaluation", "CLAP"],
+   "quality": "新且重要",
+   "tldr": "FUSEMOS 把 CLAP 與 MERT 兩種編碼器融合，並加入排序感知損失，預測文字生成音樂的人類評分，在 MusicEval 上超越先前方法。",
+   "insight": "洞見:只靠 CLAP 難以捕捉音色與表現力等細節，作者加入自監督音樂模型 MERT 與 CLAP 融合，再用排序感知的複合損失貼近人類對相對好壞的判斷。作者稱在 MusicEval 的誤差與排序相關指標上都勝過先前最佳方法，論文已被 ICASSP 2026 接收。對 MeanAudio，這提供了比 CLAP score 更貼近人耳的自動評估候選，可輔助 reward alignment 與模型選擇。限制:我只讀到摘要頁，具體數字與消融未確認。",
+   "try_next": "可做:用 FUSEMOS 類的 MOS 預測器對 MeanAudio 輸出打分，與 CLAP score、FAD 比較和人耳排序的一致性。",
+   "problem": "文字生成音樂的自動評估多依賴 CLAP，難以反映音色、表現力等細緻品質，與人類感知有落差。",
+   "method": "雙編碼器融合 CLAP 與 MERT，預測整體音樂印象與文字對齊兩種人類評分，並以排序感知的複合損失訓練，使預測更貼近人類對片段相對優劣的偏好。",
+   "data": "MusicEval 基準；細節僅見摘要。",
+   "findings": "作者稱在 MusicEval 上，誤差與排名相關指標均優於先前最佳方法；已被 ICASSP 2026 接收。",
+   "limitations": "只讀到摘要頁；未確認具體指標數值、消融與泛化至其他生成模型的表現；頁面未見程式碼連結；與 MeanAudio 的應用為我的推論。",
+   "editor_note": "評估指標是 MeanAudio 主線（CLAP、FAD、reward alignment）的關鍵基礎，列為今日第一篇。",
+   "relevance": {"mean_audio": 4, "karaoke_jp": 1}
+  },
+  {
+   "slot": 2,
+   "track": "general_mir",
+   "title": "ProCraft: Instruction-Driven Music Production from Free-Form Text",
+   "authors": ["Yuan-Chiao Cheng", "Yi-Hsuan Yang", "Vincent K.M. Cheung"],
+   "published": "2026-11-05",
+   "updated": "2026-11-05",
+   "source_url": "https://arxiv.org/abs/2611.07423",
+   "arxiv_id": "2611.07423",
+   "doi": "10.48550/arXiv.2611.07423",
+   "tags": ["music editing", "codec language model", "track removal"],
+   "quality": "新",
+   "tldr": "ProCraft 是 0.5B 的自回歸 codec 語言模型，能依自由文字指令編輯 30 秒音樂，支援移除音軌、抽取、伴奏生成等七種操作。",
+   "insight": "洞見:作者用即時合成編輯配對的訓練方式，並把中間表示對齊預訓練音樂嵌入與音高、樂器目標，每層解碼器加入門控交叉注意力。在 MoisesDB 與 Slakh 上，複合指令的移除、抽取、去噪優於四個自由文字編輯器，16 人聽測在移除與去噪上評價最高。對 karaoke-jp，『移除人聲、保留伴奏』與『依指令生成伴奏』正是卡拉 OK 的核心需求。限制:我只讀到摘要頁，是否支援人聲與日文歌曲未確認。",
+   "try_next": "可做:追蹤作者是否釋出程式碼或展示頁，若有，用日文歌曲測試去人聲品質並與現用分離模型比較。",
+   "problem": "音樂編輯多為單一任務模型，難以用自由文字處理同時包含多種修改的複合指令。",
+   "method": "輕量自回歸 codec 語言模型，對齊中間表示與預訓練音樂嵌入及音高、樂器目標，解碼器每層用門控交叉注意力；以 On-the-fly Editing-pair Synthesis 動態合成指令與音訊配對進行訓練。",
+   "data": "以 MoisesDB（真實錄音）與 Slakh（合成錄音）評測，另有 16 位聽者的使用者研究。",
+   "findings": "單一任務編輯與專用系統相當；複合指令的移除、抽取、去噪優於四個自由文字編輯器；抽取與樂器轉換與大 16 倍的模型相當；消融顯示表示對齊與交叉注意力可減少洩漏。",
+   "limitations": "只讀到摘要頁；頁面未見程式碼連結；僅 30 秒片段與八種樂器；是否涵蓋人聲與日文歌曲未確認；使用者研究僅 16 人；為預印本。",
+   "editor_note": "音軌移除與伴奏生成可遷移到卡拉 OK 流程，且屬 codec LM 路線，與 MeanAudio 也有關聯，列為第二篇。",
+   "relevance": {"mean_audio": 3, "karaoke_jp": 3}
+  }
+ ],
+ "repo": {
+  "full_name": "audioshake/audioshake-python",
+  "url": "https://github.com/audioshake/audioshake-python",
+  "description_zh": "AudioShake API 的 Python 用戶端與命令列工具，提供人聲與樂器分軌、歌詞轉錄與對齊等功能，支援同步與非同步呼叫，MIT 授權。",
+  "stars": 25,
+  "updated": "2026-11-04",
+  "why": "分軌加歌詞轉錄與對齊，與 karaoke-jp 流程直接相關，可當商用基準來比對自建 pipeline。我只看了 README，未實測；需要 API 金鑰、為雲端服務，支援語言須用 audioshake models 查詢，版本仍為 0.x。",
+  "tags": ["source separation", "lyrics alignment", "karaoke"]
+ },
+ "discord_messages": [
+  "# 每日 MIR 論文精選 - 2026-11-08\n網站：https://lanternko.github.io/mir-paper-digest/reports/2026-11-08.html\n\n## 論文 1：FUSEMOS: Perceptual Evaluation of Text-to-Music Generation with Dual-Encoder Fusion and Ranking-Aware Composite Loss\n作者：Jing Yang, Haoyu Wang, Ningning Pan 等\n日期：2026-11-05　品質：新且重要\n連結：https://arxiv.org/abs/2611.07562\n\n**TL;DR**：FUSEMOS 把 CLAP 與 MERT 兩種編碼器融合，並加入排序感知損失，預測文字生成音樂的人類評分，在 MusicEval 上超越先前方法。\n\n洞見:只靠 CLAP 難以捕捉音色與表現力等細節，作者加入自監督音樂模型 MERT 與 CLAP 融合，再用排序感知的複合損失貼近人類對相對好壞的判斷。作者稱在 MusicEval 的誤差與排序相關指標上都勝過先前最佳方法，論文已被 ICASSP 2026 接收。對 MeanAudio，這提供了比 CLAP score 更貼近人耳的自動評估候選，可輔助 reward alignment 與模型選擇。限制:我只讀到摘要頁，具體數字與消融未確認。\n\n可做:用 FUSEMOS 類的 MOS 預測器對 MeanAudio 輸出打分，與 CLAP score、FAD 比較和人耳排序的一致性。\n\n限制：只讀到摘要頁；未確認具體指標數值、消融與泛化表現；頁面未見程式碼連結；與 MeanAudio 的應用為我的推論。",
+  "## 論文 2：ProCraft: Instruction-Driven Music Production from Free-Form Text\n作者：Yuan-Chiao Cheng, Yi-Hsuan Yang, Vincent K.M. Cheung\n日期：2026-11-05　品質：新\n連結：https://arxiv.org/abs/2611.07423\n\n**TL;DR**：ProCraft 是 0.5B 的自回歸 codec 語言模型，能依自由文字指令編輯 30 秒音樂，支援移除音軌、抽取、伴奏生成等七種操作。\n\n洞見:作者用即時合成編輯配對的訓練方式，並把中間表示對齊預訓練音樂嵌入與音高、樂器目標，每層解碼器加入門控交叉注意力。在 MoisesDB 與 Slakh 上，複合指令的移除、抽取、去噪優於四個自由文字編輯器，16 人聽測在移除與去噪上評價最高。對 karaoke-jp，『移除人聲、保留伴奏』與『依指令生成伴奏』正是卡拉 OK 的核心需求。限制:我只讀到摘要頁，是否支援人聲與日文歌曲未確認。\n\n可做:追蹤作者是否釋出程式碼或展示頁，若有，用日文歌曲測試去人聲品質並與現用分離模型比較。\n\n限制：只讀到摘要頁；頁面未見程式碼連結；僅 30 秒片段與八種樂器；是否涵蓋人聲與日文歌曲未確認；使用者研究僅 16 人；為預印本。",
+  "## GitHub pick：audioshake/audioshake-python\nhttps://github.com/audioshake/audioshake-python\nAudioShake API 的 Python 用戶端與命令列工具，提供人聲與樂器分軌、歌詞轉錄與對齊等功能，支援同步與非同步呼叫，MIT 授權。\n星數 25，最近更新 2026-11-04\n\n分軌加歌詞轉錄與對齊，與 karaoke-jp 流程直接相關，可當商用基準來比對自建 pipeline。我只看了 README，未實測；需要 API 金鑰、為雲端服務，支援語言須用 audioshake models 查詢，版本仍為 0.x。\n\n## 今天的 take-away\n- 文字生成音樂的評估可試著融合 CLAP 與 MERT，比單用 CLAP 更可能貼近人耳。\n- 音軌移除與伴奏生成正逐漸被統一成文字指令式的 codec LM 任務，值得留意是否開源。\n- 商用分軌加對齊 API 可作為 karaoke-jp 自建流程的對照基準。"
+ ]
+}
