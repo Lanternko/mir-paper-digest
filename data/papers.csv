@@ -328,3 +328,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-11-08,1,paper,mean_audio,FUSEMOS: Perceptual Evaluation of Text-to-Music Generation with Dual-Encoder Fusion and Ranking-Aware Composite Loss,https://arxiv.org/abs/2611.07562,10.48550/arXiv.2611.07562,text-to-music|evaluation|CLAP,新且重要
 2026-11-08,2,paper,general_mir,ProCraft: Instruction-Driven Music Production from Free-Form Text,https://arxiv.org/abs/2611.07423,10.48550/arXiv.2611.07423,music editing|codec language model|track removal,新
 2026-11-08,0,repo,github,audioshake/audioshake-python,https://github.com/audioshake/audioshake-python,,source separation|lyrics alignment|karaoke,
+2026-11-09,1,paper,mean_audio,Latent Terrain: Adapting Neural Audio Autoencoders as Design Materials in NIME,https://arxiv.org/abs/2611.07210,10.48550/arXiv.2611.07210,neural audio autoencoder|latent space|NIME,待觀察
+2026-11-09,2,paper,general_mir,VioTech: Frame-Level Violin Playing Technique Detection with Multi-Scale Mixture-of-Experts,https://arxiv.org/abs/2611.02680,10.48550/arXiv.2611.02680,playing technique|MERT|transcription,重要
+2026-11-09,0,repo,github,inikolax/remiqora,https://github.com/inikolax/remiqora,,music generation|source separation|music transcription,

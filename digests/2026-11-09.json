@@ -1,0 +1,96 @@
+{
+ "date": "2026-11-09",
+ "papers": [
+  {
+   "slot": 1,
+   "track": "mean_audio",
+   "title": "Latent Terrain: Adapting Neural Audio Autoencoders as Design Materials in NIME",
+   "authors": [
+    "Shuoyang Jasper Zheng",
+    "Keigo Yoshida",
+    "Nico García-Peguinho",
+    "Jiatong Liu",
+    "Dan Hearn",
+    "Anna Xambó Sedó",
+    "Nick Bryan-Kinns"
+   ],
+   "published": "2026-11-04",
+   "updated": "2026-11-04",
+   "source_url": "https://arxiv.org/abs/2611.07210",
+   "arxiv_id": "2611.07210",
+   "doi": "10.48550/arXiv.2611.07210",
+   "tags": [
+    "neural audio autoencoder",
+    "latent space",
+    "NIME"
+   ],
+   "quality": "待觀察",
+   "tldr": "Latent Terrain 是 Max/MSP 工具包，把神經音訊自編碼器的潛在空間變成可探索的語料音色空間，並以四位 NIME 創作者的協作作品集討論其設計潛力。",
+   "insight": "洞見:作者不把自編碼器當黑盒生成器，而是當成可『手作』的設計材料，把潛在空間轉成以語料為基礎的聲音地形供人即時探索。這提醒 MeanAudio 這類以潛在空間為基礎的生成模型：潛在空間本身也是一種可操作的介面。限制:這是設計與互動研究，沒有生成品質的量化比較，我只讀到摘要頁。",
+   "try_next": "可做:把 MeanAudio 使用的音訊自編碼器潛在空間投影成可視化地形，檢視不同風格與音色是否分群，作為條件控制的診斷工具。",
+   "problem": "神經音訊自編碼器愈來愈常出現在 AI 輔助的新型音樂介面中，但其潛在空間如何被音樂介面設計者當作創作材料來運用，缺乏工具與討論。",
+   "method": "提出 Max/MSP 工具包 Latent Terrain，把自編碼器的潛在空間轉為以語料為基礎的聲音空間；並以與四位 NIME 創作者的協作藝術探索整理成註解式作品集，反思挑戰與機會。",
+   "data": "無傳統資料集；以四位 NIME 創作者的協作探索與註解式作品集為主。",
+   "findings": "作者展示潛在空間可作為語料型聲音空間融入樂器設計，並整理出把神經音訊自編碼器視為設計材料時的挑戰與機會；頁面未提供量化指標。",
+   "limitations": "只讀到摘要頁；屬 NIME 設計研究，無客觀評測與模型比較；頁面未直接連到程式碼庫；與 MeanAudio 的關聯為我的推論。",
+   "editor_note": "今天新論文中直接對應生成主線的選擇有限，這篇從潛在空間介面角度提供旁支啟發，品質標為待觀察。",
+   "relevance": {
+    "mean_audio": 2,
+    "karaoke_jp": 0
+   }
+  },
+  {
+   "slot": 2,
+   "track": "general_mir",
+   "title": "VioTech: Frame-Level Violin Playing Technique Detection with Multi-Scale Mixture-of-Experts",
+   "authors": [
+    "Ting-Kang Wang",
+    "Vincent K.M. Cheung",
+    "Nan-Tien Lai",
+    "Li Su"
+   ],
+   "published": "2026-11-02",
+   "updated": "2026-11-02",
+   "source_url": "https://arxiv.org/abs/2611.02680",
+   "arxiv_id": "2611.02680",
+   "doi": "10.48550/arXiv.2611.02680",
+   "tags": [
+    "playing technique",
+    "MERT",
+    "transcription"
+   ],
+   "quality": "重要",
+   "tldr": "VioTech 以凍結的 MERT 編碼器加多尺度專家混合，每 10 毫秒預測一次小提琴演奏技法，不需先切音符，並釋出首個人工標註的真實獨奏技法資料集。",
+   "insight": "洞見:弓弦樂器起音柔和、觸弦連續，先切音符再分類的做法並不可靠，作者改為逐幀預測，並讓調性、發音與連奏相關輸出各走專屬路由的專家。作者稱在 ISMIR 2026 接收的這項工作中，結果穩定優於既有方法且跨資料集泛化明顯更好。對 karaoke-jp，這種『不依賴音符邊界』的逐幀思路可類比唱聲的滑音、顫音與裝飾音偵測。限制:我只讀到摘要頁，沒有具體數字。",
+   "try_next": "可做:仿照其凍結 MERT 加逐幀多任務頭的設計，在日文唱聲上試做滑音與顫音的逐幀偵測，並檢查是否比先切音符再分類更穩。",
+   "problem": "演奏技法是小提琴表現力的核心，但自動偵測模型很少；既有系統先估音符邊界再分類，對起音柔和的弓弦樂器並不可靠。",
+   "method": "VioTech 以凍結的 MERT 編碼器搭配多尺度專家混合（MoE），對調性、發音、連奏相關輸出做任務專屬路由，每 10 毫秒做一次逐幀技法預測，無須切分音符；同時提出 VioTech120 資料集與標註介面。",
+   "data": "VioTech120：作者稱為首個以真實獨奏錄音人工標註小提琴技法的資料集；摘要未給規模。",
+   "findings": "作者稱相較先前方法有一致提升，跨資料集泛化大幅改善，為技法感知小提琴轉譜的新最佳結果；論文已被 ISMIR 2026 接收。",
+   "limitations": "只讀到摘要頁；未確認具體指標、資料集規模與消融；頁面未見程式碼連結；僅限小提琴，轉移到唱聲為我的推論。",
+   "editor_note": "逐幀、不依賴音符切分的表現力偵測，對 karaoke-jp 的唱聲技巧分析有可借鏡之處，且為 ISMIR 接收的紮實 MIR 工作。",
+   "relevance": {
+    "mean_audio": 1,
+    "karaoke_jp": 2
+   }
+  }
+ ],
+ "repo": {
+  "full_name": "inikolax/remiqora",
+  "url": "https://github.com/inikolax/remiqora",
+  "description_zh": "本機 GPU 音樂生成與製作工作室，整合 ACE-Step 1.5、YuE2-3B 文字生音樂、Demucs 分軌、AI 編曲、多軌 DAW、MIDI 轉譜與 LoRA 訓練，MIT 授權。",
+  "stars": 216,
+  "updated": "2026-11-08",
+  "why": "一個介面串起文字生音樂、分軌與 MuScriptor 轉譜，可觀察開源生成模型如何被組裝成實際工作流，對 MeanAudio 與 karaoke-jp 都有參考價值。我只看了 README，未實測；作者標明仍在開發、可能有破壞性變更，且部分模型有各自的授權限制。",
+  "tags": [
+   "music generation",
+   "source separation",
+   "music transcription"
+  ]
+ },
+ "discord_messages": [
+  "# 每日 MIR 論文精選 - 2026-11-09\n網站：https://lanternko.github.io/mir-paper-digest/reports/2026-11-09.html\n\n## 論文 1：Latent Terrain: Adapting Neural Audio Autoencoders as Design Materials in NIME\n作者：Shuoyang Jasper Zheng, Keigo Yoshida, Nico García-Peguinho 等\n日期：2026-11-04　品質：待觀察\n連結：https://arxiv.org/abs/2611.07210\n\n**TL;DR**：Latent Terrain 是 Max/MSP 工具包，把神經音訊自編碼器的潛在空間變成可探索的語料音色空間，並以四位 NIME 創作者的協作作品集討論其設計潛力。\n\n洞見:作者不把自編碼器當黑盒生成器，而是當成可『手作』的設計材料，把潛在空間轉成以語料為基礎的聲音地形供人即時探索。這提醒 MeanAudio 這類以潛在空間為基礎的生成模型：潛在空間本身也是一種可操作的介面。限制:這是設計與互動研究，沒有生成品質的量化比較，我只讀到摘要頁。\n\n可做:把 MeanAudio 使用的音訊自編碼器潛在空間投影成可視化地形，檢視不同風格與音色是否分群，作為條件控制的診斷工具。\n\n限制：只讀到摘要頁；屬 NIME 設計研究，無客觀評測與模型比較；頁面未直接連到程式碼庫；與 MeanAudio 的關聯為我的推論。",
+  "## 論文 2：VioTech: Frame-Level Violin Playing Technique Detection with Multi-Scale Mixture-of-Experts\n作者：Ting-Kang Wang, Vincent K.M. Cheung, Nan-Tien Lai 等\n日期：2026-11-02　品質：重要\n連結：https://arxiv.org/abs/2611.02680\n\n**TL;DR**：VioTech 以凍結的 MERT 編碼器加多尺度專家混合，每 10 毫秒預測一次小提琴演奏技法，不需先切音符，並釋出首個人工標註的真實獨奏技法資料集。\n\n洞見:弓弦樂器起音柔和、觸弦連續，先切音符再分類的做法並不可靠，作者改為逐幀預測，並讓調性、發音與連奏相關輸出各走專屬路由的專家。作者稱在 ISMIR 2026 接收的這項工作中，結果穩定優於既有方法且跨資料集泛化明顯更好。對 karaoke-jp，這種『不依賴音符邊界』的逐幀思路可類比唱聲的滑音、顫音與裝飾音偵測。限制:我只讀到摘要頁，沒有具體數字。\n\n可做:仿照其凍結 MERT 加逐幀多任務頭的設計，在日文唱聲上試做滑音與顫音的逐幀偵測，並檢查是否比先切音符再分類更穩。\n\n限制：只讀到摘要頁；未確認具體指標、資料集規模與消融；頁面未見程式碼連結；僅限小提琴，轉移到唱聲為我的推論。",
+  "## GitHub pick：inikolax/remiqora\nhttps://github.com/inikolax/remiqora\n本機 GPU 音樂生成與製作工作室，整合 ACE-Step 1.5、YuE2-3B 文字生音樂、Demucs 分軌、AI 編曲、多軌 DAW、MIDI 轉譜與 LoRA 訓練，MIT 授權。\n星數 216，最近更新 2026-11-08\n\n一個介面串起文字生音樂、分軌與 MuScriptor 轉譜，可觀察開源生成模型如何被組裝成實際工作流，對 MeanAudio 與 karaoke-jp 都有參考價值。我只看了 README，未實測；作者標明仍在開發、可能有破壞性變更，且部分模型有各自的授權限制。\n\n## 今天的 take-away\n- 潛在空間不只是生成模型的內部表示，也可以做成讓人操作的介面，值得用來診斷 MeanAudio 的條件控制。\n- 逐幀、不依賴音符切分的偵測思路，可借到唱聲技巧（滑音、顫音）分析。\n- Remiqora 展示開源生成、分軌與轉譜如何整合成單一工作流，可當 karaoke-jp 自建流程的參考。"
+ ]
+}
