@@ -331,3 +331,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-11-09,1,paper,mean_audio,Latent Terrain: Adapting Neural Audio Autoencoders as Design Materials in NIME,https://arxiv.org/abs/2611.07210,10.48550/arXiv.2611.07210,neural audio autoencoder|latent space|NIME,待觀察
 2026-11-09,2,paper,general_mir,VioTech: Frame-Level Violin Playing Technique Detection with Multi-Scale Mixture-of-Experts,https://arxiv.org/abs/2611.02680,10.48550/arXiv.2611.02680,playing technique|MERT|transcription,重要
 2026-11-09,0,repo,github,inikolax/remiqora,https://github.com/inikolax/remiqora,,music generation|source separation|music transcription,
+2026-11-10,1,paper,general_mir,Heard But Not Said: Prompting Understates Temporal Information of Musical Moments in Frozen Large Audio-Language Models,https://arxiv.org/abs/2610.29256,10.48550/arXiv.2610.29256,音樂理解|大型音訊語言模型|時間定位,重要
+2026-11-10,2,paper,mean_audio,Piano2Pop: Expanding Piano Demos into Pop Productions Without Aligned Supervision,https://arxiv.org/abs/2610.31510,10.48550/arXiv.2610.31510,flow matching|音樂生成|編曲,重要
+2026-11-10,0,repo,github,AaronZ345/TCSinger2,https://github.com/AaronZ345/TCSinger2,,singing voice|歌聲合成|zero-shot,

@@ -1,0 +1,90 @@
+{
+  "date": "2026-11-10",
+  "papers": [
+    {
+      "slot": 1,
+      "track": "general_mir",
+      "title": "Heard But Not Said: Prompting Understates Temporal Information of Musical Moments in Frozen Large Audio-Language Models",
+      "authors": [
+        "Eunsik Shin"
+      ],
+      "published": "2026-10-21",
+      "updated": "2026-10-21",
+      "source_url": "https://arxiv.org/abs/2610.29256",
+      "arxiv_id": "2610.29256",
+      "doi": "10.48550/arXiv.2610.29256",
+      "tags": [
+        "音樂理解",
+        "大型音訊語言模型",
+        "時間定位"
+      ],
+      "quality": "重要",
+      "tldr": "論文發現凍結的大型音訊語言模型其實保有音樂事件的時間資訊，只是一般提示法抽不出來，在 Slakh2100 上以狀態與變化兩種查詢驗證。",
+      "insight": "洞見:作者把『模型不會定位』拆成『沒有時間資訊』與『取出方式不佳』兩個假設，用 Slakh2100 的音軌啟用資料造出狀態查詢與變化查詢，並調整模型能聽到的前文長度。結果顯示狀態查詢在無前文時就高於基線，變化查詢多半隨前文增加而進步，但採 30 秒填充編碼器的模型沒有類似提升。這對評估 Music Flamingo 這類音樂理解模型很有用：提示式評測可能低估模型真正知道的事。限制:我只讀到摘要頁，沒有具體數字，也不確定結論能否推到真實錄音。",
+      "try_next": "可做:用同樣的『狀態／變化』成對查詢，測試 Music Flamingo 能否判斷人聲進場或換段的時間點，再比較給與不給前文的差異。",
+      "problem": "大型音訊語言模型能描述音樂內容，卻常無法指出所描述的片段在何時發生；不清楚是模型缺少時間資訊，還是提示與抽取方式成為瓶頸。",
+      "method": "以 Slakh2100 的音軌啟用資訊建立成對查詢（描述當下狀態、描述變化），改變模型可見的前文長度，並比較標準提示與以注意力為基礎的抽取方法。",
+      "data": "Slakh2100（合成多音軌資料集）。",
+      "findings": "狀態查詢即使沒有前文也高於基線；變化查詢在多數短片段模型上隨前文增加而改善，30 秒填充編碼器的模型則無明顯增益；標準提示與注意力方法只能顯露少量能力。",
+      "limitations": "只讀到摘要頁，未確認具體指標與模型名單；資料為合成的 Slakh2100，不一定代表真實錄音；頁面未連結程式碼；與 Music Flamingo 的關聯為我的推論。",
+      "editor_note": "今天 cs.SD 新稿中直接對應歌詞或唱聲的不多，這篇切中近期關注的音樂理解評測方法，故排為第一篇。",
+      "relevance": {
+        "mean_audio": 1,
+        "karaoke_jp": 1
+      }
+    },
+    {
+      "slot": 2,
+      "track": "mean_audio",
+      "title": "Piano2Pop: Expanding Piano Demos into Pop Productions Without Aligned Supervision",
+      "authors": [
+        "Yun-Chen Cheng",
+        "Chih-Pin Tan",
+        "Tzu-Hung Huang",
+        "Yi-Hsuan Yang"
+      ],
+      "published": "2026-10-22",
+      "updated": "2026-10-22",
+      "source_url": "https://arxiv.org/abs/2610.31510",
+      "arxiv_id": "2610.31510",
+      "doi": "10.48550/arXiv.2610.31510",
+      "tags": [
+        "flow matching",
+        "音樂生成",
+        "編曲"
+      ],
+      "quality": "重要",
+      "tldr": "Piano2Pop 以預訓練的 flow matching 音樂生成模型，依鋼琴譜條件生成流行編曲，不需要配對資料，並在 476 組真實鋼琴翻奏對照上比較訓練策略。",
+      "insight": "洞見:作者把鋼琴 MIDI 轉成流行器樂編曲，條件是鋼琴捲簾，並從流行錄音反推合成的鋼琴與器樂配對，繞開真實配對資料不足的問題。摘要指出配對監督版本在 FAD、伴奏提示貼合度與頻譜形狀上最好，而無配對訓練中的功能選擇式增強（FST）可減少輸出過度偏鋼琴，所有微調系統都明顯優於零樣本。這對 MeanAudio 的啟發是：在預訓練生成模型上加一條結構性條件，再靠合成配對微調，比從頭訓練務實。限制:我只讀到摘要頁，沒有確切數字。",
+      "try_next": "可做:仿照其合成配對作法，從現有歌曲轉出簡化旋律或和弦譜當條件，微調 MeanAudio 的 flow matching 模型，測試能否做旋律條件生成。",
+      "problem": "想把鋼琴小樣擴寫成完整流行編曲，但缺乏真實的鋼琴與流行成品配對資料，無法直接做監督訓練。",
+      "method": "在預訓練 flow matching 音樂生成模型上以鋼琴捲簾為條件微調；用流行錄音經轉錄得到合成鋼琴與器樂配對，比較無配對訓練（含 FST、RDA 增強）與以配對監督的鋼琴翻奏生成器所產生的偽樣本。",
+      "data": "由流行錄音衍生的合成鋼琴與器樂配對作訓練；測試為 476 組真實鋼琴翻奏與流行成品配對。",
+      "findings": "對真實鋼琴輸入，配對監督版本在 FAD、伴奏提示貼合度與頻譜形狀上最佳；FST 讓無配對訓練較少產生偏鋼琴的輸出；所有微調系統顯著優於零樣本基線。",
+      "limitations": "只讀到摘要頁，未確認數值、聆聽測試與消融細節；任務限於純器樂編曲，不含人聲；頁面未連結程式碼或模型；對 MeanAudio 的應用為我的推論。",
+      "editor_note": "生成主線的選擇中，這篇的條件控制與資料構造思路最可遷移，由 Yi-Hsuan Yang 團隊提出，品質標為重要。",
+      "relevance": {
+        "mean_audio": 4,
+        "karaoke_jp": 1
+      }
+    }
+  ],
+  "repo": {
+    "full_name": "AaronZ345/TCSinger2",
+    "url": "https://github.com/AaronZ345/TCSinger2",
+    "description_zh": "ACL 2025 Findings 論文 TCSinger 2 的 PyTorch 實作，支援多語言、零樣本歌聲合成，可用音訊與文字提示做風格轉移與控制，輸出 48 kHz 歌聲，MIT 授權。",
+    "stars": 192,
+    "updated": "2026-11-09",
+    "why": "提供訓練、前處理與推論程式碼，可作為 karaoke-jp 製作唱聲示範或資料擴充的參考。我只看了 README 與 commit 紀錄，未實測；近期更新主要是文件修訂，且需自備訓練好的檢查點與輔助模型，是否支援日文需再確認。",
+    "tags": [
+      "singing voice",
+      "歌聲合成",
+      "zero-shot"
+    ]
+  },
+  "discord_messages": [
+    "# 每日 MIR 論文精選 - 2026-11-10\n網站：https://lanternko.github.io/mir-paper-digest/reports/2026-11-10.html\n\n## 論文 1：Heard But Not Said: Prompting Understates Temporal Information of Musical Moments in Frozen Large Audio-Language Models\n作者：Eunsik Shin\n日期：2026-10-21　品質：重要\n連結：https://arxiv.org/abs/2610.29256\n\n**TL;DR**：論文發現凍結的大型音訊語言模型其實保有音樂事件的時間資訊，只是一般提示法抽不出來，在 Slakh2100 上以狀態與變化兩種查詢驗證。\n\n洞見:作者把『模型不會定位』拆成『沒有時間資訊』與『取出方式不佳』兩個假設，用 Slakh2100 的音軌啟用資料造出狀態查詢與變化查詢，並調整模型能聽到的前文長度。結果顯示狀態查詢在無前文時就高於基線，變化查詢多半隨前文增加而進步，但採 30 秒填充編碼器的模型沒有類似提升。這對評估 Music Flamingo 這類音樂理解模型很有用：提示式評測可能低估模型真正知道的事。限制:我只讀到摘要頁，沒有具體數字，也不確定結論能否推到真實錄音。\n\n可做:用同樣的『狀態／變化』成對查詢，測試 Music Flamingo 能否判斷人聲進場或換段的時間點，再比較給與不給前文的差異。\n\n限制：只讀到摘要頁，未確認具體指標與模型名單；資料為合成的 Slakh2100，不一定代表真實錄音；頁面未連結程式碼；與 Music Flamingo 的關聯為我的推論。",
+    "## 論文 2：Piano2Pop: Expanding Piano Demos into Pop Productions Without Aligned Supervision\n作者：Yun-Chen Cheng, Chih-Pin Tan, Tzu-Hung Huang 等\n日期：2026-10-22　品質：重要\n連結：https://arxiv.org/abs/2610.31510\n\n**TL;DR**：Piano2Pop 以預訓練的 flow matching 音樂生成模型，依鋼琴譜條件生成流行編曲，不需要配對資料，並在 476 組真實鋼琴翻奏對照上比較訓練策略。\n\n洞見:作者把鋼琴 MIDI 轉成流行器樂編曲，條件是鋼琴捲簾，並從流行錄音反推合成的鋼琴與器樂配對，繞開真實配對資料不足的問題。摘要指出配對監督版本在 FAD、伴奏提示貼合度與頻譜形狀上最好，而無配對訓練中的功能選擇式增強（FST）可減少輸出過度偏鋼琴，所有微調系統都明顯優於零樣本。這對 MeanAudio 的啟發是：在預訓練生成模型上加一條結構性條件，再靠合成配對微調，比從頭訓練務實。限制:我只讀到摘要頁，沒有確切數字。\n\n可做:仿照其合成配對作法，從現有歌曲轉出簡化旋律或和弦譜當條件，微調 MeanAudio 的 flow matching 模型，測試能否做旋律條件生成。\n\n限制：只讀到摘要頁，未確認數值、聆聽測試與消融細節；任務限於純器樂編曲，不含人聲；頁面未連結程式碼或模型；對 MeanAudio 的應用為我的推論。",
+    "## GitHub pick：AaronZ345/TCSinger2\nhttps://github.com/AaronZ345/TCSinger2\nACL 2025 Findings 論文 TCSinger 2 的 PyTorch 實作，支援多語言、零樣本歌聲合成，可用音訊與文字提示做風格轉移與控制，輸出 48 kHz 歌聲，MIT 授權。\n星數 192，最近更新 2026-11-09\n\n提供訓練、前處理與推論程式碼，可作為 karaoke-jp 製作唱聲示範或資料擴充的參考。我只看了 README 與 commit 紀錄，未實測；近期更新主要是文件修訂，且需自備訓練好的檢查點與輔助模型，是否支援日文需再確認。\n\n## 今天的 take-away\n- 提示式評測可能低估音訊語言模型的時間知識，評 Music Flamingo 類模型時要加入帶前文的成對查詢。\n- 在預訓練 flow matching 模型上加結構性條件，再以合成配對微調，是 MeanAudio 取得旋律或編曲控制的務實路線。\n- TCSinger 2 可當歌聲合成參考，但日文支援與檢查點取得仍須先確認。"
+  ]
+}
