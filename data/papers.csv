@@ -334,3 +334,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-11-10,1,paper,general_mir,Heard But Not Said: Prompting Understates Temporal Information of Musical Moments in Frozen Large Audio-Language Models,https://arxiv.org/abs/2610.29256,10.48550/arXiv.2610.29256,音樂理解|大型音訊語言模型|時間定位,重要
 2026-11-10,2,paper,mean_audio,Piano2Pop: Expanding Piano Demos into Pop Productions Without Aligned Supervision,https://arxiv.org/abs/2610.31510,10.48550/arXiv.2610.31510,flow matching|音樂生成|編曲,重要
 2026-11-10,0,repo,github,AaronZ345/TCSinger2,https://github.com/AaronZ345/TCSinger2,,singing voice|歌聲合成|zero-shot,
+2026-11-11,1,paper,karaoke_jp,FlowGRPO for Vocal Separation: From Reward Analysis to Reward Design,https://arxiv.org/abs/2610.15780,10.48550/arXiv.2610.15780,人聲分離|flow matching|reward alignment,重要
+2026-11-11,2,paper,mean_audio,SongCraft: Unified Song Generation and Editing with Reconstructive Learning,https://arxiv.org/abs/2609.16315,10.48550/arXiv.2609.16315,歌曲生成|歌曲編輯|flow matching,重要
+2026-11-11,0,repo,github,6hdj/lrc-ttml,https://github.com/6hdj/lrc-ttml,,lyrics alignment|TTML|karaoke,

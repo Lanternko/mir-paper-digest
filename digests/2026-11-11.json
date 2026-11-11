@@ -1,0 +1,99 @@
+{
+  "date": "2026-11-11",
+  "papers": [
+    {
+      "slot": 1,
+      "track": "karaoke_jp",
+      "title": "FlowGRPO for Vocal Separation: From Reward Analysis to Reward Design",
+      "authors": [
+        "Lishi Zuo",
+        "Chong-Xin Gan",
+        "Zezhong Jin",
+        "Youzhi Tu",
+        "Man-Wai Mak",
+        "KongAik Lee"
+      ],
+      "published": "2026-10-11",
+      "updated": "2026-10-11",
+      "source_url": "https://arxiv.org/abs/2610.15780",
+      "arxiv_id": "2610.15780",
+      "doi": "10.48550/arXiv.2610.15780",
+      "tags": [
+        "人聲分離",
+        "flow matching",
+        "reward alignment"
+      ],
+      "quality": "重要",
+      "tldr": "論文用 FlowGRPO 對齊 flow matching 人聲分離模型，結合 STFT、SI-SDR 與 ViSQOL 三種獎勵，並修正 ViSQOL 獎勵與加入樣本過濾來提升分離品質。",
+      "insight": "洞見:作者先分析資料品質如何影響同一組 rollout 內的獎勵變異，再據此改寫 ViSQOL 獎勵（對齊各聲道 RMS、只評首尾有聲區段），並加入以波形檢查為基礎的樣本過濾，據稱讓預訓練人聲分離器在分離指標與感知品質上都進步。對 karaoke-jp 的啟發是：分離器的瑕疵會直接傳到歌詞辨識與對齊，用獎勵設計補強比重訓更便宜；同時這也是 MeanAudio 做 reward alignment 的參考。限制:我只讀到摘要頁，沒有具體數字。",
+      "try_next": "可做:拿現有的人聲分離器，用其修正版 ViSQOL 獎勵做小規模 FlowGRPO 微調，再比較分離後歌詞轉錄的字錯率是否下降。",
+      "problem": "flow matching 人聲分離模型的訓練目標與波形層級、感知品質目標不完全一致，直接用強化式對齊時獎勵容易受資料品質干擾。",
+      "method": "以 FlowGRPO 對 flow matching 分離模型做端點獎勵優化，獎勵由多解析度 STFT、SI-SDR、ViSQOL 組成；分析 rollout 組內獎勵變異後，修改 ViSQOL（對齊聲道 RMS、評估首尾有聲區間）並加入波形檢查式樣本品質過濾。",
+      "data": "摘要頁未明確列出資料集；僅說明作用於預訓練人聲分離器。",
+      "findings": "作者報告修改後的獎勵設計與樣本過濾，讓預訓練人聲分離器在分離表現與感知品質上都有提升（摘要頁無具體數值）。",
+      "limitations": "只讀到摘要頁，未確認數值、資料集與消融；未連結程式碼；對歌詞辨識下游的效益為我的推論。",
+      "editor_note": "近期人聲分離與 reward alignment 同時對應 karaoke-jp 前處理與 MeanAudio 對齊兩條線，故排第一。",
+      "relevance": {
+        "mean_audio": 2,
+        "karaoke_jp": 4
+      }
+    },
+    {
+      "slot": 2,
+      "track": "mean_audio",
+      "title": "SongCraft: Unified Song Generation and Editing with Reconstructive Learning",
+      "authors": [
+        "Haohe Liu",
+        "Varun Nagaraja",
+        "Gael Le Lan",
+        "Xinhao Mei",
+        "Zhaoheng Ni",
+        "Vikas Chandra",
+        "Abdelrahman Mohamed",
+        "Yangyang Shi"
+      ],
+      "published": "2026-09-14",
+      "updated": "2026-09-14",
+      "source_url": "https://arxiv.org/abs/2609.16315",
+      "arxiv_id": "2609.16315",
+      "doi": "10.48550/arXiv.2609.16315",
+      "tags": [
+        "歌曲生成",
+        "歌曲編輯",
+        "flow matching"
+      ],
+      "quality": "重要",
+      "tldr": "SongCraft 以單一潛在空間 flow matching 模型，靠重建不同密度的條件同時做歌曲生成與編輯，加入詞級音素對齊與節拍條件，並報告基線中最低字錯率。",
+      "insight": "洞見:作者主張生成與編輯不必分開：訓練時讓模型從不同數量的可解釋條件重建音訊，條件稀疏（文字、歌詞）就是生成，條件密集就能只改單一屬性。模型在 VAE 潛在空間做 flow matching，並加入詞級音素對齊、節拍條件與表徵對齊，可編輯歌詞、人聲旋律、節拍與歌手音色。對 MeanAudio 的啟發是用『條件密度』統一生成與編輯；對 karaoke-jp 則是詞級音素對齊可當歌詞可懂度的條件。限制:我只讀到摘要頁，沒有確切數字。",
+      "try_next": "可做:在 MeanAudio 的 flow matching 訓練中隨機遮蔽部分條件（節拍、歌詞對齊），測試單一模型能否同時做生成與局部屬性編輯。",
+      "problem": "歌曲生成與歌曲編輯通常是分開的問題，既有編輯方法常需加噪重生成或精心整理的配對資料。",
+      "method": "單一潛在空間 flow matching 模型，訓練目標為從數量不一的可解釋條件重建音訊；加入詞級音素對齊、節拍條件與 VAE 潛在空間的表徵對齊。",
+      "data": "摘要頁未列出訓練資料細節。",
+      "findings": "作者報告在所比較的歌曲生成基線中字錯率最低且音質具競爭力，並展示歌詞、人聲旋律、節拍與歌手身分編輯，也討論重建品質與可編輯性的取捨。",
+      "limitations": "只讀到摘要頁，未確認數值、資料規模與聆聽測試；未連結程式碼；對 MeanAudio 與 karaoke-jp 的應用為我的推論。",
+      "editor_note": "生成主線中，把生成與編輯統一在條件密度上的思路可遷移，由 Meta 團隊提出，品質標為重要。",
+      "relevance": {
+        "mean_audio": 4,
+        "karaoke_jp": 2
+      }
+    }
+  ],
+  "repo": {
+    "full_name": "6hdj/lrc-ttml",
+    "url": "https://github.com/6hdj/lrc-ttml",
+    "description_zh": "Lyric2TTML：把 TXT/LRC 歌詞加歌曲音訊轉成 Apple Music / AMLL 用的逐字 TTML，離線執行，支援 faster-whisper 與 TIFA 歌聲音素對齊、中英日逐行語言路由、和聲與對唱，MIT 授權。",
+    "stars": 18,
+    "updated": "2026-10-28",
+    "why": "直接對應 karaoke-jp 的歌詞對齊與逐字時間軸渲染，並含日文逐行路由、和聲處理與長間奏倒數，可參考其對齊流程與輸出格式。限制:我只讀了 README 與 repo 資訊，未實際執行；預設需要 NVIDIA GPU 與 Windows，且 TIFA 為實驗性。",
+    "tags": [
+      "lyrics alignment",
+      "TTML",
+      "karaoke"
+    ]
+  },
+  "discord_messages": [
+    "# 每日 MIR 論文精選 - 2026-11-11\n網站：https://lanternko.github.io/mir-paper-digest/reports/2026-11-11.html\n\n## 論文 1：FlowGRPO for Vocal Separation: From Reward Analysis to Reward Design\n作者：Lishi Zuo, Chong-Xin Gan, Zezhong Jin 等\n日期：2026-10-11　品質：重要\n連結：https://arxiv.org/abs/2610.15780\n\n**TL;DR**：論文用 FlowGRPO 對齊 flow matching 人聲分離模型，結合 STFT、SI-SDR 與 ViSQOL 三種獎勵，並修正 ViSQOL 獎勵與加入樣本過濾來提升分離品質。\n\n洞見:作者先分析資料品質如何影響同一組 rollout 內的獎勵變異，再據此改寫 ViSQOL 獎勵（對齊各聲道 RMS、只評首尾有聲區段），並加入以波形檢查為基礎的樣本過濾，據稱讓預訓練人聲分離器在分離指標與感知品質上都進步。對 karaoke-jp 的啟發是：分離器的瑕疵會直接傳到歌詞辨識與對齊，用獎勵設計補強比重訓更便宜；同時這也是 MeanAudio 做 reward alignment 的參考。限制:我只讀到摘要頁，沒有具體數字。\n\n可做:拿現有的人聲分離器，用其修正版 ViSQOL 獎勵做小規模 FlowGRPO 微調，再比較分離後歌詞轉錄的字錯率是否下降。\n\n限制：只讀到摘要頁，未確認數值、資料集與消融；未連結程式碼；對歌詞辨識下游的效益為我的推論。",
+    "## 論文 2：SongCraft: Unified Song Generation and Editing with Reconstructive Learning\n作者：Haohe Liu, Varun Nagaraja, Gael Le Lan 等\n日期：2026-09-14　品質：重要\n連結：https://arxiv.org/abs/2609.16315\n\n**TL;DR**：SongCraft 以單一潛在空間 flow matching 模型，靠重建不同密度的條件同時做歌曲生成與編輯，加入詞級音素對齊與節拍條件，並報告基線中最低字錯率。\n\n洞見:作者主張生成與編輯不必分開：訓練時讓模型從不同數量的可解釋條件重建音訊，條件稀疏（文字、歌詞）就是生成，條件密集就能只改單一屬性。模型在 VAE 潛在空間做 flow matching，並加入詞級音素對齊、節拍條件與表徵對齊，可編輯歌詞、人聲旋律、節拍與歌手音色。對 MeanAudio 的啟發是用『條件密度』統一生成與編輯；對 karaoke-jp 則是詞級音素對齊可當歌詞可懂度的條件。限制:我只讀到摘要頁，沒有確切數字。\n\n可做:在 MeanAudio 的 flow matching 訓練中隨機遮蔽部分條件（節拍、歌詞對齊），測試單一模型能否同時做生成與局部屬性編輯。\n\n限制：只讀到摘要頁，未確認數值、資料規模與聆聽測試；未連結程式碼；對 MeanAudio 與 karaoke-jp 的應用為我的推論。",
+    "## GitHub pick：6hdj/lrc-ttml\nhttps://github.com/6hdj/lrc-ttml\nLyric2TTML：把 TXT/LRC 歌詞加歌曲音訊轉成 Apple Music / AMLL 用的逐字 TTML，離線執行，支援 faster-whisper 與 TIFA 歌聲音素對齊、中英日逐行語言路由、和聲與對唱，MIT 授權。\n星數 18，最近更新 2026-10-28\n\n直接對應 karaoke-jp 的歌詞對齊與逐字時間軸渲染，並含日文逐行路由、和聲處理與長間奏倒數，可參考其對齊流程與輸出格式。限制:我只讀了 README 與 repo 資訊，未實際執行；預設需要 NVIDIA GPU 與 Windows，且 TIFA 為實驗性。\n\n## 今天的 take-away\n- 人聲分離可以用 FlowGRPO 與獎勵設計對齊，獎勵本身的資料品質問題要先分析，這對 karaoke-jp 前處理與 MeanAudio 對齊都有參考價值。\n- SongCraft 用條件密度統一歌曲生成與編輯，值得在 MeanAudio 試做條件遮蔽訓練。\n- lrc-ttml 提供歌詞逐字對齊到 TTML 的完整流程，可對照 karaoke-jp 的 LRC 渲染。"
+  ]
+}
