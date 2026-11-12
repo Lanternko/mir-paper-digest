@@ -1,0 +1,91 @@
+{
+  "date": "2026-11-12",
+  "papers": [
+    {
+      "slot": 1,
+      "track": "karaoke_jp",
+      "title": "BARS: Beat-Adaptive Rap Synthesis via Flow Matching",
+      "authors": [
+        "Taemin Cho",
+        "Hector Martel",
+        "Enyan Koh"
+      ],
+      "published": "2026-11-09",
+      "updated": "2026-11-09",
+      "source_url": "https://arxiv.org/abs/2611.12061",
+      "arxiv_id": "2611.12061",
+      "doi": "10.48550/arXiv.2611.12061",
+      "tags": [
+        "唱聲合成",
+        "flow matching",
+        "歌詞條件"
+      ],
+      "quality": "新且重要",
+      "tldr": "BARS 以 flow matching 做非自回歸 rap 人聲合成,輸入節拍、歌詞與短參考音色,用 ByT5 與 Asymmetric Scaled RoPE 降低對齊錯誤並支援局部重生成。",
+      "insight": "洞見: 不靠音素對齊與時長預測,只用 cross-attention 就能讓歌詞貼合節拍,對 mora-to-note timing 的隱式對齊很有參考價值。",
+      "try_next": "可做: 把 Asymmetric Scaled RoPE 的做法搬到日文歌詞(kana/mora 序列)條件的唱聲生成,檢查漏字與重複是否同樣下降。",
+      "problem": "rap 合成需同時處理歌詞、節拍與音色,自回歸模型易漏字/重複,且需要明確的時長或音素對齊。",
+      "method": "非自回歸 flow matching 模型;歌詞用預訓練 ByT5 加輕量 Transformer adapter 聯合訓練;cross-attention 採 Asymmetric Scaled RoPE;span masking 支援片段重生成;參考人聲提供 zero-shot 音色。",
+      "data": "摘要頁未說明訓練資料與量化指標。",
+      "findings": "作者報告高歌詞保真度、節奏連貫,且在不同 rap 風格與速度下 tempo 控制穩健;論文為 ISMIR 2026 並獲最佳論文提名。",
+      "limitations": "僅讀摘要頁,未見訓練資料與量化數字;針對英文 rap,日文與一般唱歌的遷移性未驗證。",
+      "editor_note": "與卡拉 OK 主線的連結在歌詞—節拍對齊機制,而非 rap 本身;細節需讀全文確認。",
+      "relevance": {
+        "mean_audio": 3,
+        "karaoke_jp": 4
+      }
+    },
+    {
+      "slot": 2,
+      "track": "mean_audio",
+      "title": "MusicFlux: Flexible Conditioning for Text-Guided Music Generation and Editing",
+      "authors": [
+        "Teysir Baoueb",
+        "Leonardo Boulitreau de Menezes Martins Marques",
+        "Paraskevas Stamatiadis",
+        "Gaël Richard"
+      ],
+      "published": "2026-11-10",
+      "updated": "2026-11-10",
+      "source_url": "https://arxiv.org/abs/2611.13834",
+      "arxiv_id": "2611.13834",
+      "doi": "10.48550/arXiv.2611.13834",
+      "tags": [
+        "文字導引音樂編輯",
+        "flow matching"
+      ],
+      "quality": "新",
+      "tldr": "MusicFlux 把預訓練 flow-matching 文字轉音訊模型改成音樂編輯器,提出兩種把來源音訊當 context 的條件化方式,分別側重編輯品質與運算效率。",
+      "insight": "洞見: 保持原序列長度的條件化能省下長音訊的注意力成本,是把 MeanAudio 類模型延伸到編輯任務的實用途徑。",
+      "try_next": "可做: 在 MeanAudio 的 flow matching 骨幹上試做同長度 context 條件化,比較編輯品質與推論時間。",
+      "problem": "既有文字導引音樂編輯需處理長序列,成本高,且編輯需保留原曲結構。",
+      "method": "以預訓練 flow-matching 文字轉音訊模型為基礎,將來源音訊作為 context,提出兩種條件化:一種編輯品質較佳,另一種維持原序列長度、效率大幅提升。",
+      "data": "摘要頁未說明訓練與評估資料。",
+      "findings": "作者稱兩種方法與強基線相比皆具競爭力,另有效率與品質的取捨。",
+      "limitations": "僅讀摘要頁,無量化數字與資料集資訊;投稿 ICASSP 2027,尚未經審稿。",
+      "editor_note": "貢獻偏工程取捨,數據待全文確認,故品質標為「新」。",
+      "relevance": {
+        "mean_audio": 5,
+        "karaoke_jp": 1
+      }
+    }
+  ],
+  "repo": {
+    "full_name": "rijuyuezhu/vc-ktv",
+    "url": "https://github.com/rijuyuezhu/vc-ktv",
+    "description_zh": "自架的 KTV 點歌系統:手機點歌(Bilibili BV / 網易雲),伺服器準備歌詞與影片,選用 TIFA 對齊,以 AutoASSrenderer4karaOK 渲染字幕,網頁播放器上電視。",
+    "stars": 0,
+    "updated": "2026-11-11",
+    "why": "涵蓋歌詞選擇、對齊到卡拉 OK 字幕渲染的端到端流程,可對照 karaoke-jp 的 LRC 渲染設計;專案很新(0 星、7 個 open issue),僅支援 Linux。",
+    "tags": [
+      "karaoke",
+      "lyrics alignment",
+      "字幕渲染"
+    ]
+  },
+  "discord_messages": [
+    "# 每日 MIR 論文精選 - 2026-11-12\n網站: https://lanternko.github.io/mir-paper-digest/reports/2026-11-12.html\n\n## 1. BARS: Beat-Adaptive Rap Synthesis via Flow Matching\n作者: Taemin Cho 等 | 2026-11-09 | 新且重要\n連結: https://arxiv.org/abs/2611.12061\n\n**TL;DR** BARS 以 flow matching 做非自回歸 rap 人聲合成,輸入節拍、歌詞與短參考音色,用 ByT5 與 Asymmetric Scaled RoPE 降低對齊錯誤並支援局部重生成。\n\n洞見: 不靠音素對齊與時長預測,只用 cross-attention 就能讓歌詞貼合節拍,對 mora-to-note timing 的隱式對齊很有參考價值。\n可做: 把 Asymmetric Scaled RoPE 的做法搬到日文歌詞(kana/mora 序列)條件的唱聲生成,檢查漏字與重複是否同樣下降。\n\n限制: 僅讀摘要頁,未見訓練資料與量化數字;針對英文 rap,日文與一般唱歌的遷移性未驗證。",
+    "## 2. MusicFlux: Flexible Conditioning for Text-Guided Music Generation and Editing\n作者: Teysir Baoueb 等 | 2026-11-10 | 新\n連結: https://arxiv.org/abs/2611.13834\n\n**TL;DR** MusicFlux 把預訓練 flow-matching 文字轉音訊模型改成音樂編輯器,提出兩種把來源音訊當 context 的條件化方式,分別側重編輯品質與運算效率。\n\n洞見: 保持原序列長度的條件化能省下長音訊的注意力成本,是把 MeanAudio 類模型延伸到編輯任務的實用途徑。\n可做: 在 MeanAudio 的 flow matching 骨幹上試做同長度 context 條件化,比較編輯品質與推論時間。\n\n限制: 僅讀摘要頁,無量化數字與資料集資訊;投稿 ICASSP 2027,尚未經審稿。",
+    "## GitHub 精選: rijuyuezhu/vc-ktv\nhttps://github.com/rijuyuezhu/vc-ktv\n自架的 KTV 點歌系統:手機點歌(Bilibili BV / 網易雲),伺服器準備歌詞與影片,選用 TIFA 對齊,以 AutoASSrenderer4karaOK 渲染字幕,網頁播放器上電視。\n為何值得看: 涵蓋歌詞選擇、對齊到卡拉 OK 字幕渲染的端到端流程,可對照 karaoke-jp 的 LRC 渲染設計;專案很新(0 星、7 個 open issue),僅支援 Linux。\n\n## 今天的 take-away\n1. 歌詞—節拍的對齊可以由 cross-attention 位置編碼隱式學到(BARS),不一定要顯式音素對齊。\n2. 編輯任務可用「同長度 context 條件化」換取效率(MusicFlux)。\n3. 兩篇皆僅依摘要頁整理,量化結果需讀全文再採信。"
+  ]
+}

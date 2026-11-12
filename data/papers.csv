@@ -337,3 +337,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-11-11,1,paper,karaoke_jp,FlowGRPO for Vocal Separation: From Reward Analysis to Reward Design,https://arxiv.org/abs/2610.15780,10.48550/arXiv.2610.15780,人聲分離|flow matching|reward alignment,重要
 2026-11-11,2,paper,mean_audio,SongCraft: Unified Song Generation and Editing with Reconstructive Learning,https://arxiv.org/abs/2609.16315,10.48550/arXiv.2609.16315,歌曲生成|歌曲編輯|flow matching,重要
 2026-11-11,0,repo,github,6hdj/lrc-ttml,https://github.com/6hdj/lrc-ttml,,lyrics alignment|TTML|karaoke,
+2026-11-12,1,paper,karaoke_jp,BARS: Beat-Adaptive Rap Synthesis via Flow Matching,https://arxiv.org/abs/2611.12061,10.48550/arXiv.2611.12061,唱聲合成|flow matching|歌詞條件,新且重要
+2026-11-12,2,paper,mean_audio,MusicFlux: Flexible Conditioning for Text-Guided Music Generation and Editing,https://arxiv.org/abs/2611.13834,10.48550/arXiv.2611.13834,文字導引音樂編輯|flow matching,新
+2026-11-12,0,repo,github,rijuyuezhu/vc-ktv,https://github.com/rijuyuezhu/vc-ktv,,karaoke|lyrics alignment|字幕渲染,
