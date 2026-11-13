@@ -1,0 +1,65 @@
+{
+  "date": "2026-11-13",
+  "papers": [
+    {
+      "slot": 1,
+      "track": "mean_audio",
+      "title": "AudioCodex: Streaming Autoencoders for Live Audio",
+      "authors": ["Marco Pasini", "Javier Nistal", "Cyran Aouameur", "Stefan Lattner", "George Fazekas"],
+      "published": "2026-11-09",
+      "updated": "2026-11-09",
+      "source_url": "https://arxiv.org/abs/2611.12375",
+      "arxiv_id": "2611.12375",
+      "doi": "10.48550/arXiv.2611.12375",
+      "tags": ["neural codec", "流式生成", "Mean Flow"],
+      "quality": "新且重要",
+      "tldr": "AudioCodex 是完全因果的立體聲自編碼器，把音訊壓成約 10 Hz 連續 latent，並在重建品質與下游生成難度之間取得更好的平衡，適合即時串流生成。",
+      "insight": "洞見: 生成模型的瓶頸常在 latent 好不好生成，而不只是重建好不好；AudioCodex 用 Mean Flow、超球面投影與表徵對齊把兩者一起優化，對 MeanAudio 這類少步 flow 生成特別有參考價值。",
+      "try_next": "可做: 把 MeanAudio 的 latent 換成 10 Hz 連續 latent 的因果 codec，比較生成序列長度、推論延遲與 FAD/CLAP 的變化。",
+      "problem": "現有音訊 autoencoder 多半非因果、幀率高，難以支援即時互動與串流生成；同時重建好的 latent 不一定好生成。",
+      "method": "提出完全因果（編碼與解碼皆因果）的立體聲 autoencoder，輸出約 10 Hz 連續 latent；組合 Mean Flow 幅度 autoencoder、latent 超球面投影、有界雜訊增強、representation alignment 與對抗式相位復原。",
+      "data": "摘要未列出訓練資料細節，僅說明以大量消融實驗比較；實際資料集需看全文。",
+      "findings": "作者宣稱在生成-重建權衡上優於現有最佳方法，且嚴格維持因果性；已被 ISMIR 2026 接受。以上為摘要層級結論，數值未在摘要中給出。",
+      "limitations": "本篇只讀到摘要頁，未驗證具體指標與資料；因果設計與 10 Hz 低幀率對高頻細節、人聲咬字等的影響未知；與 MeanAudio 的相容性需自行實測。",
+      "editor_note": "與 MeanAudio 主線高度相關：如果想做即時或串流版文字生成音樂，這是值得優先看全文的 codec 設計。",
+      "relevance": {"mean_audio": 5, "karaoke_jp": 1}
+    },
+    {
+      "slot": 2,
+      "track": "general_mir",
+      "title": "FaiSonic MMD: A popular music dataset with temporally aligned multidimensional annotations for multitask music analysis",
+      "authors": ["Tieyao Zhang", "Yuke Liu", "Jiaxing Yu", "Xinda Wu", "Genfang Chen"],
+      "published": "2026-11-10",
+      "updated": "2026-11-10",
+      "source_url": "https://arxiv.org/abs/2611.13503",
+      "arxiv_id": "2611.13503",
+      "doi": "10.48550/arXiv.2611.13503",
+      "tags": ["流行音樂資料集", "樂句/段落邊界", "多任務分析"],
+      "quality": "新",
+      "tldr": "FaiSonic MMD 收錄 500 首中英文流行歌（約 32.86 小時），由專業樂手標註樂句、段落、和弦與節奏，並提供多任務基準，可供結構分析比較。",
+      "insight": "洞見: 樂句與段落邊界、和弦、節拍在同一份錄音上共用時間軸，讓跨維度關係可以直接比較，對需要把歌詞切成可唱句的流程有結構層面的參考價值。",
+      "try_next": "可做: 下載其樂句邊界標註，檢查現有日文歌詞行/卡拉 OK 換行點與樂句邊界的吻合程度，作為 LRC 分行品質的外部參考。",
+      "problem": "既有 MIR 資源在多維度聯合覆蓋與專家驗證上不一致，難以在同一批錄音上做聯合監督與跨維度分析。",
+      "method": "建立 500 首（250 中文、250 英文）流行歌資料集；專業樂手標註樂句、段落、和弦、節奏，並經獨立複審；各維度共享以錄音為基準的時間參照；並建立樂句邊界、段落邊界、段落功能、和弦、beat、downbeat 的多任務基線。",
+      "data": "500 首真實流行錄音，約 32.86 小時，中英文各 250 首；資料與程式碼公開於作者 GitHub。",
+      "findings": "提供所有預測目標的參考表現與基準；摘要未給具體數值。貢獻主要在資料集與標註一致性而非新模型。",
+      "limitations": "不含日文歌曲，也未見歌詞或音節層級標註，與 karaoke-jp 的直接關聯有限；摘要未提標註者一致性數字；只讀到摘要頁。",
+      "editor_note": "是泛 MIR 的資料資源，與兩條主線只有間接關聯；列入是因為結構標註可遷移到歌詞分行與段落感知的生成評估。",
+      "relevance": {"mean_audio": 2, "karaoke_jp": 2}
+    }
+  ],
+  "repo": {
+    "full_name": "djj45/mv-kit",
+    "url": "https://github.com/djj45/mv-kit",
+    "description_zh": "用程式碼製作歌詞逐詞同步 MV 的框架：音樂分析（節拍/段落）加逐詞歌詞對齊，生成鏡頭程式碼，瀏覽器即時預覽並匯出 mp4；每一幀只由歌曲時間 t 決定，預覽與成片逐幀一致。",
+    "stars": 0,
+    "updated": "2026-11-08",
+    "why": "內含 Whisper 加強制對齊的逐詞時間流程（align_lyrics.py）與沒有歌詞文字的 timing.json，可參考 karaoke-jp 的歌詞時間與渲染設計；但專案很新（0 star、無授權條款），說明偏中文與 Mac 環境，屬參考而非直接採用。",
+    "tags": ["lyrics alignment", "lyric video", "逐詞同步"]
+  },
+  "discord_messages": [
+    "# 每日 MIR 論文精選 - 2026-11-13\n網站: https://lanternko.github.io/mir-paper-digest/reports/2026-11-13.html\n\n## 1. AudioCodex: Streaming Autoencoders for Live Audio\n作者: Marco Pasini 等 | 2026-11-09 | 新且重要\n連結: https://arxiv.org/abs/2611.12375\n\n**TL;DR** AudioCodex 是完全因果的立體聲自編碼器，把音訊壓成約 10 Hz 連續 latent，並在重建品質與下游生成難度之間取得更好的平衡，適合即時串流生成。\n\n洞見: 生成模型的瓶頸常在 latent 好不好生成，而不只是重建好不好；AudioCodex 用 Mean Flow、超球面投影與表徵對齊把兩者一起優化。\n可做: 把 MeanAudio 的 latent 換成 10 Hz 連續 latent 的因果 codec，比較序列長度、延遲與 FAD/CLAP。\n\n限制: 只讀到摘要頁；因果設計與低幀率對高頻細節的影響未知（ISMIR 2026）。",
+    "## 2. FaiSonic MMD: A popular music dataset with temporally aligned multidimensional annotations for multitask music analysis\n作者: Tieyao Zhang 等 | 2026-11-10 | 新\n連結: https://arxiv.org/abs/2611.13503\n\n**TL;DR** FaiSonic MMD 收錄 500 首中英文流行歌（約 32.86 小時），由專業樂手標註樂句、段落、和弦與節奏，並提供多任務基準，可供結構分析比較。\n\n洞見: 樂句與段落邊界、和弦、節拍在同一份錄音上共用時間軸，讓跨維度關係可以直接比較。\n可做: 用其樂句邊界標註，檢查日文歌詞行/卡拉 OK 換行點與樂句邊界的吻合程度。\n\n限制: 不含日文歌曲，也未見歌詞或音節層級標註；與主線只有間接關聯。",
+    "## GitHub 精選: djj45/mv-kit\nhttps://github.com/djj45/mv-kit\n用程式碼製作歌詞逐詞同步 MV 的框架：音樂分析加逐詞歌詞對齊，生成鏡頭程式碼，瀏覽器即時預覽並匯出 mp4。\n為什麼值得看: 內含 Whisper 加強制對齊的逐詞時間流程，可參考 karaoke-jp 的歌詞時間與渲染設計；但專案很新（0 star、無授權條款），屬參考而非直接採用。\n\n## 今天的 take-away\n1. 想做即時或串流的音樂生成，latent 的幀率與因果性要和生成模型一起設計（AudioCodex）。\n2. 歌曲結構標註（樂句/段落）可以當歌詞分行與生成評估的外部參考（FaiSonic MMD）。\n3. 逐詞歌詞時間資料可以只存 timing、不存歌詞文字，方便放進版本控制（mv-kit）。"
+  ]
+}

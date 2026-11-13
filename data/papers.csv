@@ -340,3 +340,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-11-12,1,paper,karaoke_jp,BARS: Beat-Adaptive Rap Synthesis via Flow Matching,https://arxiv.org/abs/2611.12061,10.48550/arXiv.2611.12061,唱聲合成|flow matching|歌詞條件,新且重要
 2026-11-12,2,paper,mean_audio,MusicFlux: Flexible Conditioning for Text-Guided Music Generation and Editing,https://arxiv.org/abs/2611.13834,10.48550/arXiv.2611.13834,文字導引音樂編輯|flow matching,新
 2026-11-12,0,repo,github,rijuyuezhu/vc-ktv,https://github.com/rijuyuezhu/vc-ktv,,karaoke|lyrics alignment|字幕渲染,
+2026-11-13,1,paper,mean_audio,AudioCodex: Streaming Autoencoders for Live Audio,https://arxiv.org/abs/2611.12375,10.48550/arXiv.2611.12375,neural codec|流式生成|Mean Flow,新且重要
+2026-11-13,2,paper,general_mir,FaiSonic MMD: A popular music dataset with temporally aligned multidimensional annotations for multitask music analysis,https://arxiv.org/abs/2611.13503,10.48550/arXiv.2611.13503,流行音樂資料集|樂句/段落邊界|多任務分析,新
+2026-11-13,0,repo,github,djj45/mv-kit,https://github.com/djj45/mv-kit,,lyrics alignment|lyric video|逐詞同步,
