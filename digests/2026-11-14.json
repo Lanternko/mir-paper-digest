@@ -1,0 +1,92 @@
+{
+  "date": "2026-11-14",
+  "papers": [
+    {
+      "slot": 1,
+      "track": "mean_audio",
+      "title": "Can Music Generation Models Tap Along? Evaluating Generative Approaches to Beat Tracking",
+      "authors": [
+        "Kun Fang",
+        "Ziyu Wang",
+        "Ichiro Fujinaga"
+      ],
+      "published": "2026-11-11",
+      "updated": "2026-11-11",
+      "source_url": "https://arxiv.org/abs/2611.14971",
+      "arxiv_id": "2611.14971",
+      "doi": "10.48550/arXiv.2611.14971",
+      "tags": [
+        "音樂生成",
+        "beat tracking",
+        "MusicGen"
+      ],
+      "quality": "新",
+      "tldr": "作者替預訓練 MusicGen 加上音訊條件 adapter，讓它為輸入歌曲生成同步打擊樂軌，再從中取出拍點；在 GTZAN 接近最佳 beat tracker，去掉鼓聲時退步最小。",
+      "insight": "洞見: 生成模型為了和輸入音樂同步而學到的節奏知識，可以反過來當分析工具，輸出不只是拍點序列，還是一條聽得見的打擊樂軌，也方便人工檢查錯誤。",
+      "try_next": "可做: 在 MeanAudio 加音訊條件 adapter，讓它生成與輸入對齊的節奏軌，再用拍點 F-measure 量測少步 flow 生成的時間同步能力。",
+      "problem": "音樂生成模型已能產生與輸入歌曲同步的伴奏軌，但尚不清楚這種能力能否直接用於拍點追蹤，以及相較傳統方法是否更穩健。",
+      "method": "在預訓練 MusicGen 上加入音訊條件 adapter，生成與輸入音樂同步的打擊樂軌，再從生成結果擷取拍點位置；以不同節奏複雜度的打擊樂目標分別訓練模型，並與另外兩個生成式模型及傳統 beat tracker 比較。",
+      "data": "評估使用 GTZAN；訓練資料細節摘要未列出，需看全文。",
+      "findings": "作者宣稱在 GTZAN 上表現接近最佳 beat tracker；輸入去掉鼓聲時 F-measure 下降最小；在金屬與 disco 等類型較不易被強 onset 誤導或漏掉弱 onset 的拍點。以上為摘要層級結論，數值未在摘要中給出。",
+      "limitations": "只讀到摘要頁，未驗證具體數字；摘要只提到 GTZAN，跨資料集與非西方節奏的泛化未知；以 MusicGen 為基礎，推論成本可能高於專用 beat tracker。",
+      "editor_note": "與 MeanAudio 的關聯在於『生成模型的同步能力可當評估或分析工具』，不是直接的生成方法改進；適合當作少步生成時間對齊評估的靈感。",
+      "relevance": {
+        "mean_audio": 3,
+        "karaoke_jp": 1
+      }
+    },
+    {
+      "slot": 2,
+      "track": "general_mir",
+      "title": "SPDMX: Large-Scale Open Stem Audio From Symbolic Music",
+      "authors": [
+        "Phillip Long",
+        "Eduardo Escoto",
+        "Julian McAuley",
+        "Zachary Novack"
+      ],
+      "published": "2026-11-06",
+      "updated": "2026-11-06",
+      "source_url": "https://arxiv.org/abs/2611.09140",
+      "arxiv_id": "2611.09140",
+      "doi": "10.48550/arXiv.2611.09140",
+      "tags": [
+        "開放資料集",
+        "stem 音訊",
+        "人聲分離"
+      ],
+      "quality": "待觀察",
+      "tldr": "SPDMX 把公有領域 PDMX 樂譜渲染成 CC BY 4.0 的開放 stem 語料：25.4 萬首、49 萬條單聲道 stem、約 5,469 小時，並附 MIDI 與開放渲染流程。",
+      "insight": "洞見: 音樂訓練資料卡在版權與缺乏 stem，用符號音樂加聽感導向的渲染，可以得到可再散布、有對齊譜面的多軌監督，對分離與轉錄這類需要 stem 的任務特別有用。",
+      "try_next": "可做: 取其多軌子集當額外訓練資料，混入日文流行歌分離模型的微調，檢查合成 stem 能否改善伴奏與人聲殘留；注意合成與真實錄音的領域落差。",
+      "problem": "音樂的真實錄音因版權難以公開散布，而許多任務需要個別 stem；既有多軌資源在真實度、規模與授權之間難以兼顧，合成方案又依賴專有 VSTs 或品質差的開放渲染。",
+      "method": "對公有領域 PDMX 樂譜做聽感導向（listening-guided）渲染，產生開放授權的 stem 語料，附對齊譜面、配對 MIDI 與連結 PDMX 中繼資料的識別碼，並釋出開放渲染流程。",
+      "data": "253,982 首歌、490,159 條單聲道 stem、5,469 歌曲小時（44.1 kHz，CC BY 4.0）；其中 88,403 首（34.8%，約 2,734 小時）提供多軌監督。",
+      "findings": "作者宣稱這是依歌曲小時計最大的開放授權合成多軌子集，可支援音源分離、stem 條件合成、MIDI 轉音訊、轉錄與符號音訊聯合建模；摘要未給出下游模型成效數字。",
+      "limitations": "只讀到摘要頁（4 頁短文）；為合成音訊，缺少真實人聲與錄音混音特性，且不含歌詞或日文唱聲；實際對真實歌曲分離的助益未經摘要驗證。",
+      "editor_note": "對 karaoke-jp 的價值是間接的：它是分離與 MIDI/轉錄訓練的資料資源，而非人聲或歌詞專用；先列為待觀察。",
+      "relevance": {
+        "mean_audio": 2,
+        "karaoke_jp": 3
+      }
+    }
+  ],
+  "repo": {
+    "full_name": "openmirlab/sheetsage-infer",
+    "url": "https://github.com/openmirlab/sheetsage-infer",
+    "description_zh": "SheetSage1 與 SheetSage2 的僅推論版本，提供統一的 Python API，輸出旋律、和弦、拍點、調性與拍號，V2 還能給出帶時間的歌曲段落；不含訓練程式碼與模型權重。",
+    "stars": 4,
+    "updated": "2026-11-13",
+    "why": "可作為 karaoke-jp 的 MIDI/score 與 mora-to-note 流程的旋律與和弦參考來源，MIT 授權且近期仍在維護；但 V1 權重需另行取得、星數低，且是第三方整合包而非原作者版本。",
+    "tags": [
+      "music transcription",
+      "lead sheet",
+      "旋律/和弦"
+    ]
+  },
+  "discord_messages": [
+    "# 每日 MIR 論文精選 - 2026-11-14\n網站: https://lanternko.github.io/mir-paper-digest/reports/2026-11-14.html\n\n## 1. Can Music Generation Models Tap Along? Evaluating Generative Approaches to Beat Tracking\n作者: Kun Fang 等 | 2026-11-11 | 新\n連結: https://arxiv.org/abs/2611.14971\n\n**TL;DR** 作者替預訓練 MusicGen 加上音訊條件 adapter，讓它為輸入歌曲生成同步打擊樂軌，再從中取出拍點；在 GTZAN 接近最佳 beat tracker，去掉鼓聲時退步最小。\n\n洞見: 生成模型為了和輸入音樂同步而學到的節奏知識，可以反過來當分析工具，輸出不只是拍點序列，還是一條聽得見的打擊樂軌，也方便人工檢查錯誤。\n可做: 在 MeanAudio 加音訊條件 adapter，讓它生成與輸入對齊的節奏軌，再用拍點 F-measure 量測少步 flow 生成的時間同步能力。\n\n限制: 只讀到摘要頁，未驗證具體數字；摘要只提到 GTZAN，跨資料集與非西方節奏的泛化未知；以 MusicGen 為基礎，推論成本可能高於專用 beat tracker。",
+    "## 2. SPDMX: Large-Scale Open Stem Audio From Symbolic Music\n作者: Phillip Long 等 | 2026-11-06 | 待觀察\n連結: https://arxiv.org/abs/2611.09140\n\n**TL;DR** SPDMX 把公有領域 PDMX 樂譜渲染成 CC BY 4.0 的開放 stem 語料：25.4 萬首、49 萬條單聲道 stem、約 5,469 小時，並附 MIDI 與開放渲染流程。\n\n洞見: 音樂訓練資料卡在版權與缺乏 stem，用符號音樂加聽感導向的渲染，可以得到可再散布、有對齊譜面的多軌監督，對分離與轉錄這類需要 stem 的任務特別有用。\n可做: 取其多軌子集當額外訓練資料，混入日文流行歌分離模型的微調，檢查合成 stem 能否改善伴奏與人聲殘留；注意合成與真實錄音的領域落差。\n\n限制: 只讀到摘要頁（4 頁短文）；為合成音訊，缺少真實人聲與錄音混音特性，且不含歌詞或日文唱聲；實際對真實歌曲分離的助益未經摘要驗證。",
+    "## GitHub 精選: openmirlab/sheetsage-infer\nhttps://github.com/openmirlab/sheetsage-infer\nSheetSage1 與 SheetSage2 的僅推論版本，提供統一的 Python API，輸出旋律、和弦、拍點、調性與拍號，V2 還能給出帶時間的歌曲段落；不含訓練程式碼與模型權重。\n為什麼值得看: 可作為 karaoke-jp 的 MIDI/score 與 mora-to-note 流程的旋律與和弦參考來源，MIT 授權且近期仍在維護；但 V1 權重需另行取得、星數低，且是第三方整合包而非原作者版本。\n\n## 今天的 take-away\n1. 生成模型為了同步而學到的節奏能力，可以反過來當分析與評估工具（beat tracking 論文）。\n2. 開放授權的合成 stem 語料能緩解分離與轉錄訓練的版權瓶頸，但仍需驗證合成到真實的落差（SPDMX）。\n3. 旋律、和弦、拍點的統一推論 API 可作為 karaoke-jp MIDI/score 流程的比較基準（sheetsage-infer）。"
+  ]
+}

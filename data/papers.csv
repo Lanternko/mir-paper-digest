@@ -343,3 +343,6 @@ date_sent,slot,item_type,track,title,source_url,arxiv_or_doi,topic_tags,quality_
 2026-11-13,1,paper,mean_audio,AudioCodex: Streaming Autoencoders for Live Audio,https://arxiv.org/abs/2611.12375,10.48550/arXiv.2611.12375,neural codec|流式生成|Mean Flow,新且重要
 2026-11-13,2,paper,general_mir,FaiSonic MMD: A popular music dataset with temporally aligned multidimensional annotations for multitask music analysis,https://arxiv.org/abs/2611.13503,10.48550/arXiv.2611.13503,流行音樂資料集|樂句/段落邊界|多任務分析,新
 2026-11-13,0,repo,github,djj45/mv-kit,https://github.com/djj45/mv-kit,,lyrics alignment|lyric video|逐詞同步,
+2026-11-14,1,paper,mean_audio,Can Music Generation Models Tap Along? Evaluating Generative Approaches to Beat Tracking,https://arxiv.org/abs/2611.14971,10.48550/arXiv.2611.14971,音樂生成|beat tracking|MusicGen,新
+2026-11-14,2,paper,general_mir,SPDMX: Large-Scale Open Stem Audio From Symbolic Music,https://arxiv.org/abs/2611.09140,10.48550/arXiv.2611.09140,開放資料集|stem 音訊|人聲分離,待觀察
+2026-11-14,0,repo,github,openmirlab/sheetsage-infer,https://github.com/openmirlab/sheetsage-infer,,music transcription|lead sheet|旋律/和弦,
